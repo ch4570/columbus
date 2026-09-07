@@ -72,3 +72,7 @@ The same graph exports completely to 4,790,642 bytes and supports an 800-byte so
 ## Correlated Java generic argument constraints
 
 The eight reduced failures from the Spring audit are corrected, and both parsers pass a 25-case compiler gate plus 208 engine tests each; root tests pass 53. The same-source Spring comparison restores all 32 prior omissions while conservatively moving 207 existing calls to unresolved (9,349 → 9,174 stored calls). These removals are not proven false calls. Complete archive size rises 4.57% to 5,009,364 bytes; a source-free lookup uses 796 bytes without SQLite. [Compiler evidence and limits](../evals/jvm-guardrails/results/generic-constraints/REPORT.md), [Spring tradeoff](../evals/spring-core/results/generic-constraints/REPORT.md). Hosted checks are pending. Overall semantic coverage, release acceptance and actual token savings remain open.
+
+## Generic array context identity follow-up
+
+A compiler probe found one false target caused by treating a source-defined Object as java.lang.Object, plus two valid array-supertype omissions. Resolve context identity before accepting Object/Cloneable/Serializable. Both parsers pass the extended 31-case javac gate and 208 engine tests; fresh Spring source hashes and all 31,408 edge rows equal e8b494d. [Before/after evidence](../evals/jvm-guardrails/results/generic-array-context/REPORT.md). Hosted runs remain pending; overall goal remains incomplete.

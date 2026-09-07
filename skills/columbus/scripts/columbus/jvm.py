@@ -533,7 +533,7 @@ class _Resolver:
         local_name = ".".join(filter(None, [file["package"], name]))
         if local_name in self.declared_type_names:
             return None
-        if name in {"Object", "String", "Class", "CharSequence", "Number", "Comparable", *primitive_boxes.values()}:
+        if name in {"Object", "String", "Class", "CharSequence", "Number", "Comparable", "Cloneable", *primitive_boxes.values()}:
             return "java.lang." + name
         return None
 
@@ -637,7 +637,8 @@ class _Resolver:
                     continue
                 expected = context
                 if returned.endswith("[]"):
-                    if context in {"Object", "java.lang.Object"}:
+                    if self.reference_type_name(file, ref["scope_id"], context) in {
+                            "java.lang.Object", "java.lang.Cloneable", "java.io.Serializable"}:
                         continue
                     if not context.endswith("[]"):
                         return set(), "generic array result context requires semantic analysis"
