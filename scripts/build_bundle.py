@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 import argparse
+from email.parser import BytesParser
 import ast
 import hashlib
 import importlib.util
+import io
 import json
 from pathlib import Path
 import zipfile
@@ -51,10 +53,43 @@ def bundle_contents(root: Path) -> dict[str, bytes]:
     return contents
 
 
-def build_bundle(root: Path, output: Path) -> dict:
+def java_wheel_contents(wheelhouse: Path) -> dict[str, bytes]:
+    """Bundle the reviewed parser build, retaining each wheel's upstream license."""
+    version = "0.23.5+columbus.1"
+    wheels = sorted(wheelhouse.glob("tree_sitter_java-*.whl"))
+    if not wheels:
+        raise ValueError("Java wheelhouse contains no tree_sitter_java wheels")
+    contents = {}
+    for wheel in wheels:
+        if wheel.is_symlink() or not wheel.is_file():
+            raise ValueError("Java wheel must be a regular, non-symlink file")
+        data = wheel.read_bytes()
+        with zipfile.ZipFile(io.BytesIO(data)) as archive:
+            metadata = [name for name in archive.namelist() if name.endswith('.dist-info/METADATA')]
+            if len(metadata) != 1:
+                raise ValueError("Java wheel must have exactly one package metadata entry")
+            package = BytesParser().parsebytes(archive.read(metadata[0]))
+            if (package.get_all('Name') != ['tree-sitter-java']
+                    or package.get_all('Version') != [version]
+                    or not wheel.name.startswith(f'tree_sitter_java-{version}-')):
+                raise ValueError("Java wheel does not contain the reviewed candidate version")
+            if not any(name.endswith('/LICENSE') for name in archive.namelist()):
+                raise ValueError("Java wheel must retain its upstream license")
+        contents['vendor/java/' + wheel.name] = data
+    contents['vendor/java/constraints.txt'] = f'tree-sitter-java=={version}\n'.encode('ascii')
+    inventory = {'format': 1, 'version': version,
+                 'files': {name.removeprefix('vendor/java/'): hashlib.sha256(data).hexdigest()
+                           for name, data in sorted(contents.items())}}
+    contents['vendor/java/manifest.json'] = (json.dumps(inventory, sort_keys=True, indent=2)+'\n').encode()
+    return contents
+
+
+def build_bundle(root: Path, output: Path, *, java_wheelhouse: Path | None = None) -> dict:
     root, output = root.resolve(strict=True), output.resolve()
     version = package_version(root)
     contents = bundle_contents(root)
+    if java_wheelhouse is not None:
+        contents.update(java_wheel_contents(java_wheelhouse))
     metadata = json.loads(contents["skills/columbus/bundle.json"])
     if metadata.get("version") != version:
         raise ValueError("Package and skill bundle versions must match before distribution")
@@ -81,8 +116,9 @@ def build_bundle(root: Path, output: Path) -> dict:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", type=Path, default=ROOT / "dist")
+    parser.add_argument("--java-wheelhouse", type=Path, help="Embed reviewed Java candidate wheels as the ZIP bootstrap default")
     args = parser.parse_args(argv)
-    print(json.dumps(build_bundle(ROOT, args.output_dir), ensure_ascii=False, indent=2))
+    print(json.dumps(build_bundle(ROOT, args.output_dir, java_wheelhouse=args.java_wheelhouse), ensure_ascii=False, indent=2))
     return 0
 
 

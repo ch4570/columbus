@@ -45,7 +45,8 @@ def verify_archive(artifact: Path, target: Path) -> Path:
 
 
 def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False,
-           bundle: Path | None = None, expected_java_version: str | None = None) -> dict:
+           bundle: Path | None = None, expected_java_version: str | None = None,
+           bundled_java_default: bool = False) -> dict:
     environment = dict(os.environ)
     for name in ("PYTHONPATH", "PYTHONHOME", "VIRTUAL_ENV"):
         environment.pop(name, None)
@@ -291,7 +292,7 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
             command = [python, extracted / "install.py", "--repo", bootstrap_repo]
             if offline:
                 command.append("--offline")
-            if wheelhouse:
+            if wheelhouse and not bundled_java_default:
                 command.extend(["--wheelhouse", wheelhouse])
             run(command)
             run(command)
@@ -307,7 +308,7 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
             verify_graph_archive([local_python, '-E', '-s', local_entrypoint], bootstrap_repo, 'visible_hook', 'bootstrap archive')
             verify_callers([local_python, '-E', '-s', local_entrypoint], bootstrap_repo)
         return {"status": "passed", "version": version, "wheel": str(wheel),
-                "java_candidate_checks": grammar_checks,
+                "java_candidate_checks": grammar_checks, "bundled_java_default": bundled_java_default,
                 "clean_venv": True, "unrelated_cwd": True, "paths_with_spaces": True,
                 "global_search": True, "skill_reinstall": repeated["status"],
                 "polyglot_and_fallback": True, "budgeted_context": True, "graph_formats": 4,
@@ -325,17 +326,20 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--wheel", type=Path, required=True)
     parser.add_argument("--bundle", type=Path)
+    parser.add_argument("--bundled-java-default", action="store_true", help="Verify ZIP parser adoption without an explicit wheelhouse")
     parser.add_argument("--wheelhouse", type=Path)
     parser.add_argument("--offline", action="store_true")
     parser.add_argument("--expected-java-version", help="Require this installed candidate version and corrected annotation parsing")
     args = parser.parse_args(argv)
+    if args.bundled_java_default and (args.bundle is None or args.expected_java_version is None or args.offline):
+        parser.error("--bundled-java-default requires --bundle and --expected-java-version, without --offline")
     if args.offline and args.wheelhouse is None:
         parser.error("--offline requires --wheelhouse")
     try:
         result = verify(args.wheel.resolve(strict=True),
                         bundle=args.bundle.resolve(strict=True) if args.bundle else None,
                         wheelhouse=args.wheelhouse.resolve(strict=True) if args.wheelhouse else None,
-                        offline=args.offline, expected_java_version=args.expected_java_version)
+                        offline=args.offline, expected_java_version=args.expected_java_version, bundled_java_default=args.bundled_java_default)
     except (OSError, ValueError, KeyError, VerificationError, subprocess.CalledProcessError) as error:
         print(f"Distribution verification failed: {error}", file=sys.stderr)
         return 1

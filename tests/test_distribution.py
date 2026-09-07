@@ -56,6 +56,30 @@ class DistributionTests(unittest.TestCase):
         with zipfile.ZipFile(artifact) as archive:
             self.assertTrue(all(member.date_time == (1980, 1, 1, 0, 0, 0) for member in archive.infolist()))
 
+    def test_bundled_candidate_inventory_constraints_and_runtime_tampering(self):
+        wheels = self.root/'wheels'
+        wheels.mkdir()
+        wheel = wheels/'tree_sitter_java-0.23.5+columbus.1-py3-none-any.whl'
+        with zipfile.ZipFile(wheel, 'w') as archive:
+            archive.writestr('tree_sitter_java-0.23.5+columbus.1.dist-info/METADATA',
+                             'Name: tree-sitter-java\nVersion: 0.23.5+columbus.1\n')
+            archive.writestr('tree_sitter_java-0.23.5+columbus.1.dist-info/licenses/LICENSE', 'fixture license')
+        first = builder.build_bundle(ROOT, self.root/'first', java_wheelhouse=wheels)
+        second = builder.build_bundle(ROOT, self.root/'second', java_wheelhouse=wheels)
+        self.assertEqual(first['sha256'], second['sha256'])
+        extracted = verifier.verify_archive(Path(first['artifact']), self.root/'extracted')
+        bootstrap = load('_columbus_bundled_bootstrap', extracted/'bootstrap.py')
+        directory, manifest = bootstrap.bundled_java()
+        self.assertEqual(manifest['version'], '0.23.5+columbus.1')
+        self.assertEqual((directory/'constraints.txt').read_text(), 'tree-sitter-java==0.23.5+columbus.1\n')
+        (directory/wheel.name).write_bytes(b'tampered')
+        with self.assertRaisesRegex(bootstrap.SetupError, 'checksum mismatch'):
+            bootstrap.bundled_java()
+        with zipfile.ZipFile(wheel, 'w') as archive:
+            archive.writestr('other.dist-info/METADATA', 'Name: tree-sitter-java\nVersion: 0.23.5\n')
+        with self.assertRaisesRegex(ValueError, 'reviewed candidate'):
+            builder.build_bundle(ROOT, self.root/'rejected', java_wheelhouse=wheels)
+
     def test_archive_tampering_and_traversal_are_rejected(self):
         artifact = self.root / "tampered.zip"
         inventory = {"files": {"install.py": hashlib.sha256(b"original").hexdigest()}}

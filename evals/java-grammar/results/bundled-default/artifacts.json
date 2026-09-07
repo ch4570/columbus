@@ -1,0 +1,18 @@
+{
+  "upgrade": {
+    "columbus-1.0.0.zip": {
+      "sha256": "ccc2ff8bf5c480dd1b0cc7533491edf945b221aacb799e384d2fee3c2ec039cf",
+      "bytes": 5850293
+    }
+  },
+  "distribution": {
+    "columbus-1.0.0.zip": {
+      "sha256": "f9cc4b695f7aec6a70a209e3a22969463a02b790a7e07a24657fdfb38d51c85c",
+      "bytes": 5851064
+    },
+    "columbus-1.0.0-py3-none-any.whl": {
+      "sha256": "dd720440d8a4ee359b7526872d2e33eba552f99c00bb5c8b575c1544574db46d",
+      "bytes": 116026
+    }
+  }
+}

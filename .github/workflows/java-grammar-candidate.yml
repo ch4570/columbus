@@ -57,9 +57,13 @@ jobs:
       - name: Build Columbus wheel and portable ZIP
         run: |
           python -m pip wheel --no-deps --wheel-dir dist .
-          python scripts/build_bundle.py
+          python scripts/build_bundle.py --java-wheelhouse candidate-results
+      - name: Verify bundled default through existing-runtime upgrade and relocation
+        run: python -c "import pathlib, subprocess, sys; subprocess.run([sys.executable, 'evals/java-grammar/verify_bootstrap_upgrade.py', 'candidate-results', 'candidate-results/bundled-upgrade.json', '--bundle', str(next(pathlib.Path('dist').glob('*.zip')))], check=True)"
+      - name: Verify incompatible bundled parser cannot fall back to upstream
+        run: python evals/java-grammar/verify_bundled_fallback.py candidate-results candidate-results/bundled-fallback.json
       - name: Verify candidate through clean Columbus installations
-        run: python -c "import pathlib, subprocess, sys; p = pathlib.Path('dist'); result = subprocess.run([sys.executable, 'scripts/verify_distribution.py', '--wheel', str(next(p.glob('*.whl'))), '--bundle', str(next(p.glob('*.zip'))), '--wheelhouse', str(pathlib.Path('candidate-results').resolve()), '--expected-java-version', '0.23.5+columbus.1'], check=True, stdout=subprocess.PIPE, text=True); print(result.stdout); pathlib.Path('candidate-results/distribution.json').write_text(result.stdout, encoding='utf-8')"
+        run: python -c "import pathlib, subprocess, sys; p = pathlib.Path('dist'); result = subprocess.run([sys.executable, 'scripts/verify_distribution.py', '--wheel', str(next(p.glob('*.whl'))), '--bundle', str(next(p.glob('*.zip'))), '--wheelhouse', str(pathlib.Path('candidate-results').resolve()), '--expected-java-version', '0.23.5+columbus.1', '--bundled-java-default'], check=True, stdout=subprocess.PIPE, text=True); print(result.stdout); pathlib.Path('candidate-results/distribution.json').write_text(result.stdout, encoding='utf-8')"
       - uses: actions/upload-artifact@v4
         if: always()
         with:

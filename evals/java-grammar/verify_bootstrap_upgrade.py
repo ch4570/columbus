@@ -17,16 +17,31 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('wheelhouse', type=Path)
     parser.add_argument('output', type=Path)
+    parser.add_argument('--bundle', type=Path, help='Upgrade through this bundled-parser ZIP without --wheelhouse')
     args = parser.parse_args()
     reports = []
     with tempfile.TemporaryDirectory(prefix='columbus bootstrap upgrade ') as temporary:
-        repo = Path(temporary).resolve()
+        scratch = Path(temporary).resolve()
+        repo = scratch/'target repository'
+        repo.mkdir()
         source = repo / 'C.java'
         raw = b'class C { void hit(int @A ... values) {} void run() { hit(1); } }'
         source.write_bytes(raw)
+        extracted = None
+        if args.bundle:
+            sys.path.insert(0, str(ROOT/'scripts'))
+            from verify_distribution import verify_archive
+            extracted = verify_archive(args.bundle, scratch/'extracted')
         for candidates in (None, args.wheelhouse.resolve(), args.wheelhouse.resolve()):
-            command = [sys.executable, str(ROOT/'install.py'), '--repo', str(repo)]
-            if candidates:
+            install_source = ROOT
+            if candidates and extracted:
+                if len(reports) == 2:
+                    relocated = scratch/'relocated bundle source'
+                    extracted.rename(relocated)
+                    extracted = relocated
+                install_source = extracted
+            command = [sys.executable, str(install_source/'install.py'), '--repo', str(repo)]
+            if candidates and not extracted:
                 command += ['--wheelhouse', str(candidates)]
             run = subprocess.run(command, check=True, capture_output=True, text=True, encoding='utf-8')
             python = bootstrap.interpreter(repo, repo/'.columbus/runtime')
@@ -55,7 +70,7 @@ print(json.dumps({'version': m.version('tree-sitter-java'), 'partial': parsed['p
         assert [r['partial'] for r in reports] == [True, False, False], reports
         assert [r['pip_ran'] for r in reports] == [True, True, False], reports
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps({'source_unchanged': True, 'runs': reports}, indent=2)+'\n', encoding='utf-8')
+    args.output.write_text(json.dumps({'source_unchanged': True, 'bundled_default': bool(args.bundle), 'bundle_sha256': hashlib.sha256(args.bundle.read_bytes()).hexdigest() if args.bundle else None, 'runs': reports}, indent=2)+'\n', encoding='utf-8')
     print('PASS: existing bootstrap environment adopts candidate; warm rerun skips pip')
 
 
