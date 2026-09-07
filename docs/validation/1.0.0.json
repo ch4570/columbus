@@ -124,7 +124,7 @@
   "historical_observations": "Original inputs and results are byte-identical to commit d0f0585e33124be1e365c6674a937521e80311f6.",
   "benchmark_data": "../benchmarks/1.0.0/charts.json",
   "hosted_ci": {
-    "status": "pending_corrected_source",
+    "status": "passed",
     "workflow": "https://github.com/ch4570/columbus/actions/workflows/distribution.yml",
     "initial_attempt": {
       "url": "https://github.com/ch4570/columbus/actions/runs/34099330548",
@@ -152,9 +152,73 @@
         "windows-latest Python3.11"
       ],
       "windows_314": "Current engine169 androot49 passed; frozen RepoAtlas0.4 replay failed."
-    }
+    },
+    "url": "https://github.com/ch4570/columbus/actions/runs/34102393386",
+    "source_commit": "4f636670205d0b9a81bdcaa53cf744de325cd1c5",
+    "jobs": [
+      {
+        "name": "distribution (macos-latest, 3.14)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/ch4570/columbus/actions/runs/34102393386/job/101679556482",
+        "test_outcome": {
+          "passed": 230,
+          "skipped_archived_replay": 0
+        }
+      },
+      {
+        "name": "distribution (windows-latest, 3.11)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/ch4570/columbus/actions/runs/34102393386/job/101679556492",
+        "test_outcome": {
+          "passed": 230,
+          "skipped_archived_replay": 0
+        }
+      },
+      {
+        "name": "distribution (ubuntu-latest, 3.14)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/ch4570/columbus/actions/runs/34102393386/job/101679556601",
+        "test_outcome": {
+          "passed": 230,
+          "skipped_archived_replay": 0
+        }
+      },
+      {
+        "name": "distribution (windows-latest, 3.14)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/ch4570/columbus/actions/runs/34102393386/job/101679556744",
+        "test_outcome": {
+          "passed": 229,
+          "skipped_archived_replay": 1
+        }
+      },
+      {
+        "name": "distribution (ubuntu-latest, 3.11)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/ch4570/columbus/actions/runs/34102393386/job/101679556752",
+        "test_outcome": {
+          "passed": 230,
+          "skipped_archived_replay": 0
+        }
+      },
+      {
+        "name": "distribution (macos-latest, 3.11)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/ch4570/columbus/actions/runs/34102393386/job/101679556794",
+        "test_outcome": {
+          "passed": 230,
+          "skipped_archived_replay": 0
+        }
+      }
+    ]
   },
-  "scope_note": "Distribution behavior was tested on the recorded source snapshot. Later documentation, visual QA records and this validation record change archive membership, not the hashed tested code. Final release assets carry their own SHA256SUMS.txt.",
+  "scope_note": "The hosted matrix verifies the final code and build inputs listed here. Local distribution checks before the Windows correction remain labeled. Later documentation-only changes and this evidence record affect archive membership; release assets have their own SHA256SUMS.txt and are rebuilt behind the same matrix gate.",
   "skill_validation": {
     "structure_and_managed_resources": "passed",
     "official_quick_validate": "not run: optional PyYAML absent",
@@ -172,7 +236,7 @@
     "harness": 12,
     "result": "passed",
     "regression_detection": "Prior Windows ctime comparison and cp1252 CLI output failed new regressions.",
-    "native_windows_api": "awaiting hosted CI; local tests verify ABI, timestamps, errors and race detection with injected metadata."
+    "native_windows_api": "Passed on hosted Windows/Python3.11 and3.14, including current engine and clean distribution verification."
   },
   "historical_replay_exception": {
     "platform": "win32",
