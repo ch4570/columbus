@@ -18,3 +18,5 @@ All symbol/edge rows match before and after the source edit; restoring source re
 Both parser engine suites pass 209 tests; root tests pass 53. The final 20-test sync suite includes real schema-3 FTS layout migration, injected migration failure, replacement/deletion and a failure after FTS writes that rolls back to previous search results. Existing stale-source checks pass. Clean wheel installation validates schema 4 and normal distribution navigation. Skill validation passes. Hosted platform validation is pending.
 
 The portable complete graph archive remains a separate repository artifact. This storage change does not establish semantic completeness or actual model-token savings. One-file changes still globally relink.
+
+A follow-up concurrency check keeps a real schema-3 reader transaction open while another connection completes migration. That reader retains schema 3 and identical FTS document rows; a new reader observes schema 4 and unchanged search results. The 20-test sync suite passes in both parser environments with this assertion. This covers overlapping read/write connections in one process, not arbitrary concurrent writers or every platform.

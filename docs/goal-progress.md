@@ -84,3 +84,5 @@ An isolated external-content FTS prototype reduces the current Spring DB from a 
 ## Compressed FTS production storage
 
 Schema 4 implements compressed search document bodies with transactional FTS updates and readable schema-2/3 migration. Same-corpus fresh DB size decreases 108,814,336 → 96,677,888 bytes (11.15%); graph/search parity holds before and after an edit. Warm/edit/cold timing observations show no improvement. Existing migrated DB files retain free pages and do not automatically shrink. Both engine suites pass 209 tests, root tests 53, final rollback sync suite 20, and clean wheel installation passes. [Report and receipts](../evals/spring-core/results/fts-storage/REPORT.md). Hosted validation, broader issue acceptance and actual token savings remain open.
+
+The schema-4 migration now also has a verified overlapping-reader test: an existing schema-3 transaction continues to read identical FTS documents after another connection commits migration, while new readers observe schema 4. Both 20-test sync suites pass. The specific 8932a35 hosted runs 34156712557 and 34156718346 remain live; no replacement runs were launched.

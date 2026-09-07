@@ -319,7 +319,12 @@ class SyncTests(unittest.TestCase):
                 self.index.refresh(self.root)
         self.assertEqual(self.index.status()["schema_version"], "3")
         self.assertEqual(self.index.search("olduniquetoken")["hits"], before)
-        self.index.refresh(self.root)
+        with self.index._read() as reader:
+            old_docs = [tuple(r) for r in reader.execute("SELECT rowid,id,name,path,body FROM symbol_fts ORDER BY rowid")]
+            self.index.refresh(self.root)
+            self.assertEqual(self.index._meta(reader)["schema_version"], "3")
+            self.assertEqual([tuple(r) for r in reader.execute("SELECT rowid,id,name,path,body FROM symbol_fts ORDER BY rowid")], old_docs)
+        self.assertEqual(self.index.status()["schema_version"], "4")
         self.assertEqual(self.index.search("olduniquetoken")["hits"], before)
         source.write_text("def one(): return 'newuniquetoken'\n")
         self.index.refresh(self.root)
