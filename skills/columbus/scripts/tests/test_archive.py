@@ -100,6 +100,15 @@ class ArchiveTests(unittest.TestCase):
             self.assertTrue(limited['truncated'])
             self.assertLessEqual(len((json.dumps(limited,separators=(',',':'))+'\n').encode()),2048)
             self.assertEqual({n['id'] for n in limited['nodes']}, {caller} | {e[k] for e in limited['edges'] for k in ['source','target']})
+            pages, offset = [], 0
+            while offset is not None:
+                page = neighbors_archive(artifact, caller, 'both', ['calls'], limit=1, offset=offset)
+                pages.extend(page['edges'])
+                offset = page['next_offset']
+            self.assertEqual(pages, expected)
+            self.assertEqual(neighbors_archive(artifact, caller, offset=999)['edges'], [])
+            with self.assertRaisesRegex(ValueError, 'offset'):
+                neighbors_archive(artifact, caller, offset=-1)
             for direction, field in [('out','source'),('in','target')]:
                 result = neighbors_archive(artifact, caller, direction, ['calls'])
                 self.assertEqual(result['edges'], [e for e in expected if e[field]==caller])
@@ -125,6 +134,31 @@ class ArchiveTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'Archive changed'):
                     neighbors_archive(artifact, caller)
 
+
+    def test_archive_pagination_crosses_edge_and_byte_caps(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'many.py').write_text('def target(): pass\n' + ''.join(f'def caller_{i}(): target()\n' for i in range(65)))
+            index = RepositoryIndex(root / '.columbus/index.sqlite')
+            index.refresh(root)
+            target = index.search('target')['hits'][0]['id']
+            artifact = root / 'graph.gz'
+            archive(index, artifact)
+            offset, edges, pages = 0, [], 0
+            while offset is not None:
+                page = neighbors_archive(artifact, target, 'in', ['calls'], budget_bytes=2048, offset=offset)
+                self.assertLessEqual(len((json.dumps(page,separators=(',',':'))+'\n').encode()),2048)
+                self.assertEqual(page['matched_edges'],65)
+                self.assertTrue(page['edges'])
+                if page['next_offset'] is not None:
+                    self.assertGreater(page['next_offset'],offset)
+                offset = page['next_offset']
+                edges.extend(page['edges'])
+                pages += 1
+                self.assertLessEqual(pages,65)
+            self.assertEqual(len(edges),65)
+            self.assertEqual(len({e['source'] for e in edges}),65)
+            self.assertGreater(pages,2)
 
     def test_failed_archive_never_publishes_partial_output(self):
         with tempfile.TemporaryDirectory() as directory:

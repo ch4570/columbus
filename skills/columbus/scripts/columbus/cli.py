@@ -106,6 +106,7 @@ def main(argv=None) -> int:
             command.add_argument('--limit', type=int, default=5)
             command.add_argument('--budget-bytes', type=int, default=6000)
         if name == 'archive-neighbors':
+            command.add_argument('--offset', type=int, default=0)
             command.add_argument('symbol_id')
             command.add_argument('--input', required=True)
             command.add_argument('--direction', choices=['in', 'out', 'both'], default='out')
@@ -278,7 +279,7 @@ def main(argv=None) -> int:
             if args.pretty:
                 raise ValueError('archive-neighbors uses compact JSON to preserve its byte budget')
             from .archive import neighbors_archive
-            result = neighbors_archive(args.input, args.symbol_id, args.direction, args.kinds, args.limit, args.budget_bytes)
+            result = neighbors_archive(args.input, args.symbol_id, args.direction, args.kinds, args.limit, args.budget_bytes, args.offset)
         elif args.command == 'archive':
             from .archive import archive
             if not args.snapshot:
