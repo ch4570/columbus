@@ -13,6 +13,47 @@ spec.loader.exec_module(observe)
 
 
 class ObservationTests(unittest.TestCase):
+    def test_archive_mode_freezes_without_index_and_gates_model_launch(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            base = Path(temporary)
+            fixture = base / 'fixture.zip'
+            with zipfile.ZipFile(fixture, 'w') as archive:
+                archive.writestr('project/demo.py', 'def target(): pass\ndef entry(): target()\n')
+            cases = base / 'cases.json'
+            cases.write_text(json.dumps({'cases':[{'id':'archive-case','question':'Find callers.',
+                'mode':'caller-enumeration','findings':[{'id':'entry','path':'demo.py','marker':'target()', 'call_lines':[2]}]}]}))
+            output = base / 'observation'
+            observe.prepare(output, fixture, cases)
+            observe.freeze_archive(output)
+            frozen = json.loads((output / 'engine.json').read_text())
+            self.assertFalse((output / 'repository/.columbus').exists())
+            self.assertTrue(observe.archive_gate(output, frozen)['passed'])
+            prompts = []
+            class FakeProcess:
+                pid = 12345
+                returncode = 0
+                def __init__(self, argv, **kwargs):
+                    self.stdout = kwargs['stdout']
+                def communicate(self, prompt, timeout):
+                    prompts.append(prompt)
+                    self.stdout.write(json.dumps({'type':'turn.completed','usage':{'input_tokens':1,'cached_input_tokens':0,'output_tokens':1}})+'\n')
+                    self.stdout.flush()
+            with patch.object(observe.subprocess, 'Popen', FakeProcess), patch.object(observe, 'live_index_preflight', side_effect=AssertionError('archive mode opened index')):
+                for condition in ['baseline','columbus']:
+                    result = observe.trial(output, 'archive-case', condition, model='fake', effort='high', repeat=1, timeout=5)
+                    self.assertTrue(result['archive_preflight']['passed'])
+                    self.assertTrue(result['archive_postflight']['passed'])
+            self.assertNotIn('graph.jsonl.xz', prompts[0])
+            self.assertIn('saved complete graph', prompts[1])
+            self.assertNotIn('prebuilt index', prompts[1])
+            artifact = output / 'graph.jsonl.xz'
+            artifact.write_bytes(artifact.read_bytes()[:-8])
+            with patch.object(observe.subprocess, 'Popen') as model:
+                for condition in ['baseline','columbus']:
+                    with self.assertRaisesRegex(ValueError, 'checksum'):
+                        observe.trial(output, 'archive-case', condition, model='fake', effort='high', repeat=2, timeout=5)
+                model.assert_not_called()
+
     def test_reachability_hides_set_and_rejects_extra_or_wrong_evidence(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
