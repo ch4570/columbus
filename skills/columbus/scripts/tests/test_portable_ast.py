@@ -116,6 +116,18 @@ class PortableASTTests(unittest.TestCase):
         self.assertEqual('tree', rendered[0]['record'])
         self.assertGreater(rendered[0]['diagnostics'], 0)
 
+    def test_python_failed_parse_file_node_stays_explicitly_partial(self):
+        (self.root / 'sample.py').write_text('def broken(:\n')
+        update(self.root)
+        rows = records(self.index)
+        self.assertTrue(rows[1]['partial'])
+        self.assertEqual('module', rows[1]['kind'])
+        packet = self.index.context(rows[1]['id'])
+        self.assertTrue(packet['items'][0]['partial'])
+        (self.root / 'sample.py').write_text('def repaired():\n    return 1\n')
+        update(self.root)
+        self.assertTrue(all(not row['partial'] for row in records(self.index)[1:]))
+
     def test_shared_hook_uses_committing_worktree(self):
         self.git('add', '.')
         self.git('commit', '-qm', 'Initial')

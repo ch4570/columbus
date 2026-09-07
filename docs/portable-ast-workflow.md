@@ -19,7 +19,7 @@ Use Python 3.11+ and a Columbus revision containing these commands (this source 
 
 ```sh
 python3.11 -m venv /path/to/columbus-runtime
-/path/to/columbus-runtime/bin/python -m pip install "git+https://github.com/ch4570/columbus@cc754873ad915cd3daf910018d1befdf44d257a6"
+/path/to/columbus-runtime/bin/python -m pip install "git+https://github.com/ch4570/columbus@438ba8e9694cff9b7022ba19c2c79775a009448f"
 # Activate that environment, then:
 columbus init --repo /path/to/project
 columbus tree --repo /path/to/project --label DefaultResourceLoader --limit 50
@@ -37,7 +37,7 @@ Run pre-commit itself under Python 3.11+. Add this entry to the target's existin
 ```yaml
 repos:
   - repo: https://github.com/ch4570/columbus
-    rev: cc754873ad915cd3daf910018d1befdf44d257a6
+    rev: 438ba8e9694cff9b7022ba19c2c79775a009448f
     hooks:
       - id: columbus-sync
         # Optional: reject parse diagnostics and keep the prior snapshot.
