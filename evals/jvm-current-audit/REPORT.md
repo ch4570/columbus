@@ -1,0 +1,5 @@
+# JVM revalidation at 9386530
+
+After discovery, caller context and accounting changes, the current local engine passed all 31 compiler-backed generic/array cases with both tree-sitter-java 0.23.5 and candidate 0.23.5+columbus.1, using javac 17.0.20.1. The receipts preserve compiler outcomes, graph expectations, engine hash and parser versions. Candidate annotation-span checks also passed for primitive, array and generic annotated varargs; the illegal post-ellipsis fixture remains partial. These bounded fixtures do not establish general JVM precision or runtime completeness.
+
+The last prior all-platform candidate run was 34158876553 at 6536145. A new candidate run was explicitly dispatched at 9386530: https://github.com/ch4570/columbus/actions/runs/34162363469. The latest observation confirms all six initial OS/Python jobs are in progress. Aggregate and shared-bundle consumers depend on those jobs and are not yet proven. Continue polling this exact run; do not dispatch a duplicate because an observation times out. This report records pending CI, not a successful all-platform result. No release or issue closure was performed.
