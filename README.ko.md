@@ -16,6 +16,8 @@ Columbus는 코딩 에이전트가 저장소를 탐색하는 로컬 코드 지�
 
 개발 소스에는 부모 관계를 보존하는 AST JSONL 트리(`columbus tree --label NAME`), 다른 레포에 설치하는 에이전트 스킬, pre-commit 갱신 기능이 추가되어 있습니다. [AST 처리·레포 설치·훅 사용법](docs/portable-ast-workflow.md). 이 기능은 기존 v1.0.0 배포 파일보다 최신 소스가 필요합니다.
 
+개발 버전에서는 압축 그래프를 Git에 보관하고 원본 소스·SQLite 없이 저장된 관계를 조회할 수 있습니다. [레포에 그래프 보관하기](docs/portable-graph-workflow.md). 위 v1.0.0 다운로드가 아니라 해당 가이드에 고정한 최신 소스 버전이 필요합니다.
+
 ## 세 명령으로 출발하기
 
 **Python 3.11 이상**과 [uv](https://docs.astral.sh/uv/getting-started/installation/)가 필요합니다. 설치한 뒤 탐색할 프로젝트 디렉터리에서 실행하세요.

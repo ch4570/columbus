@@ -120,3 +120,7 @@ Added archive-neighbors with exact IDs, one-hop direction/kind filters, capped e
 ## Archive relationship continuation
 
 Added offset/next_offset continuation so the 50-edge and byte caps do not make later relationships inaccessible. A 65-caller generated case paginates under 2KB without duplicates/omissions; real Spring CLI returns six equal edges across three bounded pages without consumer writes. Both engine suites pass 213 tests and root tests pass 53. [Tradeoffs and receipts](../evals/qualified-search/archive-pagination/REPORT.md). Paging repeats scan/header work and is not a token-savings claim.
+
+## Versioned graph workflow documentation
+
+Added README entry points and a pinned-source guide for creating, tracking, moving and paginating a compressed graph. The executable CLI fixture commits only source/graph, confirms gzip is excluded from indexing, deletes the producer/SQLite and resolves a stored call from the moved artifact without consumer writes. Both environments pass. [Workflow evidence](../evals/archive-workflow/REPORT.md). Old v1.0.0 assets remain explicitly excluded; no release or model-savings claim.

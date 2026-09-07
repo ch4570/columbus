@@ -16,6 +16,8 @@ No LLM or API key is needed to index a repository. Columbus does not build or ex
 
 Source development now includes parent-first AST JSONL trees (`columbus tree --label NAME`), portable agent-skill installation, and explicit pre-commit refresh integration. [AST processing and repository workflow](docs/portable-ast-workflow.md). These additions require a revision newer than the v1.0.0 release assets.
 
+Development builds can also keep a complete compressed graph in Git and query stored relationships without SQLite or project source. [Versioned graph workflow](docs/portable-graph-workflow.md). This requires the newer pinned source version in that guide, not the v1.0.0 download above.
+
 ## Set sail in three commands
 
 Requires **Python 3.11+** and [uv](https://docs.astral.sh/uv/getting-started/installation/). Run the last two commands inside the project you want to explore.

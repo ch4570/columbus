@@ -34,6 +34,8 @@ jobs:
         run: python -m unittest discover -s evals/exploration -p "test_*.py" -v
       - name: Continuous-session audit tests (no model calls)
         run: python -m unittest discover -s evals/continuous-context -p "test_*.py" -v
+      - name: Versioned graph relocation (no model calls)
+        run: python evals/archive-workflow/verify.py
       - name: CLI delivery observations (no model calls)
         run: python scripts/observe_delivery.py
       - name: Compile Python sources
