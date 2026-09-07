@@ -1,0 +1,7 @@
+# Optional XZ graph archives
+
+`archive --compression xz --output NEW.jsonl.xz` writes the existing complete version-1 JSONL records using XZ preset 3. Gzip remains the default. Readers detect gzip/XZ by magic bytes and preserve full-stream validation, bounded responses and source-independent queries. Unsupported or truncated XZ input is rejected. Legacy readers support gzip only; no existing artifact is rewritten.
+
+Regression checks verify deterministic XZ bytes, exact decoded gzip/XZ byte equality, source/SQLite removal, equal search and incoming edge packets, distinct same-line calls, destination preservation and truncated-stream rejection. Both engine environments pass 222 tests. Clean wheel and ZIP installations exercise both codecs and compare query packets; local-distribution.json records their success. Root tests pass 53. An initial root determinism assertion overlapped edits to files packaged by that test; after edits stopped, the unchanged suite passed. The initial failure is not presented as a production compression defect.
+
+The earlier identical-byte Django experiment measured approximately 19.9% smaller XZ-3 output with slower decode-plus-hash time; see ../call-span-storage/compression-probe.json. This release change establishes local functional support, not all-platform success or model token savings. Ordinary CI will run these expanded gates after push. No release was published.

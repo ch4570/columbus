@@ -114,6 +114,7 @@ def main(argv=None) -> int:
             command.add_argument('--limit', type=int, default=50)
             command.add_argument('--budget-bytes', type=int, default=6000)
         if name == 'archive':
+            command.add_argument('--compression', choices=['gzip', 'xz'], default='gzip')
             command.add_argument('--output', required=True, help='New complete .jsonl.gz graph artifact')
             command.add_argument('--snapshot', action='store_true', help='Archive the saved index without syncing')
         if name == 'tree':
@@ -288,7 +289,7 @@ def main(argv=None) -> int:
                 index.refresh(root, fast=True)
             elif index.status()['root'] != str(root):
                 raise ValueError('Selected index belongs to a different repository')
-            result = archive(index, args.output)
+            result = archive(index, args.output, args.compression)
         elif args.command == 'serve':
             from .mcp_server import serve
             if index.status()['root'] != str(root):

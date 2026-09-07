@@ -1,5 +1,6 @@
 from contextlib import closing
 import gzip
+import lzma
 import json
 from pathlib import Path
 import sqlite3
@@ -12,6 +13,36 @@ from columbus.index import RepositoryIndex
 
 
 class ArchiveTests(unittest.TestCase):
+    def test_xz_roundtrip_source_free_queries_and_corruption(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / 'demo.py'
+            source.write_text('def target(): pass\ndef entry(): target(); target()\n')
+            index = RepositoryIndex(root / '.columbus/index.sqlite')
+            index.refresh(root)
+            gz, xz, again = root / 'a.gz', root / 'b.data', root / 'c.xz'
+            archive(index, gz)
+            receipt = archive(index, xz, compression='xz')
+            archive(index, again, compression='xz')
+            self.assertEqual(receipt['format'], 'columbus-graph-jsonl-xz-v1')
+            self.assertEqual(xz.read_bytes(), again.read_bytes())
+            self.assertEqual(gzip.decompress(gz.read_bytes()), lzma.decompress(xz.read_bytes()))
+            with self.assertRaises(FileExistsError):
+                archive(index, xz, compression='xz')
+            source.unlink()
+            index.db.unlink()
+            self.assertEqual(search_archive(gz, 'target'), search_archive(xz, 'target'))
+            target = 'demo.py::target:function'
+            expected = neighbors_archive(gz, target, direction='in', kinds=['calls'])
+            self.assertEqual(expected, neighbors_archive(xz, target, direction='in', kinds=['calls']))
+            self.assertEqual(len(expected['edges']), 2)
+            original = xz.read_bytes()
+            self.assertEqual(xz.read_bytes(), original)
+            xz.write_bytes(original[:-8])
+            for query in [lambda: search_archive(xz, 'target'), lambda: neighbors_archive(xz, target)]:
+                with self.assertRaises(ValueError):
+                    query()
+
     def test_full_archive_exceeds_view_limits_and_is_deterministic(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

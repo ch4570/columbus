@@ -110,6 +110,14 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
             if (not relations['edges'] or relations['semantic_complete'] or len(related.encode('utf-8')) > 2048
                     or not all(edge['target'] == symbol_id for edge in relations['edges'])):
                 raise VerificationError('Installed source-free archive relationships failed')
+            xz = root / (name + '.jsonl.xz')
+            run([*prefix, 'archive', '--repo', target, '--snapshot', '--output', xz, '--compression', 'xz'])
+            xz_packet = json.loads(run([*prefix, 'archive-search', label, '--input', xz,
+                                       '--repo', consumer, '--budget-bytes', '2048']))
+            xz_relations = json.loads(run([*prefix, 'archive-neighbors', symbol_id, '--input', xz,
+                                          '--repo', consumer, '--direction', 'in', '--kinds', 'contains', '--budget-bytes', '2048']))
+            if xz_packet != packet or xz_relations != relations:
+                raise VerificationError('Installed XZ archive differs from gzip queries')
             if (consumer / '.columbus').exists():
                 raise VerificationError('Archive lookup unexpectedly created a repository index')
 

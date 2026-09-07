@@ -1,7 +1,9 @@
-"""Complete, deterministic JSONL/gzip graph archives without source/FTS copies."""
+"""Complete, deterministic JSONL gzip/XZ graph archives without source/FTS copies."""
 from __future__ import annotations
 
 import gzip
+import io
+import lzma
 import hashlib
 import json
 import os
@@ -12,7 +14,20 @@ import tempfile
 from .index import compact, decode_parse
 
 
-def archive(index, destination: str | Path) -> dict:
+def _compressed_reader(raw):
+    raw.seek(0)
+    magic = raw.read(6)
+    raw.seek(0)
+    if magic.startswith(b'\x1f\x8b'):
+        return gzip.GzipFile(fileobj=raw, mode='rb')
+    if magic == b'\xfd7zXZ\x00':
+        return lzma.LZMAFile(raw, mode='rb')
+    raise ValueError('Unsupported archive compression; expected gzip or XZ')
+
+
+def archive(index, destination: str | Path, compression: str = 'gzip') -> dict:
+    if compression not in {'gzip', 'xz'}:
+        raise ValueError('compression must be gzip or xz')
     output = Path(destination).expanduser().resolve()
     if output == index.db:
         raise ValueError('Archive destination cannot overwrite the index')
@@ -23,7 +38,9 @@ def archive(index, destination: str | Path) -> dict:
         with index._read() as conn, tempfile.NamedTemporaryFile(dir=output.parent, delete=False) as raw:
             temporary = Path(raw.name)
             meta = index._meta(conn)
-            with gzip.GzipFile(filename='', mode='wb', fileobj=raw, mtime=0) as stream:
+            compressor = (gzip.GzipFile(filename='', mode='wb', fileobj=raw, mtime=0)
+                          if compression == 'gzip' else lzma.LZMAFile(raw, mode='wb', preset=3))
+            with compressor as stream:
                 def emit(kind, data):
                     stream.write((compact({'record': kind, 'data': data}) + '\n').encode('utf-8'))
                 emit('manifest', {'format': 'columbus-graph', 'version': 1,
@@ -65,7 +82,7 @@ def archive(index, destination: str | Path) -> dict:
     with output.open('rb') as stream:
         for chunk in iter(lambda: stream.read(1024 * 1024), b''):
             checksum.update(chunk)
-    return {'output': str(output), 'format': 'columbus-graph-jsonl-gzip-v1',
+    return {'output': str(output), 'format': f'columbus-graph-jsonl-{compression}-v1',
             'bytes': output.stat().st_size, 'sha256': checksum.hexdigest(),
             'revision': meta['revision'], 'truncated': False, 'semantic_complete': False, **counts}
 
@@ -80,7 +97,7 @@ def _search_archive(source: str | Path, query: str, limit: int = 5, budget_bytes
              'reference': 'references', 'import': 'imports', 'diagnostic': 'diagnostics'}
     matches = 0
     suffix = "." + query.casefold() if re.fullmatch(r"[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*)+", query) else ""
-    with gzip.open(source, 'rt', encoding='utf-8') as stream:
+    with Path(source).open('rb') as raw, _compressed_reader(raw) as compressed, io.TextIOWrapper(compressed, encoding='utf-8') as stream:
         for line in stream:
             row = json.loads(line)
             kind, data = row['record'], row['data']
@@ -131,7 +148,7 @@ def _search_archive(source: str | Path, query: str, limit: int = 5, budget_bytes
 def search_archive(source: str | Path, query: str, limit: int = 5, budget_bytes: int = 6000) -> dict:
     try:
         return _search_archive(source, query, limit, budget_bytes)
-    except (KeyError, TypeError, AttributeError, EOFError) as exc:
+    except (KeyError, TypeError, AttributeError, EOFError, lzma.LZMAError) as exc:
         raise ValueError('Malformed or incomplete graph archive') from exc
 
 
@@ -144,7 +161,7 @@ def _validated_rows(raw):
                  import_='imports', diagnostic='diagnostics')
     names['import'] = names.pop('import_')
     manifest, end = None, None
-    with gzip.GzipFile(fileobj=raw, mode='rb') as compressed, io.TextIOWrapper(compressed, encoding='utf-8') as stream:
+    with _compressed_reader(raw) as compressed, io.TextIOWrapper(compressed, encoding='utf-8') as stream:
         for line in stream:
             row = json.loads(line)
             kind, data = row['record'], row['data']
@@ -233,5 +250,5 @@ def neighbors_archive(source: str | Path, symbol_id: str, direction: str = 'out'
                 raise ValueError('Budget too small for archive relationship metadata')
             selected.pop()
             result['truncated'] = True
-    except (KeyError, TypeError, AttributeError, EOFError) as exc:
+    except (KeyError, TypeError, AttributeError, EOFError, lzma.LZMAError) as exc:
         raise ValueError('Malformed or incomplete graph archive') from exc
