@@ -1,0 +1,320 @@
+{
+  "grammar_version": "0.23.5+columbus.1",
+  "javac_version": "javac 17.0.20.1",
+  "analyzer_sha256": "552c2e7001fac0f55bae72c75a395cf7b2170448c3b7eea2676c04db689a806f",
+  "scope": "single local method; primitive annotated varargs and literal arguments",
+  "cases": [
+    {
+      "source": "class C { void hit(int @A ... values) {} void run() { hit(1); } }",
+      "source_sha256": "5971f38c9a5e40e62399bea135931e2b4e3bbd84358f04740ea0dc091c61178d",
+      "expected_valid": true,
+      "javac_exit": 0,
+      "javac_stderr": "",
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(int...)",
+        "confidence": "heuristic"
+      }
+    },
+    {
+      "source": "class C { void hit(int @A ... values) {} void run() { hit(); } }",
+      "source_sha256": "76ec6564dc802d0cc7ea0dcc4f0eabee8dc1a46603b428d0f312d72a4823bce5",
+      "expected_valid": true,
+      "javac_exit": 0,
+      "javac_stderr": "",
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit()",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(int...)",
+        "confidence": "heuristic"
+      }
+    },
+    {
+      "source": "class C { void hit(int @A ... values) {} void run() { hit(1, 2); } }",
+      "source_sha256": "148e9fabb6d3f86a7721a306000d88e8e5e7c95b6211d728e08ef58c1aa84c91",
+      "expected_valid": true,
+      "javac_exit": 0,
+      "javac_stderr": "",
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          "int",
+          "int"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1, 2)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(int...)",
+        "confidence": "heuristic"
+      }
+    },
+    {
+      "source": "class C { void hit(long @A ... values) {} void run() { hit(1); } }",
+      "source_sha256": "235a562a0230715963bf877d0a95f843cfc68e650f308148c779bd403201dea5",
+      "expected_valid": true,
+      "javac_exit": 0,
+      "javac_stderr": "",
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(long...)",
+        "confidence": "heuristic"
+      }
+    },
+    {
+      "source": "class C { void hit(int @A ... values) {} void run() { hit('x'); } }",
+      "source_sha256": "b875f511418fa7477b64e792f1b981c8d2678fc85f57f0447c98280e692627fd",
+      "expected_valid": true,
+      "javac_exit": 0,
+      "javac_stderr": "",
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "char"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit('x')",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(int...)",
+        "confidence": "heuristic"
+      }
+    },
+    {
+      "source": "class C { void hit(int @A ... values) {} void run() { hit(null); } }",
+      "source_sha256": "f46d1a5426d0a0fc97aa722b578c8b6b49312d06408f95343f6cb23bfd48c514",
+      "expected_valid": true,
+      "javac_exit": 0,
+      "javac_stderr": "",
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "null"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(null)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(int...)",
+        "confidence": "heuristic"
+      }
+    },
+    {
+      "source": "class C { void hit(int @A ... values) {} void run() { hit(true); } }",
+      "source_sha256": "0a1dc7e439b6c0f2463cdcf733b5e03e9d0f46aaa09f1b7d11033327c596e3c3",
+      "expected_valid": false,
+      "javac_exit": 1,
+      "javac_stderr": "C.java:1: error: method hit in class C cannot be applied to given types;\nclass C { void hit(int @A ... values) {} void run() { hit(true); } }\n                                                      ^\n  required: int @A []\n  found:    boolean\n  reason: varargs mismatch; boolean cannot be converted to int\n1 error\n",
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "boolean"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(true)",
+        "resolved": false,
+        "reason": "literal argument incompatible with primitive parameter"
+      }
+    },
+    {
+      "source": "class C { void hit(int @A ... values) {} void run() { hit(1L); } }",
+      "source_sha256": "b1b4da079eb859a6abbf216089c24eff7a5307bca51d11e165018c152e8b817e",
+      "expected_valid": false,
+      "javac_exit": 1,
+      "javac_stderr": "C.java:1: error: method hit in class C cannot be applied to given types;\nclass C { void hit(int @A ... values) {} void run() { hit(1L); } }\n                                                      ^\n  required: int @A []\n  found:    long\n  reason: varargs mismatch; possible lossy conversion from long to int\n1 error\n",
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "long"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1L)",
+        "resolved": false,
+        "reason": "literal argument incompatible with primitive parameter"
+      }
+    },
+    {
+      "source": "class C { void hit(int @A ... values) {} void run() { hit(1, null); } }",
+      "source_sha256": "470f7efa95bf0a8f1e5025f864ff5b5a3059d17e363421fb3b0ebc860c9b9c11",
+      "expected_valid": false,
+      "javac_exit": 1,
+      "javac_stderr": "C.java:1: error: method hit in class C cannot be applied to given types;\nclass C { void hit(int @A ... values) {} void run() { hit(1, null); } }\n                                                      ^\n  required: int @A []\n  found:    int,<null>\n  reason: varargs mismatch; <null> cannot be converted to int\n1 error\n",
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          "int",
+          "null"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1, null)",
+        "resolved": false,
+        "reason": "literal argument incompatible with primitive parameter"
+      }
+    },
+    {
+      "source": "class C { void hit(int @A ... values) {} void run() { hit(\"x\"); } }",
+      "source_sha256": "0c9716c4278434f393bf9d33932a29ecff331be90b9e0ed3650b3891cb0ded0d",
+      "expected_valid": false,
+      "javac_exit": 1,
+      "javac_stderr": "C.java:1: error: method hit in class C cannot be applied to given types;\nclass C { void hit(int @A ... values) {} void run() { hit(\"x\"); } }\n                                                      ^\n  required: int @A []\n  found:    String\n  reason: varargs mismatch; String cannot be converted to int\n1 error\n",
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(\"x\")",
+        "resolved": false,
+        "reason": "literal argument incompatible with primitive parameter"
+      }
+    },
+    {
+      "source": "class C { void hit(byte @A ... values) {} void run() { hit(1); } }",
+      "source_sha256": "d5d46102296a26ff3fc6e784dff493d878d7aba00d056fdc6b226db43df77c2d",
+      "expected_valid": false,
+      "javac_exit": 1,
+      "javac_stderr": "C.java:1: error: method hit in class C cannot be applied to given types;\nclass C { void hit(byte @A ... values) {} void run() { hit(1); } }\n                                                       ^\n  required: byte @A []\n  found:    int\n  reason: varargs mismatch; possible lossy conversion from int to byte\n1 error\n",
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": false,
+        "reason": "literal argument incompatible with primitive parameter"
+      }
+    },
+    {
+      "source": "class C { void hit(boolean @A ... values) {} void run() { hit(1); } }",
+      "source_sha256": "b38db61c358161aa8ddb0248598aa121b346310164e03ba263d2e17da66dc650",
+      "expected_valid": false,
+      "javac_exit": 1,
+      "javac_stderr": "C.java:1: error: method hit in class C cannot be applied to given types;\nclass C { void hit(boolean @A ... values) {} void run() { hit(1); } }\n                                                          ^\n  required: boolean @A []\n  found:    int\n  reason: varargs mismatch; int cannot be converted to boolean\n1 error\n",
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": false,
+        "reason": "literal argument incompatible with primitive parameter"
+      }
+    }
+  ]
+}
