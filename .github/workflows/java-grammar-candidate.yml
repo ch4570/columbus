@@ -44,12 +44,20 @@ jobs:
       - name: Install production dependencies then candidate wheel
         run: |
           python -m pip install -r skills/columbus/scripts/requirements.txt -r skills/columbus/scripts/requirements-mcp.txt
+          python -c "import pathlib, subprocess, sys; wheel = next(pathlib.Path('candidate-results').glob('*.whl')); subprocess.run([sys.executable, '-m', 'pip', 'install', '--no-deps', '--target', 'candidate-target', str(wheel)], check=True)"
+          python evals/java-grammar/verify_upgrade.py candidate-target candidate-results/upgrade.json
           python -c "import pathlib, subprocess, sys; wheels = list(pathlib.Path('candidate-results').glob('*.whl')); assert len(wheels) == 1; subprocess.run([sys.executable, '-m', 'pip', 'install', '--no-deps', '--force-reinstall', str(wheels[0])], check=True)"
       - name: Verify installed candidate and annotation spans
         run: python evals/java-grammar/verify_candidate.py candidate-results/runtime.json
       - name: Engine regression tests with candidate
         working-directory: skills/columbus/scripts
         run: python -m unittest discover -s tests -v
+      - name: Build Columbus wheel and portable ZIP
+        run: |
+          python -m pip wheel --no-deps --wheel-dir dist .
+          python scripts/build_bundle.py
+      - name: Verify candidate through clean Columbus installations
+        run: python -c "import pathlib, subprocess, sys; p = pathlib.Path('dist'); result = subprocess.run([sys.executable, 'scripts/verify_distribution.py', '--wheel', str(next(p.glob('*.whl'))), '--bundle', str(next(p.glob('*.zip'))), '--wheelhouse', str(pathlib.Path('candidate-results').resolve()), '--expected-java-version', '0.23.5+columbus.1'], check=True, stdout=subprocess.PIPE, text=True); print(result.stdout); pathlib.Path('candidate-results/distribution.json').write_text(result.stdout, encoding='utf-8')"
       - uses: actions/upload-artifact@v4
         if: always()
         with:

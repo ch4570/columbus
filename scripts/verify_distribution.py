@@ -45,7 +45,7 @@ def verify_archive(artifact: Path, target: Path) -> Path:
 
 
 def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False,
-           bundle: Path | None = None) -> dict:
+           bundle: Path | None = None, expected_java_version: str | None = None) -> dict:
     environment = dict(os.environ)
     for name in ("PYTHONPATH", "PYTHONHOME", "VIRTUAL_ENV"):
         environment.pop(name, None)
@@ -61,6 +61,28 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
             if result.returncode != expected:
                 raise VerificationError(f"Command failed ({result.returncode}, expected {expected}): {command}\n{result.stdout}\n{result.stderr}")
             return result.stdout
+
+        grammar_checks = []
+
+        def verify_java_runtime(interpreter, label):
+            if expected_java_version is None:
+                return
+            probe = """
+import importlib.metadata as metadata
+import json, sys
+from tree_sitter import Language, Parser
+import tree_sitter_java
+actual = metadata.version('tree-sitter-java')
+assert actual == sys.argv[1], (actual, sys.argv[1])
+parser = Parser(Language(tree_sitter_java.language()))
+for parameter, invalid in [('int @A ... values', False), ('int @A [] @B ... values', False),
+                           ('@A Class<?> @B ... values', False), ('int ... @A values', True)]:
+    source = ('class C { void run(' + parameter + ') {} }').encode()
+    assert parser.parse(source).root_node.has_error == invalid, parameter
+print(json.dumps({'version': actual, 'annotation_cases': 4}))
+"""
+            observed = json.loads(run([interpreter, '-I', '-c', probe, expected_java_version]))
+            grammar_checks.append({'installation': label, **observed})
 
         def verify_graph_archive(prefix, target, label, name):
             status = json.loads(run([*prefix, 'sync', '--repo', target, '--summary']))
@@ -119,6 +141,7 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
         if wheelhouse:
             installation.extend(["--find-links", wheelhouse])
         run([*installation, wheel])
+        verify_java_runtime(python, "wheel")
         if "columbus explore" not in run([cli]):
             raise VerificationError("Installed CLI did not show its getting-started guide")
         run([cli, "doctor"])
@@ -223,6 +246,7 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
             release_install.extend(["--wheelhouse", wheelhouse])
         run(release_install)
         run(release_install)
+        verify_java_runtime(root / "managed release environments/versions" / version / binary.name / python.name, "standalone release installer")
         global_cli = global_bin / ("columbus.cmd" if os.name == "nt" else "columbus")
         if run([global_cli, "--version"]).strip() != version:
             raise VerificationError("Standalone release installer did not activate the requested version")
@@ -249,11 +273,13 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
                 raise VerificationError("ZIP bootstrap did not create its initial JVM index")
             extracted.rename(root / "relocated archive source")
             local_python = bootstrap_repo / ".columbus/runtime" / binary.name / python.name
+            verify_java_runtime(local_python, "relocated ZIP bootstrap")
             local_entrypoint = bootstrap_repo / ".agents/skills/columbus/scripts/columbus.py"
             run([local_python, "-E", "-s", local_entrypoint, "doctor"])
             verify_hook([local_python, '-E', '-s', local_entrypoint], bootstrap_repo)
             verify_graph_archive([local_python, '-E', '-s', local_entrypoint], bootstrap_repo, 'visible_hook', 'bootstrap archive')
         return {"status": "passed", "version": version, "wheel": str(wheel),
+                "java_candidate_checks": grammar_checks,
                 "clean_venv": True, "unrelated_cwd": True, "paths_with_spaces": True,
                 "global_search": True, "skill_reinstall": repeated["status"],
                 "polyglot_and_fallback": True, "budgeted_context": True, "graph_formats": 4,
@@ -272,6 +298,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--bundle", type=Path)
     parser.add_argument("--wheelhouse", type=Path)
     parser.add_argument("--offline", action="store_true")
+    parser.add_argument("--expected-java-version", help="Require this installed candidate version and corrected annotation parsing")
     args = parser.parse_args(argv)
     if args.offline and args.wheelhouse is None:
         parser.error("--offline requires --wheelhouse")
@@ -279,7 +306,7 @@ def main(argv: list[str] | None = None) -> int:
         result = verify(args.wheel.resolve(strict=True),
                         bundle=args.bundle.resolve(strict=True) if args.bundle else None,
                         wheelhouse=args.wheelhouse.resolve(strict=True) if args.wheelhouse else None,
-                        offline=args.offline)
+                        offline=args.offline, expected_java_version=args.expected_java_version)
     except (OSError, ValueError, KeyError, VerificationError, subprocess.CalledProcessError) as error:
         print(f"Distribution verification failed: {error}", file=sys.stderr)
         return 1

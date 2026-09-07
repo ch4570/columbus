@@ -54,7 +54,10 @@ def doctor() -> dict:
             found = importlib.metadata.version(name)
         except importlib.metadata.PackageNotFoundError:
             found = None
-        dependencies[name] = {'required': version, 'installed': found, 'matches': found == version}
+        # Public == pins accept local builds in pip; retain the full version
+        # for provenance and the analyzer's cache fingerprint.
+        matches = found is not None and found.partition('+')[0] == version
+        dependencies[name] = {'required': version, 'installed': found, 'matches': matches}
     conn = sqlite3.connect(':memory:')
     try:
         conn.execute('CREATE VIRTUAL TABLE probe USING fts5(text)')
