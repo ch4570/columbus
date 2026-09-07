@@ -1,0 +1,45 @@
+{
+  "table_bytes": {
+    "configs": 4096,
+    "edge_source": 6135808,
+    "edge_target": 6631424,
+    "edges": 16408576,
+    "files": 95227904,
+    "metadata": 106496,
+    "sqlite_autoindex_configs_1": 4096,
+    "sqlite_autoindex_files_1": 110592,
+    "sqlite_autoindex_metadata_1": 4096,
+    "sqlite_autoindex_symbols_1": 3923968,
+    "sqlite_schema": 4096,
+    "symbol_fts_config": 4096,
+    "symbol_fts_content": 28311552,
+    "symbol_fts_data": 6938624,
+    "symbol_fts_docsize": 262144,
+    "symbol_fts_idx": 36864,
+    "symbol_name": 626688,
+    "symbol_path": 1888256,
+    "symbols": 32256000
+  },
+  "parsed_component_bytes": {
+    "path": 86038,
+    "module": 80230,
+    "language": 7047,
+    "fidelity": 5871,
+    "symbols": 19605625,
+    "imports": 4933177,
+    "references": 51377603,
+    "scopes": 82,
+    "diagnostics": 3203,
+    "analysis_note": 2747,
+    "package": 37575,
+    "partial": 5618,
+    "_scopes": 17759901
+  },
+  "language_files": {
+    "java": 1091,
+    "json": 1,
+    "kotlin": 34,
+    "text": 23,
+    "xml": 17
+  }
+}

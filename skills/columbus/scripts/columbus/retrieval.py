@@ -50,7 +50,7 @@ def fits(packet: dict) -> bool:
 
 
 def signature(symbol: dict) -> dict:
-    keys = ('id', 'path', 'name', 'kind', 'language', 'start_line', 'end_line', 'fidelity')
+    keys = ('id', 'path', 'name', 'kind', 'language', 'start_line', 'end_line', 'fidelity', 'partial')
     result = {k: symbol[k] for k in keys if k in symbol}
     result['signature'] = symbol.get('signature', '')[:240]
     return result

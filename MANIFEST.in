@@ -1,5 +1,6 @@
 include README.md VALIDATION.md LICENSE bootstrap.py install.py run.py setup.py pyproject.toml
 include get-columbus.py
+include .pre-commit-hooks.yaml
 include README.ko.md INSTALL.md CONTRIBUTING.md CHANGELOG.md SECURITY.md SUPPORT.md .editorconfig .gitattributes .gitignore
 recursive-include docs *
 recursive-include evals *

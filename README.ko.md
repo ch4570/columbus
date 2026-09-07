@@ -14,6 +14,8 @@ Columbus는 코딩 에이전트가 저장소를 탐색하는 로컬 코드 지�
 
 색인에 LLM이나 API 키가 필요하지 않으며 대상 프로젝트를 빌드하거나 실행하지 않습니다. Python·Java·Kotlin은 AST, 43개 프로필은 선언 추출 휴리스틱을 사용합니다. 나머지 UTF-8 텍스트도 파일 단위로 검색합니다. 언어 감지와 분석 정확도는 다릅니다. [지원 범위](docs/languages.md).
 
+개발 소스에는 부모 관계를 보존하는 AST JSONL 트리(`columbus tree --label NAME`), 다른 레포에 설치하는 에이전트 스킬, pre-commit 갱신 기능이 추가되어 있습니다. [AST 처리·레포 설치·훅 사용법](docs/portable-ast-workflow.md). 이 기능은 기존 v1.0.0 배포 파일보다 최신 소스가 필요합니다.
+
 ## 세 명령으로 출발하기
 
 **Python 3.11 이상**과 [uv](https://docs.astral.sh/uv/getting-started/installation/)가 필요합니다. 설치한 뒤 탐색할 프로젝트 디렉터리에서 실행하세요.

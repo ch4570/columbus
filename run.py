@@ -20,7 +20,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     parser = argparse.ArgumentParser(description=__doc__, epilog="Example: python3 run.py --repo /path/to/project search PaymentService")
     parser.add_argument("--repo", required=True)
-    parser.add_argument("command", choices=["doctor", "sync", "status", "search", "symbol", "neighbors", "impact", "context", "map", "explore", "stats", "graph", "serve", "telemetry"])
+    parser.add_argument("command", choices=["doctor", "tree", "hook-install", "hook-update", "sync", "status", "search", "symbol", "neighbors", "impact", "context", "map", "explore", "stats", "graph", "serve", "telemetry"])
     parser.add_argument("arguments", nargs=argparse.REMAINDER, help="Arguments passed to columbus.py (use COMMAND --help for details)")
     args = parser.parse_args(argv)
     try:

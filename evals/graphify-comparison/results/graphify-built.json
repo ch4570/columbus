@@ -1,0 +1,17 @@
+{
+  "seconds": 0.9639933750004275,
+  "nodes": 17138,
+  "edges": 50778,
+  "directed": true,
+  "multigraph": false,
+  "relations": {
+    "imports": 2750,
+    "contains": 2945,
+    "references": 14891,
+    "method": 11637,
+    "calls": 17459,
+    "inherits": 528,
+    "case_of": 137,
+    "implements": 431
+  }
+}

@@ -4,6 +4,11 @@ This file describes source and bundle versions. A version entry does not imply p
 
 ## Unreleased
 
+- Expose parent-first AST declaration trees as JSONL with labels, source hashes/spans, parse status and bounded node counts.
+- Support an installable `columbus-sync` pre-commit hook and opt-in native Git hooks, preserving existing hook managers and staged source.
+- Add compact visible-worktree refresh reporting and strict parse rollback; retain partial-parse evidence in bounded context and relationship responses.
+- Verify wheel/ZIP portability, linked worktrees, framework stashing/restoration and deletion-only updates.
+
 - Prevent native JVM indexing crashes on long source files by deriving line spans from UTF-8 byte offsets.
 - Include Java annotation interfaces and their elements in declaration search and import graphs.
 - Preserve exact symbol IDs in search and bounded context so long Java paths cannot displace the requested method.

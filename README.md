@@ -14,6 +14,8 @@ Columbus gives coding agents a local map of a repository. Find an entry point, f
 
 No LLM or API key is needed to index a repository. Columbus does not build or execute the project. Python, Java, and Kotlin use ASTs; 43 profiles use declaration heuristics; other UTF-8 text stays searchable as files. [Language coverage](docs/languages.md).
 
+Source development now includes parent-first AST JSONL trees (`columbus tree --label NAME`), portable agent-skill installation, and explicit pre-commit refresh integration. [AST processing and repository workflow](docs/portable-ast-workflow.md). These additions require a revision newer than the v1.0.0 release assets.
+
 ## Set sail in three commands
 
 Requires **Python 3.11+** and [uv](https://docs.astral.sh/uv/getting-started/installation/). Run the last two commands inside the project you want to explore.

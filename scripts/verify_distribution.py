@@ -62,6 +62,29 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
                 raise VerificationError(f"Command failed ({result.returncode}, expected {expected}): {command}\n{result.stdout}\n{result.stderr}")
             return result.stdout
 
+        def verify_hook(prefix: list, target: Path) -> None:
+            run(['git', 'init', '-q', target])
+            for key, value in [('user.name', 'Fixture'), ('user.email', 'fixture@example.invalid'),
+                               ('commit.gpgsign', 'false')]:
+                run(['git', '-C', target, 'config', key, value])
+            (target / '.gitignore').write_text('.columbus/\n', encoding='utf-8')
+            source = target / 'portable_hook.py'
+            source.write_text('def staged_hook():\n    return 1\n', encoding='utf-8')
+            run(['git', '-C', target, 'add', '.gitignore', 'portable_hook.py'])
+            source.write_text('def visible_hook():\n    return 2\n', encoding='utf-8')
+            run([*prefix, 'hook-install', '--repo', target])
+            run(['git', '-C', target, 'commit', '-qm', 'Exercise installed hook'])
+            committed = run(['git', '-C', target, 'show', 'HEAD:portable_hook.py'])
+            if 'visible_hook' in committed or 'staged_hook' not in committed:
+                raise VerificationError('Installed hook changed staged source')
+            found = json.loads(run([*prefix, 'search', 'visible_hook', '--snapshot', '--repo', target]))
+            if not found['hits']:
+                raise VerificationError('Installed hook did not refresh the committing worktree')
+            tree = [json.loads(line) for line in run([*prefix, 'tree', '--label', 'visible_hook',
+                                                     '--repo', target]).splitlines()]
+            if tree[0]['nodes'] != 2 or tree[-1]['name'] != 'visible_hook':
+                raise VerificationError('Installed AST tree did not retain its file parent and declaration')
+
         runtime = root / "fresh environment with spaces"
         # Match `python -m venv`: relocatable POSIX Python distributions need
         # their executable symlinked so the interpreter can find its libraries.
@@ -182,6 +205,7 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
         if run([global_cli, "--version"]).strip() != version:
             raise VerificationError("Standalone release installer did not activate the requested version")
         run([global_cli, "explore", "settle_payment", "--repo", repo])
+        verify_hook([cli], repo)
         archive_files = None
         if bundle:
             extracted = verify_archive(bundle, root / "extracted bundle")
@@ -205,12 +229,15 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
             local_python = bootstrap_repo / ".columbus/runtime" / binary.name / python.name
             local_entrypoint = bootstrap_repo / ".agents/skills/columbus/scripts/columbus.py"
             run([local_python, "-E", "-s", local_entrypoint, "doctor"])
+            verify_hook([local_python, '-E', '-s', local_entrypoint], bootstrap_repo)
         return {"status": "passed", "version": version, "wheel": str(wheel),
                 "clean_venv": True, "unrelated_cwd": True, "paths_with_spaces": True,
                 "global_search": True, "skill_reinstall": repeated["status"],
                 "polyglot_and_fallback": True, "budgeted_context": True, "graph_formats": 4,
                 "text_budget": True, "receipt_continuation": True, "telemetry_bytes_verified": True,
                 "named_sessions": True, "no_argument_guide": True, "standalone_release_install": True,
+                "ast_tree": True, "native_hook_partial_staging": True,
+                "bootstrap_hook_after_source_relocation": bool(bundle),
                 "local_edits_preserved": True, "managed_files": len(lock["files"]),
                 "archive_files": archive_files, "plan_status": planned.get("status")}
 
