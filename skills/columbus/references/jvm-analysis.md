@@ -15,7 +15,9 @@ JVM calls remain candidates. The adapter does not implement compiler overload re
 
 Type lookup keeps class/method type parameters and nested declarations in a separate lexical type namespace. A type parameter receiver stays unresolved with a bound/applicability reason; it must not link to a same-named concrete class. Calls on types with explicit inheritance stay unresolved until inherited candidates and argument applicability are supported, even if the subclass declares only one matching name. This deliberately reduces coverage. Inspect source for the actual route.
 
-Java type-name receivers require static methods; typed value receivers remain separate, including values whose names match a class. Known String/boxed-literal conversions are checked against supported reference types. For those literal arguments, generic, wildcard-import and other unknown reference conversions remain unresolved; this is not full argument type inference.
+Java type-name receivers require static methods; typed value receivers remain separate, including values whose names match a class. Known String/boxed-literal conversions are checked against supported reference types. Wildcard-import and other unknown reference conversions remain unresolved; this is not full argument type inference.
+
+For unbounded method type parameters, the adapter checks correlated `Class<T>`, single invariant `Container<T>`, and bare `T`/`T...` arguments using literals, supported typed values, and limited standard `valueOf` expressions. Direct variable/return contexts constrain supported `T`/`T[]` results. Bounds, explicit type arguments, declaring-type substitution, complex generic shapes, and unknown expressions remain unresolved. These checks do not implement complete Java inference or prove invocation validity.
 
 Java accessibility checks cover the selected declaration and its enclosing types: private nestmates, package identity, and implicitly public interface members. Cross-package protected access stays unresolved pending subtype/receiver analysis; this is not a complete Java module/classpath accessibility check.
 

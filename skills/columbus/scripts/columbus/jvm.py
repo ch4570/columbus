@@ -8,6 +8,8 @@ collected at function scope: shadowing can suppress a valid edge, never justify 
 """
 from __future__ import annotations
 
+import re
+
 from bisect import bisect_right
 from collections import defaultdict
 from pathlib import PurePosixPath
@@ -182,6 +184,8 @@ class _Parser:
             annotations=self.annotations(node), local=parent["kind"] in CALLABLE_KINDS)
         if self.language == "java":
             modifiers = _first(node, {"modifiers"})
+            if not is_class:
+                symbol["return_type"] = self.normalized(node.child_by_field_name("type"))
             symbol["modifiers"] = sorted(self.text(child) for child in modifiers.children
                                          if child.type not in {"annotation", "marker_annotation"}) if modifiers else []
         self.symbols.append(symbol)
@@ -192,6 +196,8 @@ class _Parser:
         previous_scope = self.current
         self.scope(key, previous_scope, kind, qualname)
         self.current = key
+        if "return_type" in symbol:
+            self.scopes[key]["return_type"] = symbol["return_type"]
         type_parameters = node.child_by_field_name("type_parameters") or _first(node, {"type_parameters"})
         for parameter in type_parameters.named_children if type_parameters else []:
             if parameter.type == "type_parameter":
@@ -258,6 +264,36 @@ class _Parser:
         for child in node.named_children:
             self.visit(child)
 
+    def invocation_context(self, node):
+        parent = node.parent
+        while parent and parent.type == "parenthesized_expression":
+            parent = parent.parent
+        if parent and parent.type == "variable_declarator" and parent.parent:
+            return self.normalized(parent.parent.child_by_field_name("type"))
+        if parent and parent.type == "return_statement":
+            scope = self.scopes[self.current]
+            while scope:
+                if "return_type" in scope:
+                    return scope["return_type"]
+                scope = self.scopes.get(scope["parent"])
+        return ""
+
+    def argument_fact(self, node):
+        if node.type == "identifier":
+            return {"kind": "name", "name": self.text(node)}
+        if node.type in {"class_literal", "object_creation_expression"}:
+            type_node = node.child_by_field_name("type") or _first(node, TYPE_NODES)
+            return {"kind": "class_literal" if node.type == "class_literal" else "new",
+                    "type": self.normalized(type_node)}
+        if node.type == "method_invocation" and self.text(node.child_by_field_name("name")) == "valueOf":
+            receiver = self.text(node.child_by_field_name("object"))
+            args = node.child_by_field_name("arguments")
+            values = [_literal_argument_type(n.type, self.text(n)) for n in args.named_children
+                      if n.type not in {"line_comment", "block_comment"}] if args else []
+            if receiver and len(values) == 1 and values[0] is not None:
+                return {"kind": "value_of", "receiver": receiver, "literal": values[0]}
+        return {}
+
     def static_initialization(self, node):
         if self.language != "java":
             return False
@@ -304,6 +340,10 @@ class _Parser:
             self.references.append(dict(source=self.current, scope_id=self.current,
                 kind="calls", name=f"{receiver}.{name}" if receiver else name,
                 member=name, receiver=receiver, constructor=construct, argument_count=argument_count, argument_types=argument_types,
+                argument_facts=[self.argument_fact(n) for n in arguments.named_children
+                                if n.type not in {"line_comment", "block_comment"}] if arguments else [],
+                expected_type=self.invocation_context(node),
+                explicit_type_arguments=bool(node.child_by_field_name("type_arguments") or _first(node, {"type_arguments"})),
                 static_context=self.static_initialization(node),
                 path=self.path, line=self.line(node.start_byte),
                 evidence=" ".join(self.text(node).split())[:240], resolved=False))
@@ -468,6 +508,149 @@ class _Resolver:
             scope_id = scope["parent"]
         return outer
 
+    def reference_type_name(self, file, scope_id, name):
+        """Resolve identity only; no generic erasure or basename matching."""
+        if not re.fullmatch(r"[A-Za-z_$][\w.$]*", name or ""):
+            return None
+        primitive_boxes = {"int": "Integer", "long": "Long", "short": "Short", "byte": "Byte",
+                           "float": "Float", "double": "Double", "char": "Character", "boolean": "Boolean"}
+        if name in primitive_boxes:
+            return "java.lang." + primitive_boxes[name]
+        bindings = self.type_binding(scope_id, name.split(".")[0])
+        if bindings is not None:
+            if len(bindings) != 1 or not bindings[0].get("target"):
+                return None
+        candidates = self.candidates(file, name, type_only=True, scope_id=scope_id)
+        if len(candidates) == 1:
+            return "source:" + candidates[0]["id"]
+        if candidates or any(i["wildcard"] for i in file["imports"]):
+            return None
+        aliases = [i for i in file["imports"] if i["alias"] == name.split(".")[0]]
+        if aliases:
+            return aliases[0]["qualified"] + name[len(aliases[0]["alias"]):] if len(aliases) == 1 else None
+        if "." in name:
+            return name
+        local_name = ".".join(filter(None, [file["package"], name]))
+        if local_name in self.declared_type_names:
+            return None
+        if name in {"Object", "String", "Class", "CharSequence", "Number", "Comparable", *primitive_boxes.values()}:
+            return "java.lang." + name
+        return None
+
+    @staticmethod
+    def reference_assignable(actual, expected):
+        if actual == "null" or actual == expected or expected == "java.lang.Object":
+            return True
+        if actual == "java.lang.String" and expected in {"java.lang.CharSequence", "java.lang.Comparable", "java.io.Serializable"}:
+            return True
+        wrappers = {"java.lang." + n for n in ("Boolean", "Byte", "Short", "Integer", "Long", "Float", "Double", "Character")}
+        if actual in wrappers:
+            return expected in {"java.lang.Comparable", "java.io.Serializable"} or (expected == "java.lang.Number" and actual not in {"java.lang.Boolean", "java.lang.Character"})
+        return False
+
+    def argument_reference_type(self, file, ref, literal, fact):
+        if literal == "null":
+            return "null"
+        if literal == "reference_literal":
+            return "java.lang.String"
+        if literal in _PRIMITIVE_WIDENING:
+            return self.reference_type_name(file, ref["scope_id"], literal)
+        if fact.get("kind") == "name":
+            bindings = self.binding(ref["scope_id"], fact["name"])
+            if bindings is None or len(bindings) != 1:
+                return None
+            return self.reference_type_name(file, ref["scope_id"], bindings[0].get("type", ""))
+        if fact.get("kind") == "new":
+            return self.reference_type_name(file, ref["scope_id"], fact["type"])
+        if fact.get("kind") == "value_of":
+            receiver = fact["receiver"]
+            if self.binding(ref["scope_id"], receiver.split(".")[0]) is not None:
+                return None
+            owner = self.reference_type_name(file, ref["scope_id"], receiver)
+            value = fact["literal"]
+            if owner == "java.lang.String" and value != "null":
+                return owner
+            primitives = {"java.lang." + n: p for p,n in {"int":"Integer", "long":"Long", "short":"Short", "byte":"Byte", "float":"Float", "double":"Double", "char":"Character", "boolean":"Boolean"}.items()}
+            if owner in primitives and (primitives[owner] in _PRIMITIVE_WIDENING.get(value, set())
+                    or (value == "reference_literal" and owner != "java.lang.Character")):
+                return owner
+        return None
+
+    def generic_argument_check(self, file, ref, target, parameters):
+        target_scope = self.scopes.get(target["id"], {})
+        variables = {name: bindings for name, bindings in target_scope.get("type_bindings", {}).items()
+                     if any(b.get("reason") == "type parameter" for b in bindings)}
+        scope, shadowed = target_scope, set(variables)
+        while scope:
+            for name, bindings in scope.get("type_bindings", {}).items():
+                if name not in shadowed and any(b.get("reason") == "type parameter" for b in bindings):
+                    if any(re.search(r"\b" + re.escape(name) + r"\b", p) for p in parameters):
+                        return set(), "generic declaring-type substitution requires semantic analysis"
+                shadowed.add(name)
+            scope = self.scopes.get(scope.get("parent"))
+        if not variables:
+            return set(), None
+        used = {v for v in variables if any(re.search(r"\b" + re.escape(v) + r"\b", p) for p in parameters)}
+        if not used:
+            return set(), None
+        if ref.get("explicit_type_arguments") or any(len(variables[v]) != 1 or variables[v][0].get("declaration") != v for v in used):
+            return set(), "generic bounds or explicit type arguments require semantic analysis"
+        target_file = self.files_by_path[target["path"]]
+        facts = ref.get("argument_facts", [])
+        literals = ref.get("argument_types", [])
+        if len(facts) != len(literals):
+            return set(), "generic argument facts unavailable"
+        anchors, values, handled = {}, [], set()
+        for i,(literal,fact) in enumerate(zip(literals,facts)):
+            parameter = parameters[min(i,len(parameters)-1)].removesuffix("...")
+            if parameter in used:
+                actual = self.argument_reference_type(file,ref,literal,fact)
+                if actual is None:
+                    return set(), "generic value type requires semantic analysis"
+                values.append((parameter,actual));handled.add(i)
+                continue
+            match = re.fullmatch(r"([\w.$]+)<([\w$]+)>",parameter)
+            if match and match[2] in used:
+                formal = self.reference_type_name(target_file,target["id"],match[1])
+                if formal == "java.lang.Class" and fact.get("kind") == "class_literal":
+                    concrete = self.reference_type_name(file,ref["scope_id"],fact["type"])
+                else:
+                    actual_type = fact.get("type", "") if fact.get("kind") == "new" else ""
+                    if fact.get("kind") == "name":
+                        bindings = self.binding(ref["scope_id"],fact["name"])
+                        if bindings and len(bindings)==1:
+                            actual_type = bindings[0].get("type", "")
+                    actual = re.fullmatch(r"([\w.$]+)<([\w.$]+)>", actual_type)
+                    if not actual or not formal or formal != self.reference_type_name(file,ref["scope_id"],actual[1]):
+                        return set(), "generic invariant argument requires semantic analysis"
+                    concrete = self.reference_type_name(file,ref["scope_id"],actual[2])
+                if concrete is None or (match[2] in anchors and anchors[match[2]] != concrete):
+                    return set(), "generic invariant type constraints conflict or are unknown"
+                anchors[match[2]]=concrete;handled.add(i)
+            elif any(re.search(r"\b"+re.escape(v)+r"\b",parameter) for v in used):
+                return set(), "generic parameter shape requires semantic analysis"
+        context = ref.get("expected_type", "")
+        returned = target.get("return_type", "")
+        if context and context != "var":
+            for variable in used:
+                if returned not in {variable, variable + "[]"}:
+                    continue
+                expected = context
+                if returned.endswith("[]"):
+                    if context in {"Object", "java.lang.Object"}:
+                        continue
+                    if not context.endswith("[]"):
+                        return set(), "generic array result context requires semantic analysis"
+                    expected = context[:-2]
+                upper = self.reference_type_name(file, ref["scope_id"], expected)
+                actuals = [anchors[variable]] if variable in anchors else [a for v,a in values if v == variable]
+                if upper is None or any(not self.reference_assignable(a,upper) for a in actuals):
+                    return set(), "generic result context incompatible or unverified"
+        for variable,actual in values:
+            if variable in anchors and not self.reference_assignable(actual,anchors[variable]):
+                return set(), "generic argument type constraints incompatible or unverified"
+        return handled, None
+
     def literal_reference_compatible(self, target, expected, actual):
         """Known String/boxing conversions only; None means semantic work remains."""
         file = self.files_by_path[target["path"]]
@@ -621,7 +804,12 @@ class _Resolver:
             count = ref["argument_count"]
             if (varargs and count < len(parameters) - 1) or (not varargs and count != len(parameters)):
                 return None, "argument count incompatible with declared parameters"
+            generic_handled, generic_reason = self.generic_argument_check(file, ref, target, parameters)
+            if generic_reason:
+                return None, generic_reason
             for number, actual in enumerate(ref.get("argument_types", [])):
+                if number in generic_handled:
+                    continue
                 parameter = parameters[min(number, len(parameters) - 1)] if parameters else ""
                 expected = parameter.removesuffix("...") if varargs else parameter
                 # A lone null in the final position may denote the varargs array.

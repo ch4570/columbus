@@ -15,6 +15,34 @@ class JVMTests(unittest.TestCase):
         json.dumps(result)  # Cached parse records must round-trip through SQLite JSON.
         return result
 
+    def test_generic_argument_constraints_check_literals_and_expressions(self):
+        prefix='class Factory { static <T> void hit(Class<T> type, T value) {} } '
+        for token, value, expected in [('String','"text"',True),('String','1',False),
+                ('String','String.valueOf(1)',True),('String','Integer.valueOf(1)',False),
+                ('CharSequence','"text"',True),('Number','1',True)]:
+            with self.subTest(token=token,value=value):
+                file=self.parsed('C.java',prefix+'class C { void run() { Factory.hit('+token+'.class, '+value+'); } }')
+                resolve_jvm([file]);call, = [r for r in file['references'] if r['member']=='hit']
+                self.assertEqual(expected,call['resolved'])
+                call.pop('argument_facts')
+                resolve_jvm([file])
+                self.assertFalse(call['resolved'])
+
+    def test_generic_result_context_and_unknown_constraints(self):
+        for source, expected in [
+            ('class C { static <T> T[] hit(T... x) { return x; } String[] run() { return hit("ok"); } }',True),
+            ('class C { static <T> T[] hit(T... x) { return x; } String[] run() { return hit(1); } }',False),
+            ('class C { static <T> T[] hit(T... x) { return x; } void run() { String[] x=hit(1); } }',False),
+            ('class C { static <T> void hit(T x) {} void run() { C.<String>hit(1); } }',False),
+            ('class C { static <T extends Number> void hit(T x) {} void run() { hit("bad"); } }',False),
+            ('class C<T> { void hit(T x) {} void run() { hit(Integer.valueOf(1)); } }',False),
+            ('class Filter<T> {} class C { static <T> void hit(Filter<T> f,T x) {} void run() { hit(new Filter<String>(),"ok"); } }',True),
+            ('class Filter<T> {} class C { static <T> void hit(Filter<T> f,T x) {} void run() { hit(new Filter<String>(),Integer.valueOf(1)); } }',False)]:
+            with self.subTest(source=source):
+                file=self.parsed('C.java',source);resolve_jvm([file])
+                call, = [r for r in file['references'] if r['member']=='hit']
+                self.assertEqual(expected,call['resolved'])
+
     def test_java_type_receiver_static_requirement_is_file_layout_independent(self):
         for split in [False, True]:
             for static in [False, True]:
