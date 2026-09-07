@@ -68,3 +68,5 @@ python scripts/observe_delivery.py
 ```
 
 CI runs these deterministic checks and never launches the model trials. The separate `scripts/benchmark_context.py` remains a synthetic whole-source-versus-response illustration; it is not the baseline used here.
+
+Custom predeclared tasks can now be prepared with `prepare --fixture SOURCE.zip --cases CATALOG.json`. The catalog is copied into the observation directory and hash-checked at execution and summary time; later edits to the external catalog cannot rewrite prepared tasks. Historical observations without a frozen catalog retain their original hash validation. IDs and evidence paths are validated. The new [relational pilot plan](results/relational-pilot/PLAN.md) has a prepared current-source fixture but no model measurements yet.

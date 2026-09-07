@@ -1,0 +1,47 @@
+{
+  "schema": "columbus.exploration-cases/v1",
+  "cases": [
+    {
+      "id": "java-graph-lifecycle",
+      "question": "Trace the implementation path from Java source bytes to persisted graph edges and reusable parse facts. Explain the parser dispatch, native AST construction, relationship resolver dispatch, partial-target rejection, edge persistence, and compressed parse-cache persistence. Ground each stage in source and describe how the stages connect; do not infer that a heuristic edge is compiler-verified.",
+      "findings": [
+        {
+          "id": "parse_dispatch",
+          "path": "skills/columbus/scripts/columbus/languages.py",
+          "marker": "result = parse_jvm(path, source, module)",
+          "description": "Java/Kotlin AST parser dispatch"
+        },
+        {
+          "id": "java_ast",
+          "path": "skills/columbus/scripts/columbus/jvm.py",
+          "marker": "tree = Parser(Language(grammar.language())).parse",
+          "description": "native parser input"
+        },
+        {
+          "id": "relink_dispatch",
+          "path": "skills/columbus/scripts/columbus/languages.py",
+          "marker": "edges.extend(resolve_jvm(jvm_files))",
+          "description": "JVM relationship resolution"
+        },
+        {
+          "id": "partial_guard",
+          "path": "skills/columbus/scripts/columbus/jvm.py",
+          "marker": "target file has syntax recovery",
+          "description": "partial target suppression"
+        },
+        {
+          "id": "edge_storage",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "marker": "INSERT INTO edges VALUES",
+          "description": "edge persistence"
+        },
+        {
+          "id": "cache_storage",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "marker": "encode_parse(r[\"parsed\"])",
+          "description": "compressed parse cache persistence"
+        }
+      ]
+    }
+  ]
+}

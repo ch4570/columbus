@@ -70,6 +70,37 @@ class ObservationTests(unittest.TestCase):
         self.assertFalse(observe.index_ready({'files':True,'symbols':10,'indexed_bytes':100}))
         self.assertTrue(observe.index_ready({'files':4,'symbols':20,'indexed_bytes':1000}))
 
+    def test_custom_catalog_is_frozen_and_tampering_rejected(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            base = Path(temporary)
+            catalog = base / 'custom.json'
+            value = json.loads((HERE / 'cases.json').read_text())
+            value['cases'] = value['cases'][:1]
+            value['cases'][0]['id'] = 'custom-navigation'
+            observe.dump(catalog, value)
+            root = base / 'run'
+            metadata = observe.prepare(root, cases_path=catalog)
+            self.assertEqual(['custom-navigation'], metadata['case_ids'])
+            catalog.write_text('{}')
+            self.assertEqual(value, observe.case_catalog(root, metadata))
+            (root / 'cases.json').write_text('{}')
+            with self.assertRaisesRegex(ValueError, 'Case catalog'):
+                observe.summary(root)
+
+    def test_custom_catalog_rejects_unsafe_ids_and_evidence_paths(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            base = Path(temporary)
+            for number, field in enumerate(('id', 'path')):
+                value = json.loads((HERE / 'cases.json').read_text())
+                if field == 'id':
+                    value['cases'][0]['id'] = '../escape'
+                else:
+                    value['cases'][0]['findings'][0]['path'] = '../escape'
+                catalog = base / f'case-{number}.json'
+                observe.dump(catalog, value)
+                with self.assertRaises(ValueError):
+                    observe.prepare(base / f'run-{number}', cases_path=catalog)
+
     def test_real_fixture_and_catalog_markers_are_reproducible(self):
         with tempfile.TemporaryDirectory() as temporary:
             root=Path(temporary)/'run'

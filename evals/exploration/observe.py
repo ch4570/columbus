@@ -48,7 +48,16 @@ def manifest(root: Path) -> dict:
             and '__pycache__' not in p.parts}
 
 
-def prepare(output: Path, fixture: Path = DEFAULT_FIXTURE) -> dict:
+def case_catalog(output: Path, metadata: dict) -> dict:
+    # Historical observations predate catalog freezing; retain their hash gate.
+    path = output / 'cases.json' if metadata.get('frozen_cases') else HERE / 'cases.json'
+    raw = path.read_bytes()
+    if metadata.get('cases_sha256') != sha(raw):
+        raise ValueError('Case catalog differs from the prepared observation')
+    return json.loads(raw)
+
+
+def prepare(output: Path, fixture: Path = DEFAULT_FIXTURE, cases_path: Path | None = None) -> dict:
     if output.exists():
         raise ValueError('Observation directory exists; choose a fresh path to preserve previous evidence')
     output.mkdir(parents=True)
@@ -71,22 +80,29 @@ def prepare(output: Path, fixture: Path = DEFAULT_FIXTURE) -> dict:
             target.write_bytes(archive.read(info))
     # Isolate discovery from ignores in the user's enclosing worktree.
     subprocess.run(['git', 'init', '-q', str(snapshot)], check=True)
-    cases = json.loads((HERE / 'cases.json').read_text(encoding='utf-8'))['cases']
+    catalog_bytes = (cases_path or HERE / 'cases.json').read_bytes()
+    cases = json.loads(catalog_bytes)['cases']
+    ids = [case['id'] for case in cases]
+    if not cases or len(ids) != len(set(ids)) or any(not re.fullmatch(r'[a-z0-9][a-z0-9-]*', name) for name in ids):
+        raise ValueError('Case IDs must be nonempty, unique, and filename-safe')
+    (output / 'cases.json').write_bytes(catalog_bytes)
     for case in cases:
         for finding in case['findings']:
+            relative = Path(finding['path'])
+            if relative.is_absolute() or '..' in relative.parts or '\\' in finding['path']:
+                raise ValueError('Unsafe finding path')
             source = (snapshot / finding['path']).read_text(encoding='utf-8')
             if finding['marker'] not in source:
                 raise ValueError('Fixture does not match case marker: ' + finding['id'])
     result = {'schema': 'columbus.observation-manifest/v1',
               'created_at': datetime.now(timezone.utc).isoformat(),
               'fixture': fixture.name, 'fixture_sha256': sha(fixture.read_bytes()),
-              'source_manifest': manifest(snapshot), 'cases_sha256': sha((HERE / 'cases.json').read_bytes()),
+              'source_manifest': manifest(snapshot), 'cases_sha256': sha(catalog_bytes), 'frozen_cases': True,
               'source_bytes': sum((snapshot / name).stat().st_size for name in manifest(snapshot)),
               'case_ids': [case['id'] for case in cases],
-              'condition_order': {'export-safety': ['baseline', 'columbus'],
-                                  'configuration-invalidation': ['columbus', 'baseline'],
-                                  'managed-installation': ['baseline', 'columbus']},
-              'limitations': ['Three read-only code-location tasks on one real source snapshot; no population inference.',
+              'condition_order': {name: (['baseline', 'columbus'] if number % 2 == 0 else ['columbus', 'baseline'])
+                                  for number, name in enumerate(ids)},
+              'limitations': ['Read-only source-citation tasks on one frozen snapshot; no population inference.',
                               'Baseline uses efficient rg and bounded source reads, not a forced whole-repository dump.',
                               'The graph tool receives a prebuilt index. Cold index work is measured separately.',
                               'Model aliases are requested settings, not provider backend attestations.',
@@ -255,10 +271,8 @@ def parse_events(events: list[dict]) -> dict:
 def trial(output: Path, case_id: str, condition: str, *, model: str, effort: str, repeat: int, timeout: int) -> dict:
     if condition not in {'baseline', *ENGINE_LAYOUTS}:
         raise ValueError('Unknown observation condition')
-    case = next(c for c in json.loads((HERE / 'cases.json').read_text())['cases'] if c['id'] == case_id)
     expected = json.loads((output / 'manifest.json').read_text())
-    if expected['cases_sha256'] != sha((HERE / 'cases.json').read_bytes()):
-        raise ValueError('Case catalog changed after preparation; create a fresh observation')
+    case = next(c for c in case_catalog(output, expected)['cases'] if c['id'] == case_id)
     snapshot = output / 'repository'
     if manifest(snapshot) != expected['source_manifest']:
         raise ValueError('Source snapshot changed; results would not be comparable')
@@ -361,8 +375,7 @@ You may fall back to rg/source reads; no need to force a graph lookup for a simp
 
 def summary(output: Path) -> dict:
     manifest_data = json.loads((output / 'manifest.json').read_text())
-    if manifest_data.get('cases_sha256') != sha((HERE / 'cases.json').read_bytes()):
-        raise ValueError('Case catalog differs from the prepared observation')
+    catalog = case_catalog(output, manifest_data)
     if 'source_manifest' in manifest_data and manifest(output / 'repository') != manifest_data['source_manifest']:
         raise ValueError('Observation source snapshot changed')
     if (output / 'engine.json').exists():
@@ -372,7 +385,7 @@ def summary(output: Path) -> dict:
     else:
         frozen = {}
     trials = [json.loads(p.read_text()) for p in sorted((output / 'trials').glob('*/result.json'))]
-    cases = {c['id']: c for c in json.loads((HERE / 'cases.json').read_text())['cases']}
+    cases = {c['id']: c for c in catalog['cases']}
     for record in trials:
         if record['case'] in cases and (output / 'repository').is_dir():
             record['quality_at_capture'] = record['quality']
@@ -417,6 +430,7 @@ def main():
     parser.add_argument('--output', required=True, type=Path)
     sub = parser.add_subparsers(dest='command', required=True)
     prep = sub.add_parser('prepare'); prep.add_argument('--fixture', type=Path, default=DEFAULT_FIXTURE)
+    prep.add_argument('--cases', type=Path, help='Freeze a custom predeclared task catalog with the source')
     freeze = sub.add_parser('freeze-engine')
     freeze.add_argument('--with-skill', action='store_true', help='Freeze current skill/references and evaluate its routing instead of forcing graph-first')
     freeze.add_argument('--engine-fixture', type=Path, help='Use the published observed engine instead of the current checkout')
@@ -428,7 +442,7 @@ def main():
     run.add_argument('--repeat', type=int, default=1); run.add_argument('--timeout', type=int, default=240)
     sub.add_parser('summary')
     args = parser.parse_args(); output = args.output.expanduser().resolve()
-    if args.command == 'prepare': result = prepare(output, args.fixture.resolve())
+    if args.command == 'prepare': result = prepare(output, args.fixture.resolve(), args.cases.resolve() if args.cases else None)
     elif args.command == 'freeze-engine': freeze_engine(output, args.engine_fixture, args.with_skill); result = {'status':'frozen'}
     elif args.command == 'run': result = trial(output, args.case, args.condition, model=args.model, effort=args.effort, repeat=args.repeat, timeout=args.timeout)
     else: result = summary(output); dump(output / 'summary.json', result)
