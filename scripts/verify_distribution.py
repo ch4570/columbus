@@ -62,6 +62,27 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
                 raise VerificationError(f"Command failed ({result.returncode}, expected {expected}): {command}\n{result.stdout}\n{result.stderr}")
             return result.stdout
 
+        def verify_graph_archive(prefix, target, label, name):
+            status = json.loads(run([*prefix, 'sync', '--repo', target, '--summary']))
+            if not status.get('summary') or not status.get('details_omitted'):
+                raise VerificationError('Installed summary omitted its evidence boundary')
+            if (status['schema_version'] != '3'
+                    or any(status['refresh'].get(key) != 0 for key in ('cached_parses_loaded', 'parsed_files', 'hashed_files'))):
+                raise VerificationError('Installed compressed cache did not support lazy unchanged sync')
+            artifact = root / (name + '.jsonl.gz')
+            receipt = json.loads(run([*prefix, 'archive', '--repo', target, '--snapshot', '--output', artifact]))
+            if receipt['nodes'] != status['symbols'] or receipt['edges'] != status['edges'] or receipt['truncated']:
+                raise VerificationError('Installed complete archive lost graph records')
+            consumer = root / (name + ' consumer')
+            consumer.mkdir()
+            result = run([*prefix, 'archive-search', label, '--input', artifact,
+                          '--repo', consumer, '--budget-bytes', '2048'])
+            packet = json.loads(result)
+            if not any(item['name'] == label for item in packet['items']) or len(result.encode('utf-8')) > 2048:
+                raise VerificationError('Installed archive lookup failed its result/budget check')
+            if (consumer / '.columbus').exists():
+                raise VerificationError('Archive lookup unexpectedly created a repository index')
+
         def verify_hook(prefix: list, target: Path) -> None:
             run(['git', 'init', '-q', target])
             for key, value in [('user.name', 'Fixture'), ('user.email', 'fixture@example.invalid'),
@@ -165,6 +186,7 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
         warm = json.loads(run([cli, "--repo", repo, "sync"]))
         if warm["refresh"]["parsed_files"] or warm["refresh"]["hashed_files"]:
             raise VerificationError("Unchanged installed index was reparsed or rehashed")
+        verify_graph_archive([cli], repo, "settle_payment", "wheel archive")
         planned = json.loads(run([cli, "--repo", repo, "init", "--plan"]))
         if (repo / ".agents").exists():
             raise VerificationError("init --plan changed the repository")
@@ -230,6 +252,7 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
             local_entrypoint = bootstrap_repo / ".agents/skills/columbus/scripts/columbus.py"
             run([local_python, "-E", "-s", local_entrypoint, "doctor"])
             verify_hook([local_python, '-E', '-s', local_entrypoint], bootstrap_repo)
+            verify_graph_archive([local_python, '-E', '-s', local_entrypoint], bootstrap_repo, 'visible_hook', 'bootstrap archive')
         return {"status": "passed", "version": version, "wheel": str(wheel),
                 "clean_venv": True, "unrelated_cwd": True, "paths_with_spaces": True,
                 "global_search": True, "skill_reinstall": repeated["status"],
@@ -237,6 +260,7 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
                 "text_budget": True, "receipt_continuation": True, "telemetry_bytes_verified": True,
                 "named_sessions": True, "no_argument_guide": True, "standalone_release_install": True,
                 "ast_tree": True, "native_hook_partial_staging": True,
+                "complete_graph_archive": True, "source_free_archive_query": True, "summary_lazy_cache": True,
                 "bootstrap_hook_after_source_relocation": bool(bundle),
                 "local_edits_preserved": True, "managed_files": len(lock["files"]),
                 "archive_files": archive_files, "plan_status": planned.get("status")}

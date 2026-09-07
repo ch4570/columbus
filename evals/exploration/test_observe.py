@@ -135,6 +135,21 @@ class ObservationTests(unittest.TestCase):
                     self.assertIsNone(observe.archived_replay_reason(archive))
         self.assertEqual(archive.read_bytes(), original)
 
+    def test_current_skill_is_frozen_and_edits_invalidate_trials(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / 'run'
+            observe.prepare(root)
+            observe.freeze_engine(root, with_skill=True)
+            frozen = json.loads((root / 'engine.json').read_text())
+            self.assertTrue(frozen['skill_included'])
+            self.assertIn('SKILL.md', frozen['files'])
+            self.assertIn('references/archive.md', frozen['files'])
+            (root / 'runtime/SKILL.md').write_text('changed routing')
+            with patch.object(observe.subprocess, 'Popen') as model:
+                with self.assertRaisesRegex(ValueError, 'Frozen engine changed'):
+                    observe.trial(root, 'export-safety', 'columbus', model='unused', effort='high', repeat=1, timeout=5)
+                model.assert_not_called()
+
     def test_current_columbus_engine_uses_its_own_index_and_condition(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary) / 'run'

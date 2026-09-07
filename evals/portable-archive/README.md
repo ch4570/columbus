@@ -24,3 +24,7 @@ columbus archive-search DefaultResourceLoader --input /new/path/graph.jsonl.gz -
 ```
 
 The verification script's named-query assertion targets the recorded Spring corpus. `--snapshot` archives existing evidence without syncing. Existing output files are never replaced; publish is atomic via a same-directory hard link. Filesystems without hard-link support fail rather than publish partial output. Hosted Windows/Linux and final wheel/ZIP integration remain to be verified.
+
+## Extended clean distribution verification
+
+The [clean wheel/ZIP receipt](results/clean-distribution.json) now verifies archive creation, source-free bounded archive queries, schema 3 and zero parse/hash/cache-decode work on unchanged sync through both the wheel CLI and the relocated bootstrap installation. The verifier runs in fresh dependency environments with PYTHONPATH/PYTHONHOME removed. It also checks the prior installation, receipts, native hooks and managed-file contracts. This run passed locally on macOS arm64 / Python 3.11; the receipt includes artifact and verifier hashes. Hosted platform coverage remains outstanding.
