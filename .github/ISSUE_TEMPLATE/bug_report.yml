@@ -1,0 +1,42 @@
+name: Bug report
+description: Report a reproducible installation, analysis, or retrieval problem.
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: Use synthetic source where possible. Do not attach secrets or a private repository index. Follow SECURITY.md for sensitive reports.
+  - type: input
+    id: version
+    attributes:
+      label: Version and installation
+      description: RepoAtlas version and wheel, ZIP, pipx, uv, or source installation.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system, CPU architecture, and Python version.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Exact command and a minimal synthetic fixture or public path with revision.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and observed behavior
+      description: Include budgets, format, source locations, and fidelity/confidence where relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics
+      description: Relevant doctor/status output or error text, reviewed for sensitive data.
+      render: text

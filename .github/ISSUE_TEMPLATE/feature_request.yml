@@ -1,0 +1,28 @@
+name: Feature request
+description: Describe a repository task RepoAtlas should support better.
+title: "[Feature] "
+body:
+  - type: textarea
+    id: task
+    attributes:
+      label: Task and obstacle
+      description: What is the agent or developer trying to do, and what blocks it today?
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Useful outcome
+      description: Describe the smallest observable behavior that would solve the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Example and verification
+      description: A synthetic language fixture, desired graph, or exploration trace and how to check the result.
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Current workaround
+      description: What works today, and what context or effort does it require?

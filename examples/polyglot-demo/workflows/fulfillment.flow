@@ -1,0 +1,6 @@
+task reserve_inventory
+  owner service/orders.go
+  next send_confirmation
+
+task send_confirmation
+  channel order-confirmations

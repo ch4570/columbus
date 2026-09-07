@@ -1,0 +1,15 @@
+include README.md VALIDATION.md LICENSE bootstrap.py install.py run.py setup.py pyproject.toml
+include get-repoatlas.py
+include README.ko.md INSTALL.md CONTRIBUTING.md CHANGELOG.md SECURITY.md SUPPORT.md .editorconfig .gitattributes .gitignore
+recursive-include docs *
+recursive-include evals *
+recursive-include .github *
+recursive-include scripts *.py
+recursive-include skills/repoatlas-jvm *.py *.txt *.md *.json *.yaml *.svg
+recursive-include tests *.py
+recursive-include examples *
+global-exclude *.py[cod]
+prune .omx
+prune .repoatlas
+prune build
+prune dist

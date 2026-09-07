@@ -1,0 +1,32 @@
+{
+  "schema": "repoatlas.exploration-cases/v1",
+  "cases": [
+    {
+      "id": "export-safety",
+      "question": "Trace graph export safety: how is a nonexistent repository rejected, how is overwriting the SQLite index blocked, and what operation refuses an already existing output file?",
+      "findings": [
+        {"id": "repository_validation", "description": "existing repository directory validation", "path": "skills/repoatlas-jvm/scripts/repoatlas/cli.py", "marker": "if not root.is_dir():"},
+        {"id": "index_protection", "description": "protection against exporting over the SQLite index", "path": "skills/repoatlas-jvm/scripts/repoatlas/cli.py", "marker": "if output == index.db:"},
+        {"id": "exclusive_create", "description": "exclusive output file creation", "path": "skills/repoatlas-jvm/scripts/repoatlas/cli.py", "marker": "output.open('x', encoding='utf-8')"}
+      ]
+    },
+    {
+      "id": "configuration-invalidation",
+      "question": "Trace why changing .repoatlas.json's custom declaration keywords invalidates cached analysis. Locate the allowed-key validation, configuration hash in the analyzer fingerprint, and the refresh rebuild condition.",
+      "findings": [
+        {"id": "configuration_validation", "description": "allowed configuration keys validation", "path": "skills/repoatlas-jvm/scripts/repoatlas/discovery.py", "marker": "set(value) - {\"include\", \"exclude\", \"extensions\", \"declarations\"}"},
+        {"id": "configuration_fingerprint", "description": "configuration content hash in analyzer fingerprint", "path": "skills/repoatlas-jvm/scripts/repoatlas/languages.py", "marker": "versions[\"language_config\"] = digest"},
+        {"id": "rebuild_condition", "description": "refresh condition forcing analysis rebuild", "path": "skills/repoatlas-jvm/scripts/repoatlas/index.py", "marker": "or config_changed)"}
+      ]
+    },
+    {
+      "id": "managed-installation",
+      "question": "Trace how a managed skill update preserves local edits and recovers from a normal promotion failure. Locate local-edit conflict detection, the condition aborting apply for conflicts, and restoration of the previous destination.",
+      "findings": [
+        {"id": "local_edit_detection", "description": "local modification detected as a conflict", "path": "skills/repoatlas-jvm/scripts/install.py", "marker": "Managed file has local edits"},
+        {"id": "conflict_aborts_apply", "description": "apply aborts before mutation when the plan conflicts", "path": "skills/repoatlas-jvm/scripts/install.py", "marker": "if not apply or plan[\"status\"] in {\"conflict\", \"noop\"}:"},
+        {"id": "restore_backup", "description": "restore old destination after promotion failure", "path": "skills/repoatlas-jvm/scripts/install.py", "marker": "backup.rename(destination)"}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string"},
+          "path": {"type": "string"},
+          "start_line": {"type": "integer"},
+          "end_line": {"type": "integer"},
+          "quote": {"type": "string"},
+          "explanation": {"type": "string"}
+        },
+        "required": ["id", "path", "start_line", "end_line", "quote", "explanation"]
+      }
+    }
+  },
+  "required": ["findings"]
+}

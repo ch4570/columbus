@@ -1,0 +1,41 @@
+document_type: repository_handbook
+audience:
+  - developers evaluating RepoAtlas
+  - coding agents retrieving repository context
+language: [en, ko]
+target: github_markdown
+theme: repoatlas_cartography
+density: compact
+toc: linked_navigation
+sources:
+  - ../README.md
+  - ../README.ko.md
+  - ../INSTALL.md
+  - usage.md
+  - usage.ko.md
+  - agents.md
+  - languages.md
+  - architecture.md
+page_break_hints: []
+font_fallback:
+  - system-ui
+  - Apple SD Gothic Neo
+  - Malgun Gothic
+  - sans-serif
+accessibility_notes:
+  - Markdown files are the editable semantic source; no duplicated source.md.
+  - One H1 per document and ordered heading levels.
+  - Hero has descriptive alternative text; meaning does not depend on color.
+  - Tables use at most three columns except when a comparison requires more.
+  - Preserve command syntax and label token estimates separately from observations.
+assumptions:
+  - GitHub and plain Markdown are the primary reading surfaces.
+  - No custom font installation or PDF publication is required.
+brand:
+  name: RepoAtlas
+  tagline: Find the code. Carry less context.
+  metaphor: local maps and routes through a repository
+  colors:
+    midnight: '#101D29'
+    ivory: '#F5F0E6'
+    teal: '#55BCAC'

@@ -1,0 +1,3 @@
+The checkout calculates a total. The order service validates quantity.
+The worker checks jobs. This document does not assert calls between processes.
+The workflow file has configurable task declarations; its semantics are unknown.

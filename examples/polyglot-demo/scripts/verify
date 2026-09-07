@@ -1,0 +1,10 @@
+#!/usr/bin/env python3
+"""Extensionless scripts are detected from their interpreter."""
+
+
+def is_positive(value):
+    return value > 0
+
+
+def verify_order(quantity):
+    return is_positive(quantity)

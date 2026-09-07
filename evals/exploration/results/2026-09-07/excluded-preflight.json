@@ -1,0 +1,929 @@
+{
+  "schema": "repoatlas.exploration-summary/v1",
+  "manifest": {
+    "schema": "repoatlas.observation-manifest/v1",
+    "created_at": "2026-09-07T05:48:32.148272+00:00",
+    "fixture": "repoatlas-source-v0.3.0.zip",
+    "fixture_sha256": "dff36ebc978ebe3c8dcfe206192e241e4b36700a996dfc7d1e6a3921080fd180",
+    "source_manifest": {
+      "BUNDLE-MANIFEST.json": "1ae736e15d4b190820570f92ebd3f162ac9bbcc4a075316f4d562cdf2ce8abcf",
+      "LICENSE": "ca9eaa7f33a4300272c57aee1a16d912be268e16b0befa4bbcc10994d87ff3d7",
+      "MANIFEST.in": "343c4c792249aff7bd89aa2ceb83e23c2dbd8070914925893a728d7e67e9bec8",
+      "README.md": "9f4e3ff7a89c164624d574ef5c49ac3a7de9d04dd749e024402da3fb123e1bf0",
+      "VALIDATION.md": "a6f4054d0b602bef37facfe26823e28c3ae237b03c9215fccef6d60841a33f77",
+      "bootstrap.py": "7cba0e14796678568d6282abac927359a12350a1e2380dd0eac2246c6872f23c",
+      "examples/jvm-demo/settings.gradle.kts": "74b2d4a7a8ad022cf20f436329a61717518ca2322b5379ee71ce549c034a8220",
+      "examples/jvm-demo/src/main/java/demo/PaymentGateway.java": "b39f10199981557cf7b870270f4d61a33c164da09ab0204942f20e7433e2d335",
+      "examples/jvm-demo/src/main/kotlin/demo/OrderService.kt": "60bfe6e2b5284fc2a9e0995e5ad06b60732c20bf4bd4db6f9cc49c5151512729",
+      "examples/polyglot-demo/.repoatlas.json": "4cda59c4b9b0bb31d8a84d53451d30401da2534996175f7762ac7adb8530a57f",
+      "examples/polyglot-demo/ARCHITECTURE.notes": "0aa20cf34800176e1011f37dbe768d9490f4cb7c559c5d012bd639e7db81933c",
+      "examples/polyglot-demo/README.md": "2e199857feed7df616a1d95f92fd9d8bf35e318644d93ca3713113943047ee9e",
+      "examples/polyglot-demo/native/totals.cpp": "a61026d5abc1a40b103a2f1869fe53e994ae179f04f106d91d145784d2a83572",
+      "examples/polyglot-demo/native/totals.h": "c0f82893feb477572f9b0e790cfd65d69295487309c2e7355db4e68ff5a71fc3",
+      "examples/polyglot-demo/scripts/verify": "b8701dc41e947baa4e0bf715b317697ada23a96562c43b032e49b51f15f82c6f",
+      "examples/polyglot-demo/service/orders.go": "0a6df84ebb7f7987cdfd49d8afbc01e26daa29dde3a3b63fc675584e60feb878",
+      "examples/polyglot-demo/web/checkout.ts": "6aae9698a7cb533a5afb03065cc88d97dd3857713a823460bfe13e920ac0752b",
+      "examples/polyglot-demo/web/pricing.ts": "15d0b59edcfda154e12fdd9636533f42a69138cfe31b417e0cd67fbb1b739b64",
+      "examples/polyglot-demo/worker/main.rs": "adb7a4cdadc07c5ee26875b97776e762f19505b6db71702185a297d84e91e3b7",
+      "examples/polyglot-demo/worker/queue.rs": "d57378d03d9eacf329a81c73550544fa9ecfdeaa97da8d789808627db3beda7c",
+      "examples/polyglot-demo/workflows/fulfillment.flow": "f399d52f3492f1b1f7dc7a3e55fc904257405f2c9435c535c7dda0827d907d77",
+      "install.py": "090958afaed36a9c865d1fe8fe028d1420ea1459bbeb93cbe3744f51ac77d1a6",
+      "pyproject.toml": "e74246e94264c474d4ee985f3b4128ff94bc7f4a00bd3240c8b057d6d34c5082",
+      "run.py": "d814c3d4e96a828892eb489dbbccf57e27d478589e4ac7138ebbbeaa787a2aa3",
+      "scripts/benchmark_context.py": "a35c4e4f47ea100e1ccf4b6bf38de177c60ac53e0da714591bfb6beb63a5a932",
+      "scripts/build_bundle.py": "9baf1a1487eb07ada72a8b8a91479ae9dcb9b345b5b2bd5fc4419129c1974a1f",
+      "scripts/verify_distribution.py": "4d2d998e5fc8f878c495eb35432d90fae951e5353ebff8337fe51a75c4d60925",
+      "setup.py": "216e25cf00a400415b27d49ed8c9ac2c09ffa69c12cfd05a62cf12403b55ace6",
+      "skills/repoatlas-jvm/LICENSE": "ca9eaa7f33a4300272c57aee1a16d912be268e16b0befa4bbcc10994d87ff3d7",
+      "skills/repoatlas-jvm/SKILL.md": "f2715f7d245ec569778258dc9481f2b9249694f8ac32e4b7517a80f209878169",
+      "skills/repoatlas-jvm/agents/openai.yaml": "753994ff9e30db9bf50d73a0abfa23b99148982d1ce6ab980328b80f3ff9327b",
+      "skills/repoatlas-jvm/assets/icon.svg": "8936b24f674a1250d999e2c2b5901374fb4240426f32bd1ae340c352a90d617d",
+      "skills/repoatlas-jvm/bundle.json": "e0f245cc870f2aec8d3f855335557d2800f7cc179c5ec2db3652d6f2510d3b44",
+      "skills/repoatlas-jvm/references/INDEX.md": "23b0c44400d9f74e5c07d7afa723010ea3f26874432991f5c2123fa5799cec67",
+      "skills/repoatlas-jvm/references/agent-context.md": "fa603a7f968c561ceffdf28fd334375e312803ab1b97e7d1e08f49b1ca46ae8b",
+      "skills/repoatlas-jvm/references/bundle-sync.md": "412812d855d78de77afa0d2aa1bbb10e9460a863e87a9fc5bc2370eb51fefa56",
+      "skills/repoatlas-jvm/references/index-sync.md": "b661c79b8b53343dc3d2ec908882c71e03e6c86df21c992498886dad33480f90",
+      "skills/repoatlas-jvm/references/jvm-analysis.md": "082a0fbccaf6278620d56df58a108c3197819bd87678de4c1a82dd73a55c4834",
+      "skills/repoatlas-jvm/references/polyglot.md": "91eb70c10c1bd1fa0be59671fda5e7463e2670e8cfa28323bf55dc172b7b14c3",
+      "skills/repoatlas-jvm/references/principles.md": "01c330ed6108cea6a3e9e44e77cc7c9d2dbb27b47c7ac267881be3f1968063d0",
+      "skills/repoatlas-jvm/references/technology-review.md": "409dd21e6337cedb82e24e00fcd1419a7cf2c01d8f36137b84c16dc3052d3f1a",
+      "skills/repoatlas-jvm/references/validation.md": "9309dad8eafabed25a0ab5f0a6996ec70484218646b4d2067ada257bf3b85545",
+      "skills/repoatlas-jvm/scripts/atlas.py": "6ecb105cc5bb6d62c015d9779052edcf0d5e7873bfa42a911b65d46f98a9411a",
+      "skills/repoatlas-jvm/scripts/install.py": "16e3c2ff9933394cf153734ddd31cc067db4d909af6895c29105e4bf6d48fbf5",
+      "skills/repoatlas-jvm/scripts/repoatlas/__init__.py": "c5b3081f85daf141bf873ee5b379379214d83abd391e63dc579913b6f996aba8",
+      "skills/repoatlas-jvm/scripts/repoatlas/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "skills/repoatlas-jvm/scripts/repoatlas/bundle.py": "db37b8d3d1aaabdd2e27d1b8b940565d629b9ca087c5b1a126675cbdf3976525",
+      "skills/repoatlas-jvm/scripts/repoatlas/cli.py": "459de50a1c97e7215a87603e72af9359eb0cb9413b06097e8f422879e9a4929d",
+      "skills/repoatlas-jvm/scripts/repoatlas/discovery.py": "d3f986864b82f4def640cd1ffdb1490ac01eaeb8f970be20b902be4b98aed9b3",
+      "skills/repoatlas-jvm/scripts/repoatlas/export.py": "1243138426852b11037d08146591bf3b751fed72fb9060230c7913dc87650d08",
+      "skills/repoatlas-jvm/scripts/repoatlas/graph_views.py": "9e935520bb990c2066cfdb943c37477e78378b5ffd868e31735cc6a5e261f1c7",
+      "skills/repoatlas-jvm/scripts/repoatlas/index.py": "c04ab8b4a0f0f5b55e971c299a142c4e373411fb7cc31ec9aad561d8a444b847",
+      "skills/repoatlas-jvm/scripts/repoatlas/jvm.py": "601e4415c67d07730668ae889c4295ac853eed0d34bc6cb71807421e6950e676",
+      "skills/repoatlas-jvm/scripts/repoatlas/language_profiles.py": "cda7c22cce6227d2627225110adafa641c7b09134b7c5d800ffcf1329092a1ce",
+      "skills/repoatlas-jvm/scripts/repoatlas/languages.py": "0cac78227364d9f93679b57e3dfdfedf7343bc7f0a713581eebcbc85a7d9b006",
+      "skills/repoatlas-jvm/scripts/repoatlas/mcp_server.py": "bc7b06619d564d8c2c9db5ba70520d4fe4f354a7ceed57277a481d56486bf729",
+      "skills/repoatlas-jvm/scripts/repoatlas/parser.py": "2cf8c3d3d40871eebc715a00ad63d248dff4ff7a6d17f54b78140d56f65f2c88",
+      "skills/repoatlas-jvm/scripts/repoatlas/polyglot.py": "fdaf6ff2253945b31eeca00f87175ea9179be9c7b404db5468403d4a269948ae",
+      "skills/repoatlas-jvm/scripts/repoatlas/retrieval.py": "9e5ee3b6ea526985a21285f982832557a845d5217cf009b5068e7cb392244265",
+      "skills/repoatlas-jvm/scripts/repoatlas/sync_state.py": "8fee2912bba2aed95e0c0161c877b4ecbf0fe1f31896c8f856df702aed316a8c",
+      "skills/repoatlas-jvm/scripts/requirements-mcp.txt": "641c5558a338a9bab5ca77cb3c66f1560efebe55f53558f47c1e2139dee5068d",
+      "skills/repoatlas-jvm/scripts/requirements.txt": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+      "skills/repoatlas-jvm/scripts/tests/test_agent_context.py": "6c19cd50a1de51454f0b73371e6e00061418cc6d1590c6357d6ea60d66fb38cb",
+      "skills/repoatlas-jvm/scripts/tests/test_atlas.py": "7aafce181a3fc8117676c6d1cb1e8876bf2677c96b06fe5a3fe62866cbbd4425",
+      "skills/repoatlas-jvm/scripts/tests/test_export.py": "65d21bb05daf873639bc8d9fa4974d9647209046dd74fe74834336286770dc65",
+      "skills/repoatlas-jvm/scripts/tests/test_index.py": "5aeeee8ad42eb0e89226f9d996b3d89cc63be8d89cf4fabfbf9a2daa9c4ff423",
+      "skills/repoatlas-jvm/scripts/tests/test_install.py": "991cda096c5fcbaf1d3febb2562791157f1ee5dc4191696f420b5a20fa1e74cd",
+      "skills/repoatlas-jvm/scripts/tests/test_jvm.py": "cc7685e1718493356c45cf468885a54476241b99cbb5bb93315b35e252ef09cf",
+      "skills/repoatlas-jvm/scripts/tests/test_mcp.py": "665aa5ce6737edd8ab7abffecdc10675f6b17ef79d349c311c965a98ec17da92",
+      "skills/repoatlas-jvm/scripts/tests/test_parser.py": "dd2aa66da52abcdcab659bf35c00ceac5fdcd384fe4ab084e7b65afce39b5842",
+      "skills/repoatlas-jvm/scripts/tests/test_polyglot.py": "b62cfdda1db8f690f26bfe1063d11e3ec984811d06fd1f1b84ad48184e94b474",
+      "skills/repoatlas-jvm/scripts/tests/test_sync.py": "67e44828c9fbf483e33f54843cf7009071ce8bbf9c1de3fabe0a37871209474f",
+      "tests/test_bootstrap.py": "c13d59b0748c5eb9837bffcad9aa204d2ec524a9246ab0751d55e1f8963ef69b",
+      "tests/test_distribution.py": "1f06c80c6f56a8a025035b99fdbf7098114e06ad5e3570d129112e80ac8e6b5c"
+    },
+    "cases_sha256": "56bd5fc3d1aeb42102cd36a66a81e794d165e44015aaa6ab64b160ac27cbcb80",
+    "source_bytes": 408123,
+    "case_ids": [
+      "export-safety",
+      "configuration-invalidation",
+      "managed-installation"
+    ],
+    "condition_order": {
+      "export-safety": [
+        "baseline",
+        "repoatlas"
+      ],
+      "configuration-invalidation": [
+        "repoatlas",
+        "baseline"
+      ],
+      "managed-installation": [
+        "baseline",
+        "repoatlas"
+      ]
+    },
+    "limitations": [
+      "Three read-only code-location tasks on one real source snapshot; no population inference.",
+      "Baseline uses efficient rg and bounded source reads, not a forced whole-repository dump.",
+      "RepoAtlas receives a prebuilt index. Cold index work is measured separately.",
+      "Model aliases are requested settings, not provider backend attestations.",
+      "Cached input is a subset of input, not an additional quantity. No price estimate."
+    ]
+  },
+  "trials": [
+    {
+      "schema": "repoatlas.exploration-observation/v1",
+      "case": "configuration-invalidation",
+      "condition": "baseline",
+      "repeat": 1,
+      "model_requested": "gpt-5.6-sol",
+      "effort_requested": "xhigh",
+      "elapsed_seconds": 66.12,
+      "return_code": 0,
+      "timed_out": false,
+      "source_unchanged": true,
+      "usage": {
+        "input_tokens": 92055,
+        "cached_input_tokens": 51456,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2198,
+        "reasoning_output_tokens": 1359,
+        "uncached_input_tokens": 40599
+      },
+      "commands": [
+        {
+          "command": "/bin/zsh -lc \"rg -n --hidden --glob '\"'!'\"\\\\.git/**' \\\"repoatlas|declaration|allowed.*key|configuration.*hash|config.*hash|fingerprint|refresh|rebuild\\\" .\"",
+          "exit_code": 0,
+          "output_bytes": 43218,
+          "output_sha256": "b1807be3bc823d5312260d4b179756b6b61e8195fe3c090c047007398bcc0ae1"
+        },
+        {
+          "command": "/bin/zsh -lc \"nl -ba skills/repoatlas-jvm/scripts/repoatlas/discovery.py | sed -n '68,108p'\"",
+          "exit_code": 0,
+          "output_bytes": 2767,
+          "output_sha256": "5b3c3faddc779511b5f98a33fac0024ecc6227e011c3d65ab22e2e3a7001dce8"
+        },
+        {
+          "command": "/bin/zsh -lc 'rg -n -C 12 \"def analyzer_fingerprint|config_hash|language_config|fingerprint\" skills/repoatlas-jvm/scripts/repoatlas/languages.py skills/repoatlas-jvm/scripts/repoatlas/index.py'",
+          "exit_code": 0,
+          "output_bytes": 27786,
+          "output_sha256": "6e57d8d4c516e5e595a879aa4a2f5a5d5b1afaf2befec6dc27b9ce41c054ff92"
+        },
+        {
+          "command": "/bin/zsh -lc \"nl -ba skills/repoatlas-jvm/scripts/repoatlas/index.py | sed -n '96,145p'\"",
+          "exit_code": 0,
+          "output_bytes": 3742,
+          "output_sha256": "9dedaa8cff24752cede8a502a7925dff60dd0e8b4b2841a859bb770411302ebb"
+        }
+      ],
+      "command_count": 4,
+      "command_output_bytes": 77513,
+      "failed_commands": 0,
+      "other_tool_types": [],
+      "runtime_warnings": [
+        "Skill descriptions were shortened to fit the skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest."
+      ],
+      "turn_failed": false,
+      "quality": {
+        "passed": true,
+        "findings": [
+          {
+            "id": "configuration_validation",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "configuration_fingerprint",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "rebuild_condition",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          }
+        ],
+        "grader_version": 2,
+        "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+      },
+      "answer": {
+        "findings": [
+          {
+            "id": "configuration_validation",
+            "path": "skills/repoatlas-jvm/scripts/repoatlas/discovery.py",
+            "start_line": 82,
+            "end_line": 103,
+            "quote": "if not isinstance(value, dict) or set(value) - {\"include\", \"exclude\", \"extensions\", \"declarations\"}:\n        raise ValueError(\".repoatlas.json accepts only include, exclude, extensions and declarations\")",
+            "explanation": "The loader permits only four top-level keys, including `declarations`. It subsequently validates declaration language names and requires each custom keyword to be a short literal word rather than a regex."
+          },
+          {
+            "id": "configuration_fingerprint",
+            "path": "skills/repoatlas-jvm/scripts/repoatlas/languages.py",
+            "start_line": 26,
+            "end_line": 47,
+            "quote": "versions[\"language_config\"] = digest(json.dumps(config or {}, sort_keys=True, separators=(\",\", \":\")).encode())[:20]",
+            "explanation": "The analyzer fingerprint includes a digest of the canonicalized configuration object. Because custom declaration keywords are part of that object, changing them changes the fingerprint even when analyzer code and source files are unchanged."
+          },
+          {
+            "id": "rebuild_condition",
+            "path": "skills/repoatlas-jvm/scripts/repoatlas/index.py",
+            "start_line": 134,
+            "end_line": 137,
+            "quote": "config_fingerprint = digest(compact([(r[\"path\"], r[\"hash\"]) for r in config_records]).encode())[:20]\n            config_changed = old_meta.get(\"config_fingerprint\") != config_fingerprint\n            rebuild = (old_meta.get(\"analyzer_fingerprint\") != actual_analyzer\n                       or source_root != old_meta.get(\"source_root\", \".\") or config_changed)",
+            "explanation": "Refresh compares the newly computed analyzer fingerprint with the cached one and also compares hashes of configuration-file contents. A declaration-keyword edit changes the analyzer's `language_config` digest and the `.repoatlas.json` content fingerprint, so `rebuild` becomes true and cached parsed analysis is not reused."
+          }
+        ]
+      },
+      "prompt_bytes": 1098,
+      "events_sha256": "5cb8c95692b0f561e5e61bc01a96cbfdbed1fe82cdef076b42a64cdfc0459f02",
+      "quality_at_capture": {
+        "passed": true,
+        "findings": [
+          {
+            "id": "configuration_validation",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "configuration_fingerprint",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "rebuild_condition",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          }
+        ],
+        "grader_version": 2,
+        "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+      }
+    },
+    {
+      "schema": "repoatlas.exploration-observation/v1",
+      "case": "configuration-invalidation",
+      "condition": "repoatlas",
+      "repeat": 1,
+      "model_requested": "gpt-5.6-sol",
+      "effort_requested": "xhigh",
+      "elapsed_seconds": 81.677,
+      "return_code": 0,
+      "timed_out": false,
+      "source_unchanged": true,
+      "usage": {
+        "input_tokens": 202948,
+        "cached_input_tokens": 164864,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2638,
+        "reasoning_output_tokens": 1387,
+        "uncached_input_tokens": 38084
+      },
+      "commands": [
+        {
+          "command": "/bin/zsh -lc '$PYTHON $EXCLUDED_RUN/runtime/atlas.py search \"repoatlas custom declaration keywords allowed configuration keys fingerprint hash refresh rebuild\" --repo . --snapshot --format text --limit 5'",
+          "exit_code": 0,
+          "output_bytes": 158,
+          "output_sha256": "a962b0d6ca6a9e22b9aca8e09c2d03564edbb3059f7502e9ea59e288f0588bab"
+        },
+        {
+          "command": "/bin/zsh -lc '$PYTHON $EXCLUDED_RUN/runtime/atlas.py search \".repoatlas.json\" --repo . --snapshot --format text --limit 10'",
+          "exit_code": 0,
+          "output_bytes": 158,
+          "output_sha256": "a962b0d6ca6a9e22b9aca8e09c2d03564edbb3059f7502e9ea59e288f0588bab"
+        },
+        {
+          "command": "/bin/zsh -lc '$PYTHON $EXCLUDED_RUN/runtime/atlas.py search \"refresh rebuild cached analysis\" --repo . --snapshot --format text --limit 10'",
+          "exit_code": 0,
+          "output_bytes": 158,
+          "output_sha256": "a962b0d6ca6a9e22b9aca8e09c2d03564edbb3059f7502e9ea59e288f0588bab"
+        },
+        {
+          "command": "/bin/zsh -lc '$PYTHON $EXCLUDED_RUN/runtime/atlas.py search \"custom declaration keywords\" --repo . --snapshot --format text --limit 10'",
+          "exit_code": 0,
+          "output_bytes": 158,
+          "output_sha256": "a962b0d6ca6a9e22b9aca8e09c2d03564edbb3059f7502e9ea59e288f0588bab"
+        },
+        {
+          "command": "/bin/zsh -lc '$PYTHON $EXCLUDED_RUN/runtime/atlas.py search \"configuration hash analyzer fingerprint\" --repo . --snapshot --format text --limit 10'",
+          "exit_code": 0,
+          "output_bytes": 158,
+          "output_sha256": "a962b0d6ca6a9e22b9aca8e09c2d03564edbb3059f7502e9ea59e288f0588bab"
+        },
+        {
+          "command": "/bin/zsh -lc \"rg -n --hidden --glob '\"'!'\"\\\\.git/**' \\\"repoatlas|declaration|fingerprint|config(uration)?Hash|refresh|rebuild\\\" .\"",
+          "exit_code": 0,
+          "output_bytes": 62616,
+          "output_sha256": "438a84f17c90c0b0db6df581bd25de026f3dedaebeb16a5a06455e35996e3895"
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '100,141p' \\\"skills/repoatlas-jvm/scripts/repoatlas/index.py\\\" | nl -ba -v 100\"",
+          "exit_code": 0,
+          "output_bytes": 3257,
+          "output_sha256": "b8c52cfbe8742a5cb3dc477ffbadcac112c57fdbb46536ba32a1f5529f2bdc8a"
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '70,106p' \\\"skills/repoatlas-jvm/scripts/repoatlas/discovery.py\\\" | nl -ba -v 70\"",
+          "exit_code": 0,
+          "output_bytes": 2544,
+          "output_sha256": "dfb8acf70cbc92c02e0ea03526a93cae36ed3f63952e1928e6d7f08bd1df7a93"
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '1,48p' \\\"skills/repoatlas-jvm/scripts/repoatlas/languages.py\\\" | nl -ba -v 1\"",
+          "exit_code": 0,
+          "output_bytes": 2881,
+          "output_sha256": "ef5936b44061c03ed46809071949fe3ae878981bdcaae294b7fac66f19ffe151"
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '130,163p' skills/repoatlas-jvm/scripts/repoatlas/discovery.py | nl -ba -v 130\"",
+          "exit_code": 0,
+          "output_bytes": 1991,
+          "output_sha256": "3845de3e6acceafb0b83b2154e5234d67f0bddeeaab371f5d8f69b06c6c9a0ed"
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '1,40p' skills/repoatlas-jvm/scripts/repoatlas/discovery.py | nl -ba -v 1\"",
+          "exit_code": 0,
+          "output_bytes": 2247,
+          "output_sha256": "6474c7b2b506c2d65e1b8c90a3c1575d435b3a4eeaed51dc2fabc1423964df26"
+        }
+      ],
+      "command_count": 11,
+      "command_output_bytes": 76326,
+      "failed_commands": 0,
+      "other_tool_types": [],
+      "runtime_warnings": [
+        "Skill descriptions were shortened to fit the skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest."
+      ],
+      "turn_failed": false,
+      "quality": {
+        "passed": true,
+        "findings": [
+          {
+            "id": "configuration_validation",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "configuration_fingerprint",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "rebuild_condition",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          }
+        ],
+        "grader_version": 2,
+        "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+      },
+      "answer": {
+        "findings": [
+          {
+            "id": "configuration_validation",
+            "path": "skills/repoatlas-jvm/scripts/repoatlas/discovery.py",
+            "start_line": 82,
+            "end_line": 83,
+            "quote": "if not isinstance(value, dict) or set(value) - {\"include\", \"exclude\", \"extensions\", \"declarations\"}:\n        raise ValueError(\".repoatlas.json accepts only include, exclude, extensions and declarations\")",
+            "explanation": "The loader accepts only four top-level configuration keys, including `declarations`; unknown keys invalidate the configuration before analysis."
+          },
+          {
+            "id": "configuration_fingerprint",
+            "path": "skills/repoatlas-jvm/scripts/repoatlas/languages.py",
+            "start_line": 44,
+            "end_line": 46,
+            "quote": "versions[\"analyzer_code\"] = digest(b\"\\n\".join(path.read_bytes() for path in analyzer_files))[:20]\n    versions[\"language_config\"] = digest(json.dumps(config or {}, sort_keys=True, separators=(\",\", \":\")).encode())[:20]\n    return {\"languages\": languages, \"versions\": versions,",
+            "explanation": "The complete parsed configuration is serialized deterministically and hashed into `versions.language_config`. Changing a custom declaration keyword therefore changes the current analyzer fingerprint."
+          },
+          {
+            "id": "rebuild_condition",
+            "path": "skills/repoatlas-jvm/scripts/repoatlas/index.py",
+            "start_line": 134,
+            "end_line": 137,
+            "quote": "config_fingerprint = digest(compact([(r[\"path\"], r[\"hash\"]) for r in config_records]).encode())[:20]\n            config_changed = old_meta.get(\"config_fingerprint\") != config_fingerprint\n            rebuild = (old_meta.get(\"analyzer_fingerprint\") != actual_analyzer\n                       or source_root != old_meta.get(\"source_root\", \".\") or config_changed)",
+            "explanation": "Refresh forces `rebuild` when the stored analyzer fingerprint differs from the newly computed one or when configuration-file content changed. A declaration-keyword edit changes the embedded language-configuration hash—and the `.repoatlas.json` file hash—so cached analysis cannot be reused."
+          }
+        ]
+      },
+      "prompt_bytes": 1995,
+      "events_sha256": "3007dfd2be9db27d60187f3dcb9a7ad19d2904f6da50fd2652ea9674018ebcb4",
+      "quality_at_capture": {
+        "passed": true,
+        "findings": [
+          {
+            "id": "configuration_validation",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "configuration_fingerprint",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "rebuild_condition",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          }
+        ],
+        "grader_version": 2,
+        "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+      }
+    },
+    {
+      "schema": "repoatlas.exploration-observation/v1",
+      "case": "export-safety",
+      "condition": "baseline",
+      "repeat": 1,
+      "model_requested": "gpt-5.6-sol",
+      "effort_requested": "xhigh",
+      "elapsed_seconds": 51.075,
+      "return_code": 0,
+      "timed_out": false,
+      "source_unchanged": true,
+      "usage": {
+        "input_tokens": 139961,
+        "cached_input_tokens": 108544,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1485,
+        "reasoning_output_tokens": 712,
+        "uncached_input_tokens": 31417
+      },
+      "commands": [
+        {
+          "command": "/bin/zsh -lc \"rg -n --hidden -S \\\"repository|sqlite|index|create_new|createNew|OpenOptions|exists\\\\(|is_dir\\\\(|isDirectory|output\\\" -g '\"'!target'\"' -g '\"'!build'\"' -g '\"'!node_modules'\"' . | head -n 240\"",
+          "exit_code": 0,
+          "output_bytes": 34327,
+          "output_sha256": "6cc7312cfdd3178f3b36c27c233d5ae572825baa36104ab0593a0f5f9062210f"
+        },
+        {
+          "command": "/bin/zsh -lc \"nl -ba skills/repoatlas-jvm/scripts/repoatlas/cli.py | sed -n '96,162p'\"",
+          "exit_code": 0,
+          "output_bytes": 4719,
+          "output_sha256": "c486d6bef8ce4d90b9b097d75b697d0e75ad99ba4ea74299c87903b5cf9cc299"
+        },
+        {
+          "command": "/bin/zsh -lc \"nl -ba skills/repoatlas-jvm/scripts/repoatlas/cli.py | sed -n '159,166p'\"",
+          "exit_code": 0,
+          "output_bytes": 317,
+          "output_sha256": "23d58183852bcff3f29ff36a5b650584b44efbb5dcfe1dc802054ff5fee762a3"
+        },
+        {
+          "command": "/bin/zsh -lc \"rg -n \\\"class RepositoryIndex|def __init__|self\\\\.db\\\" skills/repoatlas-jvm/scripts/repoatlas/index.py | head -n 30\"",
+          "exit_code": 0,
+          "output_bytes": 362,
+          "output_sha256": "e140d96638a4336af782bd2266c43ffbb77644ab0debc621db524eab7c7dfe98"
+        }
+      ],
+      "command_count": 4,
+      "command_output_bytes": 39725,
+      "failed_commands": 0,
+      "other_tool_types": [],
+      "runtime_warnings": [
+        "Skill descriptions were shortened to fit the skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest."
+      ],
+      "turn_failed": false,
+      "quality": {
+        "passed": true,
+        "findings": [
+          {
+            "id": "repository_validation",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "index_protection",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "exclusive_create",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          }
+        ],
+        "grader_version": 2,
+        "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+      },
+      "answer": {
+        "findings": [
+          {
+            "id": "repository_validation",
+            "path": "skills/repoatlas-jvm/scripts/repoatlas/cli.py",
+            "start_line": 103,
+            "end_line": 109,
+            "quote": "root = Path(args.repo or '.').expanduser().resolve()\nif not root.is_dir():\n    raise ValueError('--repo must be an existing local repository directory')",
+            "explanation": "The repository argument is normalized to an absolute path and must resolve to a directory. A nonexistent path fails is_dir() and is rejected with a ValueError before graph access or export."
+          },
+          {
+            "id": "index_protection",
+            "path": "skills/repoatlas-jvm/scripts/repoatlas/cli.py",
+            "start_line": 147,
+            "end_line": 152,
+            "quote": "output = Path(args.output).expanduser().resolve()\nif output == index.db:\n    raise ValueError('Export destination cannot overwrite the index')",
+            "explanation": "The export destination is resolved and compared with the SQLite index path. If they are identical, export stops before writing, protecting the index from being overwritten."
+          },
+          {
+            "id": "exclusive_create",
+            "path": "skills/repoatlas-jvm/scripts/repoatlas/cli.py",
+            "start_line": 153,
+            "end_line": 157,
+            "quote": "# Exclusive creation also closes the exists-check/write race.\nwith output.open('x', encoding='utf-8') as stream:\n    stream.write(rendered)",
+            "explanation": "Path.open() in 'x' mode performs exclusive creation. It refuses an output path that already exists by raising FileExistsError, while avoiding a separate existence-check race."
+          }
+        ]
+      },
+      "prompt_bytes": 1038,
+      "events_sha256": "bd7d70a807d2c471bed599e6396de7da1576094029935c77ac5387584e4b5cbe",
+      "quality_at_capture": {
+        "passed": false,
+        "findings": [
+          {
+            "id": "repository_validation",
+            "passed": false,
+            "reason": "quote not verbatim within cited lines"
+          },
+          {
+            "id": "index_protection",
+            "passed": false,
+            "reason": "quote not verbatim within cited lines"
+          },
+          {
+            "id": "exclusive_create",
+            "passed": false,
+            "reason": "quote not verbatim within cited lines"
+          }
+        ],
+        "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+      }
+    },
+    {
+      "schema": "repoatlas.exploration-observation/v1",
+      "case": "export-safety",
+      "condition": "repoatlas",
+      "repeat": 1,
+      "model_requested": "gpt-5.6-sol",
+      "effort_requested": "xhigh",
+      "elapsed_seconds": 61.081,
+      "return_code": 0,
+      "timed_out": false,
+      "source_unchanged": true,
+      "usage": {
+        "input_tokens": 159229,
+        "cached_input_tokens": 132608,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1949,
+        "reasoning_output_tokens": 751,
+        "uncached_input_tokens": 26621
+      },
+      "commands": [
+        {
+          "command": "/bin/zsh -lc '$PYTHON $EXCLUDED_RUN/runtime/atlas.py search \"graph export repository exists sqlite index overwrite exclusive create\" --repo . --snapshot --format text --limit 5'",
+          "exit_code": 0,
+          "output_bytes": 158,
+          "output_sha256": "a962b0d6ca6a9e22b9aca8e09c2d03564edbb3059f7502e9ea59e288f0588bab"
+        },
+        {
+          "command": "/bin/zsh -lc '$PYTHON $EXCLUDED_RUN/runtime/atlas.py search \"SQLite index export output\" --repo . --snapshot --format text --limit 10'",
+          "exit_code": 0,
+          "output_bytes": 158,
+          "output_sha256": "a962b0d6ca6a9e22b9aca8e09c2d03564edbb3059f7502e9ea59e288f0588bab"
+        },
+        {
+          "command": "/bin/zsh -lc '$PYTHON $EXCLUDED_RUN/runtime/atlas.py search \"nonexistent repository directory\" --repo . --snapshot --format text --limit 10'",
+          "exit_code": 0,
+          "output_bytes": 158,
+          "output_sha256": "a962b0d6ca6a9e22b9aca8e09c2d03564edbb3059f7502e9ea59e288f0588bab"
+        },
+        {
+          "command": "/bin/zsh -lc '$PYTHON $EXCLUDED_RUN/runtime/atlas.py search \"create_new output file already exists\" --repo . --snapshot --format text --limit 10'",
+          "exit_code": 0,
+          "output_bytes": 158,
+          "output_sha256": "a962b0d6ca6a9e22b9aca8e09c2d03564edbb3059f7502e9ea59e288f0588bab"
+        },
+        {
+          "command": "/bin/zsh -lc \"rg --files | sed -n '1,160p'\"",
+          "exit_code": 0,
+          "output_bytes": 2922,
+          "output_sha256": "8c06eb3dd89759f0c751be603631f3976ac2bfa56957744b38e31f04d9e48baf"
+        },
+        {
+          "command": "/bin/zsh -lc \"rg -n -C 3 \\\"(is_dir|exists\\\\(|resolve\\\\(|sqlite|index_path|exclusive|FileExists|open\\\\(|['\\\\\\\"]x['\\\\\\\"]|create)\\\" skills/repoatlas-jvm/scripts/repoatlas/export.py skills/repoatlas-jvm/scripts/repoatlas/cli.py skills/repoatlas-jvm/scripts/tests/test_export.py\"",
+          "exit_code": 0,
+          "output_bytes": 7883,
+          "output_sha256": "9f6bd587635849dd435d575ead5e90a4a47c98d745d2466d124e51e428435492"
+        },
+        {
+          "command": "/bin/zsh -lc \"nl -ba skills/repoatlas-jvm/scripts/repoatlas/cli.py | sed -n '100,120p'\"",
+          "exit_code": 0,
+          "output_bytes": 1355,
+          "output_sha256": "492af91e2da6d05bc26bedb91ec5ede5a2e87ee5d295a5e0d7bdd8c89cc1e135"
+        },
+        {
+          "command": "/bin/zsh -lc \"nl -ba skills/repoatlas-jvm/scripts/repoatlas/cli.py | sed -n '140,164p'\"",
+          "exit_code": 0,
+          "output_bytes": 1983,
+          "output_sha256": "cfe67c752b433d48ccdc69b0573cfc25eb8c660401276ed6ea0e279e67342a5a"
+        },
+        {
+          "command": "/bin/zsh -lc \"rg -n -C 3 \\\"self\\\\.db\\\\s*=|def __init__\\\" skills/repoatlas-jvm/scripts/repoatlas/index.py | sed -n '1,60p'\"",
+          "exit_code": 0,
+          "output_bytes": 181,
+          "output_sha256": "3642abb270586eb1036feec44bbdcfce267fc7326078649abe4d93a5f00d9292"
+        }
+      ],
+      "command_count": 9,
+      "command_output_bytes": 14956,
+      "failed_commands": 0,
+      "other_tool_types": [],
+      "runtime_warnings": [
+        "Skill descriptions were shortened to fit the skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest."
+      ],
+      "turn_failed": false,
+      "quality": {
+        "passed": true,
+        "findings": [
+          {
+            "id": "repository_validation",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "index_protection",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "exclusive_create",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          }
+        ],
+        "grader_version": 2,
+        "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+      },
+      "answer": {
+        "findings": [
+          {
+            "id": "repository_validation",
+            "path": "skills/repoatlas-jvm/scripts/repoatlas/cli.py",
+            "start_line": 103,
+            "end_line": 109,
+            "quote": "root = Path(args.repo or '.').expanduser().resolve()\nif not root.is_dir():\n    raise ValueError('--repo must be an existing local repository directory')",
+            "explanation": "The repository path is normalized and resolved, then `is_dir()` verifies that it both exists and is a directory. A nonexistent path fails this check and is rejected with `ValueError`."
+          },
+          {
+            "id": "index_protection",
+            "path": "skills/repoatlas-jvm/scripts/repoatlas/cli.py",
+            "start_line": 147,
+            "end_line": 152,
+            "quote": "output = Path(args.output).expanduser().resolve()\nif output == index.db:\n    raise ValueError('Export destination cannot overwrite the index')",
+            "explanation": "Before rendering or writing the graph export, the resolved destination is compared with the SQLite index path. An exact match raises `ValueError`, preventing the export from replacing its own index."
+          },
+          {
+            "id": "exclusive_create",
+            "path": "skills/repoatlas-jvm/scripts/repoatlas/cli.py",
+            "start_line": 153,
+            "end_line": 157,
+            "quote": "# Exclusive creation also closes the exists-check/write race.\nwith output.open('x', encoding='utf-8') as stream:\n    stream.write(rendered)",
+            "explanation": "`Path.open('x')` performs exclusive file creation. The open operation refuses an already existing destination by raising `FileExistsError` instead of truncating it, while also avoiding a separate check-then-write race."
+          }
+        ]
+      },
+      "prompt_bytes": 1935,
+      "events_sha256": "08c9392e43b5ba3dca64e62cd158d3bc43a99e3787f591862df43dd037eaf1bf",
+      "quality_at_capture": {
+        "passed": true,
+        "findings": [
+          {
+            "id": "repository_validation",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "index_protection",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "exclusive_create",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          }
+        ],
+        "grader_version": 2,
+        "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+      }
+    },
+    {
+      "schema": "repoatlas.exploration-observation/v1",
+      "case": "managed-installation",
+      "condition": "baseline",
+      "repeat": 1,
+      "model_requested": "gpt-5.6-sol",
+      "effort_requested": "xhigh",
+      "elapsed_seconds": 41.379,
+      "return_code": 0,
+      "timed_out": false,
+      "source_unchanged": true,
+      "usage": {
+        "input_tokens": 68357,
+        "cached_input_tokens": 42240,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1467,
+        "reasoning_output_tokens": 578,
+        "uncached_input_tokens": 26117
+      },
+      "commands": [
+        {
+          "command": "/bin/zsh -lc \"rg -n --hidden -S \\\"local edit|local modification|managed skill|promotion|promote|backup|restore|conflict\\\" . --glob '\"'!/.git/**'\"' --glob '\"'!node_modules/**'\"'\"",
+          "exit_code": 0,
+          "output_bytes": 8159,
+          "output_sha256": "dadfe9f8503f7d8e0bea503f773cbe8c9036c2085da94ea5bd1fe26256e6d1d7"
+        },
+        {
+          "command": "/bin/zsh -lc \"nl -ba skills/repoatlas-jvm/scripts/install.py | sed -n '250,334p'\"",
+          "exit_code": 0,
+          "output_bytes": 4439,
+          "output_sha256": "8991e8783011a4a007a014451e2e8a64f8a2ad813e49f99833d88fe55c88858d"
+        },
+        {
+          "command": "/bin/zsh -lc \"nl -ba skills/repoatlas-jvm/scripts/install.py | sed -n '188,246p'\"",
+          "exit_code": 0,
+          "output_bytes": 3190,
+          "output_sha256": "c432e132fce5652d57f320206bd9b8c14cd46c5ad91015d5637eb1a5f4c397a6"
+        },
+        {
+          "command": "/bin/zsh -lc \"nl -ba skills/repoatlas-jvm/scripts/tests/test_install.py | sed -n '116,162p;266,294p'\"",
+          "exit_code": 0,
+          "output_bytes": 4372,
+          "output_sha256": "392e61e6304fecf4a7c90a63951655ec24d38fc4ffec0fa38463adbc0acaebfe"
+        }
+      ],
+      "command_count": 4,
+      "command_output_bytes": 20160,
+      "failed_commands": 0,
+      "other_tool_types": [],
+      "runtime_warnings": [
+        "Skill descriptions were shortened to fit the skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest."
+      ],
+      "turn_failed": false,
+      "quality": {
+        "passed": true,
+        "findings": [
+          {
+            "id": "local_edit_detection",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "conflict_aborts_apply",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "restore_backup",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          }
+        ],
+        "grader_version": 2,
+        "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+      },
+      "answer": {
+        "findings": [
+          {
+            "id": "local_edit_detection",
+            "path": "skills/repoatlas-jvm/scripts/install.py",
+            "start_line": 213,
+            "end_line": 219,
+            "quote": "for relative, previous_hash in old_files.items():\n    current = snapshot.get(relative)\n    if current is None:\n        if relative in new_files:\n            result[\"conflicts\"].append({\"path\": relative, \"reason\": \"Managed file was locally deleted\"})\n    elif current[0] != \"file\" or current[1] != previous_hash:\n        result[\"conflicts\"].append({\"path\": relative, \"reason\": \"Managed file has local edits\"})",
+            "explanation": "Each installed managed file is compared with its hash from the previous manifest. If the destination is no longer a regular file or its current hash differs, the planner records a local-edit conflict, preserving the modified content."
+          },
+          {
+            "id": "conflict_aborts_apply",
+            "path": "skills/repoatlas-jvm/scripts/install.py",
+            "start_line": 318,
+            "end_line": 321,
+            "quote": "destination = repo / skills_dir / NAME\nplan, snapshot = _plan(destination, manifest)\nif not apply or plan[\"status\"] in {\"conflict\", \"noop\"}:\n    return plan",
+            "explanation": "After producing the read-only plan, installation returns immediately when its status is conflict. This happens before destination-directory creation, locking, staging, or calling `_apply`, so conflicting local edits are not mutated."
+          },
+          {
+            "id": "restore_backup",
+            "path": "skills/repoatlas-jvm/scripts/install.py",
+            "start_line": 280,
+            "end_line": 291,
+            "quote": "if destination.exists():\n    backup = Path(tempfile.mkdtemp(prefix=f\".{NAME}.backup-\", dir=parent))\n    backup.rmdir()\n    destination.rename(backup)\ntry:\n    stage.rename(destination)\n    promoted = True\nexcept BaseException:\n    if backup is not None:\n        backup.rename(destination)\n        backup = None\n    raise",
+            "explanation": "The existing destination is renamed to a backup immediately before staged promotion. If promotion raises an exception, the backup is renamed back to the original destination path before the failure is re-raised, restoring the complete previous installation."
+          }
+        ]
+      },
+      "prompt_bytes": 1114,
+      "events_sha256": "f964d29a1431a782cad9277126f9b362fdf41ab119f4cadfa515d7519bb8446b",
+      "quality_at_capture": {
+        "passed": true,
+        "findings": [
+          {
+            "id": "local_edit_detection",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "conflict_aborts_apply",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "restore_backup",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          }
+        ],
+        "grader_version": 2,
+        "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+      }
+    }
+  ],
+  "pairs": [
+    {
+      "case": "export-safety",
+      "repeat": 1,
+      "quality_gated": false,
+      "settings_match": true,
+      "measures": {
+        "input_tokens": {
+          "baseline": 139961,
+          "repoatlas": 159229,
+          "reduction_pct": -13.77
+        },
+        "cached_input_tokens": {
+          "baseline": 108544,
+          "repoatlas": 132608,
+          "reduction_pct": -22.17
+        },
+        "uncached_input_tokens": {
+          "baseline": 31417,
+          "repoatlas": 26621,
+          "reduction_pct": 15.27
+        },
+        "output_tokens": {
+          "baseline": 1485,
+          "repoatlas": 1949,
+          "reduction_pct": -31.25
+        },
+        "command_count": {
+          "baseline": 4,
+          "repoatlas": 9,
+          "reduction_pct": -125.0
+        },
+        "command_output_bytes": {
+          "baseline": 39725,
+          "repoatlas": 14956,
+          "reduction_pct": 62.35
+        },
+        "elapsed_seconds": {
+          "baseline": 51.075,
+          "repoatlas": 61.081,
+          "reduction_pct": -19.59
+        }
+      },
+      "preflight_valid": false
+    },
+    {
+      "case": "configuration-invalidation",
+      "repeat": 1,
+      "quality_gated": false,
+      "settings_match": true,
+      "measures": {
+        "input_tokens": {
+          "baseline": 92055,
+          "repoatlas": 202948,
+          "reduction_pct": -120.46
+        },
+        "cached_input_tokens": {
+          "baseline": 51456,
+          "repoatlas": 164864,
+          "reduction_pct": -220.4
+        },
+        "uncached_input_tokens": {
+          "baseline": 40599,
+          "repoatlas": 38084,
+          "reduction_pct": 6.19
+        },
+        "output_tokens": {
+          "baseline": 2198,
+          "repoatlas": 2638,
+          "reduction_pct": -20.02
+        },
+        "command_count": {
+          "baseline": 4,
+          "repoatlas": 11,
+          "reduction_pct": -175.0
+        },
+        "command_output_bytes": {
+          "baseline": 77513,
+          "repoatlas": 76326,
+          "reduction_pct": 1.53
+        },
+        "elapsed_seconds": {
+          "baseline": 66.12,
+          "repoatlas": 81.677,
+          "reduction_pct": -23.53
+        }
+      },
+      "preflight_valid": false
+    }
+  ],
+  "note": "All completed trials are retained, including failures and regressions; do not infer billing savings.",
+  "exclusion": {
+    "excluded": true,
+    "reason": "The selected source root was inside an enclosing Git-ignored .omx directory. Git discovery returned zero files; two Atlas trials fell back to shell reads. The entire initial five-trial cohort is excluded, including baseline trials.",
+    "index": {
+      "files": 0,
+      "symbols": 0,
+      "edges": 0,
+      "indexed_bytes": 0,
+      "revision": "c827c0cd0ff610eb6699"
+    },
+    "repair": "Isolate fixture with git init, require a nonempty index before model trials, and fix product discovery for an explicitly selected ignored root. All three pairs were rerun in a fresh cohort."
+  }
+}

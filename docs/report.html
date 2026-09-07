@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="markdown-publisher">
+  <title>RepoAtlas 탐색과 토큰 효율 관측</title>
+  <style data-layer="common">:root {
+  color-scheme: light;
+  font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", Inter,
+    -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.72;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--page-surround);
+  color: var(--text);
+}
+
+main {
+  width: min(100% - 40px, 920px);
+  margin: 32px auto;
+  padding: 64px 72px 80px;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--heading);
+  font-weight: 720;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  break-after: avoid-page;
+}
+
+h1 { margin: 0 0 1.35rem; font-size: 2.4rem; }
+h2 { margin: 2.5rem 0 0.9rem; padding-bottom: 0.35rem; border-bottom: 1px solid var(--border); font-size: 1.65rem; }
+h3 { margin: 2rem 0 0.7rem; font-size: 1.28rem; }
+h4 { margin: 1.7rem 0 0.6rem; font-size: 1.08rem; }
+p { margin: 0.75rem 0; }
+a { color: var(--link); text-underline-offset: 0.15em; }
+strong { color: var(--strong); }
+hr { margin: 2.4rem 0; border: 0; border-top: 1px solid var(--border); }
+
+ul, ol { margin: 0.75rem 0; padding-left: 1.65rem; }
+li { margin: 0.24rem 0; }
+
+blockquote {
+  margin: 1.1rem 0;
+  padding: 0.2rem 1.1rem;
+  border-left: 4px solid var(--accent);
+  color: var(--muted);
+  background: var(--soft);
+}
+
+.callout {
+  margin: 1.2rem 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--callout-border);
+  border-left: 5px solid var(--callout-accent);
+  border-radius: 9px;
+  background: var(--callout-bg);
+  break-inside: avoid-page;
+}
+
+.callout-title { margin-bottom: 0.25rem; color: var(--heading); font-size: 0.82rem; font-weight: 760; letter-spacing: 0.055em; }
+.callout p { margin: 0.35rem 0; }
+
+code, pre {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+code {
+  padding: 0.12em 0.36em;
+  border: 1px solid var(--code-border);
+  border-radius: 5px;
+  background: var(--code-inline);
+  font-size: 0.88em;
+}
+
+pre {
+  margin: 1.15rem 0;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+  border: 1px solid var(--code-border);
+  border-radius: 10px;
+  background: var(--code-block);
+  color: var(--code-text);
+  font-size: 0.86rem;
+  line-height: 1.58;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  break-inside: avoid-page;
+}
+
+pre code { padding: 0; border: 0; background: transparent; color: inherit; font-size: inherit; }
+
+.table-wrap { margin: 1.25rem 0; overflow-x: auto; break-inside: avoid-page; }
+table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+thead { display: table-header-group; }
+th, td { padding: 0.68rem 0.75rem; border: 1px solid var(--border); text-align: left; vertical-align: top; }
+th { background: var(--table-head); color: var(--heading); font-weight: 700; }
+tbody tr:nth-child(even) { background: var(--table-stripe); }
+
+@page { size: A4; margin: 17mm 15mm 18mm; }
+
+@media print {
+  :root { font-size: 10pt; line-height: 1.6; }
+  body { background: #fff; }
+  main { width: auto; margin: 0; padding: 0; border: 0; border-radius: 0; box-shadow: none; }
+  h1 { margin-bottom: 1rem; font-size: 25pt; }
+  h2 { margin: 1.65rem 0 0.7rem; font-size: 17pt; }
+  h3 { font-size: 13pt; }
+  p, ul, ol { orphans: 3; widows: 3; }
+  a { color: inherit; }
+  pre { white-space: pre-wrap; }
+  tr, img, blockquote, .callout { break-inside: avoid-page; }
+}
+
+@media (max-width: 700px) {
+  main { width: 100%; margin: 0; padding: 36px 24px 56px; border: 0; border-radius: 0; }
+  h1 { font-size: 2rem; }
+}
+</style>
+  <style data-layer="theme" data-theme="technical">:root {
+  --page-surround: #eef1f5;
+  --paper: #ffffff;
+  --text: #25303b;
+  --heading: #14202c;
+  --strong: #101820;
+  --muted: #596775;
+  --link: #0969da;
+  --accent: #1f6feb;
+  --border: #d0d7de;
+  --soft: #f6f8fa;
+  --shadow: 0 16px 42px rgba(31, 35, 40, 0.1);
+  --code-inline: #eff2f5;
+  --code-block: #0d1117;
+  --code-text: #e6edf3;
+  --code-border: #d0d7de;
+  --table-head: #f6f8fa;
+  --table-stripe: #fbfcfd;
+  --callout-bg: #f1f7ff;
+  --callout-border: #b6d2f2;
+  --callout-accent: #0969da;
+}
+</style>
+</head>
+<body>
+  <main><h1>RepoAtlas 탐색과 토큰 효율 관측</h1>
+<p><strong>2026-09-07 · RepoAtlas 0.4.0 · 로컬 조회 측정 + 실제 Codex 탐색 6회</strong></p>
+<p>RepoAtlas는 에이전트가 읽는 코드의 범위와 반복 전송을 줄입니다. 이번 관측에서 같은 28개 지도 항목의 텍스트 출력은 JSON보다 <strong>46.8% 작았습니다</strong>. 하지만 실제 에이전트 비교에서는 <strong>누적 입력 토큰 절감을 입증하지 못했습니다</strong>. 양쪽 답변이 인용 검사를 모두 통과한 사례에서는 입력 토큰이 오히려 34.0% 늘었습니다.</p>
+<p>작은 출력, 적은 도구 호출, 정확한 답변, 모델 사용량을 따로 측정해야 합니다. 아래 수치는 유리한 결과와 불리한 결과를 모두 포함합니다. <a href="../evals/exploration/README.md">영문 재현 안내</a>에서 직접 실행할 수 있습니다.</p>
+<h2>무엇을 줄이는가</h2>
+<div class="table-wrap"><table><thead><tr><th scope="col">기능</th><th scope="col">줄이는 대상</th><th scope="col">보장하지 않는 것</th></tr></thead><tbody><tr><td>작은 지도와 선언 조회</td><td>처음부터 읽어야 하는 소스 범위</td><td>질문마다 지도 조회가 가장 저렴함</td></tr>
+<tr><td><code>--format text</code></td><td>JSON 키와 반복 메타데이터를 포함한 응답 바이트</td><td>JSON의 모든 필드 보존, 특정 모델의 토큰 절감률</td></tr>
+<tr><td><code>--budget-tokens</code></td><td>바이트 기반 상한 안의 완성된 응답</td><td>실제 토크나이저 기준의 정확한 상한</td></tr>
+<tr><td><code>--receipt PATH</code></td><td>앞서 전달한 소스 범위의 재전송</td><td>에이전트의 기억 유지, 일반 파일 읽기 중복 제거</td></tr>
+<tr><td>증분 색인</td><td>변경 없는 파일의 재파싱·재해싱</td><td>최초 색인 비용 제거</td></tr>
+<tr><td><code>--telemetry PATH</code></td><td>조회 크기·횟수·중복 제외 상태를 관측</td><td>모델 전체 대화의 사용량 또는 청구 금액</td></tr></tbody></table></div>
+<p>추정 토큰은 <code>ceil(UTF-8 응답 바이트 / 3)</code>입니다. 바이트와 토큰 예산을 함께 주면 더 작은 상한을 사용합니다. CLI의 map 기본 상한은 6,000바이트, context는 12,000바이트입니다. 전송 계층과 호스트 프롬프트 비용은 별도입니다.</p>
+<h2>1. 같은 예제에서 CLI 응답 측정</h2>
+<p>번들에 포함한 <code>examples/polyglot-demo</code>를 임시 디렉터리에 복사해 색인했습니다. 11개 파일, 28개 심볼, 25개 관계이며, 소스·엔진 파일 해시를 <a href="../evals/exploration/results/2026-09-07/delivery.json">delivery.json</a>에 보관합니다. 모델을 호출하지 않는 측정입니다.</p>
+<h3>텍스트 지도</h3>
+<p>두 형식이 충분히 들어가는 30,000바이트 상한에서 <strong>동일한 순서의 28개 심볼 ID</strong>를 반환했는지 검사했습니다.</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">출력</th><th scope="col">항목 수</th><th scope="col">실제 UTF-8 바이트</th><th scope="col">잘림</th></tr></thead><tbody><tr><td>JSON</td><td>28</td><td>6,639</td><td>없음</td></tr>
+<tr><td>Text</td><td>28</td><td>3,535</td><td>없음</td></tr></tbody></table></div>
+<p>응답 바이트가 <strong>46.8% 줄었습니다</strong>. 텍스트는 위치·선언·분석 수준을 남기고 반복 필드 등을 줄입니다. JSON 전체 메타데이터와 동일한 정보량이라고 주장하지는 않습니다. 상한을 6,000바이트로 낮추면 JSON은 24개 항목을 담고 4개를 생략한 반면, 텍스트는 28개를 모두 담았습니다.</p>
+<h3>동일 조회를 세 번 실행한 receipt 관측</h3>
+<p><code>context checkout --format text --budget-tokens 2000</code>을 같은 색인에 세 번 실행했습니다.</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">호출</th><th scope="col">Receipt 없이 소스 바이트</th><th scope="col">Receipt로 소스 바이트</th><th scope="col">Receipt 응답 전체 바이트</th></tr></thead><tbody><tr><td>1</td><td>1,429</td><td>1,429</td><td>3,247</td></tr>
+<tr><td>2</td><td>1,429</td><td>188</td><td>902</td></tr>
+<tr><td>3</td><td>1,429</td><td>0</td><td>334</td></tr></tbody></table></div>
+<p>Receipt 없이 같은 조회를 반복하면 앞의 소스를 다시 받습니다. Receipt를 사용한 두 번째 조회는 아직 전달하지 않은 188바이트를 이어 읽고, 세 번째는 소스 없이 상태만 반환했습니다. 세 번의 전체 응답 합계는 9,633바이트에서 4,483바이트로 <strong>53.5% 감소</strong>했습니다. 서로 같은 소스 집합을 세 번 받은 비교는 아니며, receipt가 추가로 읽지 않은 범위를 전달했다는 점을 함께 봐야 합니다.</p>
+<p>서로 겹치는 부모·자식 심볼도 전달한 문자 범위로 중복을 판단합니다. 원본 바이트 해시와 디코딩·줄바꿈 정규화 후 해시가 모두 맞아야 이전 범위를 재사용합니다. 파일 내용이나 디코딩 설정이 바뀌면 새로운 소스를 숨기지 않습니다. 긴 함수나 긴 한글 줄도 나머지를 이어 읽도록 회귀 테스트했습니다.</p>
+<p>Receipt는 이 작업에서 실제로 이전 출력을 받은 에이전트만 재사용합니다. 컨텍스트가 사라진 새 세션이나 다른 에이전트에는 새 receipt를 써야 합니다. 변경 없는 후속 sync에서는 <code>parsed_files=0</code>, <code>hashed_files=0</code>, <code>hashed_bytes=0</code>이었습니다.</p>
+<p>재현 명령은 다음과 같습니다. 임시 색인·receipt·telemetry는 실행 후 정리됩니다.</p>
+<pre><code class="language-sh">python scripts/observe_delivery.py</code></pre>
+<h2>2. 실제 에이전트의 탐색 비교</h2>
+<h3>조건</h3>
+<p>코드 위치를 찾아 근거를 설명하는 질문 세 개를 먼저 고정했습니다. 질문별로 일반 탐색과 RepoAtlas 사용 탐색을 각각 한 번 실행했습니다. 일반 탐색에도 효율적인 <code>rg</code>와 필요한 줄만 읽기를 허용했습니다. 전체 파일 덤프를 강제한 비교가 아닙니다.</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">항목</th><th scope="col">조건</th></tr></thead><tbody><tr><td>소스</td><td>고정한 실제 RepoAtlas 0.3.0 소스 ZIP, 합성 파일 추가 없음</td></tr>
+<tr><td>색인</td><td>73파일 · 488심볼 · 953관계 · 408,007 색인 바이트</td></tr>
+<tr><td>도구</td><td>관측 시점의 RepoAtlas 0.4.0 엔진을 별도 고정</td></tr>
+<tr><td>모델 요청</td><td><code>gpt-5.6-sol</code>, reasoning effort <code>xhigh</code></td></tr>
+<tr><td>런타임</td><td>Codex CLI 0.153.4, macOS arm64, Python 3.14.7</td></tr>
+<tr><td>격리</td><td>새 ephemeral 실행, read-only sandbox, 웹·위임 비활성화</td></tr>
+<tr><td>반복</td><td>질문 × 조건당 1회, 총 6회; 질문별 실행 순서를 교차 배치</td></tr>
+<tr><td>사전 색인 비용</td><td>1.105초, 모델 탐색 시간에서 분리</td></tr></tbody></table></div>
+<p>두 조건 모두 같은 전역 스킬 목록이 보였습니다. 스킬 설명 축약 경고가 있었으며 이 시작 비용은 빼지 않았습니다. RepoAtlas 조건의 안내 프롬프트는 도구 사용법 때문에 더 깁니다. 모델 이름은 요청한 alias이며 공급자의 내부 모델 버전을 증명하지 않습니다.</p>
+<p>답변은 지정한 파일, 40줄 이하의 유효한 소스 범위, 실제 원문 인용, 설명을 반환해야 합니다. 인용의 들여쓰기는 무시하지만 임의 생략 부호는 통과시키지 않았습니다. 모든 답변에 같은 v2 검사기를 적용하고 초기 판정도 보존했습니다. 설명의 메커니즘은 소스와 대조해 별도로 검토했습니다.</p>
+<h3>전체 결과</h3>
+<p>화살표는 <strong>일반 탐색 → RepoAtlas 탐색</strong>입니다. 누적 입력 토큰은 CLI의 <code>turn.completed.usage</code>에서 읽었습니다.</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">질문</th><th scope="col">인용 검사</th><th scope="col">누적 입력 토큰</th><th scope="col">입력 변화</th><th scope="col">명령 수</th><th scope="col">명령 출력 바이트</th></tr></thead><tbody><tr><td>그래프 export 보호</td><td>통과 → 통과</td><td>79,358 → 106,334</td><td>+34.0%</td><td>4 → 7</td><td>49,750 → 66,502</td></tr>
+<tr><td>설정 변경과 재색인</td><td>실패 → 통과</td><td>157,482 → 138,864</td><td>−11.8%</td><td>10 → 8</td><td>81,885 → 43,542</td></tr>
+<tr><td>관리 스킬 설치 충돌</td><td>실패 → 통과</td><td>70,775 → 88,411</td><td>+24.9%</td><td>4 → 3</td><td>23,514 → 11,993</td></tr></tbody></table></div>
+<p>일반 탐색의 두 실패는 총 세 개 인용에 <code>...</code>가 들어가 연속된 원문 인용이 아니었기 때문입니다. 코드 위치와 설명은 별도로 확인했습니다. 이를 곧바로 기능 이해 실패로 해석하거나, 이 작은 표본으로 정확도 개선률을 주장하지 않습니다. 이 두 쌍은 <strong>동일 품질에서의 절감 비교에 사용하지 않습니다</strong>.</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">질문</th><th scope="col">캐시된 입력</th><th scope="col">캐시되지 않은 입력</th><th scope="col">출력 토큰</th><th scope="col">경과 시간(초)</th></tr></thead><tbody><tr><td>그래프 export 보호</td><td>58,752 → 86,016</td><td>20,606 → 20,318</td><td>1,425 → 1,511</td><td>45.397 → 48.327</td></tr>
+<tr><td>설정 변경과 재색인</td><td>119,680 → 103,936</td><td>37,802 → 34,928</td><td>2,509 → 2,330</td><td>65.068 → 61.225</td></tr>
+<tr><td>관리 스킬 설치 충돌</td><td>44,160 → 64,000</td><td>26,615 → 24,411</td><td>1,205 → 1,295</td><td>40.246 → 42.194</td></tr></tbody></table></div>
+<p>캐시된 입력은 전체 입력의 <strong>부분집합</strong>입니다. <code>input + cached_input</code>으로 더하지 않습니다. 출력 사용량에 reasoning 수치를 다시 더하지도 않습니다. 명령 수는 완료한 shell command 항목 수이며 모델 왕복 횟수와 같지 않습니다. 명령 출력 바이트는 CLI에 기록된 문자열의 길이로, 모델에 전달된 전체 도구 메시지의 토큰 수와 다릅니다. 가격이나 청구 금액은 계산하지 않았습니다.</p>
+<p>양쪽이 인용 검사를 통과한 export 사례에서는 캐시되지 않은 입력은 1.4% 줄었지만, 전체 입력과 출력은 늘었습니다. <strong>이번 비교로 모델 토큰 절감을 입증할 수 없습니다.</strong> 단일 저장소의 세 가지 읽기 질문이며 장기 구현 작업, 대형 저장소, 다른 모델에 대한 성능 결론도 내리지 않습니다.</p>
+<h3>실제로 어떤 탐색을 했는가</h3>
+<p>Export 사례의 RepoAtlas 에이전트는 자연어 검색 세 번 후 CLI 앞부분, 넓은 <code>rg</code>, 정확한 줄 범위를 읽었습니다. 검색 출력은 각각 약 1.2KB였지만 뒤의 넓은 검색은 47KB였습니다. 앞의 검색이 뒤의 읽기를 충분히 대체하지 못했습니다. 입력 토큰에는 단계마다 다시 처리한 대화 문맥도 포함되므로 작은 검색 응답만 합쳐 비용을 판단할 수 없습니다.</p>
+<p>설치 충돌 사례에서는 검색 → 해당 파일에서 <code>rg</code> → 필요한 세 범위를 읽었습니다. 명령 출력이 23,514바이트에서 11,993바이트로 <strong>49.0% 감소</strong>했지만 누적 입력은 늘었습니다. 실행마다 달라지는 캐시와 모델의 진행 방식도 포함된 결과입니다. 이 파일 위치 탐색에서는 receipt 사용까지 진행하지 않았으므로 CLI의 중복 제거 수치를 실제 에이전트 사용량 감소로 연결하지 않습니다.</p>
+<h3>제외한 초기 실험도 보존</h3>
+<p>초기에는 상위 Git 저장소에서 무시하는 <code>.omx</code> 아래에 소스를 풀어 색인이 0파일이 되는 문제가 있었습니다. RepoAtlas 실행 두 번이 빈 검색 후 일반 읽기로 돌아갔습니다. 해당 <strong>초기 5회 전체를 성능 비교에서 제외</strong>하고, 원인과 관측값을 <a href="../evals/exploration/results/2026-09-07/excluded-preflight.json">excluded-preflight.json</a>에 남겼습니다.</p>
+<p>실험 준비 시 독립 Git 루트를 만들고, 파일·심볼·색인 바이트가 0보다 큰지 확인하는 검사를 추가한 뒤 세 쌍을 새로 실행했습니다. 제품도 사용자가 명시한 루트가 상위 Git의 ignore에 들어 있는 경우 파일 시스템 탐색으로 돌아가도록 고쳤고, 기존 ignore 동작과 함께 회귀 테스트했습니다.</p>
+<h2>관측을 반영한 사용법</h2>
+<ol>
+<li><strong>이름이나 파일을 알면 직접 좁힙니다.</strong> 알려진 리터럴에는 특정 경로의 <code>rg</code>나 직접 읽기가 더 간단할 수 있습니다.</li>
+<li><strong>구조를 모를 때 작은 지도를 봅니다.</strong> 개념의 위치는 짧은 검색, 관계가 필요할 때는 정확한 ID와 <code>neighbors</code>를 사용합니다.</li>
+<li><strong>빈 검색을 표현만 바꿔 반복하지 않습니다.</strong> 색인 coverage를 한 번 확인하고 파일·디렉터리·짧은 키워드로 전환합니다.</li>
+<li><strong>필요한 소스에만 예산과 receipt를 씁니다.</strong> 독립 조회를 묶고, 근거가 충분하면 탐색을 마칩니다. 단계 수를 줄이는 것도 중요합니다.</li>
+<li><strong>응답과 런타임 사용량을 함께 봅니다.</strong> 모델·질문·정확성·캐시를 고정하거나 기록한 다음 개선 여부를 판단합니다.</li>
+</ol>
+<p>이 원칙을 설치되는 스킬과 에이전트 안내에 반영했습니다. 관측 후에는 긴 함수·클래스의 앞부분만 전달하던 한계도 고쳐, 선언 범위 안의 검색 일치점을 먼저 보여주도록 했습니다. 정확한 이름 검색은 헤더를 유지하고, receipt로 앞뒤 남은 코드를 이어 읽습니다. 이 후속 수정은 기능 테스트로 검증했으며 <strong>위 모델 비교 수치에는 소급 적용하지 않았습니다</strong>. 관측 당시 엔진 ZIP을 따로 보존합니다.</p>
+<pre><code class="language-sh">repoatlas context checkout --format text --budget-tokens 2000 \
+  --receipt .repoatlas/checkout-receipt.json \
+  --telemetry .repoatlas/exploration.jsonl
+repoatlas telemetry .repoatlas/exploration.jsonl --format text</code></pre>
+<p>Telemetry에는 원문·질문·소스 경로를 쓰지 않습니다. Receipt에는 상대 경로·해시·전달 범위를 기록합니다. 서로 다른 파일에 저장하고, 동시 에이전트는 별도 파일을 사용합니다. 자세한 계약은 <a href="agents.md">에이전트 연동</a>에 있습니다.</p>
+<h2>근거와 재현</h2>
+<ul>
+<li><a href="../evals/exploration/results/2026-09-07/controlled.json">실제 탐색 6회 기록</a>: 모델 설정, 프롬프트, 명령과 출력 크기, 답변, 판정, 사용량, 파일 해시.</li>
+<li><a href="../evals/exploration/results/2026-09-07/delivery.json">CLI 조회 기록</a>: 같은 지도 항목과 receipt 비교, 현재 소스·엔진 해시.</li>
+<li><a href="../evals/exploration/README.md">관측 하네스</a>: 입력·출력 스키마, 원본 fixture, 관측 엔진, 실행 절차.</li>
+<li><a href="../VALIDATION.md">제품 검증 기록</a>: 자동 테스트, 설치 패키지, 플랫폼 범위와 남은 한계.</li>
+</ul>
+<p>원본 이벤트 JSONL은 로컬에 보존하고 공개 기록에는 SHA-256을 남겼습니다. 공개본은 실행 경로를 치환하고 답변·명령 메타데이터만 포함하며 내부 추론 로그는 포함하지 않습니다. 공개본만으로 공급자 청구를 독립 인증할 수는 없습니다.</p></main>
+</body>
+</html>

@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "repoatlas"
+description = "Local polyglot repository graphs and bounded context for coding agents"
+keywords = ["code-graph", "repository", "agent", "context", "mcp", "polyglot"]
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+dynamic = ["version", "dependencies"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
+  "Topic :: Software Development :: Documentation",
+]
+
+[project.optional-dependencies]
+mcp = ["mcp==2.1.1"]
+
+[project.scripts]
+repoatlas = "repoatlas.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/ch4570/repo-graph"
+Documentation = "https://github.com/ch4570/repo-graph#readme"
+Issues = "https://github.com/ch4570/repo-graph/issues"
+
+[tool.setuptools]
+package-dir = {"" = "skills/repoatlas-jvm/scripts"}
+packages = ["repoatlas"]
+include-package-data = false
+
+[tool.setuptools.dynamic]
+version = {attr = "repoatlas.__version__"}
+dependencies = {file = ["skills/repoatlas-jvm/scripts/requirements.txt"]}

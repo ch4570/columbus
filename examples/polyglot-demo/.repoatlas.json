@@ -1,0 +1,5 @@
+{
+  "exclude": ["*.generated.*"],
+  "extensions": {".flow": "workflow"},
+  "declarations": {"workflow": ["task"]}
+}

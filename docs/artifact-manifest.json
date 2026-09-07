@@ -1,0 +1,21 @@
+{
+  "schema": "markdown-publisher.artifact/v1",
+  "theme": "technical",
+  "source": {
+    "path": "source.md",
+    "sha256": "441765f0677e66dc5dc2d4c4c299f90ec637d7cfb74eeac0b408f7ce96a3c71f",
+    "bytes": 13620
+  },
+  "html": {
+    "path": "report.html",
+    "sha256": "219f4fdfaee3853d359328e832a28b188a393f26f3a90339fed115a3b2f58d37",
+    "bytes": 20517
+  },
+  "pdf": null,
+  "renderer": null,
+  "qa": {
+    "required": false,
+    "status": "not_applicable",
+    "next_skill": null
+  }
+}

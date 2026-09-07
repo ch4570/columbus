@@ -1,0 +1,41 @@
+name: Publish release
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    uses: ./.github/workflows/distribution.yml
+  publish:
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/download-artifact@v4
+        with:
+          name: repoatlas-ubuntu-latest-py3.11
+          path: dist
+      - name: Verify release version and prepare checksums
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: python scripts/release_assets.py --tag "$RELEASE_TAG"
+      - name: Publish validated release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          version="${RELEASE_TAG#v}"
+          gh release create "$RELEASE_TAG" --verify-tag --latest \
+            --title "RepoAtlas $version" --notes-file "docs/releases/$version.md" \
+            "dist/repoatlas-$version-py3-none-any.whl" \
+            "dist/repoatlas-$version.zip" dist/get-repoatlas.py dist/SHA256SUMS.txt
