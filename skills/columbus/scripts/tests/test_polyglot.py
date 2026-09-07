@@ -20,6 +20,13 @@ def edges(files, kind):
 
 
 class DetectionTests(unittest.TestCase):
+    def test_text_control_classifier_preserves_character_policy(self):
+        from columbus.discovery import DISALLOWED_TEXT_CONTROLS
+        for value in list(range(256)) + [0x2028, 0x2029, 0x1f600]:
+            character = chr(value)
+            expected = ord(character) < 32 and character not in "\n\r\t\f\b"
+            self.assertEqual(bool(DISALLOWED_TEXT_CONTROLS.search('prefix' + character + 'suffix')), expected)
+
     def test_extensions_names_shebang_and_unknown(self):
         expected = {"a.TSX": "typescript", "a.C": "cpp", "a.rs": "rust", "a.go": "go",
                     "Dockerfile": "dockerfile", "Gemfile": "ruby", "go.mod": "go-module",

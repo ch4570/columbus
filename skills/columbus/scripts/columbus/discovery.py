@@ -26,6 +26,7 @@ BINARY_EXTENSIONS = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico", ".pdf", "
                      ".pyc", ".pyo", ".so", ".dylib", ".dll", ".exe", ".o", ".a", ".lib",
                      ".db", ".sqlite", ".sqlite3", ".wasm", ".woff", ".woff2", ".ttf",
                      ".mp3", ".mp4", ".mov", ".wav", ".lockb"}
+DISALLOWED_TEXT_CONTROLS = re.compile(r"[\x00-\x07\x0b\x0e-\x1f]")
 MAX_FILE_BYTES = 1_000_000
 SOURCE_EXTENSIONS = set(EXTENSION_LANGUAGES)
 CONFIG_NAMES = {"build.gradle", "build.gradle.kts", "settings.gradle", "settings.gradle.kts",
@@ -198,7 +199,7 @@ def discover(root: Path, source_root: str = ".") -> tuple[list[str], dict]:
                 except UnicodeError:
                     sample_text = ""
                     sample = b"\0"
-                if b"\0" in sample or any(ord(c) < 32 and c not in "\n\r\t\f\b" for c in sample_text):
+                if b"\0" in sample or DISALLOWED_TEXT_CONTROLS.search(sample_text):
                     stats["binary_paths"].append(rel)
                     stats["excluded_files"] += 1
                     continue
