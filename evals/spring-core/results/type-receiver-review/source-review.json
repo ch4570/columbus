@@ -1,0 +1,598 @@
+{
+  "added": [
+    {
+      "source": "src/main/java/org/springframework/aot/generate/AccessControl.java::org.springframework.aot.generate.AccessControl.forClass:method(Class<?>)",
+      "target": "src/main/java/org/springframework/aot/generate/AccessControl.java::org.springframework.aot.generate.AccessControl.Visibility.forClass:method(Class<?>)",
+      "path": "src/main/java/org/springframework/aot/generate/AccessControl.java",
+      "line": 82,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/aot/generate/AccessControl.java::org.springframework.aot.generate.AccessControl.forMember:method(Member)",
+      "target": "src/main/java/org/springframework/aot/generate/AccessControl.java::org.springframework.aot.generate.AccessControl.Visibility.forMember:method(Member)",
+      "path": "src/main/java/org/springframework/aot/generate/AccessControl.java",
+      "line": 63,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/aot/generate/AccessControl.java::org.springframework.aot.generate.AccessControl.lowest:method(AccessControl...)",
+      "target": "src/main/java/org/springframework/aot/generate/AccessControl.java::org.springframework.aot.generate.AccessControl.Visibility.lowestIndex:method(Visibility...)",
+      "path": "src/main/java/org/springframework/aot/generate/AccessControl.java",
+      "line": 91,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/aot/generate/MethodReference.java::org.springframework.aot.generate.MethodReference.ArgumentCodeGenerator.and:method(Class<?>,String)",
+      "target": "src/main/java/org/springframework/aot/generate/MethodReference.java::org.springframework.aot.generate.MethodReference.ArgumentCodeGenerator.of:method(Class<?>,String)",
+      "path": "src/main/java/org/springframework/aot/generate/MethodReference.java",
+      "line": 121,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/cglib/core/EmitUtils.java::org.springframework.cglib.core.EmitUtils.append_string_helper:method(CodeEmitter,Type,ArrayDelimiters,CustomizerRegistry,ProcessArrayCallback)",
+      "target": "src/main/java/org/springframework/cglib/core/EmitUtils.java::org.springframework.cglib.core.EmitUtils.process_array:method(CodeEmitter,Type,ProcessArrayCallback)",
+      "path": "src/main/java/org/springframework/cglib/core/EmitUtils.java",
+      "line": 661,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/cglib/core/EmitUtils.java::org.springframework.cglib.core.EmitUtils.hash_array:method(CodeEmitter,Type,int,CustomizerRegistry)",
+      "target": "src/main/java/org/springframework/cglib/core/EmitUtils.java::org.springframework.cglib.core.EmitUtils.process_array:method(CodeEmitter,Type,ProcessArrayCallback)",
+      "path": "src/main/java/org/springframework/cglib/core/EmitUtils.java",
+      "line": 424,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/cglib/core/EmitUtils.java::org.springframework.cglib.core.EmitUtils.member_helper_size:method(CodeEmitter,List,ObjectSwitchCallback,ParameterTyper,Label,Label)",
+      "target": "src/main/java/org/springframework/cglib/core/EmitUtils.java::org.springframework.cglib.core.EmitUtils.getSwitchKeys:method(Map)",
+      "path": "src/main/java/org/springframework/cglib/core/EmitUtils.java",
+      "line": 780,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/cglib/core/EmitUtils.java::org.springframework.cglib.core.EmitUtils.member_helper_type:method(CodeEmitter,List,ObjectSwitchCallback,ParameterTyper,Label,Label,BitSet)",
+      "target": "src/main/java/org/springframework/cglib/core/EmitUtils.java::org.springframework.cglib.core.EmitUtils.string_switch:method(CodeEmitter,String[],int,ObjectSwitchCallback)",
+      "path": "src/main/java/org/springframework/cglib/core/EmitUtils.java",
+      "line": 843,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/cglib/core/EmitUtils.java::org.springframework.cglib.core.EmitUtils.member_switch_helper:method(CodeEmitter,List,ObjectSwitchCallback,boolean)",
+      "target": "src/main/java/org/springframework/cglib/core/EmitUtils.java::org.springframework.cglib.core.EmitUtils.string_switch:method(CodeEmitter,String[],int,ObjectSwitchCallback)",
+      "path": "src/main/java/org/springframework/cglib/core/EmitUtils.java",
+      "line": 747,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/cglib/core/EmitUtils.java::org.springframework.cglib.core.EmitUtils.not_equals_helper:method(CodeEmitter,Type,Label,CustomizerRegistry,ProcessArrayCallback)",
+      "target": "src/main/java/org/springframework/cglib/core/EmitUtils.java::org.springframework.cglib.core.EmitUtils.process_arrays:method(CodeEmitter,Type,ProcessArrayCallback)",
+      "path": "src/main/java/org/springframework/cglib/core/EmitUtils.java",
+      "line": 534,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/cglib/core/ReflectUtils.java::org.springframework.cglib.core.ReflectUtils.getMethodInfo.getClassInfo:function()",
+      "target": "src/main/java/org/springframework/cglib/core/ReflectUtils.java::org.springframework.cglib.core.ReflectUtils.getClassInfo:method(Class)",
+      "path": "src/main/java/org/springframework/cglib/core/ReflectUtils.java",
+      "line": 618,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/cglib/core/ReflectUtils.java::org.springframework.cglib.core.ReflectUtils.getMethodInfo.getExceptionTypes:function()",
+      "target": "src/main/java/org/springframework/cglib/core/ReflectUtils.java::org.springframework.cglib.core.ReflectUtils.getExceptionTypes:method(Member)",
+      "path": "src/main/java/org/springframework/cglib/core/ReflectUtils.java",
+      "line": 635,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/core/MethodParameter.java::org.springframework.core.MethodParameter.computeParameterType:method()",
+      "target": "src/main/java/org/springframework/core/MethodParameter.java::org.springframework.core.MethodParameter.KotlinDelegate.getReturnType:method(Method)",
+      "path": "src/main/java/org/springframework/core/MethodParameter.java",
+      "line": 524,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/core/MethodParameter.java::org.springframework.core.MethodParameter.getGenericParameterType:method()",
+      "target": "src/main/java/org/springframework/core/MethodParameter.java::org.springframework.core.MethodParameter.KotlinDelegate.getGenericReturnType:method(Method)",
+      "path": "src/main/java/org/springframework/core/MethodParameter.java",
+      "line": 496,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/core/MethodParameter.java::org.springframework.core.MethodParameter.isOptional:method()",
+      "target": "src/main/java/org/springframework/core/MethodParameter.java::org.springframework.core.MethodParameter.KotlinDelegate.isOptional:method(MethodParameter)",
+      "path": "src/main/java/org/springframework/core/MethodParameter.java",
+      "line": 407,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/core/Nullness.java::org.springframework.core.Nullness.forField:method(Field)",
+      "target": "src/main/java/org/springframework/core/Nullness.java::org.springframework.core.Nullness.KotlinDelegate.forField:method(Field)",
+      "path": "src/main/java/org/springframework/core/Nullness.java",
+      "line": 130,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/core/Nullness.java::org.springframework.core.Nullness.forMethodReturnType:method(Method)",
+      "target": "src/main/java/org/springframework/core/Nullness.java::org.springframework.core.Nullness.KotlinDelegate.forMethodReturnType:method(Method)",
+      "path": "src/main/java/org/springframework/core/Nullness.java",
+      "line": 90,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/core/Nullness.java::org.springframework.core.Nullness.forParameter:method(Parameter)",
+      "target": "src/main/java/org/springframework/core/Nullness.java::org.springframework.core.Nullness.KotlinDelegate.forParameter:method(Executable,int)",
+      "path": "src/main/java/org/springframework/core/Nullness.java",
+      "line": 105,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/core/PropagationContextElement.java::org.springframework.core.PropagationContextElement.updateThreadContext:method(CoroutineContext)",
+      "target": "src/main/java/org/springframework/core/PropagationContextElement.java::org.springframework.core.PropagationContextElement.ReactorDelegate.captureFrom:method(CoroutineContext)",
+      "path": "src/main/java/org/springframework/core/PropagationContextElement.java",
+      "line": 90,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/core/ResolvableType.java::org.springframework.core.ResolvableType.isAssignableFrom:method(ResolvableType,boolean,Map<Type,Type>,boolean)",
+      "target": "src/main/java/org/springframework/core/ResolvableType.java::org.springframework.core.ResolvableType.WildcardBounds.get:method(ResolvableType)",
+      "path": "src/main/java/org/springframework/core/ResolvableType.java",
+      "line": 325,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/core/ResolvableType.java::org.springframework.core.ResolvableType.isAssignableFrom:method(ResolvableType,boolean,Map<Type,Type>,boolean)",
+      "target": "src/main/java/org/springframework/core/ResolvableType.java::org.springframework.core.ResolvableType.WildcardBounds.get:method(ResolvableType)",
+      "path": "src/main/java/org/springframework/core/ResolvableType.java",
+      "line": 326,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java::org.springframework.core.io.support.PathMatchingResourcePatternResolver.getClassPathManifestEntriesFromJar:method(File)",
+      "target": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java::org.springframework.core.io.support.PathMatchingResourcePatternResolver.ClassPathManifestEntry.of:method(File,Boolean)",
+      "path": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java",
+      "line": 656,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.and:method(Class<T>,T)",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.of:method(Class<T>,T)",
+      "path": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java",
+      "line": 512,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.andSupplied:method(Class<T>,Supplier<T>)",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.ofSupplied:method(Class<T>,Supplier<T>)",
+      "path": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java",
+      "line": 524,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.FactoryInstantiator.findPrimaryKotlinConstructor:method(Class<?>)",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.KotlinDelegate.findPrimaryConstructor:method(Class<T>)",
+      "path": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java",
+      "line": 410,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.instantiateFactory:method(String,Class<T>,ArgumentResolver,FailureHandler)",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.FactoryInstantiator.forClass:method(Class<?>)",
+      "path": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java",
+      "line": 221,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/util/PlaceholderParser.java::org.springframework.util.PlaceholderParser.NestedPlaceholderPart.resolve:method(PartResolutionContext)",
+      "target": "src/main/java/org/springframework/util/PlaceholderParser.java::org.springframework.util.PlaceholderParser.Part.resolveAll:method(Iterable<Part>,PartResolutionContext)",
+      "path": "src/main/java/org/springframework/util/PlaceholderParser.java",
+      "line": 545,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/util/PlaceholderParser.java::org.springframework.util.PlaceholderParser.NestedPlaceholderPart.resolve:method(PartResolutionContext)",
+      "target": "src/main/java/org/springframework/util/PlaceholderParser.java::org.springframework.util.PlaceholderParser.Part.resolveAll:method(Iterable<Part>,PartResolutionContext)",
+      "path": "src/main/java/org/springframework/util/PlaceholderParser.java",
+      "line": 551,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/util/PlaceholderParser.java::org.springframework.util.PlaceholderParser.ParsedValue.resolve:method(PartResolutionContext)",
+      "target": "src/main/java/org/springframework/util/PlaceholderParser.java::org.springframework.util.PlaceholderParser.Part.resolveAll:method(Iterable<Part>,PartResolutionContext)",
+      "path": "src/main/java/org/springframework/util/PlaceholderParser.java",
+      "line": 293,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/util/SerializationUtils.java::org.springframework.util.SerializationUtils.clone:method(T)",
+      "target": "src/main/java/org/springframework/util/SerializationUtils.java::org.springframework.util.SerializationUtils.deserialize:method(byte@Nullable[])",
+      "path": "src/main/java/org/springframework/util/SerializationUtils.java",
+      "line": 104,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/util/SerializationUtils.java::org.springframework.util.SerializationUtils.clone:method(T)",
+      "target": "src/main/java/org/springframework/util/SerializationUtils.java::org.springframework.util.SerializationUtils.serialize:method(Object)",
+      "path": "src/main/java/org/springframework/util/SerializationUtils.java",
+      "line": 104,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/main/java/org/springframework/util/unit/DataSize.java::org.springframework.util.unit.DataSize.parse:method(CharSequence,DataUnit)",
+      "target": "src/main/java/org/springframework/util/unit/DataSize.java::org.springframework.util.unit.DataSize.DataSizeUtils.determineDataUnit:method(String,DataUnit)",
+      "path": "src/main/java/org/springframework/util/unit/DataSize.java",
+      "line": 191,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/convert/converter/DefaultConversionServiceTests.java::org.springframework.core.convert.converter.DefaultConversionServiceTests.convertObjectToObjectUsingObjectConstructor:method()",
+      "target": "src/test/java/org/springframework/core/convert/converter/DefaultConversionServiceTests.java::org.springframework.core.convert.converter.DefaultConversionServiceTests.SSN.reset:method()",
+      "path": "src/test/java/org/springframework/core/convert/converter/DefaultConversionServiceTests.java",
+      "line": 921,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/convert/converter/DefaultConversionServiceTests.java::org.springframework.core.convert.converter.DefaultConversionServiceTests.convertObjectToObjectUsingValueOfMethod:method()",
+      "target": "src/test/java/org/springframework/core/convert/converter/DefaultConversionServiceTests.java::org.springframework.core.convert.converter.DefaultConversionServiceTests.ISBN.reset:method()",
+      "path": "src/test/java/org/springframework/core/convert/converter/DefaultConversionServiceTests.java",
+      "line": 901,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/convert/converter/DefaultConversionServiceTests.java::org.springframework.core.convert.converter.DefaultConversionServiceTests.convertObjectToStringUsingToString:method()",
+      "target": "src/test/java/org/springframework/core/convert/converter/DefaultConversionServiceTests.java::org.springframework.core.convert.converter.DefaultConversionServiceTests.SSN.reset:method()",
+      "path": "src/test/java/org/springframework/core/convert/converter/DefaultConversionServiceTests.java",
+      "line": 912,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/convert/converter/DefaultConversionServiceTests.java::org.springframework.core.convert.converter.DefaultConversionServiceTests.convertObjectToStringWithValueOfMethodPresentUsingToString:method()",
+      "target": "src/test/java/org/springframework/core/convert/converter/DefaultConversionServiceTests.java::org.springframework.core.convert.converter.DefaultConversionServiceTests.ISBN.reset:method()",
+      "path": "src/test/java/org/springframework/core/convert/converter/DefaultConversionServiceTests.java",
+      "line": 888,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/task/support/ContextPropagatingTaskDecoratorTests.java::org.springframework.core.task.support.ContextPropagatingTaskDecoratorTests.TestThreadLocalAccessor.getValue:method()",
+      "target": "src/test/java/org/springframework/core/task/support/ContextPropagatingTaskDecoratorTests.java::org.springframework.core.task.support.ContextPropagatingTaskDecoratorTests.TestThreadLocalHolder.getValue:method()",
+      "path": "src/test/java/org/springframework/core/task/support/ContextPropagatingTaskDecoratorTests.java",
+      "line": 80,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/task/support/ContextPropagatingTaskDecoratorTests.java::org.springframework.core.task.support.ContextPropagatingTaskDecoratorTests.TestThreadLocalAccessor.setValue:method()",
+      "target": "src/test/java/org/springframework/core/task/support/ContextPropagatingTaskDecoratorTests.java::org.springframework.core.task.support.ContextPropagatingTaskDecoratorTests.TestThreadLocalHolder.reset:method()",
+      "path": "src/test/java/org/springframework/core/task/support/ContextPropagatingTaskDecoratorTests.java",
+      "line": 90,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/task/support/ContextPropagatingTaskDecoratorTests.java::org.springframework.core.task.support.ContextPropagatingTaskDecoratorTests.TestThreadLocalAccessor.setValue:method(String)",
+      "target": "src/test/java/org/springframework/core/task/support/ContextPropagatingTaskDecoratorTests.java::org.springframework.core.task.support.ContextPropagatingTaskDecoratorTests.TestThreadLocalHolder.setValue:method(String)",
+      "path": "src/test/java/org/springframework/core/task/support/ContextPropagatingTaskDecoratorTests.java",
+      "line": 85,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/task/support/ContextPropagatingTaskDecoratorTests.java::org.springframework.core.task.support.ContextPropagatingTaskDecoratorTests.shouldPropagateContextInTaskExecution:method()",
+      "target": "src/test/java/org/springframework/core/task/support/ContextPropagatingTaskDecoratorTests.java::org.springframework.core.task.support.ContextPropagatingTaskDecoratorTests.TestThreadLocalHolder.reset:method()",
+      "path": "src/test/java/org/springframework/core/task/support/ContextPropagatingTaskDecoratorTests.java",
+      "line": 48,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/task/support/ContextPropagatingTaskDecoratorTests.java::org.springframework.core.task.support.ContextPropagatingTaskDecoratorTests.shouldPropagateContextInTaskExecution:method()",
+      "target": "src/test/java/org/springframework/core/task/support/ContextPropagatingTaskDecoratorTests.java::org.springframework.core.task.support.ContextPropagatingTaskDecoratorTests.TestThreadLocalHolder.setValue:method(String)",
+      "path": "src/test/java/org/springframework/core/task/support/ContextPropagatingTaskDecoratorTests.java",
+      "line": 42,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    },
+    {
+      "source": "src/testFixtures/java/org/springframework/core/testfixture/TestGroup.java::org.springframework.core.testfixture.TestGroup.loadTestGroups:method()",
+      "target": "src/testFixtures/java/org/springframework/core/testfixture/TestGroup.java::org.springframework.core.testfixture.TestGroup.parse:method(String)",
+      "path": "src/testFixtures/java/org/springframework/core/testfixture/TestGroup.java",
+      "line": 64,
+      "declaration_match": true,
+      "review_scope": "Reviewed call spelling and corresponding static declaration in original source; full argument applicability and runtime behavior not verified."
+    }
+  ],
+  "removed": [
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.findMergedAnnotationForMultipleMetaAnnotationsWithClashingAttributeNames:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 787,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.findMergedAnnotationForMultipleMetaAnnotationsWithClashingAttributeNames:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 788,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.getMergedAnnotationAttributesWithAliasedComposedAnnotation:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 440,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.getMergedAnnotationAttributesWithAliasedComposedAnnotation:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 441,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.getMergedAnnotationAttributesWithAliasedValueComposedAnnotation:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 454,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.getMergedAnnotationAttributesWithAliasedValueComposedAnnotation:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 455,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.getMergedAnnotationAttributesWithImplicitAliasesInMetaAnnotationOnComposedAnnotation:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 466,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.getMergedAnnotationAttributesWithShadowedAliasComposedAnnotation:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 560,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.getMergedAnnotationWithImplicitAliasesInMetaAnnotationOnComposedAnnotation:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 529,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.getAnnotationAttributesWithAttributeAliases:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java",
+      "line": 466,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.getAnnotationAttributesWithAttributeAliases:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java",
+      "line": 467,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.getAnnotationAttributesWithAttributeAliases:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java",
+      "line": 475,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.getAnnotationAttributesWithAttributeAliases:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java",
+      "line": 476,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java::org.springframework.core.io.support.SpringFactoriesLoaderTests.ArgumentResolverTests.andResolverReturnsComposite:method()",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.of:method(Class<T>,T)",
+      "path": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java",
+      "line": 295,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java::org.springframework.core.io.support.SpringFactoriesLoaderTests.ArgumentResolverTests.andResolverReturnsComposite:method()",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.of:method(Class<T>,T)",
+      "path": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java",
+      "line": 296,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java::org.springframework.core.io.support.SpringFactoriesLoaderTests.ArgumentResolverTests.andValueReturnsComposite:method()",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.of:method(Class<T>,T)",
+      "path": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java",
+      "line": 267,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java::org.springframework.core.io.support.SpringFactoriesLoaderTests.ArgumentResolverTests.andValueSupplierReturnsComposite:method()",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.of:method(Class<T>,T)",
+      "path": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java",
+      "line": 281,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java::org.springframework.core.io.support.SpringFactoriesLoaderTests.ArgumentResolverTests.andValueSupplierWhenSameTypeReturnsCompositeResolvingFirst:method()",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.of:method(Class<T>,T)",
+      "path": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java",
+      "line": 289,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java::org.springframework.core.io.support.SpringFactoriesLoaderTests.ArgumentResolverTests.andValueWhenSameTypeReturnsCompositeResolvingFirst:method()",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.of:method(Class<T>,T)",
+      "path": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java",
+      "line": 275,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java::org.springframework.core.io.support.SpringFactoriesLoaderTests.ArgumentResolverTests.ofValueResolvesValue:method()",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.of:method(Class<T>,T)",
+      "path": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java",
+      "line": 242,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java::org.springframework.core.io.support.SpringFactoriesLoaderTests.FactoryInstantiatorTests:class",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.of:method(Class<T>,T)",
+      "path": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java",
+      "line": 308,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java::org.springframework.core.io.support.SpringFactoriesLoaderTests.loadWhenMultipleConstructorsThrowsException:method()",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.of:method(Class<T>,T)",
+      "path": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java",
+      "line": 127,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java::org.springframework.core.io.support.SpringFactoriesLoaderTests.loadWithArgumentResolverWhenNoDefaultConstructor:method()",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.of:method(Class<T>,T)",
+      "path": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java",
+      "line": 117,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.emptyFilterApplyMatchIfEmpty:method()",
+      "target": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.match:method(InstanceFilter<T>,T)",
+      "path": "src/test/java/org/springframework/util/InstanceFilterTests.java",
+      "line": 33,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.emptyFilterApplyMatchIfEmpty:method()",
+      "target": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.match:method(InstanceFilter<T>,T)",
+      "path": "src/test/java/org/springframework/util/InstanceFilterTests.java",
+      "line": 34,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.excludesFilter:method()",
+      "target": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.doNotMatch:method(InstanceFilter<T>,T)",
+      "path": "src/test/java/org/springframework/util/InstanceFilterTests.java",
+      "line": 47,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.excludesFilter:method()",
+      "target": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.match:method(InstanceFilter<T>,T)",
+      "path": "src/test/java/org/springframework/util/InstanceFilterTests.java",
+      "line": 48,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.includesAndExcludesFilters:method()",
+      "target": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.doNotMatch:method(InstanceFilter<T>,T)",
+      "path": "src/test/java/org/springframework/util/InstanceFilterTests.java",
+      "line": 54,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.includesAndExcludesFilters:method()",
+      "target": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.match:method(InstanceFilter<T>,T)",
+      "path": "src/test/java/org/springframework/util/InstanceFilterTests.java",
+      "line": 55,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.includesAndExcludesFiltersConflict:method()",
+      "target": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.doNotMatch:method(InstanceFilter<T>,T)",
+      "path": "src/test/java/org/springframework/util/InstanceFilterTests.java",
+      "line": 61,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.includesFilter:method()",
+      "target": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.doNotMatch:method(InstanceFilter<T>,T)",
+      "path": "src/test/java/org/springframework/util/InstanceFilterTests.java",
+      "line": 41,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    },
+    {
+      "source": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.includesFilter:method()",
+      "target": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.match:method(InstanceFilter<T>,T)",
+      "path": "src/test/java/org/springframework/util/InstanceFilterTests.java",
+      "line": 40,
+      "classification": "source-supported generic call omitted",
+      "review_scope": "Reviewed generic helper signature, relevant imports and String/String-compatible arguments; reduced javac fixtures support the pattern, not a full Spring compilation."
+    }
+  ]
+}

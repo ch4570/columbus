@@ -1,0 +1,306 @@
+org.springframework.aot.generate.AccessControl.Visibility.forClass src/main/java/org/springframework/aot/generate/AccessControl.java
+216|		private static Visibility forClass(Class<?> clazz) {
+217|			clazz = ClassUtils.getUserClass(clazz);
+218|			Visibility visibility = forModifiers(clazz.getModifiers());
+219|			if (clazz.isArray()) {
+220|				visibility = lowest(visibility, forClass(clazz.componentType()));
+221|			}
+222|			Class<?> enclosingClass = clazz.getEnclosingClass();
+CALL src/main/java/org/springframework/aot/generate/AccessControl.java:82 return new AccessControl(type, Visibility.forClass(type));
+
+org.springframework.aot.generate.AccessControl.Visibility.forMember src/main/java/org/springframework/aot/generate/AccessControl.java
+160|		private static Visibility forMember(Member member) {
+161|			Assert.notNull(member, "'member' must not be null");
+162|			Visibility visibility = forModifiers(member.getModifiers());
+163|			Visibility declaringClassVisibility = forClass(member.getDeclaringClass());
+164|			visibility = lowest(visibility, declaringClassVisibility);
+165|			if (visibility != PRIVATE) {
+166|				if (member instanceof Field field) {
+CALL src/main/java/org/springframework/aot/generate/AccessControl.java:63 return new AccessControl(member.getDeclaringClass(), Visibility.forMember(member));
+
+org.springframework.aot.generate.AccessControl.Visibility.lowestIndex src/main/java/org/springframework/aot/generate/AccessControl.java
+263|		static int lowestIndex(Visibility... candidates) {
+264|			Visibility visibility = PUBLIC;
+265|			int index = 0;
+266|			for (int i = 0; i < candidates.length; i++) {
+267|				Visibility candidate = candidates[i];
+268|				if (candidate.ordinal() > visibility.ordinal()) {
+269|					visibility = candidate;
+CALL src/main/java/org/springframework/aot/generate/AccessControl.java:91 int index = Visibility.lowestIndex(
+
+org.springframework.aot.generate.MethodReference.ArgumentCodeGenerator.of src/main/java/org/springframework/aot/generate/MethodReference.java
+96|		static ArgumentCodeGenerator of(Class<?> argumentType, String argumentCode) {
+97|			return from(candidateType -> candidateType.equals(ClassName.get(argumentType)) ?
+98|					CodeBlock.of(argumentCode) : null);
+99|		}
+CALL src/main/java/org/springframework/aot/generate/MethodReference.java:121 return and(ArgumentCodeGenerator.of(argumentType, argumentCode));
+
+org.springframework.cglib.core.EmitUtils.getSwitchKeys src/main/java/org/springframework/cglib/core/EmitUtils.java
+251|    static int[] getSwitchKeys(Map buckets) {
+252|        int[] keys = new int[buckets.size()];
+253|        int index = 0;
+254|        for (Iterator it = buckets.keySet().iterator(); it.hasNext();) {
+255|            keys[index++] = ((Integer)it.next());
+256|        }
+257|        Arrays.sort(keys);
+CALL src/main/java/org/springframework/cglib/core/EmitUtils.java:780 e.process_switch(EmitUtils.getSwitchKeys(buckets), new ProcessSwitchCallback() {
+
+org.springframework.cglib.core.EmitUtils.process_array src/main/java/org/springframework/cglib/core/EmitUtils.java
+113|    public static void process_array(CodeEmitter e, Type type, ProcessArrayCallback callback) {
+114|        Type componentType = TypeUtils.getComponentType(type);
+115|        Local array = e.make_local();
+116|        Local loopvar = e.make_local(Type.INT_TYPE);
+117|        Label loopbody = e.make_label();
+118|        Label checkloop = e.make_label();
+119|        e.store_local(array);
+CALL src/main/java/org/springframework/cglib/core/EmitUtils.java:661 EmitUtils.process_array(e, type, callback);
+CALL src/main/java/org/springframework/cglib/core/EmitUtils.java:424 EmitUtils.process_array(e, type, type1 -> hash_code(e, type1, multiplier, registry));
+
+org.springframework.cglib.core.EmitUtils.process_arrays src/main/java/org/springframework/cglib/core/EmitUtils.java
+145|    public static void process_arrays(CodeEmitter e, Type type, ProcessArrayCallback callback) {
+146|        Type componentType = TypeUtils.getComponentType(type);
+147|        Local array1 = e.make_local();
+148|        Local array2 = e.make_local();
+149|        Local loopvar = e.make_local(Type.INT_TYPE);
+150|        Label loopbody = e.make_label();
+151|        Label checkloop = e.make_label();
+CALL src/main/java/org/springframework/cglib/core/EmitUtils.java:534 EmitUtils.process_arrays(e, type, callback);
+
+org.springframework.cglib.core.EmitUtils.string_switch src/main/java/org/springframework/cglib/core/EmitUtils.java
+175|    public static void string_switch(CodeEmitter e, String[] strings, int switchStyle, ObjectSwitchCallback callback) {
+176|        try {
+177|            switch (switchStyle) {
+178|            case Constants.SWITCH_STYLE_TRIE:
+179|                string_switch_trie(e, strings, callback);
+180|                break;
+181|            case Constants.SWITCH_STYLE_HASH:
+CALL src/main/java/org/springframework/cglib/core/EmitUtils.java:843 EmitUtils.string_switch(e, names, Constants.SWITCH_STYLE_HASH, new ObjectSwitchCallback() {
+CALL src/main/java/org/springframework/cglib/core/EmitUtils.java:747 EmitUtils.string_switch(e, names, Constants.SWITCH_STYLE_HASH, new ObjectSwitchCallback() {
+
+org.springframework.cglib.core.ReflectUtils.getClassInfo src/main/java/org/springframework/cglib/core/ReflectUtils.java
+644|	public static ClassInfo getClassInfo(final Class clazz) {
+645|		final Type type = Type.getType(clazz);
+646|		final Type sc = (clazz.getSuperclass() == null) ? null : Type.getType(clazz.getSuperclass());
+647|		return new ClassInfo() {
+648|			@Override
+649|			public Type getType() {
+650|				return type;
+CALL src/main/java/org/springframework/cglib/core/ReflectUtils.java:618 ci = ReflectUtils.getClassInfo(member.getDeclaringClass());
+
+org.springframework.cglib.core.ReflectUtils.getExceptionTypes src/main/java/org/springframework/cglib/core/ReflectUtils.java
+128|	public static Type[] getExceptionTypes(Member member) {
+129|		if (member instanceof Method method) {
+130|			return TypeUtils.getTypes(method.getExceptionTypes());
+131|		}
+132|		else if (member instanceof Constructor<?> constructor) {
+133|			return TypeUtils.getTypes(constructor.getExceptionTypes());
+134|		}
+CALL src/main/java/org/springframework/cglib/core/ReflectUtils.java:635 return ReflectUtils.getExceptionTypes(member);
+
+org.springframework.core.MethodParameter.KotlinDelegate.getGenericReturnType src/main/java/org/springframework/core/MethodParameter.java
+974|		private static Type getGenericReturnType(Method method) {
+975|			try {
+976|				KFunction<?> function = ReflectJvmMapping.getKotlinFunction(method);
+977|				if (function != null && function.isSuspend()) {
+978|					return ReflectJvmMapping.getJavaType(function.getReturnType());
+979|				}
+980|			}
+CALL src/main/java/org/springframework/core/MethodParameter.java:496 KotlinDelegate.getGenericReturnType(method) : method.getGenericReturnType()) : void.class);
+
+org.springframework.core.MethodParameter.KotlinDelegate.getReturnType src/main/java/org/springframework/core/MethodParameter.java
+991|		private static Class<?> getReturnType(Method method) {
+992|			try {
+993|				KFunction<?> function = ReflectJvmMapping.getKotlinFunction(method);
+994|				if (function != null && function.isSuspend()) {
+995|					Type paramType = ReflectJvmMapping.getJavaType(function.getReturnType());
+996|					if (paramType == Unit.class) {
+997|						paramType = void.class;
+CALL src/main/java/org/springframework/core/MethodParameter.java:524 return KotlinDelegate.getReturnType(method);
+
+org.springframework.core.MethodParameter.KotlinDelegate.isOptional src/main/java/org/springframework/core/MethodParameter.java
+934|		public static boolean isOptional(MethodParameter param) {
+935|			Method method = param.getMethod();
+936|			int index = param.getParameterIndex();
+937|			if (method != null && index == -1) {
+938|				KFunction<?> function = ReflectJvmMapping.getKotlinFunction(method);
+939|				return (function != null && function.getReturnType().isMarkedNullable());
+940|			}
+CALL src/main/java/org/springframework/core/MethodParameter.java:407 KotlinDelegate.isOptional(this)));
+
+org.springframework.core.Nullness.KotlinDelegate.forField src/main/java/org/springframework/core/Nullness.java
+246|		public static Nullness forField(Field field) {
+247|			KProperty<?> property = ReflectJvmMapping.getKotlinProperty(field);
+248|			if (property != null) {
+249|				return (property.getReturnType().isMarkedNullable() ? Nullness.NULLABLE : Nullness.NON_NULL);
+250|			}
+251|			return Nullness.UNSPECIFIED;
+252|		}
+CALL src/main/java/org/springframework/core/Nullness.java:130 return KotlinDelegate.forField(field);
+
+org.springframework.core.Nullness.KotlinDelegate.forMethodReturnType src/main/java/org/springframework/core/Nullness.java
+188|		public static Nullness forMethodReturnType(Method method) {
+189|			KFunction<?> function = ReflectJvmMapping.getKotlinFunction(method);
+190|			if (function == null) {
+191|				String methodName = method.getName();
+192|				if (methodName.startsWith("get")) {
+193|					String propertyName = accessorToPropertyName(methodName);
+194|					KClass<?> kClass = JvmClassMappingKt.getKotlinClass(method.getDeclaringClass());
+CALL src/main/java/org/springframework/core/Nullness.java:90 return KotlinDelegate.forMethodReturnType(method);
+
+org.springframework.core.Nullness.KotlinDelegate.forParameter src/main/java/org/springframework/core/Nullness.java
+211|		public static Nullness forParameter(Executable executable, int parameterIndex) {
+212|			KFunction<?> function;
+213|			Predicate<KParameter> predicate;
+214|			if (executable instanceof Method method) {
+215|				function = ReflectJvmMapping.getKotlinFunction(method);
+216|				predicate = p -> KParameter.Kind.VALUE.equals(p.getKind());
+217|			}
+CALL src/main/java/org/springframework/core/Nullness.java:105 return KotlinDelegate.forParameter(methodParameter.getExecutable(), methodParameter.getParameterIndex());
+
+org.springframework.core.PropagationContextElement.ReactorDelegate.captureFrom src/main/java/org/springframework/core/PropagationContextElement.java
+106|		@SuppressWarnings({"unchecked", "rawtypes"})
+107|		public static @Nullable ContextSnapshot captureFrom(CoroutineContext context) {
+108|			ReactorContext reactorContext = (ReactorContext)context.get((CoroutineContext.Key)ReactorContext.Key);
+109|			ContextView contextView = reactorContext != null ? reactorContext.getContext() : null;
+110|			if (contextView != null) {
+111|				return contextSnapshotFactory.captureFrom(contextView);
+112|			}
+CALL src/main/java/org/springframework/core/PropagationContextElement.java:90 contextSnapshot = ReactorDelegate.captureFrom(context);
+
+org.springframework.core.ResolvableType.WildcardBounds.get src/main/java/org/springframework/core/ResolvableType.java
+1814|		public static @Nullable WildcardBounds get(ResolvableType type) {
+1815|			ResolvableType candidate = type;
+1816|			while (!(candidate.getType() instanceof WildcardType || candidate.isUnresolvableTypeVariable())) {
+1817|				if (candidate == NONE) {
+1818|					return null;
+1819|				}
+1820|				candidate = candidate.resolveType();
+CALL src/main/java/org/springframework/core/ResolvableType.java:325 WildcardBounds ourBounds = WildcardBounds.get(this);
+CALL src/main/java/org/springframework/core/ResolvableType.java:326 WildcardBounds otherBounds = WildcardBounds.get(other);
+
+org.springframework.core.io.support.PathMatchingResourcePatternResolver.ClassPathManifestEntry.of src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java
+1294|		static ClassPathManifestEntry of(File file, @Nullable Boolean useCaches) throws MalformedURLException {
+1295|			String path = fixPath(file.getAbsolutePath());
+1296|			Resource resource = asJarFileResource(path, useCaches);
+1297|			Resource alternative = createAlternative(path, useCaches);
+1298|			return new ClassPathManifestEntry(resource, alternative);
+1299|		}
+CALL src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java:656 manifestEntries.add(ClassPathManifestEntry.of(candidate, this.useCaches));
+
+org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.of src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java
+557|		static <T> ArgumentResolver of(Class<T> type, T value) {
+558|			return ofSupplied(type, () -> value);
+559|		}
+CALL src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java:512 return and(ArgumentResolver.of(type, value));
+
+org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.ofSupplied src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java
+569|		static <T> ArgumentResolver ofSupplied(Class<T> type, Supplier<T> valueSupplier) {
+570|			return from(candidateType -> (candidateType.equals(type) ? valueSupplier.get() : null));
+571|		}
+CALL src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java:524 return and(ArgumentResolver.ofSupplied(type, valueSupplier));
+
+org.springframework.core.io.support.SpringFactoriesLoader.FactoryInstantiator.forClass src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java
+388|		@SuppressWarnings("unchecked")
+389|		static <T> FactoryInstantiator<T> forClass(Class<?> factoryImplementationClass) {
+390|			Constructor<?> constructor = findConstructor(factoryImplementationClass);
+391|			Assert.state(constructor != null, () ->
+392|					"Class [%s] has no suitable constructor".formatted(factoryImplementationClass.getName()));
+393|			return new FactoryInstantiator<>((Constructor<T>) constructor);
+394|		}
+CALL src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java:221 FactoryInstantiator<T> factoryInstantiator = FactoryInstantiator.forClass(factoryImplementationClass);
+
+org.springframework.core.io.support.SpringFactoriesLoader.KotlinDelegate.findPrimaryConstructor src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java
+434|		static <T> @Nullable Constructor<T> findPrimaryConstructor(Class<T> clazz) {
+435|			try {
+436|				KFunction<T> primaryConstructor = KClasses.getPrimaryConstructor(JvmClassMappingKt.getKotlinClass(clazz));
+437|				if (primaryConstructor != null) {
+438|					Constructor<T> constructor = ReflectJvmMapping.getJavaConstructor(
+439|							primaryConstructor);
+440|					Assert.state(constructor != null, () ->
+CALL src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java:410 KotlinDelegate.findPrimaryConstructor(factoryImplementationClass) : null);
+
+org.springframework.util.PlaceholderParser.Part.resolveAll src/main/java/org/springframework/util/PlaceholderParser.java
+400|		static String resolveAll(Iterable<Part> parts, PartResolutionContext resolutionContext) {
+401|			StringBuilder sb = new StringBuilder();
+402|			for (Part part : parts) {
+403|				sb.append(part.resolve(resolutionContext));
+404|			}
+405|			return sb.toString();
+406|		}
+CALL src/main/java/org/springframework/util/PlaceholderParser.java:545 String resolvedKey = Part.resolveAll(this.keyParts, resolutionContext);
+CALL src/main/java/org/springframework/util/PlaceholderParser.java:551 return Part.resolveAll(this.defaultParts, resolutionContext);
+CALL src/main/java/org/springframework/util/PlaceholderParser.java:293 return Part.resolveAll(this.parts, resolutionContext);
+
+org.springframework.util.SerializationUtils.deserialize src/main/java/org/springframework/util/SerializationUtils.java
+78|	@Deprecated(since = "6.0")
+79|	@Contract("null -> null")
+80|	public static @Nullable Object deserialize(byte @Nullable [] bytes) {
+81|		if (bytes == null) {
+82|			return null;
+83|		}
+84|		try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(bytes))) {
+CALL src/main/java/org/springframework/util/SerializationUtils.java:104 Object result = SerializationUtils.deserialize(SerializationUtils.serialize(object));
+
+org.springframework.util.SerializationUtils.serialize src/main/java/org/springframework/util/SerializationUtils.java
+52|	@Contract("null -> null")
+53|	public static byte @Nullable [] serialize(@Nullable Object object) {
+54|		if (object == null) {
+55|			return null;
+56|		}
+57|		ByteArrayOutputStream baos = new ByteArrayOutputStream(1024);
+58|		try (ObjectOutputStream oos = new ObjectOutputStream(baos)) {
+CALL src/main/java/org/springframework/util/SerializationUtils.java:104 Object result = SerializationUtils.deserialize(SerializationUtils.serialize(object));
+
+org.springframework.util.unit.DataSize.DataSizeUtils.determineDataUnit src/main/java/org/springframework/util/unit/DataSize.java
+288|		private static DataUnit determineDataUnit(String suffix, @Nullable DataUnit defaultUnit) {
+289|			DataUnit defaultUnitToUse = (defaultUnit != null ? defaultUnit : DataUnit.BYTES);
+290|			return (StringUtils.hasLength(suffix) ? DataUnit.fromSuffix(suffix) : defaultUnitToUse);
+291|		}
+CALL src/main/java/org/springframework/util/unit/DataSize.java:191 DataUnit unit = DataSizeUtils.determineDataUnit(matcher.group(2), defaultUnit);
+
+org.springframework.core.convert.converter.DefaultConversionServiceTests.ISBN.reset src/test/java/org/springframework/core/convert/converter/DefaultConversionServiceTests.java
+1430|		static void reset() {
+1431|			constructorCount = 0;
+1432|			toStringCount = 0;
+1433|			valueOfCount = 0;
+1434|		}
+CALL src/test/java/org/springframework/core/convert/converter/DefaultConversionServiceTests.java:901 ISBN.reset();
+CALL src/test/java/org/springframework/core/convert/converter/DefaultConversionServiceTests.java:888 ISBN.reset();
+
+org.springframework.core.convert.converter.DefaultConversionServiceTests.SSN.reset src/test/java/org/springframework/core/convert/converter/DefaultConversionServiceTests.java
+1391|		static void reset() {
+1392|			constructorCount = 0;
+1393|			toStringCount = 0;
+1394|		}
+CALL src/test/java/org/springframework/core/convert/converter/DefaultConversionServiceTests.java:921 SSN.reset();
+CALL src/test/java/org/springframework/core/convert/converter/DefaultConversionServiceTests.java:912 SSN.reset();
+
+org.springframework.core.task.support.ContextPropagatingTaskDecoratorTests.TestThreadLocalHolder.getValue src/test/java/org/springframework/core/task/support/ContextPropagatingTaskDecoratorTests.java
+59|		static String getValue() {
+60|			return holder.get();
+61|		}
+CALL src/test/java/org/springframework/core/task/support/ContextPropagatingTaskDecoratorTests.java:80 return TestThreadLocalHolder.getValue();
+
+org.springframework.core.task.support.ContextPropagatingTaskDecoratorTests.TestThreadLocalHolder.reset src/test/java/org/springframework/core/task/support/ContextPropagatingTaskDecoratorTests.java
+63|		static void reset() {
+64|			holder.remove();
+65|		}
+CALL src/test/java/org/springframework/core/task/support/ContextPropagatingTaskDecoratorTests.java:90 TestThreadLocalHolder.reset();
+CALL src/test/java/org/springframework/core/task/support/ContextPropagatingTaskDecoratorTests.java:48 TestThreadLocalHolder.reset();
+
+org.springframework.core.task.support.ContextPropagatingTaskDecoratorTests.TestThreadLocalHolder.setValue src/test/java/org/springframework/core/task/support/ContextPropagatingTaskDecoratorTests.java
+55|		static void setValue(String value) {
+56|			holder.set(value);
+57|		}
+CALL src/test/java/org/springframework/core/task/support/ContextPropagatingTaskDecoratorTests.java:85 TestThreadLocalHolder.setValue(value);
+CALL src/test/java/org/springframework/core/task/support/ContextPropagatingTaskDecoratorTests.java:42 TestThreadLocalHolder.setValue("expected");
+
+org.springframework.core.testfixture.TestGroup.parse src/testFixtures/java/org/springframework/core/testfixture/TestGroup.java
+79|	static Set<TestGroup> parse(String value) throws IllegalArgumentException {
+80|		if (!StringUtils.hasText(value)) {
+81|			return Collections.emptySet();
+82|		}
+83|		String originalValue = value;
+84|		value = value.trim();
+85|		if ("ALL".equalsIgnoreCase(value)) {
+CALL src/testFixtures/java/org/springframework/core/testfixture/TestGroup.java:64 return TestGroup.parse(System.getProperty(TEST_GROUPS_SYSTEM_PROPERTY));

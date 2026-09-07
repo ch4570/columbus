@@ -1,0 +1,325 @@
+{
+  "conclusion": "success",
+  "headSha": "9a249be870ffc088e226b0541d2f8c08f15fd99d",
+  "jobs": [
+    {
+      "name": "candidate (ubuntu-latest, 3.11)",
+      "conclusion": "success",
+      "verification_steps": [
+        {
+          "name": "Verify existing bootstrap runtime adopts the candidate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify installed candidate and annotation spans",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compiler-backed access and static-context gate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compiler-backed package accessibility gate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compiler-backed type receivers and literal references",
+          "conclusion": "success"
+        },
+        {
+          "name": "Engine regression tests with candidate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify bundled default through existing-runtime upgrade and relocation",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify incompatible bundled parser cannot fall back to upstream",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify candidate through clean Columbus installations",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "candidate (windows-latest, 3.14)",
+      "conclusion": "success",
+      "verification_steps": [
+        {
+          "name": "Verify existing bootstrap runtime adopts the candidate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify installed candidate and annotation spans",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compiler-backed access and static-context gate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compiler-backed package accessibility gate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compiler-backed type receivers and literal references",
+          "conclusion": "success"
+        },
+        {
+          "name": "Engine regression tests with candidate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify bundled default through existing-runtime upgrade and relocation",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify incompatible bundled parser cannot fall back to upstream",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify candidate through clean Columbus installations",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "candidate (windows-latest, 3.11)",
+      "conclusion": "success",
+      "verification_steps": [
+        {
+          "name": "Verify existing bootstrap runtime adopts the candidate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify installed candidate and annotation spans",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compiler-backed access and static-context gate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compiler-backed package accessibility gate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compiler-backed type receivers and literal references",
+          "conclusion": "success"
+        },
+        {
+          "name": "Engine regression tests with candidate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify bundled default through existing-runtime upgrade and relocation",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify incompatible bundled parser cannot fall back to upstream",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify candidate through clean Columbus installations",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "candidate (macos-latest, 3.14)",
+      "conclusion": "success",
+      "verification_steps": [
+        {
+          "name": "Verify existing bootstrap runtime adopts the candidate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify installed candidate and annotation spans",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compiler-backed access and static-context gate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compiler-backed package accessibility gate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compiler-backed type receivers and literal references",
+          "conclusion": "success"
+        },
+        {
+          "name": "Engine regression tests with candidate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify bundled default through existing-runtime upgrade and relocation",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify incompatible bundled parser cannot fall back to upstream",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify candidate through clean Columbus installations",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "candidate (ubuntu-latest, 3.14)",
+      "conclusion": "success",
+      "verification_steps": [
+        {
+          "name": "Verify existing bootstrap runtime adopts the candidate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify installed candidate and annotation spans",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compiler-backed access and static-context gate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compiler-backed package accessibility gate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compiler-backed type receivers and literal references",
+          "conclusion": "success"
+        },
+        {
+          "name": "Engine regression tests with candidate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify bundled default through existing-runtime upgrade and relocation",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify incompatible bundled parser cannot fall back to upstream",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify candidate through clean Columbus installations",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "candidate (macos-latest, 3.11)",
+      "conclusion": "success",
+      "verification_steps": [
+        {
+          "name": "Verify existing bootstrap runtime adopts the candidate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify installed candidate and annotation spans",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compiler-backed access and static-context gate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compiler-backed package accessibility gate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compiler-backed type receivers and literal references",
+          "conclusion": "success"
+        },
+        {
+          "name": "Engine regression tests with candidate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify bundled default through existing-runtime upgrade and relocation",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify incompatible bundled parser cannot fall back to upstream",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify candidate through clean Columbus installations",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "aggregate",
+      "conclusion": "success",
+      "verification_steps": []
+    },
+    {
+      "name": "aggregate-verify (windows-latest, 3.14)",
+      "conclusion": "success",
+      "verification_steps": [
+        {
+          "name": "Verify the unchanged shared artifact through installation and upgrade",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "aggregate-verify (ubuntu-latest, 3.11)",
+      "conclusion": "success",
+      "verification_steps": [
+        {
+          "name": "Verify the unchanged shared artifact through installation and upgrade",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "aggregate-verify (ubuntu-latest, 3.14)",
+      "conclusion": "success",
+      "verification_steps": [
+        {
+          "name": "Verify the unchanged shared artifact through installation and upgrade",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "aggregate-verify (macos-latest, 3.11)",
+      "conclusion": "success",
+      "verification_steps": [
+        {
+          "name": "Verify the unchanged shared artifact through installation and upgrade",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "aggregate-verify (windows-latest, 3.11)",
+      "conclusion": "success",
+      "verification_steps": [
+        {
+          "name": "Verify the unchanged shared artifact through installation and upgrade",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "aggregate-verify (macos-latest, 3.14)",
+      "conclusion": "success",
+      "verification_steps": [
+        {
+          "name": "Verify the unchanged shared artifact through installation and upgrade",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/ch4570/columbus/actions/runs/34153270616"
+}
