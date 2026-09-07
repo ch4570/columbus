@@ -46,9 +46,9 @@
     {
       "path": "src/main/java/org/springframework/core/io/FileUrlResource.java",
       "sha256": "8976287532732cce3d0f0aa67a7e752993438f95c0cccec867a900908bd07d38",
-      "start_line": 51,
-      "end_line": 51,
-      "text": ""
+      "start_line": 47,
+      "end_line": 47,
+      "text": "public class FileUrlResource extends UrlResource implements WritableResource {"
     },
     {
       "path": "src/main/java/org/springframework/core/io/ResourceLoader.java",

@@ -18,7 +18,7 @@ base = 'src/main/java/org/springframework/core/io/'
 ranges = [('DefaultResourceLoader.java',155,184),('DefaultResourceLoader.java',198,200),
           ('DefaultResourceLoader.java',242,267),('DefaultResourceLoader.java',297,302),
           ('ClassPathResource.java',200,216),('UrlResource.java',244,257),
-          ('FileUrlResource.java',51,51),('ResourceLoader.java',48,68)]
+          ('FileUrlResource.java',47,47),('ResourceLoader.java',48,68)]
 expected = ['DefaultResourceLoader.getResource','DefaultResourceLoader.getResourceByPath',
             'DefaultResourceLoader.ClassPathAllResource.getInputStream',
             'ClassPathResource.getInputStream','UrlResource.getInputStream']
