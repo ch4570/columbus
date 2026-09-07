@@ -2,7 +2,8 @@ import json
 import textwrap
 import unittest
 
-from columbus.parser import parse_source, resolve_files
+from columbus.parser import parse_source, resolve_files, _Parser
+import ast
 
 
 def parsed(module, source, path=None):
@@ -15,6 +16,17 @@ def relations(files, kind="calls"):
 
 
 class ParserTests(unittest.TestCase):
+    def test_cached_evidence_matches_ast_byte_offsets_and_line_endings(self):
+        for newline in ['\n', '\r\n', '\r']:
+            source = newline.join(['def café():', '    return target("🙂é\u2028x",', '                  other("a\u0085b\f"))', ''])
+            tree = ast.parse(source)
+            parser = _Parser('unicode.py', source, 'unicode')
+            for node in ast.walk(tree):
+                expected = ast.get_source_segment(source, node)
+                if expected is not None:
+                    self.assertEqual(parser._evidence(node), ' '.join(expected.split())[:240])
+        self.assertEqual(parser._evidence(ast.Name(id='fallback', ctx=ast.Load())), 'fallback')
+
     def test_absolute_import_alias_and_module_alias(self):
         helpers = parsed("pkg.helpers", "def work(): pass")
         caller = parsed("pkg.main", """

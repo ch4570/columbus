@@ -8,6 +8,7 @@ resolved. Unresolved references remain available in the returned parse records.
 from __future__ import annotations
 
 import ast
+import re
 from pathlib import PurePosixPath
 from typing import Any
 
@@ -49,6 +50,7 @@ class _Declarations(ast.NodeVisitor):
 class _Parser(ast.NodeVisitor):
     def __init__(self, path: str, source: str, module: str) -> None:
         self.path, self.source, self.module = path, source, module
+        self.source_lines = [line.encode("utf-8") for line in re.split(r"(?<=\n)|(?<=\r)(?!\n)", source)]
         self.symbols: list[dict[str, Any]] = []
         self.references: list[dict[str, Any]] = []
         self.imports: list[dict[str, Any]] = []
@@ -99,7 +101,18 @@ class _Parser(ast.NodeVisitor):
                 parent = candidate["parent"]
 
     def _evidence(self, node: ast.AST) -> str:
-        value = ast.get_source_segment(self.source, node) or ast.unparse(node)
+        positions = [getattr(node, key, None) for key in ('lineno', 'col_offset', 'end_lineno', 'end_col_offset')]
+        if any(value is None for value in positions):
+            value = ast.unparse(node)
+        else:
+            line, column, end_line, end_column = positions
+            if line == end_line:
+                segment = self.source_lines[line - 1][column:end_column]
+            else:
+                segment = (self.source_lines[line - 1][column:]
+                           + b''.join(self.source_lines[line:end_line - 1])
+                           + self.source_lines[end_line - 1][:end_column])
+            value = segment.decode('utf-8') or ast.unparse(node)
         return " ".join(value.split())[:240]
 
     def _reference(self, node: ast.AST, kind: str,

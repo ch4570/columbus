@@ -124,3 +124,7 @@ Added offset/next_offset continuation so the 50-edge and byte caps do not make l
 ## Versioned graph workflow documentation
 
 Added README entry points and a pinned-source guide for creating, tracking, moving and paginating a compressed graph. The executable CLI fixture commits only source/graph, confirms gzip is excluded from indexing, deletes the producer/SQLite and resolves a stored call from the moved artifact without consumer writes. Both environments pass. [Workflow evidence](../evals/archive-workflow/REPORT.md). Old v1.0.0 assets remain explicitly excluded; no release or model-savings claim.
+
+## Django preflight and Python evidence cost
+
+A different repository is pinned at Django 4ea2676. The initial uri_to_iri selection has no production callers; independent AST review instead identifies 15 iri_to_uri calls in 12 owners across seven files. Whole-repo indexing failed on a PNG fixture with a .txt suffix, so graph parity/model trials remain blocked by a reproducible input-classification defect. Separately, caching physical UTF-8 source lines preserves all parsed facts for those seven files and reduces observed parse totals 1.6259 → 0.02847 seconds. Both engine suites pass 214 tests, root 53. [Evidence](../evals/python-evidence-cache/REPORT.md). Full-index latency and actual token savings remain unproven.

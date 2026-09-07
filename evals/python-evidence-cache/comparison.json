@@ -1,0 +1,72 @@
+{
+  "baseline_commit": "e2a7c63",
+  "rows": [
+    {
+      "path": "django/contrib/flatpages/models.py",
+      "source_sha256": "dee81146c0f00790b7187396bed3b38c997ecb4caaaa361905238cb76e1062ec",
+      "bytes": 1764,
+      "before_seconds": 0.004544042007182725,
+      "after_seconds": 0.0006282910035224631,
+      "facts_equal": true,
+      "facts_sha256": "89c7a0e8ac639def796c80488f233c1754595bb94162adbc88301ff463bc4468"
+    },
+    {
+      "path": "django/contrib/syndication/views.py",
+      "source_sha256": "c0e3017d202040fa571e605e3f37bdd001b99dcd49a10d135f67ae64a643ea26",
+      "bytes": 9377,
+      "before_seconds": 0.06351258400536608,
+      "after_seconds": 0.002120332996128127,
+      "facts_equal": true,
+      "facts_sha256": "557d8d231bd350ffd08fba53f41fd078713a9726fec39530b76fbc09adb5ce71"
+    },
+    {
+      "path": "django/http/request.py",
+      "source_sha256": "bbdd7e5bdb6e38932f4559fb53aff24239d7b1d2520444df8ceb1c6e579f788a",
+      "bytes": 30193,
+      "before_seconds": 0.4786955830059014,
+      "after_seconds": 0.0068254579964559525,
+      "facts_equal": true,
+      "facts_sha256": "f0e6aef9aae62426dc39bab8a24230199e8172c9275b937c92f9250d534c8d77"
+    },
+    {
+      "path": "django/http/response.py",
+      "source_sha256": "e3cf67a8060fc67048ba4df8b45ea98cab4f3fe6302335c8e23a9156103687bf",
+      "bytes": 26282,
+      "before_seconds": 0.35635570899466984,
+      "after_seconds": 0.006210791994817555,
+      "facts_equal": true,
+      "facts_sha256": "bbde1790f0f863a79f90862cbcb7ff052607e57e0bc7894be206b1cd88a4fbfa"
+    },
+    {
+      "path": "django/template/defaultfilters.py",
+      "source_sha256": "07169341c50e984e02ffe14b842424013412d12d33ee319f49aa2e18f9774f90",
+      "bytes": 28438,
+      "before_seconds": 0.5164698340086034,
+      "after_seconds": 0.0066277919977437705,
+      "facts_equal": true,
+      "facts_sha256": "c8218d067f2abefc4c6eef0097972359791e009b07663829053575c3ff437b60"
+    },
+    {
+      "path": "django/templatetags/static.py",
+      "source_sha256": "5b846ab770cdfd8b577ba128a8ef862f2ed647bc5def3d09b285fe553d2fbe37",
+      "bytes": 4730,
+      "before_seconds": 0.01299299999664072,
+      "after_seconds": 0.0011796250037150458,
+      "facts_equal": true,
+      "facts_sha256": "6822b03ba39322712b196713d14677ac86575b74168f0eae64d20e547af3d146"
+    },
+    {
+      "path": "django/utils/feedgenerator.py",
+      "source_sha256": "bb02704aec1ffd761378dbfa5f448688fda04fb78594cad680f4da00a8d8bcfc",
+      "bytes": 18064,
+      "before_seconds": 0.1933380000118632,
+      "after_seconds": 0.004881625005509704,
+      "facts_equal": true,
+      "facts_sha256": "014b85888de1d45e5cd048d3ec0fd3a6e1b9f93ef9102d7e350a275a1359cde3"
+    }
+  ],
+  "before_total_seconds": 1.6259087520302273,
+  "after_total_seconds": 0.028473915997892618,
+  "limitations": "Single parse per file; baseline first; unflushed caches/shared host. Not full-index latency.",
+  "model_trials": 0
+}

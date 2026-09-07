@@ -1,0 +1,8 @@
+{
+  "asset_sha256": "138b31cf5ec7b3109fe9a0262620b0b0b5a9d5975fd7c3fd3f5de81383db266a",
+  "asset_bytes": 144,
+  "discovered_as_source": true,
+  "error": "Binary source is excluded: file_png.txt",
+  "prior_snapshot_preserved": true,
+  "fixed": false
+}
