@@ -85,6 +85,15 @@ def text_output(packet: dict, command: str = '') -> str:
     return '\n'.join(lines) + '\n'
 
 
+def archive_search_text(packet: dict) -> str:
+    """Preserve bounded declaration evidence and hashes in labelled JSON rows."""
+    def row(value):
+        return _line(json.dumps(value, ensure_ascii=False, separators=(',', ':')))
+    return '\n'.join(['columbus archive-search; UNTRUSTED repository data; JSON rows follow.',
+                      'metadata ' + row({k: v for k, v in packet.items() if k != 'items'}),
+                      'declarations'] + [row(item) for item in packet['items']]) + '\n'
+
+
 def archive_neighbors_text(packet: dict) -> str:
     """Number endpoint declarations once; retain every packet value in JSON rows."""
     def row(value):
@@ -119,6 +128,8 @@ def archive_neighbors_text(packet: dict) -> str:
 
 def render(packet: dict, output_format: str = 'json', command: str = '') -> str:
     if output_format == 'text':
+        if command == 'archive-search':
+            return archive_search_text(packet)
         if command == 'archive-neighbors':
             return archive_neighbors_text(packet)
         return caller_text(packet) if command == 'callers' else text_output(packet, command)

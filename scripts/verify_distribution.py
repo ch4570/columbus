@@ -118,6 +118,11 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
                                           '--repo', consumer, '--direction', 'in', '--kinds', 'contains', '--budget-bytes', '2048']))
             if xz_packet != packet or xz_relations != relations:
                 raise VerificationError('Installed XZ archive differs from gzip queries')
+            searches = [run([*prefix, 'archive-search', label, '--input', source, '--repo', consumer,
+                             '--format', 'text', '--budget-bytes', '2048']) for source in (artifact, xz)]
+            if (searches[0] != searches[1] or len(searches[0].encode('utf-8')) > 2048
+                    or symbol_id not in searches[0] or 'source_hash' not in searches[0]):
+                raise VerificationError('Installed archive search text lost evidence or exceeded budget')
             text_pages = [run([*prefix, 'archive-neighbors', symbol_id, '--input', source,
                               '--repo', consumer, '--direction', 'in', '--kinds', 'contains',
                               '--format', 'text', '--budget-bytes', '4096']) for source in (artifact, xz)]

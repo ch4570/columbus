@@ -101,6 +101,7 @@ def main(argv=None) -> int:
         command = sub.add_parser(name)
         _common(command, subcommand=True)
         if name == 'archive-search':
+            command.add_argument('--format', choices=['json', 'text'], default='json')
             command.add_argument('query')
             command.add_argument('--input', required=True)
             command.add_argument('--limit', type=int, default=5)
@@ -278,9 +279,9 @@ def main(argv=None) -> int:
                 raise ValueError('Selected index belongs to a different repository')
         elif args.command == 'archive-search':
             if args.pretty:
-                raise ValueError('archive-search uses compact JSON to preserve its byte budget')
+                raise ValueError('archive-search rejects pretty output to preserve its byte budget')
             from .archive import search_archive
-            result = search_archive(args.input, args.query, args.limit, args.budget_bytes)
+            result = search_archive(args.input, args.query, args.limit, args.budget_bytes, output_format=args.format)
         elif args.command == 'archive-neighbors':
             if args.pretty:
                 raise ValueError('archive-neighbors rejects pretty output to preserve its byte budget')

@@ -13,6 +13,37 @@ from columbus.index import RepositoryIndex
 
 
 class ArchiveTests(unittest.TestCase):
+    def test_search_text_preserves_ranked_evidence_and_rendered_budget(self):
+        from columbus.presentation import render
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'calls.py').write_text('def target(): pass\n' + ''.join(f'def target_{i}(): pass\n' for i in range(30)), encoding='utf-8')
+            index = RepositoryIndex(root / '.columbus/index.sqlite')
+            index.refresh(root)
+            rendered = []
+            for codec in ['gzip', 'xz']:
+                artifact = root / ('graph.' + codec)
+                archive(index, artifact, compression=codec)
+                expected = search_archive(artifact, 'target', limit=50, budget_bytes=64000)
+                complete = search_archive(artifact, 'target', limit=50, budget_bytes=64000, output_format='text')
+                self.assertEqual(complete, expected)
+                packet = search_archive(artifact, 'target', limit=50, budget_bytes=2048, output_format='text')
+                text = render(packet, 'text', 'archive-search')
+                self.assertLessEqual(len(text.encode()), 2048)
+                lines = text.splitlines()
+                self.assertEqual(json.loads(lines[1][9:]), {k:v for k,v in packet.items() if k!='items'})
+                self.assertEqual([json.loads(line) for line in lines[3:]], packet['items'])
+                self.assertEqual(packet['items'], expected['items'][:len(packet['items'])])
+                self.assertTrue(packet['truncated'])
+                self.assertEqual(packet['items'][0]['name'], 'target')
+                rendered.append(text)
+                with self.assertRaisesRegex(ValueError, 'output_format'):
+                    search_archive(artifact, 'target', output_format='invalid')
+            self.assertEqual(*rendered)
+            text = render(dict(complete, source_policy='bad\n\x1b\u2028data'), 'text', 'archive-search')
+            self.assertNotIn('\x1b', text)
+            self.assertNotIn('\u2028', text)
+
     def test_path_filter_precedes_counts_cursor_and_source_reads(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
