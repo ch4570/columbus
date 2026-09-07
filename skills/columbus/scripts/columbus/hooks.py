@@ -31,11 +31,11 @@ def update(root: Path, db: Path | None = None, *, strict: bool = False) -> dict:
 def install(root: Path, *, apply: bool = False) -> dict:
     """Install only into an unoccupied standard hook path; never chain unknown code."""
     state = git_state(root)
-    if not state['is_git'] or Path(state['worktree_root']) != root:
+    if not state['is_git'] or not Path(state['worktree_root']).samefile(root):
         raise ValueError('Hook installation requires the Git worktree root')
     configured = subprocess.run(['git', '-c', 'core.fsmonitor=false', '-C', str(root),
                                  'config', '--get', 'core.hooksPath'],
-                                capture_output=True, text=True, timeout=10)
+                                capture_output=True, text=True, encoding='utf-8', timeout=10)
     if configured.returncode not in {0, 1}:
         raise ValueError('Cannot inspect core.hooksPath')
     if configured.returncode == 0:

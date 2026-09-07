@@ -33,7 +33,7 @@ class PortableASTTests(unittest.TestCase):
 
     def git(self, *args):
         return subprocess.check_output(['git', '-c', 'core.fsmonitor=false', '-C', str(self.root), *args],
-                                       stderr=subprocess.STDOUT, text=True)
+                                       stderr=subprocess.STDOUT, text=True, encoding='utf-8')
 
     def test_hook_plan_existing_hook_and_custom_hook_path_are_preserved(self):
         target = self.root / '.git/hooks/pre-commit'
