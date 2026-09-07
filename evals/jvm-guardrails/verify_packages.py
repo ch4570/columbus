@@ -1,6 +1,7 @@
 """Compiler-backed Java package/member accessibility fixtures."""
 import argparse
 import hashlib
+import inspect
 from importlib.metadata import version
 import json
 from pathlib import Path
@@ -51,7 +52,7 @@ def main():
                          'passed':refs[0]['resolved']==resolved})
     result={'compiler':subprocess.check_output([str(args.jdk/'javac'),'-version'],text=True).strip(),
             'versions':{n:version(n) for n in ['tree-sitter','tree-sitter-java','tree-sitter-kotlin']},
-            'analyzer_sha256':hashlib.sha256(Path(__file__).resolve().parents[2].joinpath('skills/columbus/scripts/columbus/jvm.py').read_bytes()).hexdigest(),
+            'analyzer_sha256':hashlib.sha256(Path(inspect.getsourcefile(parse_jvm)).read_bytes()).hexdigest(),
             'cases':rows,'passed':all(r['passed'] for r in rows)}
     args.output.parent.mkdir(parents=True,exist_ok=True);args.output.write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps({r['name']:r['passed'] for r in rows}))

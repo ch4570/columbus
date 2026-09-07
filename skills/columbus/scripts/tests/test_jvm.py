@@ -15,6 +15,41 @@ class JVMTests(unittest.TestCase):
         json.dumps(result)  # Cached parse records must round-trip through SQLite JSON.
         return result
 
+    def test_java_type_receiver_static_requirement_is_file_layout_independent(self):
+        for split in [False, True]:
+            for static in [False, True]:
+                with self.subTest(split=split, static=static):
+                    target='class T { '+('static ' if static else '')+'void hit() {} }'
+                    caller='class C { void run() { T.hit(); } }'
+                    files=([self.parsed('T.java',target),self.parsed('C.java',caller)] if split
+                           else [self.parsed('C.java',target+caller)])
+                    resolve_jvm(files)
+                    call, = [r for f in files for r in f['references'] if r['kind']=='calls']
+                    self.assertEqual(static,call['resolved'])
+
+    def test_java_reference_literal_conversions_and_shadowing(self):
+        for parameter,argument,expected in [('String','1',False),('String','"ok"',True),
+                ('Integer','1',True),('Long','1',False),('Object','1',True),('Number','"bad"',False),
+                ('CharSequence','"ok"',True),('Custom','"bad"',False),('Custom','null',True)]:
+            with self.subTest(parameter=parameter,argument=argument):
+                file=self.parsed('C.java','class Custom {} class T { static void hit('+parameter+' x) {} } '
+                                 'class C { void run() { T.hit('+argument+'); } }')
+                resolve_jvm([file])
+                call, = [r for r in file['references'] if r['member']=='hit']
+                self.assertEqual(expected,call['resolved'])
+        for source in [
+                'class hit {} class C { void run() { hit(); } }',
+                'class T { static class hit {} } class C { void run() { T.hit(); } }',
+                'class String {} class T { static void hit(String x) {} void run() { hit("bad"); } }',
+                'class T { static void hit() {} } class C<T> { void run() { T.hit(); } }']:
+            file=self.parsed('C.java',source);resolve_jvm([file])
+            call, = [r for r in file['references'] if r['member']=='hit']
+            self.assertFalse(call['resolved'])
+        file=self.parsed('C.java','class T { void hit() {} } class C { void run(T T) { T.hit(); } }')
+        resolve_jvm([file])
+        call, = [r for r in file['references'] if r['member']=='hit']
+        self.assertTrue(call['resolved'])
+
     def test_java_package_access_checks_members_and_owner_types(self):
         cases = [
             ('public class T { void hit() {} }', 'b', False),

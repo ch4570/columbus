@@ -393,6 +393,8 @@ def parse_jvm(path: str, source: str, module: str = "") -> dict[str, Any]:
 class _Resolver:
     def __init__(self, files):
         self.files = files
+        self.files_by_path = {f["path"]: f for f in files}
+        self.declared_type_names = {s["qualname"] for f in files for s in f["symbols"] if s["kind"] in CLASS_KINDS}
         self.symbols = {s["id"]: s for f in files for s in f["symbols"]}
         self.scopes = {k: v for f in files for k, v in f.get("_scopes", {}).items()}
         self.inherited_owners = {r["source"] for f in files for r in f["references"] if r["kind"] == "inherits"}
@@ -466,6 +468,41 @@ class _Resolver:
             scope_id = scope["parent"]
         return outer
 
+    def literal_reference_compatible(self, target, expected, actual):
+        """Known String/boxing conversions only; None means semantic work remains."""
+        file = self.files_by_path[target["path"]]
+        if self.type_binding(target["id"], expected) is not None:
+            return None
+        declared = expected if "." in expected else ".".join(filter(None, [file["package"], expected]))
+        if declared in self.declared_type_names:
+            return False
+        aliases = [i for i in file["imports"] if i["alias"] == expected]
+        if aliases:
+            if len(aliases) != 1:
+                return None
+            qualified = aliases[0]["qualified"]
+        elif "." in expected:
+            qualified = expected
+        elif any(i["wildcard"] for i in file["imports"]):
+            return None
+        else:
+            qualified = "java.lang." + expected
+        if qualified in self.declared_type_names:
+            return False
+        boxed = {"boolean": "Boolean", "byte": "Byte", "short": "Short", "char": "Character",
+                 "int": "Integer", "long": "Long", "float": "Float", "double": "Double"}
+        if qualified == "java.lang.Object":
+            return True
+        if qualified == "java.lang.Number":
+            return actual in {"byte", "short", "int", "long", "float", "double"}
+        if qualified in {"java.lang.String", "java.lang.CharSequence"}:
+            return actual == "reference_literal"
+        if qualified in {"java.io.Serializable", "java.lang.Comparable"}:
+            return True
+        if qualified in {"java.lang." + name for name in boxed.values()}:
+            return qualified == "java.lang." + boxed.get(actual, "")
+        return None
+
     def java_access_reason(self, file, scope_id, target):
         """Check the declaration and enclosing types without inventing subtype access."""
         declaration = target
@@ -517,11 +554,19 @@ class _Resolver:
             if symbol.get("receiver_type"):
                 return None, "extension receiver dispatch unsupported"
             scope = self.scopes.get(scope.get("parent"), {})
+        type_receiver = False
         if receiver:
             if not receiver.isidentifier() or receiver in {"this", "super"}:
                 return None, "complex, this or super receiver unsupported"
             bindings = self.binding(scope_id, receiver)
-            if bindings is not None:
+            declared_type = (file["language"] == "java" and bindings is not None and len(bindings) == 1
+                             and self.symbols.get(bindings[0].get("target"), {}).get("kind") in CLASS_KINDS)
+            if declared_type:
+                # A lexical class is also recorded in value bindings. Re-enter
+                # type lookup so nearer type parameters still shadow it.
+                types = self.candidates(file, receiver, type_only=True, scope_id=scope_id)
+                type_receiver = True
+            elif bindings is not None:
                 if len(bindings) != 1 or not bindings[0].get("type"):
                     return None, "receiver shadowed, inferred or ambiguous"
                 type_name = bindings[0]["type"]
@@ -534,6 +579,7 @@ class _Resolver:
                 types = self.candidates(file, type_name, type_only=True, scope_id=scope_id)
             else:
                 types = self.candidates(file, receiver, type_only=True, scope_id=scope_id)
+                type_receiver = file["language"] == "java"
             if len(types) != 1:
                 return None, "receiver type external, ambiguous or unknown"
             if types[0]["id"] in self.inherited_owners:
@@ -557,6 +603,10 @@ class _Resolver:
         target = candidates[0]
         if file["language"] == "java" and target.get("language") == "java":
             target_owner = self.owner(target.get("parent_id"))
+            if not ref["constructor"] and target["kind"] in CLASS_KINDS:
+                return None, "Java class invocation requires constructor syntax"
+            if type_receiver and target["kind"] == "method" and "static" not in target.get("modifiers", []):
+                return None, "instance method requires a value receiver, not a type name"
             access_reason = self.java_access_reason(file, scope_id, target)
             if access_reason:
                 return None, access_reason
@@ -584,6 +634,12 @@ class _Resolver:
                 if (expected in _PRIMITIVE_WIDENING and actual is not None
                         and expected not in _PRIMITIVE_WIDENING.get(actual, set())):
                     return None, "literal argument incompatible with primitive parameter"
+                if (actual is not None and actual != "null" and expected not in _PRIMITIVE_WIDENING
+                        and not expected.endswith("[]")):
+                    compatible = self.literal_reference_compatible(target, expected, actual)
+                    if compatible is not True:
+                        return None, ("literal argument incompatible with reference parameter" if compatible is False
+                                      else "literal reference conversion requires semantic analysis")
         if target.get("partial"):
             return None, "target file has syntax recovery"
         return target["id"], "unique syntax candidate; runtime dispatch unverified"
