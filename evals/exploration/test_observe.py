@@ -70,6 +70,20 @@ class ObservationTests(unittest.TestCase):
         self.assertFalse(observe.index_ready({'files':True,'symbols':10,'indexed_bytes':100}))
         self.assertTrue(observe.index_ready({'files':4,'symbols':20,'indexed_bytes':1000}))
 
+    def test_caller_enumeration_hides_answers_and_rejects_wrong_sets_and_sites(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / 'x.py').write_text('def secret_caller():\n    compact(1)\n\ndef other():\n    compact(2)\n')
+            case = {'mode': 'caller-enumeration', 'findings': [
+                {'id': 'secret_caller', 'path': 'x.py', 'marker': 'compact(', 'call_lines': [2]}]}
+            self.assertNotIn('secret_caller', observe.finding_request(case))
+            finding = {'id': 'secret_caller', 'path': 'x.py', 'start_line': 2, 'end_line': 2,
+                       'quote': 'compact(1)', 'explanation': 'direct call'}
+            self.assertTrue(observe.grade({'findings': [finding]}, case, root)['passed'])
+            for findings in ([], [finding, finding], [finding, {**finding, 'id': 'other'}],
+                             [{**finding, 'start_line': 5, 'end_line': 5, 'quote': 'compact(2)'}]):
+                self.assertFalse(observe.grade({'findings': findings}, case, root)['passed'])
+
     def test_custom_catalog_is_frozen_and_tampering_rejected(self):
         with tempfile.TemporaryDirectory() as temporary:
             base = Path(temporary)

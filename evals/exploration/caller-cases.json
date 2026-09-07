@@ -1,0 +1,84 @@
+{
+  "schema": "columbus.exploration-cases/v1",
+  "cases": [
+    {
+      "id": "compact-direct-callers",
+      "mode": "caller-enumeration",
+      "question": "Find every function or method in this frozen package that directly calls the module-level compact function defined in skills/columbus/scripts/columbus/index.py. Resolve explicit imports and nested function ownership; exclude indirect callers and unrelated same-named variables. Explain why each is a direct caller.",
+      "findings": [
+        {
+          "id": "_search_archive",
+          "path": "skills/columbus/scripts/columbus/archive.py",
+          "marker": "compact(",
+          "call_lines": [
+            120,
+            123
+          ]
+        },
+        {
+          "id": "archive.emit",
+          "path": "skills/columbus/scripts/columbus/archive.py",
+          "marker": "compact(",
+          "call_lines": [
+            27
+          ]
+        },
+        {
+          "id": "main",
+          "path": "skills/columbus/scripts/columbus/cli.py",
+          "marker": "compact(",
+          "call_lines": [
+            203,
+            222,
+            228,
+            251,
+            317,
+            330
+          ]
+        },
+        {
+          "id": "RepositoryIndex.neighbors",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "marker": "compact(",
+          "call_lines": [
+            566
+          ]
+        },
+        {
+          "id": "RepositoryIndex.refresh",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "marker": "compact(",
+          "call_lines": [
+            147,
+            219,
+            231,
+            240,
+            243,
+            244,
+            248,
+            251,
+            252,
+            261,
+            287
+          ]
+        },
+        {
+          "id": "byte_size",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "marker": "compact(",
+          "call_lines": [
+            54
+          ]
+        },
+        {
+          "id": "encode_parse",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "marker": "compact(",
+          "call_lines": [
+            45
+          ]
+        }
+      ]
+    }
+  ]
+}

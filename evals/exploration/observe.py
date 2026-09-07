@@ -206,6 +206,17 @@ def live_index_preflight(output: Path, frozen: dict) -> dict:
     return {'passed': True, **{key: current[key] for key in frozen['index']}}
 
 
+def finding_request(case: dict) -> str:
+    if case.get('mode') == 'caller-enumeration':
+        return ('Enumerate every direct lexical caller exactly once. Use its qualified function name '
+                'as the finding ID (Class.method or outer.inner for nested functions). '
+                'Cite an actual call to the target within that caller, not just its declaration. '
+                'Use a single contiguous verbatim quote; do not insert ellipses or stitch excerpts. '
+                'Do not include transitive callers or functions that only mention the name.')
+    return 'Return one finding for each ID:\n' + '\n'.join(
+        '- ' + f['id'] + ': ' + f['description'] for f in case['findings'])
+
+
 def grade(answer: dict, case: dict, snapshot: Path) -> dict:
     findings = answer.get('findings', [])
     results = []
@@ -227,6 +238,8 @@ def grade(answer: dict, case: dict, snapshot: Path) -> dict:
                     reason = 'evidence range exceeds source file'
                 elif expected['marker'] not in cited:
                     reason = 'required mechanism absent from citation'
+                elif expected.get('call_lines') and not any(start <= line <= end for line in expected['call_lines']):
+                    reason = 'citation does not cover a reviewed direct call site'
                 elif not quote or '\n'.join(line.strip() for line in quote.splitlines()) not in '\n'.join(line.strip() for line in cited.splitlines()):
                     reason = 'quote not verbatim within cited lines'
                 elif not f.get('explanation', '').strip():
@@ -234,7 +247,13 @@ def grade(answer: dict, case: dict, snapshot: Path) -> dict:
                 else:
                     valid, reason = True, 'mechanism and code-line quote grounded in bounded source range (indentation ignored)'
         results.append({'id': expected['id'], 'passed': valid, 'reason': reason})
-    return {'passed': all(r['passed'] for r in results), 'findings': results, 'grader_version': 2,
+    if case.get('mode') == 'caller-enumeration':
+        wanted = {f['id'] for f in case['findings']}
+        extras = [f.get('id') for f in findings if f.get('id') not in wanted]
+        results.append({'id': '__exact_caller_set__', 'passed': not extras,
+                        'reason': 'unexpected callers: ' + repr(extras) if extras else 'no extra callers'})
+    return {'passed': all(r['passed'] for r in results), 'findings': results,
+            'grader_version': 'caller-enumeration-1' if case.get('mode') == 'caller-enumeration' else 2,
             'note': 'Checks source locations and quoted mechanisms; explanation semantics are reviewed separately.'}
 
 
@@ -288,10 +307,9 @@ def trial(output: Path, case_id: str, condition: str, *, model: str, effort: str
         index_preflight = live_index_preflight(output, frozen)
     trial_dir = output / 'trials' / f'{case_id}-{condition}-{repeat}'
     trial_dir.mkdir(parents=True, exist_ok=False)
-    requests = '\n'.join('- ' + f['id'] + ': ' + f['description'] for f in case['findings'])
+    requests = finding_request(case)
     prompt = f'''Examine this frozen source repository and answer the following code-navigation question.
 {case['question']}
-Return one finding for each ID:
 {requests}
 Each finding must cite a repository-relative path and a source range of at most 40 lines,
 include a short verbatim source quote within that range, and explain the behavior in your own words.
