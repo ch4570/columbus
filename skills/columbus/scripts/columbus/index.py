@@ -570,6 +570,14 @@ class RepositoryIndex:
             matches = conn.execute("SELECT data FROM symbols WHERE id=?", (query,)).fetchall()
             if not matches:
                 matches = conn.execute("SELECT data FROM symbols WHERE name=? ORDER BY id", (query,)).fetchall()
+            if not matches and "." in query:
+                # Match recorded Python module identity, not a guessed filesystem suffix.
+                candidates = conn.execute("SELECT data FROM symbols WHERE name=? ORDER BY id",
+                                          (query.rsplit(".", 1)[-1],)).fetchall()
+                matches = [row for row in candidates
+                           if (symbol := json.loads(row[0])).get("language", "python") == "python"
+                           and symbol.get("kind") != "module"
+                           and query == symbol.get("module", "") + "." + symbol["qualname"]]
             if len(matches) != 1:
                 raise ValueError("Caller target missing or ambiguous; search and use its complete symbol ID")
             target = json.loads(matches[0][0])

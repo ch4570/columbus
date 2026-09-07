@@ -7,6 +7,26 @@ from columbus.presentation import render
 
 
 class CallerPacketTests(unittest.TestCase):
+    def test_module_qualified_target_uses_recorded_identity(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / 'pkg').mkdir()
+            (root / 'pkg/__init__.py').write_text('def target(): pass\ndef entry(): target()\n')
+            (root / 'other.py').write_text('def target(): pass\n')
+            index = RepositoryIndex(root / '.columbus/index.sqlite')
+            index.refresh(root)
+            exact = index.callers('pkg/__init__.py::target:function')
+            self.assertEqual(index.callers('pkg.target'), exact)
+            with self.assertRaisesRegex(ValueError, 'ambiguous'):
+                index.callers('target', path='pkg/*')
+            with self.assertRaisesRegex(ValueError, 'missing'):
+                index.callers('notpkg.target')
+            # A package and module can have the same import identity; do not guess.
+            (root / 'pkg.py').write_text('def target(): pass\n')
+            index.refresh(root)
+            with self.assertRaisesRegex(ValueError, 'ambiguous'):
+                index.callers('pkg.target')
+
     def test_same_line_calls_keep_distinct_utf8_positions(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
