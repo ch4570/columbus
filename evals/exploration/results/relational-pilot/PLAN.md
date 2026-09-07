@@ -6,4 +6,4 @@ Run one baseline then one Columbus trial, requested model gpt-5.6-sol, effort xh
 
 The automated gate verifies the six source locations and literal quotes. Review the explanation of relationships separately before considering either answer correct. Report actual input/cached/output tokens and graph invocation counts. If the skill chooses no graph tools, report that fact; do not claim the graph caused savings. One pair is a pilot, not general savings evidence, and does not test repeated-session context reuse.
 
-Preparation and 15 harness regression tests passed. Model trials have not run. Remaining work is to execute both conditions, inspect answer semantics, publish measured results, and use the result to guide a repeated-context cohort. The user token-reduction objective remains unproven.
+Execution completed after this plan was committed: see REPORT.md and controlled.json. Both trials are retained, including citation failures and zero graph invocations. The next step is a predeclared repeated-context cohort; this pilot did not establish graph-attributable savings.
