@@ -1,0 +1,61 @@
+{
+  "before": {
+    "archive_bytes": 8785093,
+    "database_bytes": 147763200,
+    "archive_sha256": "1bff0691a6d6b7f6623469b15a855bd0c977b94b72075ef8a97211301321e71c",
+    "uncompressed_bytes_by_record": {
+      "manifest": 743,
+      "file": 901594,
+      "reference": 80677436,
+      "scope": 36399060,
+      "import": 8946742,
+      "node": 25016146,
+      "edge": 27969307,
+      "diagnostic": 187,
+      "end": 134
+    },
+    "records": {
+      "manifest": 1,
+      "file": 5466,
+      "reference": 188003,
+      "scope": 46964,
+      "import": 18268,
+      "node": 46631,
+      "edge": 86592,
+      "diagnostic": 1,
+      "end": 1
+    },
+    "file_manifest_sha256": "b3f2cc7ef4b81bce1ca15cdb1185e069ca82e6c1b26a0ef7314cfa6ffe5d0673"
+  },
+  "after": {
+    "archive_bytes": 10726317,
+    "database_bytes": 153387008,
+    "archive_sha256": "1bd6397d4e8df8e0e9f94eaac41bb777dea40bad6a61e71e203bd40a6bb981d5",
+    "uncompressed_bytes_by_record": {
+      "manifest": 743,
+      "file": 901594,
+      "reference": 95900390,
+      "scope": 36399060,
+      "import": 8946742,
+      "node": 25016146,
+      "edge": 31881328,
+      "diagnostic": 187,
+      "end": 134
+    },
+    "records": {
+      "manifest": 1,
+      "file": 5466,
+      "reference": 188003,
+      "scope": 46964,
+      "import": 18268,
+      "node": 46631,
+      "edge": 86828,
+      "diagnostic": 1,
+      "end": 1
+    },
+    "file_manifest_sha256": "b3f2cc7ef4b81bce1ca15cdb1185e069ca82e6c1b26a0ef7314cfa6ffe5d0673"
+  },
+  "same_indexed_source_hashes": true,
+  "archive_change_percent": 22.09679510507174,
+  "scope": "Storage cost of corrected Python call evidence on matching retained snapshots; no speed or model token claim."
+}
