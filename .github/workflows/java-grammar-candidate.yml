@@ -1,0 +1,56 @@
+name: Experimental Java grammar
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/java-grammar-candidate.yml'
+      - 'evals/java-grammar/**'
+
+permissions:
+  contents: read
+
+jobs:
+  candidate:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python: ['3.11', '3.14']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Fetch pinned upstream grammar
+        run: |
+          git clone https://github.com/tree-sitter/tree-sitter-java.git candidate
+          git -C candidate checkout 6018d681d319aada6d9fe1b8a8d17f9f4d6c758e
+          git -C candidate apply ../evals/java-grammar/dimensions.patch
+      - name: Generate parser and run upstream corpus
+        working-directory: candidate
+        run: |
+          npx --yes tree-sitter-cli@0.27.0 generate --abi 14
+          npx --yes tree-sitter-cli@0.27.0 test
+      - name: Stamp candidate and record source provenance
+        run: python evals/java-grammar/package_candidate.py candidate candidate-results/provenance.json
+      - name: Build candidate wheel
+        run: python -m pip wheel --no-deps --wheel-dir candidate-results candidate/
+      - name: Install production dependencies then candidate wheel
+        run: |
+          python -m pip install -r skills/columbus/scripts/requirements.txt -r skills/columbus/scripts/requirements-mcp.txt
+          python -c "import pathlib, subprocess, sys; wheels = list(pathlib.Path('candidate-results').glob('*.whl')); assert len(wheels) == 1; subprocess.run([sys.executable, '-m', 'pip', 'install', '--no-deps', '--force-reinstall', str(wheels[0])], check=True)"
+      - name: Verify installed candidate and annotation spans
+        run: python evals/java-grammar/verify_candidate.py candidate-results/runtime.json
+      - name: Engine regression tests with candidate
+        working-directory: skills/columbus/scripts
+        run: python -m unittest discover -s tests -v
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: java-candidate-${{ matrix.os }}-py${{ matrix.python }}
+          path: candidate-results/

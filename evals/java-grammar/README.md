@@ -47,3 +47,9 @@ PYTHONPATH=/tmp/java-fixed:skills/columbus/scripts .venv/bin/python evals/java-g
 Omit the local patch step to reproduce the upstream-only candidate. The shell example is POSIX; it does not substitute for supported-platform validation. Generation requires Node and a C build toolchain. The unmodified upstream license is retained in [UPSTREAM-LICENSE](UPSTREAM-LICENSE).
 
 Remaining adoption work: package the patched grammar with a distinct version/provenance, build and test all supported Python/platform combinations, verify upgrade invalidation and clean wheel/ZIP installation, and rerun call-precision evaluation after partial-file suppression changes. The corpus and patch are ready for that work; issue #4 remains open until the shipped implementation meets those gates.
+
+## Candidate wheel matrix
+
+`.github/workflows/java-grammar-candidate.yml` now builds the pinned upstream revision plus the local patch independently on Ubuntu, macOS and Windows with Python 3.11 and 3.14. `package_candidate.py` assigns the experimental local version `0.23.5+columbus.1` and records generated parser, binding, license and patch hashes. `verify_candidate.py` requires that exact installed version, hashes the native binary, and checks valid/invalid annotation parsing and original annotation spans before running the engine suite. Each job retains its wheel and receipts as an artifact. These are experimental artifacts, not release dependencies.
+
+A local macOS arm64 / Python 3.11 wheel build, target installation and fixture verification passed. Hosted results are pending. This matrix does not yet prove clean Columbus bundle adoption, upgrade invalidation, or newly enabled call-edge precision.
