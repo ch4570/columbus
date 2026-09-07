@@ -1,0 +1,10 @@
+{
+  "evals/archive-capfirst/cases.json": "ab74b621f328511b16ab05329b1c0b643e2f1c9271416f89d1151f438bdd9df2",
+  "evals/archive-capfirst/SOURCE-REVIEW.md": "704689177e91d1a27bc449cb6e137494cd89e5f1e72efd1a0e9bcd7dcfcbcfd2",
+  "evals/archive-capfirst/oracle.json": "dd941fc7452669b3197fc6c79ebdb02aa94f6e4b762c5671b68f578dab1c263f",
+  "evals/archive-capfirst/verify_frozen.py": "3a2624267b6d3067ce5ecfb682117fc2c0e8dfedbfd2d35ceccb9fca4387ae56",
+  "evals/archive-capfirst/validate.py": "820cf57034ff94ce19bd9c6863a70364f20c038a0ad24952523436b21faad8c7",
+  "evals/exploration/observe.py": "d0c35c72e5e4747a25575b5def7a8be814ee54c925734db635ed562ea8016d80",
+  "evals/exploration/answer.schema.json": "a5aff654fe899a710cbf44ad63e97f4d4818e314e24c2d71af29c4c4c863ae83",
+  "evals/archive-exploration/preflight.py": "981d18f13648886ac4198caba36339f8d855d4f02bbea1f75ae26d0268326869"
+}

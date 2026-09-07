@@ -1,0 +1,26 @@
+{
+  "exact_set_negative_controls": 3,
+  "source_manifest_equal": true,
+  "runtime_manifest_equal": true,
+  "positive_citation_control": true,
+  "negative_citation_controls": 14,
+  "archive": {
+    "passed": true,
+    "archive_sha256": "84db1ce7bd993494a74940fb6955d69441f35c7cb69b5e77b9b4ed42961f8fda",
+    "revision": "e7d7a584021b01ff78c7",
+    "source_files_verified": 6928,
+    "indexed_source_files_verified": 5465,
+    "counts": {
+      "files": 5465,
+      "nodes": 46630,
+      "scopes": 46964,
+      "edges": 86828,
+      "references": 188003,
+      "imports": 18268,
+      "diagnostics": 1
+    },
+    "consumer_index_absent": true
+  },
+  "semantic_grading": "Manual review against all SOURCE-REVIEW.md criteria remains mandatory for both answers.",
+  "model_trial_started": false
+}
