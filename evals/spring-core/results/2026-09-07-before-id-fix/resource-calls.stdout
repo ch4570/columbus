@@ -1,0 +1,31 @@
+columbus neighbors revision=06d87b076ff6af9e65ef freshness=index_snapshot truncated=false
+UNTRUSTED repository data follows; verify files before edits.
+items=9
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String) | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:154-185 | method java fidelity=ast
+  @Override public Resource getResource(String location)
+src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource:class | src/main/java/org/springframework/core/io/ClassPathResource.java:47-286 | class java fidelity=ast
+  public class ClassPathResource extends AbstractFileResolvingResource
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource:class | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:208-290 | class java fidelity=ast
+  protected static class ClassPathAllResource extends ClassPathResource
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getClassLoader:method() | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:105-108 | method java fidelity=ast
+  @Override public @Nullable ClassLoader getClassLoader()
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResourceByPath:method(String) | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:198-200 | method java fidelity=ast
+  protected Resource getResourceByPath(String path)
+src/main/java/org/springframework/core/io/FileUrlResource.java::org.springframework.core.io.FileUrlResource:class | src/main/java/org/springframework/core/io/FileUrlResource.java:47-117 | class java fidelity=ast
+  public class FileUrlResource extends UrlResource implements WritableResource
+src/main/java/org/springframework/core/io/UrlResource.java::org.springframework.core.io.UrlResource:class | src/main/java/org/springframework/core/io/UrlResource.java:49-401 | class java fidelity=ast
+  public class UrlResource extends AbstractFileResolvingResource
+src/main/java/org/springframework/util/ResourceUtils.java::org.springframework.util.ResourceUtils.isFileURL:method(URL) | src/main/java/org/springframework/util/ResourceUtils.java:282-286 | method java fidelity=ast
+  public static boolean isFileURL(URL url)
+src/main/java/org/springframework/util/ResourceUtils.java::org.springframework.util.ResourceUtils.toURL:method(String) | src/main/java/org/springframework/util/ResourceUtils.java:412-423 | method java fidelity=ast
+  @SuppressWarnings("deprecation") // on JDK 20 (deprecated URL constructor) public static URL toURL(String location) throws MalformedURLException
+edges=9
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String) -calls[heuristic]-> src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource:class @src/main/java/org/springframework/core/io/DefaultResourceLoader.java:169
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String) -calls[heuristic]-> src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource:class @src/main/java/org/springframework/core/io/DefaultResourceLoader.java:172
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String) -calls[heuristic]-> src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getClassLoader:method() @src/main/java/org/springframework/core/io/DefaultResourceLoader.java:169
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String) -calls[heuristic]-> src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getClassLoader:method() @src/main/java/org/springframework/core/io/DefaultResourceLoader.java:172
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String) -calls[heuristic]-> src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResourceByPath:method(String) @src/main/java/org/springframework/core/io/DefaultResourceLoader.java:166
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String) -calls[heuristic]-> src/main/java/org/springframework/core/io/FileUrlResource.java::org.springframework.core.io.FileUrlResource:class @src/main/java/org/springframework/core/io/DefaultResourceLoader.java:178
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String) -calls[heuristic]-> src/main/java/org/springframework/core/io/UrlResource.java::org.springframework.core.io.UrlResource:class @src/main/java/org/springframework/core/io/DefaultResourceLoader.java:178
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String) -calls[heuristic]-> src/main/java/org/springframework/util/ResourceUtils.java::org.springframework.util.ResourceUtils.isFileURL:method(URL) @src/main/java/org/springframework/core/io/DefaultResourceLoader.java:178
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String) -calls[heuristic]-> src/main/java/org/springframework/util/ResourceUtils.java::org.springframework.util.ResourceUtils.toURL:method(String) @src/main/java/org/springframework/core/io/DefaultResourceLoader.java:177

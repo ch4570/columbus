@@ -8,6 +8,7 @@ collected at function scope: shadowing can suppress a valid edge, never justify 
 """
 from __future__ import annotations
 
+from bisect import bisect_right
 from collections import defaultdict
 from pathlib import PurePosixPath
 from typing import Any
@@ -17,9 +18,11 @@ TYPE_NODES = {"user_type", "nullable_type", "function_type", "parenthesized_type
               "integral_type", "floating_point_type", "boolean_type", "array_type",
               "annotated_type", "void_type", "dynamic"}
 CLASS_NODES = {"class_declaration", "interface_declaration", "enum_declaration",
-               "record_declaration", "object_declaration", "companion_object"}
+               "record_declaration", "object_declaration", "companion_object",
+               "annotation_type_declaration"}
 FUNCTION_NODES = {"function_declaration", "method_declaration",
-                  "constructor_declaration", "secondary_constructor"}
+                  "constructor_declaration", "secondary_constructor",
+                  "annotation_type_element_declaration"}
 CLASS_KINDS = {"class", "interface", "enum", "record", "object"}
 CALLABLE_KINDS = {"function", "method", "constructor"}
 
@@ -42,6 +45,9 @@ class _Parser:
     def __init__(self, path, source, module, language):
         self.path, self.source = path, source.encode("utf-8")
         self.module, self.language, self.package = module, language, ""
+        # Avoid native Point properties: tree-sitter 0.26.0 row/column getters
+        # return borrowed references. Byte offsets also preserve UTF-8 spans.
+        self.line_starts = [0] + [i + 1 for i, byte in enumerate(self.source) if byte == 10]
         self.symbols, self.references, self.imports = [], [], []
         self.scopes, self.counts = {}, defaultdict(int)
         self.current = f"{path}::module"
@@ -50,6 +56,9 @@ class _Parser:
             name=PurePosixPath(path).name, qualname=module, kind="module",
             start_line=1, end_line=max(1, len(source.splitlines())),
             signature="", doc="", parent_id=None, language=language))
+
+    def line(self, byte_offset):
+        return bisect_right(self.line_starts, byte_offset)
 
     def text(self, node):
         return self.source[node.start_byte:node.end_byte].decode("utf-8") if node else ""
@@ -98,7 +107,7 @@ class _Parser:
         name = self.text(name_node)
         is_class = node.type in CLASS_NODES
         if is_class:
-            kind = {"interface_declaration": "interface", "enum_declaration": "enum",
+            kind = {"interface_declaration": "interface", "annotation_type_declaration": "interface", "enum_declaration": "enum",
                     "record_declaration": "record", "object_declaration": "object",
                     "companion_object": "object"}.get(node.type, "class")
             words = self.text(node).split("{", 1)[0].split()
@@ -135,8 +144,8 @@ class _Parser:
         previous = node.prev_named_sibling
         doc = self.text(previous) if previous and previous.type in {"block_comment", "multiline_comment"} else ""
         symbol = dict(id=key, path=self.path, module=self.module, name=name,
-            qualname=qualname, kind=kind, start_line=node.start_point.row + 1,
-            end_line=node.end_point.row + 1, signature=signature, doc=doc[:3000],
+            qualname=qualname, kind=kind, start_line=self.line(node.start_byte),
+            end_line=self.line(node.end_byte), signature=signature, doc=doc[:3000],
             parent_id=self.current, language=self.language, package=self.package,
             parameter_types=[p["signature"] for p in params], receiver_type=receiver,
             annotations=self.annotations(node), local=parent["kind"] in CALLABLE_KINDS)
@@ -156,8 +165,8 @@ class _Parser:
                     property_type = self.normalized(_first(item, TYPE_NODES))
                     self.symbols.append(dict(id=f"{key}.{property_name}:property", path=self.path,
                         module=self.module, name=property_name, qualname=f"{qualname}.{property_name}",
-                        kind="property", start_line=item.start_point.row + 1,
-                        end_line=item.end_point.row + 1, signature=self.text(item), doc="",
+                        kind="property", start_line=self.line(item.start_byte),
+                        end_line=self.line(item.end_byte), signature=self.text(item), doc="",
                         parent_id=key, language=self.language, package=self.package,
                         declared_type=property_type, annotations=self.annotations(item)))
         # Primary-constructor parameters participate in conservative class scope.
@@ -179,7 +188,7 @@ class _Parser:
                 name = self.normalized(type_node)
                 self.references.append(dict(source=self.current, scope_id=self.current,
                     kind="inherits", name=name, member=name, receiver="", constructor=False,
-                    path=self.path, line=type_node.start_point.row + 1,
+                    path=self.path, line=self.line(type_node.start_byte),
                     evidence=self.text(clause)[:240], resolved=False))
 
     def property(self, node):
@@ -198,7 +207,7 @@ class _Parser:
                 key = base + (f"#duplicate{self.counts[base]}" if self.counts[base] > 1 else "")
                 self.symbols.append(dict(id=key, path=self.path, module=self.module,
                     name=name, qualname=qualname, kind="property",
-                    start_line=node.start_point.row + 1, end_line=node.end_point.row + 1,
+                    start_line=self.line(node.start_byte), end_line=self.line(node.end_byte),
                     signature=f"{name}: {value_type or '<inferred>'}", doc="",
                     parent_id=self.current, language=self.language, package=self.package,
                     declared_type=value_type, annotations=self.annotations(node)))
@@ -225,7 +234,7 @@ class _Parser:
             self.references.append(dict(source=self.current, scope_id=self.current,
                 kind="calls", name=f"{receiver}.{name}" if receiver else name,
                 member=name, receiver=receiver, constructor=construct,
-                path=self.path, line=node.start_point.row + 1,
+                path=self.path, line=self.line(node.start_byte),
                 evidence=" ".join(self.text(node).split())[:240], resolved=False))
         for child in node.named_children:
             self.visit(child)
@@ -287,7 +296,7 @@ def parse_jvm(path: str, source: str, module: str = "") -> dict[str, Any]:
                 alias_node = next((c for c in node.named_children if c.type == "identifier" and c != full_node), None)
                 parser.imports.append(dict(id=f"{path}::import:{len(parser.imports)+1}",
                     source=parser.current, scope_id=parser.current, path=path,
-                    line=node.start_point.row+1, evidence=parser.text(node),
+                    line=parser.line(node.start_byte), evidence=parser.text(node),
                     module=full_name.rpartition(".")[0], name=full_name.rpartition(".")[2],
                     qualified=full_name, alias=parser.text(alias_node) or full_name.rpartition(".")[2],
                     wildcard=wildcard, static=any(c.type == "static" for c in node.children),
@@ -296,7 +305,7 @@ def parse_jvm(path: str, source: str, module: str = "") -> dict[str, Any]:
                 parser.visit(node)
         if root.has_error:
             errors = [n for n in _walk(root) if n.type == "ERROR" or n.is_missing]
-            diagnostics = [f"Tree-sitter {language} syntax recovery at line {n.start_point.row+1}: {n.type}"
+            diagnostics = [f"Tree-sitter {language} syntax recovery at line {parser.line(n.start_byte)}: {n.type}"
                            for n in errors[:20]] or ["Tree-sitter syntax recovery"]
     except ImportError as exc:
         diagnostics = [f"JVM parser dependency unavailable: {exc.name}; install pinned requirements"]

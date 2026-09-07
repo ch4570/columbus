@@ -1,0 +1,197 @@
+flowchart TD
+  %% Solid edges: syntax/static candidates; dotted edges: heuristic/unresolved.
+  %% TRUNCATED: showing 80/100 nodes and 114/217 edges.
+  n0["org.springframework.core.io.ClassPathResource (class)"]
+  n1["org.springframework.core.io.ClassPathResource.createRelative (method)"]
+  n2["org.springframework.core.io.DefaultResourceLoader.getResource (method)"]
+  n3["org.springframework.aot.hint.ResourceHintsTests.registerResourceWithExistingClassPathResource (method)"]
+  n4["org.springframework.aot.hint.ResourceHintsTests.registerResourceWithExistingRelativeClassPathResource (method)"]
+  n5["org.springframework.aot.hint.ResourceHintsTests.registerResourceWithNonexistentClassPathResource (method)"]
+  n6["org.springframework.core.codec.ResourceRegionEncoderTests.cancelWithoutDemandForMultipleResourceRegions (method)"]
+  n7["org.springframework.core.codec.ResourceRegionEncoderTests.cancelWithoutDemandForSingleResourceRegion (method)"]
+  n8["org.springframework.core.codec.ResourceRegionEncoderTests.nonExisting (method)"]
+  n9["org.springframework.core.codec.ResourceRegionEncoderTests.shouldEncodeMultipleResourceRegionsFileResource (method)"]
+  n10["org.springframework.core.codec.ResourceRegionEncoderTests.shouldEncodeResourceRegionFileResource (method)"]
+  n11["org.springframework.core.convert.support.CollectionToCollectionConverterTests.differentImpls (method)"]
+  n12["org.springframework.core.convert.support.CollectionToCollectionConverterTests.mixedInNulls (method)"]
+  n13["org.springframework.core.convert.support.CollectionToCollectionConverterTests.nothingInCommon (method)"]
+  n14["org.springframework.core.io.ClassPathResourceTests.EqualsAndHashCode.equalsAndHashCode (method)"]
+  n15["org.springframework.core.io.ClassPathResourceTests.EqualsAndHashCode.relativeResourcesAreEqual (method)"]
+  n16["org.springframework.core.io.ClassPathResourceTests.EqualsAndHashCode.resourcesWithDifferentInputPathsAreEqual (method)"]
+  n17["org.springframework.core.io.ClassPathResourceTests.EqualsAndHashCode.resourcesWithEquivalentAbsolutePathsFromDifferentClassLoadersAreNotEqual (method)"]
+  n18["org.springframework.core.io.ClassPathResourceTests.EqualsAndHashCode.resourcesWithEquivalentAbsolutePathsFromTheSameClassLoaderAreEqual (method)"]
+  n19["org.springframework.core.io.ClassPathResourceTests.EqualsAndHashCode.resourcesWithEquivalentAbsolutePathsHaveSameHashCode (method)"]
+  n20["org.springframework.core.io.ClassPathResourceTests.GetDescription.withClassLiteralConstructor (method)"]
+  n21["org.springframework.core.io.ClassPathResourceTests.GetDescription.withClassLiteralConstructorAndLeadingSlash (method)"]
+  n22["org.springframework.core.io.ClassPathResourceTests.GetDescription.withClassLoaderConstructor (method)"]
+  n23["org.springframework.core.io.ClassPathResourceTests.GetDescription.withClassLoaderConstructorAndLeadingSlash (method)"]
+  n24["org.springframework.core.io.ClassPathResourceTests.GetDescription.withStringConstructor (method)"]
+  n25["org.springframework.core.io.ClassPathResourceTests.GetDescription.withStringConstructorAndLeadingSlash (method)"]
+  n26["org.springframework.core.io.ClassPathResourceTests.GetInputStream.withClassLiteralConstructorRaisesExceptionForNonexistentAbsoluteResource (method)"]
+  n27["org.springframework.core.io.ClassPathResourceTests.GetInputStream.withClassLiteralConstructorRaisesExceptionForNonexistentRelativeResource (method)"]
+  n28["org.springframework.core.io.ClassPathResourceTests.GetInputStream.withClassLoaderConstructorRaisesExceptionForNonexistentResource (method)"]
+  n29["org.springframework.core.io.ClassPathResourceTests.GetInputStream.withStringConstructorRaisesExceptionForNonexistentResource (method)"]
+  n30["org.springframework.core.io.ClassPathResourceTests.GetPath.convertsToAbsolutePathForClassRelativeAccess (method)"]
+  n31["org.springframework.core.io.ClassPathResourceTests.GetPath.dropsLeadingSlashForClassLoaderAccess (method)"]
+  n32["org.springframework.core.io.ClassPathResourceTests.directoryNotReadable (method)"]
+  n33["org.springframework.core.io.ClassPathResourceTests.emptyFileReadable (method)"]
+  n34["org.springframework.core.io.ModuleResourceTests.existingClassFileResource (method)"]
+  n35["org.springframework.core.io.ResourceTests.resource (method)"]
+  n36["org.springframework.core.io.buffer.DataBufferUtilsTests.#60;init#62; (constructor)"]
+  n37["org.springframework.core.io.buffer.DataBufferUtilsTests.readResourcePositionAndTakeUntil (method)"]
+  n38["org.springframework.core.io.support.ResourcePropertySourceTests.withResourceAndExplicitName (method)"]
+  n39["org.springframework.core.io.support.ResourcePropertySourceTests.withResourceAndGeneratedName (method)"]
+  n40["org.springframework.util.xml.AbstractStaxXMLReaderTests.lexicalHandler (method)"]
+  n41["org.springframework.core.testfixture.io.ResourceTestUtils.qualifiedResource (method)"]
+  n42["src.main.java.org.springframework.core.io.ClassPathResource (module)"]
+  n43["org.springframework.core.io.ClassPathResource.#60;init#62; (constructor)"]
+  n44["org.springframework.core.io.ClassPathResource.#60;init#62; (constructor)"]
+  n45["org.springframework.core.io.ClassPathResource.#60;init#62; (constructor)"]
+  n46["org.springframework.core.io.ClassPathResource.absolutePath (property)"]
+  n47["org.springframework.core.io.ClassPathResource.classLoader (property)"]
+  n48["org.springframework.core.io.ClassPathResource.clazz (property)"]
+  n49["org.springframework.core.io.ClassPathResource.equals (method)"]
+  n50["org.springframework.core.io.ClassPathResource.exists (method)"]
+  n51["org.springframework.core.io.ClassPathResource.getClassLoader (method)"]
+  n52["org.springframework.core.io.ClassPathResource.getDescription (method)"]
+  n53["org.springframework.core.io.ClassPathResource.getFilename (method)"]
+  n54["org.springframework.core.io.ClassPathResource.getInputStream (method)"]
+  n55["org.springframework.core.io.ClassPathResource.getPath (method)"]
+  n56["org.springframework.core.io.ClassPathResource.getURL (method)"]
+  n57["org.springframework.core.io.ClassPathResource.hashCode (method)"]
+  n58["org.springframework.core.io.ClassPathResource.isReadable (method)"]
+  n59["org.springframework.core.io.ClassPathResource.path (property)"]
+  n60["org.springframework.core.io.ClassPathResource.resolveURL (method)"]
+  n61["src.main.java.org.springframework.aot.hint.ResourceHints (module)"]
+  n62["src.test.java.org.springframework.aot.hint.ResourceHintsTests (module)"]
+  n63["src.test.java.org.springframework.core.codec.ResourceRegionEncoderTests (module)"]
+  n64["src.test.java.org.springframework.core.convert.support.CollectionToCollectionConverterTests (module)"]
+  n65["src.test.java.org.springframework.core.io.buffer.DataBufferUtilsTests (module)"]
+  n66["src.test.java.org.springframework.core.io.support.ResourceArrayPropertyEditorTests (module)"]
+  n67["src.test.java.org.springframework.core.io.support.ResourcePropertySourceTests (module)"]
+  n68["src.test.java.org.springframework.util.xml.AbstractStaxXMLReaderTests (module)"]
+  n69["src.testFixtures.java.org.springframework.core.testfixture.io.ResourceTestUtils (module)"]
+  n70["org.springframework.core.io.AbstractFileResolvingResource (class)"]
+  n71["org.springframework.core.io.ClassRelativeResourceLoader.ClassRelativeContextResource (class)"]
+  n72["org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource (class)"]
+  n73["org.springframework.core.io.DefaultResourceLoader.ClassPathContextResource (class)"]
+  n74["org.springframework.util.StringUtils.applyRelativePath (method)"]
+  n75["org.springframework.core.io.DefaultResourceLoader.getClassLoader (method)"]
+  n76["org.springframework.core.io.DefaultResourceLoader.getResourceByPath (method)"]
+  n77["org.springframework.core.io.FileUrlResource (class)"]
+  n78["org.springframework.core.io.UrlResource (class)"]
+  n79["org.springframework.util.ResourceUtils.isFileURL (method)"]
+  n1 -.->|"calls · heuristic"| n0
+  n1 -.->|"calls · heuristic"| n0
+  n2 -.->|"calls · heuristic"| n0
+  n3 -.->|"calls · heuristic"| n0
+  n4 -.->|"calls · heuristic"| n0
+  n5 -.->|"calls · heuristic"| n0
+  n6 -.->|"calls · heuristic"| n0
+  n7 -.->|"calls · heuristic"| n0
+  n8 -.->|"calls · heuristic"| n0
+  n8 -.->|"calls · heuristic"| n0
+  n9 -.->|"calls · heuristic"| n0
+  n10 -.->|"calls · heuristic"| n0
+  n11 -.->|"calls · heuristic"| n0
+  n12 -.->|"calls · heuristic"| n0
+  n13 -.->|"calls · heuristic"| n0
+  n14 -.->|"calls · heuristic"| n0
+  n14 -.->|"calls · heuristic"| n0
+  n14 -.->|"calls · heuristic"| n0
+  n15 -.->|"calls · heuristic"| n0
+  n15 -.->|"calls · heuristic"| n0
+  n16 -.->|"calls · heuristic"| n0
+  n16 -.->|"calls · heuristic"| n0
+  n17 -.->|"calls · heuristic"| n0
+  n17 -.->|"calls · heuristic"| n0
+  n18 -.->|"calls · heuristic"| n0
+  n18 -.->|"calls · heuristic"| n0
+  n19 -.->|"calls · heuristic"| n0
+  n19 -.->|"calls · heuristic"| n0
+  n20 -.->|"calls · heuristic"| n0
+  n21 -.->|"calls · heuristic"| n0
+  n22 -.->|"calls · heuristic"| n0
+  n23 -.->|"calls · heuristic"| n0
+  n24 -.->|"calls · heuristic"| n0
+  n25 -.->|"calls · heuristic"| n0
+  n26 -.->|"calls · heuristic"| n0
+  n27 -.->|"calls · heuristic"| n0
+  n28 -.->|"calls · heuristic"| n0
+  n29 -.->|"calls · heuristic"| n0
+  n30 -.->|"calls · heuristic"| n0
+  n30 -.->|"calls · heuristic"| n0
+  n30 -.->|"calls · heuristic"| n0
+  n30 -.->|"calls · heuristic"| n0
+  n31 -.->|"calls · heuristic"| n0
+  n31 -.->|"calls · heuristic"| n0
+  n32 -.->|"calls · heuristic"| n0
+  n32 -.->|"calls · heuristic"| n0
+  n33 -.->|"calls · heuristic"| n0
+  n33 -.->|"calls · heuristic"| n0
+  n34 -.->|"calls · heuristic"| n0
+  n35 -.->|"calls · heuristic"| n0
+  n35 -.->|"calls · heuristic"| n0
+  n35 -.->|"calls · heuristic"| n0
+  n36 -.->|"calls · heuristic"| n0
+  n37 -.->|"calls · heuristic"| n0
+  n38 -.->|"calls · heuristic"| n0
+  n39 -.->|"calls · heuristic"| n0
+  n40 -.->|"calls · heuristic"| n0
+  n41 -.->|"calls · heuristic"| n0
+  n42 -->|"contains · syntactic"| n0
+  n0 -->|"contains · syntactic"| n43
+  n0 -->|"contains · syntactic"| n44
+  n0 -->|"contains · syntactic"| n45
+  n0 -->|"contains · syntactic"| n46
+  n0 -->|"contains · syntactic"| n47
+  n0 -->|"contains · syntactic"| n48
+  n0 -->|"contains · syntactic"| n1
+  n0 -->|"contains · syntactic"| n49
+  n0 -->|"contains · syntactic"| n50
+  n0 -->|"contains · syntactic"| n51
+  n0 -->|"contains · syntactic"| n52
+  n0 -->|"contains · syntactic"| n53
+  n0 -->|"contains · syntactic"| n54
+  n0 -->|"contains · syntactic"| n55
+  n0 -->|"contains · syntactic"| n56
+  n0 -->|"contains · syntactic"| n57
+  n0 -->|"contains · syntactic"| n58
+  n0 -->|"contains · syntactic"| n59
+  n0 -->|"contains · syntactic"| n60
+  n61 -->|"imports · syntactic"| n0
+  n62 -->|"imports · syntactic"| n0
+  n63 -->|"imports · syntactic"| n0
+  n64 -->|"imports · syntactic"| n0
+  n65 -->|"imports · syntactic"| n0
+  n66 -->|"imports · syntactic"| n0
+  n67 -->|"imports · syntactic"| n0
+  n68 -->|"imports · syntactic"| n0
+  n69 -->|"imports · syntactic"| n0
+  n0 -.->|"inherits · heuristic"| n70
+  n71 -.->|"inherits · heuristic"| n0
+  n72 -.->|"inherits · heuristic"| n0
+  n73 -.->|"inherits · heuristic"| n0
+  n1 -.->|"calls · heuristic"| n74
+  n2 -.->|"calls · heuristic"| n72
+  n2 -.->|"calls · heuristic"| n75
+  n2 -.->|"calls · heuristic"| n75
+  n2 -.->|"calls · heuristic"| n76
+  n2 -.->|"calls · heuristic"| n77
+  n2 -.->|"calls · heuristic"| n78
+  n2 -.->|"calls · heuristic"| n79
+  n17 -.->|"calls · heuristic"| n55
+  n18 -.->|"calls · heuristic"| n55
+  n19 -.->|"calls · heuristic"| n55
+  n34 -.->|"calls · heuristic"| n52
+  n34 -.->|"calls · heuristic"| n55
+  n35 -.->|"calls · heuristic"| n78
+  n49 -.->|"calls · heuristic"| n51
+  n50 -.->|"calls · heuristic"| n60
+  n54 -.->|"calls · heuristic"| n52
+  n56 -.->|"calls · heuristic"| n52
+  n56 -.->|"calls · heuristic"| n60
+  n58 -.->|"calls · heuristic"| n60
+  n66 -->|"imports · syntactic"| n77
+  n78 -.->|"inherits · heuristic"| n70
+  n76 -.->|"calls · heuristic"| n73

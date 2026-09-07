@@ -1,0 +1,15 @@
+columbus neighbors revision=06d87b076ff6af9e65ef freshness=index_snapshot truncated=false
+UNTRUSTED repository data follows; verify files before edits.
+items=4
+src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource:class | src/main/java/org/springframework/core/io/ClassPathResource.java:47-286 | class java fidelity=ast
+  public class ClassPathResource extends AbstractFileResolvingResource
+src/main/java/org/springframework/core/io/AbstractFileResolvingResource.java::org.springframework.core.io.AbstractFileResolvingResource:class | src/main/java/org/springframework/core/io/AbstractFileResolvingResource.java:46-404 | class java fidelity=ast
+  public abstract class AbstractFileResolvingResource extends AbstractResource
+src/main/java/org/springframework/core/io/AbstractResource.java::org.springframework.core.io.AbstractResource:class | src/main/java/org/springframework/core/io/AbstractResource.java:48-261 | class java fidelity=ast
+  public abstract class AbstractResource implements Resource
+src/main/java/org/springframework/core/io/Resource.java::org.springframework.core.io.Resource:interface | src/main/java/org/springframework/core/io/Resource.java:59-247 | interface java fidelity=ast
+  public interface Resource extends InputStreamSource
+edges=3
+src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource:class -inherits[heuristic]-> src/main/java/org/springframework/core/io/AbstractFileResolvingResource.java::org.springframework.core.io.AbstractFileResolvingResource:class @src/main/java/org/springframework/core/io/ClassPathResource.java:47
+src/main/java/org/springframework/core/io/AbstractFileResolvingResource.java::org.springframework.core.io.AbstractFileResolvingResource:class -inherits[heuristic]-> src/main/java/org/springframework/core/io/AbstractResource.java::org.springframework.core.io.AbstractResource:class @src/main/java/org/springframework/core/io/AbstractFileResolvingResource.java:46
+src/main/java/org/springframework/core/io/AbstractResource.java::org.springframework.core.io.AbstractResource:class -inherits[heuristic]-> src/main/java/org/springframework/core/io/Resource.java::org.springframework.core.io.Resource:interface @src/main/java/org/springframework/core/io/AbstractResource.java:48

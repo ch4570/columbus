@@ -1,0 +1,12 @@
+Fatal Python error: Segmentation fault
+
+Current thread 0x00000001ee09e180 (most recent call first):
+  File "/tmp/columbus-baseline-jvm.py", line 134 in declaration
+  File "/tmp/columbus-baseline-jvm.py", line 235 in visit
+  File "/tmp/columbus-baseline-jvm.py", line 261 in visit
+  File "/tmp/columbus-baseline-jvm.py", line 166 in declaration
+  File "/tmp/columbus-baseline-jvm.py", line 235 in visit
+  File "/tmp/columbus-baseline-jvm.py", line 296 in parse_jvm
+  File "<stdin>", line 5 in <module>
+
+Extension modules: tree_sitter_java._binding (total: 1)

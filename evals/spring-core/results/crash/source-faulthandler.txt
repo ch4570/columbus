@@ -1,0 +1,18 @@
+/tmp/columbus-spring-framework/spring-core/src/jmh/java/org/springframework/core/codec/StringDecoderBenchmark.java
+/tmp/columbus-spring-framework/spring-core/src/jmh/java/org/springframework/core/convert/support/GenericConversionServiceBenchmark.java
+/tmp/columbus-spring-framework/spring-core/src/jmh/java/org/springframework/core/env/CompositePropertySourceBenchmark.java
+/tmp/columbus-spring-framework/spring-core/src/jmh/java/org/springframework/util/ConcurrentLruCacheBenchmark.java
+/tmp/columbus-spring-framework/spring-core/src/jmh/java/org/springframework/util/ConcurrentReferenceHashMapBenchmark.java
+/tmp/columbus-spring-framework/spring-core/src/jmh/java/org/springframework/util/ReflectionUtilsUniqueDeclaredMethodsBenchmark.java
+/tmp/columbus-spring-framework/spring-core/src/jmh/java/org/springframework/util/StringUtilsBenchmark.java
+/tmp/columbus-spring-framework/spring-core/src/main/java/org/springframework/aot/AotDetector.java
+/tmp/columbus-spring-framework/spring-core/src/main/java/org/springframework/aot/generate/AccessControl.java
+Fatal Python error: Bus error
+
+Current thread 0x00000001ee09e180 (most recent call first):
+  File "/Users/rex/Desktop/columbus/skills/columbus/scripts/columbus/jvm.py", line 137 in declaration
+  File "/Users/rex/Desktop/columbus/skills/columbus/scripts/columbus/jvm.py", line 235 in visit
+  File "/Users/rex/Desktop/columbus/skills/columbus/scripts/columbus/jvm.py", line 296 in parse_jvm
+  File "<stdin>", line 5 in <module>
+
+Extension modules: tree_sitter_java._binding (total: 1)

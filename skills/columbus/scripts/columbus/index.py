@@ -366,6 +366,18 @@ class RepositoryIndex:
         expression = " OR ".join('"' + word.replace('"', '""') + '"' for word in words)
         where, values = self._filter_sql(path, language)
         with self._read() as conn:
+            # IDs copied from search must not be reinterpreted as path keywords.
+            # Keep filters authoritative, even for an existing exact ID.
+            identified = conn.execute("SELECT s.data FROM symbols s WHERE s.id=? AND " + where,
+                                      [query, *values]).fetchone()
+            if identified:
+                symbol = json.loads(identified["data"])
+                symbol["doc"] = symbol.get("doc", "")[:400]
+                symbol["signature"] = symbol.get("signature", "")[:800]
+                symbol["retrieval"] = {"bm25": 0, "exact_name": False, "exact_id": True}
+                meta = self._meta(conn)
+                return {"query": query, "revision": meta["revision"], "freshness": "index_snapshot",
+                        "hits": [symbol], "candidate_limit": 150, "truncated": False}
             rows = conn.execute("""SELECT s.data, bm25(symbol_fts,0,8,3,1) AS rank
                 FROM symbol_fts JOIN symbols s ON s.id=symbol_fts.id
                 WHERE symbol_fts MATCH ? AND """ + where + " ORDER BY rank LIMIT 150", [expression, *values]).fetchall()
@@ -404,7 +416,7 @@ class RepositoryIndex:
         lines = decode_source(symbol["path"], data, config=meta.get("inventory", {}).get("language_config"),
                               language=symbol.get("language")).splitlines()
         start = symbol["start_line"]
-        exact_name = query and query.strip().lower() in {symbol.get('name', '').lower(), symbol.get('qualname', '').lower()}
+        exact_name = query and query.strip().lower() in {symbol.get('id', '').lower(), symbol.get('name', '').lower(), symbol.get('qualname', '').lower()}
         if query and not exact_name and (symbol["kind"] == "module" or symbol['end_line'] - start + 1 > max_lines):
             words = terms(query)
             # Rank only this declaration. A stronger match in a sibling must
