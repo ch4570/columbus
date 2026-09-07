@@ -8,7 +8,7 @@ Bootstrap now fingerprints local wheel filenames and bytes, considers changed ca
 
 All 50 root tests pass, including replacement of same-name candidate bytes, failed-install retry, and unchanged-run behavior. The initial real-package probe incorrectly parsed mixed pip/installer stdout as one JSON value; after collecting runtime state separately, the full three-step probe passed. An initial test invocation used unsupported system Python; the reported passing suite uses the supported project environment.
 
-Reproduce: `.venv/bin/python evals/java-grammar/verify_bootstrap_upgrade.py WHEELHOUSE OUTPUT.json`. The experimental grammar workflow now runs this probe in all six platform/Python combinations; hosted results for this change are pending.
+Reproduce: `.venv/bin/python evals/java-grammar/verify_bootstrap_upgrade.py WHEELHOUSE OUTPUT.json`. The experimental grammar workflow now runs this probe in all six platform/Python combinations; hosted results for this change are recorded below.
 
 This fixes explicit wheelhouse adoption in the source/ZIP bootstrap. It does not publish the candidate, make it a default public dependency, implement candidate switching in an already-ready standalone get-columbus.py version, or guarantee downgrade when the wheelhouse is removed. Default release integration and broader relationship precision remain open, as does the actual-token savings goal.
 
