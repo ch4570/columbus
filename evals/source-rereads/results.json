@@ -1,0 +1,685 @@
+{
+  "scope": "Verified bounded django/ source reads only; excludes rg, help, skill text, metadata and model tokens.",
+  "conditions": {
+    "baseline": {
+      "verified_ranges": 26,
+      "unique_lines": 1182,
+      "source_bytes_returned": 44437,
+      "repeated_source_bytes": 3823,
+      "unverified_ranges": [],
+      "reads": [
+        {
+          "command_id": "item_3",
+          "path": "django/test/testcases.py",
+          "start": 1,
+          "end": 45,
+          "mode": "sed",
+          "bytes": 1465,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_3",
+          "path": "django/test/client.py",
+          "start": 1,
+          "end": 45,
+          "mode": "sed",
+          "bytes": 1500,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_3",
+          "path": "django/contrib/admin/views/main.py",
+          "start": 1,
+          "end": 50,
+          "mode": "sed",
+          "bytes": 1380,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_3",
+          "path": "django/contrib/admin/widgets.py",
+          "start": 1,
+          "end": 30,
+          "mode": "sed",
+          "bytes": 850,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_3",
+          "path": "django/contrib/admin/options.py",
+          "start": 45,
+          "end": 70,
+          "mode": "sed",
+          "bytes": 924,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_3",
+          "path": "django/contrib/admin/templatetags/admin_urls.py",
+          "start": 1,
+          "end": 15,
+          "mode": "sed",
+          "bytes": 398,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_4",
+          "path": "django/test/client.py",
+          "start": 330,
+          "end": 420,
+          "mode": "nl",
+          "bytes": 2713,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_4",
+          "path": "django/test/client.py",
+          "start": 610,
+          "end": 680,
+          "mode": "nl",
+          "bytes": 2126,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_4",
+          "path": "django/test/client.py",
+          "start": 710,
+          "end": 780,
+          "mode": "nl",
+          "bytes": 2697,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_5",
+          "path": "django/test/client.py",
+          "start": 780,
+          "end": 815,
+          "mode": "nl",
+          "bytes": 1150,
+          "repeated_bytes": 44,
+          "repeated_lines": 1
+        },
+        {
+          "command_id": "item_5",
+          "path": "django/contrib/admin/views/main.py",
+          "start": 270,
+          "end": 320,
+          "mode": "nl",
+          "bytes": 2207,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_5",
+          "path": "django/contrib/admin/widgets.py",
+          "start": 125,
+          "end": 175,
+          "mode": "nl",
+          "bytes": 1785,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_5",
+          "path": "django/contrib/admin/options.py",
+          "start": 1225,
+          "end": 1280,
+          "mode": "nl",
+          "bytes": 2208,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_5",
+          "path": "django/contrib/admin/templatetags/admin_urls.py",
+          "start": 35,
+          "end": 70,
+          "mode": "nl",
+          "bytes": 1120,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_6",
+          "path": "django/contrib/admin/templatetags/admin_urls.py",
+          "start": 15,
+          "end": 70,
+          "mode": "nl",
+          "bytes": 1641,
+          "repeated_bytes": 1121,
+          "repeated_lines": 37
+        },
+        {
+          "command_id": "item_6",
+          "path": "django/contrib/admin/widgets.py",
+          "start": 90,
+          "end": 132,
+          "mode": "nl",
+          "bytes": 1330,
+          "repeated_bytes": 171,
+          "repeated_lines": 8
+        },
+        {
+          "command_id": "item_7",
+          "path": "django/contrib/admin/widgets.py",
+          "start": 175,
+          "end": 215,
+          "mode": "nl",
+          "bytes": 1288,
+          "repeated_bytes": 14,
+          "repeated_lines": 1
+        },
+        {
+          "command_id": "item_7",
+          "path": "django/contrib/admin/views/main.py",
+          "start": 60,
+          "end": 185,
+          "mode": "nl",
+          "bytes": 4732,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_8",
+          "path": "django/contrib/admin/widgets.py",
+          "start": 215,
+          "end": 240,
+          "mode": "nl",
+          "bytes": 863,
+          "repeated_bytes": 1,
+          "repeated_lines": 1
+        },
+        {
+          "command_id": "item_8",
+          "path": "django/utils/http.py",
+          "start": 1,
+          "end": 75,
+          "mode": "nl",
+          "bytes": 2625,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_9",
+          "path": "django/utils/http.py",
+          "start": 44,
+          "end": 90,
+          "mode": "nl",
+          "bytes": 1783,
+          "repeated_bytes": 1248,
+          "repeated_lines": 32
+        },
+        {
+          "command_id": "item_10",
+          "path": "django/test/client.py",
+          "start": 401,
+          "end": 475,
+          "mode": "nl",
+          "bytes": 2877,
+          "repeated_bytes": 752,
+          "repeated_lines": 20
+        },
+        {
+          "command_id": "item_11",
+          "path": "django/test/client.py",
+          "start": 674,
+          "end": 718,
+          "mode": "nl",
+          "bytes": 1454,
+          "repeated_bytes": 472,
+          "repeated_lines": 16
+        },
+        {
+          "command_id": "item_11",
+          "path": "django/test/client.py",
+          "start": 1020,
+          "end": 1055,
+          "mode": "nl",
+          "bytes": 1502,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_11",
+          "path": "django/test/client.py",
+          "start": 1390,
+          "end": 1420,
+          "mode": "nl",
+          "bytes": 950,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_12",
+          "path": "django/contrib/admin/options.py",
+          "start": 1398,
+          "end": 1420,
+          "mode": "nl",
+          "bytes": 869,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        }
+      ],
+      "events_sha256": "f912c50e90a1f5cd06aee15f0d360878b7a0bf8af356de263e2ffa0d3e565fe3"
+    },
+    "columbus": {
+      "verified_ranges": 40,
+      "unique_lines": 873,
+      "source_bytes_returned": 40071,
+      "repeated_source_bytes": 10428,
+      "unverified_ranges": [],
+      "reads": [
+        {
+          "command_id": "item_6",
+          "path": "django/contrib/admin/options.py",
+          "start": 1263,
+          "end": 1268,
+          "mode": "archive-context",
+          "bytes": 223,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_6",
+          "path": "django/contrib/admin/templatetags/admin_urls.py",
+          "start": 65,
+          "end": 70,
+          "mode": "archive-context",
+          "bytes": 152,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_6",
+          "path": "django/contrib/admin/views/main.py",
+          "start": 302,
+          "end": 306,
+          "mode": "archive-context",
+          "bytes": 163,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_6",
+          "path": "django/contrib/admin/widgets.py",
+          "start": 158,
+          "end": 166,
+          "mode": "archive-context",
+          "bytes": 342,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_6",
+          "path": "django/test/client.py",
+          "start": 762,
+          "end": 770,
+          "mode": "archive-context",
+          "bytes": 371,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_6",
+          "path": "django/test/client.py",
+          "start": 395,
+          "end": 399,
+          "mode": "archive-context",
+          "bytes": 226,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_6",
+          "path": "django/test/client.py",
+          "start": 661,
+          "end": 669,
+          "mode": "archive-context",
+          "bytes": 410,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_9",
+          "path": "django/test/testcases.py",
+          "start": 1,
+          "end": 42,
+          "mode": "sed",
+          "bytes": 1324,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_9",
+          "path": "django/test/client.py",
+          "start": 1,
+          "end": 48,
+          "mode": "sed",
+          "bytes": 1606,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_9",
+          "path": "django/contrib/admin/options.py",
+          "start": 1,
+          "end": 80,
+          "mode": "sed",
+          "bytes": 2513,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_9",
+          "path": "django/contrib/admin/views/main.py",
+          "start": 1,
+          "end": 46,
+          "mode": "sed",
+          "bytes": 1330,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_9",
+          "path": "django/contrib/admin/widgets.py",
+          "start": 1,
+          "end": 24,
+          "mode": "sed",
+          "bytes": 720,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_9",
+          "path": "django/contrib/admin/templatetags/admin_urls.py",
+          "start": 1,
+          "end": 20,
+          "mode": "sed",
+          "bytes": 468,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_10",
+          "path": "django/contrib/admin/options.py",
+          "start": 1246,
+          "end": 1270,
+          "mode": "sed",
+          "bytes": 932,
+          "repeated_bytes": 223,
+          "repeated_lines": 6
+        },
+        {
+          "command_id": "item_10",
+          "path": "django/contrib/admin/templatetags/admin_urls.py",
+          "start": 22,
+          "end": 70,
+          "mode": "sed",
+          "bytes": 1529,
+          "repeated_bytes": 152,
+          "repeated_lines": 6
+        },
+        {
+          "command_id": "item_10",
+          "path": "django/contrib/admin/views/main.py",
+          "start": 286,
+          "end": 308,
+          "mode": "sed",
+          "bytes": 704,
+          "repeated_bytes": 163,
+          "repeated_lines": 5
+        },
+        {
+          "command_id": "item_10",
+          "path": "django/contrib/admin/widgets.py",
+          "start": 140,
+          "end": 181,
+          "mode": "sed",
+          "bytes": 1602,
+          "repeated_bytes": 342,
+          "repeated_lines": 9
+        },
+        {
+          "command_id": "item_10",
+          "path": "django/test/client.py",
+          "start": 376,
+          "end": 404,
+          "mode": "sed",
+          "bytes": 867,
+          "repeated_bytes": 226,
+          "repeated_lines": 5
+        },
+        {
+          "command_id": "item_10",
+          "path": "django/test/client.py",
+          "start": 626,
+          "end": 674,
+          "mode": "sed",
+          "bytes": 1575,
+          "repeated_bytes": 410,
+          "repeated_lines": 9
+        },
+        {
+          "command_id": "item_10",
+          "path": "django/test/client.py",
+          "start": 726,
+          "end": 786,
+          "mode": "sed",
+          "bytes": 2157,
+          "repeated_bytes": 371,
+          "repeated_lines": 9
+        },
+        {
+          "command_id": "item_11",
+          "path": "django/contrib/admin/views/main.py",
+          "start": 110,
+          "end": 155,
+          "mode": "sed",
+          "bytes": 2050,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_11",
+          "path": "django/contrib/admin/widgets.py",
+          "start": 178,
+          "end": 220,
+          "mode": "sed",
+          "bytes": 1400,
+          "repeated_bytes": 112,
+          "repeated_lines": 4
+        },
+        {
+          "command_id": "item_12",
+          "path": "django/contrib/admin/widgets.py",
+          "start": 220,
+          "end": 240,
+          "mode": "sed",
+          "bytes": 689,
+          "repeated_bytes": 8,
+          "repeated_lines": 1
+        },
+        {
+          "command_id": "item_14",
+          "path": "django/contrib/admin/options.py",
+          "start": 1400,
+          "end": 1425,
+          "mode": "sed",
+          "bytes": 1055,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_15",
+          "path": "django/contrib/admin/widgets.py",
+          "start": 255,
+          "end": 285,
+          "mode": "sed",
+          "bytes": 1361,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_16",
+          "path": "django/contrib/admin/widgets.py",
+          "start": 100,
+          "end": 132,
+          "mode": "sed",
+          "bytes": 909,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_19",
+          "path": "django/utils/http.py",
+          "start": 44,
+          "end": 84,
+          "mode": "sed",
+          "bytes": 1563,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_20",
+          "path": "django/contrib/admin/options.py",
+          "start": 1250,
+          "end": 1268,
+          "mode": "nl",
+          "bytes": 748,
+          "repeated_bytes": 748,
+          "repeated_lines": 19
+        },
+        {
+          "command_id": "item_20",
+          "path": "django/contrib/admin/templatetags/admin_urls.py",
+          "start": 31,
+          "end": 70,
+          "mode": "nl",
+          "bytes": 1218,
+          "repeated_bytes": 1218,
+          "repeated_lines": 40
+        },
+        {
+          "command_id": "item_20",
+          "path": "django/contrib/admin/views/main.py",
+          "start": 290,
+          "end": 306,
+          "mode": "nl",
+          "bytes": 559,
+          "repeated_bytes": 559,
+          "repeated_lines": 17
+        },
+        {
+          "command_id": "item_20",
+          "path": "django/contrib/admin/widgets.py",
+          "start": 146,
+          "end": 166,
+          "mode": "nl",
+          "bytes": 854,
+          "repeated_bytes": 854,
+          "repeated_lines": 21
+        },
+        {
+          "command_id": "item_20",
+          "path": "django/test/client.py",
+          "start": 384,
+          "end": 399,
+          "mode": "nl",
+          "bytes": 497,
+          "repeated_bytes": 497,
+          "repeated_lines": 16
+        },
+        {
+          "command_id": "item_20",
+          "path": "django/test/client.py",
+          "start": 633,
+          "end": 671,
+          "mode": "nl",
+          "bytes": 1377,
+          "repeated_bytes": 1377,
+          "repeated_lines": 39
+        },
+        {
+          "command_id": "item_20",
+          "path": "django/test/client.py",
+          "start": 733,
+          "end": 770,
+          "mode": "nl",
+          "bytes": 1321,
+          "repeated_bytes": 1321,
+          "repeated_lines": 38
+        },
+        {
+          "command_id": "item_21",
+          "path": "django/test/client.py",
+          "start": 765,
+          "end": 774,
+          "mode": "nl",
+          "bytes": 440,
+          "repeated_bytes": 440,
+          "repeated_lines": 10
+        },
+        {
+          "command_id": "item_21",
+          "path": "django/contrib/admin/templatetags/admin_urls.py",
+          "start": 22,
+          "end": 35,
+          "mode": "nl",
+          "bytes": 472,
+          "repeated_bytes": 472,
+          "repeated_lines": 14
+        },
+        {
+          "command_id": "item_21",
+          "path": "django/contrib/admin/widgets.py",
+          "start": 180,
+          "end": 192,
+          "mode": "nl",
+          "bytes": 475,
+          "repeated_bytes": 475,
+          "repeated_lines": 13
+        },
+        {
+          "command_id": "item_21",
+          "path": "django/contrib/admin/widgets.py",
+          "start": 226,
+          "end": 234,
+          "mode": "nl",
+          "bytes": 351,
+          "repeated_bytes": 351,
+          "repeated_lines": 9
+        },
+        {
+          "command_id": "item_22",
+          "path": "django/http/request.py",
+          "start": 698,
+          "end": 730,
+          "mode": "sed",
+          "bytes": 903,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_23",
+          "path": "django/test/client.py",
+          "start": 400,
+          "end": 470,
+          "mode": "sed",
+          "bytes": 2615,
+          "repeated_bytes": 109,
+          "repeated_lines": 5
+        }
+      ],
+      "events_sha256": "4a812db6fa4be083cee1764adcd1a7402eb32dcaab655895476eae2ab461ed59"
+    }
+  }
+}
