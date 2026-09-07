@@ -37,3 +37,5 @@ Git discovery respects untracked ignores, and excludes symlinks, known secret fi
 - Is detected language distinguished from AST/heuristic/text fidelity?
 - Is custom configuration declarative, bounded, and fingerprinted?
 - Are unknown text, binary exclusions, and unresolved relationships visible?
+
+Python call evidence now stores a JSON object inside the edge's text `evidence` field: `text`, `callee_span` (`lineno`, `col_offset`, `end_lineno`, `end_col_offset`) and `column_unit: utf8_bytes`. The span identifies the callee expression, not the entire argument list. Distinct positions on the same line remain distinct edges and contribute separately to `call_sites`. Existing archives can still contain older plain-text evidence and collapsed sites; rebuilding the index with the current analyzer is necessary to recover them. This representation does not prove runtime invocation counts.

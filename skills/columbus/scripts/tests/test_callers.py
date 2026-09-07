@@ -7,6 +7,24 @@ from columbus.presentation import render
 
 
 class CallerPacketTests(unittest.TestCase):
+    def test_same_line_calls_keep_distinct_utf8_positions(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / 'demo.py').write_text('def target(value): return value\ndef caller(): é = target(1); return target(2)\n')
+            index = RepositoryIndex(root / '.columbus/index.sqlite')
+            index.refresh(root)
+            item, = index.callers('target')['items']
+            self.assertEqual(item['call_sites'], 2)
+            edges = index.neighbors('target', direction='in', kinds=['calls'])['edges']
+            self.assertEqual(len(edges), 2)
+            spans = [json.loads(edge['evidence']) for edge in edges]
+            self.assertEqual(len({span['callee_span']['col_offset'] for span in spans}), 2)
+            line = (root / 'demo.py').read_text().splitlines()[1].encode()
+            for evidence in spans:
+                span = evidence['callee_span']
+                self.assertEqual(line[span['col_offset']:span['end_col_offset']], b'target')
+                self.assertEqual(evidence['column_unit'], 'utf8_bytes')
+
     def test_filtered_context_counts_and_hash_checks(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

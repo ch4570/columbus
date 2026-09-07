@@ -8,6 +8,7 @@ resolved. Unresolved references remain available in the returned parse records.
 from __future__ import annotations
 
 import ast
+import json
 import re
 from pathlib import PurePosixPath
 from typing import Any
@@ -121,6 +122,8 @@ class _Parser(ast.NodeVisitor):
             "source": source or self.scopes[self.current]["owner"],
             "scope_id": self.current, "kind": kind, "name": _dotted(node),
             "path": self.path, "line": getattr(node, "lineno", 1),
+            "callee_span": {key: getattr(node, key, None) for key in
+                            ("lineno", "col_offset", "end_lineno", "end_col_offset")},
             "evidence": self._evidence(node), "resolved": False,
         })
 
@@ -613,9 +616,14 @@ def resolve_files(parsed_files: list[dict[str, Any]]) -> list[dict[str, Any]]:
             edges.append({
                 "source": reference["source"], "target": target,
                 "kind": reference["kind"], "confidence": confidence,
-                "evidence": reference["evidence"], "path": file["path"],
+                "evidence": (json.dumps({"text": reference["evidence"],
+                    "callee_span": reference["callee_span"], "column_unit": "utf8_bytes"},
+                    ensure_ascii=False, separators=(",", ":"))
+                    if reference["kind"] == "calls" and reference.get("callee_span") else reference["evidence"]),
+                "path": file["path"],
                 "line": reference["line"],
             })
     # Preserve distinct call sites, but avoid duplicate edges from identical input.
-    unique = {tuple(edge[k] for k in ("source", "target", "kind", "path", "line")): edge for edge in edges}
+    unique = {tuple(edge[k] for k in ("source", "target", "kind", "path", "line"))
+              + (edge["evidence"] if edge["kind"] == "calls" else "",): edge for edge in edges}
     return sorted(unique.values(), key=lambda e: (e["path"], e["line"], e["kind"], e["source"], e["target"]))
