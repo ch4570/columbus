@@ -1,6 +1,6 @@
 # Issue #4: annotated Java varargs grammar evaluation
 
-2026-09-08 KST. A grammar fix is implemented as a reproducible patch and verified locally. It is **experimental**, not the shipped runtime grammar. Platform/release integration remains unfinished.
+2026-09-08 KST. A grammar fix is implemented as a reproducible patch and verified as experimental wheels on six hosted platform/Python combinations. It is **experimental**, not the shipped runtime grammar. Platform/release integration remains unfinished.
 
 The pinned tree-sitter-java 0.23.5 rejects legal annotations before `...` and accepts the invalid after-ellipsis placement. [Upstream issue #205](https://github.com/tree-sitter/tree-sitter-java/issues/205) and [PR #206](https://github.com/tree-sitter/tree-sitter-java/pull/206) describe the defect. PR #206 remains open at the time of this observation; its commit `6018d681d319aada6d9fe1b8a8d17f9f4d6c758e` changes grammar.js but does not regenerate parser.c. Installing that Git revision without regeneration therefore does not apply the grammar change.
 
@@ -24,7 +24,7 @@ Validation on macOS arm64 / Python 3.11:
 - Columbus engine: 185 tests passed with an explicit assertion that the patched grammar module was loaded.
 - Local fixture spans, parameter types, corpus hashes and Python compilation passed.
 
-Raw evidence: [summary](results/summary.json), [compiler output](results/compiler.json), [pinned parser](results/pinned.json), [upstream candidate](results/candidate.json), [local fix](results/fixed.json), [upstream suite](results/upstream-corpus.txt), [engine suite](results/engine.txt). Binary hashes distinguish the experimental builds, which retain upstream's package version in this evaluation. Runtime dependency pins and installed production environments were not changed. No Windows/Linux or Python 3.14 validation is claimed.
+Raw evidence: [summary](results/summary.json), [compiler output](results/compiler.json), [pinned parser](results/pinned.json), [upstream candidate](results/candidate.json), [local fix](results/fixed.json), [upstream suite](results/upstream-corpus.txt), [engine suite](results/engine.txt). Binary hashes distinguish the experimental builds, which retain upstream's package version in this evaluation. Runtime dependency pins and installed production environments were not changed. The original observations above were local; the later candidate wheel matrix below adds Windows/Linux and Python 3.14 evidence.
 
 ## Reproduce
 
@@ -46,10 +46,12 @@ PYTHONPATH=/tmp/java-fixed:skills/columbus/scripts .venv/bin/python evals/java-g
 
 Omit the local patch step to reproduce the upstream-only candidate. The shell example is POSIX; it does not substitute for supported-platform validation. Generation requires Node and a C build toolchain. The unmodified upstream license is retained in [UPSTREAM-LICENSE](UPSTREAM-LICENSE).
 
-Remaining adoption work: package the patched grammar with a distinct version/provenance, build and test all supported Python/platform combinations, verify upgrade invalidation and clean wheel/ZIP installation, and rerun call-precision evaluation after partial-file suppression changes. The corpus and patch are ready for that work; issue #4 remains open until the shipped implementation meets those gates.
+Remaining adoption work: integrate the candidate into the shipped dependency and clean Columbus wheel/ZIP installation path, extend the local upgrade probe to the hosted release path, and rerun call-precision evaluation after partial-file suppression changes. The corpus and patch are ready for that work; issue #4 remains open until the shipped implementation meets those gates.
 
 ## Candidate wheel matrix
 
 `.github/workflows/java-grammar-candidate.yml` now builds the pinned upstream revision plus the local patch independently on Ubuntu, macOS and Windows with Python 3.11 and 3.14. `package_candidate.py` assigns the experimental local version `0.23.5+columbus.1` and records generated parser, binding, license and patch hashes. `verify_candidate.py` requires that exact installed version, hashes the native binary, and checks valid/invalid annotation parsing and original annotation spans before running the engine suite. Each job retains its wheel and receipts as an artifact. These are experimental artifacts, not release dependencies.
 
-A local macOS arm64 / Python 3.11 wheel build, target installation and fixture verification passed. Hosted results are pending. This matrix does not yet prove clean Columbus bundle adoption, upgrade invalidation, or newly enabled call-edge precision.
+A local macOS arm64 / Python 3.11 wheel build, target installation and fixture verification passed. Hosted run [34138003324](https://github.com/ch4570/columbus/actions/runs/34138003324), at commit `56350ec`, passed **all six combinations**. Each completed upstream grammar checks and the current engine regression suite after installing the candidate wheel. All six generated `src/parser.c` hashes match. [Run receipt](results/platform-matrix/final.json) and [wheel/source/runtime hashes](results/platform-matrix/artifacts.json) retain the evidence. The initial run failed to fetch an unmerged commit through ordinary clone; explicitly fetching its pinned SHA fixed that setup failure, preserved in [initial receipt](results/platform-matrix/initial.json). This matrix does not yet prove clean Columbus bundle adoption, upgrade invalidation, or newly enabled call-edge precision.
+
+The local upgrade probe (`verify_upgrade.py`) uses fresh processes and an actual separately installed candidate package. With unchanged source, pinned → candidate → warm candidate → pinned yielded parsed-file counts **1 → 1 → 0 → 1**, and partial flags **true → false → false → true**. The existing package-version fingerprint invalidates the cache on both upgrade and downgrade. This is local fixture evidence, not a full release upgrade test. See [receipt](results/package-upgrade.json). The local candidate also passed all **190** current engine tests and the **14** javac-backed literal/varargs guard cases; package and guard receipts are in [package-local](results/package-local).
