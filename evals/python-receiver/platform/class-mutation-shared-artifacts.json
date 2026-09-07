@@ -1,0 +1,83 @@
+{
+  "run": 34151039384,
+  "consumers": [
+    {
+      "artifact": "java-aggregate-check-macos-latest-py3.11",
+      "receipt_sha256": "ba8a9b63d90b9800e380c6488f79051918b690121d6300809ba2da09ecdf7ccf",
+      "status": "passed",
+      "artifact_sha256": {
+        "columbus-1.0.0-py3-none-any.whl": "a4da719e3062fb4999e02a3a5f4a7eed4149c1ee71aca9c6d52127d05584028a",
+        "columbus-1.0.0.zip": "096439026ae0b47d4e3e7e0fb91d0f9312e1ded5b08708ccb846252052881941"
+      },
+      "source_revision": "2ffb051e306662fd3e177510880dea6da1275006",
+      "python": "3.11.9 (v3.11.9:de54cf5be3, Apr  2 2024, 07:12:50) [Clang 13.0.0 (clang-1300.0.29.30)]",
+      "platform": "darwin",
+      "same_bytes_after_verification": true
+    },
+    {
+      "artifact": "java-aggregate-check-macos-latest-py3.14",
+      "receipt_sha256": "17cd934df73ae0e41efb0a3845409cf949eb39d0435491b3faddb9050821b807",
+      "status": "passed",
+      "artifact_sha256": {
+        "columbus-1.0.0-py3-none-any.whl": "a4da719e3062fb4999e02a3a5f4a7eed4149c1ee71aca9c6d52127d05584028a",
+        "columbus-1.0.0.zip": "096439026ae0b47d4e3e7e0fb91d0f9312e1ded5b08708ccb846252052881941"
+      },
+      "source_revision": "2ffb051e306662fd3e177510880dea6da1275006",
+      "python": "3.14.7 (v3.14.7:823f0323ee6, Aug  5 2026, 07:07:01) [Clang 21.0.0 (clang-2100.1.1.101)]",
+      "platform": "darwin",
+      "same_bytes_after_verification": true
+    },
+    {
+      "artifact": "java-aggregate-check-ubuntu-latest-py3.11",
+      "receipt_sha256": "1392914ef71489dbd436353ad03cf4c86910c408a6272d95ab3f5ace187745f7",
+      "status": "passed",
+      "artifact_sha256": {
+        "columbus-1.0.0-py3-none-any.whl": "a4da719e3062fb4999e02a3a5f4a7eed4149c1ee71aca9c6d52127d05584028a",
+        "columbus-1.0.0.zip": "096439026ae0b47d4e3e7e0fb91d0f9312e1ded5b08708ccb846252052881941"
+      },
+      "source_revision": "2ffb051e306662fd3e177510880dea6da1275006",
+      "python": "3.11.16 (main, Aug 13 2026, 02:46:14) [GCC 13.3.0]",
+      "platform": "linux",
+      "same_bytes_after_verification": true
+    },
+    {
+      "artifact": "java-aggregate-check-ubuntu-latest-py3.14",
+      "receipt_sha256": "dd570ab9d8ec5fc84c5a4612bb12ca8400ea757178e863ea7ef8e9e419cade10",
+      "status": "passed",
+      "artifact_sha256": {
+        "columbus-1.0.0-py3-none-any.whl": "a4da719e3062fb4999e02a3a5f4a7eed4149c1ee71aca9c6d52127d05584028a",
+        "columbus-1.0.0.zip": "096439026ae0b47d4e3e7e0fb91d0f9312e1ded5b08708ccb846252052881941"
+      },
+      "source_revision": "2ffb051e306662fd3e177510880dea6da1275006",
+      "python": "3.14.7 (main, Aug  6 2026, 02:19:46) [GCC 13.3.0]",
+      "platform": "linux",
+      "same_bytes_after_verification": true
+    },
+    {
+      "artifact": "java-aggregate-check-windows-latest-py3.11",
+      "receipt_sha256": "f770ed94335eca4c727b2cdf7e2bdb157e7c14dad7ae36a25526317a1d5676bc",
+      "status": "passed",
+      "artifact_sha256": {
+        "columbus-1.0.0-py3-none-any.whl": "a4da719e3062fb4999e02a3a5f4a7eed4149c1ee71aca9c6d52127d05584028a",
+        "columbus-1.0.0.zip": "096439026ae0b47d4e3e7e0fb91d0f9312e1ded5b08708ccb846252052881941"
+      },
+      "source_revision": "2ffb051e306662fd3e177510880dea6da1275006",
+      "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+      "platform": "win32",
+      "same_bytes_after_verification": true
+    },
+    {
+      "artifact": "java-aggregate-check-windows-latest-py3.14",
+      "receipt_sha256": "48dab8df7b23436bd92f1e2a3e60faee01c23248f9a60dac8c6910087e604cb6",
+      "status": "passed",
+      "artifact_sha256": {
+        "columbus-1.0.0-py3-none-any.whl": "a4da719e3062fb4999e02a3a5f4a7eed4149c1ee71aca9c6d52127d05584028a",
+        "columbus-1.0.0.zip": "096439026ae0b47d4e3e7e0fb91d0f9312e1ded5b08708ccb846252052881941"
+      },
+      "source_revision": "2ffb051e306662fd3e177510880dea6da1275006",
+      "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+      "platform": "win32",
+      "same_bytes_after_verification": true
+    }
+  ]
+}

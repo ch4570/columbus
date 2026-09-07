@@ -48,3 +48,9 @@ Implemented `neighbors/impact --include-candidates` with separate `candidate_cal
 ## Known class writes invalidate Python receiver candidates
 
 A generated runtime counterexample showed a misleading candidate after `C.helper` was replaced. Added lexical member-write facts and cross-module relinking guards so assignments, deletion, and direct setattr/delattr to known classes suppress contradicted receiver candidates. Removing the mutation restores them. Both parser environments passed 202 engine tests, and the existing real three-hop candidate path still passes. [Before/after evidence and limits](../evals/python-receiver/CLASS-MUTATION.md). Previous-commit platform jobs remain under observation; this evidence does not establish model token savings.
+
+## Actual multi-hop model comparison
+
+Predeclared an independent AST oracle and ran baseline then Columbus (requested gpt-5.6-sol/xhigh) on the same frozen source. Both answers passed exact method/citation checks and manual shortest-path/uncertainty review. Input tokens rose 66,318 → 104,367 (+57.37%); uncached input rose 23,054 → 41,263 (+78.98%). Columbus used the candidate impact traversal but added it to broad source searches and rereads (3 → 10 commands). Frozen source/runtime/database integrity and oracle correspondence passed before and after. [Full report](../evals/multihop/REPORT.md). No token-savings completion claim.
+
+Both Python receiver commits now have successful ordinary six-environment and candidate/aggregate thirteen-job hosted checks. For the class-write correction, six downloaded consumer receipts confirm identical ZIP/wheel bytes and unchanged artifacts after use; see [platform evidence](../evals/python-receiver/CLASS-MUTATION.md). This closes those verification runs, not the remaining issues or overall goal.
