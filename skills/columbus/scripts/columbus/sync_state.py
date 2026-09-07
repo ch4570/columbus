@@ -90,7 +90,7 @@ def git_state(root: Path) -> dict:
     """Never run hooks, builds, shell commands, or a repository fsmonitor."""
     def run(*args: str, optional: bool = False):
         proc = subprocess.run(["git", "-c", "core.fsmonitor=false", "-C", str(root), *args],
-                              capture_output=True, text=True, timeout=10)
+                              capture_output=True, text=True, encoding='utf-8', timeout=10)
         if proc.returncode:
             if optional:
                 return None

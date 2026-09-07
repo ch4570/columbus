@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "isolated_wheel": true,
+  "partial_staging_preserved": true,
+  "framework_snapshot": true,
+  "restoration_refresh": true,
+  "deletion_only": true
+}

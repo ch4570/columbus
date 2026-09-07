@@ -1,0 +1,9 @@
+- id: columbus-sync
+  name: Refresh Columbus AST navigation index
+  entry: columbus hook-update
+  language: python
+  pass_filenames: false
+  always_run: true
+  require_serial: true
+  verbose: true
+  stages: [pre-commit]

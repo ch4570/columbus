@@ -94,9 +94,20 @@ def main(argv=None) -> int:
     parser.add_argument('--version', action='version', version=__version__)
     _common(parser)
     sub = parser.add_subparsers(dest='command', required=True)
-    for name in ('doctor', 'init', 'sync', 'index', 'status', 'search', 'map', 'symbol', 'neighbors', 'impact', 'context', 'explore', 'stats', 'graph', 'export', 'serve', 'telemetry'):
+    for name in ('doctor', 'init', 'tree', 'hook-install', 'hook-update', 'sync', 'index', 'status', 'search', 'map', 'symbol', 'neighbors', 'impact', 'context', 'explore', 'stats', 'graph', 'export', 'serve', 'telemetry'):
         command = sub.add_parser(name)
         _common(command, subcommand=True)
+        if name == 'tree':
+            command.add_argument('--label', help='Exact symbol ID, name or qualified label; include ancestors and descendants')
+            command.add_argument('--path', help='Repository-relative path glob')
+            command.add_argument('--language', help='Detected language filter')
+            command.add_argument('--limit', type=int, default=100, help='Maximum nodes, with ancestors emitted first')
+            command.add_argument('--include-fallback', action='store_true', help='Also include explicitly labelled heuristic/text nodes')
+            command.add_argument('--snapshot', action='store_true')
+        if name == 'hook-install':
+            command.add_argument('--plan', action='store_true', help='Show the hook destination without installing')
+        if name == 'hook-update':
+            command.add_argument('--strict', action='store_true', help='Reject parse diagnostics and preserve the prior index')
         if name == 'telemetry':
             command.add_argument('log', help='Local query telemetry JSONL file to summarize')
             command.add_argument('--format', choices=['json', 'text'], default='text')
@@ -192,6 +203,12 @@ def main(argv=None) -> int:
             root = Path(args.repo or '.').expanduser().resolve()
         if not root.is_dir():
             raise ValueError('--repo must be an existing local repository directory')
+        if args.command in {'hook-install', 'hook-update'}:
+            from .hooks import install, update
+            result = (install(root, apply=not args.plan) if args.command == 'hook-install'
+                      else update(root, db, strict=args.strict))
+            print(compact(result))
+            return 0
         if args.command == 'stats':
             from .telemetry import summarize, summary_text
             _, log = _session_paths(root, args.name)
@@ -211,6 +228,16 @@ def main(argv=None) -> int:
             print(json.dumps(result, ensure_ascii=False, indent=2 if args.pretty else None))
             return 2 if result['status'] in {'error', 'conflict'} else 0
         index = RepositoryIndex(db or root / '.columbus/index-v1.sqlite')
+        if args.command == 'tree':
+            from .tree import records
+            if not args.snapshot:
+                index.refresh(root, fast=True)
+            elif index.status()['root'] != str(root):
+                raise ValueError('Selected index belongs to a different repository')
+            for record in records(index, label=args.label, path=args.path, language=args.language,
+                                  limit=args.limit, include_fallback=args.include_fallback):
+                print(compact(record))
+            return 0
         if args.command in {'sync', 'index'}:
             result = index.refresh(root, source_root=args.source_root, fast=not args.verify_content)
         elif args.command == 'status':

@@ -1,0 +1,23 @@
+{
+  "seconds": 19.14730125000642,
+  "files": 1125,
+  "nodes": 17140,
+  "edges": 60445,
+  "relations": {
+    "imports": 9692,
+    "contains": 2956,
+    "references": 16476,
+    "method": 12766,
+    "inherits": 528,
+    "calls": 17459,
+    "case_of": 137,
+    "implements": 431
+  },
+  "confidence": {
+    "EXTRACTED": 51543,
+    "INFERRED": 8902
+  },
+  "dangling": 6933,
+  "failed": [],
+  "graph_bytes": 27780743
+}

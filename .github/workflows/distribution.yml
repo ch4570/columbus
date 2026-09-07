@@ -44,6 +44,11 @@ jobs:
         run: python scripts/release_assets.py
       - name: Verify clean install and portable bundle
         run: python -c "import pathlib, subprocess, sys; p = pathlib.Path('dist'); subprocess.run([sys.executable, 'scripts/verify_distribution.py', '--wheel', str(next(p.glob('*.whl'))), '--bundle', str(next(p.glob('*.zip')))], check=True)"
+      - name: Verify pre-commit partial staging and deletion-only updates
+        run: |
+          python -m pip install pre-commit==4.6.2
+          python -m pre_commit validate-manifest .pre-commit-hooks.yaml
+          python -c "import pathlib, subprocess, sys; subprocess.run([sys.executable, 'scripts/verify_pre_commit.py', '--wheel', str(next(pathlib.Path('dist').glob('*.whl')))], check=True)"
       - uses: actions/upload-artifact@v4
         with:
           name: columbus-${{ matrix.os }}-py${{ matrix.python }}

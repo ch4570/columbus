@@ -37,7 +37,7 @@ def bundle_contents(root: Path) -> dict[str, bytes]:
     for relative in required:
         contents[relative] = installer._read_regular(root / relative)
     for relative in ("VALIDATION.md", "README.ko.md", "INSTALL.md", "CONTRIBUTING.md", "CHANGELOG.md",
-                     "SECURITY.md", "SUPPORT.md", ".editorconfig", ".gitattributes", ".gitignore"):
+                     "SECURITY.md", "SUPPORT.md", ".editorconfig", ".gitattributes", ".gitignore", ".pre-commit-hooks.yaml"):
         if (root / relative).is_file():
             contents[relative] = installer._read_regular(root / relative)
     for directory in ("scripts", "tests", "skills/columbus/scripts/tests"):

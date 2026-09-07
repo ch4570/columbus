@@ -1,0 +1,21 @@
+{
+  "columbus_commit": "9a4108d6e1658d5060d9653539dffc52f5b09d49",
+  "graphify_commit": "c9f99018774e2e0380e9f65b3959944559a0d5f6",
+  "spring_commit": "4c8c6409a27a62ab163d3b6196ad862b7c835440",
+  "scope": "Code-only extractor comparison, not full CLI/search/LLM A/B. Source/JLS oracles, no installed JDK; javac launcher reports no Java runtime.",
+  "columbus_hashes": {
+    "skills/columbus/scripts/columbus/jvm.py": "262d854d2fce429b3111231202d191aa65c11bb1e0987368cf796e0dd54aaf39",
+    "skills/columbus/scripts/columbus/index.py": "8f34c0b5d36dbf7fd2a336bee24a469809318ecde09940e97780b28c4dafa560",
+    "skills/columbus/scripts/columbus/retrieval.py": "ee49391f65cb25b5d58ffe2758b5ecccb1978c0a20e03060b665a1ab719dbe94"
+  },
+  "columbus_dependencies": {
+    "tree-sitter": "0.26.0",
+    "tree-sitter-java": "0.23.5",
+    "tree-sitter-kotlin": "1.1.0"
+  },
+  "graphify_dependencies": {
+    "tree-sitter": "0.25.2",
+    "tree-sitter-java": "0.23.5",
+    "tree-sitter-kotlin": "1.1.0"
+  }
+}

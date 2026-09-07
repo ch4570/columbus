@@ -17,7 +17,7 @@ Graphify documents project installation and separate CLI/skill version alignment
 
 In v8 [watch.py](https://github.com/Graphify-Labs/graphify/blob/v8/graphify/watch.py), changed paths drive replacement/deletion and unchanged AST facts provide resolver context. Pending changes and locking handle overlapping events. Some paths rebuild the entire corpus; failed extraction remains eligible for retry. Re-parsing changed files alone therefore does not establish graph correctness.
 
-This bundle separates bundle/code versions, synchronizes before CLI queries, fingerprints content/configuration, commits one successful DB transaction, and labels inferred calls. It installs no hooks/watcher. Those can later accelerate updates but should not replace freshness checks or overwrite existing hooks.
+This bundle separates bundle/code versions, synchronizes before CLI queries, fingerprints content/configuration, commits one successful DB transaction, and labels inferred calls. Skill installation and indexing install no hooks/watcher. The source-development `hook-install` command explicitly installs an optional native pre-commit hook while preserving existing hook managers; the `columbus-sync` manifest supports the pre-commit framework. These accelerate updates but do not replace query-time freshness checks.
 
 ## Evaluation
 

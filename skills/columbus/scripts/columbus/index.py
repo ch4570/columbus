@@ -69,7 +69,8 @@ class RepositoryIndex:
     def _meta(conn) -> dict:
         return {r[0]: json.loads(r[1]) for r in conn.execute("SELECT key,value FROM metadata")}
 
-    def refresh(self, root: str | Path, source_root: str | None = None, fast: bool = False) -> dict:
+    def refresh(self, root: str | Path, source_root: str | None = None, fast: bool = False,
+                require_complete: bool = False) -> dict:
         """Commit one working-tree snapshot atomically.
 
         Fast mode still enumerates and stats all eligible files. It hashes only
@@ -171,6 +172,8 @@ class RepositoryIndex:
                                 "parsed": parsed, "stat": current_stat})
                 for message in parsed.get("diagnostics", []):
                     diagnostics.append({"path": rel, "message": str(message)})
+            if require_complete and diagnostics:
+                raise ValueError(f'Incomplete parse: {len(diagnostics)} diagnostics; previous index preserved')
             current_paths = {r["path"] for r in records}
             removed = sorted(set(old) - current_paths)
             added = sorted(current_paths - set(old))
@@ -542,6 +545,9 @@ class RepositoryIndex:
                         edges.append(edge)
             return {"center": first["id"], "nodes": list(nodes.values()), "edges": edges,
                     "revision": self._meta(conn)["revision"], "freshness": "index_snapshot",
+                    "semantic_complete": False,
+                    "repository_unresolved_references": self._meta(conn).get('unresolved_references', 0),
+                    "partial_nodes": sum(bool(n.get('partial')) for n in nodes.values()),
                     "truncated": truncated, "direction": direction, "hops": hops}
 
     def graph(self, limit: int = 1000, *, path: str | None = None, language: str | None = None,

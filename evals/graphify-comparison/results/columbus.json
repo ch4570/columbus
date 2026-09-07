@@ -1,0 +1,239 @@
+{
+  "engine": "columbus",
+  "results": [
+    {
+      "name": "this_call",
+      "case": {
+        "files": {
+          "C.java": "package demo; class C { void hit() {} void run() { this.hit(); } }"
+        },
+        "expected": "C.hit"
+      },
+      "calls": [],
+      "diagnostics": [
+        {
+          "path": "C.java",
+          "partial": false,
+          "diagnostics": []
+        }
+      ],
+      "seconds": 0.010046875002444722,
+      "expected_found": false,
+      "forbidden_found": false
+    },
+    {
+      "name": "generic_receiver",
+      "case": {
+        "files": {
+          "C.java": "package demo; class Box<T> { void hit() {} } class C { void run(Box<String> box) { box.hit(); } }"
+        },
+        "expected": "Box.hit"
+      },
+      "calls": [],
+      "diagnostics": [
+        {
+          "path": "C.java",
+          "partial": false,
+          "diagnostics": []
+        }
+      ],
+      "seconds": 0.00026466599956620485,
+      "expected_found": false,
+      "forbidden_found": false
+    },
+    {
+      "name": "loop_receiver",
+      "case": {
+        "files": {
+          "C.java": "package demo; class Item { void hit() {} } class C { void run(Item[] items) { for (Item item : items) { item.hit(); } } }"
+        },
+        "expected": "Item.hit"
+      },
+      "calls": [],
+      "diagnostics": [
+        {
+          "path": "C.java",
+          "partial": false,
+          "diagnostics": []
+        }
+      ],
+      "seconds": 0.00038433300505857915,
+      "expected_found": false,
+      "forbidden_found": false
+    },
+    {
+      "name": "parameter_receiver",
+      "case": {
+        "files": {
+          "C.java": "package demo; class Item { void hit() {} } class C { void run(Item item) { item.hit(); } }"
+        },
+        "expected": "Item.hit"
+      },
+      "calls": [
+        {
+          "source": "demo.C.run",
+          "target": "demo.Item.hit",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "item.hit()",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "diagnostics": [
+        {
+          "path": "C.java",
+          "partial": false,
+          "diagnostics": []
+        }
+      ],
+      "seconds": 0.00017870900046546012,
+      "expected_found": true,
+      "forbidden_found": false
+    },
+    {
+      "name": "wrong_package",
+      "case": {
+        "files": {
+          "unrelated/Item.java": "package unrelated; class Item { void hit() {} }",
+          "app/C.java": "package app; import external.Item; class C { void run(Item item) { item.hit(); } }"
+        },
+        "forbidden": "Item.hit",
+        "note": "External imported type is deliberately outside indexed scope; never bind unrelated.Item."
+      },
+      "calls": [],
+      "diagnostics": [
+        {
+          "path": "unrelated/Item.java",
+          "partial": false,
+          "diagnostics": []
+        },
+        {
+          "path": "app/C.java",
+          "partial": false,
+          "diagnostics": []
+        }
+      ],
+      "seconds": 0.00020987499738112092,
+      "expected_found": null,
+      "forbidden_found": false
+    },
+    {
+      "name": "type_parameter_shadow",
+      "case": {
+        "files": {
+          "C.java": "package demo; class T { void hit() {} } interface API { void hit(); } class C<T extends API> { void run(T item) { item.hit(); } }"
+        },
+        "forbidden": "T.hit",
+        "expected": "API.hit"
+      },
+      "calls": [
+        {
+          "source": "demo.C.run",
+          "target": "demo.T.hit",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "item.hit()",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "diagnostics": [
+        {
+          "path": "C.java",
+          "partial": false,
+          "diagnostics": []
+        }
+      ],
+      "seconds": 0.00018887499754782766,
+      "expected_found": false,
+      "forbidden_found": true
+    },
+    {
+      "name": "inherited_overload",
+      "case": {
+        "files": {
+          "C.java": "package demo; class Base { void hit(int n) {} } class C extends Base { void hit(String s) {} void run() { hit(1); } }"
+        },
+        "expected": "Base.hit",
+        "forbidden": "C.hit"
+      },
+      "calls": [
+        {
+          "source": "demo.C.run",
+          "target": "demo.C.hit",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(1)",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "diagnostics": [
+        {
+          "path": "C.java",
+          "partial": false,
+          "diagnostics": []
+        }
+      ],
+      "seconds": 0.00016029200924094766,
+      "expected_found": false,
+      "forbidden_found": true
+    },
+    {
+      "name": "parameter_shadows_field",
+      "case": {
+        "files": {
+          "C.java": "package demo; interface API { void hit(); } class Item { void hit() {} } class C { Item item; void run(API item) { item.hit(); } }"
+        },
+        "expected": "API.hit",
+        "forbidden": "Item.hit"
+      },
+      "calls": [
+        {
+          "source": "demo.C.run",
+          "target": "demo.API.hit",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "item.hit()",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "diagnostics": [
+        {
+          "path": "C.java",
+          "partial": false,
+          "diagnostics": []
+        }
+      ],
+      "seconds": 0.00015787499432917684,
+      "expected_found": true,
+      "forbidden_found": false
+    },
+    {
+      "name": "partial_file",
+      "case": {
+        "files": {
+          "C.java": "package demo; @java.lang.annotation.Target(java.lang.annotation.ElementType.TYPE_USE) @interface Mark {} class C { void hit() {} void run() { hit(); } void other(int @Mark ... args) {} }"
+        },
+        "expected": "C.hit",
+        "note": "Legal annotated varargs causes pinned Java grammar recovery."
+      },
+      "calls": [],
+      "diagnostics": [
+        {
+          "path": "C.java",
+          "partial": true,
+          "diagnostics": [
+            "Tree-sitter java syntax recovery at line 1: ERROR",
+            "Tree-sitter java syntax recovery at line 1: ERROR"
+          ]
+        }
+      ],
+      "seconds": 0.00019733300723601133,
+      "expected_found": false,
+      "forbidden_found": false
+    }
+  ]
+}

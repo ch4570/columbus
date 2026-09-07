@@ -27,6 +27,9 @@ def text_output(packet: dict, command: str = '') -> str:
         coverage = packet['coverage']
         lines.append(f"coverage files={coverage['files']} symbols={coverage['symbols']} "
                      f"diagnostics={coverage['diagnostics']} languages={_line(','.join(coverage['languages']))}")
+    if packet.get('semantic_complete') is False:
+        lines.append(f"semantic_complete=false partial_nodes={packet.get('partial_nodes', 0)} "
+                     f"repository_unresolved_references={packet.get('repository_unresolved_references', 'unknown')}")
     if packet.get('receipt'):
         lines.append(f"receipt={_line(packet['receipt']['status'])} "
                      f"seen_source_bytes={packet['receipt']['seen_source_bytes']}")
@@ -37,6 +40,8 @@ def text_output(packet: dict, command: str = '') -> str:
         lines.append(f"{_line(item['id'])} | {_line(item['path'])}:{item.get('start_line', 1)}-{end} "
                      f"| {_line(item.get('kind', 'symbol'))} {_line(item.get('language', 'unknown'))} "
                      f"fidelity={_line(item.get('fidelity', 'unknown'))}")
+        if item.get('partial'):
+            lines.append('  parse_partial=true; relationships may be missing')
         if 'source' in item:
             lines.append(f"hash={item['source_hash']} truncated={str(bool(item.get('truncated'))).lower()} "
                          f"partial_line={str(bool(item.get('last_line_may_be_partial'))).lower()}")
