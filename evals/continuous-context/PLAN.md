@@ -1,0 +1,7 @@
+# Predeclared continuous receipt implementation pilot
+
+Use frozen c67b20a runtime source and cases.json. Two successive questions: receipt initialization/ownership, then compatible span retention/intervening-file-change rejection. Each condition starts a new persistent thread and resumes that exact UUID for question two. Run baseline turn 1/2, then Columbus turn 1/2. Requested gpt-5.6-sol, xhigh, 600 seconds each. No selective retries.
+
+Freeze current engine/skill before model execution. The scratch working directory is writable; source and engine live outside it. Only Columbus may write its own receipt in scratch. Source/engine/index hashes are checked after every turn. Both agents retain their own prior conversation. Task code execution, web and delegation are prohibited. All four answers require exact mechanism locations, contiguous source quotations and separate explanation review. The scenario tests one real implementation in an unchanged snapshot; not a general benchmark or compaction test.
+
+Use cumulative counters established by the live CLI preflight: adjacent differences per turn, final counter as condition total. Keep raw counters too. Audit exact thread continuity and output events, record command usage, source reuse and receipt creation. Do not claim receipt savings unless it is actually used and quality remains valid. Distinguish graph availability/routing from receipt-specific causality. Record all failures and previous negative pilots. Results pending at predeclaration.
