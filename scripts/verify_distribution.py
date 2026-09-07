@@ -110,9 +110,20 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
             source = target / 'caller_probe.py'
             original = ("def evidence_target(): return 1\n"
                         "def outer():\n    def inner():\n        evidence_target()\n    inner()\n"
-                        "def direct():\n    value = 'a\u2028b'\n    evidence_target()\n").encode()
+                        "def direct():\n    value = 'a\u2028b'\n    evidence_target()\n"
+                        "class ReceiverProbe:\n    def helper(self): pass\n    def run(self): self.helper()\n").encode()
             source.write_bytes(original)
             run([*prefix, 'sync', '--repo', target, '--summary'])
+            neighbors = [*prefix, 'neighbors', 'ReceiverProbe.run', '--repo', target,
+                         '--snapshot', '--direction', 'out', '--kinds', 'calls']
+            if json.loads(run(neighbors))['edges']:
+                raise VerificationError('Receiver candidate leaked into default calls')
+            candidate = json.loads(run([*neighbors, '--include-candidates']))
+            if (len(candidate['edges']) != 1 or candidate['edges'][0]['kind'] != 'candidate_calls'
+                    or candidate['edges'][0]['confidence'] != 'retrieval_only'):
+                raise VerificationError('Installed receiver candidate traversal lost uncertainty')
+            if 'not resolved calls' not in run([*neighbors, '--include-candidates', '--format', 'text']):
+                raise VerificationError('Installed candidate text lost uncertainty')
             command = [*prefix, 'callers', 'evidence_target', '--repo', target, '--snapshot']
             text = run(command)
             packet = json.loads(text)

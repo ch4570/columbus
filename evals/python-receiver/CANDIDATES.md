@@ -1,0 +1,13 @@
+# Optional receiver navigation
+
+`neighbors` and `impact` now accept `--include-candidates`. Ordinary `calls` edges are unchanged. The option reads cached unresolved references and traverses separately labelled `candidate_calls` with `retrieval_only` confidence. JSON retains edge evidence; text explicitly says these are navigation hints, not resolved calls. Source inspection is still necessary.
+
+The parser offers lexical member candidates for an undecorated instance method's unrebound first parameter, including a nested closure capturing it. It rejects known subclasses of the owner, owner bases/decorators/metaclass keywords, rebinding, direct receiver member mutation, direct `setattr`/`delattr`, writes through `self.__dict__`, custom attribute lookup, decorated targets except an unshadowed `staticmethod`, and static source parameters. This is deliberately incomplete: aliases, reflective mutation, external subclasses and runtime dispatch are not proven. No new resolved calls are claimed.
+
+Eight generated runtime traces in `candidate-results.json` retain unresolved receiver references. Only `instance`, `static_target`, and `nested_capture` receive candidates; the five counterexamples do not. The earlier observations are preserved in `results.json`.
+
+On the frozen c67b20a source, `verify-candidates.py` verifies the source-reviewed incoming three-hop path `RepositoryIndex.symbol → RepositoryIndex._source → read_stable → safe_source`. Default traversal lacks the first hop; opt-in traversal returns it as a candidate and preserves the other two call edges. The first verification attempt used the wrong definition module for `safe_source`; inspecting the original `.discovery` import corrected the verifier before the successful run. `candidate-path.json` records the result. A single local observation took about 0.9 ms by default and 6.2 ms with candidates across this small fixture. This is not a general performance benchmark; optional traversal decodes repository parse caches.
+
+Validation: 201 engine tests passed with each of the pinned and candidate Java parser environments; 53 root tests passed. Additional targeted CLI assertions passed for both neighbors and impact after those runs. Tests cover forward/reverse three-hop traversal, opt-in isolation, persistence, node bounds, kind filtering, text uncertainty, and candidate removal after an edit. Clean-install verification now checks default/candidate isolation and text marking; hosted runs will supply cross-platform evidence.
+
+No new model token experiment was run. This change creates a reviewable candidate path for a different task family; it does not establish token savings or close the outstanding correctness issues.

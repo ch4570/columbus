@@ -588,7 +588,8 @@ class RepositoryIndex:
             return result
 
     def neighbors(self, symbol_id: str, direction: str = "both", hops: int = 1,
-                  limit: int = 50, kinds: list[str] | None = None) -> dict:
+                  limit: int = 50, kinds: list[str] | None = None, *,
+                  include_candidates: bool = False) -> dict:
         if direction not in {"in", "out", "both"} or not 1 <= hops <= 3 or not 1 <= limit <= 200:
             raise ValueError("direction=in/out/both, hops=1–3, limit=1–200 required")
         if kinds is not None and (not kinds or any(k not in {"contains", "calls", "imports", "inherits"} for k in kinds)):
@@ -597,6 +598,19 @@ class RepositoryIndex:
             first = self._find(conn, symbol_id)
             nodes, edges, seen_edges = {first["id"]: first}, [], set()
             queue, truncated = deque([(first["id"], 0)]), False
+            candidates = {}
+            if include_candidates and (not kinds or "calls" in kinds):
+                for record in conn.execute("SELECT parsed FROM files ORDER BY path"):
+                    for ref in decode_parse(record[0]).get("references", []):
+                        for candidate in ref.get("retrieval_candidates", []):
+                            edge = {"source": ref["source"], "target": candidate["target"],
+                                    "kind": "candidate_calls", "confidence": "retrieval_only",
+                                    "evidence": candidate["reason"], "path": ref["path"], "line": ref["line"]}
+                            endpoints = ([edge["target"]] if direction == "in" else
+                                         [edge["source"]] if direction == "out" else
+                                         set([edge["source"], edge["target"]]))
+                            for endpoint in endpoints:
+                                candidates.setdefault(endpoint, []).append(edge)
             while queue:
                 node_id, depth = queue.popleft()
                 if depth >= hops:
@@ -611,6 +625,7 @@ class RepositoryIndex:
                     where += " AND kind IN (" + ",".join("?" for _ in kinds) + ")"
                     params += kinds
                 rows = conn.execute("SELECT * FROM edges WHERE " + where + " ORDER BY kind,source,target,line LIMIT 1001", params).fetchall()
+                rows = list(rows) + candidates.get(node_id, [])
                 truncated |= len(rows) > 1000
                 for row in rows[:1000]:
                     edge = dict(row)
@@ -634,7 +649,8 @@ class RepositoryIndex:
                     "repository_diagnostic_count": len(self._meta(conn).get("diagnostics", [])),
                     "repository_unresolved_references": self._meta(conn).get('unresolved_references', 0),
                     "partial_nodes": sum(bool(n.get('partial')) for n in nodes.values()),
-                    "truncated": truncated, "direction": direction, "hops": hops}
+                    "truncated": truncated, "direction": direction, "hops": hops,
+                    "candidate_traversal": include_candidates}
 
     def graph(self, limit: int = 1000, *, path: str | None = None, language: str | None = None,
               kinds: list[str] | None = None, focus: str | None = None, hops: int = 2,

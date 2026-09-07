@@ -50,6 +50,8 @@ def text_output(packet: dict, command: str = '') -> str:
         lines.append(f"semantic_complete=false partial_nodes={packet.get('partial_nodes', 0)} "
                      f"repository_unresolved_references={packet.get('repository_unresolved_references', 'unknown')} "
                      f"repository_diagnostic_count={packet.get('repository_diagnostic_count', 'unknown')}")
+    if packet.get('candidate_traversal'):
+        lines.append('candidate_traversal=true; candidate_calls are navigation hints, not resolved calls; verify runtime dispatch.')
     if packet.get('receipt'):
         lines.append(f"receipt={_line(packet['receipt']['status'])} "
                      f"seen_source_bytes={packet['receipt']['seen_source_bytes']}")

@@ -156,6 +156,9 @@ def main(argv=None) -> int:
             command.add_argument('--limit', type=int, default=50)
         if name == 'symbol':
             command.add_argument('--max-lines', type=int, default=80)
+        if name in {'neighbors', 'impact'}:
+            command.add_argument('--include-candidates', action='store_true',
+                                 help='Traverse uncertain receiver candidates; these are not resolved calls')
         if name in {'neighbors', 'impact', 'graph', 'export'}:
             command.add_argument('--hops', type=int, default=2)
             command.add_argument('--limit', type=int, default=1000 if name in {'graph', 'export'} else 50)
@@ -293,7 +296,8 @@ def main(argv=None) -> int:
             elif args.command in {'neighbors', 'impact'}:
                 result = index.neighbors(args.symbol_id, direction='in' if args.command == 'impact' else args.direction,
                                          hops=args.hops, limit=args.limit,
-                                         kinds=['calls', 'inherits'] if args.command == 'impact' else args.kinds)
+                                         kinds=['calls', 'inherits'] if args.command == 'impact' else args.kinds,
+                                         include_candidates=args.include_candidates)
             elif args.command in {'context', 'map'}:
                 from .presentation import render
                 kwargs = dict(budget_bytes=args.budget_bytes, budget_tokens=args.budget_tokens, path=args.path,

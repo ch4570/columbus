@@ -58,6 +58,8 @@ Used the RepoAtlas preview? Columbus has a new command, skill, configuration nam
 | Inspect incoming relationships | `columbus impact EXACT_SYMBOL_ID --format text` |
 | Share an interactive graph | `columbus graph --level file --format html --output graph.html` |
 
+For a missing Python instance-receiver hop, `neighbors` and `impact` accept `--include-candidates`. This opt-in follows lexical member hints labelled `candidate_calls[retrieval_only]`; they remain unresolved references and never become stored call edges. Runtime dispatch and external mutation still require source review. Candidate lookup reads cached parse facts across the repository, so it costs more than the default edge lookup.
+
 Use IDs returned by `search`. `impact` is a bounded graph traversal, not proof of every runtime effect. Existing automation commands retain their JSON default; `explore` defaults to readable text.
 
 ## Let an agent travel light

@@ -134,6 +134,7 @@ class _Parser(ast.NodeVisitor):
             "start_line": node.lineno, "end_line": node.end_lineno or node.lineno,
             "signature": signature, "doc": ast.get_docstring(node) or "",
             "parent_id": parent["owner"],
+            "decorators": [ast.unparse(d) for d in node.decorator_list],
         })
         self._bind(node.name, {"kind": "symbol", "target": key})
         for decorator in node.decorator_list:
@@ -152,6 +153,13 @@ class _Parser(ast.NodeVisitor):
         self._scope(key, previous, "class" if kind == "class" else "function",
                     qualname, key, node.body)
         self.current = key
+        if isinstance(node, ast.ClassDef):
+            self.scopes[key]['receiver_mutations'] = []
+            self.scopes[key]['dynamic_class'] = bool(node.bases or node.keywords or node.decorator_list)
+        elif kind == 'method' and not node.decorator_list:
+            positional = [*node.args.posonlyargs, *node.args.args]
+            if positional:
+                self.scopes[key]['instance_receiver'] = {'name': positional[0].arg, 'owner': previous}
         if not isinstance(node, ast.ClassDef):
             self._arguments(node.args)
         for statement in node.body:
@@ -170,6 +178,34 @@ class _Parser(ast.NodeVisitor):
             args.append(arguments.kwarg)
         for arg in args:
             self._bind(arg.arg, {"kind": "local", "reason": "parameter"})
+
+    def receiver_owner(self, name):
+        scope = self.scopes[self.current]
+        while scope:
+            receiver = scope.get('instance_receiver')
+            if receiver and receiver['name'] == name:
+                return receiver['owner']
+            if name in scope['bindings']:
+                return None
+            scope = self.scopes.get(scope['parent'])
+        return None
+
+    def visit_Attribute(self, node: ast.Attribute) -> None:
+        if isinstance(node.ctx, (ast.Store, ast.Del)) and isinstance(node.value, ast.Name):
+            owner = self.receiver_owner(node.value.id)
+            if owner:
+                mutations = self.scopes[owner]['receiver_mutations']
+                if node.attr not in mutations:
+                    mutations.append(node.attr)
+        self.generic_visit(node)
+
+    def visit_Subscript(self, node: ast.Subscript) -> None:
+        if (isinstance(node.ctx, (ast.Store, ast.Del)) and isinstance(node.value, ast.Attribute)
+                and node.value.attr == "__dict__" and isinstance(node.value.value, ast.Name)):
+            owner = self.receiver_owner(node.value.value.id)
+            if owner:
+                self.scopes[owner]["receiver_mutations"].append("*")
+        self.generic_visit(node)
 
     def visit_Name(self, node: ast.Name) -> None:
         if isinstance(node.ctx, (ast.Store, ast.Del)):
@@ -205,6 +241,11 @@ class _Parser(ast.NodeVisitor):
         self.generic_visit(node)
 
     def visit_Call(self, node: ast.Call) -> None:
+        if (isinstance(node.func, ast.Name) and node.func.id in {"setattr", "delattr"}
+                and node.args and isinstance(node.args[0], ast.Name)):
+            owner = self.receiver_owner(node.args[0].id)
+            if owner:
+                self.scopes[owner]["receiver_mutations"].append("*")
         self._reference(node.func, "calls")
         self.generic_visit(node)
 
@@ -305,6 +346,8 @@ class _Resolver:
         self.modules: dict[str, list[dict[str, Any]]] = {}
         for file in files:
             self.modules.setdefault(file["module"], []).append(file)
+        self.receiver_bases = {target for file in files for ref in file["references"]
+                               if ref["kind"] == "inherits" and (target := self.reference(ref))}
 
     def module_file(self, module: str) -> dict[str, Any] | None:
         candidates = self.modules.get(module, [])
@@ -418,6 +461,46 @@ class _Resolver:
                 return None
         return value
 
+    def receiver_candidate(self, reference):
+        """A navigation hint only: receiver dispatch is not a proven call edge."""
+        parts = (reference.get('name') or '').split('.')
+        if reference['kind'] != 'calls' or len(parts) != 2:
+            return None
+        name, member = parts
+        scope = self.scopes[reference['scope_id']]
+        while scope:
+            if name in scope['globals'] or name in scope['nonlocals']:
+                return None
+            bindings = scope['bindings'].get(name)
+            if bindings is not None:
+                receiver = scope.get('instance_receiver')
+                if (not receiver or receiver['name'] != name
+                        or bindings != [{'kind': 'local', 'reason': 'parameter'}]):
+                    return None
+                owner = receiver['owner']
+                break
+            scope = self.scopes.get(scope['parent'])
+        else:
+            return None
+        cls = self.scopes[owner]
+        if (cls.get('dynamic_class') or owner in self.receiver_bases
+                or {member, '*', '__class__', '__dict__'} & set(cls.get('receiver_mutations', []))
+                or {'__getattr__', '__getattribute__'} & cls['bindings'].keys()):
+            return None
+        resolved = self.binding(cls['bindings'].get(member, []), set())
+        if not resolved or resolved[0] != 'symbol':
+            return None
+        target = self.symbols[resolved[1]]
+        if target['kind'] != 'method' or target.get('decorators') not in ([], ['staticmethod']):
+            return None
+        if target.get('decorators'):
+            current = cls
+            while current:
+                if 'staticmethod' in current['bindings']:
+                    return None
+                current = self.scopes.get(current['parent'])
+        return target['id']
+
     def reference(self, reference: dict[str, Any]) -> str | None:
         name = reference["name"]
         if not name:
@@ -479,10 +562,15 @@ def resolve_files(parsed_files: list[dict[str, Any]]) -> list[dict[str, Any]]:
         for reference in file["references"]:
             reference.pop("target", None)
             reference.pop("confidence", None)
+            reference.pop("retrieval_candidates", None)
             target = resolver.reference(reference)
             reference["resolved"] = target is not None
             if target is None:
                 reference["reason"] = "dynamic, external, shadowed, ambiguous or unknown name"
+                candidate = resolver.receiver_candidate(reference)
+                if candidate:
+                    reference["retrieval_candidates"] = [{"target": candidate, "confidence": "retrieval_only",
+                        "reason": "lexical instance-receiver member; runtime dispatch and external mutation unverified"}]
                 continue
             reference.pop("reason", None)
             confidence = "heuristic" if "." in reference["name"] else "resolved_static"
