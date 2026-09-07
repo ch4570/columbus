@@ -143,6 +143,20 @@ class IndexTests(unittest.TestCase):
         self.assertEqual(report["files"], 1)
         self.assertEqual(self.index.search("visible")["hits"][0]["name"], "visible")
 
+    def test_qualified_suffix_matches_preserve_ambiguity_and_filters(self):
+        for package, name in [("a", "Loader"), ("b", "Loader"), ("c", "OtherLoader")]:
+            self.write(package + "/Loader.java", "package " + package + "; class " + name + " { void getResource() {} }")
+        self.index.refresh(self.root)
+        hits = self.index.search("Loader.getResource")["hits"]
+        suffixes = [h for h in hits if h["retrieval"].get("qualified_suffix")]
+        self.assertEqual({h["qualname"] for h in suffixes}, {"a.Loader.getResource", "b.Loader.getResource"})
+        self.assertEqual(hits[:2], suffixes)
+        self.assertTrue(all(not h["retrieval"]["exact_name"] for h in suffixes))
+        filtered = self.index.search("Loader.getResource", path="b/*")["hits"]
+        self.assertEqual(filtered[0]["qualname"], "b.Loader.getResource")
+        exact = self.index.search("a.Loader.getResource")["hits"][0]
+        self.assertTrue(exact["retrieval"]["exact_name"])
+
     def test_exact_match_survives_fts_candidate_cutoff(self):
         self.write("all.py", "def foo():\n" + "    # unrelated content\n"*500 + "    return 1\n" +
                    "\n".join(f"def foo_{i}(): return 1" for i in range(220)))

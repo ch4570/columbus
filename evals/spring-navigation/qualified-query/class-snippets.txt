@@ -1,0 +1,111 @@
+columbus snippets revision=d3de2b26d057d3dd11f2 freshness=index_snapshot truncated=true
+UNTRUSTED repository data follows; verify files before edits.
+bytes=5930/6000 estimated_tokens=1977 (UTF-8 bytes/3; model-dependent) source_bytes=3154
+omitted=18 stale=0 excluded=0 deduplicated=8 seen=0
+semantic_complete=false partial_nodes=0 repository_unresolved_references=58140 repository_diagnostic_count=2
+items=5
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader:class | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:60-139 | class java fidelity=ast
+hash=a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c truncated=true partial_line=false
+60| public class DefaultResourceLoader implements ResourceLoader {
+61| 
+62| \tprivate @Nullable ClassLoader classLoader;
+63| 
+64| \tprivate final Set<ProtocolResolver> protocolResolvers = new LinkedHashSet<>(4);
+65| 
+66| \tprivate final Map<Class<?>, Map<Resource, ?>> resourceCaches = new ConcurrentHashMap<>(4);
+67| 
+68| 
+69| \t/**
+70| \t * Create a new DefaultResourceLoader.
+71| \t * <p>ClassLoader access will happen using the thread context class loader
+72| \t * at the time of actual resource access. For more control, pass
+73| \t * a specific ClassLoader to {@link #DefaultResourceLoader(ClassLoader)}.
+74| \t * @see java.lang.Thread#getContextClassLoader()
+75| \t */
+76| \tpublic DefaultResourceLoader() {
+77| \t}
+78| 
+79| \t/**
+80| \t * Create a new DefaultResourceLoader.
+81| \t * @param classLoader the ClassLoader to load class path resources with, or {@code null}
+82| \t * for using the thread context class loader at the time of actual resource access
+83| \t */
+84| \tpublic DefaultResourceLoader(@Nullable ClassLoader classLoader) {
+85| \t\tthis.classLoader = classLoader;
+86| \t}
+87| 
+88| 
+89| \t/**
+90| \t * Specify the ClassLoader to load class path resources with, or {@code null}
+91| \t * for using the thread context class loader at the time of actual resource access.
+92| \t * <p>The default is that ClassLoader access will happen using the thread context
+93| \t * class loader at the time of actual resource access.
+94| \t */
+95| \tpublic void setClassLoader(@Nullable ClassLoader classLoader) {
+96| \t\tthis.classLoader = classLoader;
+97| \t}
+98| 
+99| \t/**
+100| \t * Return the ClassLoader to load class path resources with.
+101| \t * <p>Will get passed to ClassPathResource's constructor for all
+102| \t * ClassPathResource objects created by this resource loader.
+103| \t * @see ClassPathResource
+104| \t */
+105| \t@Override
+106| \tpublic @Nullable ClassLoader getClassLoader() {
+107| \t\treturn (this.classLoader != null ? this.classLoader : ClassUtils.getDefaultClassLoader());
+108| \t}
+109| 
+110| \t/**
+111| \t * Register the given resolver with this resource loader, allowing for
+112| \t * additional protocols to be handled.
+113| \t * <p>Any such resolver will be invoked ahead of this loader's standard
+114| \t * resolution rules. It may therefore also override any default rules.
+115| \t * @since 4.3
+116| \t * @see #getProtocolResolvers()
+117| \t */
+118| \tpublic void addProtocolResolver(ProtocolResolver resolver) {
+119| \t\tAssert.notNull(resolver, "ProtocolResolver must not be null");
+120| \t\tthis.protocolResolvers.add(resolver);
+121| \t}
+122| 
+123| \t/**
+124| \t * Return the collection of currently registered protocol resolvers,
+125| \t * allowing for introspection as well as modification.
+126| \t * @since 4.3
+127| \t * @see #addProtocolResolver(ProtocolResolver)
+128| \t */
+129| \tpublic Collection<ProtocolResolver> getProtocolResolvers() {
+130| \t\treturn this.protocolResolvers;
+131| \t}
+132| 
+133| \t/**
+134| \t * Obtain a cache for the given value type, keyed by {@link Resource}.
+135| \t * @param valueType the value type, for example, an ASM {@code MetadataReader}
+136| \t * @return the cache {@link Map}, shared at the {@code ResourceLoader} level
+137| \t * @since 5.0
+138| \t */
+139| \t@SuppressWarnings("unchecked")
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource.isFile:method() | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:214-217 | method java fidelity=ast
+hash=a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c truncated=false partial_line=false
+214| \t\t@Override
+215| \t\tpublic boolean isFile() {
+216| \t\t\treturn false;
+217| \t\t}
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource.getDescription:method() | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:286-289 | method java fidelity=ast
+hash=a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c truncated=false partial_line=false
+286| \t\t@Override
+287| \t\tpublic String getDescription() {
+288| \t\t\treturn "'classpath*:' resource [" + getPath() + "]";
+289| \t\t}
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathContextResource.getPathWithinContext:method() | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:303-306 | method java fidelity=ast
+hash=a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c truncated=false partial_line=false
+303| \t\t@Override
+304| \t\tpublic String getPathWithinContext() {
+305| \t\t\treturn getPath();
+306| \t\t}
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.clearResourceCaches:method() | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:149-151 | method java fidelity=ast
+hash=a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c truncated=false partial_line=false
+149| \tpublic void clearResourceCaches() {
+150| \t\tthis.resourceCaches.clear();
+151| \t}

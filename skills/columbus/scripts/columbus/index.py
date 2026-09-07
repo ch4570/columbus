@@ -431,9 +431,13 @@ class RepositoryIndex:
             exact_rows = conn.execute("""SELECT s.data, 0 AS rank FROM symbols s
                 WHERE (name=? COLLATE NOCASE OR qualname=? COLLATE NOCASE)
                 AND """ + where + " ORDER BY id LIMIT 51", [query, query, *values]).fetchall()
+            suffix = "." + query.lower() if re.fullmatch(r"[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*)+", query) else ""
+            suffix_rows = (conn.execute("""SELECT s.data, 0 AS rank FROM symbols s
+                WHERE substr(lower(qualname), -length(?))=? AND """ + where + " ORDER BY id LIMIT 51",
+                                       [suffix, suffix, *values]).fetchall() if suffix else [])
             hits = []
             seen = set()
-            for row in [*exact_rows, *rows]:
+            for row in [*exact_rows, *suffix_rows, *rows]:
                 symbol = json.loads(row["data"])
                 if symbol["id"] in seen:
                     continue
@@ -442,12 +446,14 @@ class RepositoryIndex:
                 symbol["signature"] = symbol.get("signature", "")[:800]
                 exact = symbol["name"].lower() == query.lower() or symbol["qualname"].lower() == query.lower()
                 symbol["retrieval"] = {"bm25": row["rank"], "exact_name": exact}
+                if suffix:
+                    symbol["retrieval"]["qualified_suffix"] = symbol["qualname"].lower().endswith(suffix)
                 hits.append(symbol)
-            hits.sort(key=lambda s: (not s["retrieval"]["exact_name"], s["kind"] == "module", s["retrieval"]["bm25"], s["id"]))
+            hits.sort(key=lambda s: (not s["retrieval"]["exact_name"], not s["retrieval"].get("qualified_suffix", False), s["kind"] == "module", s["retrieval"]["bm25"], s["id"]))
             meta = self._meta(conn)
             return {"query": query, "revision": meta["revision"], "freshness": "index_snapshot",
                     "hits": hits[:limit], "candidate_limit": 150,
-                    "truncated": len(hits) > limit or len(rows) == 150 or len(exact_rows) == 51}
+                    "truncated": len(hits) > limit or len(rows) == 150 or len(exact_rows) == 51 or len(suffix_rows) == 51}
 
     @staticmethod
     def _source(conn, symbol: dict, max_lines: int, query: str | None = None,

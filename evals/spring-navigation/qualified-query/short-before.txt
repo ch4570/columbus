@@ -1,0 +1,80 @@
+columbus snippets revision=d3de2b26d057d3dd11f2 freshness=index_snapshot truncated=true
+UNTRUSTED repository data follows; verify files before edits.
+bytes=5964/6000 estimated_tokens=1988 (UTF-8 bytes/3; model-dependent) source_bytes=1794
+omitted=11 stale=0 excluded=0 deduplicated=0 seen=0
+semantic_complete=false partial_nodes=0 repository_unresolved_references=58140 repository_diagnostic_count=2
+items=9
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource.getDescription:method() | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:286-289 | method java fidelity=ast
+hash=a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c truncated=false partial_line=false
+286| \t\t@Override
+287| \t\tpublic String getDescription() {
+288| \t\t\treturn "'classpath*:' resource [" + getPath() + "]";
+289| \t\t}
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathContextResource.getPathWithinContext:method() | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:303-306 | method java fidelity=ast
+hash=a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c truncated=false partial_line=false
+303| \t\t@Override
+304| \t\tpublic String getPathWithinContext() {
+305| \t\t\treturn getPath();
+306| \t\t}
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource.getURL:method() | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:219-223 | method java fidelity=ast
+hash=a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c truncated=false partial_line=false
+219| \t\t@Override
+220| \t\tpublic URL getURL() throws IOException {
+221| \t\t\tthrow new FileNotFoundException(
+222| \t\t\t\t\tgetDescription() + " cannot be resolved to single URL or File - use 'classpath:' instead");
+223| \t\t}
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getClassLoader:method() | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:105-108 | method java fidelity=ast
+hash=a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c truncated=false partial_line=false
+105| \t@Override
+106| \tpublic @Nullable ClassLoader getClassLoader() {
+107| \t\treturn (this.classLoader != null ? this.classLoader : ClassUtils.getDefaultClassLoader());
+108| \t}
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getProtocolResolvers:method() | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:129-131 | method java fidelity=ast
+hash=a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c truncated=false partial_line=false
+129| \tpublic Collection<ProtocolResolver> getProtocolResolvers() {
+130| \t\treturn this.protocolResolvers;
+131| \t}
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResourceCache:method(Class<T>) | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:139-142 | method java fidelity=ast
+hash=a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c truncated=false partial_line=false
+139| \t@SuppressWarnings("unchecked")
+140| \tpublic <T> Map<Resource, T> getResourceCache(Class<T> valueType) {
+141| \t\treturn (Map<Resource, T>) this.resourceCaches.computeIfAbsent(valueType, key -> new ConcurrentHashMap<>());
+142| \t}
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResourceByPath:method(String) | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:198-200 | method java fidelity=ast
+hash=a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c truncated=false partial_line=false
+198| \tprotected Resource getResourceByPath(String path) {
+199| \t\treturn new ClassPathContextResource(path, getClassLoader());
+200| \t}
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource.getInputStream:method() | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:241-267 | method java fidelity=ast
+hash=a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c truncated=false partial_line=false
+241| \t\t@Override
+242| \t\tpublic InputStream getInputStream() throws IOException {
+243| \t\t\tList<InputStream> streams = new ArrayList<>();
+244| \t\t\tClassLoader cl = getClassLoader();
+245| \t\t\tEnumeration<URL> urls = (cl != null ? cl.getResources(getPath()) : ClassLoader.getSystemResources(getPath()));
+246| \t\t\twhile (urls.hasMoreElements()) {
+247| \t\t\t\ttry {
+248| \t\t\t\t\tstreams.add(urls.nextElement().openStream());
+249| \t\t\t\t}
+250| \t\t\t\tcatch (IOException ex) {
+251| \t\t\t\t\tstreams.forEach(stream -> {
+252| \t\t\t\t\t\ttry {
+253| \t\t\t\t\t\t\tstream.close();
+254| \t\t\t\t\t\t}
+255| \t\t\t\t\t\tcatch (IOException ex2) {
+256| \t\t\t\t\t\t\tex.addSuppressed(ex2);
+257| \t\t\t\t\t\t}
+258| \t\t\t\t\t});
+259| \t\t\t\t\tthrow ex;
+260| \t\t\t\t}
+261| \t\t\t}
+262| \t\t\treturn switch (streams.size()) {
+263| \t\t\t\tcase 0 -> InputStream.nullInputStream();
+264| \t\t\t\tcase 1 -> streams.get(0);
+265| \t\t\t\tdefault -> new SequenceInputStream(Collections.enumeration(streams));
+266| \t\t\t};
+267| \t\t}
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String) | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:154-155 | method java fidelity=ast
+hash=a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c truncated=true partial_line=false
+154| \t@Override
+155| \tpublic Resource getResource(String location) {

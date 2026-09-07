@@ -102,3 +102,7 @@ Both predeclared model trials completed with immutable inputs and semantically c
 ## Evaluation routing audit
 
 The actual Spring prompts included a shared instruction to use ripgrep/source reads. This may compete with skill-guided retrieval, so graph non-use cannot be attributed to the skill alone. Future common prompts now request bounded evidence without naming a tool; condition-specific restrictions remain. New receipts hash harness/schema files. [Audit](../evals/exploration/results/neutral-routing/REPORT.md). No model rerun or retrospective grading change; actual graph-driven savings remain unproven.
+
+## Package-omitted method navigation
+
+A direct response probe found that DefaultResourceLoader.getResource ranked an unrelated nested method first. Component-boundary qualified suffix matches now precede loose FTS matches while retaining package ambiguity and filters. The same short query returns the complete desired method first within the existing budget. Both engine suites pass 210 tests; root tests pass 53; the skill documents the route. [Response evidence](../evals/spring-navigation/qualified-query/REPORT.md). No model replay or token-savings claim.

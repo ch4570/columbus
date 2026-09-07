@@ -1,0 +1,40 @@
+columbus signatures revision=d3de2b26d057d3dd11f2 freshness=index_snapshot truncated=true
+UNTRUSTED repository data follows; verify files before edits.
+bytes=5849/6000 estimated_tokens=1950 (UTF-8 bytes/3; model-dependent) source_bytes=0
+omitted=14 stale=0 excluded=0 deduplicated=0 seen=0
+semantic_complete=false partial_nodes=0 repository_unresolved_references=58140 repository_diagnostic_count=2
+items=17
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader:class | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:60-315 | class java fidelity=ast
+  public class DefaultResourceLoader implements ResourceLoader
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.classLoader:property | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:62-62 | property java fidelity=ast
+  classLoader: ClassLoader
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.resourceCaches:property | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:66-66 | property java fidelity=ast
+  resourceCaches: Map<Class<?>,Map<Resource,?>>
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource.isFile:method() | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:214-217 | method java fidelity=ast
+  @Override public boolean isFile()
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource.getDescription:method() | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:286-289 | method java fidelity=ast
+  @Override public String getDescription()
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathContextResource.getPathWithinContext:method() | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:303-306 | method java fidelity=ast
+  @Override public String getPathWithinContext()
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.clearResourceCaches:method() | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:149-151 | method java fidelity=ast
+  public void clearResourceCaches()
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource.<init>:constructor(String,ClassLoader) | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:210-212 | constructor java fidelity=ast
+  public ClassPathAllResource(String path, @Nullable ClassLoader classLoader)
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathContextResource.<init>:constructor(String,ClassLoader) | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:299-301 | constructor java fidelity=ast
+  public ClassPathContextResource(String path, @Nullable ClassLoader classLoader)
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.protocolResolvers:property | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:64-64 | property java fidelity=ast
+  protocolResolvers: Set<ProtocolResolver>
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource.createRelative:method(String) | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:280-284 | method java fidelity=ast
+  @Override public Resource createRelative(String relativePath)
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathContextResource.createRelative:method(String) | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:308-312 | method java fidelity=ast
+  @Override public Resource createRelative(String relativePath)
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource.getURL:method() | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:219-223 | method java fidelity=ast
+  @Override public URL getURL() throws IOException
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getClassLoader:method() | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:105-108 | method java fidelity=ast
+  @Override public @Nullable ClassLoader getClassLoader()
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.setClassLoader:method(ClassLoader) | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:95-97 | method java fidelity=ast
+  public void setClassLoader(@Nullable ClassLoader classLoader)
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource.consumeContent:method(IOConsumer<InputStream>) | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:269-278 | method java fidelity=ast
+  @Override public void consumeContent(IOConsumer<InputStream> consumer) throws IOException
+src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.<init>:constructor() | src/main/java/org/springframework/core/io/DefaultResourceLoader.java:76-77 | constructor java fidelity=ast
+  public DefaultResourceLoader()
