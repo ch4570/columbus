@@ -1,0 +1,34 @@
+2026-09-07T15:09:10.7531628Z ERROR: test_full_archive_exceeds_view_limits_and_is_deterministic (test_archive.ArchiveTests.test_full_archive_exceeds_view_limits_and_is_deterministic)
+2026-09-07T15:09:10.7532771Z ----------------------------------------------------------------------
+2026-09-07T15:09:10.7533283Z Traceback (most recent call last):
+2026-09-07T15:09:10.7540402Z   File "C:\hostedtoolcache\windows\Python\3.14.7\x64\Lib\shutil.py", line 701, in _rmtree_unsafe
+2026-09-07T15:09:10.7541667Z     os.unlink(fullname)
+2026-09-07T15:09:10.7542038Z     ~~~~~~~~~^^^^^^^^^^
+2026-09-07T15:09:10.7543225Z PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\tmpjmryff_g\\.columbus\\index.sqlite'
+2026-09-07T15:09:10.7544324Z 
+2026-09-07T15:09:10.7544598Z During handling of the above exception, another exception occurred:
+2026-09-07T15:09:10.7545024Z 
+2026-09-07T15:09:10.7545168Z Traceback (most recent call last):
+2026-09-07T15:09:10.7546250Z   File "D:\a\columbus\columbus\skills\columbus\scripts\tests\test_archive.py", line 15, in test_full_archive_exceeds_view_limits_and_is_deterministic
+2026-09-07T15:09:10.7547293Z     with tempfile.TemporaryDirectory() as directory:
+2026-09-07T15:09:10.7547762Z          ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+2026-09-07T15:09:10.7548445Z   File "C:\hostedtoolcache\windows\Python\3.14.7\x64\Lib\tempfile.py", line 972, in __exit__
+2026-09-07T15:09:10.7549105Z     self.cleanup()
+2026-09-07T15:09:10.7549378Z     ~~~~~~~~~~~~^^
+2026-09-07T15:09:10.7549959Z   File "C:\hostedtoolcache\windows\Python\3.14.7\x64\Lib\tempfile.py", line 976, in cleanup
+2026-09-07T15:09:10.7550756Z     self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+2026-09-07T15:09:10.7551344Z     ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-09-07T15:09:10.7552071Z   File "C:\hostedtoolcache\windows\Python\3.14.7\x64\Lib\tempfile.py", line 956, in _rmtree
+2026-09-07T15:09:10.7552735Z     _shutil.rmtree(name, onexc=onexc)
+2026-09-07T15:09:10.7553099Z     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+2026-09-07T15:09:10.7553711Z   File "C:\hostedtoolcache\windows\Python\3.14.7\x64\Lib\shutil.py", line 852, in rmtree
+2026-09-07T15:09:10.7554365Z     _rmtree_impl(path, dir_fd, onexc)
+2026-09-07T15:09:10.7554728Z     ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+2026-09-07T15:09:10.7556383Z   File "C:\hostedtoolcache\windows\Python\3.14.7\x64\Lib\shutil.py", line 705, in _rmtree_unsafe
+2026-09-07T15:09:10.7557157Z     onexc(os.unlink, fullname, err)
+2026-09-07T15:09:10.7557525Z     ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-09-07T15:09:10.7558155Z   File "C:\hostedtoolcache\windows\Python\3.14.7\x64\Lib\tempfile.py", line 931, in onexc
+2026-09-07T15:09:10.7558804Z     _os.unlink(path)
+2026-09-07T15:09:10.7559099Z     ~~~~~~~~~~^^^^^^
+2026-09-07T15:09:10.7560142Z PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\tmpjmryff_g\\.columbus\\index.sqlite'
+2026-09-07T15:09:10.7561174Z 
