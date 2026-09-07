@@ -1,7 +1,7 @@
 {
   "schema": "columbus.incremental-observation/v1",
   "engine_version": "1.0.0",
-  "captured_at": "2026-09-07T07:53:20.350620+00:00",
+  "captured_at": "2026-09-07T08:27:46.902564+00:00",
   "environment": {
     "python": "3.14.7",
     "system": "Darwin",
@@ -11,7 +11,7 @@
     "columbus/__init__.py": "87f632dcdb12b5a9b78e5961202c87910906399c90157131799707e5b35b375c",
     "columbus/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
     "columbus/bundle.py": "f73fe1c36c89211c823f6c94eae67efc054e8c69b835b3ef49371482e7dd7f00",
-    "columbus/cli.py": "89279c8a7e905ded58b119c284ae61af1819fa8136138208cd8195a1609b1f47",
+    "columbus/cli.py": "32df2bec6f24bfd66026642473ff14f8e1eb7acff5801d504956194f80067823",
     "columbus/discovery.py": "7513fa3158c15c002eac90367df849cf72ec6343d6c8952a814948c71f5342c8",
     "columbus/export.py": "258f6b2df72a08da837480c96db82c78eeec63007d8d1c48baed8aa36b445957",
     "columbus/graph_views.py": "9e935520bb990c2066cfdb943c37477e78378b5ffd868e31735cc6a5e261f1c7",
@@ -25,7 +25,7 @@
     "columbus/presentation.py": "edf82c405fc8c7c4b8a0cb5373db74afb155428715e0513a09c418719bce1197",
     "columbus/receipts.py": "11068a6fd2d78a8d22a86c102b199c395c5f001e50ed5ff010f6893ab9b13ca9",
     "columbus/retrieval.py": "ee49391f65cb25b5d58ffe2758b5ecccb1978c0a20e03060b665a1ab719dbe94",
-    "columbus/sync_state.py": "8fee2912bba2aed95e0c0161c877b4ecbf0fe1f31896c8f856df702aed316a8c",
+    "columbus/sync_state.py": "07d526cf420becfd660ce4386f9cdb3a3a34abba404e779a3304f87b0071f9ab",
     "columbus/telemetry.py": "9f49124a606e3a30191c596c8bd40f7255d5fbbb93f5ba2a531940b7f63c32dc"
   },
   "observer_sha256": "19000250876374917a01b686b8240dc090091a82d74dcf7407d6bcde353f3fcd",
@@ -42,7 +42,7 @@
     {
       "repeat": 1,
       "phase": "cold",
-      "elapsed_seconds": 0.969214,
+      "elapsed_seconds": 1.020168,
       "parsed_files": 1001,
       "hashed_files": 1001,
       "hashed_bytes": 1101260,
@@ -54,7 +54,7 @@
     {
       "repeat": 1,
       "phase": "warm",
-      "elapsed_seconds": 0.344211,
+      "elapsed_seconds": 0.412198,
       "parsed_files": 0,
       "hashed_files": 0,
       "hashed_bytes": 0,
@@ -66,7 +66,7 @@
     {
       "repeat": 1,
       "phase": "one_file_changed",
-      "elapsed_seconds": 0.473352,
+      "elapsed_seconds": 0.537711,
       "parsed_files": 1,
       "hashed_files": 1,
       "hashed_bytes": 74,
@@ -78,7 +78,7 @@
     {
       "repeat": 2,
       "phase": "cold",
-      "elapsed_seconds": 1.022713,
+      "elapsed_seconds": 0.970287,
       "parsed_files": 1001,
       "hashed_files": 1001,
       "hashed_bytes": 1101260,
@@ -90,7 +90,7 @@
     {
       "repeat": 2,
       "phase": "warm",
-      "elapsed_seconds": 0.360925,
+      "elapsed_seconds": 0.346072,
       "parsed_files": 0,
       "hashed_files": 0,
       "hashed_bytes": 0,
@@ -102,7 +102,7 @@
     {
       "repeat": 2,
       "phase": "one_file_changed",
-      "elapsed_seconds": 0.522079,
+      "elapsed_seconds": 0.504681,
       "parsed_files": 1,
       "hashed_files": 1,
       "hashed_bytes": 74,
@@ -114,7 +114,7 @@
     {
       "repeat": 3,
       "phase": "cold",
-      "elapsed_seconds": 0.944158,
+      "elapsed_seconds": 1.024678,
       "parsed_files": 1001,
       "hashed_files": 1001,
       "hashed_bytes": 1101260,
@@ -126,7 +126,7 @@
     {
       "repeat": 3,
       "phase": "warm",
-      "elapsed_seconds": 0.354021,
+      "elapsed_seconds": 0.313718,
       "parsed_files": 0,
       "hashed_files": 0,
       "hashed_bytes": 0,
@@ -138,7 +138,7 @@
     {
       "repeat": 3,
       "phase": "one_file_changed",
-      "elapsed_seconds": 0.672526,
+      "elapsed_seconds": 0.503915,
       "parsed_files": 1,
       "hashed_files": 1,
       "hashed_bytes": 74,

@@ -23,7 +23,7 @@
     "skills/columbus/scripts/columbus/__init__.py": "87f632dcdb12b5a9b78e5961202c87910906399c90157131799707e5b35b375c",
     "skills/columbus/scripts/columbus/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
     "skills/columbus/scripts/columbus/bundle.py": "f73fe1c36c89211c823f6c94eae67efc054e8c69b835b3ef49371482e7dd7f00",
-    "skills/columbus/scripts/columbus/cli.py": "89279c8a7e905ded58b119c284ae61af1819fa8136138208cd8195a1609b1f47",
+    "skills/columbus/scripts/columbus/cli.py": "32df2bec6f24bfd66026642473ff14f8e1eb7acff5801d504956194f80067823",
     "skills/columbus/scripts/columbus/discovery.py": "7513fa3158c15c002eac90367df849cf72ec6343d6c8952a814948c71f5342c8",
     "skills/columbus/scripts/columbus/export.py": "258f6b2df72a08da837480c96db82c78eeec63007d8d1c48baed8aa36b445957",
     "skills/columbus/scripts/columbus/graph_views.py": "9e935520bb990c2066cfdb943c37477e78378b5ffd868e31735cc6a5e261f1c7",
@@ -37,22 +37,23 @@
     "skills/columbus/scripts/columbus/presentation.py": "edf82c405fc8c7c4b8a0cb5373db74afb155428715e0513a09c418719bce1197",
     "skills/columbus/scripts/columbus/receipts.py": "11068a6fd2d78a8d22a86c102b199c395c5f001e50ed5ff010f6893ab9b13ca9",
     "skills/columbus/scripts/columbus/retrieval.py": "ee49391f65cb25b5d58ffe2758b5ecccb1978c0a20e03060b665a1ab719dbe94",
-    "skills/columbus/scripts/columbus/sync_state.py": "8fee2912bba2aed95e0c0161c877b4ecbf0fe1f31896c8f856df702aed316a8c",
+    "skills/columbus/scripts/columbus/sync_state.py": "07d526cf420becfd660ce4386f9cdb3a3a34abba404e779a3304f87b0071f9ab",
     "skills/columbus/scripts/columbus/telemetry.py": "9f49124a606e3a30191c596c8bd40f7255d5fbbb93f5ba2a531940b7f63c32dc",
     "skills/columbus/scripts/install.py": "e2447308b9e283dd70574c6291f9e159f6e6d0b0b1a4fa0bbcd9745044ee10c7",
     "skills/columbus/scripts/tests/test_agent_context.py": "7d7fa2d1c90108582d71b165e4f280ca35c3c59a13fa6e40b5eb05211a4a42fb",
-    "skills/columbus/scripts/tests/test_columbus.py": "75259e1211e2f0039ad950e988d6e7429928c2e1f90be9b2492156f6120d201b",
+    "skills/columbus/scripts/tests/test_columbus.py": "b9d4723932c70c5efd1e1e750bfaba5385f2637ebe78b28a977583620a56ad4e",
     "skills/columbus/scripts/tests/test_explicit_root.py": "a74c2d242b644216dcc19d516013f5126752565aac92547c960297f5c34fe9d8",
     "skills/columbus/scripts/tests/test_export.py": "10daceff2f699007bd5440bc8732956ceecb952dde154c83a719bffbac7b294a",
-    "skills/columbus/scripts/tests/test_index.py": "e3090599063b6cf51a46596c564961f3ba0534bf2ee1f03c6fe5dbbed0c43982",
+    "skills/columbus/scripts/tests/test_index.py": "5daa5cc0959e6cae5f06cc94836261cbf79a25f3fc025d7fc8dc2a2423a66837",
     "skills/columbus/scripts/tests/test_install.py": "0933927164665987d150c34af0668449f6cff319410d6ad4ec0a1d8730f513d2",
     "skills/columbus/scripts/tests/test_jvm.py": "7d6744aca3ca1e81bbe0b0417a7b36102ebb91db202f5b02f2ca0c364baeed9e",
     "skills/columbus/scripts/tests/test_mcp.py": "bad850f2384a0144fc977b8f726dfab50f3fce61e694be0497450e8263858530",
     "skills/columbus/scripts/tests/test_parser.py": "660d3d291e4ef75215e995b07cba70290a1aa79bf14e5609288f054911cf7d33",
     "skills/columbus/scripts/tests/test_polyglot.py": "47a0dedeb3c7779037abe993f94275aff133dfca592eb38f47a7bb222fabc208",
     "skills/columbus/scripts/tests/test_sessions.py": "6970ec0d6341226463df0bc5a5b77aa6c63024d91ca32019847c10c0c175a8bd",
-    "skills/columbus/scripts/tests/test_sync.py": "6923faea8d5ad53d4ed7ccb4b5841b340824d307c237ab047a64631a7238b8dc",
-    "skills/columbus/scripts/tests/test_token_economy.py": "7b8ecb1338cbe3f3599e7e1ba22126fff2191010e7008a515aec470a91c1e986",
+    "skills/columbus/scripts/tests/test_sync.py": "1b82cb2f7a81f0c8d5937dbdcb84542bd6a437398c44180216f3afe284d36a35",
+    "skills/columbus/scripts/tests/test_sync_state.py": "7fc307b637b580a170af1fca77c6e14d8bc4562f30f790e4dba42d01949b5979",
+    "skills/columbus/scripts/tests/test_token_economy.py": "281890cdb1f861c902433a812d6f38bb81d6fa3422affcda36fee526dbbcb404",
     "tests/test_benchmark_charts.py": "2c1132770b4c8b34455bde2e38d5e502332535ebf06f807db17fac4f5664eede",
     "tests/test_bootstrap.py": "b15ebfdac359691cd549e739dcd6a83ff4a6c2d31922ea8b3c1c771a37606fc1",
     "tests/test_distribution.py": "5f91ab3b0497bca9c0a88a913a7cd0722ac06e39a358c560fdd3a676655dc10c",
@@ -63,10 +64,10 @@
     "machine": "arm64",
     "test_python": "3.14.7",
     "tests": {
-      "engine": 162,
+      "engine": 169,
       "root": 49,
       "harness": 10,
-      "total": 221
+      "total": 228
     },
     "distribution": [
       {
@@ -117,14 +118,29 @@
         "plan_status": "planned",
         "python": "3.14.7"
       }
-    ]
+    ],
+    "distribution_source_note": "These local clean-distribution checks preceded the Windows metadata and CLI stream corrections. Hosted validation below verifies the corrected artifact on all supported platforms."
   },
   "historical_observations": "Original inputs and results are byte-identical to commit d0f0585e33124be1e365c6674a937521e80311f6.",
   "benchmark_data": "../benchmarks/1.0.0/charts.json",
   "hosted_ci": {
-    "status": "pending",
+    "status": "pending_corrected_source",
     "workflow": "https://github.com/ch4570/columbus/actions/workflows/distribution.yml",
-    "note": "Local verification is complete; hosted Linux and Windows are not claimed until their jobs complete."
+    "initial_attempt": {
+      "url": "https://github.com/ch4570/columbus/actions/runs/34099330548",
+      "commit": "928e704183b4d48d7cb42cb01b82bfe2b29e7f03",
+      "passed": [
+        "ubuntu-latest Python3.11",
+        "ubuntu-latest Python3.14",
+        "macos-latest Python3.11",
+        "macos-latest Python3.14"
+      ],
+      "failed": [
+        "windows-latest Python3.11",
+        "windows-latest Python3.14"
+      ],
+      "correction": "Use native Windows ChangeTime consistently; UTF-8/LF CLI streams and test fixtures; close fixture SQLite connections."
+    }
   },
   "scope_note": "Distribution behavior was tested on the recorded source snapshot. Later documentation, visual QA records and this validation record change archive membership, not the hashed tested code. Final release assets carry their own SHA256SUMS.txt.",
   "skill_validation": {
@@ -137,5 +153,13 @@
     "tests": 9,
     "result": "passed after SVG trailing-whitespace normalization",
     "svg_dom_and_rendered_pixels": "unchanged; all six artifacts reproduced byte-identically"
+  },
+  "windows_correction_local_checks": {
+    "engine": 169,
+    "root": 49,
+    "harness": 10,
+    "result": "passed",
+    "regression_detection": "Prior Windows ctime comparison and cp1252 CLI output failed new regressions.",
+    "native_windows_api": "awaiting hosted CI; local tests verify ABI, timestamps, errors and race detection with injected metadata."
   }
 }

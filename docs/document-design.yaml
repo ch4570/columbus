@@ -1,3 +1,4 @@
+# Historical design specification for the RepoAtlas 0.4.0 report; current Columbus artwork is documented in assets/columbus-art.md.
 document_type: repository_handbook
 audience:
   - developers evaluating RepoAtlas

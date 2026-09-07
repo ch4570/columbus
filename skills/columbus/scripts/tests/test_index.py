@@ -19,7 +19,7 @@ class IndexTests(unittest.TestCase):
     def write(self, path, source):
         file = self.root/path
         file.parent.mkdir(parents=True, exist_ok=True)
-        file.write_text(source)
+        file.write_text(source, encoding="utf-8", newline="\n")
 
     def seed(self):
         self.write("payments.py", "def refund_payment(amount):\n    return amount\n")

@@ -19,7 +19,7 @@
     {
       "name": "delivery",
       "source": "docs/benchmarks/1.0.0/delivery.json",
-      "source_sha256": "b0b0379abfd3c1d7b26e4aeeddcd24159a0164d6bae98f5dd38a382205eda6da",
+      "source_sha256": "1f38126569d28a411ae52f494ea25e9bd46dc1f64f6646711f752aa3539a58f8",
       "series": {
         "engine_version": "1.0.0",
         "map_items": 28,
@@ -116,30 +116,30 @@
     {
       "name": "incremental",
       "source": "docs/benchmarks/1.0.0/incremental.json",
-      "source_sha256": "274782d977b6eb90076b2f7812e231d664a7fd8cbb3ebdd61d170ea5548601c7",
+      "source_sha256": "e75366c3f2f2be4822dca0d7ae10c76da58b54d6a963ec283e9bbfa0c4b86824",
       "series": {
         "cold": {
-          "median_seconds": 0.969214,
-          "min_seconds": 0.944158,
-          "max_seconds": 1.022713,
+          "median_seconds": 1.020168,
+          "min_seconds": 0.970287,
+          "max_seconds": 1.024678,
           "parsed_files": 1001
         },
         "warm": {
-          "median_seconds": 0.354021,
-          "min_seconds": 0.344211,
-          "max_seconds": 0.360925,
+          "median_seconds": 0.346072,
+          "min_seconds": 0.313718,
+          "max_seconds": 0.412198,
           "parsed_files": 0
         },
         "one_file_changed": {
-          "median_seconds": 0.522079,
-          "min_seconds": 0.473352,
-          "max_seconds": 0.672526,
+          "median_seconds": 0.504681,
+          "min_seconds": 0.503915,
+          "max_seconds": 0.537711,
           "parsed_files": 1
         }
       },
       "outputs": {
-        "docs/assets/benchmark-incremental.svg": "af6e91a81c8658b8d8c2f70d4ca24f2957be269f760584a57dd6dffaf5595d0c",
-        "docs/assets/benchmark-incremental.png": "73493dff6143321fa3c93b1b8e42a5f849e81e5f9a6ae2345a5f14c7ea9f386b"
+        "docs/assets/benchmark-incremental.svg": "6e2c058f819ca97a294d8f149698f09e6870e4b453de41edb06c35356eebd1f1",
+        "docs/assets/benchmark-incremental.png": "11fa98ab2e96c1fc7e48fb0c369a817c7a750e363cb7aae00c0f97fc5f6a05ce"
       }
     }
   ],

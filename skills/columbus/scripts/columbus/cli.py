@@ -80,6 +80,12 @@ def _common(parser, *, subcommand=False):
 
 
 def main(argv=None) -> int:
+    # Budgets and telemetry describe UTF-8/LF bytes, including redirected pipes.
+    # StringIO and embedders without reconfigure keep their original streams.
+    for stream, errors in ((sys.stdout, 'strict'), (sys.stderr, 'backslashreplace')):
+        reconfigure = getattr(stream, 'reconfigure', None)
+        if callable(reconfigure):
+            reconfigure(encoding='utf-8', errors=errors, newline='\n')
     argv = list(sys.argv[1:] if argv is None else argv)
     if not argv:
         sys.stdout.write(_WELCOME)

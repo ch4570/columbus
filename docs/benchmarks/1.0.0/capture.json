@@ -1,6 +1,6 @@
 {
   "schema": "columbus.benchmark-capture/v1",
-  "recorded_at": "2026-09-07T07:58:48.409948+00:00",
+  "recorded_at": "2026-09-07T08:28:50.392254+00:00",
   "engine_version": "1.0.0",
   "environment": {
     "python": "3.14.7",
@@ -18,10 +18,11 @@
     "skills/columbus/bundle.json": "e24fa4c53c7bcd724b9ac65597d14220383f70aa5ec3332f429c356375027252"
   },
   "observations": {
-    "delivery.json": "b0b0379abfd3c1d7b26e4aeeddcd24159a0164d6bae98f5dd38a382205eda6da",
-    "incremental.json": "274782d977b6eb90076b2f7812e231d664a7fd8cbb3ebdd61d170ea5548601c7"
+    "delivery.json": "1f38126569d28a411ae52f494ea25e9bd46dc1f64f6646711f752aa3539a58f8",
+    "incremental.json": "e75366c3f2f2be4822dca0d7ae10c76da58b54d6a963ec283e9bbfa0c4b86824"
   },
-  "scope": "Columbus 1.0.0 release working tree; per-file engine and fixture hashes identify measured code.",
+  "scope": "Columbus 1.0.0 release working tree after Windows fixes; per-file engine and fixture hashes identify measured code.",
+  "measurement_isolation": "Incremental capture started after the full 169-test engine run completed.",
   "history": {
     "path": "evals/exploration/results/2026-09-07/controlled.json",
     "sha256": "f54a427fd821df50fa39ef9488ed68ca0e2b8fa6544be6e6eef97d05f2b9e633",

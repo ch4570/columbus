@@ -1,3 +1,4 @@
+from contextlib import closing
 import json
 import os
 from pathlib import Path
@@ -215,9 +216,10 @@ class SyncTests(unittest.TestCase):
 
     def test_schema_one_database_is_untouched_and_rejected(self):
         self.index.db.parent.mkdir()
-        with sqlite3.connect(self.index.db) as conn:
-            conn.execute("CREATE TABLE metadata(key TEXT PRIMARY KEY,value TEXT)")
-            conn.execute("INSERT INTO metadata VALUES('schema_version', ?)", (json.dumps("1"),))
+        with closing(sqlite3.connect(self.index.db)) as conn:
+            with conn:
+                conn.execute("CREATE TABLE metadata(key TEXT PRIMARY KEY,value TEXT)")
+                conn.execute("INSERT INTO metadata VALUES('schema_version', ?)", (json.dumps("1"),))
         original = self.index.db.read_bytes()
         with self.assertRaisesRegex(ValueError, "choose a new --db"):
             self.index.refresh(self.root, fast=True)
