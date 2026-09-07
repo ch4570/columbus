@@ -1,0 +1,674 @@
+[
+  {
+    "environment": "java-aggregate-check-macos-latest-py3.11",
+    "verification": {
+      "status": "passed",
+      "artifact_sha256": {
+        "columbus-1.0.0-py3-none-any.whl": "6ee017b42c3b77c0ed891c274d292e3bcfb1b35f0a7a7630ae7fcfcf1a428fab",
+        "columbus-1.0.0.zip": "c22a12d5cf2ea8ef4d72d2fc405dc73a0dad32f593cd38e80dd812999ab28c5b"
+      },
+      "source_revision": "6c4c968f73db47aa3a5ed4db7856ff7c0e86b4a1",
+      "python": "3.11.9 (v3.11.9:de54cf5be3, Apr  2 2024, 07:12:50) [Clang 13.0.0 (clang-1300.0.29.30)]",
+      "platform": "darwin",
+      "same_bytes_after_verification": true
+    },
+    "upgrade": {
+      "source_unchanged": true,
+      "bundled_default": true,
+      "bundle_sha256": "c22a12d5cf2ea8ef4d72d2fc405dc73a0dad32f593cd38e80dd812999ab28c5b",
+      "runs": [
+        {
+          "version": "0.23.5",
+          "partial": true,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": null
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "cd174da7b23a5819096a5da8bb9eb67aa75cd5e2b30e18a9b034eef11ab80977",
+          "install_stderr_sha256": "e83027fdad71dd5c64c8a1e0f5936d39c5fd7054cb00da95a3ad89cd911a8158"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "cca237e6a40fc6e042c801763b8473be9dfd353f56fef6a43ec7cebf25c101fd"
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "151ef7e43eb1d0217137465377e58f45c1c607329a782a1e54ad89cf87f6b7bc",
+          "install_stderr_sha256": "64484c2452ea0d8ba80d18d30c95a21a92298734fb4e675a1db78362d375ef40"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "cca237e6a40fc6e042c801763b8473be9dfd353f56fef6a43ec7cebf25c101fd"
+          },
+          "pip_ran": false,
+          "install_stdout_sha256": "a1b60dc185335ceb28a0ed7b5b7c6940d708267cd1fafea6a093efd1d72c7905",
+          "install_stderr_sha256": "8da630a5c3d3fd07867c947c0f94f2c1d0d4c2e4cfb1c66a8b4309b9fafaf6d3"
+        }
+      ]
+    },
+    "distribution": {
+      "status": "passed",
+      "version": "1.0.0",
+      "wheel": "/Users/runner/work/columbus/columbus/aggregate-artifacts/columbus-1.0.0-py3-none-any.whl",
+      "java_candidate_checks": [
+        {
+          "installation": "wheel",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        },
+        {
+          "installation": "standalone release installer",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        },
+        {
+          "installation": "relocated ZIP bootstrap",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        }
+      ],
+      "bundled_java_default": true,
+      "clean_venv": true,
+      "unrelated_cwd": true,
+      "paths_with_spaces": true,
+      "global_search": true,
+      "skill_reinstall": "noop",
+      "polyglot_and_fallback": true,
+      "budgeted_context": true,
+      "graph_formats": 4,
+      "text_budget": true,
+      "receipt_continuation": true,
+      "telemetry_bytes_verified": true,
+      "named_sessions": true,
+      "no_argument_guide": true,
+      "standalone_release_install": true,
+      "ast_tree": true,
+      "native_hook_partial_staging": true,
+      "bounded_caller_evidence": true,
+      "stale_caller_source_rejected": true,
+      "complete_graph_archive": true,
+      "source_free_archive_query": true,
+      "summary_lazy_cache": true,
+      "bootstrap_hook_after_source_relocation": true,
+      "local_edits_preserved": true,
+      "managed_files": 43,
+      "archive_files": 451,
+      "plan_status": "planned"
+    }
+  },
+  {
+    "environment": "java-aggregate-check-macos-latest-py3.14",
+    "verification": {
+      "status": "passed",
+      "artifact_sha256": {
+        "columbus-1.0.0-py3-none-any.whl": "6ee017b42c3b77c0ed891c274d292e3bcfb1b35f0a7a7630ae7fcfcf1a428fab",
+        "columbus-1.0.0.zip": "c22a12d5cf2ea8ef4d72d2fc405dc73a0dad32f593cd38e80dd812999ab28c5b"
+      },
+      "source_revision": "6c4c968f73db47aa3a5ed4db7856ff7c0e86b4a1",
+      "python": "3.14.7 (v3.14.7:823f0323ee6, Aug  5 2026, 07:07:01) [Clang 21.0.0 (clang-2100.1.1.101)]",
+      "platform": "darwin",
+      "same_bytes_after_verification": true
+    },
+    "upgrade": {
+      "source_unchanged": true,
+      "bundled_default": true,
+      "bundle_sha256": "c22a12d5cf2ea8ef4d72d2fc405dc73a0dad32f593cd38e80dd812999ab28c5b",
+      "runs": [
+        {
+          "version": "0.23.5",
+          "partial": true,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": null
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "280f922b848867151a1489aabfb5d5c7dc498cedb9a3b4bc6689667a0d7078cb",
+          "install_stderr_sha256": "e83027fdad71dd5c64c8a1e0f5936d39c5fd7054cb00da95a3ad89cd911a8158"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "cca237e6a40fc6e042c801763b8473be9dfd353f56fef6a43ec7cebf25c101fd"
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "95148532fde7cc8aca03b4eb76f61a12cbf80f2106ace1a7cb96ed438152b2c4",
+          "install_stderr_sha256": "64484c2452ea0d8ba80d18d30c95a21a92298734fb4e675a1db78362d375ef40"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "cca237e6a40fc6e042c801763b8473be9dfd353f56fef6a43ec7cebf25c101fd"
+          },
+          "pip_ran": false,
+          "install_stdout_sha256": "b6e2743d80cb687c6fcd90893c6b8000bce423864dce615152fd496fb0b5e55f",
+          "install_stderr_sha256": "8da630a5c3d3fd07867c947c0f94f2c1d0d4c2e4cfb1c66a8b4309b9fafaf6d3"
+        }
+      ]
+    },
+    "distribution": {
+      "status": "passed",
+      "version": "1.0.0",
+      "wheel": "/Users/runner/work/columbus/columbus/aggregate-artifacts/columbus-1.0.0-py3-none-any.whl",
+      "java_candidate_checks": [
+        {
+          "installation": "wheel",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        },
+        {
+          "installation": "standalone release installer",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        },
+        {
+          "installation": "relocated ZIP bootstrap",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        }
+      ],
+      "bundled_java_default": true,
+      "clean_venv": true,
+      "unrelated_cwd": true,
+      "paths_with_spaces": true,
+      "global_search": true,
+      "skill_reinstall": "noop",
+      "polyglot_and_fallback": true,
+      "budgeted_context": true,
+      "graph_formats": 4,
+      "text_budget": true,
+      "receipt_continuation": true,
+      "telemetry_bytes_verified": true,
+      "named_sessions": true,
+      "no_argument_guide": true,
+      "standalone_release_install": true,
+      "ast_tree": true,
+      "native_hook_partial_staging": true,
+      "bounded_caller_evidence": true,
+      "stale_caller_source_rejected": true,
+      "complete_graph_archive": true,
+      "source_free_archive_query": true,
+      "summary_lazy_cache": true,
+      "bootstrap_hook_after_source_relocation": true,
+      "local_edits_preserved": true,
+      "managed_files": 43,
+      "archive_files": 451,
+      "plan_status": "planned"
+    }
+  },
+  {
+    "environment": "java-aggregate-check-ubuntu-latest-py3.11",
+    "verification": {
+      "status": "passed",
+      "artifact_sha256": {
+        "columbus-1.0.0-py3-none-any.whl": "6ee017b42c3b77c0ed891c274d292e3bcfb1b35f0a7a7630ae7fcfcf1a428fab",
+        "columbus-1.0.0.zip": "c22a12d5cf2ea8ef4d72d2fc405dc73a0dad32f593cd38e80dd812999ab28c5b"
+      },
+      "source_revision": "6c4c968f73db47aa3a5ed4db7856ff7c0e86b4a1",
+      "python": "3.11.16 (main, Aug 13 2026, 02:46:14) [GCC 13.3.0]",
+      "platform": "linux",
+      "same_bytes_after_verification": true
+    },
+    "upgrade": {
+      "source_unchanged": true,
+      "bundled_default": true,
+      "bundle_sha256": "c22a12d5cf2ea8ef4d72d2fc405dc73a0dad32f593cd38e80dd812999ab28c5b",
+      "runs": [
+        {
+          "version": "0.23.5",
+          "partial": true,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": null
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "d84b3df76819d16ac9b3482f7ccea31bc1952003ac4e296fa4868c235b459a5b",
+          "install_stderr_sha256": "e83027fdad71dd5c64c8a1e0f5936d39c5fd7054cb00da95a3ad89cd911a8158"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "cca237e6a40fc6e042c801763b8473be9dfd353f56fef6a43ec7cebf25c101fd"
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "619d3b831ee1871302a71f87f05ab05f5074639a9b78c25b988f9f884ee774bc",
+          "install_stderr_sha256": "64484c2452ea0d8ba80d18d30c95a21a92298734fb4e675a1db78362d375ef40"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "cca237e6a40fc6e042c801763b8473be9dfd353f56fef6a43ec7cebf25c101fd"
+          },
+          "pip_ran": false,
+          "install_stdout_sha256": "af6cd56e97b031b5a48a32d697bc4927477cf5e09920efb1c685d8371503f144",
+          "install_stderr_sha256": "8da630a5c3d3fd07867c947c0f94f2c1d0d4c2e4cfb1c66a8b4309b9fafaf6d3"
+        }
+      ]
+    },
+    "distribution": {
+      "status": "passed",
+      "version": "1.0.0",
+      "wheel": "/home/runner/work/columbus/columbus/aggregate-artifacts/columbus-1.0.0-py3-none-any.whl",
+      "java_candidate_checks": [
+        {
+          "installation": "wheel",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        },
+        {
+          "installation": "standalone release installer",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        },
+        {
+          "installation": "relocated ZIP bootstrap",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        }
+      ],
+      "bundled_java_default": true,
+      "clean_venv": true,
+      "unrelated_cwd": true,
+      "paths_with_spaces": true,
+      "global_search": true,
+      "skill_reinstall": "noop",
+      "polyglot_and_fallback": true,
+      "budgeted_context": true,
+      "graph_formats": 4,
+      "text_budget": true,
+      "receipt_continuation": true,
+      "telemetry_bytes_verified": true,
+      "named_sessions": true,
+      "no_argument_guide": true,
+      "standalone_release_install": true,
+      "ast_tree": true,
+      "native_hook_partial_staging": true,
+      "bounded_caller_evidence": true,
+      "stale_caller_source_rejected": true,
+      "complete_graph_archive": true,
+      "source_free_archive_query": true,
+      "summary_lazy_cache": true,
+      "bootstrap_hook_after_source_relocation": true,
+      "local_edits_preserved": true,
+      "managed_files": 43,
+      "archive_files": 451,
+      "plan_status": "planned"
+    }
+  },
+  {
+    "environment": "java-aggregate-check-ubuntu-latest-py3.14",
+    "verification": {
+      "status": "passed",
+      "artifact_sha256": {
+        "columbus-1.0.0-py3-none-any.whl": "6ee017b42c3b77c0ed891c274d292e3bcfb1b35f0a7a7630ae7fcfcf1a428fab",
+        "columbus-1.0.0.zip": "c22a12d5cf2ea8ef4d72d2fc405dc73a0dad32f593cd38e80dd812999ab28c5b"
+      },
+      "source_revision": "6c4c968f73db47aa3a5ed4db7856ff7c0e86b4a1",
+      "python": "3.14.7 (main, Aug  6 2026, 02:19:46) [GCC 13.3.0]",
+      "platform": "linux",
+      "same_bytes_after_verification": true
+    },
+    "upgrade": {
+      "source_unchanged": true,
+      "bundled_default": true,
+      "bundle_sha256": "c22a12d5cf2ea8ef4d72d2fc405dc73a0dad32f593cd38e80dd812999ab28c5b",
+      "runs": [
+        {
+          "version": "0.23.5",
+          "partial": true,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": null
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "53706b8654d2101df6e0012e392afe186444c6b373da48206db393ac9e6eeee3",
+          "install_stderr_sha256": "e83027fdad71dd5c64c8a1e0f5936d39c5fd7054cb00da95a3ad89cd911a8158"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "cca237e6a40fc6e042c801763b8473be9dfd353f56fef6a43ec7cebf25c101fd"
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "769fbf2a54e0bfa892fc22e4432063858815726e267019f9399674836a89a569",
+          "install_stderr_sha256": "64484c2452ea0d8ba80d18d30c95a21a92298734fb4e675a1db78362d375ef40"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "cca237e6a40fc6e042c801763b8473be9dfd353f56fef6a43ec7cebf25c101fd"
+          },
+          "pip_ran": false,
+          "install_stdout_sha256": "73d0ac1bbaa5b67d3e34950216f5e1d464cc4e4e238442a5beea4a84c3362f91",
+          "install_stderr_sha256": "8da630a5c3d3fd07867c947c0f94f2c1d0d4c2e4cfb1c66a8b4309b9fafaf6d3"
+        }
+      ]
+    },
+    "distribution": {
+      "status": "passed",
+      "version": "1.0.0",
+      "wheel": "/home/runner/work/columbus/columbus/aggregate-artifacts/columbus-1.0.0-py3-none-any.whl",
+      "java_candidate_checks": [
+        {
+          "installation": "wheel",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        },
+        {
+          "installation": "standalone release installer",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        },
+        {
+          "installation": "relocated ZIP bootstrap",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        }
+      ],
+      "bundled_java_default": true,
+      "clean_venv": true,
+      "unrelated_cwd": true,
+      "paths_with_spaces": true,
+      "global_search": true,
+      "skill_reinstall": "noop",
+      "polyglot_and_fallback": true,
+      "budgeted_context": true,
+      "graph_formats": 4,
+      "text_budget": true,
+      "receipt_continuation": true,
+      "telemetry_bytes_verified": true,
+      "named_sessions": true,
+      "no_argument_guide": true,
+      "standalone_release_install": true,
+      "ast_tree": true,
+      "native_hook_partial_staging": true,
+      "bounded_caller_evidence": true,
+      "stale_caller_source_rejected": true,
+      "complete_graph_archive": true,
+      "source_free_archive_query": true,
+      "summary_lazy_cache": true,
+      "bootstrap_hook_after_source_relocation": true,
+      "local_edits_preserved": true,
+      "managed_files": 43,
+      "archive_files": 451,
+      "plan_status": "planned"
+    }
+  },
+  {
+    "environment": "java-aggregate-check-windows-latest-py3.11",
+    "verification": {
+      "status": "passed",
+      "artifact_sha256": {
+        "columbus-1.0.0-py3-none-any.whl": "6ee017b42c3b77c0ed891c274d292e3bcfb1b35f0a7a7630ae7fcfcf1a428fab",
+        "columbus-1.0.0.zip": "c22a12d5cf2ea8ef4d72d2fc405dc73a0dad32f593cd38e80dd812999ab28c5b"
+      },
+      "source_revision": "6c4c968f73db47aa3a5ed4db7856ff7c0e86b4a1",
+      "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+      "platform": "win32",
+      "same_bytes_after_verification": true
+    },
+    "upgrade": {
+      "source_unchanged": true,
+      "bundled_default": true,
+      "bundle_sha256": "c22a12d5cf2ea8ef4d72d2fc405dc73a0dad32f593cd38e80dd812999ab28c5b",
+      "runs": [
+        {
+          "version": "0.23.5",
+          "partial": true,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": null
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "bb7cff79a906dc7782acbe16b85e95ff80ec2b196ad53e5c145ce4c65921b2fc",
+          "install_stderr_sha256": "e83027fdad71dd5c64c8a1e0f5936d39c5fd7054cb00da95a3ad89cd911a8158"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "cca237e6a40fc6e042c801763b8473be9dfd353f56fef6a43ec7cebf25c101fd"
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "fe878390b5329a45ac40ab8b2613d301755d93ab3ea481220a7c5deb33f82066",
+          "install_stderr_sha256": "64484c2452ea0d8ba80d18d30c95a21a92298734fb4e675a1db78362d375ef40"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "cca237e6a40fc6e042c801763b8473be9dfd353f56fef6a43ec7cebf25c101fd"
+          },
+          "pip_ran": false,
+          "install_stdout_sha256": "1ab6ca382cd9852bdddfeba3a1b9597d17f638b763b8b7dea39b490b3775ee1a",
+          "install_stderr_sha256": "8da630a5c3d3fd07867c947c0f94f2c1d0d4c2e4cfb1c66a8b4309b9fafaf6d3"
+        }
+      ]
+    },
+    "distribution": {
+      "status": "passed",
+      "version": "1.0.0",
+      "wheel": "D:\\a\\columbus\\columbus\\aggregate-artifacts\\columbus-1.0.0-py3-none-any.whl",
+      "java_candidate_checks": [
+        {
+          "installation": "wheel",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        },
+        {
+          "installation": "standalone release installer",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        },
+        {
+          "installation": "relocated ZIP bootstrap",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        }
+      ],
+      "bundled_java_default": true,
+      "clean_venv": true,
+      "unrelated_cwd": true,
+      "paths_with_spaces": true,
+      "global_search": true,
+      "skill_reinstall": "noop",
+      "polyglot_and_fallback": true,
+      "budgeted_context": true,
+      "graph_formats": 4,
+      "text_budget": true,
+      "receipt_continuation": true,
+      "telemetry_bytes_verified": true,
+      "named_sessions": true,
+      "no_argument_guide": true,
+      "standalone_release_install": true,
+      "ast_tree": true,
+      "native_hook_partial_staging": true,
+      "bounded_caller_evidence": true,
+      "stale_caller_source_rejected": true,
+      "complete_graph_archive": true,
+      "source_free_archive_query": true,
+      "summary_lazy_cache": true,
+      "bootstrap_hook_after_source_relocation": true,
+      "local_edits_preserved": true,
+      "managed_files": 43,
+      "archive_files": 451,
+      "plan_status": "planned"
+    }
+  },
+  {
+    "environment": "java-aggregate-check-windows-latest-py3.14",
+    "verification": {
+      "status": "passed",
+      "artifact_sha256": {
+        "columbus-1.0.0-py3-none-any.whl": "6ee017b42c3b77c0ed891c274d292e3bcfb1b35f0a7a7630ae7fcfcf1a428fab",
+        "columbus-1.0.0.zip": "c22a12d5cf2ea8ef4d72d2fc405dc73a0dad32f593cd38e80dd812999ab28c5b"
+      },
+      "source_revision": "6c4c968f73db47aa3a5ed4db7856ff7c0e86b4a1",
+      "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+      "platform": "win32",
+      "same_bytes_after_verification": true
+    },
+    "upgrade": {
+      "source_unchanged": true,
+      "bundled_default": true,
+      "bundle_sha256": "c22a12d5cf2ea8ef4d72d2fc405dc73a0dad32f593cd38e80dd812999ab28c5b",
+      "runs": [
+        {
+          "version": "0.23.5",
+          "partial": true,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": null
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "49d5ffed54e1e488a3d7e92d536328539dd624417c013a10a81b00ac3d8d1e0b",
+          "install_stderr_sha256": "e83027fdad71dd5c64c8a1e0f5936d39c5fd7054cb00da95a3ad89cd911a8158"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "cca237e6a40fc6e042c801763b8473be9dfd353f56fef6a43ec7cebf25c101fd"
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "0fd15129284072945c8c6f0e9b04be372c4fe3bd7cb377956ee21d2463be4d32",
+          "install_stderr_sha256": "64484c2452ea0d8ba80d18d30c95a21a92298734fb4e675a1db78362d375ef40"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "cca237e6a40fc6e042c801763b8473be9dfd353f56fef6a43ec7cebf25c101fd"
+          },
+          "pip_ran": false,
+          "install_stdout_sha256": "5d97e22858d704c7585fc535b30201e98386b1f8c425b4a3d3878e1efd3fba71",
+          "install_stderr_sha256": "8da630a5c3d3fd07867c947c0f94f2c1d0d4c2e4cfb1c66a8b4309b9fafaf6d3"
+        }
+      ]
+    },
+    "distribution": {
+      "status": "passed",
+      "version": "1.0.0",
+      "wheel": "D:\\a\\columbus\\columbus\\aggregate-artifacts\\columbus-1.0.0-py3-none-any.whl",
+      "java_candidate_checks": [
+        {
+          "installation": "wheel",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        },
+        {
+          "installation": "standalone release installer",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        },
+        {
+          "installation": "relocated ZIP bootstrap",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        }
+      ],
+      "bundled_java_default": true,
+      "clean_venv": true,
+      "unrelated_cwd": true,
+      "paths_with_spaces": true,
+      "global_search": true,
+      "skill_reinstall": "noop",
+      "polyglot_and_fallback": true,
+      "budgeted_context": true,
+      "graph_formats": 4,
+      "text_budget": true,
+      "receipt_continuation": true,
+      "telemetry_bytes_verified": true,
+      "named_sessions": true,
+      "no_argument_guide": true,
+      "standalone_release_install": true,
+      "ast_tree": true,
+      "native_hook_partial_staging": true,
+      "bounded_caller_evidence": true,
+      "stale_caller_source_rejected": true,
+      "complete_graph_archive": true,
+      "source_free_archive_query": true,
+      "summary_lazy_cache": true,
+      "bootstrap_hook_after_source_relocation": true,
+      "local_edits_preserved": true,
+      "managed_files": 43,
+      "archive_files": 451,
+      "plan_status": "planned"
+    }
+  }
+]

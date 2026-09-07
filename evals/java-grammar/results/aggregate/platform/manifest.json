@@ -1,0 +1,87 @@
+{
+  "format": 1,
+  "source_revision": "6c4c968f73db47aa3a5ed4db7856ff7c0e86b4a1",
+  "source_tracked_dirty": false,
+  "selection": "Python 3.11 abi3 build for each OS; this exact combined artifact requires all consumer checks",
+  "selected": [
+    {
+      "platform": "ubuntu-latest",
+      "build_python": "3.11",
+      "filename": "tree_sitter_java-0.23.5+columbus.1-cp39-abi3-linux_x86_64.whl",
+      "sha256": "5ee4965bb132b99c75175a97221ca27f60e4a69f2ec8c327e2c9b45d179cf5f7",
+      "provenance": {
+        "upstream_revision": "6018d681d319aada6d9fe1b8a8d17f9f4d6c758e",
+        "package_version": "0.23.5+columbus.1",
+        "generator": "tree-sitter-cli@0.27.0",
+        "abi": 14,
+        "files_sha256": {
+          "grammar.js": "966a10920d11ba6566736d8a1c80c15b8e349bc12945e709456d5852c8717035",
+          "src/parser.c": "64aece257d41d4c27848125dac05e619b2e0164388330cd657411b741ace6ff7",
+          "src/node-types.json": "d314dd68cc4c0f5638f4173ed6cc9931f7ca69a6583c6d97caf4349111fb1989",
+          "pyproject.toml": "e571ab02bb3ae6efbaf16b73dca68fe18f0f1aff15dc32de56bd9d55bd3988d1",
+          "setup.py": "42e55e6fa7bf687e684f29a893ba151dd2a01533a3bca9467f1a095cf4e310df",
+          "bindings/python/tree_sitter_java/binding.c": "f62d846c352e0cc50b1c261f01b94583d5ef3b04a9c62a8ce60d60359a6ea33b",
+          "LICENSE": "52ed137b039cd9c46409bc22e89938af911c95b157feae2d040b51e6084369a7"
+        },
+        "patch_sha256": "701ad2f492a934051b721206cdfc4903b2a83a89023ec406d4cb700ecbd60b4c"
+      },
+      "tested_binary_sha256": {
+        "_binding.abi3.so": "fcad1a4c2749357caf939eb95c24e15ed2d4f6a27f235cec548bb08142e8ea70"
+      }
+    },
+    {
+      "platform": "macos-latest",
+      "build_python": "3.11",
+      "filename": "tree_sitter_java-0.23.5+columbus.1-cp39-abi3-macosx_10_9_universal2.whl",
+      "sha256": "7c5db5613ec5fff7ba5b7564dd4a5ca2326083d8f9f92d0e3f559835a236b80a",
+      "provenance": {
+        "upstream_revision": "6018d681d319aada6d9fe1b8a8d17f9f4d6c758e",
+        "package_version": "0.23.5+columbus.1",
+        "generator": "tree-sitter-cli@0.27.0",
+        "abi": 14,
+        "files_sha256": {
+          "grammar.js": "966a10920d11ba6566736d8a1c80c15b8e349bc12945e709456d5852c8717035",
+          "src/parser.c": "64aece257d41d4c27848125dac05e619b2e0164388330cd657411b741ace6ff7",
+          "src/node-types.json": "d314dd68cc4c0f5638f4173ed6cc9931f7ca69a6583c6d97caf4349111fb1989",
+          "pyproject.toml": "e571ab02bb3ae6efbaf16b73dca68fe18f0f1aff15dc32de56bd9d55bd3988d1",
+          "setup.py": "42e55e6fa7bf687e684f29a893ba151dd2a01533a3bca9467f1a095cf4e310df",
+          "bindings/python/tree_sitter_java/binding.c": "f62d846c352e0cc50b1c261f01b94583d5ef3b04a9c62a8ce60d60359a6ea33b",
+          "LICENSE": "52ed137b039cd9c46409bc22e89938af911c95b157feae2d040b51e6084369a7"
+        },
+        "patch_sha256": "701ad2f492a934051b721206cdfc4903b2a83a89023ec406d4cb700ecbd60b4c"
+      },
+      "tested_binary_sha256": {
+        "_binding.abi3.so": "fa22aeaa113a1ddb1cbd6296bb4b2a0f355e8841e2f3fc4c9acd0ebf649bb979"
+      }
+    },
+    {
+      "platform": "windows-latest",
+      "build_python": "3.11",
+      "filename": "tree_sitter_java-0.23.5+columbus.1-cp39-abi3-win_amd64.whl",
+      "sha256": "be2e9e8ba9547cfb3b0bbeb034588961d232e0b86aff51f02de2bd785f5164c8",
+      "provenance": {
+        "upstream_revision": "6018d681d319aada6d9fe1b8a8d17f9f4d6c758e",
+        "package_version": "0.23.5+columbus.1",
+        "generator": "tree-sitter-cli@0.27.0",
+        "abi": 14,
+        "files_sha256": {
+          "grammar.js": "966a10920d11ba6566736d8a1c80c15b8e349bc12945e709456d5852c8717035",
+          "src/parser.c": "64aece257d41d4c27848125dac05e619b2e0164388330cd657411b741ace6ff7",
+          "src/node-types.json": "d314dd68cc4c0f5638f4173ed6cc9931f7ca69a6583c6d97caf4349111fb1989",
+          "pyproject.toml": "e17ec32922f74159b78de389f3a209a26f3bbd14a1cf0f09a2a6ba26de5b50e8",
+          "setup.py": "42e55e6fa7bf687e684f29a893ba151dd2a01533a3bca9467f1a095cf4e310df",
+          "bindings/python/tree_sitter_java/binding.c": "f62d846c352e0cc50b1c261f01b94583d5ef3b04a9c62a8ce60d60359a6ea33b",
+          "LICENSE": "52ed137b039cd9c46409bc22e89938af911c95b157feae2d040b51e6084369a7"
+        },
+        "patch_sha256": "701ad2f492a934051b721206cdfc4903b2a83a89023ec406d4cb700ecbd60b4c"
+      },
+      "tested_binary_sha256": {
+        "_binding.pyd": "60180c98a6c05ec48c7e3b44e12dccc9a6fa20029454b507bc3f178217fc4c8d"
+      }
+    }
+  ],
+  "files": {
+    "columbus-1.0.0-py3-none-any.whl": "6ee017b42c3b77c0ed891c274d292e3bcfb1b35f0a7a7630ae7fcfcf1a428fab",
+    "columbus-1.0.0.zip": "c22a12d5cf2ea8ef4d72d2fc405dc73a0dad32f593cd38e80dd812999ab28c5b"
+  }
+}
