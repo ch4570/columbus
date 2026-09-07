@@ -94,9 +94,17 @@ def main(argv=None) -> int:
     parser.add_argument('--version', action='version', version=__version__)
     _common(parser)
     sub = parser.add_subparsers(dest='command', required=True)
-    for name in ('doctor', 'init', 'tree', 'hook-install', 'hook-update', 'sync', 'index', 'status', 'search', 'map', 'symbol', 'neighbors', 'impact', 'context', 'explore', 'stats', 'graph', 'export', 'serve', 'telemetry'):
+    for name in ('doctor', 'init', 'archive-search', 'archive', 'tree', 'hook-install', 'hook-update', 'sync', 'index', 'status', 'search', 'map', 'symbol', 'neighbors', 'impact', 'context', 'explore', 'stats', 'graph', 'export', 'serve', 'telemetry'):
         command = sub.add_parser(name)
         _common(command, subcommand=True)
+        if name == 'archive-search':
+            command.add_argument('query')
+            command.add_argument('--input', required=True)
+            command.add_argument('--limit', type=int, default=5)
+            command.add_argument('--budget-bytes', type=int, default=6000)
+        if name == 'archive':
+            command.add_argument('--output', required=True, help='New complete .jsonl.gz graph artifact')
+            command.add_argument('--snapshot', action='store_true', help='Archive the saved index without syncing')
         if name == 'tree':
             command.add_argument('--label', help='Exact symbol ID, name or qualified label; include ancestors and descendants')
             command.add_argument('--path', help='Repository-relative path glob')
@@ -245,6 +253,18 @@ def main(argv=None) -> int:
             result = index.status(check_files=args.verify_content)
             if result['root'] != str(root):
                 raise ValueError('Selected index belongs to a different repository')
+        elif args.command == 'archive-search':
+            if args.pretty:
+                raise ValueError('archive-search uses compact JSON to preserve its byte budget')
+            from .archive import search_archive
+            result = search_archive(args.input, args.query, args.limit, args.budget_bytes)
+        elif args.command == 'archive':
+            from .archive import archive
+            if not args.snapshot:
+                index.refresh(root, fast=True)
+            elif index.status()['root'] != str(root):
+                raise ValueError('Selected index belongs to a different repository')
+            result = archive(index, args.output)
         elif args.command == 'serve':
             from .mcp_server import serve
             if index.status()['root'] != str(root):
