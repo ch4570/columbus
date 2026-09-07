@@ -149,6 +149,17 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
                 raise VerificationError('Installed caller text exceeded byte budget')
             if len(run([*command, '--budget-bytes', '1024']).encode('utf-8')) > 1024:
                 raise VerificationError('Installed caller packet exceeded byte budget')
+            expanded = json.loads(run([*command, '--path', 'caller_probe.py', '--context-lines', '40']))
+            if (expanded['matched_callers'] != 2 or expanded['truncated']
+                    or any(item['start_line'] >= item['call_line'] for item in expanded['items'])):
+                raise VerificationError('Installed caller context expansion lost lexical ranges')
+            excluded = json.loads(run([*command, '--path', 'absent/*', '--limit', '1']))
+            if excluded['matched_callers'] != 0 or excluded['items'] or excluded['truncated']:
+                raise VerificationError('Installed caller path filter did not apply before counting')
+            single = json.loads(run([*command, '--context-lines', '0']))
+            if any(item['start_line'] != item['end_line'] for item in single['items']):
+                raise VerificationError('Installed zero-context caller response expanded unexpectedly')
+            run([*command, '--context-lines', '41'], expected=2)
             try:
                 source.write_bytes(original + b'# changed after indexing\n')
                 run(command, expected=2)
