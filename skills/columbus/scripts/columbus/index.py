@@ -16,8 +16,8 @@ from .discovery import digest, discover, module_name
 from .languages import ANALYZER_VERSION, analyzer_fingerprint, code_lines, decode_source, parse_source, resolve_files
 from .sync_state import SnapshotChanged, file_stat, git_state, read_stable
 
-SCHEMA_VERSION = "3"
-READABLE_SCHEMAS = {"2", SCHEMA_VERSION}
+SCHEMA_VERSION = "4"
+READABLE_SCHEMAS = {"2", "3", SCHEMA_VERSION}
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS metadata(key TEXT PRIMARY KEY, value TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS files(path TEXT PRIMARY KEY, hash TEXT NOT NULL,
@@ -32,7 +32,6 @@ CREATE TABLE IF NOT EXISTS edges(source TEXT NOT NULL REFERENCES symbols(id),
     confidence TEXT NOT NULL, evidence TEXT NOT NULL, path TEXT NOT NULL, line INTEGER NOT NULL);
 CREATE INDEX IF NOT EXISTS edge_source ON edges(source,kind);
 CREATE INDEX IF NOT EXISTS edge_target ON edges(target,kind);
-CREATE VIRTUAL TABLE IF NOT EXISTS symbol_fts USING fts5(id UNINDEXED, name, path, body);
 """
 
 
@@ -68,11 +67,12 @@ class RepositoryIndex:
         if not self.db.is_file():
             raise ValueError("Index is missing. Run: columbus --db PATH index REPOSITORY")
         conn = sqlite3.connect(self.db.as_uri() + "?mode=ro", uri=True, timeout=30)
+        conn.create_function("inflate", 1, lambda body: zlib.decompress(body).decode("utf-8"))
         conn.row_factory = sqlite3.Row
         try:
             conn.execute("BEGIN")
             if self._meta(conn).get("schema_version") not in READABLE_SCHEMAS:
-                raise ValueError("Unsupported index schema; choose a new --db path and rebuild (schema 2 or 3 required)")
+                raise ValueError("Unsupported index schema; choose a new --db path and rebuild (schema 2, 3 or 4 required)")
             yield conn
         finally:
             conn.close()
@@ -96,6 +96,7 @@ class RepositoryIndex:
             raise ValueError("Repository must be an existing local directory")
         self.db.parent.mkdir(parents=True, exist_ok=True)
         conn = sqlite3.connect(self.db, timeout=30)
+        conn.create_function("inflate", 1, lambda body: zlib.decompress(body).decode("utf-8"))
         conn.row_factory = sqlite3.Row
         try:
             # Check existing schemas before executing CREATE TABLE statements;
@@ -104,7 +105,7 @@ class RepositoryIndex:
             if has_metadata:
                 current_schema = self._meta(conn).get("schema_version")
                 if current_schema is not None and current_schema not in READABLE_SCHEMAS:
-                    raise ValueError("Unsupported index schema; choose a new --db path and rebuild (schema 2 or 3 required)")
+                    raise ValueError("Unsupported index schema; choose a new --db path and rebuild (schema 2, 3 or 4 required)")
             conn.execute("PRAGMA foreign_keys=ON")
             conn.execute("PRAGMA journal_mode=WAL")
             conn.executescript(SCHEMA)
@@ -112,6 +113,15 @@ class RepositoryIndex:
             old_meta = self._meta(conn)
             if old_meta.get("root", str(root)) != str(root):
                 raise ValueError("This index belongs to another repository or worktree. Choose a different --db")
+            if old_meta.get("schema_version") != SCHEMA_VERSION:
+                # DDL and rebuilding are in the same transaction as the snapshot.
+                conn.execute("DROP TABLE IF EXISTS symbol_fts")
+                conn.execute("DROP VIEW IF EXISTS search_content")
+                conn.execute("DROP TABLE IF EXISTS search_documents")
+                conn.execute("CREATE TABLE search_documents(rowid INTEGER PRIMARY KEY, id TEXT, name TEXT, path TEXT, body BLOB)")
+                conn.execute("CREATE INDEX search_document_path ON search_documents(path)")
+                conn.execute("CREATE VIEW search_content AS SELECT rowid,id,name,path,inflate(body) AS body FROM search_documents")
+                conn.execute("CREATE VIRTUAL TABLE symbol_fts USING fts5(id UNINDEXED,name,path,body,content='search_content',content_rowid='rowid')")
             source_root = source_root if source_root is not None else old_meta.get("source_root", ".")
             source_root = Path(source_root).as_posix()
             state_before = git_state(root)
@@ -206,10 +216,15 @@ class RepositoryIndex:
                 edges = resolve_files([r["parsed"] for r in records])
                 conn.execute("DELETE FROM edges")
                 conn.execute("DELETE FROM symbols")
-                for rel in set(sources) | set(removed):
-                    conn.execute("DELETE FROM symbol_fts WHERE path=?", (rel,))
                 if rebuild:
-                    conn.execute("DELETE FROM symbol_fts")
+                    conn.execute("INSERT INTO symbol_fts(symbol_fts) VALUES('delete-all')")
+                    conn.execute("DELETE FROM search_documents")
+                else:
+                    for rel in set(sources) | set(removed):
+                        for doc in conn.execute("SELECT rowid,id,name,path,body FROM search_documents WHERE path=?", (rel,)).fetchall():
+                            conn.execute("INSERT INTO symbol_fts(symbol_fts,rowid,id,name,path,body) VALUES('delete',?,?,?,?,?)",
+                                         (*doc[:4], zlib.decompress(doc[4]).decode("utf-8")))
+                        conn.execute("DELETE FROM search_documents WHERE path=?", (rel,))
                 for record in records:
                     parsed = record["parsed"]
                     source_lines = code_lines(sources.get(record["path"], ""), parsed.get("language"))
@@ -222,9 +237,11 @@ class RepositoryIndex:
                             if symbol["kind"] != "module":
                                 body = body[:12000]
                             searchable_name = " ".join(terms(symbol["qualname"]))
-                            conn.execute("INSERT INTO symbol_fts VALUES(?,?,?,?)", (
-                                symbol["id"], searchable_name, record["path"],
-                                " ".join([symbol.get("signature", ""), symbol.get("doc", "") or "", body])))
+                            document = (symbol["id"], searchable_name, record["path"],
+                                        " ".join([symbol.get("signature", ""), symbol.get("doc", "") or "", body]))
+                            rowid = conn.execute("INSERT INTO search_documents(id,name,path,body) VALUES(?,?,?,?)",
+                                                 (*document[:3], zlib.compress(document[3].encode("utf-8")))).lastrowid
+                            conn.execute("INSERT INTO symbol_fts(rowid,id,name,path,body) VALUES(?,?,?,?,?)", (rowid, *document))
                 for edge in edges:
                     evidence = edge.get("evidence", "")
                     if not isinstance(evidence, str):

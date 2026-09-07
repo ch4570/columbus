@@ -80,3 +80,7 @@ A compiler probe found one false target caused by treating a source-defined Obje
 ## Compressed FTS storage feasibility
 
 An isolated external-content FTS prototype reduces the current Spring DB from a vacuumed control of 106,471,424 bytes to 92,446,720 (13.17%), with exact reconstructed document rows, twelve query candidate/ranking results, and delete/rollback integrity checks. [Evidence and adoption requirements](../evals/spring-core/results/fts-compression-probe/REPORT.md). Production storage is unchanged; migration, full refresh/latency/platform validation remain required before adopting this result. This is evidence for the next storage change, not a token-savings claim.
+
+## Compressed FTS production storage
+
+Schema 4 implements compressed search document bodies with transactional FTS updates and readable schema-2/3 migration. Same-corpus fresh DB size decreases 108,814,336 → 96,677,888 bytes (11.15%); graph/search parity holds before and after an edit. Warm/edit/cold timing observations show no improvement. Existing migrated DB files retain free pages and do not automatically shrink. Both engine suites pass 209 tests, root tests 53, final rollback sync suite 20, and clean wheel installation passes. [Report and receipts](../evals/spring-core/results/fts-storage/REPORT.md). Hosted validation, broader issue acceptance and actual token savings remain open.

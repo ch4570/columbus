@@ -89,7 +89,7 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
             status = json.loads(run([*prefix, 'sync', '--repo', target, '--summary']))
             if not status.get('summary') or not status.get('details_omitted'):
                 raise VerificationError('Installed summary omitted its evidence boundary')
-            if (status['schema_version'] != '3'
+            if (status['schema_version'] != '4'
                     or any(status['refresh'].get(key) != 0 for key in ('cached_parses_loaded', 'parsed_files', 'hashed_files'))):
                 raise VerificationError('Installed compressed cache did not support lazy unchanged sync')
             artifact = root / (name + '.jsonl.gz')

@@ -1,0 +1,493 @@
+{
+  "baseline_commit": "fc0b65fd43e52699606824eab866ce90e3adedd1",
+  "corpus_commit": "4c8c6409a27a62ab163d3b6196ad862b7c835440",
+  "engine_sha256": "8eee8de5df0ba756a04a13366036933bdc8551054a5bb8cc16503ab81990a2ac",
+  "os_cache": "not flushed; baseline first; shared host load uncontrolled",
+  "queries": [
+    "DefaultResourceLoader",
+    "getResource",
+    "ResolvableType",
+    "Nullable",
+    "protocolResolver",
+    "class loader",
+    "getClassLoader",
+    "paramTypes",
+    "ReflectionUtils",
+    "MethodInvoker",
+    "ObjectUtils",
+    "ClassUtils"
+  ],
+  "edited_source_sha256": "a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c",
+  "before": {
+    "cold": {
+      "seconds": 5.627060791986878,
+      "refresh": {
+        "mode": "fast",
+        "check": "content_hash_verified",
+        "parsed_files": 1166,
+        "cached_parses_loaded": 0,
+        "reused_files": 0,
+        "metadata_reused_files": 0,
+        "added_files": 1166,
+        "removed_files": 0,
+        "hashed_files": 1166,
+        "hashed_bytes": 7120331,
+        "config_hashed_files": 0,
+        "config_hashed_bytes": 0,
+        "head_changed": false,
+        "branch_changed": false,
+        "git_state_changed": true,
+        "config_changed": true,
+        "global_relink": true,
+        "elapsed_seconds": 5.4056
+      }
+    },
+    "warm": [
+      {
+        "seconds": 0.419149416993605,
+        "refresh": {
+          "mode": "fast",
+          "check": "metadata_checked",
+          "parsed_files": 0,
+          "cached_parses_loaded": 0,
+          "reused_files": 1166,
+          "metadata_reused_files": 1166,
+          "added_files": 0,
+          "removed_files": 0,
+          "hashed_files": 0,
+          "hashed_bytes": 0,
+          "config_hashed_files": 0,
+          "config_hashed_bytes": 0,
+          "head_changed": false,
+          "branch_changed": false,
+          "git_state_changed": false,
+          "config_changed": false,
+          "global_relink": false,
+          "elapsed_seconds": 0.4145
+        }
+      },
+      {
+        "seconds": 0.42260812499444,
+        "refresh": {
+          "mode": "fast",
+          "check": "metadata_checked",
+          "parsed_files": 0,
+          "cached_parses_loaded": 0,
+          "reused_files": 1166,
+          "metadata_reused_files": 1166,
+          "added_files": 0,
+          "removed_files": 0,
+          "hashed_files": 0,
+          "hashed_bytes": 0,
+          "config_hashed_files": 0,
+          "config_hashed_bytes": 0,
+          "head_changed": false,
+          "branch_changed": false,
+          "git_state_changed": false,
+          "config_changed": false,
+          "global_relink": false,
+          "elapsed_seconds": 0.418
+        }
+      },
+      {
+        "seconds": 0.4194157079909928,
+        "refresh": {
+          "mode": "fast",
+          "check": "metadata_checked",
+          "parsed_files": 0,
+          "cached_parses_loaded": 0,
+          "reused_files": 1166,
+          "metadata_reused_files": 1166,
+          "added_files": 0,
+          "removed_files": 0,
+          "hashed_files": 0,
+          "hashed_bytes": 0,
+          "config_hashed_files": 0,
+          "config_hashed_bytes": 0,
+          "head_changed": false,
+          "branch_changed": false,
+          "git_state_changed": false,
+          "config_changed": false,
+          "global_relink": false,
+          "elapsed_seconds": 0.4149
+        }
+      },
+      {
+        "seconds": 0.42096366599434987,
+        "refresh": {
+          "mode": "fast",
+          "check": "metadata_checked",
+          "parsed_files": 0,
+          "cached_parses_loaded": 0,
+          "reused_files": 1166,
+          "metadata_reused_files": 1166,
+          "added_files": 0,
+          "removed_files": 0,
+          "hashed_files": 0,
+          "hashed_bytes": 0,
+          "config_hashed_files": 0,
+          "config_hashed_bytes": 0,
+          "head_changed": false,
+          "branch_changed": false,
+          "git_state_changed": false,
+          "config_changed": false,
+          "global_relink": false,
+          "elapsed_seconds": 0.4164
+        }
+      },
+      {
+        "seconds": 0.41934341700107325,
+        "refresh": {
+          "mode": "fast",
+          "check": "metadata_checked",
+          "parsed_files": 0,
+          "cached_parses_loaded": 0,
+          "reused_files": 1166,
+          "metadata_reused_files": 1166,
+          "added_files": 0,
+          "removed_files": 0,
+          "hashed_files": 0,
+          "hashed_bytes": 0,
+          "config_hashed_files": 0,
+          "config_hashed_bytes": 0,
+          "head_changed": false,
+          "branch_changed": false,
+          "git_state_changed": false,
+          "config_changed": false,
+          "global_relink": false,
+          "elapsed_seconds": 0.4148
+        }
+      }
+    ],
+    "warm_median_seconds": 0.4194157079909928,
+    "database_bytes": 108814336,
+    "allocated_table_bytes": 108277760,
+    "tables": {
+      "configs": 4096,
+      "edge_source": 5533696,
+      "edge_target": 6094848,
+      "edges": 15003648,
+      "files": 6164480,
+      "metadata": 98304,
+      "sqlite_autoindex_configs_1": 4096,
+      "sqlite_autoindex_files_1": 110592,
+      "sqlite_autoindex_metadata_1": 4096,
+      "sqlite_autoindex_symbols_1": 3923968,
+      "sqlite_schema": 4096,
+      "symbol_fts_config": 4096,
+      "symbol_fts_content": 28311552,
+      "symbol_fts_data": 6938624,
+      "symbol_fts_docsize": 262144,
+      "symbol_fts_idx": 36864,
+      "symbol_name": 626688,
+      "symbol_path": 1888256,
+      "symbols": 33263616
+    },
+    "facts": {
+      "symbols": {
+        "count": 20811,
+        "sha256": "22e5f47488ebf4ba5261de1ca77075c4bb82e3303db09da065d5d47345f628b1"
+      },
+      "edges": {
+        "count": 31408,
+        "sha256": "ce788ccaa759ec803dbef067bc217456162a7dc1b3240dd3c0e48d172f8139ce"
+      }
+    },
+    "edit": {
+      "seconds": 3.068520290995366,
+      "refresh": {
+        "mode": "fast",
+        "check": "metadata_checked",
+        "parsed_files": 1,
+        "cached_parses_loaded": 1165,
+        "reused_files": 1165,
+        "metadata_reused_files": 1165,
+        "added_files": 0,
+        "removed_files": 0,
+        "hashed_files": 1,
+        "hashed_bytes": 10276,
+        "config_hashed_files": 0,
+        "config_hashed_bytes": 0,
+        "head_changed": false,
+        "branch_changed": false,
+        "git_state_changed": false,
+        "config_changed": false,
+        "global_relink": true,
+        "elapsed_seconds": 2.8639
+      }
+    },
+    "edited_facts": {
+      "symbols": {
+        "count": 20811,
+        "sha256": "c3cafd646fdae531fdfdfab9378989ab3a9966402f6072818f62e51e66eebcba"
+      },
+      "edges": {
+        "count": 31408,
+        "sha256": "ce788ccaa759ec803dbef067bc217456162a7dc1b3240dd3c0e48d172f8139ce"
+      }
+    },
+    "restore": {
+      "seconds": 3.113173082994763,
+      "refresh": {
+        "mode": "fast",
+        "check": "metadata_checked",
+        "parsed_files": 1,
+        "cached_parses_loaded": 1165,
+        "reused_files": 1165,
+        "metadata_reused_files": 1165,
+        "added_files": 0,
+        "removed_files": 0,
+        "hashed_files": 1,
+        "hashed_bytes": 10249,
+        "config_hashed_files": 0,
+        "config_hashed_bytes": 0,
+        "head_changed": false,
+        "branch_changed": false,
+        "git_state_changed": false,
+        "config_changed": false,
+        "global_relink": true,
+        "elapsed_seconds": 2.9089
+      }
+    },
+    "restored_facts_equal": true,
+    "indexed_bytes": 7120331
+  },
+  "after": {
+    "cold": {
+      "seconds": 5.986102415990899,
+      "refresh": {
+        "mode": "fast",
+        "check": "content_hash_verified",
+        "parsed_files": 1166,
+        "cached_parses_loaded": 0,
+        "reused_files": 0,
+        "metadata_reused_files": 0,
+        "added_files": 1166,
+        "removed_files": 0,
+        "hashed_files": 1166,
+        "hashed_bytes": 7120331,
+        "config_hashed_files": 0,
+        "config_hashed_bytes": 0,
+        "head_changed": false,
+        "branch_changed": false,
+        "git_state_changed": true,
+        "config_changed": true,
+        "global_relink": true,
+        "elapsed_seconds": 5.7644
+      }
+    },
+    "warm": [
+      {
+        "seconds": 0.43376116700528655,
+        "refresh": {
+          "mode": "fast",
+          "check": "metadata_checked",
+          "parsed_files": 0,
+          "cached_parses_loaded": 0,
+          "reused_files": 1166,
+          "metadata_reused_files": 1166,
+          "added_files": 0,
+          "removed_files": 0,
+          "hashed_files": 0,
+          "hashed_bytes": 0,
+          "config_hashed_files": 0,
+          "config_hashed_bytes": 0,
+          "head_changed": false,
+          "branch_changed": false,
+          "git_state_changed": false,
+          "config_changed": false,
+          "global_relink": false,
+          "elapsed_seconds": 0.429
+        }
+      },
+      {
+        "seconds": 0.43011979199945927,
+        "refresh": {
+          "mode": "fast",
+          "check": "metadata_checked",
+          "parsed_files": 0,
+          "cached_parses_loaded": 0,
+          "reused_files": 1166,
+          "metadata_reused_files": 1166,
+          "added_files": 0,
+          "removed_files": 0,
+          "hashed_files": 0,
+          "hashed_bytes": 0,
+          "config_hashed_files": 0,
+          "config_hashed_bytes": 0,
+          "head_changed": false,
+          "branch_changed": false,
+          "git_state_changed": false,
+          "config_changed": false,
+          "global_relink": false,
+          "elapsed_seconds": 0.4254
+        }
+      },
+      {
+        "seconds": 0.43330633400182705,
+        "refresh": {
+          "mode": "fast",
+          "check": "metadata_checked",
+          "parsed_files": 0,
+          "cached_parses_loaded": 0,
+          "reused_files": 1166,
+          "metadata_reused_files": 1166,
+          "added_files": 0,
+          "removed_files": 0,
+          "hashed_files": 0,
+          "hashed_bytes": 0,
+          "config_hashed_files": 0,
+          "config_hashed_bytes": 0,
+          "head_changed": false,
+          "branch_changed": false,
+          "git_state_changed": false,
+          "config_changed": false,
+          "global_relink": false,
+          "elapsed_seconds": 0.429
+        }
+      },
+      {
+        "seconds": 0.42828341700078454,
+        "refresh": {
+          "mode": "fast",
+          "check": "metadata_checked",
+          "parsed_files": 0,
+          "cached_parses_loaded": 0,
+          "reused_files": 1166,
+          "metadata_reused_files": 1166,
+          "added_files": 0,
+          "removed_files": 0,
+          "hashed_files": 0,
+          "hashed_bytes": 0,
+          "config_hashed_files": 0,
+          "config_hashed_bytes": 0,
+          "head_changed": false,
+          "branch_changed": false,
+          "git_state_changed": false,
+          "config_changed": false,
+          "global_relink": false,
+          "elapsed_seconds": 0.4237
+        }
+      },
+      {
+        "seconds": 0.43363887499435805,
+        "refresh": {
+          "mode": "fast",
+          "check": "metadata_checked",
+          "parsed_files": 0,
+          "cached_parses_loaded": 0,
+          "reused_files": 1166,
+          "metadata_reused_files": 1166,
+          "added_files": 0,
+          "removed_files": 0,
+          "hashed_files": 0,
+          "hashed_bytes": 0,
+          "config_hashed_files": 0,
+          "config_hashed_bytes": 0,
+          "head_changed": false,
+          "branch_changed": false,
+          "git_state_changed": false,
+          "config_changed": false,
+          "global_relink": false,
+          "elapsed_seconds": 0.4291
+        }
+      }
+    ],
+    "warm_median_seconds": 0.43330633400182705,
+    "database_bytes": 96677888,
+    "allocated_table_bytes": 96141312,
+    "tables": {
+      "configs": 4096,
+      "edge_source": 5533696,
+      "edge_target": 6094848,
+      "edges": 15003648,
+      "files": 6164480,
+      "metadata": 98304,
+      "search_document_path": 1888256,
+      "search_documents": 14286848,
+      "sqlite_autoindex_configs_1": 4096,
+      "sqlite_autoindex_files_1": 110592,
+      "sqlite_autoindex_metadata_1": 4096,
+      "sqlite_autoindex_symbols_1": 3923968,
+      "sqlite_schema": 4096,
+      "symbol_fts_config": 4096,
+      "symbol_fts_data": 6938624,
+      "symbol_fts_docsize": 262144,
+      "symbol_fts_idx": 36864,
+      "symbol_name": 626688,
+      "symbol_path": 1888256,
+      "symbols": 33263616
+    },
+    "facts": {
+      "symbols": {
+        "count": 20811,
+        "sha256": "22e5f47488ebf4ba5261de1ca77075c4bb82e3303db09da065d5d47345f628b1"
+      },
+      "edges": {
+        "count": 31408,
+        "sha256": "ce788ccaa759ec803dbef067bc217456162a7dc1b3240dd3c0e48d172f8139ce"
+      }
+    },
+    "edit": {
+      "seconds": 3.0939155420055613,
+      "refresh": {
+        "mode": "fast",
+        "check": "metadata_checked",
+        "parsed_files": 1,
+        "cached_parses_loaded": 1165,
+        "reused_files": 1165,
+        "metadata_reused_files": 1165,
+        "added_files": 0,
+        "removed_files": 0,
+        "hashed_files": 1,
+        "hashed_bytes": 10276,
+        "config_hashed_files": 0,
+        "config_hashed_bytes": 0,
+        "head_changed": false,
+        "branch_changed": false,
+        "git_state_changed": false,
+        "config_changed": false,
+        "global_relink": true,
+        "elapsed_seconds": 2.9034
+      }
+    },
+    "edited_facts": {
+      "symbols": {
+        "count": 20811,
+        "sha256": "c3cafd646fdae531fdfdfab9378989ab3a9966402f6072818f62e51e66eebcba"
+      },
+      "edges": {
+        "count": 31408,
+        "sha256": "ce788ccaa759ec803dbef067bc217456162a7dc1b3240dd3c0e48d172f8139ce"
+      }
+    },
+    "restore": {
+      "seconds": 3.065572749997955,
+      "refresh": {
+        "mode": "fast",
+        "check": "metadata_checked",
+        "parsed_files": 1,
+        "cached_parses_loaded": 1165,
+        "reused_files": 1165,
+        "metadata_reused_files": 1165,
+        "added_files": 0,
+        "removed_files": 0,
+        "hashed_files": 1,
+        "hashed_bytes": 10249,
+        "config_hashed_files": 0,
+        "config_hashed_bytes": 0,
+        "head_changed": false,
+        "branch_changed": false,
+        "git_state_changed": false,
+        "config_changed": false,
+        "global_relink": true,
+        "elapsed_seconds": 2.868
+      }
+    },
+    "restored_facts_equal": true,
+    "indexed_bytes": 7120331
+  },
+  "all_symbol_edge_rows_equal": true,
+  "edited_symbol_edge_rows_equal": true,
+  "search_hits_and_ranking_equal": true
+}

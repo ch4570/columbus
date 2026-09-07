@@ -291,12 +291,54 @@ class SyncTests(unittest.TestCase):
         self.assertEqual(self.index.status()["schema_version"], "2")
         self.assertEqual(self.index.symbol(symbol_id), before)
         report = self.index.refresh(self.root, fast=True)
-        self.assertEqual(report["schema_version"], "3")
+        self.assertEqual(report["schema_version"], "4")
         after = self.index.symbol(symbol_id)
         before.pop("revision"); after.pop("revision")
         self.assertEqual(after, before)
         with closing(sqlite3.connect(self.index.db)) as conn:
             self.assertEqual(conn.execute("SELECT typeof(parsed) FROM files").fetchone()[0], "blob")
+
+    def test_external_search_migration_update_delete_and_rollback(self):
+        source = self.write("one.py", "def one(): return 'olduniquetoken'\n")
+        self.write("two.py", "def two(): return 'keepuniquetoken'\n")
+        self.index.refresh(self.root)
+        before = self.index.search("olduniquetoken")["hits"]
+        # Reconstruct the actual schema-3 FTS layout, not just its version flag.
+        with closing(sqlite3.connect(self.index.db)) as conn, conn:
+            conn.create_function("inflate", 1, lambda b: index_module.zlib.decompress(b).decode())
+            docs = conn.execute("SELECT rowid,id,name,path,body FROM symbol_fts").fetchall()
+            conn.execute("DROP TABLE symbol_fts")
+            conn.execute("DROP VIEW search_content")
+            conn.execute("DROP TABLE search_documents")
+            conn.execute("CREATE VIRTUAL TABLE symbol_fts USING fts5(id UNINDEXED,name,path,body)")
+            conn.executemany("INSERT INTO symbol_fts(rowid,id,name,path,body) VALUES(?,?,?,?,?)", docs)
+            conn.execute("UPDATE metadata SET value=? WHERE key='schema_version'", (json.dumps("3"),))
+        self.assertEqual(self.index.search("olduniquetoken")["hits"], before)
+        with patch.object(index_module, "resolve_files", side_effect=RuntimeError("migration failed")):
+            with self.assertRaisesRegex(RuntimeError, "migration failed"):
+                self.index.refresh(self.root)
+        self.assertEqual(self.index.status()["schema_version"], "3")
+        self.assertEqual(self.index.search("olduniquetoken")["hits"], before)
+        self.index.refresh(self.root)
+        self.assertEqual(self.index.search("olduniquetoken")["hits"], before)
+        source.write_text("def one(): return 'newuniquetoken'\n")
+        self.index.refresh(self.root)
+        self.assertFalse(self.index.search("olduniquetoken")["hits"])
+        self.assertTrue(self.index.search("newuniquetoken")["hits"])
+        self.assertTrue(self.index.search("keepuniquetoken")["hits"])
+        source.write_text("def one(): return 'rollbackuniquetoken'\n")
+        state = index_module.git_state(self.root)
+        with patch.object(index_module, "git_state", side_effect=[state, SnapshotChanged("late change")]):
+            with self.assertRaisesRegex(SnapshotChanged, "late change"):
+                self.index.refresh(self.root)
+        self.assertTrue(self.index.search("newuniquetoken")["hits"])
+        self.assertFalse(self.index.search("rollbackuniquetoken")["hits"])
+        source.unlink()
+        self.index.refresh(self.root)
+        self.assertFalse(self.index.search("newuniquetoken")["hits"])
+        with closing(sqlite3.connect(self.index.db)) as conn, conn:
+            conn.create_function("inflate", 1, lambda b: index_module.zlib.decompress(b).decode())
+            conn.execute("INSERT INTO symbol_fts(symbol_fts,rank) VALUES('integrity-check',1)")
 
     def test_schema_one_database_is_untouched_and_rejected(self):
         self.index.db.parent.mkdir()

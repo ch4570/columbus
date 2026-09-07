@@ -27,7 +27,7 @@ python3 "$SKILL_DIR/scripts/columbus.py" status --repo "$REPO" --verify-content
 | Separate worktree | Use a separate default DB; reject a DB belonging to another root |
 | Gradle/Maven/ignore/version-catalog input change | Change configuration fingerprint; conservatively reparse/relink |
 | Analyzer code, actual grammar/runtime version, language set | Change analyzer fingerprint and rebuild relevant stored facts conservatively |
-| Schema 2 database | Readable; next sync atomically rebuilds into compressed schema 3 |
+| Schema 2 or 3 database | Readable; next sync atomically rebuilds into compressed schema 4 |
 | Schema 1 / unknown database schema | Refuse migration; choose a new DB path and rebuild |
 
 Configuration filenames include `build.gradle`, `build.gradle.kts`, `settings.gradle`, `settings.gradle.kts`, `pom.xml`, `gradle.properties`, `gradle.lockfile`, `libs.versions.toml`, `.columbusignore`, and `.gitignore`. Their content is a freshness input, not an executed build or a resolved dependency graph. Configuration outside a restricted source root is still considered when discovered within the repository.
@@ -54,6 +54,6 @@ Generated-code exclusion can omit declarations used by handwritten code. Report 
 
 ## Storage format
 
-Schema 3 stores lossless zlib-compressed UTF-8 JSON parse facts in `files.parsed`; use the engine's decoder instead of treating this internal BLOB as plain JSON. Public search, graph and JSONL tree formats remain readable JSON. No runtime dependency is added. Schema 2 remains readable, but its first sync reparses all sources and atomically upgrades the cache; failure preserves the prior snapshot. Older engines reject schema 3, so use separate `--db` paths when comparing versions.
+Schema 4 retains lossless zlib-compressed UTF-8 JSON parse facts in `files.parsed`; use the engine's decoder instead of treating this internal BLOB as plain JSON. Public search, graph and JSONL tree formats remain readable JSON. No runtime dependency is added. Search document bodies are also compressed behind an external-content FTS index; use engine connections to read that internal view. Schema 2 and 3 remain readable, but their first sync reparses all sources and atomically upgrades the cache; failure preserves the prior snapshot. Older engines reject schema 4, so use separate `--db` paths when comparing versions. Existing SQLite files can retain freed pages after migration; the smaller fresh-database size is not an automatic on-disk shrink.
 
 SQLite retains freed pages after an in-place upgrade. A fresh `--db` gives the compact physical size; existing databases can reclaim free pages with SQLite `VACUUM` when no other operation is using the cache. Compression reduces stored parse facts, not the full-text index or graph rows. Source bytes, response bytes, sync latency, and model tokens remain separate measurements.

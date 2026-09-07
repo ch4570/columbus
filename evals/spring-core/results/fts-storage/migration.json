@@ -1,0 +1,28 @@
+{
+  "old_bytes": 108814336,
+  "migrated_bytes": 108814336,
+  "schema": "4",
+  "graph_rows_equal": true,
+  "search_equal": true,
+  "fts_integrity": true,
+  "warm_refresh": {
+    "mode": "fast",
+    "check": "metadata_checked",
+    "parsed_files": 0,
+    "cached_parses_loaded": 0,
+    "reused_files": 1166,
+    "metadata_reused_files": 1166,
+    "added_files": 0,
+    "removed_files": 0,
+    "hashed_files": 0,
+    "hashed_bytes": 0,
+    "config_hashed_files": 0,
+    "config_hashed_bytes": 0,
+    "head_changed": false,
+    "branch_changed": false,
+    "git_state_changed": false,
+    "config_changed": false,
+    "global_relink": false,
+    "elapsed_seconds": 0.4228
+  }
+}
