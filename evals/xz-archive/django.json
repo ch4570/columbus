@@ -1,0 +1,19 @@
+{
+  "gzip": {
+    "bytes": 10726317,
+    "sha256": "1bd6397d4e8df8e0e9f94eaac41bb777dea40bad6a61e71e203bd40a6bb981d5",
+    "cli_query_seconds": 7.465664165996714,
+    "pages": 3,
+    "edges": 17
+  },
+  "xz": {
+    "bytes": 8592976,
+    "sha256": "fd8382eaba505f1dd601f15829886ae8a3a94291ea289fac3aa5e25285b9ee64",
+    "cli_query_seconds": 10.704214291996323,
+    "pages": 3,
+    "edges": 17
+  },
+  "all_query_packets_equal": true,
+  "source_free_consumer_unchanged": true,
+  "scope": "Single full-Django stored target, includes same-line calls; fixed order, unflushed caches. No token result."
+}
