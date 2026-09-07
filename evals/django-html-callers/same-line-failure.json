@@ -1,0 +1,11 @@
+{
+  "ast_call_sites": 2,
+  "stored_call_sites": 1,
+  "distinct_ast_columns": [
+    21,
+    33
+  ],
+  "same_line": true,
+  "bug_reproduced": true,
+  "fixed": false
+}
