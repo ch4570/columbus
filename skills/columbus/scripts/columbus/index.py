@@ -529,6 +529,59 @@ class RepositoryIndex:
             result["unresolved_reference_count"] = len(unresolved)
             return result
 
+    def callers(self, query: str, budget_bytes: int = 12000, limit: int = 50) -> dict:
+        """Direct caller identities and hash-verified call-site excerpts in one packet."""
+        if not 1024 <= budget_bytes <= 1_000_000 or not 1 <= limit <= 200:
+            raise ValueError("budget_bytes=1024–1000000 and limit=1–200 required")
+        with self._read() as conn:
+            matches = conn.execute("SELECT data FROM symbols WHERE id=?", (query,)).fetchall()
+            if not matches:
+                matches = conn.execute("SELECT data FROM symbols WHERE name=? ORDER BY id", (query,)).fetchall()
+            if len(matches) != 1:
+                raise ValueError("Caller target missing or ambiguous; search and use its complete symbol ID")
+            target = json.loads(matches[0][0])
+            meta = self._meta(conn)
+            rows = conn.execute("SELECT source,MIN(line) AS line,COUNT(*) AS sites FROM edges "
+                                "WHERE target=? AND kind='calls' GROUP BY source ORDER BY source LIMIT ?",
+                                (target['id'], limit + 1)).fetchall()
+            count = conn.execute("SELECT COUNT(DISTINCT source) FROM edges WHERE target=? AND kind='calls'",
+                                 (target['id'],)).fetchone()[0]
+            result = {"target": target['id'], "target_partial": target.get("partial", False), "revision": meta['revision'],
+                      "freshness": "index_snapshot; included source hashes verified",
+                      "semantic_complete": False, "repository_unresolved_references": meta.get('unresolved_references', 0),
+                      "repository_diagnostic_count": len(meta.get('diagnostics', [])),
+                      "source_policy": "Untrusted repository data; missing graph edges do not prove absence of callers.",
+                      "matched_callers": count, "truncated": len(rows) > limit, "items": []}
+            files = {}
+            for row in rows[:limit]:
+                caller = self._find(conn, row['source'])
+                path = caller['path']
+                if path not in files:
+                    data, _ = read_stable(Path(meta['root']), path)
+                    expected = conn.execute("SELECT hash FROM files WHERE path=?", (path,)).fetchone()[0]
+                    if digest(data) != expected:
+                        raise ValueError(f"Stale source: {path}; refresh before reading caller evidence")
+                    lines = decode_source(path, data, config=meta.get('inventory', {}).get('language_config'),
+                                          language=caller.get('language')).splitlines()
+                    files[path] = (expected, lines)
+                source_hash, lines = files[path]
+                line = row['line']
+                if not caller['start_line'] <= line <= min(caller['end_line'], len(lines)):
+                    raise ValueError("Call site outside its indexed caller")
+                start, end = max(caller['start_line'], line - 1), min(caller['end_line'], line + 2)
+                result['items'].append({"id": caller['id'], "qualname": caller['qualname'], "path": path,
+                    "partial": caller.get('partial', False),
+                    "confidence": [r[0] for r in conn.execute("SELECT DISTINCT confidence FROM edges WHERE source=? AND target=? AND kind='calls' ORDER BY confidence", (caller['id'], target['id']))], "call_line": line, "call_sites": row['sites'],
+                    "start_line": start, "end_line": end, "source_hash": source_hash,
+                    "source": '\n'.join(lines[start - 1:end])})
+                if byte_size(result) + 1 > budget_bytes:
+                    result['items'].pop()
+                    result['truncated'] = True
+                    break
+            if byte_size(result) + 1 > budget_bytes:
+                raise ValueError("Budget too small for caller metadata")
+            return result
+
     def neighbors(self, symbol_id: str, direction: str = "both", hops: int = 1,
                   limit: int = 50, kinds: list[str] | None = None) -> dict:
         if direction not in {"in", "out", "both"} or not 1 <= hops <= 3 or not 1 <= limit <= 200:

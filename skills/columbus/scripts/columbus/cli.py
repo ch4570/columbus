@@ -97,7 +97,7 @@ def main(argv=None) -> int:
     parser.add_argument('--version', action='version', version=__version__)
     _common(parser)
     sub = parser.add_subparsers(dest='command', required=True)
-    for name in ('doctor', 'init', 'archive-search', 'archive', 'tree', 'hook-install', 'hook-update', 'sync', 'index', 'status', 'search', 'map', 'symbol', 'neighbors', 'impact', 'context', 'explore', 'stats', 'graph', 'export', 'serve', 'telemetry'):
+    for name in ('doctor', 'init', 'archive-search', 'archive', 'tree', 'hook-install', 'hook-update', 'sync', 'index', 'status', 'search', 'map', 'symbol', 'callers', 'neighbors', 'impact', 'context', 'explore', 'stats', 'graph', 'export', 'serve', 'telemetry'):
         command = sub.add_parser(name)
         _common(command, subcommand=True)
         if name == 'archive-search':
@@ -135,7 +135,7 @@ def main(argv=None) -> int:
             command.add_argument('--verify-content', '--check-files', action='store_true', help='Hash source contents to verify freshness')
         if name in {'sync', 'index'}:
             command.add_argument('--source-root', default=None, help='Restrict source directory; also sets Python import root')
-        if name in {'search', 'map', 'symbol', 'neighbors', 'impact', 'context', 'explore', 'graph', 'export'}:
+        if name in {'search', 'map', 'symbol', 'callers', 'neighbors', 'impact', 'context', 'explore', 'graph', 'export'}:
             command.add_argument('--snapshot', action='store_true', help='Read saved index without automatic sync')
         if name in {'search', 'map', 'symbol', 'neighbors', 'impact', 'context', 'explore'}:
             command.add_argument('--format', choices=['json', 'text'], default='text' if name == 'explore' else 'json',
@@ -149,8 +149,11 @@ def main(argv=None) -> int:
             command.add_argument('--language', help='Detected language name, e.g. python or typescript')
         if name == 'search':
             command.add_argument('--limit', type=int, default=10)
-        if name in {'symbol', 'neighbors', 'impact'}:
+        if name in {'symbol', 'callers', 'neighbors', 'impact'}:
             command.add_argument('symbol_id')
+        if name == 'callers':
+            command.add_argument('--budget-bytes', type=int, default=12000)
+            command.add_argument('--limit', type=int, default=50)
         if name == 'symbol':
             command.add_argument('--max-lines', type=int, default=80)
         if name in {'neighbors', 'impact', 'graph', 'export'}:
@@ -281,6 +284,10 @@ def main(argv=None) -> int:
                 raise ValueError('Selected index belongs to a different repository')
             if args.command == 'search':
                 result = index.search(args.query, args.limit, path=args.path, language=args.language)
+            elif args.command == 'callers':
+                if args.pretty:
+                    raise ValueError('callers uses compact JSON to preserve its byte budget')
+                result = index.callers(args.symbol_id, args.budget_bytes, args.limit)
             elif args.command == 'symbol':
                 result = index.symbol(args.symbol_id, args.max_lines)
             elif args.command in {'neighbors', 'impact'}:
