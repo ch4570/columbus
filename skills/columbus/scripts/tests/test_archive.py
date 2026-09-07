@@ -58,6 +58,24 @@ class ArchiveTests(unittest.TestCase):
                 archive(index, first)
             self.assertEqual(first.read_bytes(), second.read_bytes())
 
+    def test_source_free_qualified_suffix_outranks_substrings(self):
+        with tempfile.TemporaryDirectory() as consumer:
+            artifact = Path(consumer) / "graph.jsonl.gz"
+            with tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                for package, name in [("a", "OtherLoader"), ("b", "Loader"), ("c", "Loader")]:
+                    (root / (package + ".java")).write_text("package " + package + "; class " + name + " { void getResource() {} }")
+                index = RepositoryIndex(root / ".columbus/index.sqlite")
+                index.refresh(root)
+                archive(index, artifact)
+            self.assertFalse(root.exists())
+            packet = search_archive(artifact, "Loader.getResource", limit=2)
+            self.assertEqual([i["path"] for i in packet["items"]], ["b.java", "c.java"])
+            self.assertTrue(packet["truncated"])
+            exact = search_archive(artifact, "a.OtherLoader.getResource", limit=1)
+            self.assertEqual(exact["items"][0]["path"], "a.java")
+            self.assertEqual(list(Path(consumer).iterdir()), [artifact])
+
     def test_failed_archive_never_publishes_partial_output(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

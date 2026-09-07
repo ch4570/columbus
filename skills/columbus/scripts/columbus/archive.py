@@ -5,6 +5,7 @@ import gzip
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import tempfile
 
@@ -78,6 +79,7 @@ def _search_archive(source: str | Path, query: str, limit: int = 5, budget_bytes
     names = {'file': 'files', 'node': 'nodes', 'scope': 'scopes', 'edge': 'edges',
              'reference': 'references', 'import': 'imports', 'diagnostic': 'diagnostics'}
     matches = 0
+    suffix = "." + query.casefold() if re.fullmatch(r"[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*)+", query) else ""
     with gzip.open(source, 'rt', encoding='utf-8') as stream:
         for line in stream:
             row = json.loads(line)
@@ -105,7 +107,8 @@ def _search_archive(source: str | Path, query: str, limit: int = 5, budget_bytes
             matches += 1
             item = {key: data[key] for key in ('id', 'path', 'name', 'kind', 'start_line', 'end_line', 'language', 'fidelity', 'partial') if key in data}
             item['signature'] = data.get('signature', '')[:240]
-            selected.append((not exact, data['id'], item))
+            qualified = bool(suffix and data['qualname'].casefold().endswith(suffix))
+            selected.append((0 if exact else 1 if qualified else 2, data['id'], item))
             selected.sort(key=lambda item: item[:2])
             del selected[limit:]
     if manifest is None or end != counts:

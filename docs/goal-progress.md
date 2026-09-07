@@ -108,3 +108,7 @@ The actual Spring prompts included a shared instruction to use ripgrep/source re
 A direct response probe found that DefaultResourceLoader.getResource ranked an unrelated nested method first. Component-boundary qualified suffix matches now precede loose FTS matches while retaining package ambiguity and filters. The same short query returns the complete desired method first within the existing budget. Both engine suites pass 210 tests; root tests pass 53; the skill documents the route. [Response evidence](../evals/spring-navigation/qualified-query/REPORT.md). No model replay or token-savings claim.
 
 Qualified search now has a 60-package ambiguity/cap observation on both parsers: 50 returned matches disclose truncation, context preserves the upstream truncation flag, and path/full-name narrowing prioritizes the intended declaration. [Raw results and probe correction](../evals/qualified-search/REPORT.md). No additional engine change or model-savings claim.
+
+## Portable archive qualified lookup
+
+Fixed archive substring ordering that let OtherLoader displace a Loader.getResource candidate under a result cap. Component-boundary suffixes now precede general substrings after exact matches. Tests run after source/SQLite removal; both engine suites pass 211 tests and root tests pass 53. An unchanged existing Spring archive supports an empty-directory query in 1,890 bytes. [Evidence](../evals/qualified-search/archive/REPORT.md). Archive relationship traversal and actual model savings remain separate open work.
