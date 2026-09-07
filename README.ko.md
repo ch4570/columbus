@@ -4,7 +4,9 @@
 
 [English](README.md) · [한국어](README.ko.md) · [v0.5.0 다운로드](https://github.com/ch4570/repo-graph/releases/tag/v0.5.0)
 
-[![테스트](https://github.com/ch4570/repo-graph/actions/workflows/distribution.yml/badge.svg)](https://github.com/ch4570/repo-graph/actions/workflows/distribution.yml)
+[검증 기록](VALIDATION.md) · [CI 상태](https://github.com/ch4570/repo-graph/actions/runs/34094599664)
+
+테스트 208개와 macOS·Linux의 Python 3.11/3.14 설치 검증을 통과한 비공개 프리뷰입니다. GitHub 호스팅 작업은 계정 결제 또는 사용 한도 문제로 시작되지 않았으며, 원격 플랫폼 검증을 통과한 것으로 표시하지 않습니다.
 
 **코드를 찾고, 필요한 맥락만 가져갑니다.**
 

@@ -1,0 +1,213 @@
+{
+  "schema": "repoatlas.release-validation/v1",
+  "version": "0.5.0",
+  "date": "2026-09-07",
+  "release_kind": "private prerelease",
+  "code_sha256": {
+    "bootstrap.py": "7cba0e14796678568d6282abac927359a12350a1e2380dd0eac2246c6872f23c",
+    "evals/exploration/observe.py": "547175c41d1a30994d3550a1048227c954525a42ade77dee7d813abac91f4b73",
+    "evals/exploration/test_observe.py": "c7274713033a460423fd3d7e3b8604848ee80d1aa81d06d89512247734d7054a",
+    "get-repoatlas.py": "e3c244a01aa2ffdb2c63d09d90c9309d1523b3c56b0f0b959caaddf4d670933e",
+    "install.py": "090958afaed36a9c865d1fe8fe028d1420ea1459bbeb93cbe3744f51ac77d1a6",
+    "run.py": "ff9411675324a4acd52c5beb36e9dfea30bce9182e6d903177fdac6af87d76f9",
+    "scripts/benchmark_context.py": "a35c4e4f47ea100e1ccf4b6bf38de177c60ac53e0da714591bfb6beb63a5a932",
+    "scripts/build_bundle.py": "189f5c0e6db71cda552c06ce0a5f0b8b6a97345a9c87bb4fc886783803b59df1",
+    "scripts/observe_delivery.py": "a8d180e2ed7a3cb24b45716f90b27e257e8d1813e7b99ca1fe600e01dd7d2767",
+    "scripts/release_assets.py": "e4cd09e76ef79598d0f4cb9fa2f5a9280dcea6d4a1a7b86c0a5b4b4876692ab3",
+    "scripts/verify_distribution.py": "bfeaa668f3d18c1dafa8bb9397c2ad220c4a72bb8ff39c7970f25295b48091cc",
+    "setup.py": "216e25cf00a400415b27d49ed8c9ac2c09ffa69c12cfd05a62cf12403b55ace6",
+    "skills/repoatlas-jvm/scripts/atlas.py": "6ecb105cc5bb6d62c015d9779052edcf0d5e7873bfa42a911b65d46f98a9411a",
+    "skills/repoatlas-jvm/scripts/install.py": "16e3c2ff9933394cf153734ddd31cc067db4d909af6895c29105e4bf6d48fbf5",
+    "skills/repoatlas-jvm/scripts/repoatlas/__init__.py": "706f898ccd75ba9f7faa4e23c358c8fabe65dfd5c7de80903225bb07e8972fb3",
+    "skills/repoatlas-jvm/scripts/repoatlas/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "skills/repoatlas-jvm/scripts/repoatlas/bundle.py": "db37b8d3d1aaabdd2e27d1b8b940565d629b9ca087c5b1a126675cbdf3976525",
+    "skills/repoatlas-jvm/scripts/repoatlas/cli.py": "c7b15152220fd91bd6fdc8a215a8cabfaa6f0168283a545ab8afda41f92a17fd",
+    "skills/repoatlas-jvm/scripts/repoatlas/discovery.py": "c5c30e91b3444e6a1bdbf568365a13768e1f57a6bef04ba4e87d826ff2fbf1f9",
+    "skills/repoatlas-jvm/scripts/repoatlas/export.py": "1243138426852b11037d08146591bf3b751fed72fb9060230c7913dc87650d08",
+    "skills/repoatlas-jvm/scripts/repoatlas/graph_views.py": "9e935520bb990c2066cfdb943c37477e78378b5ffd868e31735cc6a5e261f1c7",
+    "skills/repoatlas-jvm/scripts/repoatlas/index.py": "1e04b62e3f621d329e2daa7e5ef70043dba1dfed266b4e40ea9a8c7a7af721b7",
+    "skills/repoatlas-jvm/scripts/repoatlas/jvm.py": "601e4415c67d07730668ae889c4295ac853eed0d34bc6cb71807421e6950e676",
+    "skills/repoatlas-jvm/scripts/repoatlas/language_profiles.py": "cda7c22cce6227d2627225110adafa641c7b09134b7c5d800ffcf1329092a1ce",
+    "skills/repoatlas-jvm/scripts/repoatlas/languages.py": "4352805b22dd62a10563bac1f77f4649641487580f75a59e73f24072de478d68",
+    "skills/repoatlas-jvm/scripts/repoatlas/mcp_server.py": "5b19768d15b87c59f00ea90328bf8e3ab76d7d434a1766e85c1681b7690e5bcb",
+    "skills/repoatlas-jvm/scripts/repoatlas/parser.py": "2cf8c3d3d40871eebc715a00ad63d248dff4ff7a6d17f54b78140d56f65f2c88",
+    "skills/repoatlas-jvm/scripts/repoatlas/polyglot.py": "fdaf6ff2253945b31eeca00f87175ea9179be9c7b404db5468403d4a269948ae",
+    "skills/repoatlas-jvm/scripts/repoatlas/presentation.py": "fcff641241708cba3a68c8d1d8ad6336e9980328e97ad14e70ea278e45555c96",
+    "skills/repoatlas-jvm/scripts/repoatlas/receipts.py": "e62558048b16a01265931fc7337704bb0939470eb0a28a3a80729bc6b2b78d14",
+    "skills/repoatlas-jvm/scripts/repoatlas/retrieval.py": "ee49391f65cb25b5d58ffe2758b5ecccb1978c0a20e03060b665a1ab719dbe94",
+    "skills/repoatlas-jvm/scripts/repoatlas/sync_state.py": "8fee2912bba2aed95e0c0161c877b4ecbf0fe1f31896c8f856df702aed316a8c",
+    "skills/repoatlas-jvm/scripts/repoatlas/telemetry.py": "446ff75214f2fb497c70a433c3fc47ee0a204544c85c908f5476193db18f1a31",
+    "skills/repoatlas-jvm/scripts/tests/test_agent_context.py": "d3195ecb631ff09c8c98079051be7533fbc455b44f89c27229f4ab70971677d2",
+    "skills/repoatlas-jvm/scripts/tests/test_atlas.py": "7aafce181a3fc8117676c6d1cb1e8876bf2677c96b06fe5a3fe62866cbbd4425",
+    "skills/repoatlas-jvm/scripts/tests/test_explicit_root.py": "53ecf176d4d1cdf6429ed6eeeac01a4f22ae241bc4e44f42702e874219cbfb20",
+    "skills/repoatlas-jvm/scripts/tests/test_export.py": "65d21bb05daf873639bc8d9fa4974d9647209046dd74fe74834336286770dc65",
+    "skills/repoatlas-jvm/scripts/tests/test_index.py": "5aeeee8ad42eb0e89226f9d996b3d89cc63be8d89cf4fabfbf9a2daa9c4ff423",
+    "skills/repoatlas-jvm/scripts/tests/test_install.py": "991cda096c5fcbaf1d3febb2562791157f1ee5dc4191696f420b5a20fa1e74cd",
+    "skills/repoatlas-jvm/scripts/tests/test_jvm.py": "cc7685e1718493356c45cf468885a54476241b99cbb5bb93315b35e252ef09cf",
+    "skills/repoatlas-jvm/scripts/tests/test_mcp.py": "665aa5ce6737edd8ab7abffecdc10675f6b17ef79d349c311c965a98ec17da92",
+    "skills/repoatlas-jvm/scripts/tests/test_parser.py": "dd2aa66da52abcdcab659bf35c00ceac5fdcd384fe4ab084e7b65afce39b5842",
+    "skills/repoatlas-jvm/scripts/tests/test_polyglot.py": "b62cfdda1db8f690f26bfe1063d11e3ec984811d06fd1f1b84ad48184e94b474",
+    "skills/repoatlas-jvm/scripts/tests/test_sessions.py": "93e6ba59c5e6d446cc20717c31e8d48d4ff25c721d812d63a2228d0ac515b5ff",
+    "skills/repoatlas-jvm/scripts/tests/test_sync.py": "67e44828c9fbf483e33f54843cf7009071ce8bbf9c1de3fabe0a37871209474f",
+    "skills/repoatlas-jvm/scripts/tests/test_token_economy.py": "ac6662b73afe0db9b35d7158a5cd3e4f70defbd9b66b12b7183bb034ebbd3586",
+    "tests/test_bootstrap.py": "c13d59b0748c5eb9837bffcad9aa204d2ec524a9246ab0751d55e1f8963ef69b",
+    "tests/test_distribution.py": "e38067474a81cba67f100ddeb2a38ccd1bd8b010dfec3ba8b92910f8404e54a7",
+    "tests/test_release_installer.py": "5550b8679aa145899792c514f24e05ae06c8b14e8ce313027195e7a2c41a7017"
+  },
+  "macos": {
+    "machine": "arm64",
+    "tests": {
+      "engine": 161,
+      "root": 39,
+      "observations": 8
+    },
+    "test_python": "3.14.7",
+    "distribution": [
+      {
+        "python": "3.11.14",
+        "status": "passed",
+        "version": "0.5.0",
+        "wheel": "repoatlas-0.5.0-py3-none-any.whl",
+        "clean_venv": true,
+        "unrelated_cwd": true,
+        "paths_with_spaces": true,
+        "global_search": true,
+        "skill_reinstall": "noop",
+        "polyglot_and_fallback": true,
+        "budgeted_context": true,
+        "graph_formats": 4,
+        "text_budget": true,
+        "receipt_continuation": true,
+        "telemetry_bytes_verified": true,
+        "named_sessions": true,
+        "no_argument_guide": true,
+        "standalone_release_install": true,
+        "local_edits_preserved": true,
+        "managed_files": 37,
+        "archive_files": 122,
+        "plan_status": "planned"
+      },
+      {
+        "python": "3.14.7",
+        "status": "passed",
+        "version": "0.5.0",
+        "wheel": "repoatlas-0.5.0-py3-none-any.whl",
+        "clean_venv": true,
+        "unrelated_cwd": true,
+        "paths_with_spaces": true,
+        "global_search": true,
+        "skill_reinstall": "noop",
+        "polyglot_and_fallback": true,
+        "budgeted_context": true,
+        "graph_formats": 4,
+        "text_budget": true,
+        "receipt_continuation": true,
+        "telemetry_bytes_verified": true,
+        "named_sessions": true,
+        "no_argument_guide": true,
+        "standalone_release_install": true,
+        "local_edits_preserved": true,
+        "managed_files": 37,
+        "archive_files": 122,
+        "plan_status": "planned"
+      }
+    ]
+  },
+  "linux": [
+    {
+      "image": "python:3.11-slim",
+      "image_digest": "sha256:9534e5a8e315485d4061ed659af0fd78a284c015f9b73661b41d6bab25604534",
+      "python": "3.11.16",
+      "platform": "Linux-6.6.119-0-virt-aarch64-with-glibc2.41",
+      "machine": "aarch64",
+      "tests": {
+        "root": {
+          "tests": 39,
+          "passed": true
+        },
+        "engine": {
+          "tests": 161,
+          "passed": true
+        },
+        "observations": {
+          "tests": 8,
+          "passed": true
+        }
+      },
+      "distribution": {
+        "status": "passed",
+        "version": "0.5.0",
+        "wheel": "repoatlas-0.5.0-py3-none-any.whl",
+        "clean_venv": true,
+        "unrelated_cwd": true,
+        "paths_with_spaces": true,
+        "global_search": true,
+        "skill_reinstall": "noop",
+        "polyglot_and_fallback": true,
+        "budgeted_context": true,
+        "graph_formats": 4,
+        "text_budget": true,
+        "receipt_continuation": true,
+        "telemetry_bytes_verified": true,
+        "named_sessions": true,
+        "no_argument_guide": true,
+        "standalone_release_install": true,
+        "local_edits_preserved": true,
+        "managed_files": 37,
+        "archive_files": 122,
+        "plan_status": "planned"
+      }
+    },
+    {
+      "image": "python:3.14-slim",
+      "image_digest": "sha256:cad9a2c871761c413caa6fdd6441c783451e740a48aaeba60ae62a8b53525ef6",
+      "python": "3.14.7",
+      "platform": "Linux-6.6.119-0-virt-aarch64-with-glibc2.41",
+      "machine": "aarch64",
+      "tests": {
+        "root": {
+          "tests": 39,
+          "passed": true
+        },
+        "engine": {
+          "tests": 161,
+          "passed": true
+        },
+        "observations": {
+          "tests": 8,
+          "passed": true
+        }
+      },
+      "distribution": {
+        "status": "passed",
+        "version": "0.5.0",
+        "wheel": "repoatlas-0.5.0-py3-none-any.whl",
+        "clean_venv": true,
+        "unrelated_cwd": true,
+        "paths_with_spaces": true,
+        "global_search": true,
+        "skill_reinstall": "noop",
+        "polyglot_and_fallback": true,
+        "budgeted_context": true,
+        "graph_formats": 4,
+        "text_budget": true,
+        "receipt_continuation": true,
+        "telemetry_bytes_verified": true,
+        "named_sessions": true,
+        "no_argument_guide": true,
+        "standalone_release_install": true,
+        "local_edits_preserved": true,
+        "managed_files": 37,
+        "archive_files": 122,
+        "plan_status": "planned"
+      }
+    }
+  ],
+  "hosted_ci": {
+    "status": "not_started",
+    "reason": "Account payments or spending limit prevented runner startup; no test steps executed.",
+    "run": "https://github.com/ch4570/repo-graph/actions/runs/34094599664"
+  },
+  "windows_native": "not executed",
+  "note": "Locally observed test evidence, not a provider-signed attestation. Source code hashes identify the tested code; later documentation changes do not alter it."
+}

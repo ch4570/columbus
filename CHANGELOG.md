@@ -8,7 +8,7 @@ This file describes source and bundle versions. A version entry does not imply p
 - Add `explore [QUERY]` with readable text and a 2,000 estimated-token default, task-named sessions, and `stats NAME`.
 - Show a useful getting-started guide when the CLI is called without arguments.
 - Add a Python-only release installer with checksum verification, an isolated user runtime, and safe launcher updates.
-- Distribute installable wheels, portable source ZIPs, the installer, and checksums in GitHub Releases; validate release tags and build assets after the platform test matrix.
+- Distribute installable wheels, portable source ZIPs, the installer, and checksums in GitHub Releases. The automatic release workflow requires the platform test matrix; this private preview uses locally verified artifacts because hosted jobs could not start.
 
 ## 0.4.0 — Earlier local bundle
 

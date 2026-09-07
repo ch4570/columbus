@@ -72,6 +72,17 @@ python scripts/verify_distribution.py \
 
 최종 배포 파일과 체크섬은 `dist/`에 있습니다. `scripts/release_assets.py`가 wheel·ZIP·standalone installer의 배포 체크섬을 만듭니다. 루트 `SHA256SUMS.txt`는 현재 배포 대상 소스의 inventory이며 자기 자신을 포함하지 않습니다.
 
+## Linux 컨테이너 검증
+
+GitHub 호스팅 작업이 시작되지 않아 로컬 Rancher Desktop의 Linux aarch64 컨테이너로 추가 확인했습니다. 입력은 소스 ZIP과 wheel이며 호스트 인증 정보는 전달하지 않았습니다. 실행 후 두 검증 컨테이너는 제거했습니다.
+
+| 환경 | 테스트 | 설치·배포 검증 |
+| --- | --- | --- |
+| Linux aarch64 · Python 3.11.16 | 208개 통과 | wheel·ZIP·standalone·세션·stats 통과 |
+| Linux aarch64 · Python 3.14.7 | 208개 통과 | wheel·ZIP·standalone·세션·stats 통과 |
+
+처음 3.11 컨테이너의 OS 패키지 설치가 중단되어, 다운로드 재시도·시간 제한을 설정한 새 컨테이너에서 실행했습니다. 완료하지 못한 준비 작업을 테스트 성공으로 세지 않습니다. 이미지 digest, 실제 환경 버전, 검사 결과와 검증한 코드 해시는 [구조화한 검증 기록](docs/validation/0.5.0.json)에 보관합니다. Windows 네이티브 검증을 대신하는 결과는 아닙니다.
+
 ## 실제 관측과 문서
 
 [관측 보고서 원본](docs/token-efficiency.md)과 [오프라인 HTML](docs/report.html)에 결과를 공개했습니다. 같은 28개 지도 항목은 JSON 6,639바이트, text 3,535바이트로 **46.8% 감소**했습니다. 동일 context를 세 번 요청한 전체 응답은 receipt 사용 시 **53.5% 감소**했고, 마지막 소스 본문은 0바이트였습니다. 이는 모델을 호출하지 않은 CLI 측정입니다.
@@ -84,8 +95,14 @@ Python 3.11 문법 검사, compileall, pip check와 Markdown 내부 링크 검�
 
 ## 남은 범위
 
-- Linux/Windows 네이티브 실행과 원격 GitHub Actions는 이 세션에서 수행하지 않았습니다. 세 OS × Python 3.11/3.14 CI를 작성한 것과 실행 성공은 구분합니다.
+- GitHub Actions의 [첫 실행](https://github.com/ch4570/repo-graph/actions/runs/34094599664)은 계정 결제 실패 또는 사용 한도 제한으로 6개 작업 모두 step 실행 전에 차단됐습니다. 코드 테스트 실패나 통과로 해석하지 않습니다. Windows 검증은 실행하지 못했습니다. 계정 결제 설정과 저장소 공개 범위는 변경하지 않았습니다.
 - Python·Java·Kotlin 외에는 heuristic 또는 text 수준이며 모든 언어의 타입·동적 호출·매크로를 증명하지 않습니다.
 - 작은 저장소의 코드 위치 질문 세 개를 한 번씩 비교했습니다. 대형 모노레포·장기 구현·다른 모델의 토큰 효과와 성능 상한은 측정하지 않았습니다.
 - Receipt는 모델의 기억을 복구하지 않습니다. 새 세션·다른 에이전트·컨텍스트 유실 후에는 새 receipt가 필요하며 동시 에이전트는 각자 파일을 써야 합니다.
 - 별도 모델 토크나이저나 NVIDIA SkillEvaluator를 의존성으로 추가하지 않았습니다. 스킬 frontmatter·설치 경로·관리 파일 체크섬은 검사했지만 모든 호스트의 자동 발견을 보장하지 않습니다.
+
+## 비공개 프리뷰 게시
+
+사용자의 비공개 유지 지시에 따라 저장소 공개 범위를 유지하고, 이번 v0.5.0은 로컬 검증 산출물을 GitHub의 **prerelease**로 게시합니다. 자동 정식 릴리스 워크플로의 플랫폼 검증 조건은 유지합니다. 호스팅 작업이 차단된 이번 프리뷰는 그 조건을 통과했다고 표시하지 않으며, 릴리스 노트에 수동 게시와 검증 한계를 기록합니다.
+
+차단 근거: [GitHub 작업 annotation](https://github.com/ch4570/repo-graph/actions/runs/34094599664/job/101655249074). GitHub는 계정의 결제 실패 또는 사용 한도 상향 필요로 작업을 시작하지 못했다고 보고했습니다.

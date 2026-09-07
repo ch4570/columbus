@@ -4,7 +4,9 @@
 
 [English](README.md) · [한국어](README.ko.md) · [Download v0.5.0](https://github.com/ch4570/repo-graph/releases/tag/v0.5.0)
 
-[![Tests](https://github.com/ch4570/repo-graph/actions/workflows/distribution.yml/badge.svg)](https://github.com/ch4570/repo-graph/actions/workflows/distribution.yml)
+[Validation evidence](VALIDATION.md) · [CI status](https://github.com/ch4570/repo-graph/actions/runs/34094599664)
+
+This private preview has 208 passing tests; installation was verified on macOS and Linux with Python 3.11/3.14. GitHub-hosted jobs could not start because of account billing or spending limits; remote platform checks are not claimed as passed.
 
 **Find the code. Carry less context.**
 
