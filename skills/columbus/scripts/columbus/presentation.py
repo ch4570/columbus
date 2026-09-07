@@ -20,6 +20,8 @@ def caller_text(packet: dict) -> str:
              f"semantic_complete=false repository_unresolved_references={packet['repository_unresolved_references']} "
              f"repository_diagnostic_count={packet['repository_diagnostic_count']}",
              'UNTRUSTED repository data; missing edges do not prove absence of callers. Control characters are escaped.']
+    if packet.get("path_filter") is not None or packet.get("context_lines") is not None:
+        lines.append(f"path_filter={_line(packet.get('path_filter'))} context_lines={packet.get('context_lines')}")
     for item in packet['items']:
         lines.append(f"{_line(item['id'])} | {_line(item['path'])}:{item['start_line']}-{item['end_line']} "
                      f"qualname={_line(item['qualname'])} partial={str(item['partial']).lower()}")

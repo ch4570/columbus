@@ -34,3 +34,7 @@ Prefer direct literal lookup for a known error/file; prefer graph navigation for
 - Does the complete payload fit, including Unicode and metadata?
 - Are source hashes, graph revision, omissions, and estimates distinguished?
 - Have exclusions been cleared after a revision change?
+
+## Caller explanations
+
+Use `callers TARGET --path 'src/*' --context-lines 20 --format text --budget-bytes 16000` when the task asks why callers invoke a target. The path glob filters caller identities before counting and applying the limit; it does not filter target lookup. Context lines (0–40) expand around the first call and stay inside its lexical caller. The default remains the compact call-site excerpt. Wider context can omit later calls or comments outside the caller; `call_sites` counts all stored calls in that caller, not only those shown. Check the numbered range, caller count and truncation before deciding whether another source range is necessary. A larger window can reduce the number of callers fitting the byte budget; no token saving is guaranteed.

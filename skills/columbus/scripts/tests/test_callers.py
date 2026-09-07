@@ -7,6 +7,34 @@ from columbus.presentation import render
 
 
 class CallerPacketTests(unittest.TestCase):
+    def test_filtered_context_counts_and_hash_checks(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / 'prod').mkdir()
+            (root / 'tests').mkdir()
+            (root / 'target.py').write_text('def target(): pass\n')
+            source = 'from target import target\ndef use(flag):\n    if flag:\n        x = 1\n        y = 2\n        target()\n        z = 3\n        target()\n'
+            (root / 'prod/a.py').write_text(source)
+            (root / 'tests/a.py').write_text(source)
+            index = RepositoryIndex(root / '.columbus/index.sqlite')
+            index.refresh(root)
+            (root / 'tests/a.py').write_text('# stale excluded caller\n')
+            packet = index.callers('target.py::target:function', path='prod/*', context_lines=40, limit=1)
+            self.assertEqual(packet['matched_callers'], 1)
+            self.assertFalse(packet['truncated'])
+            item, = packet['items']
+            self.assertEqual((item['start_line'], item['end_line']), (2, 8))
+            self.assertEqual(item['call_sites'], 2)
+            self.assertIn('if flag:', item['source'])
+            one, = index.callers('target.py::target:function', path='prod/*', context_lines=0)['items']
+            self.assertEqual(one['start_line'], one['end_line'])
+            self.assertEqual(index.callers('target.py::target:function', path='absent/*')['matched_callers'], 0)
+            with self.assertRaisesRegex(ValueError, 'Stale source'):
+                index.callers('target.py::target:function', context_lines=40)
+            for invalid in [-1, 41, True, 1.5]:
+                with self.assertRaises(ValueError):
+                    index.callers('target.py::target:function', context_lines=invalid)
+
     def test_nested_ownership_evidence_budget_and_stale_source(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

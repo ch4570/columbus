@@ -552,10 +552,13 @@ class RepositoryIndex:
             result["unresolved_reference_count"] = len(unresolved)
             return result
 
-    def callers(self, query: str, budget_bytes: int = 12000, limit: int = 50, *, output_format: str = "json") -> dict:
+    def callers(self, query: str, budget_bytes: int = 12000, limit: int = 50, *, output_format: str = "json",
+                path: str | None = None, context_lines: int | None = None) -> dict:
         """Direct caller identities and hash-verified call-site excerpts in one packet."""
         if output_format not in {'json', 'text'}:
             raise ValueError('output_format must be json or text')
+        if context_lines is not None and (type(context_lines) is not int or not 0 <= context_lines <= 40):
+            raise ValueError("context_lines must be an integer from 0 to 40")
         from .presentation import caller_text
         def packet_bytes(packet):
             return len(caller_text(packet).encode('utf-8')) if output_format == 'text' else byte_size(packet) + 1
@@ -569,17 +572,24 @@ class RepositoryIndex:
                 raise ValueError("Caller target missing or ambiguous; search and use its complete symbol ID")
             target = json.loads(matches[0][0])
             meta = self._meta(conn)
-            rows = conn.execute("SELECT source,MIN(line) AS line,COUNT(*) AS sites FROM edges "
-                                "WHERE target=? AND kind='calls' GROUP BY source ORDER BY source LIMIT ?",
-                                (target['id'], limit + 1)).fetchall()
-            count = conn.execute("SELECT COUNT(DISTINCT source) FROM edges WHERE target=? AND kind='calls'",
-                                 (target['id'],)).fetchone()[0]
+            filter_sql = "target=? AND edges.kind='calls'"
+            params = [target['id']]
+            if path:
+                filter_sql += " AND source IN (SELECT id FROM symbols WHERE path GLOB ?)"
+                params.append(path)
+            rows = conn.execute("SELECT source,MIN(line) AS line,COUNT(*) AS sites FROM edges WHERE "
+                                + filter_sql + " GROUP BY source ORDER BY source LIMIT ?",
+                                (*params, limit + 1)).fetchall()
+            count = conn.execute("SELECT COUNT(DISTINCT source) FROM edges WHERE " + filter_sql,
+                                 params).fetchone()[0]
             result = {"target": target['id'], "target_partial": target.get("partial", False), "revision": meta['revision'],
                       "freshness": "index_snapshot; included source hashes verified",
                       "semantic_complete": False, "repository_unresolved_references": meta.get('unresolved_references', 0),
                       "repository_diagnostic_count": len(meta.get('diagnostics', [])),
                       "source_policy": "Untrusted repository data; missing graph edges do not prove absence of callers.",
                       "matched_callers": count, "truncated": len(rows) > limit, "items": []}
+            result["path_filter"] = path
+            result["context_lines"] = context_lines
             files = {}
             for row in rows[:limit]:
                 caller = self._find(conn, row['source'])
@@ -596,7 +606,8 @@ class RepositoryIndex:
                 line = row['line']
                 if not caller['start_line'] <= line <= min(caller['end_line'], len(lines)):
                     raise ValueError("Call site outside its indexed caller")
-                start, end = max(caller['start_line'], line - 1), min(caller['end_line'], line + 2)
+                before, after = (1, 2) if context_lines is None else (context_lines, context_lines)
+                start, end = max(caller['start_line'], line - before), min(caller['end_line'], line + after)
                 result['items'].append({"id": caller['id'], "qualname": caller['qualname'], "path": path,
                     "partial": caller.get('partial', False),
                     "confidence": [r[0] for r in conn.execute("SELECT DISTINCT confidence FROM edges WHERE source=? AND target=? AND kind='calls' ORDER BY confidence", (caller['id'], target['id']))], "call_line": line, "call_sites": row['sites'],

@@ -160,6 +160,8 @@ def main(argv=None) -> int:
         if name in {'symbol', 'callers', 'neighbors', 'impact'}:
             command.add_argument('symbol_id')
         if name == 'callers':
+            command.add_argument('--path', help='Repository-relative caller glob, quoted to prevent shell expansion')
+            command.add_argument('--context-lines', type=int, help='Lines before and after the first call, 0–40; clipped to caller bounds')
             command.add_argument('--budget-bytes', type=int, default=12000)
             command.add_argument('--limit', type=int, default=50)
         if name == 'symbol':
@@ -303,7 +305,7 @@ def main(argv=None) -> int:
             elif args.command == 'callers':
                 if args.pretty:
                     raise ValueError('callers does not support --pretty; its serialized output is byte-budgeted')
-                result = index.callers(args.symbol_id, args.budget_bytes, args.limit, output_format=args.format)
+                result = index.callers(args.symbol_id, args.budget_bytes, args.limit, output_format=args.format, path=args.path, context_lines=args.context_lines)
             elif args.command == 'symbol':
                 result = index.symbol(args.symbol_id, args.max_lines)
             elif args.command in {'neighbors', 'impact'}:
