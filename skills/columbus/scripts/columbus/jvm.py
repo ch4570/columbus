@@ -239,10 +239,14 @@ class _Parser:
                 parts = callee.named_children
                 if len(parts) == 2 and parts[1].type == "identifier":
                     receiver, name = self.text(parts[0]), self.text(parts[1])
+        arguments = node.child_by_field_name("arguments") if self.language == "java" else None
+        argument_count = (len([child for child in arguments.named_children
+                               if child.type not in {"line_comment", "block_comment"}])
+                          if arguments is not None else None)
         if name:
             self.references.append(dict(source=self.current, scope_id=self.current,
                 kind="calls", name=f"{receiver}.{name}" if receiver else name,
-                member=name, receiver=receiver, constructor=construct,
+                member=name, receiver=receiver, constructor=construct, argument_count=argument_count,
                 path=self.path, line=self.line(node.start_byte),
                 evidence=" ".join(self.text(node).split())[:240], resolved=False))
         for child in node.named_children:
@@ -448,6 +452,13 @@ class _Resolver:
         if len(candidates) != 1:
             return None, "overloaded, external, ambiguous or unknown declaration"
         target = candidates[0]
+        if (file["language"] == "java" and target.get("language") == "java"
+                and target["kind"] in CALLABLE_KINDS and ref.get("argument_count") is not None):
+            parameters = target.get("parameter_types", [])
+            varargs = bool(parameters and parameters[-1].endswith("..."))
+            count = ref["argument_count"]
+            if (varargs and count < len(parameters) - 1) or (not varargs and count != len(parameters)):
+                return None, "argument count incompatible with declared parameters"
         if target.get("partial"):
             return None, "target file has syntax recovery"
         return target["id"], "unique syntax candidate; runtime dispatch unverified"

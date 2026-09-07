@@ -166,6 +166,20 @@ class C { class T { void hit() {} } void run(T item, int T) { item.hit(); } }
                 self.assertFalse(call["resolved"], call)
                 self.assertIn("inherited", call["reason"])
 
+    def test_java_call_arity_rejects_false_single_targets(self):
+        for parameters, arguments, resolved in (
+            ("int n", "", False), ("", "1", False), ("int n", "1, 2", False),
+            ("int n", "/* comment */ 1", True), ("int... ns", "", True),
+            ("int n, int... ns", "", False), ("int n, int... ns", "1, 2, 3", True),
+        ):
+            with self.subTest(parameters=parameters, arguments=arguments):
+                parsed = self.parsed("C.java", f"class C {{ void hit({parameters}) {{}} void run() {{ hit({arguments}); }} }}")
+                resolve_jvm([parsed])
+                call = next(r for r in parsed['references'] if r['kind']=='calls')
+                self.assertEqual(call['resolved'], resolved, call)
+                if not resolved:
+                    self.assertIn('argument count incompatible', call['reason'])
+
     def test_overload_remains_unresolved_and_ids_ignore_parameter_names(self):
         original = self.parsed("A.java", '''package demo;
 class A {
