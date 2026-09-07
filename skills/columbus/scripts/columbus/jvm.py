@@ -68,7 +68,7 @@ class _Parser:
 
     def scope(self, key, parent, kind, qualname):
         self.scopes[key] = dict(id=key, parent=parent, kind=kind,
-                                qualname=qualname, bindings={})
+                                qualname=qualname, bindings={}, type_bindings={})
 
     def bind(self, name, type_text="", *, reason="local", target=None):
         if name:
@@ -151,9 +151,18 @@ class _Parser:
             annotations=self.annotations(node), local=parent["kind"] in CALLABLE_KINDS)
         self.symbols.append(symbol)
         self.bind(name, reason="declaration", target=key)
+        if is_class:
+            self.scopes[self.current]["type_bindings"].setdefault(name, []).append(
+                dict(reason="declaration", target=key))
         previous_scope = self.current
         self.scope(key, previous_scope, kind, qualname)
         self.current = key
+        type_parameters = node.child_by_field_name("type_parameters") or _first(node, {"type_parameters"})
+        for parameter in type_parameters.named_children if type_parameters else []:
+            if parameter.type == "type_parameter":
+                identifier = parameter.child_by_field_name("name") or _first(parameter, {"type_identifier", "identifier"})
+                self.scopes[key]["type_bindings"].setdefault(self.text(identifier), []).append(
+                    dict(reason="type parameter", target=None, declaration=self.text(parameter)))
         for parameter in params:
             self.bind(parameter["name"], parameter["type"], reason="parameter")
         if is_class:
@@ -324,6 +333,7 @@ class _Resolver:
         self.files = files
         self.symbols = {s["id"]: s for f in files for s in f["symbols"]}
         self.scopes = {k: v for f in files for k, v in f.get("_scopes", {}).items()}
+        self.inherited_owners = {r["source"] for f in files for r in f["references"] if r["kind"] == "inherits"}
         self.qualified, self.members = defaultdict(list), defaultdict(list)
         for symbol in self.symbols.values():
             if symbol["kind"] != "module" and not symbol.get("partial") and not symbol.get("local"):
@@ -340,7 +350,25 @@ class _Resolver:
             scope_id = scope["parent"]
         return None
 
-    def candidates(self, file, name, *, type_only=False):
+    def type_binding(self, scope_id, name):
+        while scope_id:
+            scope = self.scopes[scope_id]
+            bindings = scope.get("type_bindings", {}).get(name)
+            if bindings is not None:
+                return bindings
+            scope_id = scope["parent"]
+        return None
+
+    def candidates(self, file, name, *, type_only=False, scope_id=None):
+        if type_only and scope_id:
+            bindings = self.type_binding(scope_id, name.split(".")[0])
+            if bindings is not None:
+                if len(bindings) != 1 or not bindings[0].get("target"):
+                    return []
+                target = self.symbols[bindings[0]["target"]]
+                if "." not in name:
+                    return [target]
+                return self.qualified.get(target["qualname"] + "." + name.split(".", 1)[1], [])
         # Never search globally by basename. Qualified imports and this package
         # are the only supported visibility paths; wildcard imports stay unknown.
         if any(i["wildcard"] for i in file["imports"]):
@@ -371,7 +399,7 @@ class _Resolver:
             return None, "syntax recovery: partial file"
         scope_id, member, receiver = ref["scope_id"], ref["member"], ref["receiver"]
         if ref["kind"] == "inherits":
-            candidates = self.candidates(file, member, type_only=True)
+            candidates = self.candidates(file, member, type_only=True, scope_id=scope_id)
             return (candidates[0]["id"], "unique declared base; compiler unverified") if len(candidates) == 1 else (
                 None, "base type external, generic, ambiguous or unknown")
         scope = self.scopes.get(scope_id, {})
@@ -393,13 +421,20 @@ class _Resolver:
                 # Generics and nullable syntax are not type resolution.
                 if any(char in type_name for char in "<>()[]?*"):
                     return None, "receiver type requires semantic analysis"
-                types = self.candidates(file, type_name, type_only=True)
+                type_bindings = self.type_binding(scope_id, type_name.split(".")[0])
+                if type_bindings and any(b["reason"] == "type parameter" for b in type_bindings):
+                    return None, "type parameter receiver: bound and applicability analysis required"
+                types = self.candidates(file, type_name, type_only=True, scope_id=scope_id)
             else:
-                types = self.candidates(file, receiver, type_only=True)
+                types = self.candidates(file, receiver, type_only=True, scope_id=scope_id)
             if len(types) != 1:
                 return None, "receiver type external, ambiguous or unknown"
+            if types[0]["id"] in self.inherited_owners:
+                return None, "inherited candidate set and argument applicability required"
             candidates = self.members.get((types[0]["id"], member), [])
         else:
+            if not ref["constructor"] and self.owner(scope_id) in self.inherited_owners:
+                return None, "inherited candidate set and argument applicability required"
             bindings = self.binding(scope_id, member)
             if bindings is not None:
                 if any(not b.get("target") for b in bindings):

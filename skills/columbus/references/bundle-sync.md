@@ -40,4 +40,4 @@ The installer stages a candidate directory and uses locking, replacement, and ro
 
 The installer does not edit `AGENTS.md`, `.gitignore`, hooks, build files, or MCP host settings. Team use should version the installed skill and its manifest using the user's normal repository process. Generated `.columbus/` databases/virtual environments should stay untracked; adding ignore rules is a separate project edit when needed.
 
-After upgrade, run `doctor` with the selected interpreter and update pinned dependencies. Subsequent index sync invalidates incompatible analyzer/configuration state. Old schema 1 DBs are not silently migrated/deleted; the JVM entrypoint defaults to a separate schema 2 cache path.
+After upgrade, run `doctor` with the selected interpreter and update pinned dependencies. Subsequent index sync invalidates incompatible analyzer/configuration state. Old schema 1 DBs are not silently migrated/deleted; schema 2 snapshots are readable and atomically rebuilt into compressed schema 3 on the next sync. Older engines require their own DB path after this upgrade.

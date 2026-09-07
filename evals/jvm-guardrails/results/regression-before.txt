@@ -1,0 +1,52 @@
+======================================================================
+FAIL: test_inherited_overload_cannot_assert_subclass_target (test_jvm.JVMTests.test_inherited_overload_cannot_assert_subclass_target) (invocation='hit(1)')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/rex/Desktop/columbus/skills/columbus/scripts/tests/test_jvm.py", line 166, in test_inherited_overload_cannot_assert_subclass_target
+    self.assertFalse(call["resolved"], call)
+AssertionError: True is not false : {'source': 'C.java::C.run:method(C)', 'scope_id': 'C.java::C.run:method(C)', 'kind': 'calls', 'name': 'hit', 'member': 'hit', 'receiver': '', 'constructor': False, 'path': 'C.java', 'line': 1, 'evidence': 'hit(1)', 'resolved': True, 'reason': 'unique syntax candidate; runtime dispatch unverified', 'target': 'C.java::C.hit:method(String)', 'confidence': 'heuristic'}
+
+======================================================================
+FAIL: test_inherited_overload_cannot_assert_subclass_target (test_jvm.JVMTests.test_inherited_overload_cannot_assert_subclass_target) (invocation='item.hit(1)')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/rex/Desktop/columbus/skills/columbus/scripts/tests/test_jvm.py", line 166, in test_inherited_overload_cannot_assert_subclass_target
+    self.assertFalse(call["resolved"], call)
+AssertionError: True is not false : {'source': 'C.java::C.run:method(C)', 'scope_id': 'C.java::C.run:method(C)', 'kind': 'calls', 'name': 'item.hit', 'member': 'hit', 'receiver': 'item', 'constructor': False, 'path': 'C.java', 'line': 1, 'evidence': 'item.hit(1)', 'resolved': True, 'reason': 'unique syntax candidate; runtime dispatch unverified', 'target': 'C.java::C.hit:method(String)', 'confidence': 'heuristic'}
+
+======================================================================
+FAIL: test_nested_type_shadows_top_level_but_value_name_does_not (test_jvm.JVMTests.test_nested_type_shadows_top_level_but_value_name_does_not)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/rex/Desktop/columbus/skills/columbus/scripts/tests/test_jvm.py", line 156, in test_nested_type_shadows_top_level_but_value_name_does_not
+    self.assertTrue(call["resolved"], call)
+AssertionError: False is not true : {'source': 'C.java::C.run:method(T,int)', 'scope_id': 'C.java::C.run:method(T,int)', 'kind': 'calls', 'name': 'item.hit', 'member': 'hit', 'receiver': 'item', 'constructor': False, 'path': 'C.java', 'line': 2, 'evidence': 'item.hit()', 'resolved': False, 'reason': 'overloaded, external, ambiguous or unknown declaration'}
+
+======================================================================
+FAIL: test_type_parameters_never_resolve_to_same_named_concrete_type (test_jvm.JVMTests.test_type_parameters_never_resolve_to_same_named_concrete_type) (declaration='class C<T extends API> { void run(T item) { item.hit(); } }')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/rex/Desktop/columbus/skills/columbus/scripts/tests/test_jvm.py", line 146, in test_type_parameters_never_resolve_to_same_named_concrete_type
+    self.assertFalse(call["resolved"], call)
+AssertionError: True is not false : {'source': 'C.java::C.run:method(T)', 'scope_id': 'C.java::C.run:method(T)', 'kind': 'calls', 'name': 'item.hit', 'member': 'hit', 'receiver': 'item', 'constructor': False, 'path': 'C.java', 'line': 1, 'evidence': 'item.hit()', 'resolved': True, 'reason': 'unique syntax candidate; runtime dispatch unverified', 'target': 'C.java::T.hit:method()', 'confidence': 'heuristic'}
+
+======================================================================
+FAIL: test_type_parameters_never_resolve_to_same_named_concrete_type (test_jvm.JVMTests.test_type_parameters_never_resolve_to_same_named_concrete_type) (declaration='class C { <T extends API> void run(T item) { item.hit(); } }')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/rex/Desktop/columbus/skills/columbus/scripts/tests/test_jvm.py", line 146, in test_type_parameters_never_resolve_to_same_named_concrete_type
+    self.assertFalse(call["resolved"], call)
+AssertionError: True is not false : {'source': 'C.java::C.run:method(T)', 'scope_id': 'C.java::C.run:method(T)', 'kind': 'calls', 'name': 'item.hit', 'member': 'hit', 'receiver': 'item', 'constructor': False, 'path': 'C.java', 'line': 1, 'evidence': 'item.hit()', 'resolved': True, 'reason': 'unique syntax candidate; runtime dispatch unverified', 'target': 'C.java::T.hit:method()', 'confidence': 'heuristic'}
+
+======================================================================
+FAIL: test_type_parameters_never_resolve_to_same_named_concrete_type (test_jvm.JVMTests.test_type_parameters_never_resolve_to_same_named_concrete_type) (declaration='class C<T extends API> { class Nested { void run(T item) { item.hit(); } } }')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/rex/Desktop/columbus/skills/columbus/scripts/tests/test_jvm.py", line 146, in test_type_parameters_never_resolve_to_same_named_concrete_type
+    self.assertFalse(call["resolved"], call)
+AssertionError: True is not false : {'source': 'C.java::C.Nested.run:method(T)', 'scope_id': 'C.java::C.Nested.run:method(T)', 'kind': 'calls', 'name': 'item.hit', 'member': 'hit', 'receiver': 'item', 'constructor': False, 'path': 'C.java', 'line': 1, 'evidence': 'item.hit()', 'resolved': True, 'reason': 'unique syntax candidate; runtime dispatch unverified', 'target': 'C.java::T.hit:method()', 'confidence': 'heuristic'}
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.161s
+
+FAILED (failures=6)

@@ -20,6 +20,27 @@ class AgentContextTests(unittest.TestCase):
         self.index = RepositoryIndex(self.root / '.columbus/index.sqlite')
         self.index.refresh(self.root)
 
+    def test_bounded_context_distinguishes_semantics_from_output_truncation(self):
+        (self.root / 'broken.py').write_text('def broken(:\n')
+        (self.root / 'unknown.py').write_text('def unknown(): return missing()\n')
+        status = self.index.refresh(self.root)
+        for mode in ('snippets', 'signatures'):
+            for output_format in ('json', 'text'):
+                packet = self.index.context('broken.py::module', mode=mode,
+                    output_format=output_format, budget_bytes=2048)
+                self.assertTrue(any(i.get('partial') for i in packet['items']))
+                self.assertFalse(packet['semantic_complete'])
+                self.assertEqual(packet['repository_diagnostic_count'], len(status['diagnostics']))
+                self.assertEqual(packet['repository_unresolved_references'], status['unresolved_references'])
+                self.assertEqual(packet['partial_nodes'], sum(bool(i.get('partial')) for i in packet['items']))
+                rendered = render(packet, output_format)
+                self.assertLessEqual(len(rendered.encode()), 2048)
+                self.assertIn('repository_diagnostic_count', rendered)
+        related = self.index.neighbors('broken.py::module')
+        self.assertFalse(related['truncated'])
+        self.assertFalse(related['semantic_complete'])
+        self.assertEqual(related['repository_diagnostic_count'], len(status['diagnostics']))
+
     def test_outline_and_signatures_never_read_source(self):
         with patch.object(self.index, '_source', side_effect=AssertionError('source read')):
             outline = self.index.repo_map(budget_bytes=2048)

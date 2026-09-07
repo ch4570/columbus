@@ -29,7 +29,8 @@ def text_output(packet: dict, command: str = '') -> str:
                      f"diagnostics={coverage['diagnostics']} languages={_line(','.join(coverage['languages']))}")
     if packet.get('semantic_complete') is False:
         lines.append(f"semantic_complete=false partial_nodes={packet.get('partial_nodes', 0)} "
-                     f"repository_unresolved_references={packet.get('repository_unresolved_references', 'unknown')}")
+                     f"repository_unresolved_references={packet.get('repository_unresolved_references', 'unknown')} "
+                     f"repository_diagnostic_count={packet.get('repository_diagnostic_count', 'unknown')}")
     if packet.get('receipt'):
         lines.append(f"receipt={_line(packet['receipt']['status'])} "
                      f"seen_source_bytes={packet['receipt']['seen_source_bytes']}")
@@ -67,3 +68,30 @@ def render(packet: dict, output_format: str = 'json', command: str = '') -> str:
     if output_format != 'json':
         raise ValueError('output_format must be json or text')
     return json.dumps(packet, ensure_ascii=False, separators=(',', ':'))
+
+
+def sync_summary(status: dict) -> dict:
+    """Constant-shape agent receipt; full status remains available on request."""
+    keys = ('revision', 'schema_version', 'analyzer_version', 'freshness', 'last_sync_check',
+            'files', 'symbols', 'edges', 'indexed_bytes', 'references',
+            'resolved_references', 'unresolved_references')
+    result = {key: status[key] for key in keys if key in status}
+    result.update(summary=True, semantic_complete=False,
+                  diagnostic_count=len(status.get('diagnostics', [])),
+                  details_omitted=True)
+    refresh = status.get('refresh', {})
+    result['refresh'] = {key: refresh[key] for key in (
+        'mode', 'check', 'parsed_files', 'cached_parses_loaded', 'reused_files',
+        'metadata_reused_files', 'added_files', 'removed_files', 'hashed_files',
+        'hashed_bytes', 'config_hashed_files', 'config_hashed_bytes',
+        'global_relink', 'elapsed_seconds') if key in refresh}
+    inventory = status.get('inventory', {})
+    result['inventory'] = {key: inventory[key] for key in (
+        'candidate_files', 'excluded_files', 'probe_files', 'probe_bytes') if key in inventory}
+    result['inventory'].update(oversized_files=len(inventory.get('oversized_paths', [])),
+                               binary_files=len(inventory.get('binary_paths', [])))
+    if 'stale_paths' in status:
+        result.update(stale_files=len(status['stale_paths']),
+                      stale_config_files=len(status.get('stale_config_paths', [])),
+                      stale_reasons=status.get('stale_reasons', []))
+    return result

@@ -1,5 +1,7 @@
 from contextlib import closing
 import json
+import io
+from contextlib import redirect_stdout
 import os
 from pathlib import Path
 import sqlite3
@@ -45,6 +47,62 @@ class SyncTests(unittest.TestCase):
 
     def graph(self, index=None):
         return (index or self.index).graph()
+
+    def test_lazy_parse_cache_preserves_diagnostics_and_relink(self):
+        self.write("one.py", "def one(): return missing()\n")
+        self.write("broken.py", "def broken(:\n")
+        first = self.index.refresh(self.root, fast=True)
+        graph = self.graph()
+        original_loads = index_module.json.loads
+
+        def reject_parse_decode(value, *args, **kwargs):
+            result = original_loads(value, *args, **kwargs)
+            if isinstance(result, dict) and "symbols" in result and "references" in result:
+                raise AssertionError("unchanged sync decoded cached parse facts")
+            return result
+
+        with patch.object(index_module.json, "loads", side_effect=reject_parse_decode):
+            for fast in (True, False):
+                report = self.index.refresh(self.root, fast=fast)
+                self.assertEqual(report["diagnostics"], first["diagnostics"])
+                self.assertEqual(report["unresolved_references"], first["unresolved_references"])
+                self.assertEqual(report["refresh"]["cached_parses_loaded"], 0)
+            with self.assertRaisesRegex(ValueError, "Incomplete parse"):
+                self.index.refresh(self.root, fast=True, require_complete=True)
+        self.assertEqual(self.graph(), graph)
+        self.write("broken.py", "def missing(): return 1\n")
+        report = self.index.refresh(self.root, fast=True)
+        self.assertEqual(report["refresh"]["cached_parses_loaded"], 1)
+        self.assertEqual(report["diagnostics"], [])
+        self.assertTrue(report["refresh"]["global_relink"])
+        self.assertEqual(report["refresh"]["parsed_files"], 1)
+
+    def test_cli_summary_preserves_parse_counts_and_stale_state(self):
+        from columbus.cli import main
+        self.write("broken.py", "def broken(:\n")
+        for number in range(80):
+            self.write(f"long_nested_path/worker_{number}.py", f"def call_{number}(): return unknown()\n")
+        def invoke(*args):
+            output = io.StringIO()
+            with redirect_stdout(output):
+                self.assertEqual(main([*args, '--repo', str(self.root), '--db', str(self.index.db)]), 0)
+            return json.loads(output.getvalue()), len(output.getvalue().encode())
+        full, full_bytes = invoke('sync')
+        summary, summary_bytes = invoke('sync', '--summary')
+        self.assertTrue(summary['details_omitted'])
+        self.assertEqual(summary['diagnostic_count'], len(full['diagnostics']))
+        self.assertEqual(summary['unresolved_references'], full['unresolved_references'])
+        self.assertEqual(summary['files'], 81)
+        self.assertEqual(summary['refresh']['parsed_files'], 0)
+        self.assertNotIn('detected_languages', summary['inventory'])
+        self.assertLess(summary_bytes, full_bytes)
+        self.write('broken.py', 'def fixed(): return 1\n')
+        stale, _ = invoke('status', '--summary', '--verify-content')
+        self.assertEqual(stale['freshness'], 'stale')
+        self.assertEqual(stale['stale_files'], 1)
+        fresh, _ = invoke('sync', '--summary')
+        self.assertEqual(fresh['diagnostic_count'], 0)
+        self.assertEqual(fresh['refresh']['parsed_files'], 1)
 
     def test_fast_noop_never_reads_source_bodies(self):
         self.write("one.py", "def one(): return 1\n")
@@ -213,6 +271,32 @@ class SyncTests(unittest.TestCase):
             with self.assertRaisesRegex(SnapshotChanged, "Git HEAD/branch/worktree changed"):
                 self.index.refresh(self.root, fast=True)
         self.assertEqual(self.graph(), original)
+
+    def test_compressed_parse_cache_and_atomic_schema_two_upgrade(self):
+        self.write("one.py", "def one(): return missing()\n")
+        self.index.refresh(self.root)
+        symbol_id = self.index.search("one")["hits"][0]["id"]
+        before = self.index.symbol(symbol_id)
+        with closing(sqlite3.connect(self.index.db)) as conn, conn:
+            row = conn.execute("SELECT parsed FROM files").fetchone()[0]
+            self.assertIsInstance(row, bytes)
+            plain = index_module.compact(index_module.decode_parse(row))
+            self.assertLess(len(row), len(plain))
+            conn.execute("UPDATE files SET parsed=?", (plain,))
+            conn.execute("UPDATE metadata SET value=? WHERE key='schema_version'", (json.dumps("2"),))
+        self.assertEqual(self.index.symbol(symbol_id), before)
+        with patch.object(index_module, "resolve_files", side_effect=RuntimeError("upgrade failed")):
+            with self.assertRaisesRegex(RuntimeError, "upgrade failed"):
+                self.index.refresh(self.root, fast=True)
+        self.assertEqual(self.index.status()["schema_version"], "2")
+        self.assertEqual(self.index.symbol(symbol_id), before)
+        report = self.index.refresh(self.root, fast=True)
+        self.assertEqual(report["schema_version"], "3")
+        after = self.index.symbol(symbol_id)
+        before.pop("revision"); after.pop("revision")
+        self.assertEqual(after, before)
+        with closing(sqlite3.connect(self.index.db)) as conn:
+            self.assertEqual(conn.execute("SELECT typeof(parsed) FROM files").fetchone()[0], "blob")
 
     def test_schema_one_database_is_untouched_and_rejected(self):
         self.index.db.parent.mkdir()

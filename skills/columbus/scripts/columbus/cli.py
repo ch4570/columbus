@@ -120,6 +120,7 @@ def main(argv=None) -> int:
         if name == 'index':
             command.add_argument('root', help='Legacy alias for sync --repo ROOT')
         if name in {'sync', 'index', 'status'}:
+            command.add_argument('--summary', action='store_true', help='Emit counts and freshness without file inventory or diagnostic text')
             command.add_argument('--verify-content', '--check-files', action='store_true', help='Hash source contents to verify freshness')
         if name in {'sync', 'index'}:
             command.add_argument('--source-root', default=None, help='Restrict source directory; also sets Python import root')
@@ -296,6 +297,9 @@ def main(argv=None) -> int:
                 with output.open('x', encoding='utf-8') as stream:
                     stream.write(rendered)
                 result = {'output': str(output), 'nodes': len(graph['nodes']), 'edges': len(graph['edges']), 'truncated': graph['truncated']}
+        if getattr(args, 'summary', False):
+            from .presentation import sync_summary
+            result = sync_summary(result)
         if getattr(args, 'format', 'json') == 'text':
             from .presentation import render
             rendered = render(result, 'text', args.command)

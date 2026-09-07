@@ -13,6 +13,10 @@ The JVM adapter extracts packages/imports and supported class, interface, object
 
 JVM calls remain candidates. The adapter does not implement compiler overload resolution, generic inference, runtime dispatch, Kotlin extension selection, coroutine semantics, annotation processing, or Spring bean selection. Mixed-language links require explicit supporting facts; equal last names alone must not create global calls.
 
+Type lookup keeps class/method type parameters and nested declarations in a separate lexical type namespace. A type parameter receiver stays unresolved with a bound/applicability reason; it must not link to a same-named concrete class. Calls on types with explicit inheritance stay unresolved until inherited candidates and argument applicability are supported, even if the subclass declares only one matching name. This deliberately reduces coverage. Inspect source for the actual route.
+
+Context and relationship responses expose `semantic_complete=false`, repository diagnostic/unresolved counts, and partial node counts separately from output `truncated`. Repository counts are global, not a per-symbol completeness proof. A clean parse still does not imply complete call resolution.
+
 Build `.kts` syntax is not a resolved Gradle dependency graph. Build/config files are freshness inputs and are never executed. Duplicate fully qualified symbols across modules may remain ambiguous because source-set classpaths are not resolved. Index the repository root to include main/test sources across modules unless scope restriction is requested.
 
 SCIP import and live language-server integration are possible next layers, not current features. scip-java covers Java and Kotlin, but Kotlin is less mature and automatic Gradle support does not imply automatic Maven/Android Kotlin support. It may compile projects, so do not run it implicitly during syntax queries. [scip-java guide](https://github.com/scip-code/scip-java/blob/main/docs/getting-started.md).

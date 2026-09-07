@@ -10,16 +10,18 @@ from pathlib import Path
 import re
 import sqlite3
 import time
+import zlib
 
 from .discovery import digest, discover, module_name
 from .languages import ANALYZER_VERSION, analyzer_fingerprint, decode_source, parse_source, resolve_files
 from .sync_state import SnapshotChanged, file_stat, git_state, read_stable
 
-SCHEMA_VERSION = "2"
+SCHEMA_VERSION = "3"
+READABLE_SCHEMAS = {"2", SCHEMA_VERSION}
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS metadata(key TEXT PRIMARY KEY, value TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS files(path TEXT PRIMARY KEY, hash TEXT NOT NULL,
-    size INTEGER NOT NULL, parsed TEXT NOT NULL, stat TEXT NOT NULL);
+    size INTEGER NOT NULL, parsed BLOB NOT NULL, stat TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS configs(path TEXT PRIMARY KEY, hash TEXT NOT NULL, stat TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS symbols(id TEXT PRIMARY KEY, path TEXT NOT NULL,
     name TEXT NOT NULL, qualname TEXT NOT NULL, kind TEXT NOT NULL, data TEXT NOT NULL);
@@ -36,6 +38,16 @@ CREATE VIRTUAL TABLE IF NOT EXISTS symbol_fts USING fts5(id UNINDEXED, name, pat
 
 def compact(value) -> str:
     return json.dumps(value, ensure_ascii=False, separators=(",", ":"))
+
+
+def encode_parse(value: dict) -> bytes:
+    """Lossless parse cache; public graph/search records remain ordinary JSON."""
+    return zlib.compress(compact(value).encode("utf-8"))
+
+
+def decode_parse(value: str | bytes) -> dict:
+    # Schema 2 snapshots remain readable until an atomic refresh upgrades them.
+    return json.loads(zlib.decompress(value) if isinstance(value, bytes) else value)
 
 
 def byte_size(value) -> int:
@@ -59,8 +71,8 @@ class RepositoryIndex:
         conn.row_factory = sqlite3.Row
         try:
             conn.execute("BEGIN")
-            if self._meta(conn).get("schema_version") != SCHEMA_VERSION:
-                raise ValueError("Unsupported index schema; choose a new --db path and rebuild (schema 2 required)")
+            if self._meta(conn).get("schema_version") not in READABLE_SCHEMAS:
+                raise ValueError("Unsupported index schema; choose a new --db path and rebuild (schema 2 or 3 required)")
             yield conn
         finally:
             conn.close()
@@ -91,8 +103,8 @@ class RepositoryIndex:
             has_metadata = conn.execute("SELECT 1 FROM sqlite_master WHERE name='metadata'").fetchone()
             if has_metadata:
                 current_schema = self._meta(conn).get("schema_version")
-                if current_schema is not None and current_schema != SCHEMA_VERSION:
-                    raise ValueError("Unsupported index schema; choose a new --db path and rebuild (schema 2 required)")
+                if current_schema is not None and current_schema not in READABLE_SCHEMAS:
+                    raise ValueError("Unsupported index schema; choose a new --db path and rebuild (schema 2 or 3 required)")
             conn.execute("PRAGMA foreign_keys=ON")
             conn.execute("PRAGMA journal_mode=WAL")
             conn.executescript(SCHEMA)
@@ -108,7 +120,7 @@ class RepositoryIndex:
             language_config = inventory.get("language_config", {})
             detected_languages = inventory.get("detected_languages", {})
             actual_analyzer = analyzer_fingerprint(paths, language_config, detected_languages)
-            old = {r["path"]: dict(r) for r in conn.execute("SELECT * FROM files")}
+            old = {r["path"]: dict(r) for r in conn.execute("SELECT path,hash,size,stat FROM files")}
             old_configs = {r["path"]: dict(r) for r in conn.execute("SELECT * FROM configs")}
             previous_state = old_meta.get("git_state")
             git_changed = previous_state != state_before
@@ -134,7 +146,8 @@ class RepositoryIndex:
                 config_records.append({"path": rel, "hash": content_hash, "stat": config_stats[rel]})
             config_fingerprint = digest(compact([(r["path"], r["hash"]) for r in config_records]).encode())[:20]
             config_changed = old_meta.get("config_fingerprint") != config_fingerprint
-            rebuild = (old_meta.get("analyzer_fingerprint") != actual_analyzer
+            rebuild = (old_meta.get("schema_version") != SCHEMA_VERSION
+                       or old_meta.get("analyzer_fingerprint") != actual_analyzer
                        or source_root != old_meta.get("source_root", ".") or config_changed)
             records, sources = [], {}
             diagnostics = [{"path": p, "message": "excluded: file exceeds 1 MB"} for p in inventory["oversized_paths"]]
@@ -144,7 +157,7 @@ class RepositoryIndex:
                 current_stat = source_stats[rel]
                 if previous and not rebuild and not force_hash and json.loads(previous["stat"]) == current_stat:
                     content_hash = previous["hash"]
-                    parsed = json.loads(previous["parsed"])
+                    parsed = None
                     reused += 1
                     metadata_reused += 1
                     size = previous["size"]
@@ -160,7 +173,7 @@ class RepositoryIndex:
                     bytes_read += len(data)
                     size = len(data)
                     if previous and previous["hash"] == content_hash and not rebuild:
-                        parsed = json.loads(previous["parsed"])
+                        parsed = None
                         reused += 1
                     else:
                         source = decode_source(rel, data, config=language_config, language=detected_languages.get(rel))
@@ -170,14 +183,25 @@ class RepositoryIndex:
                         changed += 1
                 records.append({"path": rel, "hash": content_hash, "size": size,
                                 "parsed": parsed, "stat": current_stat})
-                for message in parsed.get("diagnostics", []):
-                    diagnostics.append({"path": rel, "message": str(message)})
-            if require_complete and diagnostics:
-                raise ValueError(f'Incomplete parse: {len(diagnostics)} diagnostics; previous index preserved')
             current_paths = {r["path"] for r in records}
             removed = sorted(set(old) - current_paths)
             added = sorted(current_paths - set(old))
             has_changes = bool(changed or removed or rebuild)
+            cached_parses_loaded = 0
+            if has_changes:
+                for record in records:
+                    if record["parsed"] is None:
+                        record["parsed"] = decode_parse(conn.execute(
+                            "SELECT parsed FROM files WHERE path=?", (record["path"],)).fetchone()[0])
+                        cached_parses_loaded += 1
+                    diagnostics.extend({"path": record["path"], "message": str(message)}
+                                       for message in record["parsed"].get("diagnostics", []))
+            else:
+                # The analyzer, content and file set are identical to the committed snapshot.
+                diagnostics.extend(item for item in old_meta.get("diagnostics", [])
+                                   if item["path"] in current_paths)
+            if require_complete and diagnostics:
+                raise ValueError(f'Incomplete parse: {len(diagnostics)} diagnostics; previous index preserved')
             if has_changes:
                 edges = resolve_files([r["parsed"] for r in records])
                 conn.execute("DELETE FROM edges")
@@ -213,7 +237,7 @@ class RepositoryIndex:
             if has_changes:
                 conn.execute("DELETE FROM files")
                 conn.executemany("INSERT INTO files VALUES(?,?,?,?,?)", [
-                    (r["path"], r["hash"], r["size"], compact(r["parsed"]), compact(r["stat"])) for r in records])
+                    (r["path"], r["hash"], r["size"], encode_parse(r["parsed"]), compact(r["stat"])) for r in records])
             else:
                 conn.executemany("UPDATE files SET stat=? WHERE path=?", [
                     (compact(r["stat"]), r["path"]) for r in records
@@ -236,20 +260,23 @@ class RepositoryIndex:
                 raise SnapshotChanged("Git HEAD/branch/worktree changed during sync; retry sync")
             revision = digest(compact([SCHEMA_VERSION, actual_analyzer, source_root, state_before,
                                       config_fingerprint, [(r["path"], r["hash"]) for r in records]]).encode())[:20]
-            references = [ref for record in records for ref in record["parsed"].get("references", [])]
+            references = [ref for record in records for ref in record["parsed"].get("references", [])] if has_changes else []
+            reference_counts = ({"references": len(references),
+                                 "resolved_references": sum(bool(r.get("resolved")) for r in references),
+                                 "unresolved_references": sum(not r.get("resolved") for r in references)}
+                                if has_changes else {key: old_meta[key] for key in
+                                    ("references", "resolved_references", "unresolved_references")})
             check_mode = "content_hash_verified" if force_hash or rebuild else "metadata_checked"
             report = {"root": str(root), "source_root": source_root, "schema_version": SCHEMA_VERSION,
                       "analyzer_version": ANALYZER_VERSION, "analyzer_fingerprint": actual_analyzer,
                       "revision": revision, "git_head_at_index": state_before["head"], "git_state": state_before,
                       "config_fingerprint": config_fingerprint, "config_files": len(config_records),
                       "indexed_at": datetime.now(timezone.utc).isoformat(), "inventory": inventory,
-                      "diagnostics": diagnostics, "references": len(references),
-                      "resolved_references": sum(bool(r.get("resolved")) for r in references),
-                      "unresolved_references": sum(not r.get("resolved") for r in references),
+                      "diagnostics": diagnostics, **reference_counts,
                       "indexed_bytes": sum(r["size"] for r in records),
                       "last_sync_check": check_mode,
                       "refresh": {"mode": "fast" if fast else "full", "check": check_mode,
-                      "parsed_files": changed, "reused_files": reused, "metadata_reused_files": metadata_reused,
+                      "parsed_files": changed, "cached_parses_loaded": cached_parses_loaded, "reused_files": reused, "metadata_reused_files": metadata_reused,
                       "added_files": len(added), "removed_files": len(removed),
                       "hashed_files": hashed_files, "hashed_bytes": bytes_read,
                       "config_hashed_files": config_hashed, "config_hashed_bytes": config_bytes,
@@ -496,7 +523,7 @@ class RepositoryIndex:
         with self._read() as conn:
             result = self._source(conn, self._find(conn, symbol_id), max_lines)
             row = conn.execute("SELECT parsed FROM files WHERE path=?", (result["path"],)).fetchone()
-            unresolved = [r for r in json.loads(row[0]).get("references", [])
+            unresolved = [r for r in decode_parse(row[0]).get("references", [])
                           if r["source"] == result["id"] and not r.get("resolved")]
             result["unresolved_references"] = unresolved[:30]
             result["unresolved_reference_count"] = len(unresolved)
@@ -546,6 +573,7 @@ class RepositoryIndex:
             return {"center": first["id"], "nodes": list(nodes.values()), "edges": edges,
                     "revision": self._meta(conn)["revision"], "freshness": "index_snapshot",
                     "semantic_complete": False,
+                    "repository_diagnostic_count": len(self._meta(conn).get("diagnostics", [])),
                     "repository_unresolved_references": self._meta(conn).get('unresolved_references', 0),
                     "partial_nodes": sum(bool(n.get('partial')) for n in nodes.values()),
                     "truncated": truncated, "direction": direction, "hops": hops}

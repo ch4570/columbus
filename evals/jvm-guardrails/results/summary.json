@@ -1,0 +1,123 @@
+{
+  "javac_version": "javac 17.0.20.1",
+  "analyzer_sha256": "5e17cc397eb6a7c1ff53f0e5875c0b3c49283ab819628b19c79d2379d7f70f73",
+  "versions": {
+    "columbus": "1.0.0",
+    "tree-sitter": "0.26.0",
+    "tree-sitter-java": "0.23.5",
+    "tree-sitter-kotlin": "1.1.0"
+  },
+  "baseline_commit": "4d55a3438f375aada7ca063aa3dba434bc1a3725",
+  "cases": [
+    {
+      "name": "Generic",
+      "source_sha256": "a2d02431c67aae8e2200c774396c37814a5d2f35af1fc2fe7f2cf5c6e5fbd38e",
+      "compiler_expected_instruction": "InterfaceMethod API.hit:()V",
+      "before": {
+        "references": [
+          {
+            "source": "Generic.java::Generic.run:method(T)",
+            "scope_id": "Generic.java::Generic.run:method(T)",
+            "kind": "calls",
+            "name": "item.hit",
+            "member": "hit",
+            "receiver": "item",
+            "constructor": false,
+            "path": "Generic.java",
+            "line": 4,
+            "evidence": "item.hit()",
+            "resolved": true,
+            "reason": "unique syntax candidate; runtime dispatch unverified",
+            "target": "Generic.java::T.hit:method()",
+            "confidence": "heuristic"
+          }
+        ],
+        "call_edges": [
+          {
+            "source": "Generic.java::Generic.run:method(T)",
+            "target": "Generic.java::T.hit:method()",
+            "kind": "calls",
+            "confidence": "heuristic",
+            "evidence": "item.hit()",
+            "path": "Generic.java",
+            "line": 4
+          }
+        ]
+      },
+      "after": {
+        "references": [
+          {
+            "source": "Generic.java::Generic.run:method(T)",
+            "scope_id": "Generic.java::Generic.run:method(T)",
+            "kind": "calls",
+            "name": "item.hit",
+            "member": "hit",
+            "receiver": "item",
+            "constructor": false,
+            "path": "Generic.java",
+            "line": 4,
+            "evidence": "item.hit()",
+            "resolved": false,
+            "reason": "type parameter receiver: bound and applicability analysis required"
+          }
+        ],
+        "call_edges": []
+      }
+    },
+    {
+      "name": "Inherited",
+      "source_sha256": "35ab20bc1e59789efd78fd06514c3b6c43767af89cd8f3b8ea499357f7a1c43f",
+      "compiler_expected_instruction": "Method hit:(I)V",
+      "before": {
+        "references": [
+          {
+            "source": "Inherited.java::Inherited.run:method()",
+            "scope_id": "Inherited.java::Inherited.run:method()",
+            "kind": "calls",
+            "name": "hit",
+            "member": "hit",
+            "receiver": "",
+            "constructor": false,
+            "path": "Inherited.java",
+            "line": 4,
+            "evidence": "hit(1)",
+            "resolved": true,
+            "reason": "unique syntax candidate; runtime dispatch unverified",
+            "target": "Inherited.java::Inherited.hit:method(String)",
+            "confidence": "heuristic"
+          }
+        ],
+        "call_edges": [
+          {
+            "source": "Inherited.java::Inherited.run:method()",
+            "target": "Inherited.java::Inherited.hit:method(String)",
+            "kind": "calls",
+            "confidence": "heuristic",
+            "evidence": "hit(1)",
+            "path": "Inherited.java",
+            "line": 4
+          }
+        ]
+      },
+      "after": {
+        "references": [
+          {
+            "source": "Inherited.java::Inherited.run:method()",
+            "scope_id": "Inherited.java::Inherited.run:method()",
+            "kind": "calls",
+            "name": "hit",
+            "member": "hit",
+            "receiver": "",
+            "constructor": false,
+            "path": "Inherited.java",
+            "line": 4,
+            "evidence": "hit(1)",
+            "resolved": false,
+            "reason": "inherited candidate set and argument applicability required"
+          }
+        ],
+        "call_edges": []
+      }
+    }
+  ]
+}

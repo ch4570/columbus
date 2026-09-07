@@ -133,6 +133,39 @@ class Client { void go(Service service) { service.fetch(); } }
         self.assertTrue(java["references"][0]["resolved"])
         self.assertIn("Service.fetch", java["references"][0]["target"])
 
+    def test_type_parameters_never_resolve_to_same_named_concrete_type(self):
+        for declaration in (
+            "class C<T extends API> { void run(T item) { item.hit(); } }",
+            "class C { <T extends API> void run(T item) { item.hit(); } }",
+            "class C<T extends API> { class Nested { void run(T item) { item.hit(); } } }",
+        ):
+            with self.subTest(declaration=declaration):
+                parsed = self.parsed("C.java", "class T { void hit() {} } interface API { void hit(); } " + declaration)
+                edges = resolve_jvm([parsed])
+                call = next(r for r in parsed["references"] if r["kind"] == "calls")
+                self.assertFalse(call["resolved"], call)
+                self.assertIn("type parameter", call["reason"])
+                self.assertFalse([e for e in edges if e["kind"] == "calls"])
+
+    def test_nested_type_shadows_top_level_but_value_name_does_not(self):
+        parsed = self.parsed("C.java", """class T { void wrong() {} }
+class C { class T { void hit() {} } void run(T item, int T) { item.hit(); } }
+""")
+        resolve_jvm([parsed])
+        call = next(r for r in parsed["references"] if r["kind"] == "calls")
+        self.assertTrue(call["resolved"], call)
+        self.assertIn("C.T.hit", call["target"])
+
+    def test_inherited_overload_cannot_assert_subclass_target(self):
+        for invocation in ("hit(1)", "item.hit(1)"):
+            with self.subTest(invocation=invocation):
+                parsed = self.parsed("C.java", "class Base { void hit(int n) {} } "
+                    "class C extends Base { void hit(String s) {} void run(C item) { " + invocation + "; } }")
+                resolve_jvm([parsed])
+                call = next(r for r in parsed["references"] if r["kind"] == "calls")
+                self.assertFalse(call["resolved"], call)
+                self.assertIn("inherited", call["reason"])
+
     def test_overload_remains_unresolved_and_ids_ignore_parameter_names(self):
         original = self.parsed("A.java", '''package demo;
 class A {

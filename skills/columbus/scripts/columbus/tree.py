@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import json
 
+from .index import decode_parse
+
 
 def records(index, *, label: str | None = None, path: str | None = None,
             language: str | None = None, limit: int = 100,
@@ -23,7 +25,7 @@ def records(index, *, label: str | None = None, path: str | None = None,
             parent = node.get('parent_id')
             if parent and parent not in nodes and node['path'] not in scopes:
                 row = conn.execute('SELECT parsed FROM files WHERE path=?', [node['path']]).fetchone()
-                scopes[node['path']] = json.loads(row[0]).get('_scopes', {})
+                scopes[node['path']] = decode_parse(row[0]).get('_scopes', {})
         parents = {}
         for node in nodes.values():
             parent, seen = node.get('parent_id'), set()

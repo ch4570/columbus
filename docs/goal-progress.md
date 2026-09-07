@@ -1,0 +1,18 @@
+# AST graph / agent efficiency goal: completion audit
+
+The user goal remains active. The worktree has verified improvements, but the required shipped end state is not yet proven. Historical receipts identify the engine they measured; they are not automatically evidence for the latest worktree.
+
+| Requirement | Current evidence | Remaining completion gate |
+| --- | --- | --- |
+| Real AST graph and agent navigation | Python AST and Java/Kotlin Tree-sitter; portable JSONL trees, exact IDs and bounded context; engine regression suite | Final clean installation and all supported platform checks for the combined changes |
+| Lightweight repository storage (#6) | Lossless parse-cache compression reduced fresh Spring DB from 199,421,952 to 109,953,024 bytes; all stored symbol/edge rows and listed searches matched in that measurement | Further reduce duplicated FTS/graph storage or provide a compact complete portable artifact; current DB remains about 15x source size |
+| Cheap repeated exploration (#6) | Lazy parse-cache loading; `sync/status --summary` retains freshness/coverage/work counts without inventory | Final same-corpus size, warm/edit latency, stale-source and search parity measurements after all engine changes |
+| Correct relationship evidence (#8) | Two compiler-backed false-edge cases blocked; lexical type namespace; context/relationships distinguish semantic incompleteness from truncation | Broader argument applicability and namespace/accessibility tests; reviewed precision/coverage corpus; assess coverage suppressed by conservative inheritance guard |
+| Legal Java annotation parsing (#4) | Upstream grammar plus local dimensions-conflict patch passes three legal fixtures, rejects invalid placement, and reduces Spring Java partial files 5 to 0 | Experimental grammar is not shipped. Distinct package provenance, supported-platform native wheels, clean install/upgrade invalidation and resolver precision after partial suppression changes |
+| Agent-accessible skill | Progressive retrieval entrypoint, topic references, summary sync, syntax/fidelity/receipt boundaries; quick_validate passes | Verify final installed bundle and a realistic agent task with current skill |
+| Lower actual model token usage | Older byte/receipt measurements only; historical actual-model experiment did not demonstrate reduction | Run matched tasks with current engine/skill and source-only baseline, verify answer quality, retain actual input/cache/output usage; do not infer model savings from response bytes |
+| Result report and iteration | Linked reproducible reports below, compiler traces, raw measurements and failure logs | One final requirement-by-requirement report for the shipped state; close issues only when their complete acceptance is demonstrated |
+
+Evidence: [storage](../evals/spring-core/results/compressed-cache/REPORT.md), [JVM guardrails](../evals/jvm-guardrails/README.md), [grammar candidate](../evals/java-grammar/README.md), [portable workflow](../evals/portable-ast/README.md).
+
+Next work should prioritize a complete compact repository artifact and the real agent token/quality experiment, while completing the grammar packaging/platform path. An upstream open PR is not by itself a blocker: the local grammar patch is available for packaging. Existing tests and report files do not justify declaring the overall goal complete.

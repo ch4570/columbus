@@ -1,0 +1,33 @@
+{
+  "javac_version": "javac 17.0.20.1",
+  "cases": {
+    "primitive": {
+      "source_sha256": "719d96337df3abde9abfc20f4996ba52e5b4730de796615cc5ff62956163b959",
+      "expected_valid": true,
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "array": {
+      "source_sha256": "2265436cb57d23c54097c6017f86668da41be968f9623009485a418fff32f187",
+      "expected_valid": true,
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "generic": {
+      "source_sha256": "2ce5cb2879cb6b751e890b50e2cc3e1bdcb0c5d5729417a0001dd4fe97576b50",
+      "expected_valid": true,
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "invalid_after_ellipsis": {
+      "source_sha256": "c41513063a9cc63faf7c30d8b2e2756ef4b8360572a41cce3f71bd3cefae8233",
+      "expected_valid": false,
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "C.java:1: error: <identifier> expected\nclass C { void run(int ... @A values) {} }\n                          ^\nC.java:1: error: illegal start of type\nclass C { void run(int ... @A values) {} }\n                           ^\nC.java:1: error: ',', ')', or '[' expected\nclass C { void run(int ... @A values) {} }\n                             ^\n3 errors\n"
+    }
+  }
+}

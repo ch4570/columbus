@@ -1,0 +1,14 @@
+Compiled from "Generic.java"
+class Generic<T extends API> {
+  Generic();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  void run(T);
+    Code:
+       0: aload_1
+       1: invokeinterface #7,  1            // InterfaceMethod API.hit:()V
+       6: return
+}
