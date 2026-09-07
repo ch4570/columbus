@@ -97,7 +97,7 @@ def archive_neighbors_text(packet: dict) -> str:
                    key=lambda pair: (pair[0], pair[1] or ''))
     file_numbers = {pair: number for number, pair in enumerate(files)}
     lines = ['columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.',
-             'metadata ' + row({k: v for k, v in packet.items() if k not in {'nodes', 'edges'}}),
+             'metadata ' + row({k: v for k, v in packet.items() if k not in {'nodes', 'edges', 'call_context'}}),
              'files [number,path,source_hash]']
     lines.extend(row([number, *pair]) for number, pair in enumerate(files))
     lines.append('nodes [number,file_number,declaration]')
@@ -108,6 +108,12 @@ def archive_neighbors_text(packet: dict) -> str:
     for edge in packet['edges']:
         lines.append(row([numbers[edge['source']], numbers[edge['target']], file_numbers[(edge['path'], paths.get(edge['path']))],
                           {k: v for k, v in edge.items() if k not in {'source', 'target', 'path'}}]))
+    if 'call_context' in packet:
+        lines.append('call_context: JSON metadata followed by physical source lines; control characters escaped')
+        for context in packet['call_context']:
+            lines.append(row({k: v for k, v in context.items() if k != 'source'}))
+            lines.extend(f'{number}| {_line(line)}' for number, line in
+                         enumerate(context['source'].split('\n'), context['start_line']))
     return '\n'.join(lines) + '\n'
 
 

@@ -175,6 +175,25 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
             if any(item['start_line'] != item['end_line'] for item in single['items']):
                 raise VerificationError('Installed zero-context caller response expanded unexpectedly')
             run([*command, '--context-lines', '41'], expected=2)
+            with tempfile.TemporaryDirectory(dir=root, prefix='archive source consumer ') as folder:
+                consumer = Path(folder)
+                (consumer / 'caller_probe.py').write_bytes(original)
+                artifact = consumer / 'graph.xz'
+                run([*prefix, 'archive', '--repo', target, '--snapshot', '--output', artifact, '--compression', 'xz'])
+                archive_command = [*prefix, 'archive-neighbors', packet['target'], '--input', artifact,
+                                   '--repo', consumer, '--direction', 'in', '--kinds', 'calls', '--context-lines', '2']
+                context = json.loads(run(archive_command))
+                if (len(context['edges']) != 2 or context['truncated'] or not context['call_context']
+                        or any(item['source_hash'] != hashlib.sha256(original).hexdigest()
+                               or 'evidence_target()' not in item['source'] for item in context['call_context'])):
+                    raise VerificationError('Installed archive call context lost verified evidence')
+                rendered = run([*archive_command, '--format', 'text'])
+                if len(rendered.encode('utf-8')) > 6000 or 'call_context:' not in rendered:
+                    raise VerificationError('Installed archive context text failed budget/rendering')
+                (consumer / 'caller_probe.py').write_bytes(original + b'# stale\n')
+                run(archive_command, expected=2)
+                if (consumer / '.columbus').exists():
+                    raise VerificationError('Archive call context created a consumer index')
             try:
                 source.write_bytes(original + b'# changed after indexing\n')
                 run(command, expected=2)

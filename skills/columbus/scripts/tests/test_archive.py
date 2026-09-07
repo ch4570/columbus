@@ -13,6 +13,84 @@ from columbus.index import RepositoryIndex
 
 
 class ArchiveTests(unittest.TestCase):
+    def test_verified_call_context_merges_sites_and_rejects_stale_source(self):
+        from columbus.presentation import render
+        from columbus import sync_state
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / 'calls.py'
+            content = '# coding: latin-1\r\ndef target(): pass\r\ndef outer():\r\n    def inner():\r\n        label = "caf\u00e9"\r\n        target(); target()\r\n        target()\r\n    return inner\r\n'
+            source.write_bytes(content.encode('latin-1'))
+            index = RepositoryIndex(root / '.columbus/index.sqlite')
+            index.refresh(root)
+            target = index.search('target')['hits'][0]['id']
+            for compression in ['gzip', 'xz']:
+                artifact = root / ('graph.' + compression)
+                archive(index, artifact, compression=compression)
+                for fmt in ['json', 'text']:
+                    with patch('columbus.sync_state.read_stable', wraps=sync_state.read_stable) as reader:
+                        packet = neighbors_archive(artifact, target, 'in', ['calls'], repo=root,
+                                                   context_lines=1, output_format=fmt)
+                    self.assertEqual(reader.call_count, 1)
+                    context, = packet['call_context']
+                    self.assertEqual(context['call_lines'], [6, 6, 7])
+                    self.assertEqual((context['start_line'], context['end_line']), (5, 7))
+                    self.assertIn('caf\u00e9', context['source'])
+                    self.assertNotIn('return inner', context['source'])
+                    self.assertIn('returned source bytes match', packet['context_freshness'])
+                    output = render(packet, fmt, 'archive-neighbors') + ('\n' if fmt == 'json' else '')
+                    self.assertLessEqual(len(output.encode()), 6000)
+                source.write_bytes(content.replace('caf\u00e9', 'test').encode('latin-1'))
+                with self.assertRaisesRegex(ValueError, 'Stale source'):
+                    neighbors_archive(artifact, target, 'in', ['calls'], repo=root, context_lines=0)
+                self.assertEqual(len(neighbors_archive(artifact, target, 'in', ['calls'])['edges']), 3)
+                source.write_bytes(content.encode('latin-1'))
+            for kwargs in [{'context_lines': -1, 'repo': root}, {'context_lines': 41, 'repo': root},
+                           {'context_lines': True, 'repo': root}, {'context_lines': 0}]:
+                with self.assertRaisesRegex(ValueError, 'context-lines'):
+                    neighbors_archive(artifact, target, 'in', ['calls'], **kwargs)
+            with self.assertRaisesRegex(ValueError, 'context-lines'):
+                neighbors_archive(artifact, target, repo=root, context_lines=1)
+            malicious = root / 'outside.gz'
+            with lzma.open(artifact, 'rt', encoding='utf-8') as stream:
+                rows = [json.loads(line) for line in stream]
+            for row in rows:
+                if row['data'].get('path') == 'calls.py':
+                    row['data']['path'] = '../outside.py'
+            with gzip.open(malicious, 'wt', encoding='utf-8') as stream:
+                stream.writelines(json.dumps(row) + '\n' for row in rows)
+            with self.assertRaisesRegex(ValueError, 'inside the indexed repository'):
+                neighbors_archive(malicious, target, 'in', ['calls'], repo=root, context_lines=0)
+
+    def test_call_context_budget_pagination_retains_every_site(self):
+        from columbus.presentation import render
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / 'calls.py'
+            source.write_text('def target(): pass\n' + ''.join(f'def c{i}(): target(); target()\n' for i in range(9)), encoding='utf-8')
+            index = RepositoryIndex(root / '.columbus/index.sqlite')
+            index.refresh(root)
+            target = index.search('target')['hits'][0]['id']
+            artifact = root / 'graph.gz'
+            archive(index, artifact)
+            for fmt in ['json', 'text']:
+                offset, edges, sites = 0, [], []
+                while offset is not None:
+                    packet = neighbors_archive(artifact, target, 'in', ['calls'], budget_bytes=3000,
+                                               offset=offset, repo=root, context_lines=0, output_format=fmt)
+                    output = render(packet, fmt, 'archive-neighbors') + ('\n' if fmt == 'json' else '')
+                    self.assertLessEqual(len(output.encode()), 3000)
+                    self.assertTrue(packet['edges'])
+                    for context in packet['call_context']:
+                        sites.extend((context['source_id'], line) for line in context['call_lines'])
+                        self.assertEqual(context['source'], source.read_text().splitlines()[context['start_line']-1])
+                    edges.extend(packet['edges'])
+                    if packet['next_offset'] is not None:
+                        self.assertGreater(packet['next_offset'], offset)
+                    offset = packet['next_offset']
+                self.assertEqual(sorted(sites), sorted((e['source'], e['line']) for e in edges))
+                self.assertEqual(len(edges), 18)
+
     def test_xz_roundtrip_source_free_queries_and_corruption(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
