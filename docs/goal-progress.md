@@ -98,3 +98,7 @@ Schema-4 commit 8932a35 now has successful six-job ordinary and thirteen-job can
 ## Actual Spring navigation pair
 
 Both predeclared model trials completed with immutable inputs and semantically correct explanations, but failed verbatim citations (baseline 7/8, Columbus 6/8). Total input decreased 23.15%, while uncached input increased 26.23% and output 14.09%. Columbus read the skill but used no graph commands and made 24 shell calls versus 12. This is not an accepted-quality or graph-driven savings result. [Full retained results and limits](../evals/spring-navigation/REPORT.md). No selective retries; overall goal remains open.
+
+## Evaluation routing audit
+
+The actual Spring prompts included a shared instruction to use ripgrep/source reads. This may compete with skill-guided retrieval, so graph non-use cannot be attributed to the skill alone. Future common prompts now request bounded evidence without naming a tool; condition-specific restrictions remain. New receipts hash harness/schema files. [Audit](../evals/exploration/results/neutral-routing/REPORT.md). No model rerun or retrospective grading change; actual graph-driven savings remain unproven.
