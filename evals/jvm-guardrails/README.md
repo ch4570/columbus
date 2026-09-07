@@ -24,3 +24,7 @@ Reproduce from repository root:
 ```
 
 Remaining issue #8 work includes broader namespace/accessibility cases, argument applicability, independently reviewed precision/coverage beyond these two compiler fixtures, and separating retrieval candidates from static/runtime targets across the API. Issue #4 grammar evaluation, #6 further storage/output reduction and actual model-token comparison also remain active.
+
+## Array applicability follow-up
+
+A [12-case javac probe](results/arrays/REPORT.md) found and repaired six additional false targets for scalar literals passed to Java array parameters. All six valid cases remained linked. This extends the existing arity and primitive guards; general assignability, namespace/accessibility, and independently reviewed corpus precision remain incomplete.

@@ -270,6 +270,22 @@ fun go(s: Service) {
         resolve_jvm([result])
         self.assertFalse(result["references"][0]["resolved"])
 
+    def test_array_parameters_reject_scalar_literals_without_rejecting_null(self):
+        cases = [('int[]', '1', False), ('String[]', '"x"', False),
+                 ('Object[]', 'true', False), ('int[]...', '1', False),
+                 ('int[][]', "'x'", False), ('int[]', 'null', True),
+                 ('String[]', 'null', True), ('int[]...', '', True),
+                 ('int[]...', 'null, null', True), ('Object...', '1', True)]
+        for parameter, argument, expected in cases:
+            with self.subTest(parameter=parameter, argument=argument):
+                result = self.parsed('C.java', f'class C {{ void hit({parameter} p) {{}} void run() {{ hit({argument}); }} }}')
+                resolve_jvm([result])
+                calls = [r for r in result['references'] if r['kind'] == 'calls']
+                self.assertEqual(1, len(calls))
+                self.assertEqual(expected, calls[0]['resolved'])
+                if not expected:
+                    self.assertIn('array parameter', calls[0]['reason'])
+
     def test_syntax_recovery_suppresses_edges(self):
         result = parse_jvm("Bad.java", "class Bad { void run( { missing(); }")
         self.assertTrue(result["partial"])

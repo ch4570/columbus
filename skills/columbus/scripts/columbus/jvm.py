@@ -500,6 +500,10 @@ class _Resolver:
                 # A lone null in the final position may denote the varargs array.
                 if varargs and actual == "null" and number == len(parameters) - 1 and count == len(parameters):
                     continue
+                # Boxing a primitive or a String literal cannot produce an array.
+                # Null and unknown expressions may still denote an array value.
+                if expected.endswith("[]") and (actual in _PRIMITIVE_WIDENING or actual == "reference_literal"):
+                    return None, "literal argument incompatible with array parameter"
                 if (expected in _PRIMITIVE_WIDENING and actual is not None
                         and expected not in _PRIMITIVE_WIDENING.get(actual, set())):
                     return None, "literal argument incompatible with primitive parameter"
