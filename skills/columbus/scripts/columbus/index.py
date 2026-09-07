@@ -529,8 +529,13 @@ class RepositoryIndex:
             result["unresolved_reference_count"] = len(unresolved)
             return result
 
-    def callers(self, query: str, budget_bytes: int = 12000, limit: int = 50) -> dict:
+    def callers(self, query: str, budget_bytes: int = 12000, limit: int = 50, *, output_format: str = "json") -> dict:
         """Direct caller identities and hash-verified call-site excerpts in one packet."""
+        if output_format not in {'json', 'text'}:
+            raise ValueError('output_format must be json or text')
+        from .presentation import caller_text
+        def packet_bytes(packet):
+            return len(caller_text(packet).encode('utf-8')) if output_format == 'text' else byte_size(packet) + 1
         if not 1024 <= budget_bytes <= 1_000_000 or not 1 <= limit <= 200:
             raise ValueError("budget_bytes=1024–1000000 and limit=1–200 required")
         with self._read() as conn:
@@ -574,11 +579,11 @@ class RepositoryIndex:
                     "confidence": [r[0] for r in conn.execute("SELECT DISTINCT confidence FROM edges WHERE source=? AND target=? AND kind='calls' ORDER BY confidence", (caller['id'], target['id']))], "call_line": line, "call_sites": row['sites'],
                     "start_line": start, "end_line": end, "source_hash": source_hash,
                     "source": '\n'.join(lines[start - 1:end])})
-                if byte_size(result) + 1 > budget_bytes:
+                if packet_bytes(result) > budget_bytes:
                     result['items'].pop()
                     result['truncated'] = True
                     break
-            if byte_size(result) + 1 > budget_bytes:
+            if packet_bytes(result) > budget_bytes:
                 raise ValueError("Budget too small for caller metadata")
             return result
 

@@ -1,0 +1,7 @@
+# Numbered caller evidence
+
+`callers IDENTIFIER --format text` now returns numbered source excerpts with caller identity, call line/site count, confidence, full source hash, target/caller partial flags, matched/included counts, truncation and semantic incompleteness. Control characters are visibly escaped using the existing presentation policy. JSON remains the compatible default; both output formats apply their complete serialized UTF-8 byte budget, including the text newline. The skill now selects text for direct-caller exploration.
+
+The [frozen c67b20a source observation](observation.json) returns the same seven caller records in JSON and text. Delivered bytes decrease from 4,327 to 3,892 (10.05%) while preserving numbered call evidence. This is a transport observation, **not actual model-token savings**, and does not establish that an agent will stop rereading source. Earlier failed/negative actual-model pilots remain unchanged; another run on the same compact-caller task would not establish broad gains.
+
+The 1,024-byte Unicode truncation gate and actual CLI line/hash probe pass; the full engine suite passes 196 tests and the root suite passes 53. Skill validation passes. The [fresh wheel/standalone/relocated-ZIP installation check](distribution.json) passes with the new numbered/hash/budget assertions, alongside graph/archive, receipt and hook checks. The installation verifier now runs these text checks on future hosted builds too. Hosted validation of this new output change is pending.

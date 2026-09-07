@@ -3,6 +3,7 @@ from pathlib import Path
 import tempfile
 import unittest
 from columbus.index import RepositoryIndex
+from columbus.presentation import render
 
 
 class CallerPacketTests(unittest.TestCase):
@@ -22,6 +23,17 @@ class CallerPacketTests(unittest.TestCase):
                 self.assertIn('target()', item['source'])
                 self.assertTrue(item['confidence'])
                 self.assertEqual(64, len(item['source_hash']))
+            text_packet = index.callers('target', output_format='text')
+            displayed = render(text_packet, 'text', 'callers')
+            self.assertEqual(packet, text_packet)
+            self.assertIn('semantic_complete=false', displayed)
+            for item in text_packet['items']:
+                self.assertIn(f"{item['call_line']}| ", displayed)
+                self.assertIn(item['source_hash'], displayed)
+                self.assertIn(f"call_sites={item['call_sites']}", displayed)
+            limited_text = index.callers('target', budget_bytes=1024, output_format='text')
+            self.assertLessEqual(len(render(limited_text, 'text', 'callers').encode()), 1024)
+            self.assertTrue(limited_text['truncated'])
             small = index.callers('target', budget_bytes=1024)
             self.assertLessEqual(len((json.dumps(small, separators=(',', ':'), ensure_ascii=False)+'\n').encode()), 1024)
             self.assertTrue(small['truncated'])

@@ -137,7 +137,7 @@ def main(argv=None) -> int:
             command.add_argument('--source-root', default=None, help='Restrict source directory; also sets Python import root')
         if name in {'search', 'map', 'symbol', 'callers', 'neighbors', 'impact', 'context', 'explore', 'graph', 'export'}:
             command.add_argument('--snapshot', action='store_true', help='Read saved index without automatic sync')
-        if name in {'search', 'map', 'symbol', 'neighbors', 'impact', 'context', 'explore'}:
+        if name in {'search', 'map', 'symbol', 'callers', 'neighbors', 'impact', 'context', 'explore'}:
             command.add_argument('--format', choices=['json', 'text'], default='text' if name == 'explore' else 'json',
                                  help='Compact text for agents or compatible structured JSON')
         if name in {'search', 'context'}:
@@ -286,8 +286,8 @@ def main(argv=None) -> int:
                 result = index.search(args.query, args.limit, path=args.path, language=args.language)
             elif args.command == 'callers':
                 if args.pretty:
-                    raise ValueError('callers uses compact JSON to preserve its byte budget')
-                result = index.callers(args.symbol_id, args.budget_bytes, args.limit)
+                    raise ValueError('callers does not support --pretty; its serialized output is byte-budgeted')
+                result = index.callers(args.symbol_id, args.budget_bytes, args.limit, output_format=args.format)
             elif args.command == 'symbol':
                 result = index.symbol(args.symbol_id, args.max_lines)
             elif args.command in {'neighbors', 'impact'}:

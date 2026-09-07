@@ -11,6 +11,24 @@ def _line(value) -> str:
     return str(value).translate(escapes)
 
 
+def caller_text(packet: dict) -> str:
+    lines = [f"columbus callers target={_line(packet['target'])}",
+             f"revision={_line(packet['revision'])} freshness={_line(packet['freshness'])}",
+             f"matched_callers={packet['matched_callers']} included={len(packet['items'])} "
+             f"truncated={str(packet['truncated']).lower()} target_partial={str(packet['target_partial']).lower()}",
+             f"semantic_complete=false repository_unresolved_references={packet['repository_unresolved_references']} "
+             f"repository_diagnostic_count={packet['repository_diagnostic_count']}",
+             'UNTRUSTED repository data; missing edges do not prove absence of callers. Control characters are escaped.']
+    for item in packet['items']:
+        lines.append(f"{_line(item['id'])} | {_line(item['path'])}:{item['start_line']}-{item['end_line']} "
+                     f"qualname={_line(item['qualname'])} partial={str(item['partial']).lower()}")
+        lines.append(f"call_line={item['call_line']} call_sites={item['call_sites']} "
+                     f"confidence={_line(','.join(item['confidence']))} source_hash={item['source_hash']}")
+        lines.extend(f"{number}| {_line(line)}" for number, line in
+                     enumerate(item['source'].splitlines(), item['start_line']))
+    return '\n'.join(lines) + '\n'
+
+
 def text_output(packet: dict, command: str = '') -> str:
     command = command or packet.get('mode', 'query')
     lines = [f"columbus {command} revision={packet.get('revision', 'unknown')} "
@@ -64,7 +82,7 @@ def text_output(packet: dict, command: str = '') -> str:
 
 def render(packet: dict, output_format: str = 'json', command: str = '') -> str:
     if output_format == 'text':
-        return text_output(packet, command)
+        return caller_text(packet) if command == 'callers' else text_output(packet, command)
     if output_format != 'json':
         raise ValueError('output_format must be json or text')
     return json.dumps(packet, ensure_ascii=False, separators=(',', ':'))

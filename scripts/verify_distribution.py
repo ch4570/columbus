@@ -123,6 +123,12 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
                 if (item['source_hash'] != hashlib.sha256(original).hexdigest()
                         or 'evidence_target()' not in item['source'] or not item['confidence']):
                     raise VerificationError('Installed caller evidence lost source/hash/confidence')
+            numbered = run([*command, '--format', 'text'])
+            if ('semantic_complete=false' not in numbered
+                    or any(item['source_hash'] not in numbered or f"{item['call_line']}| " not in numbered for item in packet['items'])):
+                raise VerificationError('Installed caller text lost numbered evidence or completeness')
+            if len(run([*command, '--format', 'text', '--budget-bytes', '1024']).encode('utf-8')) > 1024:
+                raise VerificationError('Installed caller text exceeded byte budget')
             if len(run([*command, '--budget-bytes', '1024']).encode('utf-8')) > 1024:
                 raise VerificationError('Installed caller packet exceeded byte budget')
             try:
