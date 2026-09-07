@@ -61,9 +61,13 @@ def parse_source(path: str, source: str, module: str = "", *, config: dict | Non
         return parse_polyglot(path, source, module, language, config)
     result["language"] = language
     result["fidelity"] = "ast"
+    # Python resets failed parses to a file node; that node is still an
+    # incomplete AST view, just like a JVM recovery node.
+    result["partial"] = bool(result.get("partial") or result.get("diagnostics"))
     for symbol in result["symbols"]:
         symbol["language"] = language
         symbol["fidelity"] = "ast"
+        symbol["partial"] = result["partial"]
     return result
 
 
