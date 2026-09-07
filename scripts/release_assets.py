@@ -16,20 +16,20 @@ def prepare(dist: Path, tag: str | None = None) -> list[Path]:
     version = package_version(ROOT)
     if tag is not None and tag != 'v' + version:
         raise ValueError('Release tag must match the package and bundle version: v' + version)
-    if json.loads((ROOT / 'skills/repoatlas-jvm/bundle.json').read_text(encoding='utf-8'))['version'] != version:
+    if json.loads((ROOT / 'skills/columbus/bundle.json').read_text(encoding='utf-8'))['version'] != version:
         raise ValueError('Skill bundle version must match the package version')
-    source = ast.parse((ROOT / 'get-repoatlas.py').read_text(encoding='utf-8'))
+    source = ast.parse((ROOT / 'get-columbus.py').read_text(encoding='utf-8'))
     defaults = [ast.literal_eval(node.value) for node in source.body if isinstance(node, ast.Assign)
                 and any(isinstance(target, ast.Name) and target.id == 'DEFAULT_VERSION' for target in node.targets)]
     if defaults != [version]:
         raise ValueError('Standalone installer DEFAULT_VERSION must match the package version')
-    wheel = dist / f'repoatlas-{version}-py3-none-any.whl'
-    bundle = dist / f'repoatlas-{version}.zip'
+    wheel = dist / f'columbus-{version}-py3-none-any.whl'
+    bundle = dist / f'columbus-{version}.zip'
     for artifact in (wheel, bundle):
         if not artifact.is_file() or artifact.is_symlink():
             raise ValueError('Build the matching wheel and ZIP first: ' + artifact.name)
-    installer = dist / 'get-repoatlas.py'
-    shutil.copyfile(ROOT / 'get-repoatlas.py', installer)
+    installer = dist / 'get-columbus.py'
+    shutil.copyfile(ROOT / 'get-columbus.py', installer)
     assets = [wheel, bundle, installer]
     checksum = dist / 'SHA256SUMS.txt'
     checksum.write_text(''.join(hashlib.sha256(p.read_bytes()).hexdigest() + '  ' + p.name + '\n'

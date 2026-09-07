@@ -16,7 +16,7 @@ INVENTORY = "BUNDLE-MANIFEST.json"
 
 
 def package_version(root: Path) -> str:
-    module = ast.parse((root / "skills/repoatlas-jvm/scripts/repoatlas/__init__.py").read_text(encoding="utf-8"))
+    module = ast.parse((root / "skills/columbus/scripts/columbus/__init__.py").read_text(encoding="utf-8"))
     for node in module.body:
         if isinstance(node, ast.Assign) and any(isinstance(target, ast.Name) and target.id == "__version__" for target in node.targets):
             version = ast.literal_eval(node.value)
@@ -26,13 +26,13 @@ def package_version(root: Path) -> str:
 
 
 def bundle_contents(root: Path) -> dict[str, bytes]:
-    source = root / "skills/repoatlas-jvm"
-    spec = importlib.util.spec_from_file_location("_repoatlas_distribution_installer", source / "scripts/install.py")
+    source = root / "skills/columbus"
+    spec = importlib.util.spec_from_file_location("_columbus_distribution_installer", source / "scripts/install.py")
     installer = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(installer)
     _, skill = installer._bundle(source)
-    contents = {f"skills/repoatlas-jvm/{relative}": data for relative, data in skill.items()}
-    required = ("README.md", "LICENSE", "bootstrap.py", "install.py", "run.py", "get-repoatlas.py", "pyproject.toml",
+    contents = {f"skills/columbus/{relative}": data for relative, data in skill.items()}
+    required = ("README.md", "LICENSE", "bootstrap.py", "install.py", "run.py", "get-columbus.py", "pyproject.toml",
                 "setup.py", "MANIFEST.in", "scripts/build_bundle.py", "scripts/verify_distribution.py")
     for relative in required:
         contents[relative] = installer._read_regular(root / relative)
@@ -40,7 +40,7 @@ def bundle_contents(root: Path) -> dict[str, bytes]:
                      "SECURITY.md", "SUPPORT.md", ".editorconfig", ".gitattributes", ".gitignore"):
         if (root / relative).is_file():
             contents[relative] = installer._read_regular(root / relative)
-    for directory in ("scripts", "tests", "skills/repoatlas-jvm/scripts/tests"):
+    for directory in ("scripts", "tests", "skills/columbus/scripts/tests"):
         for path in installer._walk_files(root / directory, python_only=True):
             contents[path.relative_to(root).as_posix()] = installer._read_regular(path)
     for path in installer._walk_files(root / "examples"):
@@ -55,15 +55,15 @@ def build_bundle(root: Path, output: Path) -> dict:
     root, output = root.resolve(strict=True), output.resolve()
     version = package_version(root)
     contents = bundle_contents(root)
-    metadata = json.loads(contents["skills/repoatlas-jvm/bundle.json"])
+    metadata = json.loads(contents["skills/columbus/bundle.json"])
     if metadata.get("version") != version:
         raise ValueError("Package and skill bundle versions must match before distribution")
-    inventory = {"format": 1, "name": "repoatlas", "version": version,
+    inventory = {"format": 1, "name": "columbus", "version": version,
                  "files": {name: hashlib.sha256(data).hexdigest() for name, data in sorted(contents.items())}}
     contents[INVENTORY] = (json.dumps(inventory, ensure_ascii=False, sort_keys=True, indent=2) + "\n").encode("utf-8")
     output.mkdir(parents=True, exist_ok=True)
-    artifact = output / f"repoatlas-{version}.zip"
-    prefix = f"repoatlas-{version}/"
+    artifact = output / f"columbus-{version}.zip"
+    prefix = f"columbus-{version}/"
     with zipfile.ZipFile(artifact, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
         for name, data in sorted(contents.items()):
             entry = zipfile.ZipInfo(prefix + name, date_time=(1980, 1, 1, 0, 0, 0))

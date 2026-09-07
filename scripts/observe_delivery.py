@@ -11,15 +11,19 @@ import tempfile
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ATLAS = ROOT / 'skills/repoatlas-jvm/scripts/atlas.py'
+COLUMBUS = ROOT / 'skills/columbus/scripts/columbus.py'
+
+
+def fixture_sources(fixture: Path) -> dict[str, bytes]:
+    """Copy only fixture inputs, excluding both current and preview caches."""
+    return {p.relative_to(fixture).as_posix(): p.read_bytes()
+            for p in sorted(fixture.rglob('*')) if p.is_file()
+            and not {'.columbus', '.repoatlas', '.git', '__pycache__'} & set(p.relative_to(fixture).parts)}
 
 
 def observe() -> dict:
-    fixture = ROOT / 'examples/polyglot-demo'
-    sources = {p.relative_to(fixture).as_posix(): p.read_bytes()
-               for p in sorted(fixture.rglob('*')) if p.is_file()
-               and not {'.repoatlas', '.git', '__pycache__'} & set(p.relative_to(fixture).parts)}
-    with tempfile.TemporaryDirectory(prefix='repoatlas delivery ') as temporary:
+    sources = fixture_sources(ROOT / 'examples/polyglot-demo')
+    with tempfile.TemporaryDirectory(prefix='columbus delivery ') as temporary:
         scratch = Path(temporary)
         repo = scratch / 'repository'
         for name, data in sources.items():
@@ -30,7 +34,7 @@ def observe() -> dict:
         log = scratch / 'queries.jsonl'
 
         def run(*args: str) -> str:
-            result = subprocess.run([sys.executable, str(ATLAS), '--repo', str(repo), *args],
+            result = subprocess.run([sys.executable, str(COLUMBUS), '--repo', str(repo), *args],
                                     capture_output=True, text=True, encoding='utf-8', check=True)
             return result.stdout
 
@@ -71,12 +75,12 @@ def observe() -> dict:
         if rows[-1]['source_bytes'] != 0:
             raise ValueError('The small checkout example did not exhaust its source receipt')
         warm = json.loads(run('sync'))['refresh']
-        return {'schema': 'repoatlas.delivery-observation/v1',
+        return {'schema': 'columbus.delivery-observation/v1',
                 'fixture': 'examples/polyglot-demo',
                 'fixture_files': {name: hashlib.sha256(data).hexdigest() for name, data in sources.items()},
-                'engine_version': json.loads((ROOT / 'skills/repoatlas-jvm/bundle.json').read_text())['version'],
+                'engine_version': json.loads((ROOT / 'skills/columbus/bundle.json').read_text())['version'],
                 'engine_files': {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
-                                 for p in sorted((ATLAS.parent / 'repoatlas').glob('*.py'))},
+                                 for p in sorted((COLUMBUS.parent / 'columbus').glob('*.py'))},
                 'index': {key: index[key] for key in ('files', 'symbols', 'edges', 'indexed_bytes')},
                 'same_map_ids': expected_ids, 'rows': rows,
                 'warm_sync': {key: warm[key] for key in ('parsed_files', 'hashed_files', 'hashed_bytes')},

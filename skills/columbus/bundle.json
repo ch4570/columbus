@@ -1,0 +1,23 @@
+{
+  "name": "columbus",
+  "version": "1.0.0",
+  "schema_version": "2",
+  "primary_languages": [
+    "python",
+    "kotlin",
+    "java",
+    "javascript",
+    "typescript",
+    "go",
+    "rust",
+    "c",
+    "cpp",
+    "csharp",
+    "ruby",
+    "php",
+    "swift",
+    "dart"
+  ],
+  "license": "MIT",
+  "fallback": "text-file graph with configurable declaration keywords"
+}

@@ -100,6 +100,37 @@ class ObservationTests(unittest.TestCase):
                     observe.trial(root, 'export-safety', 'repoatlas', model='unused', effort='high', repeat=1, timeout=5)
                 model.assert_not_called()
 
+    def test_current_columbus_engine_uses_its_own_index_and_condition(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / 'run'
+            observe.prepare(root)
+            observe.freeze_engine(root)
+            frozen = json.loads((root / 'engine.json').read_text())
+            self.assertEqual(frozen['name'], 'columbus')
+            self.assertTrue((root / 'runtime/columbus.py').is_file())
+            self.assertTrue((root / 'repository/.columbus/index-v1.sqlite').is_file())
+            self.assertFalse((root / 'repository/.repoatlas').exists())
+            self.assertTrue(observe.live_index_preflight(root, frozen)['passed'])
+            with patch.object(observe.subprocess, 'Popen') as model:
+                with self.assertRaisesRegex(ValueError, 'Condition must match'):
+                    observe.trial(root, 'export-safety', 'repoatlas', model='unused', effort='high', repeat=1, timeout=5)
+                (root / 'repository/.columbus/index-v1.sqlite').unlink()
+                with self.assertRaisesRegex(ValueError, 'Prebuilt index is missing'):
+                    observe.trial(root, 'export-safety', 'columbus', model='unused', effort='high', repeat=1, timeout=5)
+                model.assert_not_called()
+
+    def test_archive_with_two_engines_is_rejected_before_execution(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            archive = root / 'ambiguous.zip'
+            with zipfile.ZipFile(archive, 'w') as output:
+                for name in ('atlas.py', 'repoatlas/__init__.py', 'columbus.py', 'columbus/__init__.py'):
+                    output.writestr(name, 'raise AssertionError("must not execute")')
+            with patch.object(observe.subprocess, 'run') as execute:
+                with self.assertRaisesRegex(ValueError, 'one supported wrapper'):
+                    observe.freeze_engine(root, archive)
+                execute.assert_not_called()
+
     def test_engine_archive_cannot_escape_or_inject_unlisted_files(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

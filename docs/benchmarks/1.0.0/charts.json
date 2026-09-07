@@ -1,0 +1,147 @@
+{
+  "schema": "columbus.benchmark-charts/v1",
+  "renderer": "matplotlib",
+  "renderer_version": "3.11.0",
+  "python_version": "3.14.7",
+  "script": "scripts/plot_benchmarks.py",
+  "script_sha256": "19d446f4242651e952d32c267a603f2e76d5593ddf5bba3c997dcd2d46fc3641",
+  "theme": {
+    "paper": "#FBF7EE",
+    "navy": "#183342",
+    "teal": "#16776F",
+    "coral": "#B84935",
+    "muted": "#566973",
+    "grid": "#DCDDD5"
+  },
+  "svg_fonts": "embedded paths; accessible title and description",
+  "png_dpi": 160,
+  "charts": [
+    {
+      "name": "delivery",
+      "source": "docs/benchmarks/1.0.0/delivery.json",
+      "source_sha256": "b0b0379abfd3c1d7b26e4aeeddcd24159a0164d6bae98f5dd38a382205eda6da",
+      "series": {
+        "engine_version": "1.0.0",
+        "map_items": 28,
+        "map_bytes": [
+          6639,
+          3534
+        ],
+        "map_reduction_pct": 46.769091730682334,
+        "output_totals": [
+          9612,
+          4474
+        ],
+        "output_reduction_pct": 53.45401581356637,
+        "source_by_call": [
+          [
+            1423,
+            1423,
+            1423
+          ],
+          [
+            1423,
+            188,
+            0
+          ]
+        ],
+        "output_by_call": [
+          [
+            3204,
+            3204,
+            3204
+          ],
+          [
+            3240,
+            901,
+            333
+          ]
+        ]
+      },
+      "outputs": {
+        "docs/assets/benchmark-delivery.svg": "3ddc714aa12c714fe1a29f0e38c1a1c3202bad94a9caa5ad11dfc4ad0c667e2e",
+        "docs/assets/benchmark-delivery.png": "be64d8ba85ed7763cc1e4acef14ac4779e5043849285837b87fd397d4cf9a233"
+      }
+    },
+    {
+      "name": "agent-tokens",
+      "source": "evals/exploration/results/2026-09-07/controlled.json",
+      "source_sha256": "f54a427fd821df50fa39ef9488ed68ca0e2b8fa6544be6e6eef97d05f2b9e633",
+      "series": [
+        {
+          "case": "export-safety",
+          "input_tokens": [
+            79358,
+            106334
+          ],
+          "citation_passed": [
+            true,
+            true
+          ],
+          "both_citations_passed": true,
+          "change_pct": 33.992792157060414
+        },
+        {
+          "case": "configuration-invalidation",
+          "input_tokens": [
+            157482,
+            138864
+          ],
+          "citation_passed": [
+            false,
+            true
+          ],
+          "both_citations_passed": false,
+          "change_pct": -11.822303501352538
+        },
+        {
+          "case": "managed-installation",
+          "input_tokens": [
+            70775,
+            88411
+          ],
+          "citation_passed": [
+            false,
+            true
+          ],
+          "both_citations_passed": false,
+          "change_pct": 24.91840339102791
+        }
+      ],
+      "outputs": {
+        "docs/assets/benchmark-agent-tokens.svg": "6d684f0390e28876cb49375e536666fa5b11370ff7b821ebac83a9d7321cf8bd",
+        "docs/assets/benchmark-agent-tokens.png": "1ff927e0136572eb547eb2fca11904fce2ada54afc0a20140f150ad3eebe64a2"
+      }
+    },
+    {
+      "name": "incremental",
+      "source": "docs/benchmarks/1.0.0/incremental.json",
+      "source_sha256": "274782d977b6eb90076b2f7812e231d664a7fd8cbb3ebdd61d170ea5548601c7",
+      "series": {
+        "cold": {
+          "median_seconds": 0.969214,
+          "min_seconds": 0.944158,
+          "max_seconds": 1.022713,
+          "parsed_files": 1001
+        },
+        "warm": {
+          "median_seconds": 0.354021,
+          "min_seconds": 0.344211,
+          "max_seconds": 0.360925,
+          "parsed_files": 0
+        },
+        "one_file_changed": {
+          "median_seconds": 0.522079,
+          "min_seconds": 0.473352,
+          "max_seconds": 0.672526,
+          "parsed_files": 1
+        }
+      },
+      "outputs": {
+        "docs/assets/benchmark-incremental.svg": "af6e91a81c8658b8d8c2f70d4ca24f2957be269f760584a57dd6dffaf5595d0c",
+        "docs/assets/benchmark-incremental.png": "73493dff6143321fa3c93b1b8e42a5f849e81e5f9a6ae2345a5f14c7ea9f386b"
+      }
+    }
+  ],
+  "note": "Derived figures use measured JSON. Historical model trials remain attributed to RepoAtlas 0.4.0."
+}

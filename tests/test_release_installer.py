@@ -18,14 +18,14 @@ from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
-spec = importlib.util.spec_from_file_location("release_installer", ROOT / "get-repoatlas.py")
+spec = importlib.util.spec_from_file_location("release_installer", ROOT / "get-columbus.py")
 installer = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(installer)
 
 
 class ReleaseInstallerTests(unittest.TestCase):
     def setUp(self):
-        self.temporary = tempfile.TemporaryDirectory(prefix="repoatlas release tests ")
+        self.temporary = tempfile.TemporaryDirectory(prefix="columbus release tests ")
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name).resolve()
         self.prefix = self.root / "managed installation"
@@ -38,10 +38,10 @@ class ReleaseInstallerTests(unittest.TestCase):
         self.wheelhouse = self.root / "dependency wheels"
         self.wheelhouse.mkdir()
 
-    def arguments(self, version="0.5.0"):
+    def arguments(self, version="1.0.0"):
         files = self.root / ("artifacts-" + version)
         files.mkdir(exist_ok=True)
-        wheel = files / f"repoatlas-{version}-py3-none-any.whl"
+        wheel = files / f"columbus-{version}-py3-none-any.whl"
         wheel.write_bytes(("fixture wheel " + version).encode())
         checksum = files / "SHA256SUMS.txt"
         checksum.write_text(hashlib.sha256(wheel.read_bytes()).hexdigest() + "  " + wheel.name + "\n")
@@ -66,7 +66,7 @@ class ReleaseInstallerTests(unittest.TestCase):
         if "doctor" in command:
             return subprocess.CompletedProcess(command, int(self.fail_doctor),
                                                json.dumps({"ready": not self.fail_doctor, "bundle": {"version": version}}), "")
-        if "m.version('repoatlas')" in command[-1]:
+        if "m.version('columbus')" in command[-1]:
             return subprocess.CompletedProcess(command, 0, (self.reported_version or version) + "\n", "")
         prefix = "/global-python" if self.report_global_prefix else str(runtime)
         return subprocess.CompletedProcess(command, 0, json.dumps({"prefix": prefix, "base_prefix": "/base-python"}), "")
@@ -76,8 +76,8 @@ class ReleaseInstallerTests(unittest.TestCase):
             return installer.install(args or self.arguments())
 
     def test_release_version_rejects_paths_shell_text_prereleases_and_newlines(self):
-        self.assertEqual(installer.version_number("0.5.0"), "0.5.0")
-        for value in ("../0.5.0", "v0.5.0", "0.5.0rc1", "0.5.0\n", "0.5.0;echo bad", "01.5.0", "-1.2.3"):
+        self.assertEqual(installer.version_number("1.0.0"), "1.0.0")
+        for value in ("../1.0.0", "v1.0.0", "1.0.0rc1", "1.0.0\n", "1.0.0;echo bad", "01.5.0", "-1.2.3"):
             with self.subTest(value=value), self.assertRaises(argparse.ArgumentTypeError):
                 installer.version_number(value)
 
@@ -106,7 +106,7 @@ class ReleaseInstallerTests(unittest.TestCase):
         args = self.arguments()
         args.wheel = args.checksum_file = None
         received = []
-        checksum_data = hashlib.sha256(b"wheel").hexdigest().encode() + b"  repoatlas-0.5.0-py3-none-any.whl\n"
+        checksum_data = hashlib.sha256(b"wheel").hexdigest().encode() + b"  columbus-1.0.0-py3-none-any.whl\n"
 
         def open_response(request, timeout):
             received.append((request.full_url, timeout))
@@ -120,8 +120,8 @@ class ReleaseInstallerTests(unittest.TestCase):
             opener.return_value.open.side_effect = open_response
             wheel, _ = installer.verified_wheel(args, target)
         self.assertEqual(wheel.read_bytes(), b"wheel")
-        self.assertEqual(received, [(installer.RELEASES + "/v0.5.0/SHA256SUMS.txt", 30),
-                                    (installer.RELEASES + "/v0.5.0/repoatlas-0.5.0-py3-none-any.whl", 30)])
+        self.assertEqual(received, [(installer.RELEASES + "/v1.0.0/SHA256SUMS.txt", 30),
+                                    (installer.RELEASES + "/v1.0.0/columbus-1.0.0-py3-none-any.whl", 30)])
         with self.assertRaisesRegex(installer.InstallError, "download limit"):
             installer.limited_copy(io.BytesIO(b"abcd"), io.BytesIO(), 3)
         with patch.object(installer.time, "monotonic", side_effect=[0, 121]):
@@ -139,7 +139,7 @@ class ReleaseInstallerTests(unittest.TestCase):
         self.assertEqual(user_file.read_text(), "user data")
         self.prefix = self.root / "other managed installation"
         self.bin_dir.mkdir()
-        command = self.bin_dir / ("repoatlas.cmd" if installer.WINDOWS else "repoatlas")
+        command = self.bin_dir / ("columbus.cmd" if installer.WINDOWS else "columbus")
         command.write_text("my existing command")
         with self.assertRaisesRegex(installer.InstallError, "unmanaged launcher"):
             self.install()
@@ -171,12 +171,12 @@ class ReleaseInstallerTests(unittest.TestCase):
         command, repeated = self.install(args)
         self.assertFalse(repeated)
         pip = next(call for call in self.calls if "pip" in call)
-        self.assertEqual(pip[:3], [str(installer.binaries(self.prefix / "versions/0.5.0")[0]), "-I", "-m"])
+        self.assertEqual(pip[:3], [str(installer.binaries(self.prefix / "versions/1.0.0")[0]), "-I", "-m"])
         self.assertIn("--isolated", pip)
         self.assertIn("--no-index", pip)
         self.assertEqual(pip[pip.index("--find-links") + 1], str(self.wheelhouse))
-        self.assertEqual(installer.owned_launcher(command, self.prefix), "0.5.0")
-        state = installer.read_marker(self.prefix / "versions/0.5.0" / installer.RUNTIME_MARKER, self.prefix, version="0.5.0")
+        self.assertEqual(installer.owned_launcher(command, self.prefix), "1.0.0")
+        state = installer.read_marker(self.prefix / "versions/1.0.0" / installer.RUNTIME_MARKER, self.prefix, version="1.0.0")
         self.assertEqual(state["status"], "ready")
         args.wheel = args.checksum_file = None
         args.offline = False
@@ -194,12 +194,12 @@ class ReleaseInstallerTests(unittest.TestCase):
         with self.assertRaisesRegex(installer.InstallError, "rerun the same command"):
             self.install(args)
         self.assertEqual(installer.owned_launcher(command, self.prefix), "0.4.0")
-        self.assertEqual(installer.read_marker(self.prefix / "versions/0.5.0" / installer.RUNTIME_MARKER,
-                                              self.prefix, version="0.5.0")["status"], "installing")
+        self.assertEqual(installer.read_marker(self.prefix / "versions/1.0.0" / installer.RUNTIME_MARKER,
+                                              self.prefix, version="1.0.0")["status"], "installing")
         self.fail_pip = False
         self.calls.clear()
         self.install(args)
-        self.assertEqual(installer.owned_launcher(command, self.prefix), "0.5.0")
+        self.assertEqual(installer.owned_launcher(command, self.prefix), "1.0.0")
         self.assertTrue((self.prefix / "versions/0.4.0" / installer.RUNTIME_MARKER).is_file())
         self.assertTrue(any("pip" in call and "--force-reinstall" in call for call in self.calls))
         self.assertFalse((self.prefix / ".install-lock").exists())
@@ -212,7 +212,7 @@ class ReleaseInstallerTests(unittest.TestCase):
         self.assertFalse(self.bin_dir.exists())
         self.fail_doctor = False
         self.reported_version = "0.4.0"
-        with self.assertRaisesRegex(installer.InstallError, "must be RepoAtlas 0.5.0"):
+        with self.assertRaisesRegex(installer.InstallError, "must be Columbus 1.0.0"):
             self.install(args)
         self.assertFalse(self.bin_dir.exists())
 
@@ -225,14 +225,14 @@ class ReleaseInstallerTests(unittest.TestCase):
     def test_ready_runtime_with_global_site_packages_is_preserved(self):
         args = self.arguments()
         command, _ = self.install(args)
-        config = self.prefix / "versions/0.5.0/pyvenv.cfg"
+        config = self.prefix / "versions/1.0.0/pyvenv.cfg"
         config.write_text("include-system-site-packages = true\n")
         self.calls.clear()
         with self.assertRaisesRegex(installer.InstallError, "preserved"):
             self.install(args)
         self.assertIn("true", config.read_text())
         self.assertEqual(self.calls, [])
-        self.assertEqual(installer.owned_launcher(command, self.prefix), "0.5.0")
+        self.assertEqual(installer.owned_launcher(command, self.prefix), "1.0.0")
 
     def test_partial_runtime_redirect_cannot_write_outside_prefix(self):
         args = self.arguments()
@@ -241,7 +241,7 @@ class ReleaseInstallerTests(unittest.TestCase):
             self.install(args)
         outside = self.root / "external packages"
         outside.mkdir()
-        redirected = self.prefix / "versions/0.5.0/lib"
+        redirected = self.prefix / "versions/1.0.0/lib"
         try:
             redirected.symlink_to(outside, target_is_directory=True)
         except OSError:
@@ -260,7 +260,7 @@ class ReleaseInstallerTests(unittest.TestCase):
         external = self.root / "external configuration sentinel"
         original = b"# User-owned external data\ninclude-system-site-packages = false\n"
         external.write_bytes(original)
-        config = self.prefix / "versions/0.5.0/pyvenv.cfg"
+        config = self.prefix / "versions/1.0.0/pyvenv.cfg"
         config.unlink()
         os.link(external, config)
         self.assertEqual(config.stat().st_nlink, 2)
@@ -279,7 +279,7 @@ class ReleaseInstallerTests(unittest.TestCase):
         self.fail_pip = True
         with self.assertRaises(installer.InstallError):
             self.install(args)
-        runtime = self.prefix / "versions/0.5.0"
+        runtime = self.prefix / "versions/1.0.0"
         alias = runtime / "bin/𝜋thon"
         alias.symlink_to(Path(sys.executable).resolve())
         with patch.object(installer, "invoke", side_effect=self.fake_invoke):
@@ -307,7 +307,7 @@ class ReleaseInstallerTests(unittest.TestCase):
         args.checksum_file.write_text(hashlib.sha256(args.wheel.read_bytes()).hexdigest() + "  " + args.wheel.name + "\n")
         with self.assertRaisesRegex(installer.InstallError, "different wheel bytes"):
             self.install(args)
-        self.assertEqual(installer.owned_launcher(command, self.prefix), "0.5.0")
+        self.assertEqual(installer.owned_launcher(command, self.prefix), "1.0.0")
 
     def test_windows_batch_is_ascii_and_uses_adjacent_pinned_executable(self):
         self.prefix = self.root / "사용자 %data%! with spaces"
@@ -316,11 +316,11 @@ class ReleaseInstallerTests(unittest.TestCase):
             data = command.read_bytes()
             self.assertTrue(data.isascii())
             self.assertEqual(data.count(b"setlocal DisableDelayedExpansion"), 1)
-            self.assertIn(b'"%~dp0.repoatlas-', data)
+            self.assertIn(b'"%~dp0.columbus-', data)
             self.assertIn(b'" %*\r\n', data)
-            helper = self.bin_dir / installer.windows_helper(self.prefix, "0.5.0")
-            self.assertEqual(helper.read_bytes(), b"test executable 0.5.0")
-            self.assertEqual(installer.owned_launcher(command, self.prefix), "0.5.0")
+            helper = self.bin_dir / installer.windows_helper(self.prefix, "1.0.0")
+            self.assertEqual(helper.read_bytes(), b"test executable 1.0.0")
+            self.assertEqual(installer.owned_launcher(command, self.prefix), "1.0.0")
             helper.write_bytes(b"someone else's helper")
             with self.assertRaisesRegex(installer.InstallError, "unmanaged Windows launcher helper"):
                 self.install()
@@ -339,7 +339,7 @@ class ReleaseInstallerTests(unittest.TestCase):
 
     def test_existing_windows_executable_is_not_hidden_by_a_new_cmd_launcher(self):
         self.bin_dir.mkdir()
-        executable = self.bin_dir / "repoatlas.exe"
+        executable = self.bin_dir / "columbus.exe"
         executable.write_bytes(b"another installer owns this")
         with patch.object(installer, "WINDOWS", True):
             with self.assertRaisesRegex(installer.InstallError, "shadow the managed launcher"):
@@ -360,7 +360,7 @@ class ReleaseInstallerTests(unittest.TestCase):
         self.assertEqual(result, 0)
         self.assertIn(str(self.bin_dir), output.getvalue())
         self.assertIn("Add this directory to PATH", output.getvalue())
-        self.assertIn("repoatlas explore", output.getvalue())
+        self.assertIn("columbus explore", output.getvalue())
         self.assertIn("profiles and existing project files were not modified", output.getvalue())
 
 

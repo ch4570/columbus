@@ -13,9 +13,9 @@ import zipfile
 
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "skills/repoatlas-jvm/scripts"))
+sys.path.insert(0, str(ROOT / "skills/columbus/scripts"))
 sys.path.insert(0, str(ROOT / "scripts"))
-from repoatlas import bundle
+from columbus import bundle
 
 
 def load(name: str, path: Path):
@@ -25,14 +25,14 @@ def load(name: str, path: Path):
     return module
 
 
-builder = load("_repoatlas_zip_builder", ROOT / "scripts/build_bundle.py")
-verifier = load("_repoatlas_distribution_verifier", ROOT / "scripts/verify_distribution.py")
-release = load("_repoatlas_release_assets", ROOT / "scripts/release_assets.py")
+builder = load("_columbus_zip_builder", ROOT / "scripts/build_bundle.py")
+verifier = load("_columbus_distribution_verifier", ROOT / "scripts/verify_distribution.py")
+release = load("_columbus_release_assets", ROOT / "scripts/release_assets.py")
 
 
 class DistributionTests(unittest.TestCase):
     def setUp(self):
-        self.temp = tempfile.TemporaryDirectory(prefix="repoatlas packaging ")
+        self.temp = tempfile.TemporaryDirectory(prefix="columbus packaging ")
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name).resolve()
 
@@ -44,15 +44,15 @@ class DistributionTests(unittest.TestCase):
         self.assertEqual(first["sha256"], hashlib.sha256(artifact.read_bytes()).hexdigest())
         extracted = verifier.verify_archive(artifact, self.root / "extract")
         inventory = json.loads((extracted / builder.INVENTORY).read_text(encoding="utf-8"))
-        for relative in ("bootstrap.py", "install.py", "get-repoatlas.py", "run.py", "pyproject.toml", "setup.py",
-                         "skills/repoatlas-jvm/SKILL.md", "skills/repoatlas-jvm/scripts/install.py",
-                         "skills/repoatlas-jvm/scripts/repoatlas/bundle.py",
-                         "README.ko.md", "docs/token-efficiency.md", "docs/assets/repoatlas-hero.png",
+        for relative in ("bootstrap.py", "install.py", "get-columbus.py", "run.py", "pyproject.toml", "setup.py",
+                         "skills/columbus/SKILL.md", "skills/columbus/scripts/install.py",
+                         "skills/columbus/scripts/columbus/bundle.py",
+                         "README.ko.md", "docs/token-efficiency.md", "docs/assets/columbus-hero.png",
                          "evals/exploration/observe.py", "scripts/observe_delivery.py",
                          "scripts/verify_distribution.py", "tests/test_distribution.py"):
             self.assertIn(relative, inventory["files"])
         for relative in inventory["files"]:
-            self.assertFalse(any(part in {".omx", ".repoatlas", ".git", "__pycache__", "dist", "build"} for part in Path(relative).parts))
+            self.assertFalse(any(part in {".omx", ".columbus", ".git", "__pycache__", "dist", "build"} for part in Path(relative).parts))
         with zipfile.ZipFile(artifact) as archive:
             self.assertTrue(all(member.date_time == (1980, 1, 1, 0, 0, 0) for member in archive.infolist()))
 
@@ -60,61 +60,61 @@ class DistributionTests(unittest.TestCase):
         artifact = self.root / "tampered.zip"
         inventory = {"files": {"install.py": hashlib.sha256(b"original").hexdigest()}}
         with zipfile.ZipFile(artifact, "w") as archive:
-            archive.writestr("repoatlas/BUNDLE-MANIFEST.json", json.dumps(inventory))
-            archive.writestr("repoatlas/install.py", b"changed")
+            archive.writestr("columbus/BUNDLE-MANIFEST.json", json.dumps(inventory))
+            archive.writestr("columbus/install.py", b"changed")
         with self.assertRaisesRegex(verifier.VerificationError, "checksum mismatch"):
             verifier.verify_archive(artifact, self.root / "extract")
         with zipfile.ZipFile(artifact, "w") as archive:
-            archive.writestr("repoatlas/../outside.txt", b"bad")
+            archive.writestr("columbus/../outside.txt", b"bad")
         with self.assertRaisesRegex(verifier.VerificationError, "Unsafe archive path"):
             verifier.verify_archive(artifact, self.root / "extract")
         self.assertFalse((self.root / "outside.txt").exists())
 
     def test_release_checks_tag_bundle_and_default_installer_version_before_publication(self):
         source = self.root / 'source'
-        package = source / 'skills/repoatlas-jvm/scripts/repoatlas'
+        package = source / 'skills/columbus/scripts/columbus'
         package.mkdir(parents=True)
-        (package / '__init__.py').write_text('__version__ = "0.5.0"\n')
-        metadata = source / 'skills/repoatlas-jvm/bundle.json'
-        metadata.write_text('{"version":"0.5.0"}')
-        installer = source / 'get-repoatlas.py'
+        (package / '__init__.py').write_text('__version__ = "1.0.0"\n')
+        metadata = source / 'skills/columbus/bundle.json'
+        metadata.write_text('{"version":"1.0.0"}')
+        installer = source / 'get-columbus.py'
         installer.write_text('DEFAULT_VERSION = "0.4.0"\n')
         dist = self.root / 'dist'
         dist.mkdir()
-        for name in ('repoatlas-0.5.0-py3-none-any.whl', 'repoatlas-0.5.0.zip'):
+        for name in ('columbus-1.0.0-py3-none-any.whl', 'columbus-1.0.0.zip'):
             (dist / name).write_bytes(b'previously built artifact')
         with patch.object(release, 'ROOT', source):
             with self.assertRaisesRegex(ValueError, 'DEFAULT_VERSION'):
-                release.prepare(dist, 'v0.5.0')
-            self.assertFalse((dist / 'get-repoatlas.py').exists())
-            installer.write_text('DEFAULT_VERSION = "0.5.0"\n')
+                release.prepare(dist, 'v1.0.0')
+            self.assertFalse((dist / 'get-columbus.py').exists())
+            installer.write_text('DEFAULT_VERSION = "1.0.0"\n')
             with self.assertRaisesRegex(ValueError, 'tag must match'):
                 release.prepare(dist, 'v0.6.0')
             metadata.write_text('{"version":"0.4.0"}')
             with self.assertRaisesRegex(ValueError, 'bundle version'):
-                release.prepare(dist, 'v0.5.0')
-            metadata.write_text('{"version":"0.5.0"}')
-            assets = release.prepare(dist, 'v0.5.0')
+                release.prepare(dist, 'v1.0.0')
+            metadata.write_text('{"version":"1.0.0"}')
+            assets = release.prepare(dist, 'v1.0.0')
         self.assertEqual(len(assets), 4)
-        self.assertEqual((dist / 'get-repoatlas.py').read_bytes(), installer.read_bytes())
+        self.assertEqual((dist / 'get-columbus.py').read_bytes(), installer.read_bytes())
         for line in (dist / 'SHA256SUMS.txt').read_text().splitlines():
             digest, name = line.split('  ', 1)
             self.assertEqual(digest, hashlib.sha256((dist / name).read_bytes()).hexdigest())
 
     def test_installed_resources_reconstruct_canonical_engine_and_preserve_edits(self):
-        source = ROOT / "skills/repoatlas-jvm"
-        installer = load("_repoatlas_resource_installer", source / "scripts/install.py")
+        source = ROOT / "skills/columbus"
+        installer = load("_columbus_resource_installer", source / "scripts/install.py")
         _, contents = installer._bundle(source)
-        package = self.root / "installed site packages/repoatlas"
+        package = self.root / "installed site packages/columbus"
         resources = package / "_bundle"
         for relative, data in contents.items():
-            if relative.startswith("scripts/repoatlas/"):
+            if relative.startswith("scripts/columbus/"):
                 path = package / Path(relative).name
             else:
                 path = resources / relative
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(data)
-        self.assertFalse((resources / "scripts/repoatlas").exists())
+        self.assertFalse((resources / "scripts/columbus").exists())
         repo = self.root / "target repository with spaces"
         repo.mkdir()
         with patch.object(bundle, "__file__", str(package / "bundle.py")):
@@ -127,14 +127,14 @@ class DistributionTests(unittest.TestCase):
             applied = bundle.install_bundle(repo, apply=True)
             self.assertEqual(applied["status"], "applied")
             self.assertEqual(bundle.install_bundle(repo, apply=True)["status"], "noop")
-            local = repo / ".agents/skills/repoatlas-jvm/SKILL.md"
+            local = repo / ".agents/skills/columbus/SKILL.md"
             local.write_text("Local instructions\n", encoding="utf-8")
             self.assertEqual(bundle.install_bundle(repo, apply=True)["status"], "conflict")
             self.assertEqual(local.read_text(encoding="utf-8"), "Local instructions\n")
 
     def test_source_checkout_uses_existing_bundle_without_staging(self):
         with bundle.bundled_source() as source:
-            self.assertEqual(source, ROOT / "skills/repoatlas-jvm")
+            self.assertEqual(source, ROOT / "skills/columbus")
 
 
 if __name__ == "__main__":

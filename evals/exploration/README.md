@@ -1,6 +1,6 @@
 # Read-only agent exploration observations
 
-This harness compares ordinary `rg` plus bounded source reads with the same tools plus a prebuilt RepoAtlas index. It runs real, independently started Codex CLI sessions. It never assumes that fewer response bytes mean fewer model tokens.
+This harness compares ordinary `rg` plus bounded source reads with the same tools plus a prebuilt Columbus index. It runs real, independently started Codex CLI sessions. It never assumes that fewer response bytes mean fewer model tokens.
 
 The [Korean report](../../docs/token-efficiency.md) explains the findings. The 2026-09-07 cohort contains all six controlled trials, including regressions and citation failures. The one pair passing both citation checks used **34.0% more cumulative input tokens** with RepoAtlas. No general token or billing savings were established.
 
@@ -16,7 +16,7 @@ The [Korean report](../../docs/token-efficiency.md) explains the findings. The 2
 | [excluded-preflight.json](results/2026-09-07/excluded-preflight.json) | Entire initial five-trial cohort excluded after discovery produced an empty index |
 | [delivery.json](results/2026-09-07/delivery.json) | Model-free CLI output and receipt measurements on the current polyglot example |
 
-The engine ZIP is immutable experimental evidence, not another maintained engine implementation. Production code remains under `skills/repoatlas-jvm/scripts/repoatlas/`. Raw event transcripts stay in local `.omx/observations/`; published records include their hashes and omit reasoning transcripts. Local absolute paths are replaced with `$PYTHON`, `$RUN`, `$CHECKOUT`, or `$EXCLUDED_RUN` in published metadata. They are labels, not directly executable commands.
+The engine ZIP is immutable experimental evidence, not another maintained engine implementation. Production code lives under `skills/columbus/scripts/columbus/`. Archived fixtures, source-case paths and their hashes keep the original RepoAtlas names. They are historical inputs, not current installation instructions. Raw event transcripts stay in local `.omx/observations/`; published records include their hashes and omit reasoning transcripts. Local absolute paths are replaced with `$PYTHON`, `$RUN`, `$CHECKOUT`, or `$EXCLUDED_RUN` in published metadata. They are labels, not directly executable commands.
 
 ## Run a new comparison
 
@@ -26,20 +26,19 @@ From this checkout:
 
 ```sh
 python evals/exploration/observe.py --output .omx/observations/new-run prepare
-python evals/exploration/observe.py --output .omx/observations/new-run freeze-engine \
-  --engine-fixture evals/exploration/fixtures/repoatlas-engine-observed-0.4.0.zip
+python evals/exploration/observe.py --output .omx/observations/new-run freeze-engine
 python evals/exploration/observe.py --output .omx/observations/new-run run \
   --case export-safety --condition baseline --model YOUR_MODEL --effort xhigh
 python evals/exploration/observe.py --output .omx/observations/new-run run \
-  --case export-safety --condition repoatlas --model YOUR_MODEL --effort xhigh
+  --case export-safety --condition columbus --model YOUR_MODEL --effort xhigh
 python evals/exploration/observe.py --output .omx/observations/new-run summary
 ```
 
-Also run `configuration-invalidation` in RepoAtlas → baseline order and `managed-installation` in baseline → RepoAtlas order. A fresh trial uses `--repeat 2`, then `3`, in **both** conditions; predeclare the number of repeats. Do not rerun only unfavorable answers or overwrite earlier evidence. The harness refuses an existing trial directory. To evaluate current production code instead of the recorded tool, omit `--engine-fixture` when freezing a **new** observation directory and label it a new cohort.
+Also run `configuration-invalidation` in Columbus → baseline order and `managed-installation` in baseline → Columbus order. A fresh trial uses `--repeat 2`, then `3`, in **both** conditions; predeclare the number of repeats. Do not rerun only unfavorable answers or overwrite earlier evidence. The harness refuses an existing trial directory. The default freeze uses current Columbus production code against the fixed source fixture and creates a new cohort. To replay the recorded tool, freeze with `--engine-fixture evals/exploration/fixtures/repoatlas-engine-observed-0.4.0.zip` in a fresh directory and use the `repoatlas` condition. A condition must match its frozen engine. Current runs use `.columbus/index-v1.sqlite`; archived replays use the recorded `.repoatlas/jvm-v2.sqlite`. Never rename or overwrite published observation inputs to fit a new brand.
 
-Preparation extracts the source snapshot, initializes its own Git root and verifies the case markers. Freezing copies one engine and creates a nonempty index. Trials verify the case catalog, source manifest and engine manifest before running. Snapshot source must remain unchanged. Model sessions use a read-only sandbox, with web and delegation disabled; repository code, tests and builds are forbidden in the task. The RepoAtlas tool itself is permitted only in its condition.
+Preparation extracts the source snapshot, initializes its own Git root and verifies the case markers. Freezing copies one engine and creates a nonempty index. Trials verify the case catalog, source manifest and engine manifest before running. Snapshot source must remain unchanged. Model sessions use a read-only sandbox, with web and delegation disabled; repository code, tests and builds are forbidden in the task. The graph tool itself is permitted only in its enhanced condition.
 
-The model receives a useful ordinary-search baseline. The enhanced condition is instructed to start with a RepoAtlas search or context query and may fall back to shell reads. Thus the experiment evaluates that specific routing strategy, not every possible agent policy. The installed global skill catalog still appeared in both conditions despite ignoring user configuration; startup context and the longer enhanced prompt are included in measured usage. Caches are not reset. Identical settings cannot make independent model executions deterministic.
+The model receives a useful ordinary-search baseline. The enhanced condition is instructed to start with the frozen tool’s search or context query and may fall back to shell reads. Thus the experiment evaluates that specific routing strategy, not every possible agent policy. The installed global skill catalog still appeared in both conditions despite ignoring user configuration; startup context and the longer enhanced prompt are included in measured usage. Caches are not reset. Identical settings cannot make independent model executions deterministic.
 
 ## Measures and quality gate
 

@@ -1,1 +1,1 @@
-rootProject.name = "repoatlas-demo"
+rootProject.name = "columbus-demo"

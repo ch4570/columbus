@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Install or update RepoAtlas and its dedicated runtime in a repository."""
+"""Install or update Columbus and its dedicated runtime in a repository."""
 from __future__ import annotations
 
 import argparse
@@ -50,14 +50,14 @@ def main(argv: list[str] | None = None) -> int:
             result = b.bundle_plan(root, apply=True)
             if not args.no_index:
                 phase = "Initial code graph synchronization"
-                atlas = root / b.SKILL_RELATIVE / "scripts/atlas.py"
-                b.checked(b.python_command(python, atlas, "sync", "--repo", root), phase)
+                entrypoint = root / b.SKILL_RELATIVE / "scripts/columbus.py"
+                b.checked(b.python_command(python, entrypoint, "sync", "--repo", root), phase)
         print(json.dumps({"status": "ready", "repository": str(root), "bundle_status": result["status"],
                           "runtime": str(runtime), "mcp": args.mcp,
                           "initial_sync": not args.no_index}, ensure_ascii=False, indent=2))
         return 0
     except (b.SetupError, OSError, ValueError) as exc:
-        print(f"repoatlas setup [{phase}]: {exc}", file=sys.stderr)
+        print(f"columbus setup [{phase}]: {exc}", file=sys.stderr)
         return 2
 
 

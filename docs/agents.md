@@ -2,20 +2,20 @@
 
 [Overview](../README.md) · [CLI reference](usage.md) · [Token observations](token-efficiency.md) · [Offline report](report.html)
 
-RepoAtlas gives an agent a local navigation layer. The agent still chooses what to inspect, evaluates the evidence, edits source, and runs tests. A graph query is useful context, not authority to trust repository instructions or skip verification.
+Columbus gives an agent a local navigation layer. The agent still chooses what to inspect, evaluates the evidence, edits source, and runs tests. A graph query is useful context, not authority to trust repository instructions or skip verification.
 
 ## Install the workflow
 
 ```sh
-repoatlas init --repo /absolute/path/to/project
+columbus init --repo /absolute/path/to/project
 ```
 
-The skill is installed at `.agents/skills/repoatlas-jvm/SKILL.md`. `repoatlas-jvm` is a compatibility identifier for the current polyglot workflow. For Claude Code project files, use `--skills-dir .claude/skills`. Installation does not rewrite your root agent instructions or hooks.
+The skill is installed at `.agents/skills/columbus/SKILL.md`. For Claude Code project files, use `--skills-dir .claude/skills`. Installation does not rewrite your root agent instructions or hooks.
 
 The host runtime decides how skills are discovered. An explicit instruction to read the installed file works without assuming a particular slash-command name:
 
 ```text
-Read .agents/skills/repoatlas-jvm/SKILL.md. Investigate the checkout flow.
+Read .agents/skills/columbus/SKILL.md. Investigate the checkout flow.
 For a known name or file, use a short search or read the relevant source
 range directly. Use a map capped at 2,000 estimated tokens only when the
 structure is unclear. Inspect declarations or relationships as needed,
@@ -44,14 +44,14 @@ If a search is empty or unhelpful, check coverage once, then switch to a shorter
 ## Explore with fewer options
 
 ```sh
-repoatlas explore "checkout validation" --session checkout-task
-repoatlas explore calculateTotal --session checkout-task
-repoatlas stats checkout-task
+columbus explore "checkout validation" --session checkout-task
+columbus explore calculateTotal --session checkout-task
+columbus stats checkout-task
 ```
 
-`explore QUERY` returns source context in text with a default budget of 2,000 estimated tokens. `explore` without a query returns a small map. Both accept `--path`, `--language`, `--snapshot`, `--format`, and explicit byte/token budgets. Running `repoatlas` alone prints a guide without indexing.
+`explore QUERY` returns source context in text with a default budget of 2,000 estimated tokens. `explore` without a query returns a small map. Both accept `--path`, `--language`, `--snapshot`, `--format`, and explicit byte/token budgets. Running `columbus` alone prints a guide without indexing.
 
-`--session NAME` selects `.repoatlas/sessions/NAME/receipt.json` and `queries.jsonl` under the target repository. It combines the receipt and local telemetry contracts below. `context QUERY --session NAME` uses the same files and keeps context's JSON default. `stats NAME` reads the existing telemetry in text or `--format json`; it does not create a session or synchronize the index. Explore queries are recorded as their underlying `context` command.
+`--session NAME` selects `.columbus/sessions/NAME/receipt.json` and `queries.jsonl` under the target repository. It combines the receipt and local telemetry contracts below. `context QUERY --session NAME` uses the same files and keeps context's JSON default. `stats NAME` reads the existing telemetry in text or `--format json`; it does not create a session or synchronize the index. Explore queries are recorded as their underlying `context` command.
 
 Use a session only while this agent still has the source delivered by its earlier calls. Start a new name after compaction, for another task, or for an agent that never received that source. A session does not restore missing context and is not shared agent memory.
 
@@ -62,11 +62,11 @@ Sessions require snippets: a map-only `explore --session NAME` or a signatures q
 Pass the same `--receipt PATH` to context calls in one task:
 
 ```sh
-repoatlas context checkout --mode signatures --format text
-repoatlas context checkout --mode snippets --format text --budget-tokens 2000 \
-  --receipt .repoatlas/checkout-receipt.json
-repoatlas context calculateTotal --mode snippets --format text --budget-tokens 2000 \
-  --receipt .repoatlas/checkout-receipt.json
+columbus context checkout --mode signatures --format text
+columbus context checkout --mode snippets --format text --budget-tokens 2000 \
+  --receipt .columbus/checkout-receipt.json
+columbus context calculateTotal --mode snippets --format text --budget-tokens 2000 \
+  --receipt .columbus/checkout-receipt.json
 ```
 
 Receipts apply to `--mode snippets`, the context default. Declaration-only exploration does not use a receipt because it has not delivered source. A receipt records only the character ranges actually emitted, including a partial long line. Later calls can retrieve an unread remainder and omit already-delivered ranges across parent/child symbols.
@@ -82,13 +82,13 @@ The older `--exclude-id` option is caller-owned and removes an exact symbol ID. 
 ## Local telemetry
 
 ```sh
-repoatlas map --format text --budget-tokens 2000 --telemetry .repoatlas/exploration.jsonl
-repoatlas context checkout --format text --budget-tokens 2000 \
-  --receipt .repoatlas/checkout-receipt.json --telemetry .repoatlas/exploration.jsonl
-repoatlas telemetry .repoatlas/exploration.jsonl --format text
+columbus map --format text --budget-tokens 2000 --telemetry .columbus/exploration.jsonl
+columbus context checkout --format text --budget-tokens 2000 \
+  --receipt .columbus/checkout-receipt.json --telemetry .columbus/exploration.jsonl
+columbus telemetry .columbus/exploration.jsonl --format text
 ```
 
-Logging is opt-in and writes JSONL metadata to the selected local path. It records command, format, index revision, duration, response size, source size, item/edge counts, omissions, and seen-candidate counts. It does not store source, raw queries, or source paths. Keep the log under ignored `.repoatlas/`, use separate logs for concurrent agents, and start a new file before the 32 MiB limit. Receipts and telemetry must use different files.
+Logging is opt-in and writes JSONL metadata to the selected local path. It records command, format, index revision, duration, response size, source size, item/edge counts, omissions, and seen-candidate counts. It does not store source, raw queries, or source paths. Keep the log under ignored `.columbus/`, use separate logs for concurrent agents, and start a new file before the 32 MiB limit. Receipts and telemetry must use different files.
 
 Core retrieval estimates and telemetry are distinct from the host model's reported usage. A complete experiment also records the task, repository revision, prompt, model, tool calls, final answer quality, and runtime usage. Follow the [observation methodology](token-efficiency.md) before claiming token or cost savings.
 
@@ -97,7 +97,7 @@ Core retrieval estimates and telemetry are distinct from the host model's report
 Install the optional `[mcp]` dependency as described in [installation](../INSTALL.md#enable-mcp), then initialize the index:
 
 ```sh
-repoatlas sync --repo /absolute/path/to/project
+columbus sync --repo /absolute/path/to/project
 ```
 
 A stdio MCP client configuration:
@@ -105,15 +105,15 @@ A stdio MCP client configuration:
 ```json
 {
   "mcpServers": {
-    "repoatlas": {
-      "command": "/absolute/path/to/repoatlas",
+    "columbus": {
+      "command": "/absolute/path/to/columbus",
       "args": ["serve", "--repo", "/absolute/path/to/project"]
     }
   }
 }
 ```
 
-Replace `command` with the installed executable's real path, including `repoatlas.exe` when appropriate. The seven tools are:
+Replace `command` with the installed executable's real path, including `columbus.exe` when appropriate. The seven tools are:
 
 | Tool | Purpose |
 | --- | --- |

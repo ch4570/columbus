@@ -2,7 +2,7 @@
 
 [Overview](../README.md) · [Agent integration](agents.md) · [Language coverage](languages.md)
 
-RepoAtlas separates repository discovery, source analysis, persisted graph facts, and bounded retrieval. The CLI, installable skill, and optional MCP server share one Python engine. Target repositories do not need to use Python or expose a build command.
+Columbus separates repository discovery, source analysis, persisted graph facts, and bounded retrieval. The CLI, installable skill, and optional MCP server share one Python engine. Target repositories do not need to use Python or expose a build command.
 
 ## Data flow
 
@@ -16,21 +16,21 @@ Graph creation and retrieval run locally without an LLM. The calling agent recei
 
 ## Source map
 
-The engine remains under `skills/repoatlas-jvm/scripts/repoatlas/` to preserve the existing skill layout.
+The engine lives under `skills/columbus/scripts/columbus/` and is shared by the CLI, installable skill, and MCP server.
 
 | Responsibility | Source |
 | --- | --- |
-| File enumeration, exclusion, configuration | [discovery.py](../skills/repoatlas-jvm/scripts/repoatlas/discovery.py) |
-| Detection profiles and fidelity | [language_profiles.py](../skills/repoatlas-jvm/scripts/repoatlas/language_profiles.py) |
-| Python analysis | [parser.py](../skills/repoatlas-jvm/scripts/repoatlas/parser.py) |
-| JVM analysis | [jvm.py](../skills/repoatlas-jvm/scripts/repoatlas/jvm.py) |
-| Heuristic analysis | [polyglot.py](../skills/repoatlas-jvm/scripts/repoatlas/polyglot.py) |
-| SQLite graph and query facade | [index.py](../skills/repoatlas-jvm/scripts/repoatlas/index.py) |
-| Budgeted map/context selection | [retrieval.py](../skills/repoatlas-jvm/scripts/repoatlas/retrieval.py) |
-| Text rendering, delivery receipts, local telemetry | [presentation.py](../skills/repoatlas-jvm/scripts/repoatlas/presentation.py), [receipts.py](../skills/repoatlas-jvm/scripts/repoatlas/receipts.py), [telemetry.py](../skills/repoatlas-jvm/scripts/repoatlas/telemetry.py) |
-| Graph filtering and rendering | [graph_views.py](../skills/repoatlas-jvm/scripts/repoatlas/graph_views.py), [export.py](../skills/repoatlas-jvm/scripts/repoatlas/export.py) |
-| CLI and MCP adapters | [cli.py](../skills/repoatlas-jvm/scripts/repoatlas/cli.py), [mcp_server.py](../skills/repoatlas-jvm/scripts/repoatlas/mcp_server.py) |
-| Bundled skill reconstruction | [bundle.py](../skills/repoatlas-jvm/scripts/repoatlas/bundle.py) |
+| File enumeration, exclusion, configuration | [discovery.py](../skills/columbus/scripts/columbus/discovery.py) |
+| Detection profiles and fidelity | [language_profiles.py](../skills/columbus/scripts/columbus/language_profiles.py) |
+| Python analysis | [parser.py](../skills/columbus/scripts/columbus/parser.py) |
+| JVM analysis | [jvm.py](../skills/columbus/scripts/columbus/jvm.py) |
+| Heuristic analysis | [polyglot.py](../skills/columbus/scripts/columbus/polyglot.py) |
+| SQLite graph and query facade | [index.py](../skills/columbus/scripts/columbus/index.py) |
+| Budgeted map/context selection | [retrieval.py](../skills/columbus/scripts/columbus/retrieval.py) |
+| Text rendering, delivery receipts, local telemetry | [presentation.py](../skills/columbus/scripts/columbus/presentation.py), [receipts.py](../skills/columbus/scripts/columbus/receipts.py), [telemetry.py](../skills/columbus/scripts/columbus/telemetry.py) |
+| Graph filtering and rendering | [graph_views.py](../skills/columbus/scripts/columbus/graph_views.py), [export.py](../skills/columbus/scripts/columbus/export.py) |
+| CLI and MCP adapters | [cli.py](../skills/columbus/scripts/columbus/cli.py), [mcp_server.py](../skills/columbus/scripts/columbus/mcp_server.py) |
+| Bundled skill reconstruction | [bundle.py](../skills/columbus/scripts/columbus/bundle.py) |
 | Project runtime installer | [bootstrap.py](../bootstrap.py), [install.py](../install.py) |
 | Portable artifact build and checks | [build_bundle.py](../scripts/build_bundle.py), [verify_distribution.py](../scripts/verify_distribution.py) |
 
@@ -38,7 +38,7 @@ The wheel stages installable skill resources alongside the canonical engine rath
 
 ## Index lifecycle
 
-The default index is `.repoatlas/jvm-v2.sqlite`. That filename and the `repoatlas-jvm` skill ID are compatibility paths, not a JVM restriction.
+The default index is `.columbus/index-v1.sqlite`. The installable agent skill lives at `.agents/skills/columbus/`; all supported languages share this index.
 
 CLI queries synchronize first unless `--snapshot` is selected. Fast synchronization avoids parsing and hashing unchanged known files by comparing metadata. `--verify-content` requests source-hash verification. Analyzer or configuration changes invalidate previous analysis. A saved index also records its repository/worktree identity.
 
@@ -61,7 +61,7 @@ The index can contain source and should be treated like the repository it descri
 
 ## Boundaries and deliberate limits
 
-RepoAtlas indexes source rather than executing the target project. Configuration is declarative and does not load repository code as a plugin. Source access stays inside the selected repository and excludes symlinks. These boundaries are enforced in the engine; the graph's contents remain untrusted input for an agent.
+Columbus indexes source rather than executing the target project. Configuration is declarative and does not load repository code as a plugin. Source access stays inside the selected repository and excludes symlinks. These boundaries are enforced in the engine; the graph's contents remain untrusted input for an agent.
 
 AST, heuristic, and text facts are distinguished rather than collapsed into a claim of uniform language support. Relationship candidates include confidence and unresolved cases. Bounded retrieval exposes omissions; it does not guarantee a complete semantic answer within every token budget.
 

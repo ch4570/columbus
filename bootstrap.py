@@ -12,10 +12,10 @@ import sys
 import tempfile
 
 sys.dont_write_bytecode = True
-SOURCE = Path(__file__).resolve().parent / "skills" / "repoatlas-jvm"
-SKILL_RELATIVE = Path(".agents/skills/repoatlas-jvm")
-MARKER = ".repoatlas-runtime.json"
-OWNER = "repoatlas-jvm-bootstrap"
+SOURCE = Path(__file__).resolve().parent / "skills" / "columbus"
+SKILL_RELATIVE = Path(".agents/skills/columbus")
+MARKER = ".columbus-runtime.json"
+OWNER = "columbus-bootstrap"
 
 
 class SetupError(RuntimeError):
@@ -46,8 +46,8 @@ def internal(root: Path, relative: str | Path) -> Path:
 
 
 def layout(root: Path) -> tuple[Path, Path, Path]:
-    cache = internal(root, ".repoatlas")
-    runtime = internal(root, ".repoatlas/runtime")
+    cache = internal(root, ".columbus")
+    runtime = internal(root, ".columbus/runtime")
     skill = internal(root, SKILL_RELATIVE)
     for path in (cache, runtime, skill):
         if path.exists() and not path.is_dir():
@@ -88,7 +88,7 @@ def save_state(root: Path, runtime: Path, state: dict) -> None:
 def setup_lock(root: Path):
     cache, _, _ = layout(root)
     cache.mkdir(exist_ok=True)
-    lock = internal(root, ".repoatlas/.bootstrap-lock")
+    lock = internal(root, ".columbus/.bootstrap-lock")
     try:
         lock.mkdir()
     except FileExistsError as exc:
@@ -100,7 +100,7 @@ def setup_lock(root: Path):
 
 
 def bundled_installer():
-    spec = importlib.util.spec_from_file_location("_repoatlas_bundle_installer", SOURCE / "scripts/install.py")
+    spec = importlib.util.spec_from_file_location("_columbus_bundle_installer", SOURCE / "scripts/install.py")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
@@ -126,7 +126,7 @@ def invoke(command: list[str], *, quiet: bool = False) -> subprocess.CompletedPr
 
 
 def checked(command: list[str], phase: str) -> None:
-    print(f"[repoatlas] {phase}", file=sys.stderr, flush=True)
+    print(f"[columbus] {phase}", file=sys.stderr, flush=True)
     result = invoke(command)
     if result.returncode:
         raise SetupError(f"{phase} failed (exit {result.returncode}). Existing files are retained; fix the reported error and rerun the same install command. Dependencies may have been partially changed.")
@@ -144,7 +144,7 @@ def requirements_digest(mcp: bool) -> str:
 
 
 def healthy(python: Path, *, mcp: bool, quiet: bool = True) -> bool:
-    result = invoke(python_command(python, SOURCE / "scripts/atlas.py", "doctor"), quiet=quiet)
+    result = invoke(python_command(python, SOURCE / "scripts/columbus.py", "doctor"), quiet=quiet)
     if result.returncode:
         return False
     if mcp:

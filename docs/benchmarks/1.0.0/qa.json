@@ -1,0 +1,71 @@
+{
+  "schema": "columbus.benchmark-visual-qa/v1",
+  "status": "pass",
+  "inspected_at": "2026-09-07T08:08:22.594387+00:00",
+  "source_manifest_sha256": "774f28cc2451056e2cbbec24ef0af24586cd4309438853577770d7442a65dcf4",
+  "generation": {
+    "renderer": "Matplotlib 3.11.0",
+    "python": "3.14.7",
+    "font": "DejaVu Sans; embedded SVG glyph paths"
+  },
+  "independent_svg_render": {
+    "renderer": "CairoSVG 2.9.0",
+    "output_width_pixels": 1800,
+    "status": "pass"
+  },
+  "inspections": [
+    {
+      "chart": "delivery",
+      "artifacts": [
+        "docs/assets/benchmark-delivery.svg",
+        "docs/assets/benchmark-delivery.png"
+      ],
+      "png": "Complete image visually inspected",
+      "svg": "Final SVG independently rasterized and complete image visually inspected",
+      "result": "No clipping, overlap, broken glyphs, unreadable labels or missing units",
+      "axis_origin": 0
+    },
+    {
+      "chart": "agent-tokens",
+      "artifacts": [
+        "docs/assets/benchmark-agent-tokens.svg",
+        "docs/assets/benchmark-agent-tokens.png"
+      ],
+      "png": "Complete image visually inspected",
+      "svg": "Final SVG independently rasterized and complete image visually inspected",
+      "result": "No clipping, overlap, broken glyphs, unreadable labels or missing units",
+      "axis_origin": 0
+    },
+    {
+      "chart": "incremental",
+      "artifacts": [
+        "docs/assets/benchmark-incremental.svg",
+        "docs/assets/benchmark-incremental.png"
+      ],
+      "png": "Complete image visually inspected",
+      "svg": "Final SVG independently rasterized and complete image visually inspected",
+      "result": "No clipping, overlap, broken glyphs, unreadable labels or missing units",
+      "axis_origin": 0
+    }
+  ],
+  "evidence_checks": {
+    "data_contract_tests": 9,
+    "tests_passed": 9,
+    "byte_identical_regenerated_artifacts": 6,
+    "engine_fixture_hashes_match_current_source": true,
+    "local_document_links_valid": true
+  },
+  "notes": [
+    "Publication figures contain only measured values from the linked JSON.",
+    "Historical model data remain labeled RepoAtlas 0.4.0 and retain citation failures and token regression.",
+    "SVG cross-rendering was verified with CairoSVG; no browser-compatibility claim is made."
+  ],
+  "whitespace_normalization": {
+    "svg_dom_equal_except_whitespace": 3,
+    "independent_render_bytes_unchanged": 3,
+    "source_trailing_whitespace_lines": 0,
+    "regenerated_artifacts_byte_identical": 6,
+    "focused_tests_passed": 9,
+    "generator_sha256": "19d446f4242651e952d32c267a603f2e76d5593ddf5bba3c997dcd2d46fc3641"
+  }
+}

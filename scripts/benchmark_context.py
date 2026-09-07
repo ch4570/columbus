@@ -8,12 +8,12 @@ from pathlib import Path
 import sys
 import tempfile
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'skills/repoatlas-jvm/scripts'))
-from repoatlas.index import RepositoryIndex, byte_size
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'skills/columbus/scripts'))
+from columbus.index import RepositoryIndex, byte_size
 
 
 def benchmark(root: Path, query: str, budget_tokens: int) -> dict:
-    with tempfile.TemporaryDirectory(prefix='repoatlas-benchmark-') as temporary:
+    with tempfile.TemporaryDirectory(prefix='columbus-benchmark-') as temporary:
         index = RepositoryIndex(Path(temporary) / 'index.sqlite')
         cold = index.refresh(root)
         warm = index.refresh(root, fast=True)
@@ -40,7 +40,7 @@ def main():
     parser.add_argument('--query', default='refund_payment')
     parser.add_argument('--budget-tokens', type=int, default=2000)
     args = parser.parse_args()
-    with tempfile.TemporaryDirectory(prefix='repoatlas-fixture-') as temporary:
+    with tempfile.TemporaryDirectory(prefix='columbus-fixture-') as temporary:
         root = args.repo.expanduser().resolve() if args.repo else Path(temporary)
         if not args.repo:
             (root / 'payments.py').write_text('def refund_payment(amount):\n    return amount\n', encoding='utf-8')
