@@ -20,6 +20,12 @@ import zipfile
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 DEFAULT_FIXTURE = HERE / 'fixtures/repoatlas-source-v0.3.0.zip'
+PUBLISHED_ENGINE = HERE / 'fixtures/repoatlas-engine-observed-0.4.0.zip'
+ARCHIVED_REPLAY_REASON = (
+    'The immutable RepoAtlas 0.4 archive cannot replay on Windows/Python 3.14: '
+    'its preserved stat/fstat ctime handling rejects stable files. Replay it on '
+    'Windows/Python 3.11, Linux, or macOS. Current Columbus remains supported.'
+)
 ENGINE_LAYOUTS = {
     'columbus': ('columbus.py', '.columbus/index-v1.sqlite', 'Columbus'),
     # The archived engine is immutable evidence and retains its original name.
@@ -98,7 +104,17 @@ def engine_name(files: dict | list[str]) -> str:
     return matches[0]
 
 
+def archived_replay_reason(engine_fixture: Path | None) -> str | None:
+    """Limit only the byte-identical published archive on its known failing runtime."""
+    if (engine_fixture is not None and sys.platform == 'win32' and sys.version_info[:2] == (3, 14)
+            and sha(engine_fixture.read_bytes()) == sha(PUBLISHED_ENGINE.read_bytes())):
+        return ARCHIVED_REPLAY_REASON
+    return None
+
+
 def freeze_engine(output: Path, engine_fixture: Path | None = None):
+    if reason := archived_replay_reason(engine_fixture):
+        raise ValueError(reason)
     target = output / 'runtime'
     if target.exists():
         raise ValueError('Observation engine already frozen; do not replace it between trials')

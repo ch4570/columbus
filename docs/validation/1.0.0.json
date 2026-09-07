@@ -5,8 +5,8 @@
   "code_and_build_input_sha256": {
     "bootstrap.py": "2a7b5cb520d86dfbdc5af97d8a17f0c045f8ce6ac9f0d2a781e27a22f7058a36",
     "docs/benchmarks/1.0.0/observe_incremental.py": "19000250876374917a01b686b8240dc090091a82d74dcf7407d6bcde353f3fcd",
-    "evals/exploration/observe.py": "58715cb30c09e188a75246f486e214a030abdbcaa2fa2b749954f3a470e67080",
-    "evals/exploration/test_observe.py": "954a3743bde35e63e17c0d0f9bb1fbe6d5ab8bd5ff4ae5fa623ef592423a9110",
+    "evals/exploration/observe.py": "cd56baab6347036c26d52af83ff928dfa33b9e09827e9c2ff3f1c677ee704327",
+    "evals/exploration/test_observe.py": "6e8f406f895deb0b2fb6c0c70ff7813935a8e5ef251591eb86c76a76522fb22a",
     "get-columbus.py": "ef9608d5bb468144fcd4ac801a9fedc64641666101fff62dc5e7968a40fb6314",
     "install.py": "fbf5fcb28490cfaefe056707f788b632ac37a6b0e651437bf0e91ce5154182c7",
     "pyproject.toml": "b657abc22777e9c29d2e6f2bf6afdf5cc821605ddbafb9e05e72feb91b0a5017",
@@ -66,8 +66,8 @@
     "tests": {
       "engine": 169,
       "root": 49,
-      "harness": 10,
-      "total": 228
+      "harness": 12,
+      "total": 230
     },
     "distribution": [
       {
@@ -140,6 +140,18 @@
         "windows-latest Python3.14"
       ],
       "correction": "Use native Windows ChangeTime consistently; UTF-8/LF CLI streams and test fixtures; close fixture SQLite connections."
+    },
+    "corrected_attempt": {
+      "url": "https://github.com/ch4570/columbus/actions/runs/34101254679",
+      "commit": "f51ae32c6056038b15fc7e537f213ff077719c54",
+      "passed": [
+        "ubuntu-latest Python3.11",
+        "ubuntu-latest Python3.14",
+        "macos-latest Python3.11",
+        "macos-latest Python3.14",
+        "windows-latest Python3.11"
+      ],
+      "windows_314": "Current engine169 androot49 passed; frozen RepoAtlas0.4 replay failed."
     }
   },
   "scope_note": "Distribution behavior was tested on the recorded source snapshot. Later documentation, visual QA records and this validation record change archive membership, not the hashed tested code. Final release assets carry their own SHA256SUMS.txt.",
@@ -157,9 +169,18 @@
   "windows_correction_local_checks": {
     "engine": 169,
     "root": 49,
-    "harness": 10,
+    "harness": 12,
     "result": "passed",
     "regression_detection": "Prior Windows ctime comparison and cp1252 CLI output failed new regressions.",
     "native_windows_api": "awaiting hosted CI; local tests verify ABI, timestamps, errors and race detection with injected metadata."
+  },
+  "historical_replay_exception": {
+    "platform": "win32",
+    "python": "3.14",
+    "scope": "Only byte-identical published RepoAtlas0.4 engine execution",
+    "skipped_tests": 1,
+    "integrity_and_current_engine_tests": "still execute",
+    "other_platforms": "archived replay still executes",
+    "note": "An excluded historical replay is not a passed execution."
   }
 }
