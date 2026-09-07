@@ -1,0 +1,52 @@
+{
+  "thread_id": "01a07cb9-e33d-7cd0-bc79-259cc841bac1",
+  "captures": [
+    {
+      "capture": ".omx/observations/resume-preflight/first.jsonl",
+      "sha256": "cf870982610c45d26f62afbf8567efba234bf6d2578f524b18aa3347eaa292fa",
+      "reported_usage": {
+        "input_tokens": 9153,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 5,
+        "reasoning_output_tokens": 0
+      },
+      "turn_usage_delta": {
+        "input_tokens": 9153,
+        "cached_input_tokens": 0,
+        "output_tokens": 5,
+        "uncached_input_tokens": 9153
+      }
+    },
+    {
+      "capture": ".omx/observations/resume-preflight/second.jsonl",
+      "sha256": "b25f8b3ae12a19c3777db469da4f67cb3459ff44f7d009c99720850e6fe85b12",
+      "reported_usage": {
+        "input_tokens": 18336,
+        "cached_input_tokens": 8960,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 16,
+        "reasoning_output_tokens": 0
+      },
+      "turn_usage_delta": {
+        "input_tokens": 9183,
+        "cached_input_tokens": 8960,
+        "output_tokens": 11,
+        "uncached_input_tokens": 223
+      }
+    }
+  ],
+  "same_thread": true,
+  "usage_mode": "cumulative",
+  "totals": {
+    "input_tokens": 18336,
+    "cached_input_tokens": 8960,
+    "output_tokens": 16,
+    "uncached_input_tokens": 9376
+  },
+  "usage_aggregation": "last cumulative report; adjacent differences per turn",
+  "limitations": [
+    "Thread identity does not prove source retention after compaction.",
+    "Quality, source immutability and usage counter semantics need separate gates."
+  ]
+}

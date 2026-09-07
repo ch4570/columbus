@@ -22,6 +22,23 @@ class EventAuditTests(unittest.TestCase):
             self.assertNotIn('total_input_tokens', result)
             self.assertEqual(101, result['captures'][1]['reported_usage']['input_tokens'])
 
+    def test_verified_cumulative_mode_uses_deltas_not_sum(self):
+        with tempfile.TemporaryDirectory() as directory:
+            paths = []
+            for number, count in enumerate([100, 175]):
+                events = self.events(number)
+                events[-1]['usage'].update(input_tokens=count, cached_input_tokens=number * 20, output_tokens=10+number*5)
+                path = Path(directory) / f'{number}.jsonl'
+                path.write_text('\n'.join(map(json.dumps, events)))
+                paths.append(path)
+            result = m.audit(paths, 'cumulative')
+            self.assertEqual(175, result['totals']['input_tokens'])
+            self.assertEqual(75, result['captures'][1]['turn_usage_delta']['input_tokens'])
+            events[-1]['usage']['input_tokens'] = 90
+            paths[1].write_text('\n'.join(map(json.dumps, events)))
+            with self.assertRaisesRegex(ValueError, 'cumulative'):
+                m.audit(paths, 'cumulative')
+
     @staticmethod
     def events(number=0):
         return [{'type': 'thread.started', 'thread_id': '00000000-0000-0000-0000-000000000001'},
