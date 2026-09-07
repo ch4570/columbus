@@ -1,0 +1,382 @@
+{
+  "cold": {
+    "seconds": 17.420104166987585,
+    "refresh": {
+      "mode": "full",
+      "check": "content_hash_verified",
+      "parsed_files": 5466,
+      "cached_parses_loaded": 0,
+      "reused_files": 0,
+      "metadata_reused_files": 0,
+      "added_files": 5466,
+      "removed_files": 0,
+      "hashed_files": 5466,
+      "hashed_bytes": 35218440,
+      "discovery_probe_files": 7814,
+      "discovery_probe_bytes": 48973750,
+      "config_hashed_files": 3,
+      "config_hashed_bytes": 3012,
+      "head_changed": false,
+      "branch_changed": false,
+      "git_state_changed": true,
+      "config_changed": true,
+      "global_relink": true,
+      "elapsed_seconds": 17.06
+    },
+    "probe_files": 3907,
+    "probe_bytes": 24486875,
+    "files": 5466,
+    "symbols": 46631,
+    "edges": 86828
+  },
+  "warm": [
+    {
+      "seconds": 2.2078905420203228,
+      "refresh": {
+        "mode": "fast",
+        "check": "metadata_checked",
+        "parsed_files": 0,
+        "cached_parses_loaded": 0,
+        "reused_files": 5466,
+        "metadata_reused_files": 5466,
+        "added_files": 0,
+        "removed_files": 0,
+        "hashed_files": 0,
+        "hashed_bytes": 0,
+        "discovery_probe_files": 7814,
+        "discovery_probe_bytes": 48973750,
+        "config_hashed_files": 0,
+        "config_hashed_bytes": 0,
+        "head_changed": false,
+        "branch_changed": false,
+        "git_state_changed": false,
+        "config_changed": false,
+        "global_relink": false,
+        "elapsed_seconds": 2.1953
+      },
+      "probe_files": 3907,
+      "probe_bytes": 24486875,
+      "files": 5466,
+      "symbols": 46631,
+      "edges": 86828
+    },
+    {
+      "seconds": 2.2069480000063777,
+      "refresh": {
+        "mode": "fast",
+        "check": "metadata_checked",
+        "parsed_files": 0,
+        "cached_parses_loaded": 0,
+        "reused_files": 5466,
+        "metadata_reused_files": 5466,
+        "added_files": 0,
+        "removed_files": 0,
+        "hashed_files": 0,
+        "hashed_bytes": 0,
+        "discovery_probe_files": 7814,
+        "discovery_probe_bytes": 48973750,
+        "config_hashed_files": 0,
+        "config_hashed_bytes": 0,
+        "head_changed": false,
+        "branch_changed": false,
+        "git_state_changed": false,
+        "config_changed": false,
+        "global_relink": false,
+        "elapsed_seconds": 2.1947
+      },
+      "probe_files": 3907,
+      "probe_bytes": 24486875,
+      "files": 5466,
+      "symbols": 46631,
+      "edges": 86828
+    },
+    {
+      "seconds": 2.1935631659871433,
+      "refresh": {
+        "mode": "fast",
+        "check": "metadata_checked",
+        "parsed_files": 0,
+        "cached_parses_loaded": 0,
+        "reused_files": 5466,
+        "metadata_reused_files": 5466,
+        "added_files": 0,
+        "removed_files": 0,
+        "hashed_files": 0,
+        "hashed_bytes": 0,
+        "discovery_probe_files": 7814,
+        "discovery_probe_bytes": 48973750,
+        "config_hashed_files": 0,
+        "config_hashed_bytes": 0,
+        "head_changed": false,
+        "branch_changed": false,
+        "git_state_changed": false,
+        "config_changed": false,
+        "global_relink": false,
+        "elapsed_seconds": 2.1813
+      },
+      "probe_files": 3907,
+      "probe_bytes": 24486875,
+      "files": 5466,
+      "symbols": 46631,
+      "edges": 86828
+    }
+  ],
+  "warm_median_seconds": 2.2069480000063777,
+  "one_file_edit": {
+    "seconds": 8.542801083996892,
+    "refresh": {
+      "mode": "fast",
+      "check": "metadata_checked",
+      "parsed_files": 1,
+      "cached_parses_loaded": 5465,
+      "reused_files": 5465,
+      "metadata_reused_files": 5465,
+      "added_files": 0,
+      "removed_files": 0,
+      "hashed_files": 1,
+      "hashed_bytes": 8813,
+      "discovery_probe_files": 7814,
+      "discovery_probe_bytes": 48973750,
+      "config_hashed_files": 0,
+      "config_hashed_bytes": 0,
+      "head_changed": false,
+      "branch_changed": false,
+      "git_state_changed": false,
+      "config_changed": false,
+      "global_relink": true,
+      "elapsed_seconds": 8.2325
+    },
+    "probe_files": 3907,
+    "probe_bytes": 24486875,
+    "files": 5466,
+    "symbols": 46631,
+    "edges": 86828
+  },
+  "restoration": {
+    "seconds": 8.380376540997531,
+    "refresh": {
+      "mode": "fast",
+      "check": "metadata_checked",
+      "parsed_files": 1,
+      "cached_parses_loaded": 5465,
+      "reused_files": 5465,
+      "metadata_reused_files": 5465,
+      "added_files": 0,
+      "removed_files": 0,
+      "hashed_files": 1,
+      "hashed_bytes": 8793,
+      "discovery_probe_files": 7814,
+      "discovery_probe_bytes": 48973750,
+      "config_hashed_files": 0,
+      "config_hashed_bytes": 0,
+      "head_changed": false,
+      "branch_changed": false,
+      "git_state_changed": false,
+      "config_changed": false,
+      "global_relink": true,
+      "elapsed_seconds": 8.0599
+    },
+    "probe_files": 3907,
+    "probe_bytes": 24486875,
+    "files": 5466,
+    "symbols": 46631,
+    "edges": 86828
+  },
+  "database_bytes": 153387008,
+  "profiled_warm": {
+    "seconds": 5.483111917012138,
+    "refresh": {
+      "mode": "fast",
+      "check": "metadata_checked",
+      "parsed_files": 0,
+      "cached_parses_loaded": 0,
+      "reused_files": 5466,
+      "metadata_reused_files": 5466,
+      "added_files": 0,
+      "removed_files": 0,
+      "hashed_files": 0,
+      "hashed_bytes": 0,
+      "discovery_probe_files": 7814,
+      "discovery_probe_bytes": 48973750,
+      "config_hashed_files": 0,
+      "config_hashed_bytes": 0,
+      "head_changed": false,
+      "branch_changed": false,
+      "git_state_changed": false,
+      "config_changed": false,
+      "global_relink": false,
+      "elapsed_seconds": 5.4702
+    },
+    "probe_files": 3907,
+    "probe_bytes": 24486875,
+    "files": 5466,
+    "symbols": 46631,
+    "edges": 86828
+  },
+  "profile_top_cumulative": [
+    {
+      "file": "measure.py",
+      "line": 19,
+      "name": "run",
+      "calls": 1,
+      "own_seconds": 0.0015682080000000002,
+      "cumulative_seconds": 5.483119
+    },
+    {
+      "file": "index.py",
+      "line": 84,
+      "name": "refresh",
+      "calls": 1,
+      "own_seconds": 0.008796004000000001,
+      "cumulative_seconds": 5.481550417
+    },
+    {
+      "file": "discovery.py",
+      "line": 48,
+      "name": "safe_source",
+      "calls": 24654,
+      "own_seconds": 0.092291461,
+      "cumulative_seconds": 3.588240855
+    },
+    {
+      "file": "discovery.py",
+      "line": 115,
+      "name": "discover",
+      "calls": 2,
+      "own_seconds": 0.11962040800000001,
+      "cumulative_seconds": 3.543883209
+    },
+    {
+      "file": "pathlib.py",
+      "line": 981,
+      "name": "resolve",
+      "calls": 35593,
+      "own_seconds": 0.033731335,
+      "cumulative_seconds": 2.070892193
+    },
+    {
+      "file": "sync_state.py",
+      "line": 61,
+      "name": "file_stat",
+      "calls": 10936,
+      "own_seconds": 0.008853517,
+      "cumulative_seconds": 1.85037834
+    },
+    {
+      "file": "<frozen posixpath>",
+      "line": 409,
+      "name": "realpath",
+      "calls": 35593,
+      "own_seconds": 0.030329762000000003,
+      "cumulative_seconds": 1.598146558
+    },
+    {
+      "file": "pathlib.py",
+      "line": 484,
+      "name": "_parse_args",
+      "calls": 327603,
+      "own_seconds": 0.27129795900000003,
+      "cumulative_seconds": 1.477611425
+    },
+    {
+      "file": "<frozen posixpath>",
+      "line": 418,
+      "name": "_joinrealpath",
+      "calls": 35594,
+      "own_seconds": 0.33483901400000005,
+      "cumulative_seconds": 1.4679690730000001
+    },
+    {
+      "file": "pathlib.py",
+      "line": 56,
+      "name": "parse_parts",
+      "calls": 327604,
+      "own_seconds": 0.757341314,
+      "cumulative_seconds": 1.13876445
+    },
+    {
+      "file": "pathlib.py",
+      "line": 504,
+      "name": "_from_parts",
+      "calls": 147289,
+      "own_seconds": 0.078771431,
+      "cumulative_seconds": 0.93538628
+    },
+    {
+      "file": "index.py",
+      "line": 140,
+      "name": "<dictcomp>",
+      "calls": 1,
+      "own_seconds": 0.003089772,
+      "cumulative_seconds": 0.9278145000000001
+    },
+    {
+      "file": "pathlib.py",
+      "line": 1008,
+      "name": "stat",
+      "calls": 202196,
+      "own_seconds": 0.042586807000000004,
+      "cumulative_seconds": 0.694149397
+    },
+    {
+      "file": "pathlib.py",
+      "line": 868,
+      "name": "__new__",
+      "calls": 111696,
+      "own_seconds": 0.043188113,
+      "cumulative_seconds": 0.669182888
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method posix.stat>",
+      "calls": 202196,
+      "own_seconds": 0.40050541500000003,
+      "cumulative_seconds": 0.65156259
+    },
+    {
+      "file": "pathlib.py",
+      "line": 1298,
+      "name": "is_symlink",
+      "calls": 128226,
+      "own_seconds": 0.058143608000000006,
+      "cumulative_seconds": 0.5677093950000001
+    },
+    {
+      "file": "pathlib.py",
+      "line": 765,
+      "name": "__truediv__",
+      "calls": 141948,
+      "own_seconds": 0.034168422000000004,
+      "cumulative_seconds": 0.549820496
+    },
+    {
+      "file": "<frozen posixpath>",
+      "line": 71,
+      "name": "join",
+      "calls": 413043,
+      "own_seconds": 0.351290363,
+      "cumulative_seconds": 0.530681413
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method posix.lstat>",
+      "calls": 412971,
+      "own_seconds": 0.5279499790000001,
+      "cumulative_seconds": 0.5279499790000001
+    },
+    {
+      "file": "pathlib.py",
+      "line": 530,
+      "name": "_make_child",
+      "calls": 141948,
+      "own_seconds": 0.112561196,
+      "cumulative_seconds": 0.515652074
+    }
+  ],
+  "limited_search_ids_equal": true,
+  "graph_counts_equal": true,
+  "os_caches": "Not flushed; same host, sequential observations. Profile timing excluded from median.",
+  "scope": "Current implementation diagnosis, not a controlled before/after or full graph parity proof."
+}

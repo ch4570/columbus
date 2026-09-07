@@ -45,7 +45,7 @@ def decode_python(data: bytes) -> str:
     return data.decode(encoding)
 
 
-def safe_source(root: Path, relative: str) -> Path:
+def safe_source(root: Path, relative: str, *, root_is_resolved: bool = False) -> Path:
     part = Path(relative)
     if part.is_absolute() or ".." in part.parts:
         raise ValueError("Source path must stay inside the indexed repository")
@@ -55,7 +55,7 @@ def safe_source(root: Path, relative: str) -> Path:
         if current.is_symlink():
             raise ValueError("Symlink source is excluded")
     resolved = current.resolve()
-    if not resolved.is_relative_to(root.resolve()):
+    if not resolved.is_relative_to(root if root_is_resolved else root.resolve()):
         raise ValueError("Source path escapes repository")
     return resolved
 
@@ -113,7 +113,9 @@ def _matches(relative: str, patterns: list[str]) -> bool:
 
 
 def discover(root: Path, source_root: str = ".") -> tuple[list[str], dict]:
-    scan_root = safe_source(root, source_root)
+    # Reuse only the canonical root, never a candidate's path or classification.
+    root = root.resolve()
+    scan_root = safe_source(root, source_root, root_is_resolved=True)
     if not scan_root.is_dir():
         raise ValueError("source_root must be an existing directory inside the repository")
     config = load_config(root)
@@ -156,7 +158,7 @@ def discover(root: Path, source_root: str = ".") -> tuple[list[str], dict]:
         path = Path(rel)
         if path.name in CONFIG_NAMES and not any(p in EXCLUDED_DIRS for p in path.parts):
             try:
-                if safe_source(root, rel).is_file():
+                if safe_source(root, rel, root_is_resolved=True).is_file():
                     configs.append(rel)
             except (OSError, ValueError):
                 pass
@@ -171,7 +173,7 @@ def discover(root: Path, source_root: str = ".") -> tuple[list[str], dict]:
             stats["excluded_files"] += 1
             continue
         try:
-            actual = safe_source(root, rel)
+            actual = safe_source(root, rel, root_is_resolved=True)
             if not actual.is_file():
                 continue
             stats["candidate_files"] += 1

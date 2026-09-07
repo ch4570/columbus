@@ -1,0 +1,86 @@
+{
+  "databaseId": 34170326885,
+  "headSha": "29651dce747d4f4c9c8754aba0bf9c66b33dfcdc",
+  "status": "completed",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "candidate (macos-latest, 3.14)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ch4570/columbus/actions/runs/34170326885/job/101889254994"
+    },
+    {
+      "name": "candidate (windows-latest, 3.11)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ch4570/columbus/actions/runs/34170326885/job/101889255011"
+    },
+    {
+      "name": "candidate (ubuntu-latest, 3.11)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ch4570/columbus/actions/runs/34170326885/job/101889255027"
+    },
+    {
+      "name": "candidate (windows-latest, 3.14)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ch4570/columbus/actions/runs/34170326885/job/101889255095"
+    },
+    {
+      "name": "candidate (macos-latest, 3.11)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ch4570/columbus/actions/runs/34170326885/job/101889255098"
+    },
+    {
+      "name": "candidate (ubuntu-latest, 3.14)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ch4570/columbus/actions/runs/34170326885/job/101889255113"
+    },
+    {
+      "name": "aggregate",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ch4570/columbus/actions/runs/34170326885/job/101890176468"
+    },
+    {
+      "name": "aggregate-verify (macos-latest, 3.14)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ch4570/columbus/actions/runs/34170326885/job/101890218798"
+    },
+    {
+      "name": "aggregate-verify (windows-latest, 3.14)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ch4570/columbus/actions/runs/34170326885/job/101890218816"
+    },
+    {
+      "name": "aggregate-verify (ubuntu-latest, 3.11)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ch4570/columbus/actions/runs/34170326885/job/101890218856"
+    },
+    {
+      "name": "aggregate-verify (windows-latest, 3.11)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ch4570/columbus/actions/runs/34170326885/job/101890218861"
+    },
+    {
+      "name": "aggregate-verify (macos-latest, 3.11)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ch4570/columbus/actions/runs/34170326885/job/101890218871"
+    },
+    {
+      "name": "aggregate-verify (ubuntu-latest, 3.14)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ch4570/columbus/actions/runs/34170326885/job/101890218874"
+    }
+  ]
+}
