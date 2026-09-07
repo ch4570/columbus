@@ -13,3 +13,5 @@ Validation: 201 engine tests passed with each of the pinned and candidate Java p
 No new model token experiment was run. This change creates a reviewable candidate path for a different task family; it does not establish token savings or close the outstanding correctness issues.
 
 Commit `e1f1d09c78470b6d541c6733bfe79d8d5a65f3ff` was pushed. Hosted checks were started at that exact commit: [ordinary distribution](https://github.com/ch4570/columbus/actions/runs/34150730953) and [candidate/aggregate distribution](https://github.com/ch4570/columbus/actions/runs/34150742418). At the last check they were in progress and queued respectively; cross-platform success is not yet established for this commit.
+
+Follow-up: the ordinary distribution run `34150730953` completed successfully in all six OS/Python environments at `e1f1d09`. The receipt is `platform/initial-production.json`; it includes successful clean-install and portable-bundle verification. Candidate/aggregate run `34150742418` was still active at the next check. These results apply to the initial implementation, before the class-write correction.

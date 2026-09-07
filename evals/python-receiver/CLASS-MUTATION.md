@@ -9,3 +9,5 @@ The parser now records dotted member writes in lexical scope facts. During relin
 Both pinned and candidate Java parser environments passed 202 engine tests. The frozen source path remains navigable with its uncertain first hop (`class-mutation-path.json`); the original observation is preserved separately. No model token trial was run.
 
 This does not resolve arbitrary value aliases or reflective mutation. It also does not upgrade any Python call edge to a runtime guarantee. The overall correctness and token-saving goals remain open.
+
+The correction was pushed as `2ffb051e306662fd3e177510880dea6da1275006`. Its [ordinary distribution](https://github.com/ch4570/columbus/actions/runs/34151020873) and [candidate/aggregate distribution](https://github.com/ch4570/columbus/actions/runs/34151039384) jobs were both confirmed in progress. Their eventual outcomes must be checked before claiming cross-platform verification of this correction.
