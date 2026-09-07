@@ -106,7 +106,7 @@ def sync_summary(status: dict) -> dict:
     result['refresh'] = {key: refresh[key] for key in (
         'mode', 'check', 'parsed_files', 'cached_parses_loaded', 'reused_files',
         'metadata_reused_files', 'added_files', 'removed_files', 'hashed_files',
-        'hashed_bytes', 'config_hashed_files', 'config_hashed_bytes',
+        'hashed_bytes', 'discovery_probe_files', 'discovery_probe_bytes', 'config_hashed_files', 'config_hashed_bytes',
         'global_relink', 'elapsed_seconds') if key in refresh}
     inventory = status.get('inventory', {})
     result['inventory'] = {key: inventory[key] for key in (

@@ -17,6 +17,22 @@ from columbus import languages
 
 
 class SyncTests(unittest.TestCase):
+    def test_warm_probe_reads_are_reported_across_both_discovery_passes(self):
+        self.write('main.py', 'def run(): pass\n')
+        self.write('note.txt', 'ordinary text\n')
+        binary = self.root / 'attachment.txt'
+        binary.write_bytes(b'\x00binary')
+        self.index.refresh(self.root)
+        result = self.index.refresh(self.root, fast=True)
+        refresh = result['refresh']
+        self.assertEqual(refresh['hashed_bytes'], 0)
+        self.assertEqual(refresh['parsed_files'], 0)
+        self.assertEqual(refresh['discovery_probe_files'], 4)
+        self.assertEqual(refresh['discovery_probe_bytes'], 2 * (len(b'ordinary text\n') + len(b'\x00binary')))
+        from columbus.presentation import sync_summary
+        summary = sync_summary(result)
+        self.assertEqual(summary['refresh']['discovery_probe_bytes'], refresh['discovery_probe_bytes'])
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)

@@ -296,6 +296,8 @@ class RepositoryIndex:
                       "parsed_files": changed, "cached_parses_loaded": cached_parses_loaded, "reused_files": reused, "metadata_reused_files": metadata_reused,
                       "added_files": len(added), "removed_files": len(removed),
                       "hashed_files": hashed_files, "hashed_bytes": bytes_read,
+                      "discovery_probe_files": inventory["probe_files"] + inventory_after["probe_files"],
+                      "discovery_probe_bytes": inventory["probe_bytes"] + inventory_after["probe_bytes"],
                       "config_hashed_files": config_hashed, "config_hashed_bytes": config_bytes,
                       "head_changed": head_changed, "branch_changed": branch_changed,
                       "git_state_changed": git_changed, "config_changed": config_changed,
