@@ -110,7 +110,7 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
             source = target / 'caller_probe.py'
             original = ("def evidence_target(): return 1\n"
                         "def outer():\n    def inner():\n        evidence_target()\n    inner()\n"
-                        "def direct():\n    evidence_target()\n").encode()
+                        "def direct():\n    value = 'a\u2028b'\n    evidence_target()\n").encode()
             source.write_bytes(original)
             run([*prefix, 'sync', '--repo', target, '--summary'])
             command = [*prefix, 'callers', 'evidence_target', '--repo', target, '--snapshot']

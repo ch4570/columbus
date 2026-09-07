@@ -24,6 +24,15 @@ def decode_source(path: str, data: bytes, *, config: dict | None = None,
     return decode_python(data) if language == "python" else data.decode("utf-8-sig")
 
 
+def code_lines(source: str, language: str | None = None) -> list[str]:
+    """Source coordinates use physical newlines, not Unicode text separators."""
+    source = source.replace('\r\n', '\n')
+    if language not in {'java', 'kotlin'}:
+        source = source.replace('\r', '\n')
+    lines = source.split('\n')
+    return lines[:-1] if lines[-1] == '' else lines
+
+
 def analyzer_fingerprint(paths: list[str], config: dict | None = None,
                          detected_languages: dict[str, str] | None = None) -> dict:
     """Missing JVM dependencies fail sync before any graph mutation."""

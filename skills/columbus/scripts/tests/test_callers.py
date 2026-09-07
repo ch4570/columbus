@@ -42,6 +42,42 @@ class CallerPacketTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'Stale source'):
                 index.callers('target')
 
+    def test_unicode_text_separators_do_not_replace_call_site_lines(self):
+        for separator in ('\u0085', '\u2028', '\u2029', '\x0b', '\x0c'):
+            for newline in ('\n', '\r\n', '\r'):
+                with self.subTest(separator=repr(separator), newline=repr(newline)), tempfile.TemporaryDirectory() as temp:
+                    root = Path(temp)
+                    source = newline.join(['def target(): pass', 'def caller():',
+                                           f'    value = "a{separator}b"', '    target()', ''])
+                    (root/'x.py').write_bytes(source.encode())
+                    index = RepositoryIndex(root/'.columbus/index.sqlite')
+                    index.refresh(root)
+                    packet = index.callers('target', output_format='text')
+                    item, = packet['items']
+                    self.assertEqual((3, 4, 4), (item['start_line'], item['end_line'], item['call_line']))
+                    self.assertEqual(f'    value = "a{separator}b"\n    target()', item['source'])
+                    self.assertIn('4|     target()', render(packet, 'text', 'callers'))
+                    symbol = index.symbol('caller')
+                    self.assertIn(separator, symbol['source'])
+                    self.assertIn('    target()', symbol['source'])
+                    self.assertEqual(4, symbol['excerpt_end_line'])
+
+    def test_jvm_unicode_separator_keeps_parser_line_coordinates(self):
+        sources = {
+            'java': 'class C {\n static void target() {}\n static void caller() {\n  String value="a\u2028b";\n  target();\n }\n}\n',
+            'kt': 'fun target() {}\nfun caller() {\n val value="a\u2028b"\n target()\n}\n',
+        }
+        for language, source in sources.items():
+            for newline in ('\n', '\r\n'):
+                with self.subTest(language=language, newline=repr(newline)), tempfile.TemporaryDirectory() as temp:
+                    root = Path(temp)
+                    (root/('C.'+language)).write_bytes(source.replace('\n', newline).encode())
+                    index = RepositoryIndex(root/'.columbus/index.sqlite')
+                    index.refresh(root)
+                    item, = index.callers('target')['items']
+                    self.assertIn('\u2028', item['source'])
+                    self.assertIn('target()', item['source'].split('\n')[item['call_line']-item['start_line']])
+
     def test_ambiguous_names_require_id(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
