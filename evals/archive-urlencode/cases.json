@@ -1,0 +1,68 @@
+{
+  "schema": "columbus.exploration-cases/v1",
+  "cases": [
+    {
+      "id": "archive-urlencode",
+      "mode": "caller-enumeration",
+      "question": "Find every Python function or method under django/ containing a syntactic direct call to django.utils.http.urlencode in this checkout. Include library code under django/test/ and exclude the top-level tests/ directory. Explain what query data each caller encodes, how that data is selected or merged, the conditions that execute or bypass the call, and the relevant doseq behavior. Distinguish similarly named functions and receiver methods by their definition/imports. Include nested functions as their own lexical callers if present. Do not list higher-order-only or transitive callers, and distinguish source-level calls from runtime reachability.",
+      "findings": [
+        {
+          "id": "ModelAdmin.get_preserved_filters",
+          "path": "django/contrib/admin/options.py",
+          "marker": "urlencode(",
+          "call_lines": [
+            1267
+          ]
+        },
+        {
+          "id": "add_preserved_filters",
+          "path": "django/contrib/admin/templatetags/admin_urls.py",
+          "marker": "urlencode(",
+          "call_lines": [
+            69
+          ]
+        },
+        {
+          "id": "ChangeList.get_query_string",
+          "path": "django/contrib/admin/views/main.py",
+          "marker": "urlencode(",
+          "call_lines": [
+            306
+          ]
+        },
+        {
+          "id": "ForeignKeyRawIdWidget.get_context",
+          "path": "django/contrib/admin/widgets.py",
+          "marker": "urlencode(",
+          "call_lines": [
+            162
+          ]
+        },
+        {
+          "id": "RequestFactory.__init__",
+          "path": "django/test/client.py",
+          "marker": "urlencode(",
+          "call_lines": [
+            399
+          ]
+        },
+        {
+          "id": "RequestFactory.generic",
+          "path": "django/test/client.py",
+          "marker": "urlencode(",
+          "call_lines": [
+            665
+          ]
+        },
+        {
+          "id": "AsyncRequestFactory.generic",
+          "path": "django/test/client.py",
+          "marker": "urlencode(",
+          "call_lines": [
+            766
+          ]
+        }
+      ]
+    }
+  ]
+}

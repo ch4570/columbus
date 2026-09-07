@@ -106,6 +106,7 @@ def main(argv=None) -> int:
             command.add_argument('--limit', type=int, default=5)
             command.add_argument('--budget-bytes', type=int, default=6000)
         if name == 'archive-neighbors':
+            command.add_argument('--path', help='Case-sensitive glob on edge paths, before counting/pagination')
             command.add_argument('--format', choices=['json', 'text'], default='json')
             command.add_argument('--context-lines', type=int, help='Verified source radius 0–40 around calls; requires --kinds calls')
             command.add_argument('--offset', type=int, default=0)
@@ -285,7 +286,7 @@ def main(argv=None) -> int:
                 raise ValueError('archive-neighbors rejects pretty output to preserve its byte budget')
             from .archive import neighbors_archive
             result = neighbors_archive(args.input, args.symbol_id, args.direction, args.kinds, args.limit, args.budget_bytes, args.offset,
-                                       output_format=args.format, repo=root, context_lines=args.context_lines)
+                                       output_format=args.format, repo=root, context_lines=args.context_lines, path=args.path)
         elif args.command == 'archive':
             from .archive import archive
             if not args.snapshot:

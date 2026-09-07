@@ -1,0 +1,26 @@
+[
+  {
+    "path": "django/contrib/admin/options.py",
+    "line": 1262,
+    "quote": "request.GET.urlencode()",
+    "reason": "Request query mapping method, distinct from the imported utility function."
+  },
+  {
+    "path": "django/contrib/auth/views.py",
+    "line": 190,
+    "quote": "querystring.urlencode(safe=\"/\")",
+    "reason": "Receiver is constructed as QueryDict in this function."
+  },
+  {
+    "path": "django/template/defaulttags.py",
+    "line": 1208,
+    "quote": "params.urlencode()",
+    "reason": "Method on copied supplied QueryDict/request.GET; no utility-module receiver binding."
+  },
+  {
+    "path": "django/urls/base.py",
+    "line": 101,
+    "quote": "query.urlencode()",
+    "reason": "Branch explicitly checks isinstance(query, QueryDict)."
+  }
+]

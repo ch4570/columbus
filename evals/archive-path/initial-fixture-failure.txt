@@ -1,0 +1,15 @@
+...................E..............................................................................................................................................................................................................
+======================================================================
+ERROR: test_path_filter_precedes_counts_cursor_and_source_reads (test_archive.ArchiveTests.test_path_filter_precedes_counts_cursor_and_source_reads)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/rex/Desktop/columbus/skills/columbus/scripts/tests/test_archive.py", line 21, in test_path_filter_precedes_counts_cursor_and_source_reads
+    (root / folder).mkdir()
+  File "/Users/rex/.local/share/uv/python/cpython-3.11.16-macos-aarch64-none/lib/python3.11/pathlib.py", line 1116, in mkdir
+    os.mkdir(self, mode)
+FileExistsError: [Errno 17] File exists: '/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/tmp32dqihx1/SRC'
+
+----------------------------------------------------------------------
+Ran 226 tests in 15.652s
+
+FAILED (errors=1)

@@ -13,6 +13,39 @@ from columbus.index import RepositoryIndex
 
 
 class ArchiveTests(unittest.TestCase):
+    def test_path_filter_precedes_counts_cursor_and_source_reads(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'api.py').write_text('def target(): pass\n', encoding='utf-8')
+            for folder in ['src', 'tests', 'UPPER']:
+                (root / folder).mkdir()
+                (root / folder / 'calls.py').write_text('from api import target\ndef call(): target(); target()\n', encoding='utf-8')
+            index = RepositoryIndex(root / '.columbus/index.sqlite')
+            index.refresh(root)
+            target = index.search('target')['hits'][0]['id']
+            artifact = root / 'graph.gz'
+            archive(index, artifact)
+            # Excluded source must not be read, even before a page is shortened.
+            (root / 'tests/calls.py').unlink()
+            for folder in ['src', 'UPPER']:
+                first = neighbors_archive(artifact, target, 'in', ['calls'], limit=1, path=folder+'/*',
+                                          repo=root, context_lines=0)
+                self.assertEqual(first['matched_edges'], 2)
+                self.assertEqual(first['next_offset'], 1)
+                self.assertEqual(first['edges'][0]['path'], folder+'/calls.py')
+                second = neighbors_archive(artifact, target, 'in', ['calls'], limit=1, offset=1,
+                                           path=folder+'/*', repo=root, context_lines=0)
+                self.assertIsNone(second['next_offset'])
+                self.assertNotEqual(first['edges'][0]['evidence'], second['edges'][0]['evidence'])
+                self.assertIn(target, {node['id'] for node in first['nodes']})
+            empty = neighbors_archive(artifact, target, 'in', ['calls'], path='upper/*', repo=root, context_lines=0)
+            self.assertEqual(empty['matched_edges'], 0)
+            self.assertFalse(empty['truncated'])
+            self.assertEqual(empty['call_context'], [])
+            for pattern in ['', 1, 'x'*2049, '\0']:
+                with self.assertRaisesRegex(ValueError, 'path must'):
+                    neighbors_archive(artifact, target, path=pattern)
+
     def test_verified_call_context_merges_sites_and_rejects_stale_source(self):
         from columbus.presentation import render
         from columbus import sync_state

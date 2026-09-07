@@ -1,0 +1,9 @@
+# Saved-archive urlencode task selection
+
+Before inspecting its caller inventory, select django.utils.http.urlencode on Django 4ea267661b260ea0d0c87e9dcb99d70037c6f2fc. Identify syntactic direct lexical callers under django/, including library django/test/ but excluding top-level tests/, and explain which query data each encodes and the relevant doseq behavior. Resolve imports and same-name alternatives rather than relying on name matching. This is a different target on the same repository, not an independent repository sample.
+
+Build and validate an independent AST/import oracle, manually review the relevant source behavior, and verify saved-archive parity before freezing a model prompt. Include current optional archive text/source-context routing without forcing its use. Keep grader identities/counts out of the prompt. Preserve every prior failed pair. No model trial, model/order declaration, or prompt freeze has occurred yet.
+
+The initial oracle rejected attribute calls, as intended by its conservative guard. Four method calls were then reviewed as QueryDict-style receiver calls, distinct from the imported utility target; QueryDict.urlencode itself calls urllib.parse.urlencode. attribute-exclusions.json freezes the reviewed call expressions/locations, and the oracle fails on any additional or changed attribute call. initial-oracle-failure.txt preserves the initial failure. No model trial has started.
+
+The first prepared runtime/source/archive at /tmp/columbus-archive-urlencode-frozen is a preparation snapshot, not a declared model trial. Graph validation found 27 incoming calls, only seven under django/. Before any model declaration, add an edge-path filter to avoid irrelevant test edges consuming the task budget. Preserve the first preparation; a future model freeze must use a new path with the validated filter. No model has run.

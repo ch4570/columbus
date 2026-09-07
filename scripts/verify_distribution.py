@@ -183,6 +183,12 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
                 archive_command = [*prefix, 'archive-neighbors', packet['target'], '--input', artifact,
                                    '--repo', consumer, '--direction', 'in', '--kinds', 'calls', '--context-lines', '2']
                 context = json.loads(run(archive_command))
+                filtered = json.loads(run([*archive_command, '--path', 'caller_probe.py']))
+                if filtered['edges'] != context['edges'] or filtered['matched_edges'] != 2:
+                    raise VerificationError('Installed archive path filter lost matching calls')
+                excluded = json.loads(run([*archive_command, '--path', 'absent/*']))
+                if excluded['edges'] or excluded['call_context'] or excluded['matched_edges'] or excluded['truncated']:
+                    raise VerificationError('Installed archive path filter did not apply before counting')
                 if (len(context['edges']) != 2 or context['truncated'] or not context['call_context']
                         or any(item['source_hash'] != hashlib.sha256(original).hexdigest()
                                or 'evidence_target()' not in item['source'] for item in context['call_context'])):
