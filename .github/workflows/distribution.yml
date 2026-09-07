@@ -24,18 +24,18 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - name: Install parser and optional MCP test dependencies
-        run: python -m pip install -r skills/repoatlas-jvm/scripts/requirements.txt -r skills/repoatlas-jvm/scripts/requirements-mcp.txt
+        run: python -m pip install -r skills/columbus/scripts/requirements.txt -r skills/columbus/scripts/requirements-mcp.txt
       - name: Bootstrap and archive tests
         run: python -m unittest discover -s tests -v
       - name: Engine tests
-        working-directory: skills/repoatlas-jvm/scripts
+        working-directory: skills/columbus/scripts
         run: python -m unittest discover -s tests -v
       - name: Observation harness tests (no model calls)
         run: python -m unittest discover -s evals/exploration -p "test_*.py" -v
       - name: CLI delivery observations (no model calls)
         run: python scripts/observe_delivery.py
       - name: Compile Python sources
-        run: python -m compileall -q bootstrap.py install.py get-repoatlas.py run.py scripts skills/repoatlas-jvm/scripts evals/exploration
+        run: python -m compileall -q bootstrap.py install.py get-columbus.py run.py scripts skills/columbus/scripts evals/exploration
       - name: Build wheel
         run: python -m pip wheel --no-deps --wheel-dir dist .
       - name: Build reproducible ZIP
@@ -46,5 +46,5 @@ jobs:
         run: python -c "import pathlib, subprocess, sys; p = pathlib.Path('dist'); subprocess.run([sys.executable, 'scripts/verify_distribution.py', '--wheel', str(next(p.glob('*.whl'))), '--bundle', str(next(p.glob('*.zip')))], check=True)"
       - uses: actions/upload-artifact@v4
         with:
-          name: repoatlas-${{ matrix.os }}-py${{ matrix.python }}
+          name: columbus-${{ matrix.os }}-py${{ matrix.python }}
           path: dist/

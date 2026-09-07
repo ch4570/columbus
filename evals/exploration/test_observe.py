@@ -78,10 +78,19 @@ class ObservationTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 observe.prepare(root)
 
+    def test_published_engine_bytes_and_inventory_match_recorded_evidence(self):
+        published = json.loads((HERE/'results/2026-09-07/controlled.json').read_text())
+        archive = observe.PUBLISHED_ENGINE
+        self.assertEqual(observe.sha(archive.read_bytes()), published['engine_fixture_sha256'])
+        with zipfile.ZipFile(archive) as engine:
+            self.assertEqual({name: observe.sha(engine.read(name)) for name in engine.namelist()},
+                             published['engine']['files'])
+
+    @unittest.skipIf(observe.archived_replay_reason(observe.PUBLISHED_ENGINE) is not None,
+                     observe.ARCHIVED_REPLAY_REASON)
     def test_published_engine_recreates_the_recorded_nonempty_index(self):
         published = json.loads((HERE/'results/2026-09-07/controlled.json').read_text())
-        archive = HERE/'fixtures/repoatlas-engine-observed-0.4.0.zip'
-        self.assertEqual(observe.sha(archive.read_bytes()), published['engine_fixture_sha256'])
+        archive = observe.PUBLISHED_ENGINE
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)/'run'
             observe.prepare(root)
@@ -99,6 +108,63 @@ class ObservationTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'Prebuilt index is missing'):
                     observe.trial(root, 'export-safety', 'repoatlas', model='unused', effort='high', repeat=1, timeout=5)
                 model.assert_not_called()
+
+    def test_known_archive_incompatibility_stops_before_copy_or_execution(self):
+        archive = observe.PUBLISHED_ENGINE
+        original = archive.read_bytes()
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            renamed = root / 'same-evidence.zip'
+            renamed.write_bytes(original)
+            different = root / 'different-engine.zip'
+            different.write_bytes(b'different input')
+            with patch.object(observe.sys, 'platform', 'win32'), \
+                    patch.object(observe.sys, 'version_info', (3, 14, 7)), \
+                    patch.object(observe.subprocess, 'run') as execute:
+                self.assertIsNone(observe.archived_replay_reason(None))
+                self.assertIsNone(observe.archived_replay_reason(different))
+                with self.assertRaisesRegex(ValueError, 'immutable RepoAtlas 0.4 archive'):
+                    observe.freeze_engine(root, renamed)
+                execute.assert_not_called()
+                self.assertFalse((root / 'runtime').exists())
+                self.assertFalse((root / 'engine.json').exists())
+            for platform, version in (('win32', (3, 11, 14)), ('linux', (3, 14, 7)),
+                                      ('darwin', (3, 14, 7))):
+                with patch.object(observe.sys, 'platform', platform), \
+                        patch.object(observe.sys, 'version_info', version):
+                    self.assertIsNone(observe.archived_replay_reason(archive))
+        self.assertEqual(archive.read_bytes(), original)
+
+    def test_current_columbus_engine_uses_its_own_index_and_condition(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / 'run'
+            observe.prepare(root)
+            observe.freeze_engine(root)
+            frozen = json.loads((root / 'engine.json').read_text())
+            self.assertEqual(frozen['name'], 'columbus')
+            self.assertTrue((root / 'runtime/columbus.py').is_file())
+            self.assertTrue((root / 'repository/.columbus/index-v1.sqlite').is_file())
+            self.assertFalse((root / 'repository/.repoatlas').exists())
+            self.assertTrue(observe.live_index_preflight(root, frozen)['passed'])
+            with patch.object(observe.subprocess, 'Popen') as model:
+                with self.assertRaisesRegex(ValueError, 'Condition must match'):
+                    observe.trial(root, 'export-safety', 'repoatlas', model='unused', effort='high', repeat=1, timeout=5)
+                (root / 'repository/.columbus/index-v1.sqlite').unlink()
+                with self.assertRaisesRegex(ValueError, 'Prebuilt index is missing'):
+                    observe.trial(root, 'export-safety', 'columbus', model='unused', effort='high', repeat=1, timeout=5)
+                model.assert_not_called()
+
+    def test_archive_with_two_engines_is_rejected_before_execution(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            archive = root / 'ambiguous.zip'
+            with zipfile.ZipFile(archive, 'w') as output:
+                for name in ('atlas.py', 'repoatlas/__init__.py', 'columbus.py', 'columbus/__init__.py'):
+                    output.writestr(name, 'raise AssertionError("must not execute")')
+            with patch.object(observe.subprocess, 'run') as execute:
+                with self.assertRaisesRegex(ValueError, 'one supported wrapper'):
+                    observe.freeze_engine(root, archive)
+                execute.assert_not_called()
 
     def test_engine_archive_cannot_escape_or_inject_unlisted_files(self):
         with tempfile.TemporaryDirectory() as temporary:

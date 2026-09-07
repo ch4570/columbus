@@ -3,7 +3,7 @@ requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "repoatlas"
+name = "columbus"
 description = "Local polyglot repository graphs and bounded context for coding agents"
 keywords = ["code-graph", "repository", "agent", "context", "mcp", "polyglot"]
 readme = "README.md"
@@ -21,18 +21,19 @@ classifiers = [
 mcp = ["mcp==2.1.1"]
 
 [project.scripts]
-repoatlas = "repoatlas.cli:main"
+columbus = "columbus.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/ch4570/repo-graph"
-Documentation = "https://github.com/ch4570/repo-graph#readme"
-Issues = "https://github.com/ch4570/repo-graph/issues"
+Homepage = "https://github.com/ch4570/columbus"
+Documentation = "https://github.com/ch4570/columbus#readme"
+Issues = "https://github.com/ch4570/columbus/issues"
 
 [tool.setuptools]
-package-dir = {"" = "skills/repoatlas-jvm/scripts"}
-packages = ["repoatlas"]
+package-dir = {"columbus" = "skills/columbus/scripts/columbus"}
+packages = ["columbus"]
 include-package-data = false
 
 [tool.setuptools.dynamic]
-version = {attr = "repoatlas.__version__"}
-dependencies = {file = ["skills/repoatlas-jvm/scripts/requirements.txt"]}
+# Resolve the literal package file, since scripts/columbus.py is also present.
+version = {attr = "columbus.__init__.__version__"}
+dependencies = {file = ["skills/columbus/scripts/requirements.txt"]}

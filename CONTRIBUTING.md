@@ -1,4 +1,4 @@
-# Contributing to RepoAtlas
+# Contributing to Columbus
 
 Keep changes source-backed, bounded, and reproducible. A useful contribution improves what an agent can find, the amount of context it needs, or the reliability of installation and retrieval.
 
@@ -9,10 +9,10 @@ From the repository root on macOS/Linux:
 ```sh
 python3 -m venv .venv
 .venv/bin/python -m pip install -e '.[mcp]'
-.venv/bin/repoatlas doctor
+.venv/bin/columbus doctor
 ```
 
-The MCP extra enables the stdio integration tests. On Windows, use `.venv\Scripts\python.exe` and `.venv\Scripts\repoatlas.exe`. The runtime source lives under `skills/repoatlas-jvm/scripts/repoatlas/`; the path is kept for existing skill installations.
+The MCP extra enables the stdio integration tests. On Windows, use `.venv\Scripts\python.exe` and `.venv\Scripts\columbus.exe`. The runtime source lives under `skills/columbus/scripts/columbus/`.
 
 ## Verify a change
 
@@ -25,14 +25,14 @@ Run the root installation/distribution suite from the repository root:
 Run the engine suite from its own directory:
 
 ```sh
-cd skills/repoatlas-jvm/scripts
+cd skills/columbus/scripts
 ../../../.venv/bin/python -m unittest discover -s tests -v
 ```
 
 Then return to the repository root for compilation and dependency checks:
 
 ```sh
-.venv/bin/python -m compileall -q bootstrap.py install.py get-repoatlas.py run.py scripts skills/repoatlas-jvm/scripts evals/exploration
+.venv/bin/python -m compileall -q bootstrap.py install.py get-columbus.py run.py scripts skills/columbus/scripts evals/exploration
 .venv/bin/python -m pip check
 ```
 
@@ -47,8 +47,8 @@ From the repository root:
 .venv/bin/python scripts/build_bundle.py
 .venv/bin/python scripts/release_assets.py
 .venv/bin/python scripts/verify_distribution.py \
-  --wheel dist/repoatlas-0.5.0-py3-none-any.whl \
-  --bundle dist/repoatlas-0.5.0.zip
+  --wheel dist/columbus-1.0.0-py3-none-any.whl \
+  --bundle dist/columbus-1.0.0.zip
 ```
 
 The distribution verifier creates isolated environments and may download dependencies. The ZIP inventory is checksummed and reproducible for the same input. Keep package and skill bundle versions aligned. New shipped assets must be included in the distribution inventory rather than only existing in the checkout.

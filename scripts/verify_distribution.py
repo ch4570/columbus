@@ -50,7 +50,7 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
     for name in ("PYTHONPATH", "PYTHONHOME", "VIRTUAL_ENV"):
         environment.pop(name, None)
     environment["PYTHONNOUSERSITE"] = "1"
-    with tempfile.TemporaryDirectory(prefix="repoatlas distribution ") as temporary:
+    with tempfile.TemporaryDirectory(prefix="columbus distribution ") as temporary:
         root = Path(temporary).resolve()
         unrelated = root / "unrelated working directory"
         unrelated.mkdir()
@@ -68,17 +68,17 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
         venv.EnvBuilder(with_pip=True, symlinks=os.name != "nt").create(runtime)
         binary = runtime / ("Scripts" if os.name == "nt" else "bin")
         python = binary / ("python.exe" if os.name == "nt" else "python")
-        cli = binary / ("repoatlas.exe" if os.name == "nt" else "repoatlas")
+        cli = binary / ("columbus.exe" if os.name == "nt" else "columbus")
         installation = [python, "-I", "-m", "pip", "--disable-pip-version-check", "install", "--no-input"]
         if offline:
             installation.append("--no-index")
         if wheelhouse:
             installation.extend(["--find-links", wheelhouse])
         run([*installation, wheel])
-        if "repoatlas explore" not in run([cli]):
+        if "columbus explore" not in run([cli]):
             raise VerificationError("Installed CLI did not show its getting-started guide")
         run([cli, "doctor"])
-        version = run([python, "-I", "-c", "import importlib.metadata as m; print(m.version('repoatlas'))"]).strip()
+        version = run([python, "-I", "-c", "import importlib.metadata as m; print(m.version('columbus'))"]).strip()
         repo = root / "target repository with spaces"
         repo.mkdir()
         (repo / "payments.py").write_text("def settle_payment(amount):\n    return amount * 2\n", encoding="utf-8")
@@ -91,7 +91,7 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
             "Orders.kt": "class Orders { fun submitOrder(): Int = 1 }\n",
             "workflow.custom": "routine reserve_inventory\n",
             "ARCHITECTURE.unfamiliar": "The unusual_fallback_anchor documents the queue boundary.\n",
-            ".repoatlas.json": json.dumps({"extensions": {".custom": "workflow"}, "declarations": {"workflow": ["routine"]}}),
+            ".columbus.json": json.dumps({"extensions": {".custom": "workflow"}, "declarations": {"workflow": ["routine"]}}),
         }
         for name, source in fixtures.items():
             (repo / name).write_text(source, encoding="utf-8")
@@ -146,7 +146,7 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
         if (repo / ".agents").exists():
             raise VerificationError("init --plan changed the repository")
         run([cli, "--repo", repo, "init"])
-        destination = repo / ".agents/skills/repoatlas-jvm"
+        destination = repo / ".agents/skills/columbus"
         lock = json.loads((destination / ".bundle-lock.json").read_text(encoding="utf-8"))
         for name, digest in lock["files"].items():
             if hashlib.sha256((destination / name).read_bytes()).hexdigest() != digest:
@@ -154,7 +154,7 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
         repeated = json.loads(run([cli, "--repo", repo, "init"]))
         if repeated.get("status") != "noop":
             raise VerificationError(f"Repeated skill install must be noop: {repeated}")
-        run([python, "-E", "-s", destination / "scripts/atlas.py", "--repo", repo, "search", "settle_payment"])
+        run([python, "-E", "-s", destination / "scripts/columbus.py", "--repo", repo, "search", "settle_payment"])
         skill = destination / "SKILL.md"
         local = skill.read_bytes() + b"\nLocal team instructions.\n"
         skill.write_bytes(local)
@@ -165,7 +165,7 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
         # that the global entry point and package resources remain usable.
         run([*installation, "--force-reinstall", "--no-deps", wheel])
         run([cli, "--repo", repo, "status"])
-        standalone = Path(__file__).resolve().parents[1] / "get-repoatlas.py"
+        standalone = Path(__file__).resolve().parents[1] / "get-columbus.py"
         release_checksums = root / "release-checksums.txt"
         release_checksums.write_text(hashlib.sha256(wheel.read_bytes()).hexdigest() + "  " + wheel.name + "\n", encoding="ascii")
         global_bin = root / "global commands"
@@ -178,7 +178,7 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
             release_install.extend(["--wheelhouse", wheelhouse])
         run(release_install)
         run(release_install)
-        global_cli = global_bin / ("repoatlas.cmd" if os.name == "nt" else "repoatlas")
+        global_cli = global_bin / ("columbus.cmd" if os.name == "nt" else "columbus")
         if run([global_cli, "--version"]).strip() != version:
             raise VerificationError("Standalone release installer did not activate the requested version")
         run([global_cli, "explore", "settle_payment", "--repo", repo])
@@ -202,9 +202,9 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
             if not json.loads(run([python, extracted / "run.py", "--repo", bootstrap_repo, "search", "submitOrder"]))["hits"]:
                 raise VerificationError("ZIP bootstrap did not create its initial JVM index")
             extracted.rename(root / "relocated archive source")
-            local_python = bootstrap_repo / ".repoatlas/runtime" / binary.name / python.name
-            local_atlas = bootstrap_repo / ".agents/skills/repoatlas-jvm/scripts/atlas.py"
-            run([local_python, "-E", "-s", local_atlas, "doctor"])
+            local_python = bootstrap_repo / ".columbus/runtime" / binary.name / python.name
+            local_entrypoint = bootstrap_repo / ".agents/skills/columbus/scripts/columbus.py"
+            run([local_python, "-E", "-s", local_entrypoint, "doctor"])
         return {"status": "passed", "version": version, "wheel": str(wheel),
                 "clean_venv": True, "unrelated_cwd": True, "paths_with_spaces": True,
                 "global_search": True, "skill_reinstall": repeated["status"],

@@ -31,7 +31,7 @@ runner = load_cli("run")
 
 class BootstrapTests(unittest.TestCase):
     def setUp(self):
-        self.temporary = tempfile.TemporaryDirectory(prefix="repoatlas package ")
+        self.temporary = tempfile.TemporaryDirectory(prefix="columbus package ")
         self.addCleanup(self.temporary.cleanup)
         self.repo = Path(self.temporary.name).resolve() / "target repository with spaces"
         self.repo.mkdir()
@@ -44,7 +44,7 @@ class BootstrapTests(unittest.TestCase):
         return result, output.getvalue(), errors.getvalue()
 
     def environment(self, *, ready=True):
-        runtime = self.repo / ".repoatlas/runtime"
+        runtime = self.repo / ".columbus/runtime"
         runtime.mkdir(parents=True)
         python = b.interpreter(self.repo, runtime)
         python.parent.mkdir()
@@ -72,11 +72,11 @@ class BootstrapTests(unittest.TestCase):
             code, _, errors = self.call(installer.main)
         self.assertEqual(code, 2)
         self.assertIn("local edits", errors)
-        self.assertFalse((self.repo / ".repoatlas").exists())
+        self.assertFalse((self.repo / ".columbus").exists())
         self.assertTrue(local.read_text().endswith("Local policy\n"))
 
     def test_unmanaged_environment_is_never_adopted(self):
-        runtime = self.repo / ".repoatlas/runtime"
+        runtime = self.repo / ".columbus/runtime"
         runtime.mkdir(parents=True)
         user_file = runtime / "my data"
         user_file.write_text("keep")
@@ -89,13 +89,13 @@ class BootstrapTests(unittest.TestCase):
     def test_internal_runtime_and_marker_symlinks_are_refused(self):
         outside = Path(self.temporary.name).resolve() / "outside"
         outside.mkdir()
-        (self.repo / ".repoatlas").symlink_to(outside, target_is_directory=True)
+        (self.repo / ".columbus").symlink_to(outside, target_is_directory=True)
         code, _, errors = self.call(installer.main)
         self.assertEqual(code, 2)
         self.assertIn("Symlink", errors)
         self.assertEqual(list(outside.iterdir()), [])
-        (self.repo / ".repoatlas").unlink()
-        runtime = self.repo / ".repoatlas/runtime"
+        (self.repo / ".columbus").unlink()
+        runtime = self.repo / ".columbus/runtime"
         runtime.mkdir(parents=True)
         target = outside / "marker.json"
         target.write_text(json.dumps({"owner": b.OWNER, "format": 1}))
@@ -110,13 +110,13 @@ class BootstrapTests(unittest.TestCase):
         self.assertEqual(b.repository(alias), self.repo)
 
     def test_lock_collision_does_not_remove_existing_lock(self):
-        lock = self.repo / ".repoatlas/.bootstrap-lock"
+        lock = self.repo / ".columbus/.bootstrap-lock"
         lock.mkdir(parents=True)
         code, _, errors = self.call(installer.main)
         self.assertEqual(code, 2)
         self.assertIn("locked", errors)
         self.assertTrue(lock.is_dir())
-        self.assertFalse((self.repo / ".repoatlas/runtime").exists())
+        self.assertFalse((self.repo / ".columbus/runtime").exists())
 
     def test_dependency_failure_preserves_retry_state_and_skill_is_not_applied(self):
         runtime, _ = self.environment(ready=False)
@@ -128,7 +128,7 @@ class BootstrapTests(unittest.TestCase):
         self.assertIn("Install pinned dependencies failed", errors)
         self.assertFalse((self.repo / b.SKILL_RELATIVE).exists())
         self.assertIsNone(b.runtime_state(self.repo, runtime)["requirements_sha256"])
-        self.assertFalse((self.repo / ".repoatlas/.bootstrap-lock").exists())
+        self.assertFalse((self.repo / ".columbus/.bootstrap-lock").exists())
         calls = []
         def successful(command, **kwargs):
             calls.append(command)
@@ -211,7 +211,7 @@ class BootstrapTests(unittest.TestCase):
     def test_runner_stops_while_setup_is_locked(self):
         b.bundle_plan(self.repo, apply=True)
         self.environment()
-        (self.repo / ".repoatlas/.bootstrap-lock").mkdir()
+        (self.repo / ".columbus/.bootstrap-lock").mkdir()
         with patch.object(b, "invoke", side_effect=AssertionError("Must not query during setup")):
             code, _, errors = self.call(runner.main, "search", "Example")
         self.assertEqual(code, 2)

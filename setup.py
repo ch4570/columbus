@@ -12,19 +12,19 @@ from setuptools.command.build_py import build_py
 class BuildWithSkill(build_py):
     def run(self):
         super().run()
-        source = Path(__file__).resolve().parent / "skills/repoatlas-jvm"
-        spec = importlib.util.spec_from_file_location("_repoatlas_build_installer", source / "scripts/install.py")
+        source = Path(__file__).resolve().parent / "skills/columbus"
+        spec = importlib.util.spec_from_file_location("_columbus_build_installer", source / "scripts/install.py")
         installer = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(installer)
         manifest, contents = installer._bundle(source)
         if manifest["version"] != self.distribution.get_version():
             raise ValueError("Package and skill bundle versions must match before distribution")
-        target = Path(self.build_lib) / "repoatlas/_bundle"
+        target = Path(self.build_lib) / "columbus/_bundle"
         # Incremental builds must not retain resources removed from the source.
         if target.exists():
             shutil.rmtree(target)
         for relative, data in contents.items():
-            if relative.startswith("scripts/repoatlas/"):
+            if relative.startswith("scripts/columbus/"):
                 continue
             path = target / relative
             path.parent.mkdir(parents=True, exist_ok=True)

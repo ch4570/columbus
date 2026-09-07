@@ -6,8 +6,8 @@ For installation questions, start with [INSTALL.md](INSTALL.md#troubleshooting).
 
 Open a repository issue and include:
 
-- The exact command, RepoAtlas version, OS, Python version, and installation method.
-- The relevant `repoatlas doctor` output and index diagnostics.
+- The exact command, Columbus version, OS, Python version, and installation method.
+- The relevant `columbus doctor` output and index diagnostics.
 - Expected and observed behavior, including output format and budgets.
 - A small synthetic fixture or a public source path and revision that reproduces it.
 

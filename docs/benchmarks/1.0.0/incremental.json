@@ -1,0 +1,158 @@
+{
+  "schema": "columbus.incremental-observation/v1",
+  "engine_version": "1.0.0",
+  "captured_at": "2026-09-07T08:27:46.902564+00:00",
+  "environment": {
+    "python": "3.14.7",
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "engine_files": {
+    "columbus/__init__.py": "87f632dcdb12b5a9b78e5961202c87910906399c90157131799707e5b35b375c",
+    "columbus/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "columbus/bundle.py": "f73fe1c36c89211c823f6c94eae67efc054e8c69b835b3ef49371482e7dd7f00",
+    "columbus/cli.py": "32df2bec6f24bfd66026642473ff14f8e1eb7acff5801d504956194f80067823",
+    "columbus/discovery.py": "7513fa3158c15c002eac90367df849cf72ec6343d6c8952a814948c71f5342c8",
+    "columbus/export.py": "258f6b2df72a08da837480c96db82c78eeec63007d8d1c48baed8aa36b445957",
+    "columbus/graph_views.py": "9e935520bb990c2066cfdb943c37477e78378b5ffd868e31735cc6a5e261f1c7",
+    "columbus/index.py": "31b34ebfc1e82eb821ac4ef6a792f4aa48aa8cb22f5ac15a3ac371cc4dcc48d4",
+    "columbus/jvm.py": "601e4415c67d07730668ae889c4295ac853eed0d34bc6cb71807421e6950e676",
+    "columbus/language_profiles.py": "cda7c22cce6227d2627225110adafa641c7b09134b7c5d800ffcf1329092a1ce",
+    "columbus/languages.py": "5caf56dff66a2e405979c5a0ed83557120d63fa891c9b161d3cd796db816e1d8",
+    "columbus/mcp_server.py": "8205f39755c51f1486fd66a1f9c993502fb2a614376510757cb4d1bdf29641c7",
+    "columbus/parser.py": "2cf8c3d3d40871eebc715a00ad63d248dff4ff7a6d17f54b78140d56f65f2c88",
+    "columbus/polyglot.py": "fdaf6ff2253945b31eeca00f87175ea9179be9c7b404db5468403d4a269948ae",
+    "columbus/presentation.py": "edf82c405fc8c7c4b8a0cb5373db74afb155428715e0513a09c418719bce1197",
+    "columbus/receipts.py": "11068a6fd2d78a8d22a86c102b199c395c5f001e50ed5ff010f6893ab9b13ca9",
+    "columbus/retrieval.py": "ee49391f65cb25b5d58ffe2758b5ecccb1978c0a20e03060b665a1ab719dbe94",
+    "columbus/sync_state.py": "07d526cf420becfd660ce4386f9cdb3a3a34abba404e779a3304f87b0071f9ab",
+    "columbus/telemetry.py": "9f49124a606e3a30191c596c8bd40f7255d5fbbb93f5ba2a531940b7f63c32dc"
+  },
+  "observer_sha256": "19000250876374917a01b686b8240dc090091a82d74dcf7407d6bcde353f3fcd",
+  "fixture": {
+    "kind": "deterministic synthetic Python",
+    "files": 1001,
+    "source_bytes": 1101260,
+    "generator": "docs/benchmarks/1.0.0/observe_incremental.py:fixture_sources",
+    "file_hash_manifest_sha256": "23a4e38efb62d7f40eef546f8890b3ba9d293e3f42456013ee02aa247a139054",
+    "hash_manifest_encoding": "SHA256 of sorted compact JSON mapping relative filenames to SHA256"
+  },
+  "repeats": 3,
+  "runs": [
+    {
+      "repeat": 1,
+      "phase": "cold",
+      "elapsed_seconds": 1.020168,
+      "parsed_files": 1001,
+      "hashed_files": 1001,
+      "hashed_bytes": 1101260,
+      "files": 1001,
+      "symbols": 9002,
+      "edges": 8001,
+      "indexed_bytes": 1101260
+    },
+    {
+      "repeat": 1,
+      "phase": "warm",
+      "elapsed_seconds": 0.412198,
+      "parsed_files": 0,
+      "hashed_files": 0,
+      "hashed_bytes": 0,
+      "files": 1001,
+      "symbols": 9002,
+      "edges": 8001,
+      "indexed_bytes": 1101260
+    },
+    {
+      "repeat": 1,
+      "phase": "one_file_changed",
+      "elapsed_seconds": 0.537711,
+      "parsed_files": 1,
+      "hashed_files": 1,
+      "hashed_bytes": 74,
+      "files": 1001,
+      "symbols": 9002,
+      "edges": 8001,
+      "indexed_bytes": 1101288
+    },
+    {
+      "repeat": 2,
+      "phase": "cold",
+      "elapsed_seconds": 0.970287,
+      "parsed_files": 1001,
+      "hashed_files": 1001,
+      "hashed_bytes": 1101260,
+      "files": 1001,
+      "symbols": 9002,
+      "edges": 8001,
+      "indexed_bytes": 1101260
+    },
+    {
+      "repeat": 2,
+      "phase": "warm",
+      "elapsed_seconds": 0.346072,
+      "parsed_files": 0,
+      "hashed_files": 0,
+      "hashed_bytes": 0,
+      "files": 1001,
+      "symbols": 9002,
+      "edges": 8001,
+      "indexed_bytes": 1101260
+    },
+    {
+      "repeat": 2,
+      "phase": "one_file_changed",
+      "elapsed_seconds": 0.504681,
+      "parsed_files": 1,
+      "hashed_files": 1,
+      "hashed_bytes": 74,
+      "files": 1001,
+      "symbols": 9002,
+      "edges": 8001,
+      "indexed_bytes": 1101288
+    },
+    {
+      "repeat": 3,
+      "phase": "cold",
+      "elapsed_seconds": 1.024678,
+      "parsed_files": 1001,
+      "hashed_files": 1001,
+      "hashed_bytes": 1101260,
+      "files": 1001,
+      "symbols": 9002,
+      "edges": 8001,
+      "indexed_bytes": 1101260
+    },
+    {
+      "repeat": 3,
+      "phase": "warm",
+      "elapsed_seconds": 0.313718,
+      "parsed_files": 0,
+      "hashed_files": 0,
+      "hashed_bytes": 0,
+      "files": 1001,
+      "symbols": 9002,
+      "edges": 8001,
+      "indexed_bytes": 1101260
+    },
+    {
+      "repeat": 3,
+      "phase": "one_file_changed",
+      "elapsed_seconds": 0.503915,
+      "parsed_files": 1,
+      "hashed_files": 1,
+      "hashed_bytes": 74,
+      "files": 1001,
+      "symbols": 9002,
+      "edges": 8001,
+      "indexed_bytes": 1101288
+    }
+  ],
+  "limitations": [
+    "Empty SQLite index per repeat; OS caches were not cleared.",
+    "Warm and one-file-edited phases use the fast metadata validation path.",
+    "Elapsed time includes refresh work, excludes Python startup and fixture creation.",
+    "One local machine, three repeats by default; no confidence interval or general speed guarantee.",
+    "Synthetic indexing benchmark; no model tokens, billing, or task quality measured."
+  ]
+}

@@ -2,6 +2,16 @@
 
 This file describes source and bundle versions. A version entry does not imply publication to a package registry or a GitHub release.
 
+## 1.0.0 — Columbus · 2026-09-07
+
+- Give the project the Columbus identity: a navigator character, repository `ch4570/columbus`, and matching English and Korean guides.
+- Rename the package, import, command, and MCP server to `columbus`; distribute `get-columbus.py`, a wheel, and a source ZIP with checksums.
+- Use `.agents/skills/columbus/`, `.columbus.json`, `.columbusignore`, and `.columbus/index-v1.sqlite`. Leave preview installations and caches intact, and exclude old runtime directories from new discovery.
+- Publish reproducible Columbus response-delivery benchmarks and graphs, alongside clearly labeled historical actual-agent measurements. Retain the original observations, including regressions and excluded trials.
+- Keep the checksum, ownership, source freshness, response budget, and release-version guards. Add regression coverage for renamed and archived engine loading.
+
+**Breaking change:** the private RepoAtlas preview is not upgraded in place. Install Columbus as a new tool, copy any custom configuration to the new filename, install the new skill, and rebuild the index. [Migration guide](INSTALL.md#moving-from-the-repoatlas-preview).
+
 ## 0.5.0 — 2026-09-07
 
 - Put measured CLI response reductions and all three real-agent comparisons directly in the English and Korean READMEs, including increased model usage and citation-quality limits.
@@ -30,4 +40,4 @@ See [validation evidence](VALIDATION.md) and [token-efficiency observations](doc
 - Export JSON, Mermaid, GraphML, and self-contained HTML graphs with scope and relationship filters.
 - Add bounded maps and context retrieval, incremental synchronization, wheel/ZIP packaging, and offline wheelhouse installation.
 
-The `repoatlas-jvm` skill identifier and `jvm-v2.sqlite` cache filename remain as compatibility paths.
+That historical version used `repoatlas-jvm` and `jvm-v2.sqlite` as compatibility paths. Columbus 1.0 uses the new paths above.

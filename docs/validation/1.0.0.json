@@ -1,0 +1,268 @@
+{
+  "schema": "columbus.release-validation/v1",
+  "version": "1.0.0",
+  "date": "2026-09-07",
+  "code_and_build_input_sha256": {
+    "bootstrap.py": "2a7b5cb520d86dfbdc5af97d8a17f0c045f8ce6ac9f0d2a781e27a22f7058a36",
+    "docs/benchmarks/1.0.0/observe_incremental.py": "19000250876374917a01b686b8240dc090091a82d74dcf7407d6bcde353f3fcd",
+    "evals/exploration/observe.py": "cd56baab6347036c26d52af83ff928dfa33b9e09827e9c2ff3f1c677ee704327",
+    "evals/exploration/test_observe.py": "6e8f406f895deb0b2fb6c0c70ff7813935a8e5ef251591eb86c76a76522fb22a",
+    "get-columbus.py": "ef9608d5bb468144fcd4ac801a9fedc64641666101fff62dc5e7968a40fb6314",
+    "install.py": "fbf5fcb28490cfaefe056707f788b632ac37a6b0e651437bf0e91ce5154182c7",
+    "pyproject.toml": "b657abc22777e9c29d2e6f2bf6afdf5cc821605ddbafb9e05e72feb91b0a5017",
+    "run.py": "878b5ba34a38a8b55c20f3d2c12aee53be9c1abb62438bacadedd0fa4a51ed2f",
+    "scripts/benchmark_context.py": "3a75dce79407a3fed330404ddbcf158f055d72ddf340004f48b2f96d477d14a4",
+    "scripts/build_bundle.py": "064346e49021ceafe60757f19ac665ad3a1a34c34fd3ef8d617d1678ad4795e2",
+    "scripts/observe_delivery.py": "44c8a1f7f05318d90b839000c4971d75a7b18a24feb20704c967958a1a801acb",
+    "scripts/plot_benchmarks.py": "19d446f4242651e952d32c267a603f2e76d5593ddf5bba3c997dcd2d46fc3641",
+    "scripts/release_assets.py": "76c4e3506b025db02cf865090376862aa0304d9792fd5b30272332bbb5bed1dd",
+    "scripts/verify_distribution.py": "d91d341f181f2e645b720361203585d1f9b971f4e13a725f77a2e816d361b53d",
+    "setup.py": "46811eec700dc3b17f0e0d32412373fff5513064eb98a02a76d90885bb8692f0",
+    "skills/columbus/bundle.json": "e24fa4c53c7bcd724b9ac65597d14220383f70aa5ec3332f429c356375027252",
+    "skills/columbus/scripts/columbus.py": "0b791210f2796253cc24b13d193c0cef0c602de6f1e9d1dcadd560b23c8db067",
+    "skills/columbus/scripts/columbus/__init__.py": "87f632dcdb12b5a9b78e5961202c87910906399c90157131799707e5b35b375c",
+    "skills/columbus/scripts/columbus/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "skills/columbus/scripts/columbus/bundle.py": "f73fe1c36c89211c823f6c94eae67efc054e8c69b835b3ef49371482e7dd7f00",
+    "skills/columbus/scripts/columbus/cli.py": "32df2bec6f24bfd66026642473ff14f8e1eb7acff5801d504956194f80067823",
+    "skills/columbus/scripts/columbus/discovery.py": "7513fa3158c15c002eac90367df849cf72ec6343d6c8952a814948c71f5342c8",
+    "skills/columbus/scripts/columbus/export.py": "258f6b2df72a08da837480c96db82c78eeec63007d8d1c48baed8aa36b445957",
+    "skills/columbus/scripts/columbus/graph_views.py": "9e935520bb990c2066cfdb943c37477e78378b5ffd868e31735cc6a5e261f1c7",
+    "skills/columbus/scripts/columbus/index.py": "31b34ebfc1e82eb821ac4ef6a792f4aa48aa8cb22f5ac15a3ac371cc4dcc48d4",
+    "skills/columbus/scripts/columbus/jvm.py": "601e4415c67d07730668ae889c4295ac853eed0d34bc6cb71807421e6950e676",
+    "skills/columbus/scripts/columbus/language_profiles.py": "cda7c22cce6227d2627225110adafa641c7b09134b7c5d800ffcf1329092a1ce",
+    "skills/columbus/scripts/columbus/languages.py": "5caf56dff66a2e405979c5a0ed83557120d63fa891c9b161d3cd796db816e1d8",
+    "skills/columbus/scripts/columbus/mcp_server.py": "8205f39755c51f1486fd66a1f9c993502fb2a614376510757cb4d1bdf29641c7",
+    "skills/columbus/scripts/columbus/parser.py": "2cf8c3d3d40871eebc715a00ad63d248dff4ff7a6d17f54b78140d56f65f2c88",
+    "skills/columbus/scripts/columbus/polyglot.py": "fdaf6ff2253945b31eeca00f87175ea9179be9c7b404db5468403d4a269948ae",
+    "skills/columbus/scripts/columbus/presentation.py": "edf82c405fc8c7c4b8a0cb5373db74afb155428715e0513a09c418719bce1197",
+    "skills/columbus/scripts/columbus/receipts.py": "11068a6fd2d78a8d22a86c102b199c395c5f001e50ed5ff010f6893ab9b13ca9",
+    "skills/columbus/scripts/columbus/retrieval.py": "ee49391f65cb25b5d58ffe2758b5ecccb1978c0a20e03060b665a1ab719dbe94",
+    "skills/columbus/scripts/columbus/sync_state.py": "07d526cf420becfd660ce4386f9cdb3a3a34abba404e779a3304f87b0071f9ab",
+    "skills/columbus/scripts/columbus/telemetry.py": "9f49124a606e3a30191c596c8bd40f7255d5fbbb93f5ba2a531940b7f63c32dc",
+    "skills/columbus/scripts/install.py": "e2447308b9e283dd70574c6291f9e159f6e6d0b0b1a4fa0bbcd9745044ee10c7",
+    "skills/columbus/scripts/tests/test_agent_context.py": "7d7fa2d1c90108582d71b165e4f280ca35c3c59a13fa6e40b5eb05211a4a42fb",
+    "skills/columbus/scripts/tests/test_columbus.py": "b9d4723932c70c5efd1e1e750bfaba5385f2637ebe78b28a977583620a56ad4e",
+    "skills/columbus/scripts/tests/test_explicit_root.py": "a74c2d242b644216dcc19d516013f5126752565aac92547c960297f5c34fe9d8",
+    "skills/columbus/scripts/tests/test_export.py": "10daceff2f699007bd5440bc8732956ceecb952dde154c83a719bffbac7b294a",
+    "skills/columbus/scripts/tests/test_index.py": "5daa5cc0959e6cae5f06cc94836261cbf79a25f3fc025d7fc8dc2a2423a66837",
+    "skills/columbus/scripts/tests/test_install.py": "0933927164665987d150c34af0668449f6cff319410d6ad4ec0a1d8730f513d2",
+    "skills/columbus/scripts/tests/test_jvm.py": "7d6744aca3ca1e81bbe0b0417a7b36102ebb91db202f5b02f2ca0c364baeed9e",
+    "skills/columbus/scripts/tests/test_mcp.py": "bad850f2384a0144fc977b8f726dfab50f3fce61e694be0497450e8263858530",
+    "skills/columbus/scripts/tests/test_parser.py": "660d3d291e4ef75215e995b07cba70290a1aa79bf14e5609288f054911cf7d33",
+    "skills/columbus/scripts/tests/test_polyglot.py": "47a0dedeb3c7779037abe993f94275aff133dfca592eb38f47a7bb222fabc208",
+    "skills/columbus/scripts/tests/test_sessions.py": "6970ec0d6341226463df0bc5a5b77aa6c63024d91ca32019847c10c0c175a8bd",
+    "skills/columbus/scripts/tests/test_sync.py": "1b82cb2f7a81f0c8d5937dbdcb84542bd6a437398c44180216f3afe284d36a35",
+    "skills/columbus/scripts/tests/test_sync_state.py": "7fc307b637b580a170af1fca77c6e14d8bc4562f30f790e4dba42d01949b5979",
+    "skills/columbus/scripts/tests/test_token_economy.py": "281890cdb1f861c902433a812d6f38bb81d6fa3422affcda36fee526dbbcb404",
+    "tests/test_benchmark_charts.py": "2c1132770b4c8b34455bde2e38d5e502332535ebf06f807db17fac4f5664eede",
+    "tests/test_bootstrap.py": "b15ebfdac359691cd549e739dcd6a83ff4a6c2d31922ea8b3c1c771a37606fc1",
+    "tests/test_distribution.py": "5f91ab3b0497bca9c0a88a913a7cd0722ac06e39a358c560fdd3a676655dc10c",
+    "tests/test_observe_delivery.py": "61f516a4cea7ffe0293c95bfc5ce23c27c31c146a55bec1bd9945772c9889dc7",
+    "tests/test_release_installer.py": "c0c09b7aeff91f6537ca629efaf7a2e1eb959bb80df1a7d153eeb3b0e72a06d8"
+  },
+  "macos": {
+    "machine": "arm64",
+    "test_python": "3.14.7",
+    "tests": {
+      "engine": 169,
+      "root": 49,
+      "harness": 12,
+      "total": 230
+    },
+    "distribution": [
+      {
+        "status": "passed",
+        "version": "1.0.0",
+        "wheel": "columbus-1.0.0-py3-none-any.whl",
+        "clean_venv": true,
+        "unrelated_cwd": true,
+        "paths_with_spaces": true,
+        "global_search": true,
+        "skill_reinstall": "noop",
+        "polyglot_and_fallback": true,
+        "budgeted_context": true,
+        "graph_formats": 4,
+        "text_budget": true,
+        "receipt_continuation": true,
+        "telemetry_bytes_verified": true,
+        "named_sessions": true,
+        "no_argument_guide": true,
+        "standalone_release_install": true,
+        "local_edits_preserved": true,
+        "managed_files": 37,
+        "archive_files": 143,
+        "plan_status": "planned",
+        "python": "3.11.14"
+      },
+      {
+        "status": "passed",
+        "version": "1.0.0",
+        "wheel": "columbus-1.0.0-py3-none-any.whl",
+        "clean_venv": true,
+        "unrelated_cwd": true,
+        "paths_with_spaces": true,
+        "global_search": true,
+        "skill_reinstall": "noop",
+        "polyglot_and_fallback": true,
+        "budgeted_context": true,
+        "graph_formats": 4,
+        "text_budget": true,
+        "receipt_continuation": true,
+        "telemetry_bytes_verified": true,
+        "named_sessions": true,
+        "no_argument_guide": true,
+        "standalone_release_install": true,
+        "local_edits_preserved": true,
+        "managed_files": 37,
+        "archive_files": 143,
+        "plan_status": "planned",
+        "python": "3.14.7"
+      }
+    ],
+    "distribution_source_note": "These local clean-distribution checks preceded the Windows metadata and CLI stream corrections. Hosted validation below verifies the corrected artifact on all supported platforms."
+  },
+  "historical_observations": "Original inputs and results are byte-identical to commit d0f0585e33124be1e365c6674a937521e80311f6.",
+  "benchmark_data": "../benchmarks/1.0.0/charts.json",
+  "hosted_ci": {
+    "status": "passed",
+    "workflow": "https://github.com/ch4570/columbus/actions/workflows/distribution.yml",
+    "initial_attempt": {
+      "url": "https://github.com/ch4570/columbus/actions/runs/34099330548",
+      "commit": "928e704183b4d48d7cb42cb01b82bfe2b29e7f03",
+      "passed": [
+        "ubuntu-latest Python3.11",
+        "ubuntu-latest Python3.14",
+        "macos-latest Python3.11",
+        "macos-latest Python3.14"
+      ],
+      "failed": [
+        "windows-latest Python3.11",
+        "windows-latest Python3.14"
+      ],
+      "correction": "Use native Windows ChangeTime consistently; UTF-8/LF CLI streams and test fixtures; close fixture SQLite connections."
+    },
+    "corrected_attempt": {
+      "url": "https://github.com/ch4570/columbus/actions/runs/34101254679",
+      "commit": "f51ae32c6056038b15fc7e537f213ff077719c54",
+      "passed": [
+        "ubuntu-latest Python3.11",
+        "ubuntu-latest Python3.14",
+        "macos-latest Python3.11",
+        "macos-latest Python3.14",
+        "windows-latest Python3.11"
+      ],
+      "windows_314": "Current engine: 169 passed. Root: 48 passed, 1 POSIX-only test skipped. Frozen RepoAtlas 0.4 replay failed."
+    },
+    "url": "https://github.com/ch4570/columbus/actions/runs/34102393386",
+    "source_commit": "4f636670205d0b9a81bdcaa53cf744de325cd1c5",
+    "jobs": [
+      {
+        "name": "distribution (macos-latest, 3.14)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/ch4570/columbus/actions/runs/34102393386/job/101679556482",
+        "test_outcome": {
+          "discovered": 230,
+          "passed": 230,
+          "skipped_posix_only": 0,
+          "skipped_archived_replay": 0
+        }
+      },
+      {
+        "name": "distribution (windows-latest, 3.11)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/ch4570/columbus/actions/runs/34102393386/job/101679556492",
+        "test_outcome": {
+          "discovered": 230,
+          "passed": 229,
+          "skipped_posix_only": 1,
+          "skipped_archived_replay": 0
+        }
+      },
+      {
+        "name": "distribution (ubuntu-latest, 3.14)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/ch4570/columbus/actions/runs/34102393386/job/101679556601",
+        "test_outcome": {
+          "discovered": 230,
+          "passed": 230,
+          "skipped_posix_only": 0,
+          "skipped_archived_replay": 0
+        }
+      },
+      {
+        "name": "distribution (windows-latest, 3.14)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/ch4570/columbus/actions/runs/34102393386/job/101679556744",
+        "test_outcome": {
+          "discovered": 230,
+          "passed": 228,
+          "skipped_posix_only": 1,
+          "skipped_archived_replay": 1
+        }
+      },
+      {
+        "name": "distribution (ubuntu-latest, 3.11)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/ch4570/columbus/actions/runs/34102393386/job/101679556752",
+        "test_outcome": {
+          "discovered": 230,
+          "passed": 230,
+          "skipped_posix_only": 0,
+          "skipped_archived_replay": 0
+        }
+      },
+      {
+        "name": "distribution (macos-latest, 3.11)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/ch4570/columbus/actions/runs/34102393386/job/101679556794",
+        "test_outcome": {
+          "discovered": 230,
+          "passed": 230,
+          "skipped_posix_only": 0,
+          "skipped_archived_replay": 0
+        }
+      }
+    ]
+  },
+  "scope_note": "The hosted matrix verifies the final code and build inputs listed here. Local distribution checks before the Windows correction remain labeled. Later documentation-only changes and this evidence record affect archive membership; release assets have their own SHA256SUMS.txt and are rebuilt behind the same matrix gate.",
+  "skill_validation": {
+    "structure_and_managed_resources": "passed",
+    "official_quick_validate": "not run: optional PyYAML absent",
+    "host_auto_discovery": "not observed"
+  },
+  "focused_followup": {
+    "scope": "scripts/plot_benchmarks.py",
+    "tests": 9,
+    "result": "passed after SVG trailing-whitespace normalization",
+    "svg_dom_and_rendered_pixels": "unchanged; all six artifacts reproduced byte-identically"
+  },
+  "windows_correction_local_checks": {
+    "engine": 169,
+    "root": 49,
+    "harness": 12,
+    "result": "passed",
+    "regression_detection": "Prior Windows ctime comparison and cp1252 CLI output failed new regressions.",
+    "native_windows_api": "Passed on hosted Windows/Python3.11 and3.14, including current engine and clean distribution verification."
+  },
+  "historical_replay_exception": {
+    "platform": "win32",
+    "python": "3.14",
+    "scope": "Only byte-identical published RepoAtlas0.4 engine execution",
+    "skipped_tests": 1,
+    "integrity_and_current_engine_tests": "still execute",
+    "other_platforms": "archived replay still executes",
+    "note": "An excluded historical replay is not a passed execution."
+  },
+  "platform_specific_exception": {
+    "platform": "win32",
+    "scope": "POSIX interpreter alias ownership test",
+    "skipped_tests_per_windows_job": 1,
+    "reason": "This interpreter alias exists only on POSIX; covered on Ubuntu and macOS."
+  }
+}

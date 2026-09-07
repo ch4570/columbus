@@ -9,7 +9,7 @@ body:
     id: version
     attributes:
       label: Version and installation
-      description: RepoAtlas version and wheel, ZIP, pipx, uv, or source installation.
+      description: Columbus version and wheel, ZIP, pipx, uv, or source installation.
     validations:
       required: true
   - type: input

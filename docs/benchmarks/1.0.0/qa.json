@@ -1,0 +1,81 @@
+{
+  "schema": "columbus.benchmark-visual-qa/v1",
+  "status": "pass",
+  "inspected_at": "2026-09-07T08:31:47.745772+00:00",
+  "source_manifest_sha256": "8d1c9137174320e9d951d97bfe75a4bddafba9443a2e2301d350fd6d50448d27",
+  "generation": {
+    "renderer": "Matplotlib 3.11.0",
+    "python": "3.14.7",
+    "font": "DejaVu Sans; embedded SVG glyph paths"
+  },
+  "independent_svg_render": {
+    "renderer": "CairoSVG 2.9.0",
+    "output_width_pixels": 1800,
+    "status": "pass"
+  },
+  "inspections": [
+    {
+      "chart": "delivery",
+      "artifacts": [
+        "docs/assets/benchmark-delivery.svg",
+        "docs/assets/benchmark-delivery.png"
+      ],
+      "png": "Complete image visually inspected",
+      "svg": "Final SVG independently rasterized and complete image visually inspected",
+      "result": "No clipping, overlap, broken glyphs, unreadable labels or missing units",
+      "axis_origin": 0,
+      "verification": "Final SVG and PNG hashes exactly match the previously visually inspected artifacts"
+    },
+    {
+      "chart": "agent-tokens",
+      "artifacts": [
+        "docs/assets/benchmark-agent-tokens.svg",
+        "docs/assets/benchmark-agent-tokens.png"
+      ],
+      "png": "Complete image visually inspected",
+      "svg": "Final SVG independently rasterized and complete image visually inspected",
+      "result": "No clipping, overlap, broken glyphs, unreadable labels or missing units",
+      "axis_origin": 0,
+      "verification": "Final SVG and PNG hashes exactly match the previously visually inspected artifacts"
+    },
+    {
+      "chart": "incremental",
+      "artifacts": [
+        "docs/assets/benchmark-incremental.svg",
+        "docs/assets/benchmark-incremental.png"
+      ],
+      "png": "Complete image visually inspected",
+      "svg": "Final SVG independently rasterized and complete image visually inspected",
+      "result": "No clipping, overlap, broken glyphs, unreadable labels or missing units",
+      "axis_origin": 0,
+      "verification": "Fresh final PNG and independent SVG raster visually inspected after new timing capture"
+    }
+  ],
+  "evidence_checks": {
+    "data_contract_tests": 9,
+    "tests_passed": 9,
+    "byte_identical_regenerated_artifacts": 6,
+    "engine_fixture_hashes_match_current_source": true,
+    "local_document_links_valid": true
+  },
+  "notes": [
+    "Publication figures contain only measured values from the linked JSON.",
+    "Historical model data remain labeled RepoAtlas 0.4.0 and retain citation failures and token regression.",
+    "SVG cross-rendering was verified with CairoSVG; no browser-compatibility claim is made."
+  ],
+  "svg_format": {
+    "source_trailing_whitespace_lines": 0,
+    "generator_sha256": "19d446f4242651e952d32c267a603f2e76d5593ddf5bba3c997dcd2d46fc3641"
+  },
+  "final_capture_verification": {
+    "capture_sha256": "197069fa38507a05a1db1abdcd3a43efea7b075e91e45ba28a660b7134634874",
+    "engine_files_matching_current_source": 19,
+    "fixture_files_matching_current_source": 12,
+    "new_model_calls": 0,
+    "cli_delivery_values_unchanged": true,
+    "delivery_and_historical_artifacts_byte_unchanged": 4,
+    "incremental_png_and_independent_svg_raster_visually_inspected": "pass",
+    "all_regenerated_artifacts_byte_identical": 6,
+    "focused_tests_passed": 9
+  }
+}
