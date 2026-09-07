@@ -1,0 +1,109 @@
+{
+  "schema": "columbus.exploration-cases/v1",
+  "cases": [
+    {
+      "id": "django-html-callers",
+      "mode": "caller-enumeration",
+      "question": "Find every production Python function or method under django/ containing a syntactic direct call to django.utils.html.conditional_escape in this checkout. Explain what each caller escapes and the relevant conditions or early returns. Cover every direct call when a caller has several. Distinguish a direct callee expression from passing the function as an argument to another function; describe such higher-order use if it occurs within a qualifying caller, but do not list higher-order-only or transitive callers. Exclude tests. Distinguish source-level calls from runtime reachability.",
+      "findings": [
+        {
+          "id": "AdminField.label_tag",
+          "path": "django/contrib/admin/helpers.py",
+          "marker": "conditional_escape(",
+          "call_lines": [
+            179
+          ]
+        },
+        {
+          "id": "AdminReadonlyField.contents",
+          "path": "django/contrib/admin/helpers.py",
+          "marker": "conditional_escape(",
+          "call_lines": [
+            304
+          ]
+        },
+        {
+          "id": "Template.render",
+          "path": "django/template/backends/dummy.py",
+          "marker": "conditional_escape(",
+          "call_lines": [
+            47
+          ]
+        },
+        {
+          "id": "render_value_in_context",
+          "path": "django/template/base.py",
+          "marker": "conditional_escape(",
+          "call_lines": [
+            1061
+          ]
+        },
+        {
+          "id": "escape_filter",
+          "path": "django/template/defaultfilters.py",
+          "marker": "conditional_escape(",
+          "call_lines": [
+            456
+          ]
+        },
+        {
+          "id": "escapeseq",
+          "path": "django/template/defaultfilters.py",
+          "marker": "conditional_escape(",
+          "call_lines": [
+            466
+          ]
+        },
+        {
+          "id": "join",
+          "path": "django/template/defaultfilters.py",
+          "marker": "conditional_escape(",
+          "call_lines": [
+            611,
+            611
+          ]
+        },
+        {
+          "id": "URLNode.render",
+          "path": "django/template/defaulttags.py",
+          "marker": "conditional_escape(",
+          "call_lines": [
+            490
+          ]
+        },
+        {
+          "id": "SimpleNode.render",
+          "path": "django/template/library.py",
+          "marker": "conditional_escape(",
+          "call_lines": [
+            329
+          ]
+        },
+        {
+          "id": "StaticNode.render",
+          "path": "django/templatetags/static.py",
+          "marker": "conditional_escape(",
+          "call_lines": [
+            118
+          ]
+        },
+        {
+          "id": "format_html",
+          "path": "django/utils/html.py",
+          "marker": "conditional_escape(",
+          "call_lines": [
+            144
+          ]
+        },
+        {
+          "id": "format_html_join",
+          "path": "django/utils/html.py",
+          "marker": "conditional_escape(",
+          "call_lines": [
+            163
+          ]
+        }
+      ]
+    }
+  ]
+}
