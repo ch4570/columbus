@@ -1,0 +1,12 @@
+{
+  "installed_skill_matches": true,
+  "managed_files_verified": 43,
+  "linked_references_exist": true,
+  "skill_sha256": "7d3d35f2580c104937411f4564a305d85133d9841b687f76aa75eea6488b60db",
+  "skill_bytes": 3546,
+  "neighbors_text_bytes": 6563,
+  "neighbors_text_sha256": "b1253c008e29ddf09f3d3adc659beef6b4078a0f2f8c4058b07fbbb6f3faf4e8",
+  "reviewed_call_sites_equal": true,
+  "call_sites": 23,
+  "callers": 7
+}

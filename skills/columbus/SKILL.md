@@ -1,16 +1,16 @@
 ---
 name: columbus
-description: Navigate repository structure, dependencies and impact with AST graphs and bounded source context; store or search portable graph archives. Use for graph-backed exploration or Columbus installation/updates. For a known literal or file lookup alone, use ordinary source search without loading this skill.
+description: Find direct callers, repository structure, dependencies and impact with AST graphs and bounded source context; store or search portable graph archives. Use for graph-backed exploration or Columbus installation/updates. For a known literal or file lookup alone, use ordinary source search without loading this skill.
 ---
 
 # Columbus
 
-Choose the smallest useful evidence. A known literal/path usually needs only `rg` and a bounded source read. Use the graph for unfamiliar structure or connected declarations; do not add a graph step to every task.
+Choose the smallest useful evidence. A literal/path lookup alone usually needs only `rg` and a bounded source read. Finding callers is a relationship task even when the target name is known: use incoming call edges to narrow candidates before broad source reading. Use the graph for unfamiliar structure or connected declarations.
 
 Set `REPO` to the actual worktree. Use the installed `columbus` command, or the dedicated interpreter with `SKILL_DIR/scripts/columbus.py`. Bootstrap Python is `REPO/.columbus/runtime/bin/python` (`Scripts/python.exe` on Windows). Commands below abbreviate this entrypoint; add `--repo "$REPO"`.
 
 1. Start with `search IDENTIFIER --format text --limit 5`, or `map --format text --budget-tokens 2000` for orientation. Use one or two code identifiers. Narrow with exact IDs, `--path 'src/*'` or `--language`. If results are empty, check coverage once, then use source search.
-2. For connections, use `context ID --mode signatures --format text --budget-tokens 1500`, `neighbors ID` or `impact ID`. Batch independent lookups when useful.
+2. For direct callers, copy the complete ID from search, including its `:function`/`:method` suffix, then run `neighbors 'ID' --direction in --hops 1 --kinds calls --limit 50 --format text`. Group edges by source ID; a nested function is its own caller. Check `truncated` and semantic/partial counts. Verify import binding and coverage with focused source search, then read the returned `@path:line` call sites for citations. A caller request does not require whole caller bodies. For other connections, use `context ID --mode signatures --format text --budget-tokens 1500` or `impact ID` for transitive impact.
 3. Fetch source with `explore ID` (text, 2,000 estimated-token default), or `symbol ID --max-lines 60 --format text`. For repeated snippets, `explore ID --session TASK` avoids resending delivered ranges. Reuse a session only while this agent retains that source; use a new name after context loss or handoff.
 4. Before editing, verify current source and inspect fidelity, partial/unresolved evidence, hashes and truncation. Missing edges do not prove independence. After edits/tests, use `sync --summary`; add `--verify-content` for full hashing.
 

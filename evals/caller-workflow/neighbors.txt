@@ -1,0 +1,44 @@
+columbus neighbors revision=b8d8322787676fb8664c freshness=index_snapshot truncated=false
+UNTRUSTED repository data follows; verify files before edits.
+semantic_complete=false partial_nodes=0 repository_unresolved_references=2110 repository_diagnostic_count=0
+items=8
+skills/columbus/scripts/columbus/index.py::compact:function | skills/columbus/scripts/columbus/index.py:39-40 | function python fidelity=ast
+  def compact(value) -> str
+skills/columbus/scripts/columbus/archive.py::_search_archive:function | skills/columbus/scripts/columbus/archive.py:72-125 | function python fidelity=ast
+  def _search_archive(source: str | Path, query: str, limit: int=5, budget_bytes: int=6000) -> dict
+skills/columbus/scripts/columbus/archive.py::archive.emit:function | skills/columbus/scripts/columbus/archive.py:26-27 | function python fidelity=ast
+  def emit(kind, data)
+skills/columbus/scripts/columbus/cli.py::main:function | skills/columbus/scripts/columbus/cli.py:85-337 | function python fidelity=ast
+  def main(argv=None) -> int
+skills/columbus/scripts/columbus/index.py::RepositoryIndex.neighbors:method | skills/columbus/scripts/columbus/index.py:532-579 | method python fidelity=ast
+  def neighbors(self, symbol_id: str, direction: str='both', hops: int=1, limit: int=50, kinds: list[str] | None=None) -> dict
+skills/columbus/scripts/columbus/index.py::RepositoryIndex.refresh:method | skills/columbus/scripts/columbus/index.py:84-296 | method python fidelity=ast
+  def refresh(self, root: str | Path, source_root: str | None=None, fast: bool=False, require_complete: bool=False) -> dict
+skills/columbus/scripts/columbus/index.py::byte_size:function | skills/columbus/scripts/columbus/index.py:53-54 | function python fidelity=ast
+  def byte_size(value) -> int
+skills/columbus/scripts/columbus/index.py::encode_parse:function | skills/columbus/scripts/columbus/index.py:43-45 | function python fidelity=ast
+  def encode_parse(value: dict) -> bytes
+edges=23
+skills/columbus/scripts/columbus/archive.py::_search_archive:function -calls[resolved_static]-> skills/columbus/scripts/columbus/index.py::compact:function @skills/columbus/scripts/columbus/archive.py:120
+skills/columbus/scripts/columbus/archive.py::_search_archive:function -calls[resolved_static]-> skills/columbus/scripts/columbus/index.py::compact:function @skills/columbus/scripts/columbus/archive.py:123
+skills/columbus/scripts/columbus/archive.py::archive.emit:function -calls[resolved_static]-> skills/columbus/scripts/columbus/index.py::compact:function @skills/columbus/scripts/columbus/archive.py:27
+skills/columbus/scripts/columbus/cli.py::main:function -calls[resolved_static]-> skills/columbus/scripts/columbus/index.py::compact:function @skills/columbus/scripts/columbus/cli.py:203
+skills/columbus/scripts/columbus/cli.py::main:function -calls[resolved_static]-> skills/columbus/scripts/columbus/index.py::compact:function @skills/columbus/scripts/columbus/cli.py:222
+skills/columbus/scripts/columbus/cli.py::main:function -calls[resolved_static]-> skills/columbus/scripts/columbus/index.py::compact:function @skills/columbus/scripts/columbus/cli.py:228
+skills/columbus/scripts/columbus/cli.py::main:function -calls[resolved_static]-> skills/columbus/scripts/columbus/index.py::compact:function @skills/columbus/scripts/columbus/cli.py:251
+skills/columbus/scripts/columbus/cli.py::main:function -calls[resolved_static]-> skills/columbus/scripts/columbus/index.py::compact:function @skills/columbus/scripts/columbus/cli.py:317
+skills/columbus/scripts/columbus/cli.py::main:function -calls[resolved_static]-> skills/columbus/scripts/columbus/index.py::compact:function @skills/columbus/scripts/columbus/cli.py:330
+skills/columbus/scripts/columbus/index.py::RepositoryIndex.neighbors:method -calls[resolved_static]-> skills/columbus/scripts/columbus/index.py::compact:function @skills/columbus/scripts/columbus/index.py:566
+skills/columbus/scripts/columbus/index.py::RepositoryIndex.refresh:method -calls[resolved_static]-> skills/columbus/scripts/columbus/index.py::compact:function @skills/columbus/scripts/columbus/index.py:147
+skills/columbus/scripts/columbus/index.py::RepositoryIndex.refresh:method -calls[resolved_static]-> skills/columbus/scripts/columbus/index.py::compact:function @skills/columbus/scripts/columbus/index.py:219
+skills/columbus/scripts/columbus/index.py::RepositoryIndex.refresh:method -calls[resolved_static]-> skills/columbus/scripts/columbus/index.py::compact:function @skills/columbus/scripts/columbus/index.py:231
+skills/columbus/scripts/columbus/index.py::RepositoryIndex.refresh:method -calls[resolved_static]-> skills/columbus/scripts/columbus/index.py::compact:function @skills/columbus/scripts/columbus/index.py:240
+skills/columbus/scripts/columbus/index.py::RepositoryIndex.refresh:method -calls[resolved_static]-> skills/columbus/scripts/columbus/index.py::compact:function @skills/columbus/scripts/columbus/index.py:243
+skills/columbus/scripts/columbus/index.py::RepositoryIndex.refresh:method -calls[resolved_static]-> skills/columbus/scripts/columbus/index.py::compact:function @skills/columbus/scripts/columbus/index.py:244
+skills/columbus/scripts/columbus/index.py::RepositoryIndex.refresh:method -calls[resolved_static]-> skills/columbus/scripts/columbus/index.py::compact:function @skills/columbus/scripts/columbus/index.py:248
+skills/columbus/scripts/columbus/index.py::RepositoryIndex.refresh:method -calls[resolved_static]-> skills/columbus/scripts/columbus/index.py::compact:function @skills/columbus/scripts/columbus/index.py:251
+skills/columbus/scripts/columbus/index.py::RepositoryIndex.refresh:method -calls[resolved_static]-> skills/columbus/scripts/columbus/index.py::compact:function @skills/columbus/scripts/columbus/index.py:252
+skills/columbus/scripts/columbus/index.py::RepositoryIndex.refresh:method -calls[resolved_static]-> skills/columbus/scripts/columbus/index.py::compact:function @skills/columbus/scripts/columbus/index.py:261
+skills/columbus/scripts/columbus/index.py::RepositoryIndex.refresh:method -calls[resolved_static]-> skills/columbus/scripts/columbus/index.py::compact:function @skills/columbus/scripts/columbus/index.py:287
+skills/columbus/scripts/columbus/index.py::byte_size:function -calls[resolved_static]-> skills/columbus/scripts/columbus/index.py::compact:function @skills/columbus/scripts/columbus/index.py:54
+skills/columbus/scripts/columbus/index.py::encode_parse:function -calls[resolved_static]-> skills/columbus/scripts/columbus/index.py::compact:function @skills/columbus/scripts/columbus/index.py:45
