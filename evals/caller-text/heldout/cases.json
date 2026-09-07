@@ -1,0 +1,38 @@
+{
+  "schema": "columbus.exploration-cases/v1",
+  "cases": [
+    {
+      "id": "read-stable-direct-callers",
+      "mode": "caller-enumeration",
+      "question": "Find every function or method in this frozen package that directly calls read_stable, defined in skills/columbus/scripts/columbus/sync_state.py. Resolve explicit imports and lexical function ownership, exclude indirect callers, and explain each direct caller.",
+      "findings": [
+        {
+          "id": "RepositoryIndex.refresh",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "marker": "read_stable(",
+          "call_lines": [
+            139,
+            170
+          ]
+        },
+        {
+          "id": "RepositoryIndex.status",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "marker": "read_stable(",
+          "call_lines": [
+            317,
+            327
+          ]
+        },
+        {
+          "id": "RepositoryIndex._source",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "marker": "read_stable(",
+          "call_lines": [
+            441
+          ]
+        }
+      ]
+    }
+  ]
+}
