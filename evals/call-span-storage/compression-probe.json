@@ -1,0 +1,24 @@
+{
+  "gzip": {
+    "bytes": 10726317,
+    "decoded_sha256": "4e1595639a67372a11e7889fa0dfc275b58632e97c261dc9bb80b3143a33aa36",
+    "decoded_bytes": 199046324,
+    "read_hash_seconds": 0.18079995800508186
+  },
+  "export_seconds": 6.504136625007959,
+  "xz-3": {
+    "bytes": 8592976,
+    "transcode_seconds": 3.178712833992904,
+    "decoded_sha256": "4e1595639a67372a11e7889fa0dfc275b58632e97c261dc9bb80b3143a33aa36",
+    "decoded_bytes": 199046324,
+    "read_hash_seconds": 0.656326625001384
+  },
+  "xz-6": {
+    "bytes": 8030456,
+    "transcode_seconds": 16.734575166992727,
+    "decoded_sha256": "4e1595639a67372a11e7889fa0dfc275b58632e97c261dc9bb80b3143a33aa36",
+    "decoded_bytes": 199046324,
+    "read_hash_seconds": 0.6427443339925958
+  },
+  "scope": "Single host, warm/unflushed caches, fixed order; transcode includes gzip decoding; read timing includes SHA-256. Production format unchanged."
+}
