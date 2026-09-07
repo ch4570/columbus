@@ -1,0 +1,12 @@
+{
+  "before_commit": "50648a1c7576b73cdec4f88be716d7ed9b144a2c",
+  "before_bytes": 7227,
+  "after_bytes": 2966,
+  "reduction_pct": 58.96,
+  "after_sha256": "cf182e9e6b214858378805c1d616396db8c2bb15e937f91a582de9e941755e1d",
+  "installed_entry_identical": true,
+  "installed_links_resolve": true,
+  "managed_file_checksums_match": true,
+  "managed_files": 43,
+  "model_token_reduction_measured": false
+}

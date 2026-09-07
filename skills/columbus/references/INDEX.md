@@ -4,6 +4,10 @@ Load only the topic required by the task.
 
 | Topic | Read when |
 | --- | --- |
+| [Evidence principles](principles.md) | Source trust, freshness and retrieval scope |
+| [Complete archive](archive.md) | Compact complete graph storage and source-free declaration queries |
+| [AST trees/hooks](portable-ast.md) | Parent-first JSONL and pre-commit integration |
+| [Operations](operations.md) | Installation, visual exports and MCP |
 | [Polyglot](polyglot.md) | Language fidelity, custom extensions, fallback and exclusions |
 | [Agent context](agent-context.md) | Token estimates, progressive retrieval and repeated evidence |
 | [Index sync](index-sync.md) | Incremental freshness and branch/worktree changes |
