@@ -620,6 +620,7 @@ class _Resolver:
         if len(facts) != len(literals):
             return set(), "generic argument facts unavailable"
         anchors, values, handled = {}, [], set()
+        array_vararg_index = None
         for i,(literal,fact) in enumerate(zip(literals,facts)):
             parameter = parameters[min(i,len(parameters)-1)].removesuffix("...")
             if parameter in used:
@@ -627,6 +628,10 @@ class _Resolver:
                 if actual is None:
                     return set(), "generic value type requires semantic analysis"
                 values.append((parameter,actual));handled.add(i)
+                if (i == len(parameters) - 1 and len(facts) == len(parameters)
+                        and parameters[-1].endswith('...') and actual.startswith('array:')
+                        and not actual[6:].startswith('primitive:')):
+                    array_vararg_index = len(values) - 1
                 continue
             match = re.fullmatch(r"([\w.$]+)<([\w$]+)>",parameter)
             if match and match[2] in used:
@@ -648,6 +653,13 @@ class _Resolver:
                 anchors[match[2]]=concrete;handled.add(i)
             elif any(re.search(r"\b"+re.escape(v)+r"\b",parameter) for v in used):
                 return set(), "generic parameter shape requires semantic analysis"
+        # An applicable fixed-arity array argument wins before target-type inference.
+        # Primitive components cannot instantiate T, so primitive arrays stay values.
+        if array_vararg_index is not None:
+            variable, actual = values[array_vararg_index]
+            component = actual[6:]
+            if variable not in anchors or self.reference_assignable(component, anchors[variable]):
+                values[array_vararg_index] = (variable, component)
         context = ref.get("expected_type", "")
         returned = target.get("return_type", "")
         if context and context != "var":

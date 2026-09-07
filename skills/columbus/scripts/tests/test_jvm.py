@@ -9,6 +9,19 @@ from columbus.jvm import parse_jvm, resolve_jvm
 
 
 class JVMTests(unittest.TestCase):
+    def test_generic_varargs_array_uses_fixed_arity_before_result_context(self):
+        for result,expected in [('String[]',True),('String[][]',False),('Object[]',True)]:
+            file=self.parsed('C.java','class C { static <T> T[] hit(T... x) { return x; } void run() { '+result+' value=hit(new String[0]); } }')
+            resolve_jvm([file])
+            call,=[r for r in file['references'] if r['member']=='hit']
+            self.assertEqual(call['resolved'],expected)
+        for token,value,expected in [('String','new String[0]',True),('String[]','new String[0]',True),
+                                     ('Object','new int[0]',True),('String','new Object[0]',False)]:
+            file=self.parsed('C.java','class C { static <T> void hit(Class<T> type,T... x) {} void run() { hit('+token+'.class,'+value+'); } }')
+            resolve_jvm([file])
+            call,=[r for r in file['references'] if r['member']=='hit']
+            self.assertEqual(call['resolved'],expected)
+
     def test_array_class_token_identity_dimensions_and_shadowing(self):
         for token,value,expected in [('int[]','new int[0]',True),('int[]','new Integer[0]',False),
                 ('Integer[]','new int[0]',False),('int[][]','new int[0][]',True),
