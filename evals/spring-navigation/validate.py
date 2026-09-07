@@ -26,5 +26,5 @@ for i in range(len(findings)):
 result={'source_manifest_equal':True,'runtime_manifest_equal':True,'positive_citation_control':True,
         'negative_citation_controls':len(findings),'index':o.live_index_preflight(a.observation,e),
         'semantic_grading':'Manual review against all PLAN.md criteria remains mandatory for both answers.',
-        'model_trial_started':False}
+        'model_trial_started':any((a.observation/'trials').glob('*/process.json'))}
 a.output.write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))

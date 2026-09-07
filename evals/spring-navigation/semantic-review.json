@@ -1,0 +1,96 @@
+{
+  "baseline": {
+    "semantic_passed": true,
+    "citation_passed": false,
+    "accepted_quality": false,
+    "findings": [
+      {
+        "id": "resolver-precedence",
+        "semantic_passed": true,
+        "review": "Correct first non-null custom resolver precedence and externally defined resource behavior."
+      },
+      {
+        "id": "location-selection",
+        "semantic_passed": true,
+        "review": "Correct branch order, both classpath prefixes, URL/file selection, malformed-URL fallback and overridable path hook."
+      },
+      {
+        "id": "path-hook",
+        "semantic_passed": true,
+        "review": "Correct default ClassPathContextResource construction and protected override point."
+      },
+      {
+        "id": "context-inheritance",
+        "semantic_passed": true,
+        "review": "Correct ClassPathResource inheritance and absence of stream override in the nested class."
+      },
+      {
+        "id": "classpath-stream",
+        "semantic_passed": true,
+        "review": "Correct class/classloader/system branches and null-to-FileNotFoundException behavior."
+      },
+      {
+        "id": "multi-classpath-stream",
+        "semantic_passed": true,
+        "review": "Correct zero/one/many behavior, prior-stream cleanup, suppressed close exceptions and original failure rethrow."
+      },
+      {
+        "id": "file-url-inheritance",
+        "semantic_passed": true,
+        "review": "Inheritance explanation is correct; its quote stitches the declaration/field to a constructor across omitted Javadoc and extends beyond the cited range, so the separate citation gate fails."
+      },
+      {
+        "id": "url-stream",
+        "semantic_passed": true,
+        "review": "Correct connection customization, HTTP disconnect/rethrow and uncaught pre-try failures."
+      }
+    ]
+  },
+  "columbus": {
+    "semantic_passed": true,
+    "citation_passed": false,
+    "accepted_quality": false,
+    "findings": [
+      {
+        "id": "resolver-precedence",
+        "semantic_passed": true,
+        "review": "Correct first non-null custom resolver precedence and externally defined resource behavior."
+      },
+      {
+        "id": "location-selection",
+        "semantic_passed": true,
+        "review": "Correct branch order, both classpath prefixes, URL/file selection, malformed-URL fallback and overridable path hook."
+      },
+      {
+        "id": "path-hook",
+        "semantic_passed": true,
+        "review": "Correct default ClassPathContextResource construction and protected override point."
+      },
+      {
+        "id": "context-inheritance",
+        "semantic_passed": true,
+        "review": "Correct ClassPathResource inheritance and absence of stream override in the nested class."
+      },
+      {
+        "id": "classpath-stream",
+        "semantic_passed": true,
+        "review": "Correct class/classloader/system branches and null-to-FileNotFoundException behavior."
+      },
+      {
+        "id": "multi-classpath-stream",
+        "semantic_passed": true,
+        "review": "Correct zero/one/many behavior, prior-stream cleanup, suppressed close exceptions and original failure rethrow."
+      },
+      {
+        "id": "file-url-inheritance",
+        "semantic_passed": true,
+        "review": "Inheritance explanation is correct; its quote stitches the declaration/field to a constructor across omitted Javadoc and extends beyond the cited range, so the separate citation gate fails."
+      },
+      {
+        "id": "url-stream",
+        "semantic_passed": true,
+        "review": "Explanation correctly describes customization, failure propagation and HTTP disconnect; quote omits the intervening comment and fails the separate verbatim-citation gate."
+      }
+    ]
+  }
+}

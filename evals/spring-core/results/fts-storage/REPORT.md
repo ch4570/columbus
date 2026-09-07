@@ -20,3 +20,5 @@ Both parser engine suites pass 209 tests; root tests pass 53. The final 20-test 
 The portable complete graph archive remains a separate repository artifact. This storage change does not establish semantic completeness or actual model-token savings. One-file changes still globally relink.
 
 A follow-up concurrency check keeps a real schema-3 reader transaction open while another connection completes migration. That reader retains schema 3 and identical FTS document rows; a new reader observes schema 4 and unchanged search results. The 20-test sync suite passes in both parser environments with this assertion. This covers overlapping read/write connections in one process, not arbitrary concurrent writers or every platform.
+
+At 8932a35, hosted validation completed successfully: six ordinary distribution jobs and thirteen candidate-build/aggregate-consumer jobs. Raw [ordinary](platform/production.json) and [candidate](platform/candidate.json) receipts retain the commit and job results. The subsequent overlapping-reader assertion was added locally after these runs; its two local sync receipts are separate evidence.
