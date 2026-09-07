@@ -18,6 +18,9 @@ flowchart LR
 Use Python 3.11+ and a Columbus revision containing these commands (this source change is newer than the v1.0.0 release assets). Install the wheel built from that revision into an isolated environment, or use the portable ZIP's `install.py --repo PROJECT`. Run `columbus init --repo PROJECT` to install the managed agent skill. Ignore `.columbus/` in the target repository. The source installation and wheel both include the same engine; the target does not need to become a Python project.
 
 ```sh
+python3.11 -m venv /path/to/columbus-runtime
+/path/to/columbus-runtime/bin/python -m pip install "git+https://github.com/ch4570/columbus@d45e09c9b35c5e52746cc723c2f2fd5a8dcf0bbc"
+# Activate that environment, then:
 columbus init --repo /path/to/project
 columbus tree --repo /path/to/project --label DefaultResourceLoader --limit 50
 columbus context EXACT_ID --repo /path/to/project --budget-tokens 2000
@@ -29,12 +32,12 @@ The tree organizes declarations, not arbitrary token windows. `context ID` reads
 
 ## pre-commit framework
 
-Run pre-commit itself under Python 3.11+. Add this entry to the target's existing `.pre-commit-config.yaml`, replacing `PINNED_COMMIT_WITH_HOOK` with the reviewed commit containing `.pre-commit-hooks.yaml` (v1.0.0 does not contain it):
+Run pre-commit itself under Python 3.11+. Add this entry to the target's existing `.pre-commit-config.yaml`, using the pinned implementation below (v1.0.0 does not contain this hook):
 
 ```yaml
 repos:
   - repo: https://github.com/ch4570/columbus
-    rev: PINNED_COMMIT_WITH_HOOK
+    rev: d45e09c9b35c5e52746cc723c2f2fd5a8dcf0bbc
     hooks:
       - id: columbus-sync
         # Optional: reject parse diagnostics and keep the prior snapshot.
