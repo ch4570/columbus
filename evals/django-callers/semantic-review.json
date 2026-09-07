@@ -1,0 +1,136 @@
+{
+  "baseline": {
+    "passed": true,
+    "reviewed_against": "SOURCE-REVIEW.md at 292d913",
+    "findings": [
+      {
+        "id": "HttpResponseRedirectBase.__init__",
+        "passed": true,
+        "note": "Conversion purpose, required fields and applicable branch conditions agree with reviewed source."
+      },
+      {
+        "id": "HttpRequest._get_full_path",
+        "passed": true,
+        "note": "Conversion purpose, required fields and applicable branch conditions agree with reviewed source."
+      },
+      {
+        "id": "HttpRequest.build_absolute_uri",
+        "passed": true,
+        "note": "Conversion purpose, required fields and applicable branch conditions agree with reviewed source."
+      },
+      {
+        "id": "Stylesheet.url",
+        "passed": true,
+        "note": "Conversion purpose, required fields and applicable branch conditions agree with reviewed source."
+      },
+      {
+        "id": "Stylesheet.__str__",
+        "passed": true,
+        "note": "Conversion purpose, required fields and applicable branch conditions agree with reviewed source."
+      },
+      {
+        "id": "SyndicationFeed.__init__",
+        "passed": true,
+        "note": "Conversion purpose, required fields and applicable branch conditions agree with reviewed source."
+      },
+      {
+        "id": "SyndicationFeed.add_item",
+        "passed": true,
+        "note": "Conversion purpose, required fields and applicable branch conditions agree with reviewed source."
+      },
+      {
+        "id": "Enclosure.__init__",
+        "passed": true,
+        "note": "Conversion purpose, required fields and applicable branch conditions agree with reviewed source."
+      },
+      {
+        "id": "PrefixNode.handle_simple",
+        "passed": true,
+        "note": "Conversion purpose, required fields and applicable branch conditions agree with reviewed source."
+      },
+      {
+        "id": "iriencode",
+        "passed": true,
+        "note": "Conversion purpose, required fields and applicable branch conditions agree with reviewed source."
+      },
+      {
+        "id": "FlatPage.get_absolute_url",
+        "passed": true,
+        "note": "Conversion purpose, required fields and applicable branch conditions agree with reviewed source."
+      },
+      {
+        "id": "add_domain",
+        "passed": true,
+        "note": "Conversion purpose, required fields and applicable branch conditions agree with reviewed source."
+      }
+    ],
+    "citation_gate_passed": true
+  },
+  "columbus": {
+    "passed": true,
+    "reviewed_against": "SOURCE-REVIEW.md at 292d913",
+    "findings": [
+      {
+        "id": "FlatPage.get_absolute_url",
+        "passed": true,
+        "note": "Conversion purpose, required fields and applicable branch conditions agree with reviewed source."
+      },
+      {
+        "id": "add_domain",
+        "passed": true,
+        "note": "Conversion purpose, required fields and applicable branch conditions agree with reviewed source."
+      },
+      {
+        "id": "HttpRequest._get_full_path",
+        "passed": true,
+        "note": "Conversion purpose, required fields and applicable branch conditions agree with reviewed source."
+      },
+      {
+        "id": "HttpRequest.build_absolute_uri",
+        "passed": true,
+        "note": "Conversion purpose, required fields and applicable branch conditions agree with reviewed source."
+      },
+      {
+        "id": "HttpResponseRedirectBase.__init__",
+        "passed": true,
+        "note": "Conversion purpose, required fields and applicable branch conditions agree with reviewed source."
+      },
+      {
+        "id": "iriencode",
+        "passed": true,
+        "note": "Conversion purpose, required fields and applicable branch conditions agree with reviewed source."
+      },
+      {
+        "id": "PrefixNode.handle_simple",
+        "passed": true,
+        "note": "Conversion purpose, required fields and applicable branch conditions agree with reviewed source."
+      },
+      {
+        "id": "Stylesheet.url",
+        "passed": true,
+        "note": "Conversion purpose, required fields and applicable branch conditions agree with reviewed source."
+      },
+      {
+        "id": "Stylesheet.__str__",
+        "passed": true,
+        "note": "Conversion purpose, required fields and applicable branch conditions agree with reviewed source."
+      },
+      {
+        "id": "SyndicationFeed.__init__",
+        "passed": true,
+        "note": "Conversion purpose, required fields and applicable branch conditions agree with reviewed source."
+      },
+      {
+        "id": "SyndicationFeed.add_item",
+        "passed": true,
+        "note": "Conversion purpose, required fields and applicable branch conditions agree with reviewed source."
+      },
+      {
+        "id": "Enclosure.__init__",
+        "passed": true,
+        "note": "Conversion purpose, required fields and applicable branch conditions agree with reviewed source."
+      }
+    ],
+    "citation_gate_passed": true
+  }
+}

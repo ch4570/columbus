@@ -1,0 +1,619 @@
+{
+  "baseline": {
+    "schema": "columbus.exploration-observation/v1",
+    "case": "django-iri-callers",
+    "condition": "baseline",
+    "repeat": 1,
+    "model_requested": "gpt-5.6-sol",
+    "effort_requested": "xhigh",
+    "elapsed_seconds": 180.722,
+    "return_code": 0,
+    "timed_out": false,
+    "source_unchanged": true,
+    "usage": {
+      "input_tokens": 69777,
+      "cached_input_tokens": 51072,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 5280,
+      "reasoning_output_tokens": 2342,
+      "uncached_input_tokens": 18705
+    },
+    "commands": [
+      {
+        "command": "/bin/zsh -lc \"rg -n --glob '*.py' 'iri_to_uri' django\"",
+        "exit_code": 0,
+        "output_bytes": 1945,
+        "output_sha256": "38853f8d8be9088c58c0c9e3f294fad6fc43db157df72dee8cfe494c69601cc7"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/flatpages/models.py | sed -n '30,60p'\"",
+        "exit_code": 0,
+        "output_bytes": 776,
+        "output_sha256": "6ce50ce7974789737dbe1f187c54315a72d5c82e2d102ee5433ba9bfdb0cd960"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/http/response.py | sed -n '600,650p'\"",
+        "exit_code": 0,
+        "output_bytes": 2570,
+        "output_sha256": "25085778cdc6e2dc86eecb0b5665e120146e0e7064b985d45b0f24579fbf43ce"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/template/defaultfilters.py | sed -n '205,235p'\"",
+        "exit_code": 0,
+        "output_bytes": 1081,
+        "output_sha256": "12e61348d8622e42a3cbded4a5af9df600745cc9e5d81e46e10bd8976135449e"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/utils/feedgenerator.py | sed -n '60,215p'\"",
+        "exit_code": 0,
+        "output_bytes": 5899,
+        "output_sha256": "ceb4e53bba85b6319f780cca4555af1a014c644b2492a07129305555ea3a395c"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/http/request.py | sed -n '190,310p'\"",
+        "exit_code": 0,
+        "output_bytes": 5771,
+        "output_sha256": "ab21b508aea3caf58dc047b3df7253b8ec33e78833cdf91732a4424d9a524367"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/utils/feedgenerator.py | sed -n '260,305p'\"",
+        "exit_code": 0,
+        "output_bytes": 1958,
+        "output_sha256": "5cc89f73823976909ff258bb90699fb596ee2002f780eaef207e9c875037a25d"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/syndication/views.py | sed -n '1,40p'\"",
+        "exit_code": 0,
+        "output_bytes": 1685,
+        "output_sha256": "87365baa6664e23911ded8e00d4ed80a53009532f994905469d536d8846d499d"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/templatetags/static.py | sed -n '25,65p'\"",
+        "exit_code": 0,
+        "output_bytes": 1468,
+        "output_sha256": "66554eca11e101d1e66717d380b4480772caf2cb8cb4ebb1b6b7bd74c57032d8"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/http/response.py | sed -n '1,30p'\"",
+        "exit_code": 0,
+        "output_bytes": 1070,
+        "output_sha256": "2f840c009c4db30fa5a88f52b26798e0cba7e542e1c850baabc292999debcc6f"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/templatetags/static.py | sed -n '1,30p'\"",
+        "exit_code": 0,
+        "output_bytes": 1116,
+        "output_sha256": "68932be538d797260261a52cd44fce5e24e5769d6067f90ee299bf5a902a7188"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/flatpages/models.py | sed -n '1,35p'\"",
+        "exit_code": 0,
+        "output_bytes": 1538,
+        "output_sha256": "86aa18db2b850ff09a3d69a5091501ad1b9a169a97e764cbeafb2233fc6a96e4"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/http/request.py | sed -n '1,45p'\"",
+        "exit_code": 0,
+        "output_bytes": 1434,
+        "output_sha256": "268479e31c21052c8dd3904f793af19b73699424a2e07da97b134c385edbff12"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n '\"'^class HttpRequest|''^class '\"' django/http/request.py\"",
+        "exit_code": 0,
+        "output_bytes": 208,
+        "output_sha256": "093d7345bf0845d8952ea661221c54165220c4afe5b6eb0bce199913ff4acb47"
+      }
+    ],
+    "command_count": 14,
+    "command_output_bytes": 28519,
+    "failed_commands": 0,
+    "other_tool_types": [],
+    "runtime_warnings": [],
+    "turn_failed": false,
+    "quality": {
+      "passed": true,
+      "findings": [
+        {
+          "id": "FlatPage.get_absolute_url",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "add_domain",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "HttpRequest._get_full_path",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "HttpRequest.build_absolute_uri",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "HttpResponseRedirectBase.__init__",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "iriencode",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "PrefixNode.handle_simple",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "Stylesheet.url",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "Stylesheet.__str__",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "SyndicationFeed.__init__",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "SyndicationFeed.add_item",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "Enclosure.__init__",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "__exact_caller_set__",
+          "passed": true,
+          "reason": "no extra callers"
+        }
+      ],
+      "grader_version": "caller-enumeration-1",
+      "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+    },
+    "index_preflight": null,
+    "answer": {
+      "findings": [
+        {
+          "id": "HttpResponseRedirectBase.__init__",
+          "path": "django/http/response.py",
+          "start_line": 636,
+          "end_line": 638,
+          "quote": "    def __init__(self, redirect_to, preserve_request=False, *args, **kwargs):\n        super().__init__(*args, **kwargs)\n        self[\"Location\"] = iri_to_uri(redirect_to)",
+          "explanation": "Direct lexical call that always converts the supplied redirect IRI into URI form for the Location header. It occurs before later length and allowed-scheme checks; preserve_request affects only the response status."
+        },
+        {
+          "id": "HttpRequest._get_full_path",
+          "path": "django/http/request.py",
+          "start_line": 219,
+          "end_line": 230,
+          "quote": "    def _get_full_path(self, path, force_append_slash):\n        # RFC 3986 requires query string arguments to be in the ASCII range.\n        # Rather than crash if this doesn't happen, we encode defensively.\n        return \"%s%s%s\" % (\n            escape_uri_path(path),\n            \"/\" if force_append_slash and not path.endswith(\"/\") else \"\",\n            (\n                (\"?\" + iri_to_uri(self.META.get(\"QUERY_STRING\", \"\")))\n                if self.META.get(\"QUERY_STRING\", \"\")\n                else \"\"\n            ),\n        )",
+          "explanation": "Direct lexical call that defensively converts the request's raw QUERY_STRING to URI form only when it is nonempty, then prefixes it with '?'. The path and optional forced slash are handled separately. get_full_path() and get_full_path_info() can reach this call at runtime but are transitive callers, so they are not findings."
+        },
+        {
+          "id": "HttpRequest.build_absolute_uri",
+          "path": "django/http/request.py",
+          "start_line": 265,
+          "end_line": 293,
+          "quote": "        if location is None:\n            # Make it an absolute url (but schemeless and domainless) for the\n            # edge case that the path starts with '//'.\n            location = \"//%s\" % self.get_full_path()\n        else:\n            # Coerce lazy locations.\n            location = str(location)\n        bits = urlsplit(location)\n        if not (bits.scheme and bits.netloc):\n            # Handle the simple, most common case. If the location is absolute\n            # and a scheme or host (netloc) isn't provided, skip an expensive\n            # urljoin() as long as no path segments are '.' or '..'.\n            if (\n                bits.path.startswith(\"/\")\n                and not bits.scheme\n                and not bits.netloc\n                and \"/./\" not in bits.path\n                and \"/../\" not in bits.path\n            ):\n                # If location starts with '//' but has no netloc, reuse the\n                # schema and netloc from the current request. Strip the double\n                # slashes and continue as if it wasn't specified.\n                location = self._current_scheme_host + location.removeprefix(\"//\")\n            else:\n                # Join the constructed URL with the provided location, which\n                # allows the provided location to apply query strings to the\n                # base path.\n                location = urljoin(self._current_scheme_host + self.path, location)\n        return iri_to_uri(location)",
+          "explanation": "Direct lexical call that always converts the final absolute location to URI form. A missing location is derived from the request's full path; a relative or incomplete location is either prefixed with the current scheme/host in the simple-path branch or resolved with urljoin(). With location=None, get_full_path() may also reach HttpRequest._get_full_path's separate conversion transitively."
+        },
+        {
+          "id": "Stylesheet.url",
+          "path": "django/utils/feedgenerator.py",
+          "start_line": 85,
+          "end_line": 89,
+          "quote": "    # Using a property to delay the evaluation of self._url as late as possible\n    # in case of a lazy object (like reverse_lazy(...) for example).\n    @property\n    def url(self):\n        return iri_to_uri(self._url)",
+          "explanation": "Direct lexical call that converts the stylesheet's stored URL to URI form whenever the property is evaluated. Keeping it in the property delays conversion so lazy URL objects are resolved as late as possible."
+        },
+        {
+          "id": "Stylesheet.__str__",
+          "path": "django/utils/feedgenerator.py",
+          "start_line": 97,
+          "end_line": 103,
+          "quote": "    def __str__(self):\n        attrs = {\n            \"href\": iri_to_uri(self._url),\n            \"type\": self.mimetype,\n            \"media\": self.media,\n        }\n        return flatatt(attrs).strip()",
+          "explanation": "Direct lexical call that converts self._url for the rendered stylesheet href attribute. If no explicit MIME type exists, evaluating self.mimetype can additionally reach Stylesheet.url at runtime; that second conversion is transitive, not another lexical call in __str__."
+        },
+        {
+          "id": "SyndicationFeed.__init__",
+          "path": "django/utils/feedgenerator.py",
+          "start_line": 145,
+          "end_line": 160,
+          "quote": "        self.feed = {\n            \"title\": to_str(title),\n            \"link\": iri_to_uri(link),\n            \"description\": to_str(description),\n            \"language\": to_str(language),\n            \"author_email\": to_str(author_email),\n            \"author_name\": to_str(author_name),\n            \"author_link\": iri_to_uri(author_link),\n            \"subtitle\": to_str(subtitle),\n            \"categories\": categories or (),\n            \"feed_url\": iri_to_uri(feed_url),\n            \"feed_copyright\": to_str(feed_copyright),\n            \"id\": feed_guid or link,\n            \"ttl\": to_str(ttl),\n            \"stylesheets\": stylesheets,\n            **kwargs,",
+          "explanation": "Three direct lexical calls normalize every feed-level URL field: link, author_link, and feed_url. They are invoked unconditionally while constructing the feed dictionary, including for optional values; non-URL metadata is converted with to_str or left in its native form."
+        },
+        {
+          "id": "SyndicationFeed.add_item",
+          "path": "django/utils/feedgenerator.py",
+          "start_line": 192,
+          "end_line": 211,
+          "quote": "        categories = categories and [to_str(c) for c in categories]\n        self.items.append(\n            {\n                \"title\": to_str(title),\n                \"link\": iri_to_uri(link),\n                \"description\": to_str(description),\n                \"author_email\": to_str(author_email),\n                \"author_name\": to_str(author_name),\n                \"author_link\": iri_to_uri(author_link),\n                \"pubdate\": pubdate,\n                \"updateddate\": updateddate,\n                \"comments\": to_str(comments),\n                \"unique_id\": to_str(unique_id),\n                \"unique_id_is_permalink\": unique_id_is_permalink,\n                \"enclosures\": enclosures or (),\n                \"categories\": categories or (),\n                \"item_copyright\": to_str(item_copyright),\n                \"ttl\": to_str(ttl),\n                **kwargs,\n            }",
+          "explanation": "Two direct lexical calls normalize the item-level link and author_link fields before the item dictionary is appended. Both calls are unconditional, even though author_link is optional; the remaining textual fields use to_str instead."
+        },
+        {
+          "id": "Enclosure.__init__",
+          "path": "django/utils/feedgenerator.py",
+          "start_line": 287,
+          "end_line": 290,
+          "quote": "    def __init__(self, url, length, mime_type):\n        \"All args are expected to be strings\"\n        self.length, self.mime_type = length, mime_type\n        self.url = iri_to_uri(url)",
+          "explanation": "Direct lexical call that converts an enclosure's URL to URI form when the enclosure is created, while storing its length and MIME type unchanged."
+        },
+        {
+          "id": "PrefixNode.handle_simple",
+          "path": "django/templatetags/static.py",
+          "start_line": 41,
+          "end_line": 49,
+          "quote": "    @classmethod\n    def handle_simple(cls, name):\n        try:\n            from django.conf import settings\n        except ImportError:\n            prefix = \"\"\n        else:\n            prefix = iri_to_uri(getattr(settings, name, \"\"))\n        return prefix",
+          "explanation": "Direct lexical call that converts the named settings value, such as a static or media URL prefix, to URI form. It runs only when django.conf.settings imports successfully; on ImportError the method returns an unconverted empty string. render() reaches this method transitively and is not a direct caller."
+        },
+        {
+          "id": "iriencode",
+          "path": "django/template/defaultfilters.py",
+          "start_line": 222,
+          "end_line": 226,
+          "quote": "@register.filter(is_safe=True)\n@stringfilter\ndef iriencode(value):\n    \"\"\"Escape an IRI value for use in a URL.\"\"\"\n    return iri_to_uri(value)",
+          "explanation": "Direct lexical call implementing the iriencode template filter. After stringfilter supplies a string value, it converts that IRI for safe use as a URI."
+        },
+        {
+          "id": "FlatPage.get_absolute_url",
+          "path": "django/contrib/flatpages/models.py",
+          "start_line": 40,
+          "end_line": 49,
+          "quote": "    def get_absolute_url(self):\n        from .views import flatpage\n\n        for url in (self.url.lstrip(\"/\"), self.url):\n            try:\n                return reverse(flatpage, kwargs={\"url\": url})\n            except NoReverseMatch:\n                pass\n        # Handle script prefix manually because we bypass reverse()\n        return iri_to_uri(get_script_prefix().rstrip(\"/\") + self.url)",
+          "explanation": "Direct lexical call used only after reverse() fails for both the leading-slash-stripped and original page URLs. The fallback manually combines the trimmed script prefix with self.url and converts that complete path to URI form."
+        },
+        {
+          "id": "add_domain",
+          "path": "django/contrib/syndication/views.py",
+          "start_line": 15,
+          "end_line": 22,
+          "quote": "def add_domain(domain, url, secure=False):\n    protocol = \"https\" if secure else \"http\"\n    if url.startswith(\"//\"):\n        # Support network-path reference (see #16753) - RSS requires a protocol\n        url = \"%s:%s\" % (protocol, url)\n    elif not url.startswith((\"http://\", \"https://\", \"mailto:\")):\n        url = iri_to_uri(\"%s://%s%s\" % (protocol, domain, url))\n    return url",
+          "explanation": "Direct lexical call that converts a domain-qualified feed URL built from the selected HTTP/HTTPS protocol, domain, and relative URL. It runs only for URLs that are neither network-path references nor already http, https, or mailto URLs; those other branches return without this conversion."
+        }
+      ]
+    },
+    "prompt_bytes": 1406,
+    "events_sha256": "d5337c21c4532c11e58b5b72f32bf893575d73f19b5e32d00e754da0cbe07dd6"
+  },
+  "columbus": {
+    "schema": "columbus.exploration-observation/v1",
+    "case": "django-iri-callers",
+    "condition": "columbus",
+    "repeat": 1,
+    "model_requested": "gpt-5.6-sol",
+    "effort_requested": "xhigh",
+    "elapsed_seconds": 283.728,
+    "return_code": 0,
+    "timed_out": false,
+    "source_unchanged": true,
+    "usage": {
+      "input_tokens": 110525,
+      "cached_input_tokens": 85504,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 8313,
+      "reasoning_output_tokens": 4585,
+      "uncached_input_tokens": 25021
+    },
+    "commands": [
+      {
+        "command": "/bin/zsh -lc \"sed -n '1,240p' /private/tmp/columbus-django-callers-frozen/runtime/SKILL.md\"",
+        "exit_code": 0,
+        "output_bytes": 4317,
+        "output_sha256": "100c9dda4c37c08c59afee76eaff3c6bba5cfd201431e827648220eaee4e24bb"
+      },
+      {
+        "command": "/bin/zsh -lc '/Users/rex/Desktop/columbus/.venv/bin/python /private/tmp/columbus-django-callers-frozen/runtime/columbus.py callers iri_to_uri --repo . --snapshot --format text --budget-bytes 12000'",
+        "exit_code": 0,
+        "output_bytes": 7741,
+        "output_sha256": "ccff42fdef990815354148578bd5f5082599abb9e7fd8985a37cb67c1a012c66"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n --glob '*.py' '\\\\biri_to_uri\\\\b' django\"",
+        "exit_code": 0,
+        "output_bytes": 1945,
+        "output_sha256": "1b94da3e6708e638a3712a1767d68683f2527d4ca9293a0837dbaef3649c805f"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/flatpages/models.py | sed -n '38,54p'\"",
+        "exit_code": 0,
+        "output_bytes": 531,
+        "output_sha256": "4ada3e3665bb8fe248121172d72a72e85684dcb2724e58f5f7ce62f058b9256d"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/template/defaultfilters.py | sed -n '217,229p'\"",
+        "exit_code": 0,
+        "output_bytes": 352,
+        "output_sha256": "faf909b88181039a5a63f6c20aef997a1f8de327d35f685f4f6822969f028e9d"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/utils/feedgenerator.py | sed -n '132,163p'\"",
+        "exit_code": 0,
+        "output_bytes": 1373,
+        "output_sha256": "66574f940c35a2c9c994991dab9858694d1a076fa941eeaae0c7e3cd1e80a38f"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/syndication/views.py | sed -n '1,28p'\"",
+        "exit_code": 0,
+        "output_bytes": 1207,
+        "output_sha256": "dc17161503d6603345453810f0cc754c32d928b459aad59fc49e2ebc0d88e5bd"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/http/response.py | sed -n '627,655p'\"",
+        "exit_code": 0,
+        "output_bytes": 1320,
+        "output_sha256": "80c08b3b70ffa7f70a9ed8f8a7415af1c205d94b31c2ec5491677fe5b77907a5"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/utils/feedgenerator.py | sed -n '74,106p'\"",
+        "exit_code": 0,
+        "output_bytes": 1127,
+        "output_sha256": "e586bd87c731a1ad2386a58104aa0b6cd647c6932317cc9a3876c4b06f886020"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/http/request.py | sed -n '206,234p'\"",
+        "exit_code": 0,
+        "output_bytes": 1443,
+        "output_sha256": "ab4bb51b5e8383594d93a1b77c1ba3bc275ef80dff38ca4ed2e52838438d039d"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/http/request.py | sed -n '260,299p'\"",
+        "exit_code": 0,
+        "output_bytes": 2196,
+        "output_sha256": "63233a77e55145af3d88e15895c8f74f1fc39a023f331502078e05c41d688653"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/utils/feedgenerator.py | sed -n '180,212p'\"",
+        "exit_code": 0,
+        "output_bytes": 1493,
+        "output_sha256": "344ec4d8721b7dba3af0b16268c5d4e5874fd82adcf20340b8d7b5e8c18b9d6a"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/templatetags/static.py | sed -n '35,54p'\"",
+        "exit_code": 0,
+        "output_bytes": 672,
+        "output_sha256": "e4d0a4c4f8b10492384dbd0654f05c72f85318a3694a61568c136db9051c7b25"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/utils/feedgenerator.py | sed -n '281,294p'\"",
+        "exit_code": 0,
+        "output_bytes": 498,
+        "output_sha256": "4a34dc59bfbc7bb9adad3906753847015da87c29149fad60f6445b7366a839ca"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/utils/feedgenerator.py | sed -n '108,163p'\"",
+        "exit_code": 0,
+        "output_bytes": 2094,
+        "output_sha256": "598d4cd4bcf33901dcb5802870a2f60456d0605583fc9694f9b8649073f6486e"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/utils/feedgenerator.py | sed -n '164,212p'\"",
+        "exit_code": 0,
+        "output_bytes": 1968,
+        "output_sha256": "1e23fb01a7325e0e76312fd00dc0b631189ebe6dfe024d5cf9d1a8a7265f290f"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/templatetags/static.py | sed -n '1,78p'\"",
+        "exit_code": 0,
+        "output_bytes": 2649,
+        "output_sha256": "b7eda57ac668be33d2ddaf77a81d786208d390949e4c3f10031c68cc78da11cf"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/utils/encoding.py | sed -n '96,128p'\"",
+        "exit_code": 0,
+        "output_bytes": 1686,
+        "output_sha256": "43d65f8c5a56010a5f9c15a327742f013f089b8277a3645bc282eb9fb6abcfc3"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/http/request.py | sed -n '250,294p'\"",
+        "exit_code": 0,
+        "output_bytes": 2438,
+        "output_sha256": "df5ba0de1e3c48bda3e95ecf12fddb288ac5a60cc15d13963c30b07bbbb5b1e1"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/utils/encoding.py | sed -n '119,142p'\"",
+        "exit_code": 0,
+        "output_bytes": 1274,
+        "output_sha256": "b24ee7423f93c441110b0f297b173f50b34c4d3d33131961e4304c4f17e1429b"
+      }
+    ],
+    "command_count": 20,
+    "command_output_bytes": 38324,
+    "failed_commands": 0,
+    "other_tool_types": [],
+    "runtime_warnings": [],
+    "turn_failed": false,
+    "quality": {
+      "passed": true,
+      "findings": [
+        {
+          "id": "FlatPage.get_absolute_url",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "add_domain",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "HttpRequest._get_full_path",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "HttpRequest.build_absolute_uri",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "HttpResponseRedirectBase.__init__",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "iriencode",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "PrefixNode.handle_simple",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "Stylesheet.url",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "Stylesheet.__str__",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "SyndicationFeed.__init__",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "SyndicationFeed.add_item",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "Enclosure.__init__",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "__exact_caller_set__",
+          "passed": true,
+          "reason": "no extra callers"
+        }
+      ],
+      "grader_version": "caller-enumeration-1",
+      "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+    },
+    "index_preflight": {
+      "passed": true,
+      "files": 5465,
+      "symbols": 46630,
+      "edges": 86592,
+      "indexed_bytes": 35218163,
+      "revision": "1ce6582e7bfe0648beba"
+    },
+    "answer": {
+      "findings": [
+        {
+          "id": "FlatPage.get_absolute_url",
+          "path": "django/contrib/flatpages/models.py",
+          "start_line": 40,
+          "end_line": 49,
+          "quote": "    def get_absolute_url(self):\n        from .views import flatpage\n\n        for url in (self.url.lstrip(\"/\"), self.url):\n            try:\n                return reverse(flatpage, kwargs={\"url\": url})\n            except NoReverseMatch:\n                pass\n        # Handle script prefix manually because we bypass reverse()\n        return iri_to_uri(get_script_prefix().rstrip(\"/\") + self.url)",
+          "explanation": "The direct call is reached only after reverse() fails for both the leading-slash-stripped and original flat-page URL. The fallback manually joins the active script prefix to self.url, then makes that assembled IRI URI-safe because it bypasses reverse()."
+        },
+        {
+          "id": "add_domain",
+          "path": "django/contrib/syndication/views.py",
+          "start_line": 15,
+          "end_line": 22,
+          "quote": "def add_domain(domain, url, secure=False):\n    protocol = \"https\" if secure else \"http\"\n    if url.startswith(\"//\"):\n        # Support network-path reference (see #16753) - RSS requires a protocol\n        url = \"%s:%s\" % (protocol, url)\n    elif not url.startswith((\"http://\", \"https://\", \"mailto:\")):\n        url = iri_to_uri(\"%s://%s%s\" % (protocol, domain, url))\n    return url",
+          "explanation": "For a URL that is neither network-path form nor already http, https, or mailto, this directly converts the newly assembled protocol/domain/path IRI into a URI suitable for the feed. secure chooses http versus https. Network-path URLs only receive a protocol, and recognized absolute or mailto URLs are returned without calling iri_to_uri."
+        },
+        {
+          "id": "HttpRequest._get_full_path",
+          "path": "django/http/request.py",
+          "start_line": 219,
+          "end_line": 230,
+          "quote": "    def _get_full_path(self, path, force_append_slash):\n        # RFC 3986 requires query string arguments to be in the ASCII range.\n        # Rather than crash if this doesn't happen, we encode defensively.\n        return \"%s%s%s\" % (\n            escape_uri_path(path),\n            \"/\" if force_append_slash and not path.endswith(\"/\") else \"\",\n            (\n                (\"?\" + iri_to_uri(self.META.get(\"QUERY_STRING\", \"\")))\n                if self.META.get(\"QUERY_STRING\", \"\")\n                else \"\"\n            ),\n        )",
+          "explanation": "The direct call converts only a nonempty raw QUERY_STRING to an ASCII-safe URI component and prefixes it with '?'; an empty query skips the call. The path is handled separately by escape_uri_path, while force_append_slash only controls an added slash. get_full_path() and get_full_path_info() can reach this method at runtime but are transitive callers, not additional lexical callers."
+        },
+        {
+          "id": "HttpRequest.build_absolute_uri",
+          "path": "django/http/request.py",
+          "start_line": 265,
+          "end_line": 293,
+          "quote": "        if location is None:\n            # Make it an absolute url (but schemeless and domainless) for the\n            # edge case that the path starts with '//'.\n            location = \"//%s\" % self.get_full_path()\n        else:\n            # Coerce lazy locations.\n            location = str(location)\n        bits = urlsplit(location)\n        if not (bits.scheme and bits.netloc):\n            # Handle the simple, most common case. If the location is absolute\n            # and a scheme or host (netloc) isn't provided, skip an expensive\n            # urljoin() as long as no path segments are '.' or '..'.\n            if (\n                bits.path.startswith(\"/\")\n                and not bits.scheme\n                and not bits.netloc\n                and \"/./\" not in bits.path\n                and \"/../\" not in bits.path\n            ):\n                # If location starts with '//' but has no netloc, reuse the\n                # schema and netloc from the current request. Strip the double\n                # slashes and continue as if it wasn't specified.\n                location = self._current_scheme_host + location.removeprefix(\"//\")\n            else:\n                # Join the constructed URL with the provided location, which\n                # allows the provided location to apply query strings to the\n                # base path.\n                location = urljoin(self._current_scheme_host + self.path, location)\n        return iri_to_uri(location)",
+          "explanation": "This direct call URI-encodes the final location after it has been made absolute. A missing location is built from get_full_path(); a supplied lazy value is coerced to str. Already absolute scheme-plus-netloc values need no joining; simple root-relative paths use the current scheme/host directly, while other incomplete locations use urljoin(). The final iri_to_uri call runs on every nonexceptional branch. With location=None, get_full_path() may additionally reach HttpRequest._get_full_path and its query conversion at runtime; that is a separate direct caller, not another lexical call in this method."
+        },
+        {
+          "id": "HttpResponseRedirectBase.__init__",
+          "path": "django/http/response.py",
+          "start_line": 636,
+          "end_line": 650,
+          "quote": "    def __init__(self, redirect_to, preserve_request=False, *args, **kwargs):\n        super().__init__(*args, **kwargs)\n        self[\"Location\"] = iri_to_uri(redirect_to)\n        redirect_to_str = str(redirect_to)\n        if len(redirect_to_str) > MAX_URL_REDIRECT_LENGTH:\n            raise DisallowedRedirect(\n                f\"Unsafe redirect exceeding {MAX_URL_REDIRECT_LENGTH} characters\"\n            )\n        parsed = urlsplit(redirect_to_str)\n        if preserve_request:\n            self.status_code = self.status_code_preserve_request\n        if parsed.scheme and parsed.scheme not in self.allowed_schemes:\n            raise DisallowedRedirect(\n                \"Unsafe redirect to URL with protocol '%s'\" % parsed.scheme\n            )",
+          "explanation": "The constructor unconditionally converts redirect_to for the HTTP Location header before validating its length and scheme. preserve_request only changes the status code; excessive length or a nonempty disallowed scheme raises after the direct conversion."
+        },
+        {
+          "id": "iriencode",
+          "path": "django/template/defaultfilters.py",
+          "start_line": 222,
+          "end_line": 226,
+          "quote": "@register.filter(is_safe=True)\n@stringfilter\ndef iriencode(value):\n    \"\"\"Escape an IRI value for use in a URL.\"\"\"\n    return iri_to_uri(value)",
+          "explanation": "This template filter directly converts its string-filtered value from an IRI into a URI-safe URL value. The decorator-generated runtime wrapper is not a separate source-level caller."
+        },
+        {
+          "id": "PrefixNode.handle_simple",
+          "path": "django/templatetags/static.py",
+          "start_line": 41,
+          "end_line": 49,
+          "quote": "    @classmethod\n    def handle_simple(cls, name):\n        try:\n            from django.conf import settings\n        except ImportError:\n            prefix = \"\"\n        else:\n            prefix = iri_to_uri(getattr(settings, name, \"\"))\n        return prefix",
+          "explanation": "When Django settings can be imported, the direct call converts the named URL-prefix setting\u2014used for values such as STATIC_URL or MEDIA_URL\u2014into URI-safe form; a missing attribute supplies an empty string. If importing settings raises ImportError, the method returns an empty prefix without calling iri_to_uri."
+        },
+        {
+          "id": "Stylesheet.url",
+          "path": "django/utils/feedgenerator.py",
+          "start_line": 85,
+          "end_line": 89,
+          "quote": "    # Using a property to delay the evaluation of self._url as late as possible\n    # in case of a lazy object (like reverse_lazy(...) for example).\n    @property\n    def url(self):\n        return iri_to_uri(self._url)",
+          "explanation": "The property directly converts the stored stylesheet URL when it is accessed. Deferring the conversion allows lazy URL objects such as reverse_lazy() to be evaluated as late as possible."
+        },
+        {
+          "id": "Stylesheet.__str__",
+          "path": "django/utils/feedgenerator.py",
+          "start_line": 97,
+          "end_line": 103,
+          "quote": "    def __str__(self):\n        attrs = {\n            \"href\": iri_to_uri(self._url),\n            \"type\": self.mimetype,\n            \"media\": self.media,\n        }\n        return flatatt(attrs).strip()",
+          "explanation": "The method's one lexical call directly converts the stored stylesheet URL for the serialized href attribute. At runtime, evaluating self.mimetype can also reach Stylesheet.url when no explicit MIME type was supplied, causing another iri_to_uri invocation transitively; that call belongs lexically to Stylesheet.url, not to __str__."
+        },
+        {
+          "id": "SyndicationFeed.__init__",
+          "path": "django/utils/feedgenerator.py",
+          "start_line": 138,
+          "end_line": 161,
+          "quote": "        if stylesheets is not None:\n            if isinstance(stylesheets, (Stylesheet, str)):\n                raise TypeError(\n                    f\"stylesheets should be a list, not {stylesheets.__class__}\"\n                )\n            stylesheets = [to_stylesheet(s) for s in stylesheets]\n\n        self.feed = {\n            \"title\": to_str(title),\n            \"link\": iri_to_uri(link),\n            \"description\": to_str(description),\n            \"language\": to_str(language),\n            \"author_email\": to_str(author_email),\n            \"author_name\": to_str(author_name),\n            \"author_link\": iri_to_uri(author_link),\n            \"subtitle\": to_str(subtitle),\n            \"categories\": categories or (),\n            \"feed_url\": iri_to_uri(feed_url),\n            \"feed_copyright\": to_str(feed_copyright),\n            \"id\": feed_guid or link,\n            \"ttl\": to_str(ttl),\n            \"stylesheets\": stylesheets,\n            **kwargs,\n        }",
+          "explanation": "The constructor directly converts all three URL-valued feed fields: link, author_link, and feed_url. They are evaluated unconditionally when the feed dictionary is built, with optional None values preserved by iri_to_uri. A non-list Stylesheet or string supplied as stylesheets raises before dictionary construction and therefore before these calls; otherwise stylesheet normalization does not condition the three conversions."
+        },
+        {
+          "id": "SyndicationFeed.add_item",
+          "path": "django/utils/feedgenerator.py",
+          "start_line": 192,
+          "end_line": 212,
+          "quote": "        categories = categories and [to_str(c) for c in categories]\n        self.items.append(\n            {\n                \"title\": to_str(title),\n                \"link\": iri_to_uri(link),\n                \"description\": to_str(description),\n                \"author_email\": to_str(author_email),\n                \"author_name\": to_str(author_name),\n                \"author_link\": iri_to_uri(author_link),\n                \"pubdate\": pubdate,\n                \"updateddate\": updateddate,\n                \"comments\": to_str(comments),\n                \"unique_id\": to_str(unique_id),\n                \"unique_id_is_permalink\": unique_id_is_permalink,\n                \"enclosures\": enclosures or (),\n                \"categories\": categories or (),\n                \"item_copyright\": to_str(item_copyright),\n                \"ttl\": to_str(ttl),\n                **kwargs,\n            }\n        )",
+          "explanation": "While building each feed item, the method directly converts both URL-valued fields: the required link and optional author_link. Both expressions are evaluated during dictionary construction; a None author_link remains None. Other strings and categories use to_str instead, and enclosure URLs are not converted by this caller."
+        },
+        {
+          "id": "Enclosure.__init__",
+          "path": "django/utils/feedgenerator.py",
+          "start_line": 284,
+          "end_line": 290,
+          "quote": "class Enclosure:\n    \"\"\"An RSS enclosure\"\"\"\n\n    def __init__(self, url, length, mime_type):\n        \"All args are expected to be strings\"\n        self.length, self.mime_type = length, mime_type\n        self.url = iri_to_uri(url)",
+          "explanation": "The constructor directly converts the enclosure's URL before storing it, making the resource address URI-safe for feed output. The length and MIME type are stored unchanged."
+        }
+      ]
+    },
+    "prompt_bytes": 1950,
+    "events_sha256": "0d3651bfe7a5aae3c2f84f309ee4377e899656f9862fd70dda33349f43efac3e"
+  }
+}
