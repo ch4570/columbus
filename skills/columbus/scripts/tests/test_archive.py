@@ -191,6 +191,56 @@ class ArchiveTests(unittest.TestCase):
             self.assertEqual(len({e['source'] for e in edges}),65)
             self.assertGreater(pages,2)
 
+    def test_text_pages_preserve_evidence_and_fit_rendered_budget(self):
+        from columbus.presentation import archive_neighbors_text
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'many.py').write_text('def target(): pass\n' + ''.join(
+                f'def caller_{i}(): target(); target()\n' for i in range(12)), encoding='utf-8')
+            index = RepositoryIndex(root / '.columbus/index.sqlite')
+            index.refresh(root)
+            target = index.search('target')['hits'][0]['id']
+            artifact = root / 'graph.xz'
+            archive(index, artifact, compression='xz')
+            expected = neighbors_archive(artifact, target, 'in', ['calls'], budget_bytes=64000)
+            offset, edges = 0, []
+            while offset is not None:
+                packet = neighbors_archive(artifact, target, 'in', ['calls'], budget_bytes=3000,
+                                           offset=offset, output_format='text')
+                rendered = archive_neighbors_text(packet)
+                self.assertLessEqual(len(rendered.encode()), 3000)
+                files, nodes, decoded_edges = {}, {}, []
+                section = None
+                for line in rendered.splitlines():
+                    if line.startswith(('files ', 'nodes ', 'edges ')):
+                        section = line.split()[0]
+                    elif line.startswith('metadata '):
+                        self.assertEqual(json.loads(line[9:]), {k:v for k,v in packet.items() if k not in {'nodes','edges'}})
+                    elif line.startswith('['):
+                        row = json.loads(line)
+                        if section == 'files':
+                            files[row[0]] = row[1:]
+                        elif section == 'nodes':
+                            path, digest = files[row[1]]
+                            nodes[row[0]] = dict(row[2], path=path, source_hash=digest)
+                        else:
+                            decoded_edges.append(dict(row[3], source=nodes[row[0]]['id'], target=nodes[row[1]]['id'], path=files[row[2]][0]))
+                self.assertEqual(list(nodes.values()), packet['nodes'])
+                self.assertEqual(decoded_edges, packet['edges'])
+                edges.extend(decoded_edges)
+                next_offset = packet['next_offset']
+                if next_offset is not None:
+                    self.assertEqual(next_offset, offset + len(decoded_edges))
+                offset = next_offset
+            self.assertEqual(edges, expected['edges'])
+            self.assertEqual(len(edges), 24)
+            adversarial = dict(expected, source_policy='bad\n\x1b[31m\u2028data')
+            rendered = archive_neighbors_text(adversarial)
+            self.assertNotIn('\x1b', rendered)
+            self.assertNotIn('\u2028', rendered)
+            with self.assertRaisesRegex(ValueError, 'output_format'):
+                neighbors_archive(artifact, target, output_format='invalid')
+
     def test_failed_archive_never_publishes_partial_output(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

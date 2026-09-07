@@ -118,6 +118,13 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
                                           '--repo', consumer, '--direction', 'in', '--kinds', 'contains', '--budget-bytes', '2048']))
             if xz_packet != packet or xz_relations != relations:
                 raise VerificationError('Installed XZ archive differs from gzip queries')
+            text_pages = [run([*prefix, 'archive-neighbors', symbol_id, '--input', source,
+                              '--repo', consumer, '--direction', 'in', '--kinds', 'contains',
+                              '--format', 'text', '--budget-bytes', '4096']) for source in (artifact, xz)]
+            if (text_pages[0] != text_pages[1] or len(text_pages[0].encode('utf-8')) > 4096
+                    or 'edges [source_node,target_node,file_number,relationship]' not in text_pages[0]
+                    or symbol_id not in text_pages[0] or 'source_hash' not in text_pages[0]):
+                raise VerificationError('Installed archive text relationships failed codec/budget/evidence checks')
             if (consumer / '.columbus').exists():
                 raise VerificationError('Archive lookup unexpectedly created a repository index')
 

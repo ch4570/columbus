@@ -85,8 +85,36 @@ def text_output(packet: dict, command: str = '') -> str:
     return '\n'.join(lines) + '\n'
 
 
+def archive_neighbors_text(packet: dict) -> str:
+    """Number endpoint declarations once; retain every packet value in JSON rows."""
+    def row(value):
+        return _line(json.dumps(value, ensure_ascii=False, separators=(',', ':')))
+    nodes = packet['nodes']
+    numbers = {node['id']: number for number, node in enumerate(nodes)}
+    paths = {node['path']: node.get('source_hash') for node in nodes}
+    files = sorted({(node['path'], node.get('source_hash')) for node in nodes}
+                   | {(edge['path'], paths.get(edge['path'])) for edge in packet['edges']},
+                   key=lambda pair: (pair[0], pair[1] or ''))
+    file_numbers = {pair: number for number, pair in enumerate(files)}
+    lines = ['columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.',
+             'metadata ' + row({k: v for k, v in packet.items() if k not in {'nodes', 'edges'}}),
+             'files [number,path,source_hash]']
+    lines.extend(row([number, *pair]) for number, pair in enumerate(files))
+    lines.append('nodes [number,file_number,declaration]')
+    for number, node in enumerate(nodes):
+        lines.append(row([number, file_numbers[(node['path'], node.get('source_hash'))],
+                          {k: v for k, v in node.items() if k not in {'path', 'source_hash'}}]))
+    lines.append('edges [source_node,target_node,file_number,relationship]; numbers are local to this page')
+    for edge in packet['edges']:
+        lines.append(row([numbers[edge['source']], numbers[edge['target']], file_numbers[(edge['path'], paths.get(edge['path']))],
+                          {k: v for k, v in edge.items() if k not in {'source', 'target', 'path'}}]))
+    return '\n'.join(lines) + '\n'
+
+
 def render(packet: dict, output_format: str = 'json', command: str = '') -> str:
     if output_format == 'text':
+        if command == 'archive-neighbors':
+            return archive_neighbors_text(packet)
         return caller_text(packet) if command == 'callers' else text_output(packet, command)
     if output_format != 'json':
         raise ValueError('output_format must be json or text')

@@ -183,8 +183,11 @@ def _validated_rows(raw):
 
 
 def neighbors_archive(source: str | Path, symbol_id: str, direction: str = 'out',
-                      kinds: list[str] | None = None, limit: int = 50, budget_bytes: int = 6000, offset: int = 0) -> dict:
+                      kinds: list[str] | None = None, limit: int = 50, budget_bytes: int = 6000, offset: int = 0,
+                      *, output_format: str = 'json') -> dict:
     """Two streaming passes; bounded stored one-hop evidence, never runtime reachability."""
+    if output_format not in {'json', 'text'}:
+        raise ValueError('output_format must be json or text')
     if not isinstance(symbol_id, str) or not 1 <= len(symbol_id) <= 2048:
         raise ValueError('An exact symbol ID of 1–2048 characters is required')
     if isinstance(offset, bool) or not isinstance(offset, int) or offset < 0:
@@ -244,7 +247,9 @@ def neighbors_archive(source: str | Path, symbol_id: str, direction: str = 'out'
             result['next_offset'] = offset + len(selected) if offset + len(selected) < matched else None
             if not selected and offset < matched:
                 raise ValueError('Budget too small for one archive edge; increase budget-bytes')
-            if len((compact(result) + '\n').encode()) <= budget_bytes:
+            from .presentation import archive_neighbors_text
+            rendered = archive_neighbors_text(result) if output_format == 'text' else compact(result) + '\n'
+            if len(rendered.encode()) <= budget_bytes:
                 return result
             if not selected:
                 raise ValueError('Budget too small for archive relationship metadata')
