@@ -15,6 +15,8 @@ JVM calls remain candidates. The adapter does not implement compiler overload re
 
 Type lookup keeps class/method type parameters and nested declarations in a separate lexical type namespace. A type parameter receiver stays unresolved with a bound/applicability reason; it must not link to a same-named concrete class. Calls on types with explicit inheritance stay unresolved until inherited candidates and argument applicability are supported, even if the subclass declares only one matching name. This deliberately reduces coverage. Inspect source for the actual route.
 
+Java accessibility checks cover the selected declaration and its enclosing types: private nestmates, package identity, and implicitly public interface members. Cross-package protected access stays unresolved pending subtype/receiver analysis; this is not a complete Java module/classpath accessibility check.
+
 Context and relationship responses expose `semantic_complete=false`, repository diagnostic/unresolved counts, and partial node counts separately from output `truncated`. Repository counts are global, not a per-symbol completeness proof. A clean parse still does not imply complete call resolution.
 
 Build `.kts` syntax is not a resolved Gradle dependency graph. Build/config files are freshness inputs and are never executed. Duplicate fully qualified symbols across modules may remain ambiguous because source-set classpaths are not resolved. Index the repository root to include main/test sources across modules unless scope restriction is requested.

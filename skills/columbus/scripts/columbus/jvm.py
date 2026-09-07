@@ -466,6 +466,23 @@ class _Resolver:
             scope_id = scope["parent"]
         return outer
 
+    def java_access_reason(self, file, scope_id, target):
+        """Check the declaration and enclosing types without inventing subtype access."""
+        declaration = target
+        while declaration and declaration.get("kind") != "module":
+            modifiers = declaration.get("modifiers", [])
+            parent = self.symbols.get(declaration.get("parent_id"), {})
+            if "private" in modifiers:
+                if self.enclosing_type(scope_id) != self.enclosing_type(declaration.get("parent_id")):
+                    return "private declaration outside the enclosing top-level type"
+            elif ("public" not in modifiers and parent.get("kind") != "interface"
+                  and file.get("package", "") != declaration.get("package", "")):
+                if "protected" in modifiers:
+                    return "protected declaration across packages requires subtype and receiver analysis"
+                return "package-private declaration outside its package"
+            declaration = parent
+        return None
+
     def implicit_instance(self, scope_id, owner):
         while scope_id:
             if scope_id == owner:
@@ -485,8 +502,13 @@ class _Resolver:
         scope_id, member, receiver = ref["scope_id"], ref["member"], ref["receiver"]
         if ref["kind"] == "inherits":
             candidates = self.candidates(file, member, type_only=True, scope_id=scope_id)
-            return (candidates[0]["id"], "unique declared base; compiler unverified") if len(candidates) == 1 else (
-                None, "base type external, generic, ambiguous or unknown")
+            if len(candidates) != 1:
+                return None, "base type external, generic, ambiguous or unknown"
+            if file["language"] == "java" and candidates[0].get("language") == "java":
+                access_reason = self.java_access_reason(file, scope_id, candidates[0])
+                if access_reason:
+                    return None, access_reason
+            return candidates[0]["id"], "unique declared base; compiler unverified"
         scope = self.scopes.get(scope_id, {})
         while scope:
             if scope.get("kind") == "opaque":
@@ -535,9 +557,9 @@ class _Resolver:
         target = candidates[0]
         if file["language"] == "java" and target.get("language") == "java":
             target_owner = self.owner(target.get("parent_id"))
-            if ("private" in target.get("modifiers", [])
-                    and self.enclosing_type(scope_id) != self.enclosing_type(target.get("parent_id"))):
-                return None, "private declaration outside the enclosing top-level type"
+            access_reason = self.java_access_reason(file, scope_id, target)
+            if access_reason:
+                return None, access_reason
             if (target["kind"] == "method" and not receiver
                     and "static" not in target.get("modifiers", [])
                     and (ref.get("static_context") or not self.implicit_instance(scope_id, target_owner))):

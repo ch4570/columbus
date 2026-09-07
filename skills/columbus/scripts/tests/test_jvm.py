@@ -15,6 +15,39 @@ class JVMTests(unittest.TestCase):
         json.dumps(result)  # Cached parse records must round-trip through SQLite JSON.
         return result
 
+    def test_java_package_access_checks_members_and_owner_types(self):
+        cases = [
+            ('public class T { void hit() {} }', 'b', False),
+            ('public class T { void hit() {} }', 'a', True),
+            ('public class T { protected void hit() {} }', 'b', False),
+            ('public class T { protected void hit() {} }', 'a', True),
+            ('public class T { public void hit() {} }', 'b', True),
+            ('class T { public void hit() {} }', 'b', False),
+            ('public interface T { void hit(); }', 'b', True),
+        ]
+        for declaration, package, expected in cases:
+            with self.subTest(declaration=declaration, package=package):
+                owner = self.parsed('a/T.java', 'package a; '+declaration)
+                caller = self.parsed(package+'/C.java', 'package '+package+'; import a.T; class C { void run(T t) { t.hit(); } }')
+                resolve_jvm([owner, caller])
+                call, = [r for r in caller['references'] if r['kind']=='calls']
+                self.assertEqual(expected, call['resolved'])
+        for container, expected in [('class', False), ('interface', True)]:
+            owner = self.parsed('a/T.java', 'package a; public '+container+' T { class Inner { public void hit() {} } }')
+            caller = self.parsed('b/C.java', 'package b; import a.T.Inner; class C { void run(Inner t) { t.hit(); } }')
+            resolve_jvm([owner, caller])
+            call, = [r for r in caller['references'] if r['kind']=='calls']
+            self.assertEqual(expected, call['resolved'])
+
+    def test_java_inaccessible_base_remains_unresolved(self):
+        for modifier, package, expected in [('', 'b', False), ('public ', 'b', True), ('', 'a', True)]:
+            owner = self.parsed('a/T.java', 'package a; '+modifier+'class T {}')
+            child = self.parsed(package+'/C.java', 'package '+package+'; import a.T; class C extends T {}')
+            edges = resolve_jvm([owner, child])
+            self.assertEqual(expected, any(e['kind']=='inherits' for e in edges))
+            ref, = [r for r in child['references'] if r['kind']=='inherits']
+            self.assertEqual(expected, ref['resolved'])
+
     def test_java_private_access_preserves_nestmates(self):
         cases = [
             ('class T { private void hit() {} } class C { void run(T item) { item.hit(); } }', False),

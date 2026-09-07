@@ -1,0 +1,655 @@
+{
+  "compiler": "javac 17.0.20.1",
+  "versions": {
+    "tree-sitter": "0.26.0",
+    "tree-sitter-java": "0.23.5",
+    "tree-sitter-kotlin": "1.1.0"
+  },
+  "analyzer_sha256": "8f5dffc0a504e7035e43f95ad13706b14f737fc68b174256245e04ca454a9171",
+  "cases": [
+    {
+      "name": "package_method_foreign",
+      "sources": {
+        "a/T.java": "package a; public class T { void hit() {} }",
+        "b/C.java": "package b; import a.T; class C { void run(T t) { t.hit(); } }"
+      },
+      "source_hashes": {
+        "a/T.java": "5b6b9abedc7df7ce81996c762e28f290799d3413403dd218c8f4c7c7f174c5ab",
+        "b/C.java": "3bd800cddffcfae8a5b35ab02fe7a708d9ca559853a3b0153a14d78d4687900d"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle 2_cvqt4b/package_method_foreign/b/C.java:1: error: hit() is not public in T; cannot be accessed from outside package\npackage b; import a.T; class C { void run(T t) { t.hit(); } }\n                                                  ^\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "b/C.java::b.C.run:method(T)",
+        "scope_id": "b/C.java::b.C.run:method(T)",
+        "kind": "calls",
+        "name": "t.hit",
+        "member": "hit",
+        "receiver": "t",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "static_context": false,
+        "path": "b/C.java",
+        "line": 1,
+        "evidence": "t.hit()",
+        "resolved": false,
+        "reason": "package-private declaration outside its package"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "package_method_same",
+      "sources": {
+        "a/T.java": "package a; public class T { void hit() {} }",
+        "a/C.java": "package a; class C { void run(T t) { t.hit(); } }"
+      },
+      "source_hashes": {
+        "a/T.java": "5b6b9abedc7df7ce81996c762e28f290799d3413403dd218c8f4c7c7f174c5ab",
+        "a/C.java": "07a7314102f5af9cfadcc802d97eb021b00bc69dc70db0e81964653d850a7c28"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "a/C.java::a.C.run:method(T)",
+        "scope_id": "a/C.java::a.C.run:method(T)",
+        "kind": "calls",
+        "name": "t.hit",
+        "member": "hit",
+        "receiver": "t",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "static_context": false,
+        "path": "a/C.java",
+        "line": 1,
+        "evidence": "t.hit()",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "a/T.java::a.T.hit:method()",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "a/C.java::a.C.run:method(T)",
+          "target": "a/T.java::a.T.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "t.hit()",
+          "path": "a/C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "public_method_foreign",
+      "sources": {
+        "a/T.java": "package a; public class T { public void hit() {} }",
+        "b/C.java": "package b; import a.T; class C { void run(T t) { t.hit(); } }"
+      },
+      "source_hashes": {
+        "a/T.java": "fdc542d384f1df56ca5c889345b63330895bc6a02f7e0d69e49946088ae333fe",
+        "b/C.java": "3bd800cddffcfae8a5b35ab02fe7a708d9ca559853a3b0153a14d78d4687900d"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "b/C.java::b.C.run:method(T)",
+        "scope_id": "b/C.java::b.C.run:method(T)",
+        "kind": "calls",
+        "name": "t.hit",
+        "member": "hit",
+        "receiver": "t",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "static_context": false,
+        "path": "b/C.java",
+        "line": 1,
+        "evidence": "t.hit()",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "a/T.java::a.T.hit:method()",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "b/C.java::b.C.run:method(T)",
+          "target": "a/T.java::a.T.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "t.hit()",
+          "path": "b/C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "protected_method_foreign",
+      "sources": {
+        "a/T.java": "package a; public class T { protected void hit() {} }",
+        "b/C.java": "package b; import a.T; class C { void run(T t) { t.hit(); } }"
+      },
+      "source_hashes": {
+        "a/T.java": "8507333b7dce128553c6da0a9bc0df69150fffb108c26c5a59e9bdfe228cf053",
+        "b/C.java": "3bd800cddffcfae8a5b35ab02fe7a708d9ca559853a3b0153a14d78d4687900d"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle 2_cvqt4b/protected_method_foreign/b/C.java:1: error: hit() has protected access in T\npackage b; import a.T; class C { void run(T t) { t.hit(); } }\n                                                  ^\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "b/C.java::b.C.run:method(T)",
+        "scope_id": "b/C.java::b.C.run:method(T)",
+        "kind": "calls",
+        "name": "t.hit",
+        "member": "hit",
+        "receiver": "t",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "static_context": false,
+        "path": "b/C.java",
+        "line": 1,
+        "evidence": "t.hit()",
+        "resolved": false,
+        "reason": "protected declaration across packages requires subtype and receiver analysis"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "protected_method_same",
+      "sources": {
+        "a/T.java": "package a; public class T { protected void hit() {} }",
+        "a/C.java": "package a; class C { void run(T t) { t.hit(); } }"
+      },
+      "source_hashes": {
+        "a/T.java": "8507333b7dce128553c6da0a9bc0df69150fffb108c26c5a59e9bdfe228cf053",
+        "a/C.java": "07a7314102f5af9cfadcc802d97eb021b00bc69dc70db0e81964653d850a7c28"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "a/C.java::a.C.run:method(T)",
+        "scope_id": "a/C.java::a.C.run:method(T)",
+        "kind": "calls",
+        "name": "t.hit",
+        "member": "hit",
+        "receiver": "t",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "static_context": false,
+        "path": "a/C.java",
+        "line": 1,
+        "evidence": "t.hit()",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "a/T.java::a.T.hit:method()",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "a/C.java::a.C.run:method(T)",
+          "target": "a/T.java::a.T.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "t.hit()",
+          "path": "a/C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "package_class_foreign",
+      "sources": {
+        "a/T.java": "package a; class T { public void hit() {} }",
+        "b/C.java": "package b; import a.T; class C { void run(T t) { t.hit(); } }"
+      },
+      "source_hashes": {
+        "a/T.java": "7a7f603f9168fa703f0643d09048d755953b83cb284dd5c9e24299821191a4d9",
+        "b/C.java": "3bd800cddffcfae8a5b35ab02fe7a708d9ca559853a3b0153a14d78d4687900d"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle 2_cvqt4b/package_class_foreign/b/C.java:1: error: T is not public in a; cannot be accessed from outside package\npackage b; import a.T; class C { void run(T t) { t.hit(); } }\n                   ^\n/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle 2_cvqt4b/package_class_foreign/b/C.java:1: error: T is not public in a; cannot be accessed from outside package\npackage b; import a.T; class C { void run(T t) { t.hit(); } }\n                                          ^\n2 errors\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "b/C.java::b.C.run:method(T)",
+        "scope_id": "b/C.java::b.C.run:method(T)",
+        "kind": "calls",
+        "name": "t.hit",
+        "member": "hit",
+        "receiver": "t",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "static_context": false,
+        "path": "b/C.java",
+        "line": 1,
+        "evidence": "t.hit()",
+        "resolved": false,
+        "reason": "package-private declaration outside its package"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "package_class_same",
+      "sources": {
+        "a/T.java": "package a; class T { public void hit() {} }",
+        "a/C.java": "package a; class C { void run(T t) { t.hit(); } }"
+      },
+      "source_hashes": {
+        "a/T.java": "7a7f603f9168fa703f0643d09048d755953b83cb284dd5c9e24299821191a4d9",
+        "a/C.java": "07a7314102f5af9cfadcc802d97eb021b00bc69dc70db0e81964653d850a7c28"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "a/C.java::a.C.run:method(T)",
+        "scope_id": "a/C.java::a.C.run:method(T)",
+        "kind": "calls",
+        "name": "t.hit",
+        "member": "hit",
+        "receiver": "t",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "static_context": false,
+        "path": "a/C.java",
+        "line": 1,
+        "evidence": "t.hit()",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "a/T.java::a.T.hit:method()",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "a/C.java::a.C.run:method(T)",
+          "target": "a/T.java::a.T.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "t.hit()",
+          "path": "a/C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "public_interface_method",
+      "sources": {
+        "a/T.java": "package a; public interface T { void hit(); }",
+        "b/C.java": "package b; import a.T; class C { void run(T t) { t.hit(); } }"
+      },
+      "source_hashes": {
+        "a/T.java": "f9f7f748106088d95c1ece366c7cf07c889c1d387b43e7b9e9c2b714851d43ae",
+        "b/C.java": "3bd800cddffcfae8a5b35ab02fe7a708d9ca559853a3b0153a14d78d4687900d"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "b/C.java::b.C.run:method(T)",
+        "scope_id": "b/C.java::b.C.run:method(T)",
+        "kind": "calls",
+        "name": "t.hit",
+        "member": "hit",
+        "receiver": "t",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "static_context": false,
+        "path": "b/C.java",
+        "line": 1,
+        "evidence": "t.hit()",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "a/T.java::a.T.hit:method()",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "b/C.java::b.C.run:method(T)",
+          "target": "a/T.java::a.T.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "t.hit()",
+          "path": "b/C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "nested_package_class_foreign",
+      "sources": {
+        "a/T.java": "package a; public class T { static class Inner { public void hit() {} } }",
+        "b/C.java": "package b; import a.T.Inner; class C { void run(Inner t) { t.hit(); } }"
+      },
+      "source_hashes": {
+        "a/T.java": "13bcceb2a56e77b48b1e31b22742b337d77a14e17c43482a533e93fef8250c79",
+        "b/C.java": "e7207320c40ce30538630cc9f29fd57a908c08f0fc7905a3f58325760d03f7a0"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle 2_cvqt4b/nested_package_class_foreign/b/C.java:1: error: Inner is not public in T; cannot be accessed from outside package\npackage b; import a.T.Inner; class C { void run(Inner t) { t.hit(); } }\n                     ^\n/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle 2_cvqt4b/nested_package_class_foreign/b/C.java:1: error: Inner is not public in T; cannot be accessed from outside package\npackage b; import a.T.Inner; class C { void run(Inner t) { t.hit(); } }\n                                                ^\n2 errors\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "b/C.java::b.C.run:method(Inner)",
+        "scope_id": "b/C.java::b.C.run:method(Inner)",
+        "kind": "calls",
+        "name": "t.hit",
+        "member": "hit",
+        "receiver": "t",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "static_context": false,
+        "path": "b/C.java",
+        "line": 1,
+        "evidence": "t.hit()",
+        "resolved": false,
+        "reason": "package-private declaration outside its package"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "nested_public_class_foreign",
+      "sources": {
+        "a/T.java": "package a; public class T { public static class Inner { public void hit() {} } }",
+        "b/C.java": "package b; import a.T.Inner; class C { void run(Inner t) { t.hit(); } }"
+      },
+      "source_hashes": {
+        "a/T.java": "95239ce434771ad824a4ce9805cedcea15603f8900b21dc1c8eb7ff7504958f6",
+        "b/C.java": "e7207320c40ce30538630cc9f29fd57a908c08f0fc7905a3f58325760d03f7a0"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "b/C.java::b.C.run:method(Inner)",
+        "scope_id": "b/C.java::b.C.run:method(Inner)",
+        "kind": "calls",
+        "name": "t.hit",
+        "member": "hit",
+        "receiver": "t",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "static_context": false,
+        "path": "b/C.java",
+        "line": 1,
+        "evidence": "t.hit()",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "a/T.java::a.T.Inner.hit:method()",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "b/C.java::b.C.run:method(Inner)",
+          "target": "a/T.java::a.T.Inner.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "t.hit()",
+          "path": "b/C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "interface_implicit_public_nested",
+      "sources": {
+        "a/T.java": "package a; public interface T { class Inner { public void hit() {} } }",
+        "b/C.java": "package b; import a.T.Inner; class C { void run(Inner t) { t.hit(); } }"
+      },
+      "source_hashes": {
+        "a/T.java": "905da1556dd5a64cc698e1909807aaa4a635263aade56bdc74cbca1aae2cd264",
+        "b/C.java": "e7207320c40ce30538630cc9f29fd57a908c08f0fc7905a3f58325760d03f7a0"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "b/C.java::b.C.run:method(Inner)",
+        "scope_id": "b/C.java::b.C.run:method(Inner)",
+        "kind": "calls",
+        "name": "t.hit",
+        "member": "hit",
+        "receiver": "t",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "static_context": false,
+        "path": "b/C.java",
+        "line": 1,
+        "evidence": "t.hit()",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "a/T.java::a.T.Inner.hit:method()",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "b/C.java::b.C.run:method(Inner)",
+          "target": "a/T.java::a.T.Inner.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "t.hit()",
+          "path": "b/C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "private_owner_foreign",
+      "sources": {
+        "a/T.java": "package a; public class T { private static class Inner { public void hit() {} } }",
+        "a/C.java": "package a; import a.T.Inner; class C { void run(Inner t) { t.hit(); } }"
+      },
+      "source_hashes": {
+        "a/T.java": "2d281fdc9f26f4577f3dd89ad093f021ba24d236eb89f12d5b42de8dbce31a31",
+        "a/C.java": "51503e1381290824b34a589ff24e6d1ee612e4c336f14ce1cff813882695a490"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle 2_cvqt4b/private_owner_foreign/a/C.java:1: error: Inner has private access in T\npackage a; import a.T.Inner; class C { void run(Inner t) { t.hit(); } }\n                     ^\n/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle 2_cvqt4b/private_owner_foreign/a/C.java:1: error: Inner has private access in T\npackage a; import a.T.Inner; class C { void run(Inner t) { t.hit(); } }\n                                                ^\n2 errors\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "a/C.java::a.C.run:method(Inner)",
+        "scope_id": "a/C.java::a.C.run:method(Inner)",
+        "kind": "calls",
+        "name": "t.hit",
+        "member": "hit",
+        "receiver": "t",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "static_context": false,
+        "path": "a/C.java",
+        "line": 1,
+        "evidence": "t.hit()",
+        "resolved": false,
+        "reason": "private declaration outside the enclosing top-level type"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "package_base_foreign",
+      "sources": {
+        "a/T.java": "package a; class T {}",
+        "b/C.java": "package b; import a.T; class C extends T {}"
+      },
+      "source_hashes": {
+        "a/T.java": "69d6ba35c8be1c9ad9f64435e516c9513432971b1c768c49f2cb14f8c2af92a5",
+        "b/C.java": "d2ba1e75171c92a7223205c56116e7f3eddf59f9382cd662677856ba759d78e2"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle 2_cvqt4b/package_base_foreign/b/C.java:1: error: T is not public in a; cannot be accessed from outside package\npackage b; import a.T; class C extends T {}\n                   ^\n/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle 2_cvqt4b/package_base_foreign/b/C.java:1: error: T is not public in a; cannot be accessed from outside package\npackage b; import a.T; class C extends T {}\n                                       ^\n2 errors\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "b/C.java::b.C:class",
+        "scope_id": "b/C.java::b.C:class",
+        "kind": "inherits",
+        "name": "T",
+        "member": "T",
+        "receiver": "",
+        "constructor": false,
+        "path": "b/C.java",
+        "line": 1,
+        "evidence": "extends T",
+        "resolved": false,
+        "reason": "package-private declaration outside its package"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "package_base_same",
+      "sources": {
+        "a/T.java": "package a; class T {}",
+        "a/C.java": "package a; class C extends T {}"
+      },
+      "source_hashes": {
+        "a/T.java": "69d6ba35c8be1c9ad9f64435e516c9513432971b1c768c49f2cb14f8c2af92a5",
+        "a/C.java": "86e2e301d1e293cef2e80a0b7c7856af64ba255896b97b6937867c69d04a7173"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "a/C.java::a.C:class",
+        "scope_id": "a/C.java::a.C:class",
+        "kind": "inherits",
+        "name": "T",
+        "member": "T",
+        "receiver": "",
+        "constructor": false,
+        "path": "a/C.java",
+        "line": 1,
+        "evidence": "extends T",
+        "resolved": true,
+        "reason": "unique declared base; compiler unverified",
+        "target": "a/T.java::a.T:class",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "a/C.java::a.C:class",
+          "target": "a/T.java::a.T:class",
+          "kind": "inherits",
+          "confidence": "heuristic",
+          "evidence": "extends T",
+          "path": "a/C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "public_base_foreign",
+      "sources": {
+        "a/T.java": "package a; public class T {}",
+        "b/C.java": "package b; import a.T; class C extends T {}"
+      },
+      "source_hashes": {
+        "a/T.java": "6a31a0dd37189e2115a3825a6a9e5fb7d96affa461ea72921d00d01106b97001",
+        "b/C.java": "d2ba1e75171c92a7223205c56116e7f3eddf59f9382cd662677856ba759d78e2"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "b/C.java::b.C:class",
+        "scope_id": "b/C.java::b.C:class",
+        "kind": "inherits",
+        "name": "T",
+        "member": "T",
+        "receiver": "",
+        "constructor": false,
+        "path": "b/C.java",
+        "line": 1,
+        "evidence": "extends T",
+        "resolved": true,
+        "reason": "unique declared base; compiler unverified",
+        "target": "a/T.java::a.T:class",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "b/C.java::b.C:class",
+          "target": "a/T.java::a.T:class",
+          "kind": "inherits",
+          "confidence": "heuristic",
+          "evidence": "extends T",
+          "path": "b/C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "protected_subclass_valid_unresolved",
+      "sources": {
+        "a/T.java": "package a; public class T { protected void hit() {} }",
+        "b/C.java": "package b; import a.T; class C extends T { void run(C c) { c.hit(); } }"
+      },
+      "source_hashes": {
+        "a/T.java": "8507333b7dce128553c6da0a9bc0df69150fffb108c26c5a59e9bdfe228cf053",
+        "b/C.java": "062b565cd9e180295fa54fef3ff9a432f0752444659f34d714ee98ce53dcebd8"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": false,
+      "reference": {
+        "source": "b/C.java::b.C.run:method(C)",
+        "scope_id": "b/C.java::b.C.run:method(C)",
+        "kind": "calls",
+        "name": "c.hit",
+        "member": "hit",
+        "receiver": "c",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "static_context": false,
+        "path": "b/C.java",
+        "line": 1,
+        "evidence": "c.hit()",
+        "resolved": false,
+        "reason": "inherited candidate set and argument applicability required"
+      },
+      "edges": [],
+      "passed": true
+    }
+  ],
+  "passed": true
+}

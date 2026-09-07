@@ -1,0 +1,13 @@
+# Java package and enclosing-type accessibility
+
+On the initial twelve compiler-backed fixtures, the previous resolver emitted all twelve selected call targets, including five calls rejected by javac: foreign package-private methods, foreign protected methods, public methods on inaccessible package-private classes, inaccessible nested classes, and a private nested owner from another top-level class. `before.json` preserves those false edges and compiler diagnostics.
+
+The resolver now checks the selected Java declaration and each enclosing type. It preserves same-package access, private nestmates and implicitly public interface members, rejects inaccessible package-private declarations, and leaves cross-package protected access unresolved where subtype/receiver analysis would be needed. The same accessibility check now guards base-type edges. These checks follow [JLS 6.6.1–6.6.2](https://docs.oracle.com/javase/specs/jls/se17/html/jls-6.html#jls-6.6.1); they do not implement complete module/classpath access or inherited member resolution.
+
+The expanded sixteen-fixture gate passed with both tree-sitter-java 0.23.5 and 0.23.5+columbus.1, using javac 17.0.20.1 with `-proc:none`. Six compiler-invalid fixtures stay unresolved. Nine valid fixtures retain their expected edges. One valid cross-package protected subclass fixture remains unresolved because inherited candidate analysis is unsupported; it is explicitly a coverage omission, not counted as resolved precision. No target program, processor, or repository build was executed; javac compiled only the literal generated fixtures.
+
+`pinned.json` and `candidate.json` retain sources, source hashes, compiler output, analyzer hash, references and edges. `verify_packages.py` is now a blocking step in each of the six candidate platform jobs. Both local engine suites passed 204 tests, the root suite passed 53, and the skill validator passed.
+
+`verify_package_cache.py` built a saved false call with the prior JVM analyzer and then refreshed the unchanged two-file source using the correction. Call counts were 1 → 0 → 0; parsed file counts were 2 → 2 → 0. This confirms analyzer invalidation removes the old edge and a warm unchanged sync preserves the correction (`cache-upgrade.json`). Its first reporting attempt used the wrong metadata key (`fingerprint`); the verifier was corrected to `analyzer_fingerprint` before the successful run.
+
+Issue #8 remains open: argument/reference-type applicability, inherited candidate sets, broader precision coverage, and other semantic limits are not solved by this access check. No new token experiment was run, and no general accuracy or savings claim follows from these fixtures.
