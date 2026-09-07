@@ -1,3 +1,4 @@
+from contextlib import closing
 import gzip
 import json
 from pathlib import Path
@@ -37,7 +38,7 @@ class ArchiveTests(unittest.TestCase):
             self.assertEqual(receipt['imports'], sum(r['record']=='import' for r in rows))
             self.assertEqual(receipt['references'], status['references'])
             self.assertEqual(receipt['diagnostics'], len(status['diagnostics']))
-            with sqlite3.connect(index.db) as conn:
+            with closing(sqlite3.connect(index.db)) as conn:
                 expected = {json.loads(row[0])['id']: json.loads(row[0]) for row in conn.execute('SELECT data FROM symbols')}
             actual = {r['data']['id']: r['data'] for r in rows if r['record'] == 'node'}
             self.assertEqual(actual, expected)

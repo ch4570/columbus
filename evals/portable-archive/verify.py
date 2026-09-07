@@ -1,4 +1,5 @@
 """Verify every archive node and edge against one complete SQLite snapshot."""
+from contextlib import closing
 import gzip
 import hashlib
 import json
@@ -19,7 +20,7 @@ with gzip.open(archive, 'rt', encoding='utf-8') as stream:
             edges.append(row['data'])
         elif row['record'] == 'end':
             counts = row['data']
-with sqlite3.connect(db) as conn:
+with closing(sqlite3.connect(db)) as conn:
     conn.row_factory = sqlite3.Row
     expected_nodes = {row[0]: json.loads(row[1]) for row in conn.execute('SELECT id,data FROM symbols')}
     expected_edges = [dict(row) for row in conn.execute('SELECT * FROM edges ORDER BY source,target,kind,path,line,confidence,evidence')]
