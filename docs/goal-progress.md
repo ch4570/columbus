@@ -76,3 +76,7 @@ The eight reduced failures from the Spring audit are corrected, and both parsers
 ## Generic array context identity follow-up
 
 A compiler probe found one false target caused by treating a source-defined Object as java.lang.Object, plus two valid array-supertype omissions. Resolve context identity before accepting Object/Cloneable/Serializable. Both parsers pass the extended 31-case javac gate and 208 engine tests; fresh Spring source hashes and all 31,408 edge rows equal e8b494d. [Before/after evidence](../evals/jvm-guardrails/results/generic-array-context/REPORT.md). Hosted runs remain pending; overall goal remains incomplete.
+
+## Compressed FTS storage feasibility
+
+An isolated external-content FTS prototype reduces the current Spring DB from a vacuumed control of 106,471,424 bytes to 92,446,720 (13.17%), with exact reconstructed document rows, twelve query candidate/ranking results, and delete/rollback integrity checks. [Evidence and adoption requirements](../evals/spring-core/results/fts-compression-probe/REPORT.md). Production storage is unchanged; migration, full refresh/latency/platform validation remain required before adopting this result. This is evidence for the next storage change, not a token-savings claim.
