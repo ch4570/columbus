@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "artifact_sha256": {
+    "columbus-1.0.0-py3-none-any.whl": "b7808da9a85be1eb4be64508198ddfa465c2c196be95ed428eb9daecabc8fdd0",
+    "columbus-1.0.0.zip": "0b8e05f2400ed2839fc753fd985bfb6bacb673a78abacf7029b12364b58810c8"
+  },
+  "source_revision": "b14c91a4d927afcd61a4d7fd54344a18a3847dc1",
+  "python": "3.11.16 (main, Aug 14 2026, 15:24:25) [Clang 22.1.3 ]",
+  "platform": "darwin",
+  "same_bytes_after_verification": true
+}

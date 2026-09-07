@@ -69,3 +69,47 @@ jobs:
         with:
           name: java-candidate-${{ matrix.os }}-py${{ matrix.python }}
           path: candidate-results/
+
+  aggregate:
+    needs: candidate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: java-candidate-*-py3.11
+          path: aggregate-inputs
+      - name: Assemble one three-OS parser ZIP and Columbus wheel
+        run: python evals/java-grammar/aggregate.py assemble aggregate-inputs aggregate-artifacts
+      - uses: actions/upload-artifact@v4
+        with:
+          name: java-aggregate-distribution
+          path: aggregate-artifacts/
+
+  aggregate-verify:
+    needs: aggregate
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python: ['3.11', '3.14']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: java-aggregate-distribution
+          path: aggregate-artifacts
+      - name: Verify the unchanged shared artifact through installation and upgrade
+        run: python evals/java-grammar/aggregate.py verify aggregate-artifacts aggregate-results
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: java-aggregate-check-${{ matrix.os }}-py${{ matrix.python }}
+          path: aggregate-results/
