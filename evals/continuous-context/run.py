@@ -42,7 +42,7 @@ def execute(output, condition, model, effort, timeout):
                   "Only this scratch working directory may be written.\n")
         if condition == 'columbus':
             prompt += (f"Read the skill at {output/'runtime/SKILL.md'} if not already retained. "
-                       f"Use command prefix {prefix} with --repo {shlex.quote(str(repository))} --snapshot. "
+                       f"Use command prefix {prefix} with --repo {shlex.quote(str(repository))} before the subcommand; put --snapshot after the subcommand and query. "
                        f"For overlapping snippet retrieval use context QUERY --receipt {shlex.quote(str(scratch/'receipt.json'))}; "
                        "this receipt belongs to you while you retain its delivered source. Ordinary source search remains available.\n")
         else:
