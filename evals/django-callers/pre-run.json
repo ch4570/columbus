@@ -1,0 +1,10 @@
+{
+  "files": {
+    "evals/exploration/observe.py": "76d95236123039eb808a44e6c19b8f551aebb84c3cc8be3856118eb8abe29374",
+    "evals/exploration/answer.schema.json": "a5aff654fe899a710cbf44ad63e97f4d4818e314e24c2d71af29c4c4c863ae83",
+    "evals/django-callers/cases.json": "155b24f37831ecf9d2ddb8194b3a861510ad6a4e21e140443f9eb28db46b8534",
+    "evals/django-callers/SOURCE-REVIEW.md": "9855662fbcb8d2de85e475e9e9e5c5b7223b98e50f6b604be357a6b84b8713d6"
+  },
+  "database_sha256": "d22ce7a95eb6f541b7b948695d9f42d234391996187cc5ae8ec4306aab218223",
+  "model_trials_started": false
+}
