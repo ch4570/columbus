@@ -36,3 +36,9 @@ These commands do not create SQLite or read project source. They return source l
 The agent skill includes this route in its archive reference. Install the managed skill with `columbus init --repo /path/to/project`; tell the agent where the versioned graph is located. This does not automatically force graph use or establish model-token savings.
 
 The [executable workflow probe](../evals/archive-workflow/verify.py) creates a small Git repository, tracks the archive but excludes SQLite, deletes the producer, and verifies incoming calls using only the moved graph. [Receipts and limits](../evals/archive-workflow/REPORT.md).
+
+## Optional XZ storage
+
+XZ requires source revision `69eb8d56ccd8ab7b8e5e133a8d2158819fafa12f` or a later descendant; the older pinned revision in the basic example supports gzip only. With an XZ-capable installation, use `archive --output codegraph/graph-v1.jsonl.xz --compression xz` and pass that file to the same archive-search/archive-neighbors commands. Current readers detect the codec from its contents. Older readers cannot open XZ. The `.xz` artifact is excluded from source indexing and can be committed outside `.columbus/` just like gzip.
+
+XZ preserves the same complete JSONL content and saves storage, with slower decompression. The recorded full Django example is about 8.59 MB instead of 10.73 MB; one search plus three caller pages took about 10.70 seconds instead of 7.47 seconds on one unflushed host. Keep gzip for repeated-query speed or older-reader compatibility. Use a new filename for every export; existing files are not overwritten.
