@@ -13,3 +13,11 @@ Validation: all **194 engine tests** passed. Direct CLI checks confirmed a 1,024
 ## Clean installation follow-up
 
 The distribution verifier now exercises `callers` after both wheel installation and ZIP bootstrap/source relocation. It checks nested lexical ownership, the exact caller set, source hash and confidence, compact 1,024-byte output, and rejection after modifying the indexed source. The source is restored and resynchronized after the negative check. The [local distribution receipt](distribution.json) confirms both paths passed on macOS arm64 / Python 3.11, alongside archive, installed-skill, session and hook checks. Root bootstrap/distribution unit tests also pass (49). Hosted matrix coverage for this extension remains pending.
+
+## Hosted matrix
+
+At commit `b4528c4`, all six ordinary distribution jobs passed ([run](https://github.com/ch4570/columbus/actions/runs/34142711192), [receipt](platform/final.json)). All six experimental Java grammar jobs also passed ([run](https://github.com/ch4570/columbus/actions/runs/34142722041), [receipt](platform/candidate.json)), including candidate upgrade/downgrade and clean wheel/relocated-ZIP caller checks ([installation receipts](platform/candidate-installations.json)). Matrix: Ubuntu/macOS/Windows × Python 3.11/3.14.
+
+The initial ordinary run failed on Windows because the Unicode regression fixture was written using the OS default encoding, while Python source without an encoding declaration requires UTF-8. Explicit UTF-8 fixture reads/writes fixed the test; parser behavior was unchanged. The [initial failure receipt](platform/initial.json) is retained. Hosted tests remain scoped evidence; passing distributions do not prove model-token savings.
+
+The [actual packet model comparison](../exploration/results/caller-packet/REPORT.md) passed both answer-quality gates but increased total input tokens 80.81%; the agent reread supplied citations in separate shell calls. That regression remains an active goal gap.
