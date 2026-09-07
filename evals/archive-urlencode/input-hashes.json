@@ -1,0 +1,12 @@
+{
+  "evals/archive-urlencode/cases.json": "a94545f7993686e434e13ac808c2c54f98cde758407680816613a8f6a3fd8525",
+  "evals/archive-urlencode/SOURCE-REVIEW.md": "aa32acf39ad802481f336e0795a65b9484c0b27a5e1f8324cabf1b2f57b26554",
+  "evals/archive-urlencode/oracle.json": "05b0b682aaffbc92b15655d4ef463cea5376e92144fbf0784ad80b19f783cf1b",
+  "evals/archive-urlencode/attribute-exclusions.json": "e77bc82d0453ce121920d247282a1a163d22708e86149a3f4b9a86e7ec09617c",
+  "evals/archive-urlencode/verify_frozen.py": "234000ce3df78572be4ecde70b51af7a982206957dcc1fa386347d0ad8504eaf",
+  "evals/archive-urlencode/verify_context.py": "ffd885e51dbdad3f35e07e91fc3c5f3dcff0f4a28af14d1f4730e34fdbd550b1",
+  "evals/archive-urlencode/validate.py": "820cf57034ff94ce19bd9c6863a70364f20c038a0ad24952523436b21faad8c7",
+  "evals/exploration/observe.py": "d0c35c72e5e4747a25575b5def7a8be814ee54c925734db635ed562ea8016d80",
+  "evals/exploration/answer.schema.json": "a5aff654fe899a710cbf44ad63e97f4d4818e314e24c2d71af29c4c4c863ae83",
+  "evals/archive-exploration/preflight.py": "981d18f13648886ac4198caba36339f8d855d4f02bbea1f75ae26d0268326869"
+}
