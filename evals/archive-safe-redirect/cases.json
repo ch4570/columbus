@@ -1,0 +1,29 @@
+{
+  "schema": "columbus.exploration-cases/v1",
+  "cases": [
+    {
+      "id": "archive-safe-redirect",
+      "mode": "caller-enumeration",
+      "question": "Find every Python function or method under django/ containing a syntactic direct call to django.utils.http.url_has_allowed_host_and_scheme in this checkout. Include library code under django/test/ and exclude the top-level tests/ directory. Explain the candidate URL, allowed hosts and HTTPS requirement each caller supplies, the conditions that execute or bypass each call, and the surrounding accept/reject behavior and fallback. Distinguish similarly named functions and receiver methods by their definitions/imports. Include nested functions as their own lexical callers if present. Do not list higher-order-only or transitive callers, and distinguish source-level calls from runtime reachability.",
+      "findings": [
+        {
+          "id": "RedirectURLMixin.get_redirect_url",
+          "path": "django/contrib/auth/views.py",
+          "marker": "url_has_allowed_host_and_scheme(",
+          "call_lines": [
+            48
+          ]
+        },
+        {
+          "id": "set_language",
+          "path": "django/views/i18n.py",
+          "marker": "url_has_allowed_host_and_scheme(",
+          "call_lines": [
+            44,
+            50
+          ]
+        }
+      ]
+    }
+  ]
+}
