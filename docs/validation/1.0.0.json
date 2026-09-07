@@ -151,7 +151,7 @@
         "macos-latest Python3.14",
         "windows-latest Python3.11"
       ],
-      "windows_314": "Current engine169 androot49 passed; frozen RepoAtlas0.4 replay failed."
+      "windows_314": "Current engine: 169 passed. Root: 48 passed, 1 POSIX-only test skipped. Frozen RepoAtlas 0.4 replay failed."
     },
     "url": "https://github.com/ch4570/columbus/actions/runs/34102393386",
     "source_commit": "4f636670205d0b9a81bdcaa53cf744de325cd1c5",
@@ -162,7 +162,9 @@
         "conclusion": "success",
         "url": "https://github.com/ch4570/columbus/actions/runs/34102393386/job/101679556482",
         "test_outcome": {
+          "discovered": 230,
           "passed": 230,
+          "skipped_posix_only": 0,
           "skipped_archived_replay": 0
         }
       },
@@ -172,7 +174,9 @@
         "conclusion": "success",
         "url": "https://github.com/ch4570/columbus/actions/runs/34102393386/job/101679556492",
         "test_outcome": {
-          "passed": 230,
+          "discovered": 230,
+          "passed": 229,
+          "skipped_posix_only": 1,
           "skipped_archived_replay": 0
         }
       },
@@ -182,7 +186,9 @@
         "conclusion": "success",
         "url": "https://github.com/ch4570/columbus/actions/runs/34102393386/job/101679556601",
         "test_outcome": {
+          "discovered": 230,
           "passed": 230,
+          "skipped_posix_only": 0,
           "skipped_archived_replay": 0
         }
       },
@@ -192,7 +198,9 @@
         "conclusion": "success",
         "url": "https://github.com/ch4570/columbus/actions/runs/34102393386/job/101679556744",
         "test_outcome": {
-          "passed": 229,
+          "discovered": 230,
+          "passed": 228,
+          "skipped_posix_only": 1,
           "skipped_archived_replay": 1
         }
       },
@@ -202,7 +210,9 @@
         "conclusion": "success",
         "url": "https://github.com/ch4570/columbus/actions/runs/34102393386/job/101679556752",
         "test_outcome": {
+          "discovered": 230,
           "passed": 230,
+          "skipped_posix_only": 0,
           "skipped_archived_replay": 0
         }
       },
@@ -212,7 +222,9 @@
         "conclusion": "success",
         "url": "https://github.com/ch4570/columbus/actions/runs/34102393386/job/101679556794",
         "test_outcome": {
+          "discovered": 230,
           "passed": 230,
+          "skipped_posix_only": 0,
           "skipped_archived_replay": 0
         }
       }
@@ -246,5 +258,11 @@
     "integrity_and_current_engine_tests": "still execute",
     "other_platforms": "archived replay still executes",
     "note": "An excluded historical replay is not a passed execution."
+  },
+  "platform_specific_exception": {
+    "platform": "win32",
+    "scope": "POSIX interpreter alias ownership test",
+    "skipped_tests_per_windows_job": 1,
+    "reason": "This interpreter alias exists only on POSIX; covered on Ubuntu and macOS."
   }
 }
