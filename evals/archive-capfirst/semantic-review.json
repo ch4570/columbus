@@ -1,0 +1,84 @@
+{
+  "baseline": {
+    "exact_set_and_citations_passed": true,
+    "semantic_passed": false,
+    "findings": [
+      {
+        "id": "SeleniumTestCaseBase.__new__",
+        "passed": false,
+        "note": "Correctly identifies additional-browser calls and bypasses, but omits the predeclared skipped-class result when no browsers are configured."
+      },
+      {
+        "id": "Model.date_error_message",
+        "passed": true,
+        "note": "Meets the reviewed caller behavior; no contradictory control-flow claim."
+      },
+      {
+        "id": "Model.unique_error_message",
+        "passed": true,
+        "note": "Meets the reviewed caller behavior; no contradictory control-flow claim."
+      },
+      {
+        "id": "Field.formfield",
+        "passed": true,
+        "note": "Meets the reviewed caller behavior; no contradictory control-flow claim."
+      },
+      {
+        "id": "BaseInlineFormSet.add_fields",
+        "passed": true,
+        "note": "Meets the reviewed caller behavior; no contradictory control-flow claim."
+      },
+      {
+        "id": "AdminSite._build_app_dict",
+        "passed": true,
+        "note": "Meets the reviewed caller behavior; no contradictory control-flow claim."
+      },
+      {
+        "id": "get_deleted_objects.format_callback",
+        "passed": true,
+        "note": "Meets the reviewed caller behavior; no contradictory control-flow claim."
+      },
+      {
+        "id": "ModelAdmin._get_action_description",
+        "passed": true,
+        "note": "Meets the reviewed caller behavior; no contradictory control-flow claim."
+      },
+      {
+        "id": "ModelAdmin.history_view",
+        "passed": false,
+        "note": "Omits the predeclared extra_context override of module_name; conversion and early exits are otherwise correct."
+      },
+      {
+        "id": "date_hierarchy",
+        "passed": false,
+        "note": "Omits the predeclared initial date-range inference that can select year/month detail without query lookups; all four call-site inputs and subsequent branches are covered."
+      },
+      {
+        "id": "AuthenticationForm.__init__",
+        "passed": true,
+        "note": "Meets the reviewed caller behavior; no contradictory control-flow claim."
+      },
+      {
+        "id": "Command.handle",
+        "passed": true,
+        "note": "Meets the reviewed caller behavior; no contradictory control-flow claim."
+      },
+      {
+        "id": "Command._get_input_message",
+        "passed": true,
+        "note": "Meets the reviewed caller behavior; no contradictory control-flow claim."
+      },
+      {
+        "id": "Command._validate_username",
+        "passed": true,
+        "note": "Meets the reviewed caller behavior; no contradictory control-flow claim."
+      }
+    ],
+    "reason": "Strict predeclared SOURCE-REVIEW criteria include the omitted behaviors; preserve this failure rather than weakening the gate after observing the answer."
+  },
+  "columbus": {
+    "exact_set_and_citations_passed": false,
+    "semantic_passed": false,
+    "reason": "Timed out without a final answer. There is no semantic answer to grade; do not infer quality from intermediate reasoning."
+  }
+}

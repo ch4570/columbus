@@ -1,0 +1,25 @@
+{
+  "source_manifest_equal": true,
+  "runtime_manifest_equal": true,
+  "archive_postflight": {
+    "passed": true,
+    "archive_sha256": "84db1ce7bd993494a74940fb6955d69441f35c7cb69b5e77b9b4ed42961f8fda",
+    "revision": "e7d7a584021b01ff78c7",
+    "source_files_verified": 6928,
+    "indexed_source_files_verified": 5465,
+    "counts": {
+      "files": 5465,
+      "nodes": 46630,
+      "scopes": 46964,
+      "edges": 86828,
+      "references": 188003,
+      "imports": 18268,
+      "diagnostics": 1
+    },
+    "consumer_index_absent": true
+  },
+  "harness_schema_case_review_hashes_equal": true,
+  "both_trials_terminal": true,
+  "semantic_review_pending": false,
+  "accepted_savings_comparison": false
+}
