@@ -13,6 +13,20 @@ spec.loader.exec_module(observe)
 
 
 class ObservationTests(unittest.TestCase):
+    def test_reachability_hides_set_and_rejects_extra_or_wrong_evidence(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / 'x.py').write_text('class Hidden:\n    def indirect(self): self.helper()\n')
+            case = {'mode': 'reachability-enumeration', 'findings': [
+                {'id': 'Hidden.indirect', 'path': 'x.py', 'marker': 'self.helper(', 'call_lines': [2]}]}
+            self.assertNotIn('Hidden.indirect', observe.finding_request(case))
+            finding = {'id': 'Hidden.indirect', 'path': 'x.py', 'start_line': 2, 'end_line': 2,
+                       'quote': 'def indirect(self): self.helper()', 'explanation': 'Lexical path, not a runtime guarantee.'}
+            self.assertTrue(observe.grade({'findings': [finding]}, case, root)['passed'])
+            self.assertFalse(observe.grade({'findings': [finding, {**finding, 'id': 'Hidden.extra'}]}, case, root)['passed'])
+            self.assertFalse(observe.grade({'findings': [{**finding, 'start_line': 1, 'end_line': 1}]}, case, root)['passed'])
+            self.assertFalse(observe.grade({'findings': [finding, finding]}, case, root)['passed'])
+
     def test_usage_cache_is_subset_and_output_not_estimated(self):
         result = observe.parse_events([
             {'type':'item.completed','item':{'type':'command_execution','command':'rg name','exit_code':0,'aggregated_output':'환불\n'}},

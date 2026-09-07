@@ -207,6 +207,11 @@ def live_index_preflight(output: Path, frozen: dict) -> dict:
 
 
 def finding_request(case: dict) -> str:
+    if case.get('mode') == 'reachability-enumeration':
+        return ('Enumerate every qualifying method exactly once using Class.method as its finding ID. '
+                'Cite its first call handoff in one contiguous verbatim excerpt. '
+                'In the explanation give the ordered shortest path, its hop count, and the source-level '
+                'assumptions; do not claim runtime dispatch is proven. Do not add helper functions as findings.')
     if case.get('mode') == 'caller-enumeration':
         return ('Enumerate every direct lexical caller exactly once. Use its qualified function name '
                 'as the finding ID (Class.method or outer.inner for nested functions). '
@@ -247,13 +252,13 @@ def grade(answer: dict, case: dict, snapshot: Path) -> dict:
                 else:
                     valid, reason = True, 'mechanism and code-line quote grounded in bounded source range (indentation ignored)'
         results.append({'id': expected['id'], 'passed': valid, 'reason': reason})
-    if case.get('mode') == 'caller-enumeration':
+    if case.get('mode') in {'caller-enumeration', 'reachability-enumeration'}:
         wanted = {f['id'] for f in case['findings']}
         extras = [f.get('id') for f in findings if f.get('id') not in wanted]
         results.append({'id': '__exact_caller_set__', 'passed': not extras,
                         'reason': 'unexpected callers: ' + repr(extras) if extras else 'no extra callers'})
     return {'passed': all(r['passed'] for r in results), 'findings': results,
-            'grader_version': 'caller-enumeration-1' if case.get('mode') == 'caller-enumeration' else 2,
+            'grader_version': case['mode'] + '-1' if case.get('mode') in {'caller-enumeration', 'reachability-enumeration'} else 2,
             'note': 'Checks source locations and quoted mechanisms; explanation semantics are reviewed separately.'}
 
 
