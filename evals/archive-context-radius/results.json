@@ -1,0 +1,283 @@
+{
+  "archive_sha256": "628c02774deaef31a5dc16fde0d7f97565280e69809dd4f9196b700ac35482be",
+  "measurements": [
+    {
+      "radius": 2,
+      "pages": [
+        {
+          "offset": 0,
+          "bytes": 8000,
+          "next_offset": null
+        }
+      ],
+      "total_bytes": 8000,
+      "sites": [
+        [
+          "django/contrib/admin/options.py::ModelAdmin.get_preserved_filters:method",
+          1267
+        ],
+        [
+          "django/contrib/admin/templatetags/admin_urls.py::add_preserved_filters:function",
+          69
+        ],
+        [
+          "django/contrib/admin/views/main.py::ChangeList.get_query_string:method",
+          306
+        ],
+        [
+          "django/contrib/admin/widgets.py::ForeignKeyRawIdWidget.get_context:method",
+          162
+        ],
+        [
+          "django/test/client.py::AsyncRequestFactory.generic:method",
+          766
+        ],
+        [
+          "django/test/client.py::RequestFactory.__init__:method",
+          399
+        ],
+        [
+          "django/test/client.py::RequestFactory.generic:method",
+          665
+        ]
+      ],
+      "ranges": [
+        {
+          "source_id": "django/contrib/admin/options.py::ModelAdmin.get_preserved_filters:method",
+          "path": "django/contrib/admin/options.py",
+          "start_line": 1265,
+          "end_line": 1268,
+          "source_hash": "50c6c655c2644b71a1b6bdeba04a016b70f9be47c5dbfd50c64361bbbeff176a"
+        },
+        {
+          "source_id": "django/contrib/admin/templatetags/admin_urls.py::add_preserved_filters:function",
+          "path": "django/contrib/admin/templatetags/admin_urls.py",
+          "start_line": 67,
+          "end_line": 70,
+          "source_hash": "1cda287b6eb0cad30b8790dd80eab37321ed35fe06faf59f72c2fbc5095656e1"
+        },
+        {
+          "source_id": "django/contrib/admin/views/main.py::ChangeList.get_query_string:method",
+          "path": "django/contrib/admin/views/main.py",
+          "start_line": 304,
+          "end_line": 306,
+          "source_hash": "3660bc9614d1715c454d0e8365981cc64481d1a08787a4d53b9c621fcb493cbd"
+        },
+        {
+          "source_id": "django/contrib/admin/widgets.py::ForeignKeyRawIdWidget.get_context:method",
+          "path": "django/contrib/admin/widgets.py",
+          "start_line": 160,
+          "end_line": 164,
+          "source_hash": "ba33ae129ec36f5d8a2047237bbfebcb9e6afc5212ca178117eec4df3f1dac58"
+        },
+        {
+          "source_id": "django/test/client.py::AsyncRequestFactory.generic:method",
+          "path": "django/test/client.py",
+          "start_line": 764,
+          "end_line": 768,
+          "source_hash": "822196b11aec0ad9e53c70f90295483b4cc2fd5b2e60c2d3c9af3fdf42aa9d2c"
+        },
+        {
+          "source_id": "django/test/client.py::RequestFactory.__init__:method",
+          "path": "django/test/client.py",
+          "start_line": 397,
+          "end_line": 399,
+          "source_hash": "822196b11aec0ad9e53c70f90295483b4cc2fd5b2e60c2d3c9af3fdf42aa9d2c"
+        },
+        {
+          "source_id": "django/test/client.py::RequestFactory.generic:method",
+          "path": "django/test/client.py",
+          "start_line": 663,
+          "end_line": 667,
+          "source_hash": "822196b11aec0ad9e53c70f90295483b4cc2fd5b2e60c2d3c9af3fdf42aa9d2c"
+        }
+      ]
+    },
+    {
+      "radius": 4,
+      "pages": [
+        {
+          "offset": 0,
+          "bytes": 8738,
+          "next_offset": null
+        }
+      ],
+      "total_bytes": 8738,
+      "sites": [
+        [
+          "django/contrib/admin/options.py::ModelAdmin.get_preserved_filters:method",
+          1267
+        ],
+        [
+          "django/contrib/admin/templatetags/admin_urls.py::add_preserved_filters:function",
+          69
+        ],
+        [
+          "django/contrib/admin/views/main.py::ChangeList.get_query_string:method",
+          306
+        ],
+        [
+          "django/contrib/admin/widgets.py::ForeignKeyRawIdWidget.get_context:method",
+          162
+        ],
+        [
+          "django/test/client.py::AsyncRequestFactory.generic:method",
+          766
+        ],
+        [
+          "django/test/client.py::RequestFactory.__init__:method",
+          399
+        ],
+        [
+          "django/test/client.py::RequestFactory.generic:method",
+          665
+        ]
+      ],
+      "ranges": [
+        {
+          "source_id": "django/contrib/admin/options.py::ModelAdmin.get_preserved_filters:method",
+          "path": "django/contrib/admin/options.py",
+          "start_line": 1263,
+          "end_line": 1268,
+          "source_hash": "50c6c655c2644b71a1b6bdeba04a016b70f9be47c5dbfd50c64361bbbeff176a"
+        },
+        {
+          "source_id": "django/contrib/admin/templatetags/admin_urls.py::add_preserved_filters:function",
+          "path": "django/contrib/admin/templatetags/admin_urls.py",
+          "start_line": 65,
+          "end_line": 70,
+          "source_hash": "1cda287b6eb0cad30b8790dd80eab37321ed35fe06faf59f72c2fbc5095656e1"
+        },
+        {
+          "source_id": "django/contrib/admin/views/main.py::ChangeList.get_query_string:method",
+          "path": "django/contrib/admin/views/main.py",
+          "start_line": 302,
+          "end_line": 306,
+          "source_hash": "3660bc9614d1715c454d0e8365981cc64481d1a08787a4d53b9c621fcb493cbd"
+        },
+        {
+          "source_id": "django/contrib/admin/widgets.py::ForeignKeyRawIdWidget.get_context:method",
+          "path": "django/contrib/admin/widgets.py",
+          "start_line": 158,
+          "end_line": 166,
+          "source_hash": "ba33ae129ec36f5d8a2047237bbfebcb9e6afc5212ca178117eec4df3f1dac58"
+        },
+        {
+          "source_id": "django/test/client.py::AsyncRequestFactory.generic:method",
+          "path": "django/test/client.py",
+          "start_line": 762,
+          "end_line": 770,
+          "source_hash": "822196b11aec0ad9e53c70f90295483b4cc2fd5b2e60c2d3c9af3fdf42aa9d2c"
+        },
+        {
+          "source_id": "django/test/client.py::RequestFactory.__init__:method",
+          "path": "django/test/client.py",
+          "start_line": 395,
+          "end_line": 399,
+          "source_hash": "822196b11aec0ad9e53c70f90295483b4cc2fd5b2e60c2d3c9af3fdf42aa9d2c"
+        },
+        {
+          "source_id": "django/test/client.py::RequestFactory.generic:method",
+          "path": "django/test/client.py",
+          "start_line": 661,
+          "end_line": 669,
+          "source_hash": "822196b11aec0ad9e53c70f90295483b4cc2fd5b2e60c2d3c9af3fdf42aa9d2c"
+        }
+      ]
+    },
+    {
+      "radius": 20,
+      "pages": [
+        {
+          "offset": 0,
+          "bytes": 13974,
+          "next_offset": null
+        }
+      ],
+      "total_bytes": 13974,
+      "sites": [
+        [
+          "django/contrib/admin/options.py::ModelAdmin.get_preserved_filters:method",
+          1267
+        ],
+        [
+          "django/contrib/admin/templatetags/admin_urls.py::add_preserved_filters:function",
+          69
+        ],
+        [
+          "django/contrib/admin/views/main.py::ChangeList.get_query_string:method",
+          306
+        ],
+        [
+          "django/contrib/admin/widgets.py::ForeignKeyRawIdWidget.get_context:method",
+          162
+        ],
+        [
+          "django/test/client.py::AsyncRequestFactory.generic:method",
+          766
+        ],
+        [
+          "django/test/client.py::RequestFactory.__init__:method",
+          399
+        ],
+        [
+          "django/test/client.py::RequestFactory.generic:method",
+          665
+        ]
+      ],
+      "ranges": [
+        {
+          "source_id": "django/contrib/admin/options.py::ModelAdmin.get_preserved_filters:method",
+          "path": "django/contrib/admin/options.py",
+          "start_line": 1250,
+          "end_line": 1268,
+          "source_hash": "50c6c655c2644b71a1b6bdeba04a016b70f9be47c5dbfd50c64361bbbeff176a"
+        },
+        {
+          "source_id": "django/contrib/admin/templatetags/admin_urls.py::add_preserved_filters:function",
+          "path": "django/contrib/admin/templatetags/admin_urls.py",
+          "start_line": 49,
+          "end_line": 70,
+          "source_hash": "1cda287b6eb0cad30b8790dd80eab37321ed35fe06faf59f72c2fbc5095656e1"
+        },
+        {
+          "source_id": "django/contrib/admin/views/main.py::ChangeList.get_query_string:method",
+          "path": "django/contrib/admin/views/main.py",
+          "start_line": 290,
+          "end_line": 306,
+          "source_hash": "3660bc9614d1715c454d0e8365981cc64481d1a08787a4d53b9c621fcb493cbd"
+        },
+        {
+          "source_id": "django/contrib/admin/widgets.py::ForeignKeyRawIdWidget.get_context:method",
+          "path": "django/contrib/admin/widgets.py",
+          "start_line": 146,
+          "end_line": 178,
+          "source_hash": "ba33ae129ec36f5d8a2047237bbfebcb9e6afc5212ca178117eec4df3f1dac58"
+        },
+        {
+          "source_id": "django/test/client.py::AsyncRequestFactory.generic:method",
+          "path": "django/test/client.py",
+          "start_line": 746,
+          "end_line": 782,
+          "source_hash": "822196b11aec0ad9e53c70f90295483b4cc2fd5b2e60c2d3c9af3fdf42aa9d2c"
+        },
+        {
+          "source_id": "django/test/client.py::RequestFactory.__init__:method",
+          "path": "django/test/client.py",
+          "start_line": 384,
+          "end_line": 399,
+          "source_hash": "822196b11aec0ad9e53c70f90295483b4cc2fd5b2e60c2d3c9af3fdf42aa9d2c"
+        },
+        {
+          "source_id": "django/test/client.py::RequestFactory.generic:method",
+          "path": "django/test/client.py",
+          "start_line": 645,
+          "end_line": 671,
+          "source_hash": "822196b11aec0ad9e53c70f90295483b4cc2fd5b2e60c2d3c9af3fdf42aa9d2c"
+        }
+      ]
+    }
+  ],
+  "model_trial": false,
+  "archive_unchanged": true
+}

@@ -1,0 +1,7 @@
+# Next saved-graph behavioral comparison
+
+Before inspecting its caller inventory, select django.utils.http.url_has_allowed_host_and_scheme on Django revision 4ea267661b260ea0d0c87e9dcb99d70037c6f2fc. Find its direct lexical callers under django/, including library django/test/ and excluding top-level tests/. Explain the candidate URL, allowed hosts and HTTPS requirement each caller supplies, surrounding accept/reject behavior and fallback. Distinguish similarly named definitions and imports; retain nested lexical ownership and source-level versus runtime uncertainty.
+
+This is a new target on the same repository, not an independent population sample. Preserve all earlier failed model comparisons. Before any model call, establish an independent AST/import oracle, review source semantics, verify saved graph and context coverage, then freeze current runtime/skill/source and commit a full trial declaration. Keep grader identities and caller counts out of the model prompt. No model has run and no outcome is implied by selecting this task.
+
+The recent search text-format fix, numbered-source reuse guidance and task-dependent archive context radius have not yet been tested in a new actual model pair. The next comparison must record answer correctness and total/cached/uncached input plus output usage, rather than treating lower command bytes as success. Do not alter the task or rerun a failed answer to obtain a favorable token result.
