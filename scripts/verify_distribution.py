@@ -105,6 +105,32 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
             if (consumer / '.columbus').exists():
                 raise VerificationError('Archive lookup unexpectedly created a repository index')
 
+        def verify_callers(prefix, target):
+            source = target / 'caller_probe.py'
+            original = ("def evidence_target(): return 1\n"
+                        "def outer():\n    def inner():\n        evidence_target()\n    inner()\n"
+                        "def direct():\n    evidence_target()\n").encode()
+            source.write_bytes(original)
+            run([*prefix, 'sync', '--repo', target, '--summary'])
+            command = [*prefix, 'callers', 'evidence_target', '--repo', target, '--snapshot']
+            text = run(command)
+            packet = json.loads(text)
+            if ({item['qualname'] for item in packet['items']} != {'outer.inner', 'direct'}
+                    or packet['truncated'] or packet['semantic_complete']):
+                raise VerificationError('Installed callers lost lexical ownership or completeness markers')
+            for item in packet['items']:
+                if (item['source_hash'] != hashlib.sha256(original).hexdigest()
+                        or 'evidence_target()' not in item['source'] or not item['confidence']):
+                    raise VerificationError('Installed caller evidence lost source/hash/confidence')
+            if len(run([*command, '--budget-bytes', '1024']).encode('utf-8')) > 1024:
+                raise VerificationError('Installed caller packet exceeded byte budget')
+            try:
+                source.write_bytes(original + b'# changed after indexing\n')
+                run(command, expected=2)
+            finally:
+                source.write_bytes(original)
+                run([*prefix, 'sync', '--repo', target, '--summary'])
+
         def verify_hook(prefix: list, target: Path) -> None:
             run(['git', 'init', '-q', target])
             for key, value in [('user.name', 'Fixture'), ('user.email', 'fixture@example.invalid'),
@@ -210,6 +236,7 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
         if warm["refresh"]["parsed_files"] or warm["refresh"]["hashed_files"]:
             raise VerificationError("Unchanged installed index was reparsed or rehashed")
         verify_graph_archive([cli], repo, "settle_payment", "wheel archive")
+        verify_callers([cli], repo)
         planned = json.loads(run([cli, "--repo", repo, "init", "--plan"]))
         if (repo / ".agents").exists():
             raise VerificationError("init --plan changed the repository")
@@ -278,6 +305,7 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
             run([local_python, "-E", "-s", local_entrypoint, "doctor"])
             verify_hook([local_python, '-E', '-s', local_entrypoint], bootstrap_repo)
             verify_graph_archive([local_python, '-E', '-s', local_entrypoint], bootstrap_repo, 'visible_hook', 'bootstrap archive')
+            verify_callers([local_python, '-E', '-s', local_entrypoint], bootstrap_repo)
         return {"status": "passed", "version": version, "wheel": str(wheel),
                 "java_candidate_checks": grammar_checks,
                 "clean_venv": True, "unrelated_cwd": True, "paths_with_spaces": True,
@@ -286,6 +314,7 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
                 "text_budget": True, "receipt_continuation": True, "telemetry_bytes_verified": True,
                 "named_sessions": True, "no_argument_guide": True, "standalone_release_install": True,
                 "ast_tree": True, "native_hook_partial_staging": True,
+                "bounded_caller_evidence": True, "stale_caller_source_rejected": True,
                 "complete_graph_archive": True, "source_free_archive_query": True, "summary_lazy_cache": True,
                 "bootstrap_hook_after_source_relocation": bool(bundle),
                 "local_edits_preserved": True, "managed_files": len(lock["files"]),

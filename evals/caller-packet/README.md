@@ -9,3 +9,7 @@ On the independently reviewed c67b20a fixture, the [4,327-byte packet](packet.js
 Regression tests cover nested lexical ownership, exact caller sets, confidence/hash presence, Unicode byte-budget truncation, changed-source rejection and ambiguous names. A future predeclared paired model run must verify both answer quality and total tokens.
 
 Validation: all **194 engine tests** passed. Direct CLI checks confirmed a 1,024-byte response ceiling and rejection of `--pretty`; skill quick-validation passed. Full clean-distribution and hosted matrix validation for this new command are still pending.
+
+## Clean installation follow-up
+
+The distribution verifier now exercises `callers` after both wheel installation and ZIP bootstrap/source relocation. It checks nested lexical ownership, the exact caller set, source hash and confidence, compact 1,024-byte output, and rejection after modifying the indexed source. The source is restored and resynchronized after the negative check. The [local distribution receipt](distribution.json) confirms both paths passed on macOS arm64 / Python 3.11, alongside archive, installed-skill, session and hook checks. Root bootstrap/distribution unit tests also pass (49). Hosted matrix coverage for this extension remains pending.
