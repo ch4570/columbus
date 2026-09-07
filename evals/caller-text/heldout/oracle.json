@@ -1,0 +1,82 @@
+{
+  "target": "skills/columbus/scripts/columbus/sync_state.py::read_stable:function",
+  "expected": [
+    [
+      "RepositoryIndex._source",
+      441
+    ],
+    [
+      "RepositoryIndex.refresh",
+      139
+    ],
+    [
+      "RepositoryIndex.refresh",
+      170
+    ],
+    [
+      "RepositoryIndex.status",
+      317
+    ],
+    [
+      "RepositoryIndex.status",
+      327
+    ]
+  ],
+  "actual": [
+    [
+      "RepositoryIndex._source",
+      441
+    ],
+    [
+      "RepositoryIndex.refresh",
+      139
+    ],
+    [
+      "RepositoryIndex.refresh",
+      170
+    ],
+    [
+      "RepositoryIndex.status",
+      317
+    ],
+    [
+      "RepositoryIndex.status",
+      327
+    ]
+  ],
+  "passed": true,
+  "post_model_graph_sites": [
+    [
+      "RepositoryIndex._source",
+      441
+    ],
+    [
+      "RepositoryIndex.refresh",
+      139
+    ],
+    [
+      "RepositoryIndex.refresh",
+      170
+    ],
+    [
+      "RepositoryIndex.status",
+      317
+    ],
+    [
+      "RepositoryIndex.status",
+      327
+    ]
+  ],
+  "read_stable_imports": [
+    [
+      "skills/columbus/scripts/columbus/index.py",
+      "sync_state",
+      [
+        [
+          "read_stable",
+          null
+        ]
+      ]
+    ]
+  ]
+}
