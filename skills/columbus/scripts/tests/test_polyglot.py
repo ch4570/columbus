@@ -50,7 +50,7 @@ class DetectionTests(unittest.TestCase):
             self.assertIn(".gitignore", inventory["config_paths"])
             self.assertIn("large.odd", inventory["oversized_paths"])
             self.assertEqual(set(inventory["binary_paths"]), {"picture.odd", "late_binary.odd"})
-            self.assertEqual(inventory["probe_files"], 4)
+            self.assertEqual(inventory["probe_files"], 5)  # Includes text-fidelity README.md.
 
     def test_extensionless_python_honors_encoding_cookie(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -59,6 +59,28 @@ class DetectionTests(unittest.TestCase):
             paths, inventory = discover(root)
             self.assertEqual(paths, ["tool"])
             self.assertEqual(inventory["detected_languages"]["tool"], "python")
+
+    def test_plain_text_binary_assets_are_excluded_and_can_become_text(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            asset = root / "attachment.txt"
+            asset.write_bytes(b"\x89PNG\r\n\0binary")
+            paths, inventory = discover(root)
+            self.assertNotIn("attachment.txt", paths)
+            self.assertIn("attachment.txt", inventory["binary_paths"])
+            asset.write_text("valid text")
+            paths, inventory = discover(root)
+            self.assertIn("attachment.txt", paths)
+            self.assertNotIn("attachment.txt", inventory["binary_paths"])
+
+    def test_non_utf8_text_fidelity_assets_are_excluded(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "legacy.css").write_bytes(b"caf\xe9 {}")
+            (root / "valid.css").write_text("body {}")
+            paths, inventory = discover(root)
+            self.assertEqual(paths, ["valid.css"])
+            self.assertIn("legacy.css", inventory["binary_paths"])
 
     def test_known_languages_need_no_discovery_content_reads(self):
         with tempfile.TemporaryDirectory() as tmp:

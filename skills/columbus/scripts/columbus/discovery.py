@@ -11,7 +11,7 @@ import re
 import subprocess
 import tokenize
 
-from .language_profiles import EXTENSION_LANGUAGES, NAME_LANGUAGES, language_for
+from .language_profiles import EXTENSION_LANGUAGES, NAME_LANGUAGES, language_for, fidelity_for
 
 # A previous private-preview runtime is data, never source for a new index.
 EXCLUDED_DIRS = {".git", ".columbus", ".repoatlas", ".omx", ".venv", "venv", "node_modules", "vendor",
@@ -185,9 +185,10 @@ def discover(root: Path, source_root: str = ".") -> tuple[list[str], dict]:
             known = (path.suffix.lower() in SOURCE_EXTENSIONS or path.name in NAME_LANGUAGES
                      or path.suffix.lower() in config.get("extensions", {}))
             language = language_for(rel, config=config)
-            if not known:
-                # Only unknown suffixes/extensionless files need content-based
-                # detection. Known source files remain metadata-only on fast sync.
+            if not known or fidelity_for(language, config) == "text":
+                # Text-fidelity formats can contain binary assets (for example test
+                # attachments). Probe them as well as unknown extensions. Known
+                # code languages remain metadata-only during discovery.
                 sample = actual.read_bytes()
                 stats["probe_files"] += 1
                 stats["probe_bytes"] += len(sample)
