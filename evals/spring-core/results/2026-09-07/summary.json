@@ -1,0 +1,974 @@
+{
+  "spring_commit": "4c8c6409a27a62ab163d3b6196ad862b7c835440",
+  "python": "3.11.16 (main, Aug 14 2026, 15:24:25) [Clang 22.1.3 ]",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "model_calls": 0,
+  "model_billed_cost_usd": 0,
+  "model_tokens": null,
+  "notes": "Fresh databases; OS caches not cleared. Timings include CLI startup. Payload bytes/3 are not model tokens. Includes production, tests, JMH and resources.",
+  "syncs": [
+    {
+      "cold": {
+        "mode": "fast",
+        "check": "content_hash_verified",
+        "parsed_files": 1166,
+        "reused_files": 0,
+        "metadata_reused_files": 0,
+        "added_files": 1166,
+        "removed_files": 0,
+        "hashed_files": 1166,
+        "hashed_bytes": 7120331,
+        "config_hashed_files": 0,
+        "config_hashed_bytes": 0,
+        "head_changed": false,
+        "branch_changed": false,
+        "git_state_changed": true,
+        "config_changed": true,
+        "global_relink": true,
+        "elapsed_seconds": 4.795
+      },
+      "warm": {
+        "mode": "fast",
+        "check": "metadata_checked",
+        "parsed_files": 0,
+        "reused_files": 1166,
+        "metadata_reused_files": 1166,
+        "added_files": 0,
+        "removed_files": 0,
+        "hashed_files": 0,
+        "hashed_bytes": 0,
+        "config_hashed_files": 0,
+        "config_hashed_bytes": 0,
+        "head_changed": false,
+        "branch_changed": false,
+        "git_state_changed": false,
+        "config_changed": false,
+        "global_relink": false,
+        "elapsed_seconds": 0.99
+      },
+      "db_bytes": 199421952
+    },
+    {
+      "cold": {
+        "mode": "fast",
+        "check": "content_hash_verified",
+        "parsed_files": 1166,
+        "reused_files": 0,
+        "metadata_reused_files": 0,
+        "added_files": 1166,
+        "removed_files": 0,
+        "hashed_files": 1166,
+        "hashed_bytes": 7120331,
+        "config_hashed_files": 0,
+        "config_hashed_bytes": 0,
+        "head_changed": false,
+        "branch_changed": false,
+        "git_state_changed": true,
+        "config_changed": true,
+        "global_relink": true,
+        "elapsed_seconds": 4.751
+      },
+      "warm": {
+        "mode": "fast",
+        "check": "metadata_checked",
+        "parsed_files": 0,
+        "reused_files": 1166,
+        "metadata_reused_files": 1166,
+        "added_files": 0,
+        "removed_files": 0,
+        "hashed_files": 0,
+        "hashed_bytes": 0,
+        "config_hashed_files": 0,
+        "config_hashed_bytes": 0,
+        "head_changed": false,
+        "branch_changed": false,
+        "git_state_changed": false,
+        "config_changed": false,
+        "global_relink": false,
+        "elapsed_seconds": 0.924
+      },
+      "db_bytes": 199421952
+    },
+    {
+      "cold": {
+        "mode": "fast",
+        "check": "content_hash_verified",
+        "parsed_files": 1166,
+        "reused_files": 0,
+        "metadata_reused_files": 0,
+        "added_files": 1166,
+        "removed_files": 0,
+        "hashed_files": 1166,
+        "hashed_bytes": 7120331,
+        "config_hashed_files": 0,
+        "config_hashed_bytes": 0,
+        "head_changed": false,
+        "branch_changed": false,
+        "git_state_changed": true,
+        "config_changed": true,
+        "global_relink": true,
+        "elapsed_seconds": 4.6078
+      },
+      "warm": {
+        "mode": "fast",
+        "check": "metadata_checked",
+        "parsed_files": 0,
+        "reused_files": 1166,
+        "metadata_reused_files": 1166,
+        "added_files": 0,
+        "removed_files": 0,
+        "hashed_files": 0,
+        "hashed_bytes": 0,
+        "config_hashed_files": 0,
+        "config_hashed_bytes": 0,
+        "head_changed": false,
+        "branch_changed": false,
+        "git_state_changed": false,
+        "config_changed": false,
+        "global_relink": false,
+        "elapsed_seconds": 1.0187
+      },
+      "db_bytes": 199421952
+    }
+  ],
+  "graph": {
+    "files": 1166,
+    "symbols": 20811,
+    "source_bytes": 7120331,
+    "edges": {
+      "calls": 12506,
+      "contains": 19644,
+      "imports": 1759,
+      "inherits": 405
+    },
+    "references": 68007,
+    "resolved": 13027,
+    "unresolved_reasons": {
+      "receiver type external, ambiguous or unknown": 7927,
+      "complex, this or super receiver unsupported": 18192,
+      "overloaded, external, ambiguous or unknown declaration": 17312,
+      "lambda, loop, catch or anonymous scope unsupported": 7109,
+      "base type external, generic, ambiguous or unknown": 739,
+      "receiver shadowed, inferred or ambiguous": 199,
+      "receiver type requires semantic analysis": 2315,
+      "callable shadowed by local or parameter": 52,
+      "syntax recovery: partial file": 1117,
+      "extension receiver dispatch unsupported": 18
+    },
+    "partial_files": [
+      {
+        "path": "src/main/java/org/springframework/core/ResolvableType.java",
+        "diagnostics": [
+          "Tree-sitter java syntax recovery at line 754: ERROR",
+          "Tree-sitter java syntax recovery at line 754: ERROR",
+          "Tree-sitter java syntax recovery at line 1178: ERROR",
+          "Tree-sitter java syntax recovery at line 1178: ERROR"
+        ]
+      },
+      {
+        "path": "src/main/java/org/springframework/util/ClassUtils.java",
+        "diagnostics": [
+          "Tree-sitter java syntax recovery at line 1298: ERROR",
+          "Tree-sitter java syntax recovery at line 1298: ERROR"
+        ]
+      },
+      {
+        "path": "src/main/java/org/springframework/util/MethodInvoker.java",
+        "diagnostics": [
+          "Tree-sitter java syntax recovery at line 131: ERROR",
+          "Tree-sitter java syntax recovery at line 131: ERROR"
+        ]
+      },
+      {
+        "path": "src/main/java/org/springframework/util/ObjectUtils.java",
+        "diagnostics": [
+          "Tree-sitter java syntax recovery at line 87: ERROR",
+          "Tree-sitter java syntax recovery at line 87: ERROR",
+          "Tree-sitter java syntax recovery at line 407: ERROR",
+          "Tree-sitter java syntax recovery at line 407: ERROR"
+        ]
+      },
+      {
+        "path": "src/main/java/org/springframework/util/ReflectionUtils.java",
+        "diagnostics": [
+          "Tree-sitter java syntax recovery at line 234: ERROR",
+          "Tree-sitter java syntax recovery at line 234: ERROR"
+        ]
+      },
+      {
+        "path": "src/test/kotlin/org/springframework/core/annotation/PersonWithAlias.kt",
+        "diagnostics": [
+          "Tree-sitter kotlin syntax recovery at line 29: identifier"
+        ]
+      },
+      {
+        "path": "src/test/kotlin/org/springframework/core/annotation/PersonWithoutAlias.kt",
+        "diagnostics": [
+          "Tree-sitter kotlin syntax recovery at line 27: identifier"
+        ]
+      }
+    ]
+  },
+  "cases": [
+    {
+      "name": "unchanged refresh parses and hashes zero files",
+      "passed": true,
+      "evidence": "warm-{0,1,2}.stdout"
+    },
+    {
+      "name": "AliasFor exact declaration ranks first",
+      "passed": true,
+      "evidence": "annotation-after.stdout"
+    },
+    {
+      "name": "AliasFor members have their annotation owner",
+      "passed": true,
+      "evidence": [
+        "src/main/java/org/springframework/core/annotation/AliasFor.java::org.springframework.core.annotation.AliasFor.value:method()",
+        "src/main/java/org/springframework/core/annotation/AliasFor.java::org.springframework.core.annotation.AliasFor.attribute:method()",
+        "src/main/java/org/springframework/core/annotation/AliasFor.java::org.springframework.core.annotation.AliasFor.annotation:method()"
+      ]
+    },
+    {
+      "name": "AliasFor incoming imports exist",
+      "passed": true,
+      "evidence": {
+        "incoming_import_edges": 6
+      }
+    },
+    {
+      "name": "resource entry point ranks first",
+      "passed": true,
+      "evidence": "resource-search.stdout"
+    },
+    {
+      "name": "resource source matches original contiguous lines",
+      "passed": true,
+      "evidence": "resource-source.stdout"
+    },
+    {
+      "name": "resource routing branches available in source",
+      "passed": true,
+      "evidence": "resource-source.stdout"
+    },
+    {
+      "name": "resource factory calls reach ClassPathResource and toURL",
+      "passed": true,
+      "evidence": "resource-calls.stdout"
+    },
+    {
+      "name": "three-hop Resource inheritance chain exists",
+      "passed": true,
+      "evidence": "resource-inheritance.stdout"
+    },
+    {
+      "name": "receipt response 0 fits 6000-byte budget",
+      "passed": true,
+      "evidence": "receipt-0.stdout"
+    },
+    {
+      "name": "exact-ID context returns intended routing source first",
+      "passed": true,
+      "evidence": "receipt-0.stdout"
+    },
+    {
+      "name": "receipt range 0 does not repeat",
+      "passed": true,
+      "evidence": "receipt-0.stdout"
+    },
+    {
+      "name": "receipt range 1 does not repeat",
+      "passed": true,
+      "evidence": "receipt-0.stdout"
+    },
+    {
+      "name": "receipt response 1 fits 6000-byte budget",
+      "passed": true,
+      "evidence": "receipt-1.stdout"
+    },
+    {
+      "name": "receipt range 2 does not repeat",
+      "passed": true,
+      "evidence": "receipt-1.stdout"
+    },
+    {
+      "name": "receipt range 3 does not repeat",
+      "passed": true,
+      "evidence": "receipt-1.stdout"
+    },
+    {
+      "name": "receipt response 2 fits 6000-byte budget",
+      "passed": true,
+      "evidence": "receipt-2.stdout"
+    },
+    {
+      "name": "receipt range 4 does not repeat",
+      "passed": true,
+      "evidence": "receipt-2.stdout"
+    },
+    {
+      "name": "receipt range 5 does not repeat",
+      "passed": true,
+      "evidence": "receipt-2.stdout"
+    },
+    {
+      "name": "partial ResolvableType remains flagged (known grammar limitation)",
+      "passed": true,
+      "evidence": [
+        {
+          "path": "src/main/java/org/springframework/core/ResolvableType.java",
+          "diagnostics": [
+            "Tree-sitter java syntax recovery at line 754: ERROR",
+            "Tree-sitter java syntax recovery at line 754: ERROR",
+            "Tree-sitter java syntax recovery at line 1178: ERROR",
+            "Tree-sitter java syntax recovery at line 1178: ERROR"
+          ]
+        },
+        {
+          "path": "src/main/java/org/springframework/util/ClassUtils.java",
+          "diagnostics": [
+            "Tree-sitter java syntax recovery at line 1298: ERROR",
+            "Tree-sitter java syntax recovery at line 1298: ERROR"
+          ]
+        },
+        {
+          "path": "src/main/java/org/springframework/util/MethodInvoker.java",
+          "diagnostics": [
+            "Tree-sitter java syntax recovery at line 131: ERROR",
+            "Tree-sitter java syntax recovery at line 131: ERROR"
+          ]
+        },
+        {
+          "path": "src/main/java/org/springframework/util/ObjectUtils.java",
+          "diagnostics": [
+            "Tree-sitter java syntax recovery at line 87: ERROR",
+            "Tree-sitter java syntax recovery at line 87: ERROR",
+            "Tree-sitter java syntax recovery at line 407: ERROR",
+            "Tree-sitter java syntax recovery at line 407: ERROR"
+          ]
+        },
+        {
+          "path": "src/main/java/org/springframework/util/ReflectionUtils.java",
+          "diagnostics": [
+            "Tree-sitter java syntax recovery at line 234: ERROR",
+            "Tree-sitter java syntax recovery at line 234: ERROR"
+          ]
+        },
+        {
+          "path": "src/test/kotlin/org/springframework/core/annotation/PersonWithAlias.kt",
+          "diagnostics": [
+            "Tree-sitter kotlin syntax recovery at line 29: identifier"
+          ]
+        },
+        {
+          "path": "src/test/kotlin/org/springframework/core/annotation/PersonWithoutAlias.kt",
+          "diagnostics": [
+            "Tree-sitter kotlin syntax recovery at line 27: identifier"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ambiguous overloads stay unresolved",
+      "passed": true,
+      "evidence": "unresolved reference census; no compiler dispatch claim"
+    },
+    {
+      "name": "one-file edit reparses exactly one file",
+      "passed": true,
+      "evidence": "one-file-edit.stdout"
+    }
+  ],
+  "commands": [
+    {
+      "label": "cold-0",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/index-0.sqlite",
+        "sync"
+      ],
+      "seconds": 5.337325,
+      "returncode": 0,
+      "output_bytes": 99536,
+      "estimated_tokens": 33179
+    },
+    {
+      "label": "warm-0",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/index-0.sqlite",
+        "sync"
+      ],
+      "seconds": 1.116726,
+      "returncode": 0,
+      "output_bytes": 99514,
+      "estimated_tokens": 33172
+    },
+    {
+      "label": "cold-1",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/index-1.sqlite",
+        "sync"
+      ],
+      "seconds": 5.238255,
+      "returncode": 0,
+      "output_bytes": 99536,
+      "estimated_tokens": 33179
+    },
+    {
+      "label": "warm-1",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/index-1.sqlite",
+        "sync"
+      ],
+      "seconds": 1.040803,
+      "returncode": 0,
+      "output_bytes": 99515,
+      "estimated_tokens": 33172
+    },
+    {
+      "label": "cold-2",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/index-2.sqlite",
+        "sync"
+      ],
+      "seconds": 5.121011,
+      "returncode": 0,
+      "output_bytes": 99537,
+      "estimated_tokens": 33179
+    },
+    {
+      "label": "warm-2",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/index-2.sqlite",
+        "sync"
+      ],
+      "seconds": 1.154399,
+      "returncode": 0,
+      "output_bytes": 99516,
+      "estimated_tokens": 33172
+    },
+    {
+      "label": "annotation-before",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/private/tmp/columbus-spring-results/crash-fixed-baseline.sqlite",
+        "search",
+        "AliasFor",
+        "--snapshot",
+        "--limit",
+        "3"
+      ],
+      "seconds": 0.469192,
+      "returncode": 0,
+      "output_bytes": 3446,
+      "estimated_tokens": 1149
+    },
+    {
+      "label": "annotation-after",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/index-2.sqlite",
+        "search",
+        "AliasFor",
+        "--snapshot",
+        "--limit",
+        "3"
+      ],
+      "seconds": 0.12281,
+      "returncode": 0,
+      "output_bytes": 3446,
+      "estimated_tokens": 1149
+    },
+    {
+      "label": "resource-search",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/index-2.sqlite",
+        "search",
+        "org.springframework.core.io.DefaultResourceLoader.getResource",
+        "--snapshot",
+        "--limit",
+        "3"
+      ],
+      "seconds": 0.199215,
+      "returncode": 0,
+      "output_bytes": 3025,
+      "estimated_tokens": 1009
+    },
+    {
+      "label": "resource-source",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/index-2.sqlite",
+        "symbol",
+        "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+        "--snapshot",
+        "--max-lines",
+        "80"
+      ],
+      "seconds": 0.075743,
+      "returncode": 0,
+      "output_bytes": 9697,
+      "estimated_tokens": 3233
+    },
+    {
+      "label": "resource-calls",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/index-2.sqlite",
+        "neighbors",
+        "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+        "--snapshot",
+        "--direction",
+        "out",
+        "--hops",
+        "1",
+        "--kinds",
+        "calls",
+        "--format",
+        "text"
+      ],
+      "seconds": 0.072286,
+      "returncode": 0,
+      "output_bytes": 6219,
+      "estimated_tokens": 2073
+    },
+    {
+      "label": "resource-inheritance",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/index-2.sqlite",
+        "neighbors",
+        "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource:class",
+        "--snapshot",
+        "--direction",
+        "out",
+        "--hops",
+        "3",
+        "--kinds",
+        "inherits",
+        "--format",
+        "text"
+      ],
+      "seconds": 0.116601,
+      "returncode": 0,
+      "output_bytes": 2344,
+      "estimated_tokens": 782
+    },
+    {
+      "label": "resource-impact",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/index-2.sqlite",
+        "impact",
+        "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource:class",
+        "--snapshot",
+        "--hops",
+        "1",
+        "--format",
+        "text"
+      ],
+      "seconds": 0.112785,
+      "returncode": 0,
+      "output_bytes": 40014,
+      "estimated_tokens": 13338
+    },
+    {
+      "label": "ordinary-search",
+      "command": [
+        "rg",
+        "-n",
+        "public Resource getResource",
+        "/private/tmp/columbus-spring-framework/spring-core/src/main/java/org/springframework/core/io/DefaultResourceLoader.java"
+      ],
+      "seconds": 0.023684,
+      "returncode": 0,
+      "output_bytes": 52,
+      "estimated_tokens": 18
+    },
+    {
+      "label": "ordinary-source",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-c",
+        "from pathlib import Path; import sys; print(\"\\n\".join(Path(sys.argv[1]).read_text().splitlines()[int(sys.argv[2])-1:int(sys.argv[3])]))",
+        "/private/tmp/columbus-spring-framework/spring-core/src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+        "154",
+        "185"
+      ],
+      "seconds": 0.029164,
+      "returncode": 0,
+      "output_bytes": 1060,
+      "estimated_tokens": 354
+    },
+    {
+      "label": "receipt-0",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/index-2.sqlite",
+        "context",
+        "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+        "--snapshot",
+        "--budget-bytes",
+        "6000",
+        "--format",
+        "json",
+        "--receipt",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/receipt.json"
+      ],
+      "seconds": 0.123361,
+      "returncode": 0,
+      "output_bytes": 5388,
+      "estimated_tokens": 1796
+    },
+    {
+      "label": "no-receipt-0",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/index-2.sqlite",
+        "context",
+        "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+        "--snapshot",
+        "--budget-bytes",
+        "6000",
+        "--format",
+        "json"
+      ],
+      "seconds": 0.118603,
+      "returncode": 0,
+      "output_bytes": 5315,
+      "estimated_tokens": 1772
+    },
+    {
+      "label": "receipt-1",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/index-2.sqlite",
+        "context",
+        "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+        "--snapshot",
+        "--budget-bytes",
+        "6000",
+        "--format",
+        "json",
+        "--receipt",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/receipt.json"
+      ],
+      "seconds": 0.134601,
+      "returncode": 0,
+      "output_bytes": 5636,
+      "estimated_tokens": 1879
+    },
+    {
+      "label": "no-receipt-1",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/index-2.sqlite",
+        "context",
+        "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+        "--snapshot",
+        "--budget-bytes",
+        "6000",
+        "--format",
+        "json"
+      ],
+      "seconds": 0.119447,
+      "returncode": 0,
+      "output_bytes": 5315,
+      "estimated_tokens": 1772
+    },
+    {
+      "label": "receipt-2",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/index-2.sqlite",
+        "context",
+        "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+        "--snapshot",
+        "--budget-bytes",
+        "6000",
+        "--format",
+        "json",
+        "--receipt",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/receipt.json"
+      ],
+      "seconds": 0.103845,
+      "returncode": 0,
+      "output_bytes": 5823,
+      "estimated_tokens": 1941
+    },
+    {
+      "label": "no-receipt-2",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/index-2.sqlite",
+        "context",
+        "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+        "--snapshot",
+        "--budget-bytes",
+        "6000",
+        "--format",
+        "json"
+      ],
+      "seconds": 0.098351,
+      "returncode": 0,
+      "output_bytes": 5315,
+      "estimated_tokens": 1772
+    },
+    {
+      "label": "graph-json",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/index-2.sqlite",
+        "graph",
+        "--snapshot",
+        "--focus",
+        "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource:class",
+        "--level",
+        "symbol",
+        "--hops",
+        "2",
+        "--limit",
+        "100",
+        "--format",
+        "json",
+        "--output",
+        "evals/spring-core/results/2026-09-07/resource-graph.json"
+      ],
+      "seconds": 0.085392,
+      "returncode": 0,
+      "output_bytes": 139,
+      "estimated_tokens": 47
+    },
+    {
+      "label": "graph-html",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/index-2.sqlite",
+        "graph",
+        "--snapshot",
+        "--focus",
+        "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource:class",
+        "--level",
+        "symbol",
+        "--hops",
+        "2",
+        "--limit",
+        "100",
+        "--format",
+        "html",
+        "--output",
+        "evals/spring-core/results/2026-09-07/resource-graph.html"
+      ],
+      "seconds": 0.083849,
+      "returncode": 0,
+      "output_bytes": 139,
+      "estimated_tokens": 47
+    },
+    {
+      "label": "graph-mermaid",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/index-2.sqlite",
+        "graph",
+        "--snapshot",
+        "--focus",
+        "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource:class",
+        "--level",
+        "symbol",
+        "--hops",
+        "2",
+        "--limit",
+        "100",
+        "--format",
+        "mermaid",
+        "--output",
+        "evals/spring-core/results/2026-09-07/resource-graph.mermaid"
+      ],
+      "seconds": 0.085019,
+      "returncode": 0,
+      "output_bytes": 142,
+      "estimated_tokens": 48
+    },
+    {
+      "label": "graph-graphml",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/index-2.sqlite",
+        "graph",
+        "--snapshot",
+        "--focus",
+        "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource:class",
+        "--level",
+        "symbol",
+        "--hops",
+        "2",
+        "--limit",
+        "100",
+        "--format",
+        "graphml",
+        "--output",
+        "evals/spring-core/results/2026-09-07/resource-graph.graphml"
+      ],
+      "seconds": 0.114131,
+      "returncode": 0,
+      "output_bytes": 142,
+      "estimated_tokens": 48
+    },
+    {
+      "label": "one-file-edit",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/index-2.sqlite",
+        "sync"
+      ],
+      "seconds": 4.578253,
+      "returncode": 0,
+      "output_bytes": 99519,
+      "estimated_tokens": 33173
+    },
+    {
+      "label": "restore",
+      "command": [
+        "/Users/rex/Desktop/columbus/.venv/bin/python",
+        "-m",
+        "columbus",
+        "--repo",
+        "/private/tmp/columbus-spring-framework/spring-core",
+        "--db",
+        "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus-spring-observation-xj9inlgl/index-2.sqlite",
+        "sync"
+      ],
+      "seconds": 3.888229,
+      "returncode": 0,
+      "output_bytes": 99519,
+      "estimated_tokens": 33173
+    }
+  ],
+  "baseline_alias_exact": false
+}

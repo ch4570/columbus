@@ -6,6 +6,8 @@
 
 [한국어](README.ko.md) · [Download 1.0.0](https://github.com/ch4570/columbus/releases/tag/v1.0.0) · [Benchmarks](docs/benchmarks/README.md) · [Installation](INSTALL.md) · [Validation](VALIDATION.md)
 
+[Real spring-core evaluation: three navigation fixes, measured indexing costs, and unresolved graph limits.](evals/spring-core/README.md)
+
 Columbus gives coding agents a local map of a repository. Find an entry point, follow its relationships, and read verified source in a bounded response. A compass, a map, and an explorer are the project's visual identity; the evidence still comes from your code.
 
 **66 language detection profiles · Incremental SQLite index · 4 graph formats · CLI, skill & optional MCP · MIT**

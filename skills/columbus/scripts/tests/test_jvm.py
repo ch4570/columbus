@@ -1,5 +1,8 @@
 """Meaningful JVM navigation checks: resolution must prefer missing to false edges."""
 import json
+import subprocess
+import sys
+import textwrap
 import unittest
 
 from columbus.jvm import parse_jvm, resolve_jvm
@@ -11,6 +14,55 @@ class JVMTests(unittest.TestCase):
         self.assertEqual([], result["diagnostics"], result["diagnostics"])
         json.dumps(result)  # Cached parse records must round-trip through SQLite JSON.
         return result
+
+    def test_large_jvm_spans_survive_native_point_reference_bug(self):
+        # A subprocess contains native crashes, which cannot be caught in Python.
+        # Lines >256 exercise non-cached Python integers in tree-sitter 0.26.0.
+        code = textwrap.dedent("""
+            import gc
+            from columbus.jvm import parse_jvm
+            for language in ('java', 'kotlin'):
+                prefix = '// 한글\\r\\n' * 300
+                if language == 'java':
+                    source = prefix + 'package demo;\\nclass Large {\\n' + ''.join(
+                        'void method%d() { helper(); }\\n' % i for i in range(100)) + 'void helper() {}\\n}\\n'
+                else:
+                    source = prefix + 'package demo\\nclass Large {\\n' + ''.join(
+                        'fun method%d() { helper() }\\n' % i for i in range(100)) + 'fun helper() {}\\n}\\n'
+                for _ in range(10):
+                    result = parse_jvm('Large.' + ('java' if language == 'java' else 'kt'), source)
+                    gc.collect()
+                    assert not result['diagnostics'], result['diagnostics']
+                    owner = next(s for s in result['symbols'] if s['name'] == 'Large')
+                    assert (owner['start_line'], owner['end_line']) == (302, 404), owner
+                    method = next(s for s in result['symbols'] if s['name'] == 'method99')
+                    assert (method['start_line'], method['end_line']) == (402, 402), method
+                    assert result['references'][-1]['line'] == 402
+        """)
+        result = subprocess.run([sys.executable, '-X', 'faulthandler', '-c', code],
+                                capture_output=True, text=True, timeout=30)
+        self.assertEqual(0, result.returncode, result.stderr)
+
+    def test_java_annotation_type_members_and_imports(self):
+        annotation = self.parsed("Alias.java", '''package demo;
+// @interface Fake {}
+public @interface Alias {
+ String value() default "@interface Fake {}";
+ Class<?> target() default Object.class;
+ @interface Nested { int count() default 1; }
+}
+''')
+        client = self.parsed("Client.java", "package app; import demo.Alias; @Alias class Client {}")
+        edges = resolve_jvm([annotation, client])
+        symbols = {s['qualname']: s for s in annotation['symbols']}
+        self.assertEqual('interface', symbols['demo.Alias']['kind'])
+        self.assertEqual('method', symbols['demo.Alias.value']['kind'])
+        self.assertEqual(symbols['demo.Alias']['id'], symbols['demo.Alias.value']['parent_id'])
+        self.assertIn('default Object.class', symbols['demo.Alias.target']['signature'])
+        self.assertEqual('method', symbols['demo.Alias.Nested.count']['kind'])
+        self.assertEqual(4, symbols['demo.Alias.value']['start_line'])
+        self.assertFalse(any(s['name'] == 'Fake' for s in annotation['symbols']))
+        self.assertTrue(any(e['kind'] == 'imports' and e['target'] == symbols['demo.Alias']['id'] for e in edges))
 
     def test_kotlin_declarations_and_extension(self):
         result = self.parsed("Model.kt", '''package demo

@@ -26,6 +26,26 @@ class IndexTests(unittest.TestCase):
         self.write("orders.py", "from payments import refund_payment\ndef cancel_order():\n    return refund_payment(10)\n")
         return self.index.refresh(self.root)
 
+    def test_exact_id_context_survives_long_path_and_noisy_overloads(self):
+        path = 'src/main/java/org/example/resource/navigation/DefaultResourceLoader.java'
+        self.write(path, 'package org.example.resource.navigation; class DefaultResourceLoader {\n'
+                   + ''.join('void noise%d() {}\n' % n for n in range(200))
+                   + 'String getResource(String location) { return "classpath:" + location; }\n'
+                   + 'String getResource(int location) { return "number"; }\n}\n')
+        self.index.refresh(self.root)
+        candidates = self.index.search('getResource')['hits']
+        target = next(s for s in candidates if s['id'].endswith('(String)'))
+        result = self.index.search(target['id'])
+        self.assertEqual([target['id']], [s['id'] for s in result['hits']])
+        self.assertTrue(result['hits'][0]['retrieval']['exact_id'])
+        context = self.index.context(target['id'], budget_bytes=6000)
+        self.assertEqual(target['id'], context['items'][0]['id'])
+        self.assertIn('return "classpath:"', context['items'][0]['source'])
+        self.assertEqual(target['start_line'], context['items'][0]['start_line'])
+        self.assertFalse(self.index.search(target['id'], path='other/*')['hits'])
+        self.assertFalse(self.index.search(target['id'], language='python')['hits'])
+        self.assertEqual(2, len([s for s in candidates if s['name']=='getResource']))
+
     def test_incremental_delete_and_full_rebuild_equivalence(self):
         first = self.seed()
         self.assertEqual(first["refresh"]["parsed_files"], 2)

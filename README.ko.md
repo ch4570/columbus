@@ -6,6 +6,8 @@
 
 [English](README.md) · [1.0.0 다운로드](https://github.com/ch4570/columbus/releases/tag/v1.0.0) · [벤치마크](docs/benchmarks/README.md) · [설치](INSTALL.md) · [검증 기록](VALIDATION.md)
 
+[실제 spring-core 검증: 탐색 결함 3개 수정, 색인 비용과 미해결 그래프 한계.](evals/spring-core/README.md)
+
 Columbus는 코딩 에이전트가 저장소를 탐색하는 로컬 코드 지도입니다. 진입점을 찾고, 관계를 따라가고, 현재 소스에서 확인한 코드만 제한된 크기로 읽습니다. 나침반과 지도를 든 탐험가 캐릭터를 담았으며, 탐색 근거는 실제 코드에서 가져옵니다.
 
 **66개 언어 감지 프로필 · 증분 SQLite 색인 · 그래프 형식 4종 · CLI·스킬·선택형 MCP · MIT**

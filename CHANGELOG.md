@@ -2,6 +2,13 @@
 
 This file describes source and bundle versions. A version entry does not imply publication to a package registry or a GitHub release.
 
+## Unreleased
+
+- Prevent native JVM indexing crashes on long source files by deriving line spans from UTF-8 byte offsets.
+- Include Java annotation interfaces and their elements in declaration search and import graphs.
+- Preserve exact symbol IDs in search and bounded context so long Java paths cannot displace the requested method.
+- Add a reproducible [spring-core field evaluation](evals/spring-core/README.md), with raw timings, source checks, remaining graph gaps, and storage/response costs.
+
 ## 1.0.0 — Columbus · 2026-09-07
 
 - Give the project the Columbus identity: a navigator character, repository `ch4570/columbus`, and matching English and Korean guides.
