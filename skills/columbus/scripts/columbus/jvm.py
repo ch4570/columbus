@@ -41,6 +41,37 @@ def _walk(node):
         yield from _walk(child)
 
 
+# Method invocation permits primitive identity/widening, not constant narrowing.
+_PRIMITIVE_WIDENING = {
+    "boolean": {"boolean"}, "byte": {"byte", "short", "int", "long", "float", "double"},
+    "short": {"short", "int", "long", "float", "double"},
+    "char": {"char", "int", "long", "float", "double"},
+    "int": {"int", "long", "float", "double"}, "long": {"long", "float", "double"},
+    "float": {"float", "double"}, "double": {"double"},
+}
+
+
+def _literal_argument_type(kind, text):
+    if kind in {"true", "false"}:
+        return "boolean"
+    if kind == "null_literal":
+        return "null"
+    if kind == "string_literal":
+        return "reference_literal"
+    if kind == "character_literal":
+        return "char"
+    if kind == "decimal_integer_literal":
+        value = text.replace("_", "")
+        is_long = value.endswith(("l", "L"))
+        digits = value[:-1] if is_long else value
+        significant = digits.lstrip("0") or "0"
+        if digits.isdecimal() and len(significant) <= 19 and int(significant) <= (2**63 - 1 if is_long else 2**31 - 1):
+            return "long" if is_long else "int"
+    if kind == "decimal_floating_point_literal":
+        return "float" if text.endswith(("f", "F")) else "double"
+    return None
+
+
 class _Parser:
     def __init__(self, path, source, module, language):
         self.path, self.source = path, source.encode("utf-8")
@@ -243,10 +274,14 @@ class _Parser:
         argument_count = (len([child for child in arguments.named_children
                                if child.type not in {"line_comment", "block_comment"}])
                           if arguments is not None else None)
+        argument_types = ([_literal_argument_type(child.type, self.text(child))
+                           for child in arguments.named_children
+                           if child.type not in {"line_comment", "block_comment"}]
+                          if arguments is not None else [])
         if name:
             self.references.append(dict(source=self.current, scope_id=self.current,
                 kind="calls", name=f"{receiver}.{name}" if receiver else name,
-                member=name, receiver=receiver, constructor=construct, argument_count=argument_count,
+                member=name, receiver=receiver, constructor=construct, argument_count=argument_count, argument_types=argument_types,
                 path=self.path, line=self.line(node.start_byte),
                 evidence=" ".join(self.text(node).split())[:240], resolved=False))
         for child in node.named_children:
@@ -459,6 +494,15 @@ class _Resolver:
             count = ref["argument_count"]
             if (varargs and count < len(parameters) - 1) or (not varargs and count != len(parameters)):
                 return None, "argument count incompatible with declared parameters"
+            for number, actual in enumerate(ref.get("argument_types", [])):
+                parameter = parameters[min(number, len(parameters) - 1)] if parameters else ""
+                expected = parameter.removesuffix("...") if varargs else parameter
+                # A lone null in the final position may denote the varargs array.
+                if varargs and actual == "null" and number == len(parameters) - 1 and count == len(parameters):
+                    continue
+                if (expected in _PRIMITIVE_WIDENING and actual is not None
+                        and expected not in _PRIMITIVE_WIDENING.get(actual, set())):
+                    return None, "literal argument incompatible with primitive parameter"
         if target.get("partial"):
             return None, "target file has syntax recovery"
         return target["id"], "unique syntax candidate; runtime dispatch unverified"

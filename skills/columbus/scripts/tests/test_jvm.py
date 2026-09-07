@@ -180,6 +180,22 @@ class C { class T { void hit() {} } void run(T item, int T) { item.hit(); } }
                 if not resolved:
                     self.assertIn('argument count incompatible', call['reason'])
 
+    def test_primitive_literal_applicability_without_constant_narrowing(self):
+        for parameter, argument, expected in (
+            ('int', 'true', False), ('boolean', '1', False), ('int', '"x"', False),
+            ('int', 'null', False), ('int', '1L', False), ('byte', '1', False),
+            ('long', '1', True), ('double', '1.0f', True), ('int', "'x'", True),
+            ('boolean', 'false', True), ('int...', '1, true', False),
+            ('int...', '1, 2', True), ('int...', 'null', True), ('int...', '1, null', False),
+        ):
+            with self.subTest(parameter=parameter, argument=argument):
+                parsed = self.parsed('C.java', f'class C {{ void hit({parameter} value) {{}} void run() {{ hit({argument}); }} }}')
+                resolve_jvm([parsed])
+                call = next(r for r in parsed['references'] if r['kind']=='calls')
+                self.assertEqual(call['resolved'], expected, call)
+                if not expected:
+                    self.assertIn('literal argument incompatible', call['reason'])
+
     def test_overload_remains_unresolved_and_ids_ignore_parameter_names(self):
         original = self.parsed("A.java", '''package demo;
 class A {
