@@ -15,3 +15,9 @@ Total responses decreased **24,819 → 9,840 bytes (60.35%)**. Every returned so
 This compares graph retrieval with/without receipts, not a model using graph versus a model using ordinary search. It proves neither actual token savings nor answer quality. The old single-turn model pilots used ephemeral sessions and cannot serve as retained-memory continuation trials.
 
 The next actual-model evaluation must create fresh persistent sessions for both arms and resume their exact recorded thread IDs. Do not use `--last` or seed a new model with receipts for source it has never seen. Deliver successive questions after earlier turns complete, retain raw per-turn events, establish whether reported usage is per-turn or cumulative before aggregation, and verify task answers against source. Only receipt/log writes should be permitted in the Columbus arm; source and index mutations remain forbidden. Both arms must retain their own previous conversation, and source hashes must be checked throughout. Predeclare the sequence and all quality gates before model execution.
+
+## Continued-event validation
+
+`audit_events.py CAPTURE.jsonl ... --output REPORT.json` now validates recorded thread UUID continuity, exactly one successful terminal turn per capture, event order, duplicate capture hashes, nonnegative integer usage and the cached-input subset. It preserves raw counters without summing them. A single real historical event file was successfully audited; two unit tests cover a valid two-turn sequence plus six rejected mutations (thread change, missing completion, data after completion, impossible cache count, boolean counter, and duplicate capture).
+
+The synthetic continuation test does not demonstrate a real resumed model session. Source retention after compaction, answer quality, source immutability and provider usage semantics remain separate required gates. This validator is an audit component, not yet an end-to-end continuous-model runner.
