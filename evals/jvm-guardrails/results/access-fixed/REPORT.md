@@ -1,0 +1,13 @@
+# Issue #8: private access and static instance-context guardrails
+
+Java declaration facts now retain explicit modifiers. Resolution rejects private targets outside the same top-level nest and unqualified instance method calls where no enclosing instance is available. Explicit static methods/classes, implicitly static nested interfaces/enums/records/interface member classes, static initialization blocks, static field initializers and interface constants are handled. Explicit typed value receivers remain eligible in static methods. Legal nestmate private calls and inner-class access to outer instances remain reachable.
+
+The [20-case javac oracle](pinned.json) rejects 10 invalid calls and preserves 10 valid calls, with the same result under the [patched grammar](candidate.json). Sources, source/analyzer hashes, parser versions and compiler diagnostics are retained. This includes the two previously observed false edges and their four positive controls, then expands to nested types and initializer contexts. No project/application execution occurred; generated fixtures were compiled independently with annotation processing disabled.
+
+One expansion initially failed: interface fields use `constant_declaration`, rather than `field_declaration`. The [failed observation](initial-interface-failure.json) is retained. Recognizing that implicitly static context makes the final 20 cases pass. Engine tests pass **196/196** with both pinned and candidate Java grammars, and root tests pass **53/53**.
+
+The [existing-index probe](cache-upgrade.json) starts with the previous analyzer's wrong private-call edge, changes only analyzer code, and reuses the same SQLite index/source. Call-edge counts are 1 → 0 → 0 and parsed-file counts are 1 → 1 → 0. The analyzer-code fingerprint therefore invalidates stale parse facts and removes the persisted wrong edge; the next warm sync retains lazy parsing.
+
+Reproduce with `PYTHONPATH=skills/columbus/scripts .venv/bin/python evals/jvm-guardrails/verify_access.py JDK_BIN OUTPUT.json`. To exercise the candidate, prepend its installed target to PYTHONPATH. The grammar CI now provisions JDK 17 and runs this compiler-backed gate on all six OS/Python combinations. Hosted results for the new change are pending.
+
+These are specific access and implicit-instance guardrails, not full Java accessibility or overload resolution. Package/protected access, broader reference-argument applicability, type-qualified receiver coverage, inherited candidate sets and runtime dispatch remain incomplete. Issue #8 remains open. This does not establish actual model-token savings or publish the candidate grammar.

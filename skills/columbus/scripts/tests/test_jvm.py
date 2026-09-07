@@ -15,6 +15,50 @@ class JVMTests(unittest.TestCase):
         json.dumps(result)  # Cached parse records must round-trip through SQLite JSON.
         return result
 
+    def test_java_private_access_preserves_nestmates(self):
+        cases = [
+            ('class T { private void hit() {} } class C { void run(T item) { item.hit(); } }', False),
+            ('class T { public void hit() {} } class C { void run(T item) { item.hit(); } }', True),
+            ('class T { private void hit() {} static class C { void run(T item) { item.hit(); } } }', True),
+        ]
+        for source, valid in cases:
+            with self.subTest(source=source):
+                parsed = self.parsed('C.java', source)
+                resolve_jvm([parsed])
+                call, = [r for r in parsed['references'] if r['kind'] == 'calls']
+                self.assertEqual(call['resolved'], valid)
+                if not valid:
+                    self.assertIn('private declaration', call['reason'])
+
+    def test_java_implicit_instance_stops_at_static_boundaries(self):
+        cases = [
+            ('class T { void hit() {} static { hit(); } }', False),
+            ('class T { static void hit() {} static { hit(); } }', True),
+            ('class T { int hit() { return 1; } static int value = hit(); }', False),
+            ('class T { int hit() { return 1; } int value = hit(); }', True),
+            ('class T { static int hit() { return 1; } static int value = hit(); }', True),
+            ('interface T { int hit(); int value = hit(); }', False),
+            ('class T { void hit() {} static void run() { hit(); } }', False),
+            ('class T { void hit() {} void run() { hit(); } }', True),
+            ('class T { static void hit() {} static void run() { hit(); } }', True),
+            ('class T { void hit() {} static class C { void run() { hit(); } } }', False),
+            ('class T { void hit() {} class C { void run() { hit(); } } }', True),
+            ('class T { static class C { void hit() {} void run() { hit(); } } }', True),
+            ('class T { void hit() {} interface C { default void run() { hit(); } } }', False),
+            ('class T { void hit() {} record C() { void run() { hit(); } } }', False),
+            ('class T { void hit() {} enum C { ONE; void run() { hit(); } } }', False),
+            ('interface T { void hit(); class C { void run() { hit(); } } }', False),
+            ('class T { void hit() {} static void run(T item) { item.hit(); } }', True),
+        ]
+        for source, valid in cases:
+            with self.subTest(source=source):
+                parsed = self.parsed('C.java', source)
+                resolve_jvm([parsed])
+                call, = [r for r in parsed['references'] if r['kind'] == 'calls']
+                self.assertEqual(call['resolved'], valid)
+                if not valid:
+                    self.assertIn('requires an enclosing instance', call['reason'])
+
     def test_large_jvm_spans_survive_native_point_reference_bug(self):
         # A subprocess contains native crashes, which cannot be caught in Python.
         # Lines >256 exercise non-cached Python integers in tree-sitter 0.26.0.

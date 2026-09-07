@@ -180,6 +180,10 @@ class _Parser:
             parent_id=self.current, language=self.language, package=self.package,
             parameter_types=[p["signature"] for p in params], receiver_type=receiver,
             annotations=self.annotations(node), local=parent["kind"] in CALLABLE_KINDS)
+        if self.language == "java":
+            modifiers = _first(node, {"modifiers"})
+            symbol["modifiers"] = sorted(self.text(child) for child in modifiers.children
+                                         if child.type not in {"annotation", "marker_annotation"}) if modifiers else []
         self.symbols.append(symbol)
         self.bind(name, reason="declaration", target=key)
         if is_class:
@@ -254,6 +258,24 @@ class _Parser:
         for child in node.named_children:
             self.visit(child)
 
+    def static_initialization(self, node):
+        if self.language != "java":
+            return False
+        parent = node.parent
+        while parent and parent.type not in CLASS_NODES | FUNCTION_NODES:
+            if parent.type in {"static_initializer", "constant_declaration"}:
+                return True
+            if parent.type == "field_declaration":
+                modifiers = _first(parent, {"modifiers"})
+                if modifiers and any(child.type == "static" for child in modifiers.children):
+                    return True
+                owner = parent.parent
+                while owner and owner.type not in CLASS_NODES:
+                    owner = owner.parent
+                return bool(owner and owner.type in {"interface_declaration", "annotation_type_declaration"})
+            parent = parent.parent
+        return False
+
     def call(self, node):
         receiver, name, construct = "", "", False
         if node.type == "method_invocation":
@@ -282,6 +304,7 @@ class _Parser:
             self.references.append(dict(source=self.current, scope_id=self.current,
                 kind="calls", name=f"{receiver}.{name}" if receiver else name,
                 member=name, receiver=receiver, constructor=construct, argument_count=argument_count, argument_types=argument_types,
+                static_context=self.static_initialization(node),
                 path=self.path, line=self.line(node.start_byte),
                 evidence=" ".join(self.text(node).split())[:240], resolved=False))
         for child in node.named_children:
@@ -433,6 +456,29 @@ class _Resolver:
             scope_id = scope["parent"]
         return None
 
+    def enclosing_type(self, scope_id):
+        """The top-level Java declaration defines private nestmate access."""
+        outer = None
+        while scope_id:
+            scope = self.scopes[scope_id]
+            if scope["kind"] in CLASS_KINDS:
+                outer = scope_id
+            scope_id = scope["parent"]
+        return outer
+
+    def implicit_instance(self, scope_id, owner):
+        while scope_id:
+            if scope_id == owner:
+                return True
+            symbol = self.symbols.get(scope_id, {})
+            parent = self.symbols.get(symbol.get("parent_id"), {})
+            if ("static" in symbol.get("modifiers", [])
+                    or symbol.get("kind") in {"interface", "enum", "record"}
+                    or (symbol.get("kind") in CLASS_KINDS and parent.get("kind") == "interface")):
+                return False
+            scope_id = self.scopes[scope_id]["parent"]
+        return False
+
     def resolve(self, file, ref):
         if file.get("partial"):
             return None, "syntax recovery: partial file"
@@ -487,6 +533,15 @@ class _Resolver:
         if len(candidates) != 1:
             return None, "overloaded, external, ambiguous or unknown declaration"
         target = candidates[0]
+        if file["language"] == "java" and target.get("language") == "java":
+            target_owner = self.owner(target.get("parent_id"))
+            if ("private" in target.get("modifiers", [])
+                    and self.enclosing_type(scope_id) != self.enclosing_type(target.get("parent_id"))):
+                return None, "private declaration outside the enclosing top-level type"
+            if (target["kind"] == "method" and not receiver
+                    and "static" not in target.get("modifiers", [])
+                    and (ref.get("static_context") or not self.implicit_instance(scope_id, target_owner))):
+                return None, "instance method requires an enclosing instance in this context"
         if (file["language"] == "java" and target.get("language") == "java"
                 and target["kind"] in CALLABLE_KINDS and ref.get("argument_count") is not None):
             parameters = target.get("parameter_types", [])

@@ -1,0 +1,719 @@
+{
+  "compiler": "javac 17.0.20.1",
+  "analyzer_sha256": "a73287c6906988c4bcf0176e11736653a077c126a053905ccf42cf101ca422aa",
+  "cases": [
+    {
+      "name": "private_foreign_value",
+      "source": "class T { private void hit() {} } class C { void run(T item) { item.hit(); } }",
+      "source_sha256": "f22b6d759e93f17091cecfaf66f16f8f86fb74756d2b505b62d7ef57f001f44b",
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus access oracle lpdobvt1/private_foreign_value/C.java:1: error: hit() has private access in T\nclass T { private void hit() {} } class C { void run(T item) { item.hit(); } }\n                                                                   ^\n1 error\n",
+      "references": [
+        {
+          "source": "C.java::C.run:method(T)",
+          "scope_id": "C.java::C.run:method(T)",
+          "kind": "calls",
+          "name": "item.hit",
+          "member": "hit",
+          "receiver": "item",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "static_context": false,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "item.hit()",
+          "resolved": false,
+          "reason": "private declaration outside the enclosing top-level type"
+        }
+      ],
+      "call_edges": [],
+      "passed": true
+    },
+    {
+      "name": "public_foreign_value",
+      "source": "class T { public void hit() {} } class C { void run(T item) { item.hit(); } }",
+      "source_sha256": "3a41ab6b617b8a1f75735f8dbb798e9293b6ddf83f789c5644f1b6f77095dc97",
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "references": [
+        {
+          "source": "C.java::C.run:method(T)",
+          "scope_id": "C.java::C.run:method(T)",
+          "kind": "calls",
+          "name": "item.hit",
+          "member": "hit",
+          "receiver": "item",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "static_context": false,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "item.hit()",
+          "resolved": true,
+          "reason": "unique syntax candidate; runtime dispatch unverified",
+          "target": "C.java::T.hit:method()",
+          "confidence": "heuristic"
+        }
+      ],
+      "call_edges": [
+        {
+          "source": "C.java::C.run:method(T)",
+          "target": "C.java::T.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "item.hit()",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "private_nestmate_value",
+      "source": "class T { private void hit() {} static class C { void run(T item) { item.hit(); } } }",
+      "source_sha256": "db1392519fbba43c11eccd1f6f664eb31786a0412813f7cb3ad222f4429c4c1d",
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "references": [
+        {
+          "source": "C.java::T.C.run:method(T)",
+          "scope_id": "C.java::T.C.run:method(T)",
+          "kind": "calls",
+          "name": "item.hit",
+          "member": "hit",
+          "receiver": "item",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "static_context": false,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "item.hit()",
+          "resolved": true,
+          "reason": "unique syntax candidate; runtime dispatch unverified",
+          "target": "C.java::T.hit:method()",
+          "confidence": "heuristic"
+        }
+      ],
+      "call_edges": [
+        {
+          "source": "C.java::T.C.run:method(T)",
+          "target": "C.java::T.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "item.hit()",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "instance_from_static",
+      "source": "class T { void hit() {} static void run() { hit(); } }",
+      "source_sha256": "87e42da8167b7c00eeb0d4d492d25bbdc60b7d97c94398ac6cc6bb9d780ccd0c",
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus access oracle lpdobvt1/instance_from_static/C.java:1: error: non-static method hit() cannot be referenced from a static context\nclass T { void hit() {} static void run() { hit(); } }\n                                            ^\n1 error\n",
+      "references": [
+        {
+          "source": "C.java::T.run:method()",
+          "scope_id": "C.java::T.run:method()",
+          "kind": "calls",
+          "name": "hit",
+          "member": "hit",
+          "receiver": "",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "static_context": false,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "hit()",
+          "resolved": false,
+          "reason": "instance method requires an enclosing instance in this context"
+        }
+      ],
+      "call_edges": [],
+      "passed": true
+    },
+    {
+      "name": "instance_from_instance",
+      "source": "class T { void hit() {} void run() { hit(); } }",
+      "source_sha256": "1d5cf82954aaf30e0629a8582e432b05c4c463fdb3fb4b17054510e439fe8bba",
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "references": [
+        {
+          "source": "C.java::T.run:method()",
+          "scope_id": "C.java::T.run:method()",
+          "kind": "calls",
+          "name": "hit",
+          "member": "hit",
+          "receiver": "",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "static_context": false,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "hit()",
+          "resolved": true,
+          "reason": "unique syntax candidate; runtime dispatch unverified",
+          "target": "C.java::T.hit:method()",
+          "confidence": "heuristic"
+        }
+      ],
+      "call_edges": [
+        {
+          "source": "C.java::T.run:method()",
+          "target": "C.java::T.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit()",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "static_from_static",
+      "source": "class T { static void hit() {} static void run() { hit(); } }",
+      "source_sha256": "b840fb3bb6f36d4969d252d4e5cb02b99a58aef7271cd66ee3e03cc7d2782334",
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "references": [
+        {
+          "source": "C.java::T.run:method()",
+          "scope_id": "C.java::T.run:method()",
+          "kind": "calls",
+          "name": "hit",
+          "member": "hit",
+          "receiver": "",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "static_context": false,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "hit()",
+          "resolved": true,
+          "reason": "unique syntax candidate; runtime dispatch unverified",
+          "target": "C.java::T.hit:method()",
+          "confidence": "heuristic"
+        }
+      ],
+      "call_edges": [
+        {
+          "source": "C.java::T.run:method()",
+          "target": "C.java::T.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit()",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "static_initializer_instance",
+      "source": "class T { void hit() {} static { hit(); } }",
+      "source_sha256": "2b26647bd51a7bef257fec75e255d2c835cb39e85b7481433f9ece7443c4dd4f",
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus access oracle lpdobvt1/static_initializer_instance/C.java:1: error: non-static method hit() cannot be referenced from a static context\nclass T { void hit() {} static { hit(); } }\n                                 ^\n1 error\n",
+      "references": [
+        {
+          "source": "C.java::T:class",
+          "scope_id": "C.java::T:class",
+          "kind": "calls",
+          "name": "hit",
+          "member": "hit",
+          "receiver": "",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "static_context": true,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "hit()",
+          "resolved": false,
+          "reason": "instance method requires an enclosing instance in this context"
+        }
+      ],
+      "call_edges": [],
+      "passed": true
+    },
+    {
+      "name": "static_initializer_static",
+      "source": "class T { static void hit() {} static { hit(); } }",
+      "source_sha256": "1eba8523d9f4fdf9ddd10110f34cb2a4e3018b1e1bbddccbde0651e02f38def5",
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "references": [
+        {
+          "source": "C.java::T:class",
+          "scope_id": "C.java::T:class",
+          "kind": "calls",
+          "name": "hit",
+          "member": "hit",
+          "receiver": "",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "static_context": true,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "hit()",
+          "resolved": true,
+          "reason": "unique syntax candidate; runtime dispatch unverified",
+          "target": "C.java::T.hit:method()",
+          "confidence": "heuristic"
+        }
+      ],
+      "call_edges": [
+        {
+          "source": "C.java::T:class",
+          "target": "C.java::T.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit()",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "static_field_instance",
+      "source": "class T { int hit() { return 1; } static int value = hit(); }",
+      "source_sha256": "94f624481449d63d79b515f8c75add2d43df6713646198453b9653beb666b41f",
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus access oracle lpdobvt1/static_field_instance/C.java:1: error: non-static method hit() cannot be referenced from a static context\nclass T { int hit() { return 1; } static int value = hit(); }\n                                                     ^\n1 error\n",
+      "references": [
+        {
+          "source": "C.java::T:class",
+          "scope_id": "C.java::T:class",
+          "kind": "calls",
+          "name": "hit",
+          "member": "hit",
+          "receiver": "",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "static_context": true,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "hit()",
+          "resolved": false,
+          "reason": "instance method requires an enclosing instance in this context"
+        }
+      ],
+      "call_edges": [],
+      "passed": true
+    },
+    {
+      "name": "instance_field_instance",
+      "source": "class T { int hit() { return 1; } int value = hit(); }",
+      "source_sha256": "bf0c10d675b3e729408fd0279c3c0a2400c601199f89be6e14f7db3476e6f6d6",
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "references": [
+        {
+          "source": "C.java::T:class",
+          "scope_id": "C.java::T:class",
+          "kind": "calls",
+          "name": "hit",
+          "member": "hit",
+          "receiver": "",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "static_context": false,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "hit()",
+          "resolved": true,
+          "reason": "unique syntax candidate; runtime dispatch unverified",
+          "target": "C.java::T.hit:method()",
+          "confidence": "heuristic"
+        }
+      ],
+      "call_edges": [
+        {
+          "source": "C.java::T:class",
+          "target": "C.java::T.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit()",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "static_field_static",
+      "source": "class T { static int hit() { return 1; } static int value = hit(); }",
+      "source_sha256": "25f620c33532578bcb138a100b424167e581053502b6eebe8473d530e91aa1be",
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "references": [
+        {
+          "source": "C.java::T:class",
+          "scope_id": "C.java::T:class",
+          "kind": "calls",
+          "name": "hit",
+          "member": "hit",
+          "receiver": "",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "static_context": true,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "hit()",
+          "resolved": true,
+          "reason": "unique syntax candidate; runtime dispatch unverified",
+          "target": "C.java::T.hit:method()",
+          "confidence": "heuristic"
+        }
+      ],
+      "call_edges": [
+        {
+          "source": "C.java::T:class",
+          "target": "C.java::T.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit()",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "interface_field_instance",
+      "source": "interface T { int hit(); int value = hit(); }",
+      "source_sha256": "b0651b61871c390964976ce34efdb20dbe97d2bd2765b33deebd68d6f57d7598",
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus access oracle lpdobvt1/interface_field_instance/C.java:1: error: non-static method hit() cannot be referenced from a static context\ninterface T { int hit(); int value = hit(); }\n                                     ^\n1 error\n",
+      "references": [
+        {
+          "source": "C.java::T:interface",
+          "scope_id": "C.java::T:interface",
+          "kind": "calls",
+          "name": "hit",
+          "member": "hit",
+          "receiver": "",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "static_context": false,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "hit()",
+          "resolved": true,
+          "reason": "unique syntax candidate; runtime dispatch unverified",
+          "target": "C.java::T.hit:method()",
+          "confidence": "heuristic"
+        }
+      ],
+      "call_edges": [
+        {
+          "source": "C.java::T:interface",
+          "target": "C.java::T.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit()",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": false
+    },
+    {
+      "name": "outer_instance_from_static_nested",
+      "source": "class T { void hit() {} static class C { void run() { hit(); } } }",
+      "source_sha256": "7522c2332e29a835ebf78e6b65b314553258ca7d575f4df2f42641bfb06f2548",
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus access oracle lpdobvt1/outer_instance_from_static_nested/C.java:1: error: non-static method hit() cannot be referenced from a static context\nclass T { void hit() {} static class C { void run() { hit(); } } }\n                                                      ^\n1 error\n",
+      "references": [
+        {
+          "source": "C.java::T.C.run:method()",
+          "scope_id": "C.java::T.C.run:method()",
+          "kind": "calls",
+          "name": "hit",
+          "member": "hit",
+          "receiver": "",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "static_context": false,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "hit()",
+          "resolved": false,
+          "reason": "instance method requires an enclosing instance in this context"
+        }
+      ],
+      "call_edges": [],
+      "passed": true
+    },
+    {
+      "name": "outer_instance_from_inner",
+      "source": "class T { void hit() {} class C { void run() { hit(); } } }",
+      "source_sha256": "04697c495aba2af348fdca43b686dc1955468d0825c141105061a337c53a2c8c",
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "references": [
+        {
+          "source": "C.java::T.C.run:method()",
+          "scope_id": "C.java::T.C.run:method()",
+          "kind": "calls",
+          "name": "hit",
+          "member": "hit",
+          "receiver": "",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "static_context": false,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "hit()",
+          "resolved": true,
+          "reason": "unique syntax candidate; runtime dispatch unverified",
+          "target": "C.java::T.hit:method()",
+          "confidence": "heuristic"
+        }
+      ],
+      "call_edges": [
+        {
+          "source": "C.java::T.C.run:method()",
+          "target": "C.java::T.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit()",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "own_instance_in_static_nested",
+      "source": "class T { static class C { void hit() {} void run() { hit(); } } }",
+      "source_sha256": "ff84ae98469527dcf95edbaa7c2fb4edc1c42b34708b7a711b37d57f019ccee8",
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "references": [
+        {
+          "source": "C.java::T.C.run:method()",
+          "scope_id": "C.java::T.C.run:method()",
+          "kind": "calls",
+          "name": "hit",
+          "member": "hit",
+          "receiver": "",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "static_context": false,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "hit()",
+          "resolved": true,
+          "reason": "unique syntax candidate; runtime dispatch unverified",
+          "target": "C.java::T.C.hit:method()",
+          "confidence": "heuristic"
+        }
+      ],
+      "call_edges": [
+        {
+          "source": "C.java::T.C.run:method()",
+          "target": "C.java::T.C.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit()",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "outer_instance_from_nested_interface",
+      "source": "class T { void hit() {} interface C { default void run() { hit(); } } }",
+      "source_sha256": "afc134ffa72c6e8648b18da4d5185929596aaf9040bf71265b5c7061a000dc74",
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus access oracle lpdobvt1/outer_instance_from_nested_interface/C.java:1: error: non-static method hit() cannot be referenced from a static context\nclass T { void hit() {} interface C { default void run() { hit(); } } }\n                                                           ^\n1 error\n",
+      "references": [
+        {
+          "source": "C.java::T.C.run:method()",
+          "scope_id": "C.java::T.C.run:method()",
+          "kind": "calls",
+          "name": "hit",
+          "member": "hit",
+          "receiver": "",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "static_context": false,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "hit()",
+          "resolved": false,
+          "reason": "instance method requires an enclosing instance in this context"
+        }
+      ],
+      "call_edges": [],
+      "passed": true
+    },
+    {
+      "name": "outer_instance_from_record",
+      "source": "class T { void hit() {} record C() { void run() { hit(); } } }",
+      "source_sha256": "2252acfd483a13bd3c241a880b30e4a2722921546193b07ba14311103a41938c",
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus access oracle lpdobvt1/outer_instance_from_record/C.java:1: error: non-static method hit() cannot be referenced from a static context\nclass T { void hit() {} record C() { void run() { hit(); } } }\n                                                  ^\n1 error\n",
+      "references": [
+        {
+          "source": "C.java::T.C.run:method()",
+          "scope_id": "C.java::T.C.run:method()",
+          "kind": "calls",
+          "name": "hit",
+          "member": "hit",
+          "receiver": "",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "static_context": false,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "hit()",
+          "resolved": false,
+          "reason": "instance method requires an enclosing instance in this context"
+        }
+      ],
+      "call_edges": [],
+      "passed": true
+    },
+    {
+      "name": "outer_instance_from_enum",
+      "source": "class T { void hit() {} enum C { ONE; void run() { hit(); } } }",
+      "source_sha256": "9d6228a54b0132d645d8a9cfe24cbc88cf167ea34b950d25eeefdca104bdaeeb",
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus access oracle lpdobvt1/outer_instance_from_enum/C.java:1: error: non-static method hit() cannot be referenced from a static context\nclass T { void hit() {} enum C { ONE; void run() { hit(); } } }\n                                                   ^\n1 error\n",
+      "references": [
+        {
+          "source": "C.java::T.C.run:method()",
+          "scope_id": "C.java::T.C.run:method()",
+          "kind": "calls",
+          "name": "hit",
+          "member": "hit",
+          "receiver": "",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "static_context": false,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "hit()",
+          "resolved": false,
+          "reason": "instance method requires an enclosing instance in this context"
+        }
+      ],
+      "call_edges": [],
+      "passed": true
+    },
+    {
+      "name": "outer_instance_from_interface_member",
+      "source": "interface T { void hit(); class C { void run() { hit(); } } }",
+      "source_sha256": "2bf20d17463af26b04b4df7b72d22eda694ed54cdd9bb7a7672063b4c16537aa",
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus access oracle lpdobvt1/outer_instance_from_interface_member/C.java:1: error: non-static method hit() cannot be referenced from a static context\ninterface T { void hit(); class C { void run() { hit(); } } }\n                                                 ^\n1 error\n",
+      "references": [
+        {
+          "source": "C.java::T.C.run:method()",
+          "scope_id": "C.java::T.C.run:method()",
+          "kind": "calls",
+          "name": "hit",
+          "member": "hit",
+          "receiver": "",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "static_context": false,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "hit()",
+          "resolved": false,
+          "reason": "instance method requires an enclosing instance in this context"
+        }
+      ],
+      "call_edges": [],
+      "passed": true
+    },
+    {
+      "name": "explicit_value_from_static",
+      "source": "class T { void hit() {} static void run(T item) { item.hit(); } }",
+      "source_sha256": "d496e1684e355ade4f6b0b71d87c4b1a33f1f728e32af310b334b69165e8e5eb",
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "references": [
+        {
+          "source": "C.java::T.run:method(T)",
+          "scope_id": "C.java::T.run:method(T)",
+          "kind": "calls",
+          "name": "item.hit",
+          "member": "hit",
+          "receiver": "item",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "static_context": false,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "item.hit()",
+          "resolved": true,
+          "reason": "unique syntax candidate; runtime dispatch unverified",
+          "target": "C.java::T.hit:method()",
+          "confidence": "heuristic"
+        }
+      ],
+      "call_edges": [
+        {
+          "source": "C.java::T.run:method(T)",
+          "target": "C.java::T.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "item.hit()",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "passed": false
+}
