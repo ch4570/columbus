@@ -279,6 +279,12 @@ class _Parser:
         return ""
 
     def argument_fact(self, node):
+        if node.type == 'array_creation_expression':
+            dimensions = sum(1 if c.type == 'dimensions_expr' else
+                             sum(part.type == '[' for part in c.children)
+                             for c in node.named_children if c.type in {'dimensions_expr', 'dimensions'})
+            if dimensions:
+                return {'kind': 'new', 'type': self.normalized(node.child_by_field_name('type')) + '[]' * dimensions}
         if node.type == "identifier":
             return {"kind": "name", "name": self.text(node)}
         if node.type in {"class_literal", "object_creation_expression"}:
@@ -510,6 +516,11 @@ class _Resolver:
 
     def reference_type_name(self, file, scope_id, name):
         """Resolve identity only; no generic erasure or basename matching."""
+        if (name or '').endswith('[]'):
+            component = name[:-2]
+            identity = ('primitive:' + component if component in _PRIMITIVE_WIDENING
+                        else self.reference_type_name(file, scope_id, component))
+            return 'array:' + identity if identity else None
         if not re.fullmatch(r"[A-Za-z_$][\w.$]*", name or ""):
             return None
         primitive_boxes = {"int": "Integer", "long": "Long", "short": "Short", "byte": "Byte",
@@ -541,6 +552,14 @@ class _Resolver:
     def reference_assignable(actual, expected):
         if actual == "null" or actual == expected or expected == "java.lang.Object":
             return True
+        if actual.startswith('array:'):
+            if expected in {'java.lang.Cloneable', 'java.io.Serializable'}:
+                return True
+            if expected.startswith('array:'):
+                left, right = actual[6:], expected[6:]
+                if left.startswith('primitive:') or right.startswith('primitive:'):
+                    return False
+                return _Resolver.reference_assignable(left, right)
         if actual == "java.lang.String" and expected in {"java.lang.CharSequence", "java.lang.Comparable", "java.io.Serializable"}:
             return True
         wrappers = {"java.lang." + n for n in ("Boolean", "Byte", "Short", "Integer", "Long", "Float", "Double", "Character")}

@@ -9,6 +9,22 @@ from columbus.jvm import parse_jvm, resolve_jvm
 
 
 class JVMTests(unittest.TestCase):
+    def test_array_class_token_identity_dimensions_and_shadowing(self):
+        for token,value,expected in [('int[]','new int[0]',True),('int[]','new Integer[0]',False),
+                ('Integer[]','new int[0]',False),('int[][]','new int[0][]',True),
+                ('int[][]','new int[0]',False),('Object[]','new String[0]',True),
+                ('Object[]','new int[0]',False),('Object[]','new int[0][]',True),
+                ('int[]','new int[new int[0].length]',True)]:
+            with self.subTest(token=token,value=value):
+                file=self.parsed('C.java','class C { static <T> void hit(Class<T> type,T value) {} void run() { hit('+token+'.class,'+value+'); } }')
+                resolve_jvm([file])
+                call,=[r for r in file['references'] if r['member']=='hit']
+                self.assertEqual(call['resolved'],expected)
+        file=self.parsed('C.java','class String {} class C { static <T> void hit(Class<T> type,T value) {} void run() { hit(java.lang.String[].class,new String[0]); } }')
+        resolve_jvm([file])
+        call,=[r for r in file['references'] if r['member']=='hit']
+        self.assertFalse(call['resolved'])
+
     def parsed(self, path, source):
         result = parse_jvm(path, source)
         self.assertEqual([], result["diagnostics"], result["diagnostics"])
