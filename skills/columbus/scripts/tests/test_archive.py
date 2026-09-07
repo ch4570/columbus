@@ -7,7 +7,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from columbus.archive import archive, search_archive
+from columbus.archive import archive, search_archive, neighbors_archive
 from columbus.index import RepositoryIndex
 
 
@@ -75,6 +75,56 @@ class ArchiveTests(unittest.TestCase):
             exact = search_archive(artifact, "a.OtherLoader.getResource", limit=1)
             self.assertEqual(exact["items"][0]["path"], "a.java")
             self.assertEqual(list(Path(consumer).iterdir()), [artifact])
+
+    def test_archive_relationships_survive_source_removal_and_enforce_caps(self):
+        with tempfile.TemporaryDirectory() as consumer:
+            artifact = Path(consumer) / "graph.jsonl.gz"
+            with tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                (root / "a.py").write_text("def leaf(): pass\ndef caller():\n    leaf()\n    caller()\ndef other(): caller()\n")
+                index = RepositoryIndex(root / ".columbus/index.sqlite")
+                index.refresh(root)
+                caller = index.search("caller")["hits"][0]["id"]
+                with index._read() as conn:
+                    expected = [dict(r) for r in conn.execute("SELECT * FROM edges WHERE kind='calls' AND (source=? OR target=?) ORDER BY source,target,kind,path,line,confidence,evidence", (caller, caller))]
+                archive(index, artifact)
+            self.assertFalse(root.exists())
+            before = artifact.read_bytes()
+            full = neighbors_archive(artifact, caller, 'both', ['calls'])
+            self.assertEqual(full['edges'], expected)
+            self.assertFalse(full['truncated'])
+            self.assertFalse(full['semantic_complete'])
+            self.assertEqual(full['matched_edges'], 3)
+            self.assertEqual(len([e for e in full['edges'] if e['source']==e['target']]), 1)
+            limited = neighbors_archive(artifact, caller, 'both', ['calls'], limit=1, budget_bytes=2048)
+            self.assertTrue(limited['truncated'])
+            self.assertLessEqual(len((json.dumps(limited,separators=(',',':'))+'\n').encode()),2048)
+            self.assertEqual({n['id'] for n in limited['nodes']}, {caller} | {e[k] for e in limited['edges'] for k in ['source','target']})
+            for direction, field in [('out','source'),('in','target')]:
+                result = neighbors_archive(artifact, caller, direction, ['calls'])
+                self.assertEqual(result['edges'], [e for e in expected if e[field]==caller])
+            with self.assertRaisesRegex(ValueError, 'Exact symbol ID'):
+                neighbors_archive(artifact, 'caller')
+            broken = Path(consumer) / 'broken.gz'
+            with gzip.open(broken,'wb') as stream:
+                stream.write(b'\n'.join(gzip.decompress(before).splitlines()[:-1])+b'\n')
+            with self.assertRaisesRegex(ValueError,'Incomplete'):
+                neighbors_archive(broken, caller, limit=1)
+            self.assertEqual(artifact.read_bytes(), before)
+            self.assertEqual(sorted(p.name for p in Path(consumer).iterdir()), ['broken.gz','graph.jsonl.gz'])
+            from columbus import archive as archive_module
+            original_rows = archive_module._validated_rows
+            passes = []
+            def changed_between_passes(raw):
+                yield from original_rows(raw)
+                passes.append(True)
+                if len(passes) == 1:
+                    with artifact.open('ab') as writer:
+                        writer.write(b'\0')
+            with patch.object(archive_module, '_validated_rows', side_effect=changed_between_passes):
+                with self.assertRaisesRegex(ValueError, 'Archive changed'):
+                    neighbors_archive(artifact, caller)
+
 
     def test_failed_archive_never_publishes_partial_output(self):
         with tempfile.TemporaryDirectory() as directory:

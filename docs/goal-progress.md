@@ -112,3 +112,7 @@ Qualified search now has a 60-package ambiguity/cap observation on both parsers:
 ## Portable archive qualified lookup
 
 Fixed archive substring ordering that let OtherLoader displace a Loader.getResource candidate under a result cap. Component-boundary suffixes now precede general substrings after exact matches. Tests run after source/SQLite removal; both engine suites pass 211 tests and root tests pass 53. An unchanged existing Spring archive supports an empty-directory query in 1,890 bytes. [Evidence](../evals/qualified-search/archive/REPORT.md). Archive relationship traversal and actual model savings remain separate open work.
+
+## Source-free stored relationship navigation
+
+Added archive-neighbors with exact IDs, one-hop direction/kind filters, capped edges/endpoints and complete byte budgeting. Two streaming passes validate the artifact and reject detected changes without SQLite. Generated post-source-removal tests cover parity, self-loops, truncation and corrupt/mutated files; both engine suites pass 212 tests, root 53 and clean install passes. Existing Spring archive returns six matching stored calls in 6,368 bytes with no consumer writes. [Report](../evals/qualified-search/archive-neighbors/REPORT.md). Runtime completeness, multihop archive navigation and actual model savings remain unproven.

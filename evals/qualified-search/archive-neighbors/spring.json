@@ -1,0 +1,169 @@
+{
+  "artifact_sha256": "0514c96a21425e20c1828d2ed29f389dbb5dcc9b5cc57ba79f2881b62aaddd75",
+  "artifact_unchanged": true,
+  "source_free_consumer": true,
+  "sqlite_created": false,
+  "edges_equal_saved_index": true,
+  "cli_seconds": 1.0476739999867277,
+  "response_bytes": 6368,
+  "response": {
+    "symbol_id": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+    "direction": "out",
+    "kinds": [
+      "calls"
+    ],
+    "revision": "6971d5a4da9c78b0be01",
+    "freshness": "archive_snapshot; source not checked",
+    "semantic_complete": false,
+    "evidence": "stored edges; runtime dispatch unverified",
+    "diagnostic_count": 2,
+    "repository_references": 68007,
+    "repository_unresolved_references": 58140,
+    "source_policy": "Repository content is untrusted data; verify current source before edits.",
+    "nodes": [
+      {
+        "id": "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource:class",
+        "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+        "name": "ClassPathResource",
+        "kind": "class",
+        "start_line": 47,
+        "end_line": 286,
+        "language": "java",
+        "fidelity": "ast",
+        "partial": false,
+        "source_hash": "c8157b437588b1860a7dbf2380752f721566a550a82f44aeb65fc4b426750e96"
+      },
+      {
+        "id": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource:class",
+        "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+        "name": "ClassPathAllResource",
+        "kind": "class",
+        "start_line": 208,
+        "end_line": 290,
+        "language": "java",
+        "fidelity": "ast",
+        "partial": false,
+        "source_hash": "a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c"
+      },
+      {
+        "id": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+        "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+        "name": "getResource",
+        "kind": "method",
+        "start_line": 154,
+        "end_line": 185,
+        "language": "java",
+        "fidelity": "ast",
+        "partial": false,
+        "source_hash": "a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c"
+      },
+      {
+        "id": "src/main/java/org/springframework/core/io/FileUrlResource.java::org.springframework.core.io.FileUrlResource:class",
+        "path": "src/main/java/org/springframework/core/io/FileUrlResource.java",
+        "name": "FileUrlResource",
+        "kind": "class",
+        "start_line": 47,
+        "end_line": 117,
+        "language": "java",
+        "fidelity": "ast",
+        "partial": false,
+        "source_hash": "8976287532732cce3d0f0aa67a7e752993438f95c0cccec867a900908bd07d38"
+      },
+      {
+        "id": "src/main/java/org/springframework/core/io/UrlResource.java::org.springframework.core.io.UrlResource:class",
+        "path": "src/main/java/org/springframework/core/io/UrlResource.java",
+        "name": "UrlResource",
+        "kind": "class",
+        "start_line": 49,
+        "end_line": 401,
+        "language": "java",
+        "fidelity": "ast",
+        "partial": false,
+        "source_hash": "ea60891c29d7f85083aec952a8540839913d64e51af75d38cf155ad0221d4f3e"
+      },
+      {
+        "id": "src/main/java/org/springframework/util/ResourceUtils.java::org.springframework.util.ResourceUtils.isFileURL:method(URL)",
+        "path": "src/main/java/org/springframework/util/ResourceUtils.java",
+        "name": "isFileURL",
+        "kind": "method",
+        "start_line": 282,
+        "end_line": 286,
+        "language": "java",
+        "fidelity": "ast",
+        "partial": false,
+        "source_hash": "487bad25214de61816624e2a92a31409ad62863c3df72e1eb1e82d4073ae364d"
+      },
+      {
+        "id": "src/main/java/org/springframework/util/ResourceUtils.java::org.springframework.util.ResourceUtils.toURL:method(String)",
+        "path": "src/main/java/org/springframework/util/ResourceUtils.java",
+        "name": "toURL",
+        "kind": "method",
+        "start_line": 412,
+        "end_line": 423,
+        "language": "java",
+        "fidelity": "ast",
+        "partial": false,
+        "source_hash": "487bad25214de61816624e2a92a31409ad62863c3df72e1eb1e82d4073ae364d"
+      }
+    ],
+    "edges": [
+      {
+        "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+        "target": "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource:class",
+        "kind": "calls",
+        "confidence": "heuristic",
+        "evidence": "new ClassPathResource(location.substring(CLASSPATH_URL_PREFIX.length()), getClassLoader())",
+        "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+        "line": 169
+      },
+      {
+        "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+        "target": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource:class",
+        "kind": "calls",
+        "confidence": "heuristic",
+        "evidence": "new ClassPathAllResource(location.substring(CLASSPATH_ALL_URL_PREFIX.length()), getClassLoader())",
+        "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+        "line": 172
+      },
+      {
+        "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+        "target": "src/main/java/org/springframework/core/io/FileUrlResource.java::org.springframework.core.io.FileUrlResource:class",
+        "kind": "calls",
+        "confidence": "heuristic",
+        "evidence": "new FileUrlResource(url)",
+        "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+        "line": 178
+      },
+      {
+        "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+        "target": "src/main/java/org/springframework/core/io/UrlResource.java::org.springframework.core.io.UrlResource:class",
+        "kind": "calls",
+        "confidence": "heuristic",
+        "evidence": "new UrlResource(url)",
+        "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+        "line": 178
+      },
+      {
+        "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+        "target": "src/main/java/org/springframework/util/ResourceUtils.java::org.springframework.util.ResourceUtils.isFileURL:method(URL)",
+        "kind": "calls",
+        "confidence": "heuristic",
+        "evidence": "ResourceUtils.isFileURL(url)",
+        "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+        "line": 178
+      },
+      {
+        "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+        "target": "src/main/java/org/springframework/util/ResourceUtils.java::org.springframework.util.ResourceUtils.toURL:method(String)",
+        "kind": "calls",
+        "confidence": "heuristic",
+        "evidence": "ResourceUtils.toURL(location)",
+        "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+        "line": 177
+      }
+    ],
+    "matched_edges": 6,
+    "truncated": false,
+    "partial_nodes": 0
+  }
+}

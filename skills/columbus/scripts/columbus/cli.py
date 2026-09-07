@@ -97,13 +97,20 @@ def main(argv=None) -> int:
     parser.add_argument('--version', action='version', version=__version__)
     _common(parser)
     sub = parser.add_subparsers(dest='command', required=True)
-    for name in ('doctor', 'init', 'archive-search', 'archive', 'tree', 'hook-install', 'hook-update', 'sync', 'index', 'status', 'search', 'map', 'symbol', 'callers', 'neighbors', 'impact', 'context', 'explore', 'stats', 'graph', 'export', 'serve', 'telemetry'):
+    for name in ('doctor', 'init', 'archive-search', 'archive-neighbors', 'archive', 'tree', 'hook-install', 'hook-update', 'sync', 'index', 'status', 'search', 'map', 'symbol', 'callers', 'neighbors', 'impact', 'context', 'explore', 'stats', 'graph', 'export', 'serve', 'telemetry'):
         command = sub.add_parser(name)
         _common(command, subcommand=True)
         if name == 'archive-search':
             command.add_argument('query')
             command.add_argument('--input', required=True)
             command.add_argument('--limit', type=int, default=5)
+            command.add_argument('--budget-bytes', type=int, default=6000)
+        if name == 'archive-neighbors':
+            command.add_argument('symbol_id')
+            command.add_argument('--input', required=True)
+            command.add_argument('--direction', choices=['in', 'out', 'both'], default='out')
+            command.add_argument('--kinds', nargs='+')
+            command.add_argument('--limit', type=int, default=50)
             command.add_argument('--budget-bytes', type=int, default=6000)
         if name == 'archive':
             command.add_argument('--output', required=True, help='New complete .jsonl.gz graph artifact')
@@ -267,6 +274,11 @@ def main(argv=None) -> int:
                 raise ValueError('archive-search uses compact JSON to preserve its byte budget')
             from .archive import search_archive
             result = search_archive(args.input, args.query, args.limit, args.budget_bytes)
+        elif args.command == 'archive-neighbors':
+            if args.pretty:
+                raise ValueError('archive-neighbors uses compact JSON to preserve its byte budget')
+            from .archive import neighbors_archive
+            result = neighbors_archive(args.input, args.symbol_id, args.direction, args.kinds, args.limit, args.budget_bytes)
         elif args.command == 'archive':
             from .archive import archive
             if not args.snapshot:

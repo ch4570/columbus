@@ -103,6 +103,13 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
             packet = json.loads(result)
             if not any(item['name'] == label for item in packet['items']) or len(result.encode('utf-8')) > 2048:
                 raise VerificationError('Installed archive lookup failed its result/budget check')
+            symbol_id = next(item['id'] for item in packet['items'] if item['name'] == label)
+            related = run([*prefix, 'archive-neighbors', symbol_id, '--input', artifact,
+                           '--repo', consumer, '--direction', 'in', '--kinds', 'contains', '--budget-bytes', '2048'])
+            relations = json.loads(related)
+            if (not relations['edges'] or relations['semantic_complete'] or len(related.encode('utf-8')) > 2048
+                    or not all(edge['target'] == symbol_id for edge in relations['edges'])):
+                raise VerificationError('Installed source-free archive relationships failed')
             if (consumer / '.columbus').exists():
                 raise VerificationError('Archive lookup unexpectedly created a repository index')
 
@@ -333,7 +340,7 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
                 "named_sessions": True, "no_argument_guide": True, "standalone_release_install": True,
                 "ast_tree": True, "native_hook_partial_staging": True,
                 "bounded_caller_evidence": True, "stale_caller_source_rejected": True,
-                "complete_graph_archive": True, "source_free_archive_query": True, "summary_lazy_cache": True,
+                "complete_graph_archive": True, "source_free_archive_query": True, "source_free_archive_relationships": True, "summary_lazy_cache": True,
                 "bootstrap_hook_after_source_relocation": bool(bundle),
                 "local_edits_preserved": True, "managed_files": len(lock["files"]),
                 "archive_files": archive_files, "plan_status": planned.get("status")}

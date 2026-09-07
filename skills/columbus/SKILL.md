@@ -19,7 +19,7 @@ Index queries auto-sync unless `--snapshot` is requested; sync failure stops the
 Read only the reference for the operation you need:
 
 - [Context, sessions and budgets](references/agent-context.md): receipt continuation, source verification and telemetry.
-- [Complete graph archives](references/archive.md): `archive --output NEW.jsonl.gz` and bounded `archive-search QUERY --input GRAPH.jsonl.gz` without SQLite.
+- [Complete graph archives](references/archive.md): `archive --output NEW.jsonl.gz` and bounded `archive-search QUERY --input GRAPH.jsonl.gz` plus `archive-neighbors EXACT_ID --input GRAPH.jsonl.gz` without SQLite.
 - [AST trees and hooks](references/portable-ast.md): parent-first JSONL, optional pre-commit integration and strict parse handling.
 - [Install, export and MCP](references/operations.md): managed updates, visual graph formats and saved-snapshot tools.
 - [Index freshness](references/index-sync.md), [language fidelity](references/polyglot.md), [JVM uncertainty](references/jvm-analysis.md) or [remaining reference topics](references/INDEX.md).
