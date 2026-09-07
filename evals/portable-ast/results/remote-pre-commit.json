@@ -2,7 +2,7 @@
   "status": "passed",
   "isolated_wheel": false,
   "hook_repository": "https://github.com/ch4570/columbus",
-  "revision": "d45e09c9b35c5e52746cc723c2f2fd5a8dcf0bbc",
+  "revision": "cc754873ad915cd3daf910018d1befdf44d257a6",
   "partial_staging_preserved": true,
   "framework_snapshot": true,
   "restoration_refresh": true,
