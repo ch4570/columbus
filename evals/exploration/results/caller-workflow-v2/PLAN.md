@@ -1,0 +1,5 @@
+# Predeclared revised caller-workflow pair
+
+Evaluate skill revision 2ec53f1 on the unchanged c67b20a fixture and caller-cases.json. One fresh Columbus trial first, then one fresh baseline trial; requested gpt-5.6-sol, xhigh, repeat 1, timeout 600 seconds each. Reverse the previous pair's order to avoid always measuring Columbus second. Freeze current engine and full skill before trials. No selective retries. Keep previous failed-efficiency pilot.
+
+Both answers must pass exact caller set, bounded contiguous citations, and semantic review against the independent corpus. Record all usage, graph calls and their position in the command trace. Only report a quality-preserving decrease for this pair if both pass; one pair cannot establish general savings. Prompt conditions remain those of the existing harness; the only intended capability change is the revised skill workflow. No source writes, repository execution, web, or delegation within trials. Cached input is a subset of input, not additional tokens or a billing estimate.
