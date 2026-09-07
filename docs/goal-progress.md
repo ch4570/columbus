@@ -44,3 +44,7 @@ The [multi-hop preflight](../evals/python-receiver/REPORT.md) finds a missing Py
 ## Optional Python receiver navigation
 
 Implemented `neighbors/impact --include-candidates` with separate `candidate_calls[retrieval_only]` traversal from cached unresolved references. Existing stored calls and default traversal remain unchanged. Three positive runtime fixtures receive candidates; five known counterexamples do not. The frozen source's missing `symbol → _source → read_stable → safe_source` path is now navigable with an explicitly uncertain first hop. Both parser environments passed 201 engine tests; root tests passed 53. See [candidate report](../evals/python-receiver/CANDIDATES.md). No actual-model savings claim; multi-hop evaluation still needs a predeclared task and quality oracle.
+
+## Known class writes invalidate Python receiver candidates
+
+A generated runtime counterexample showed a misleading candidate after `C.helper` was replaced. Added lexical member-write facts and cross-module relinking guards so assignments, deletion, and direct setattr/delattr to known classes suppress contradicted receiver candidates. Removing the mutation restores them. Both parser environments passed 202 engine tests, and the existing real three-hop candidate path still passes. [Before/after evidence and limits](../evals/python-receiver/CLASS-MUTATION.md). Previous-commit platform jobs remain under observation; this evidence does not establish model token savings.

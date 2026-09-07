@@ -190,7 +190,15 @@ class _Parser(ast.NodeVisitor):
             scope = self.scopes.get(scope['parent'])
         return None
 
+    def record_member_write(self, value: ast.AST, member: str) -> None:
+        name = _dotted(value)
+        if name:
+            self.scopes[self.current].setdefault("member_writes", []).append(
+                {"name": name, "scope_id": self.current, "member": member})
+
     def visit_Attribute(self, node: ast.Attribute) -> None:
+        if isinstance(node.ctx, (ast.Store, ast.Del)):
+            self.record_member_write(node.value, node.attr)
         if isinstance(node.ctx, (ast.Store, ast.Del)) and isinstance(node.value, ast.Name):
             owner = self.receiver_owner(node.value.id)
             if owner:
@@ -241,6 +249,11 @@ class _Parser(ast.NodeVisitor):
         self.generic_visit(node)
 
     def visit_Call(self, node: ast.Call) -> None:
+        if (isinstance(node.func, ast.Name) and node.func.id in {"setattr", "delattr"}
+                and node.args):
+            member = (node.args[1].value if len(node.args) > 1 and isinstance(node.args[1], ast.Constant)
+                      and isinstance(node.args[1].value, str) else "*")
+            self.record_member_write(node.args[0], member)
         if (isinstance(node.func, ast.Name) and node.func.id in {"setattr", "delattr"}
                 and node.args and isinstance(node.args[0], ast.Name)):
             owner = self.receiver_owner(node.args[0].id)
@@ -348,6 +361,13 @@ class _Resolver:
             self.modules.setdefault(file["module"], []).append(file)
         self.receiver_bases = {target for file in files for ref in file["references"]
                                if ref["kind"] == "inherits" and (target := self.reference(ref))}
+        self.class_mutations: dict[str, set[str]] = {}
+        for scope in self.scopes.values():
+            for write in scope.get("member_writes", []):
+                target = self.reference({**write, "kind": "inherits"})
+                if target and self.symbols[target]["kind"] == "class":
+                    self.class_mutations.setdefault(target, set()).add(write["member"])
+
 
     def module_file(self, module: str) -> dict[str, Any] | None:
         candidates = self.modules.get(module, [])
@@ -485,7 +505,9 @@ class _Resolver:
         cls = self.scopes[owner]
         if (cls.get('dynamic_class') or owner in self.receiver_bases
                 or {member, '*', '__class__', '__dict__'} & set(cls.get('receiver_mutations', []))
-                or {'__getattr__', '__getattribute__'} & cls['bindings'].keys()):
+                or {'__getattr__', '__getattribute__'} & cls['bindings'].keys()
+                or {member, '*', '__bases__', '__getattr__', '__getattribute__'}
+                   & self.class_mutations.get(owner, set())):
             return None
         resolved = self.binding(cls['bindings'].get(member, []), set())
         if not resolved or resolved[0] != 'symbol':

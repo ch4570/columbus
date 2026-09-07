@@ -1,0 +1,78 @@
+{
+  "fixture_sha256": "742c682737ac38d3a8c6449bf1b4470aaa2a81d130ce5338229ed64f6ae34f93",
+  "analyzer_sha256": "ffc37f48fc8a4764a3091c2f16cef04589a6bddced39d8b4759ab4df01f0b38a",
+  "observations": {
+    "False": {
+      "elapsed_seconds": 0.0009004580060718581,
+      "expected_path_present": [
+        false,
+        true,
+        true
+      ],
+      "nodes": 7,
+      "edges": 20,
+      "truncated": false,
+      "path_edges": [
+        {
+          "source": "skills/columbus/scripts/columbus/sync_state.py::read_stable:function",
+          "target": "skills/columbus/scripts/columbus/discovery.py::safe_source:function",
+          "kind": "calls",
+          "confidence": "resolved_static",
+          "evidence": "safe_source",
+          "path": "skills/columbus/scripts/columbus/sync_state.py",
+          "line": 73
+        },
+        {
+          "source": "skills/columbus/scripts/columbus/index.py::RepositoryIndex._source:method",
+          "target": "skills/columbus/scripts/columbus/sync_state.py::read_stable:function",
+          "kind": "calls",
+          "confidence": "resolved_static",
+          "evidence": "read_stable",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "line": 441
+        }
+      ]
+    },
+    "True": {
+      "elapsed_seconds": 0.0064931249944493175,
+      "expected_path_present": [
+        true,
+        true,
+        true
+      ],
+      "nodes": 8,
+      "edges": 22,
+      "truncated": false,
+      "path_edges": [
+        {
+          "source": "skills/columbus/scripts/columbus/sync_state.py::read_stable:function",
+          "target": "skills/columbus/scripts/columbus/discovery.py::safe_source:function",
+          "kind": "calls",
+          "confidence": "resolved_static",
+          "evidence": "safe_source",
+          "path": "skills/columbus/scripts/columbus/sync_state.py",
+          "line": 73
+        },
+        {
+          "source": "skills/columbus/scripts/columbus/index.py::RepositoryIndex._source:method",
+          "target": "skills/columbus/scripts/columbus/sync_state.py::read_stable:function",
+          "kind": "calls",
+          "confidence": "resolved_static",
+          "evidence": "read_stable",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "line": 441
+        },
+        {
+          "source": "skills/columbus/scripts/columbus/index.py::RepositoryIndex.symbol:method",
+          "target": "skills/columbus/scripts/columbus/index.py::RepositoryIndex._source:method",
+          "kind": "candidate_calls",
+          "confidence": "retrieval_only",
+          "evidence": "lexical instance-receiver member; runtime dispatch and external mutation unverified",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "line": 524
+        }
+      ]
+    }
+  },
+  "scope": "Source-reviewed three-hop navigation path; first hop remains an uncertain candidate. No model token trial."
+}

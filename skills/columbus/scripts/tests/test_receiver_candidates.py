@@ -32,6 +32,31 @@ class ReceiverCandidatesTests(unittest.TestCase):
                 self.assertEqual(expected, bool(refs[0].get('retrieval_candidates')))
                 self.assertFalse(any(e['evidence'] == 'self.helper' for e in edges))
 
+    def test_known_class_mutations_across_modules_and_relink(self):
+        source = ("class C:\n    def helper(self): pass\n"
+                  "    def run(self): self.helper()\n")
+        for mutation in ['C.helper = lambda self: None', 'del C.helper',
+                         'setattr(C, "helper", lambda self: None)',
+                         'setattr(C, name, value)',
+                         'C.__getattribute__ = replacement',
+                         'C.__bases__ = replacement', 'mod.C.helper = replacement']:
+            with self.subTest(mutation=mutation):
+                owner = parse_source('owner.py', source, 'owner')
+                patch = parse_source('patch.py', 'from owner import C\nimport owner as mod\n' + mutation, 'patch')
+                resolve_files([owner])
+                ref = next(r for r in owner['references'] if r['name'] == 'self.helper')
+                self.assertTrue(ref.get('retrieval_candidates'))
+                resolve_files([owner, patch])
+                self.assertFalse(ref.get('retrieval_candidates'))
+                self.assertFalse(ref['resolved'])
+                resolve_files([owner])
+                self.assertTrue(ref.get('retrieval_candidates'))
+        owner = parse_source('owner.py', source, 'owner')
+        unrelated = parse_source('patch.py', 'from owner import C\nC.other = 1', 'patch')
+        resolve_files([owner, unrelated])
+        ref = next(r for r in owner['references'] if r['name'] == 'self.helper')
+        self.assertTrue(ref.get('retrieval_candidates'))
+
     def test_decorators_and_static_receiver(self):
         for target_decorator, source_decorator, expected in [
             ('', '', True), ('    @staticmethod\n', '', True),

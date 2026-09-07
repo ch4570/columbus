@@ -1,6 +1,7 @@
 """Verify optional navigation on the frozen source without running its code."""
 import hashlib
 import json
+import sys
 from pathlib import Path
 import tempfile
 import time
@@ -38,5 +39,5 @@ with tempfile.TemporaryDirectory() as tmp:
               'analyzer_sha256': hashlib.sha256((repo / 'skills/columbus/scripts/columbus/parser.py').read_bytes()).hexdigest(),
               'observations': observations,
               'scope': 'Source-reviewed three-hop navigation path; first hop remains an uncertain candidate. No model token trial.'}
-(repo / 'evals/python-receiver/candidate-path.json').write_text(json.dumps(result, indent=2) + '\n')
+(Path(sys.argv[1]) if len(sys.argv) > 1 else repo / 'evals/python-receiver/candidate-path.json').write_text(json.dumps(result, indent=2) + '\n')
 print(json.dumps({k: {key: value for key, value in v.items() if key != 'path_edges'} for k, v in observations.items()}))
