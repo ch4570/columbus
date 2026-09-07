@@ -143,6 +143,20 @@ def requirements_digest(mcp: bool) -> str:
     return hashlib.sha256(b"\0".join(path.read_bytes() for path in files)).hexdigest()
 
 
+def wheelhouse_digest(wheelhouse: Path | None) -> str | None:
+    """Track the explicit local candidates, including same-name replacements."""
+    if wheelhouse is None:
+        return None
+    digest = hashlib.sha256()
+    for wheel in sorted(wheelhouse.glob("*.whl")):
+        if wheel.is_symlink() or not wheel.is_file():
+            raise SetupError(f"Wheelhouse candidate must be a regular, non-symlink file: {wheel}")
+        with wheel.open("rb") as stream:
+            content = hashlib.file_digest(stream, "sha256").hexdigest()
+        digest.update(wheel.name.encode("utf-8") + b"\0" + content.encode("ascii") + b"\0")
+    return digest.hexdigest()
+
+
 def healthy(python: Path, *, mcp: bool, quiet: bool = True) -> bool:
     result = invoke(python_command(python, SOURCE / "scripts/columbus.py", "doctor"), quiet=quiet)
     if result.returncode:
@@ -153,6 +167,7 @@ def healthy(python: Path, *, mcp: bool, quiet: bool = True) -> bool:
 
 
 def ensure_runtime(root: Path, *, mcp: bool, offline: bool, wheelhouse: Path | None) -> Path:
+    candidates = wheelhouse_digest(wheelhouse)
     _, runtime, _ = layout(root)
     state = runtime_state(root, runtime)
     if state is None:
@@ -167,18 +182,24 @@ def ensure_runtime(root: Path, *, mcp: bool, offline: bool, wheelhouse: Path | N
     if not usable:
         checked(python_command(Path(sys.executable), "-m", "venv", str(runtime)), "Create dedicated Python environment")
     fingerprint = requirements_digest(mcp)
-    ready = state.get("requirements_sha256") == fingerprint and healthy(python, mcp=mcp)
+    changed_candidates = state.get("wheelhouse_sha256") != candidates
+    ready = (state.get("requirements_sha256") == fingerprint and not changed_candidates
+             and healthy(python, mcp=mcp))
     if not ready:
         requirement = SOURCE / "scripts" / ("requirements-mcp.txt" if mcp else "requirements.txt")
         command = python_command(python, "-m", "pip", "--disable-pip-version-check", "install", "--no-input")
         if offline:
             command.append("--no-index")
         if wheelhouse:
-            command.extend(["--find-links", str(wheelhouse)])
+            command.extend(["--find-links", str(wheelhouse), "--upgrade"])
+            if changed_candidates:
+                command.append("--force-reinstall")
         command.extend(["-r", str(requirement)])
         checked(command, "Install pinned dependencies")
     if not healthy(python, mcp=mcp, quiet=False):
         raise SetupError("Runtime doctor failed. Review parser versions and SQLite FTS5 support, then rerun the same install command.")
-    state.update(requirements_sha256=fingerprint, mcp_requested=mcp)
+    if wheelhouse_digest(wheelhouse) != candidates:
+        raise SetupError("Wheelhouse changed during installation; rerun with stable candidate files.")
+    state.update(requirements_sha256=fingerprint, mcp_requested=mcp, wheelhouse_sha256=candidates)
     save_state(root, runtime, state)
     return python

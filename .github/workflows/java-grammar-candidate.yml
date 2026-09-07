@@ -47,6 +47,8 @@ jobs:
           python -c "import pathlib, subprocess, sys; wheel = next(pathlib.Path('candidate-results').glob('*.whl')); subprocess.run([sys.executable, '-m', 'pip', 'install', '--no-deps', '--target', 'candidate-target', str(wheel)], check=True)"
           python evals/java-grammar/verify_upgrade.py candidate-target candidate-results/upgrade.json
           python -c "import pathlib, subprocess, sys; wheels = list(pathlib.Path('candidate-results').glob('*.whl')); assert len(wheels) == 1; subprocess.run([sys.executable, '-m', 'pip', 'install', '--no-deps', '--force-reinstall', str(wheels[0])], check=True)"
+      - name: Verify existing bootstrap runtime adopts the candidate
+        run: python evals/java-grammar/verify_bootstrap_upgrade.py candidate-results candidate-results/bootstrap-upgrade.json
       - name: Verify installed candidate and annotation spans
         run: python evals/java-grammar/verify_candidate.py candidate-results/runtime.json
       - name: Engine regression tests with candidate
