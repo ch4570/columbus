@@ -1,0 +1,141 @@
+{
+  "answer_sha256": "6ad52a7da421379d7fdd88681aa44b5b06557a3ec40513f00259813155b76aea",
+  "rubric_sha256": "c9ecf1e74b7c756d3d31f713bca099d105aa94deffa9025de0062fcaead992d4",
+  "findings": [
+    {
+      "id": "uri_handoffs",
+      "passed": true,
+      "reason": "The public-method quote and explanation establish all ordered arguments, the synchronous return/error boundary and the absence of the request pipeline.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The answer explicitly passes defaults and per-call config to mergeConfig, merged baseURL/url/allowAbsoluteUrls to buildFullPath, and its returned path plus merged params/paramsSerializer to buildURL. The final quote contains these actual ordered calls."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The explanation states direct URI-string return, an entirely synchronous chain and no catch boundary, including synchronous propagation of serializer/encoder/helper exceptions rather than conversion into a rejected request promise."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The answer explicitly excludes request/_request, interceptors, adapters, dispatch and network operations from this method. It does not infer a later request's success or identical behavior from URI construction."
+        }
+      ]
+    },
+    {
+      "id": "uri_config_merge",
+      "passed": true,
+      "reason": "The final explanation supplies the complete policy and copying distinctions beyond the representative map quote, with defined null/false overrides and no universal deep-clone claim.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The answer describes a fresh top-level result, no assignment into either ordinary input config, and new plain-object/array containers. It expressly retains non-plain references such as native URLSearchParams and shared array elements, limiting the cloning claim appropriately."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The explanation states per-call-only url without default inheritance, contrasts baseURL/paramsSerializer defaultToConfig2 selection, and distinguishes defined null or empty base values from undefined/absent fallback. The quote identifies the corresponding map entries."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The final answer explicitly says params and allowAbsoluteUrls are not special map entries, identifies the mergeDeepProperties fallback, and explains defined override versus undefined inheritance with params:null and allowAbsoluteUrls:false examples."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The explanation describes recursive combination of plain objects with later per-call precedence, copying of plain sources, and shallow slice copying plus replacement rather than concatenation of arrays. It expressly avoids claiming recursive cloning of array elements."
+        }
+      ]
+    },
+    {
+      "id": "uri_base_path",
+      "passed": true,
+      "reason": "The answer covers scheme/protocol-relative classification, all scoped base/flag branches, bounded slash removal and non-canonicalizing textual composition.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The quote calls isAbsoluteURL, while the explanation gives the case-insensitive letter-led scheme and permitted following characters, scheme:// and // forms, and treats other strings as relative. This includes a single-leading-slash string rather than labeling every slash or colon absolute."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The answer requires a truthy merged base, joins relative URLs, forces absolute/protocol-relative joining for false, and leaves absolute URLs unchanged for true or ultimate absence. It distinguishes inherited per-call absence from an ultimately absent base and states that no truthy base preserves the requested URL even with false."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The explanation states at most two trailing base slashes removed, all leading relative slashes removed, one inserted slash and the exact unchanged-base fallback for an empty relative string. It does not claim all trailing-slash runs are stripped."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The answer explicitly distinguishes textual concatenation from browser-style resolution, origin enforcement, path-traversal normalization and canonicalization, and explains that forcing an absolute URL merely concatenates its text under the base."
+        }
+      ]
+    },
+    {
+      "id": "uri_serializer_selection",
+      "passed": true,
+      "reason": "The final explanation covers the early return, serializer normalization and arguments, native/encoder separation, exception propagation and conditional URL modification. Its object-identity statement concerns the object already passed into buildURL, consistently with the earlier description of merge-time cloning.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The answer states the immediate return for absent/null params and separately describes an empty plain object yielding an empty serialized result and preserving the URI. Under the prompt's absent/null/native/plain-object scope, this covers the falsy fast path versus truthy empty-object serialization without introducing additional unsupported input types."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The explanation and quote give the fresh function-form serialize wrapper, callback params/options arguments, object-form serialize property, precedence over native and ordinary-object branches, verbatim returned-string use and uncaught synchronous exceptions."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The final quote distinguishes direct native params.toString() from AxiosURLSearchParams(...).toString(_encode). The explanation places key/value encoding only on the latter path, names the internal encoder callback argument, and expressly bypasses it for native URLSearchParams and custom serialization."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The explanation requires a truthy nonempty serialized string before cutting the first # suffix, selects ? or & based on the remaining URL, and states that empty custom/native/plain-object serialization preserves the complete original URI and fragment."
+        }
+      ]
+    },
+    {
+      "id": "uri_parameter_materialization",
+      "passed": false,
+      "reason": "The answer accurately describes accumulator population, append/encoding/join behavior, omissions, traversal, conversions and encoding. It does not establish the separately required initialization of _pairs as an empty collection in any final explanation or quote; this narrow omission fails criterion 0 only.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": false,
+          "reason": "The answer says buildURL creates AxiosURLSearchParams and its _pairs accumulator is populated by passing the object and accumulator to toFormData, then correctly explains appending terminal pairs and encoding/joining them. However, creation and population do not explain the collection's initial empty state, and no final quote includes the constructor or an equivalent initialization description. The separate empty-params URL outcome is not evidence of constructor initialization. Credit the described handoffs and pair processing, but do not infer the missing state from a call site or reading trace."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The explanation explicitly filters null/undefined members before visiting at every level, skips null/undefined flat-array elements and emits repeated name[] for a top-level flat-array property with indexes:false. Because ordinary null members are excluded before visiting, it does not incorrectly turn them into emitted empty parameters."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The final answer describes recursive visitor-result handling, nested bracket paths, the valid numeric-path behavior for a nested flat array, Date ISO conversion and boolean strings. It explicitly confines this mechanism to the default Axios path rather than native or custom serializers."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The explanation identifies the URI builder's encodeURIComponent-based default, space-to-plus conversion, colon/dollar/comma restoration and retained percent-encoding of brackets. Shared final support in serializer_selection shows _encode passed into AxiosURLSearchParams.toString and separately names its internal encoder argument, distinguishing the URI default from the accumulator fallback."
+        }
+      ]
+    }
+  ],
+  "execution_review": {
+    "events_sha256": "8274addcc9a99bef54adeabe93e6f1b000a70de2c7d561212e0e995e9d4ab62d",
+    "passed": true,
+    "reason": "Independently audited all nine actual command executions and their matching started/completed command text; all completed with exit code zero and no unmatched command start or other tool execution. Commands use rg, nl, sed and head, including permitted batched read-only shell pipelines, against the supplied repository's implementation and relevant test source. Test bodies are read as data, not executed. There are no code-graph/runtime/saved-index invocations, source writes, installations, index creation/synchronization, repository code/tests/build execution, adapter enumeration, web/delegation, or accesses to sibling trials, private harness/oracles, grading criteria or other answers. Review inspection excludes turn.completed usage and internal reasoning content; the events hash covers all original raw bytes. The semantic decision is based on final-answer claims and truthful final quotes only, not on the reading trace. Citation and any evidence-utility grading remain separate collector determinations."
+  }
+}
