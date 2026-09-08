@@ -104,6 +104,51 @@ class ArchiveTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'Incomplete'):
                     callers_archive(broken, target, limit=1)
 
+    def test_archive_callers_unique_qualified_suffix(self):
+        from columbus.archive import _validated_rows
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for package in ('src/pkg', 'external/other'):
+                (root / package).mkdir(parents=True)
+                (root / package / 'mod.py').write_text(
+                    'def target(): pass\ndef caller(): target()\n')
+            index = RepositoryIndex(root / '.columbus/index.sqlite')
+            index.refresh(root)
+            target = 'src/pkg/mod.py::target:function'
+            for codec, opener in [('gzip', gzip.open), ('xz', lzma.open)]:
+                artifact = root / codec
+                archive(index, artifact, codec)
+                expected = neighbors_archive(artifact, target, 'in', ['calls'])
+                with patch('columbus.archive._validated_rows', wraps=_validated_rows) as scan:
+                    self.assertEqual(callers_archive(artifact, 'pkg.mod.target'), expected)
+                    self.assertEqual(scan.call_count, 2)
+                for query in ('mod.target', 'kg.mod.target', 'PKG.mod.target', 'arget'):
+                    with self.assertRaisesRegex(ValueError, 'ambiguous or absent'):
+                        callers_archive(artifact, query, path='src/*')
+                with opener(artifact, 'rt') as stream:
+                    rows = [json.loads(line) for line in stream]
+                reordered = ([rows[0]] + [r for r in rows[1:-1] if r['record'] != 'node']
+                             + [r for r in rows[1:-1] if r['record'] == 'node'] + [rows[-1]])
+                with opener(artifact, 'wt') as stream:
+                    stream.write(''.join(json.dumps(row) + '\n' for row in reordered))
+                self.assertEqual(callers_archive(artifact, 'pkg.mod.target'), expected)
+                # A second suffix candidate must fail even with unordered nodes.
+                for row in reordered:
+                    if row['record'] == 'node' and row['data']['id'] == 'external/other/mod.py::target:function':
+                        row['data']['module'] = 'external.pkg.mod'
+                with opener(artifact, 'wt') as stream:
+                    stream.write(''.join(json.dumps(row) + '\n' for row in reordered))
+                with self.assertRaisesRegex(ValueError, 'ambiguous or absent'):
+                    callers_archive(artifact, 'pkg.mod.target')
+                self.assertEqual(callers_archive(artifact, target), expected)
+                # An exact canonical name outranks the remaining suffix match.
+                for row in reordered:
+                    if row['record'] == 'node' and row['data']['id'] == target:
+                        row['data']['module'] = 'pkg.mod'
+                with opener(artifact, 'wt') as stream:
+                    stream.write(''.join(json.dumps(row) + '\n' for row in reordered))
+                self.assertEqual(callers_archive(artifact, 'pkg.mod.target'), expected)
+
     def test_archive_callers_exact_resolution_and_source_free_parity(self):
         from columbus.cli import main
         from contextlib import redirect_stdout

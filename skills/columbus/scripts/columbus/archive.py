@@ -216,7 +216,7 @@ def _neighbor_options(symbol_id, direction, kinds, limit, budget_bytes, offset, 
 def callers_archive(source: str | Path, query: str, limit: int = 50, budget_bytes: int = 6000,
                     offset: int = 0, *, output_format: str = 'json', repo: str | Path | None = None,
                     context_lines: int | None = None, path: str | None = None) -> dict:
-    """Resolve one exact stored declaration, then return bounded incoming calls."""
+    """Resolve an exact declaration or unique qualified suffix and its calls."""
     if not isinstance(query, str) or not 1 <= len(query) <= 2048:
         raise ValueError('An exact declaration name or ID of 1–2048 characters is required')
     _neighbor_options(query, 'in', ['calls'], limit, budget_bytes, offset, output_format, repo, context_lines, path)
@@ -226,6 +226,8 @@ def callers_archive(source: str | Path, query: str, limit: int = 50, budget_byte
         return stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns
     before = stamp()
     selected, count, exact_id = None, 0, None
+    suffix_selected, suffix_count = None, 0
+    suffix = '.' + query if '.' in query and '::' not in query else None
     edge_phase, ordered = False, True
     edges, matched, diagnostics, references, unresolved = [], 0, 0, 0, 0
     try:
@@ -240,7 +242,8 @@ def callers_archive(source: str | Path, query: str, limit: int = 50, budget_byte
                     unresolved += not data.get('resolved', False)
                 elif kind == 'edge':
                     edge_phase = True
-                    target = exact_id or (selected if count == 1 else None)
+                    target = exact_id or (selected if count == 1 else
+                                          suffix_selected if count == 0 and suffix_count == 1 else None)
                     if (target is not None and data['kind'] == 'calls' and data['target'] == target
                             and (path is None or fnmatchcase(data['path'], path))):
                         matched += 1
@@ -259,8 +262,14 @@ def callers_archive(source: str | Path, query: str, limit: int = 50, budget_byte
                 if query in (data['id'], data['name'], data.get('qualname'), canonical):
                     selected = data['id']
                     count += 1
+                elif suffix and any(name.endswith(suffix) for name in
+                                    (data.get('qualname', ''), canonical) if name):
+                    suffix_selected = data['id']
+                    suffix_count += 1
         if stamp() != before:
             raise ValueError('Archive changed during query; retry')
+        if count == 0 and suffix_count == 1:
+            selected, count = suffix_selected, 1
         if exact_id is None and count != 1:
             raise ValueError('Declaration is ambiguous or absent; use archive-search and an exact ID')
         # Exported archives place all nodes before edges. Arbitrary valid record

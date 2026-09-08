@@ -1,0 +1,16 @@
+...E.............
+======================================================================
+ERROR: test_archive_callers_unique_qualified_suffix (test_archive.ArchiveTests.test_archive_callers_unique_qualified_suffix)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/rex/Desktop/columbus/skills/columbus/scripts/tests/test_archive.py", line 123, in test_archive_callers_unique_qualified_suffix
+    self.assertEqual(callers_archive(artifact, 'pkg.mod.target'), expected)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rex/Desktop/columbus/skills/columbus/scripts/columbus/archive.py", line 265, in callers_archive
+    raise ValueError('Declaration is ambiguous or absent; use archive-search and an exact ID')
+ValueError: Declaration is ambiguous or absent; use archive-search and an exact ID
+
+----------------------------------------------------------------------
+Ran 17 tests in 2.384s
+
+FAILED (errors=1)
