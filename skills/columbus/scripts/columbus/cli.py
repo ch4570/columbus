@@ -103,7 +103,8 @@ def main(argv=None) -> int:
         if name == 'archive-source':
             command.add_argument('symbol_id', nargs='+', help='One declaration, or 2–16 unique declarations in one page')
             command.add_argument('--overloads', action='store_true',
-                                 help='Include a same-owner Java/Kotlin overload group for each name')
+                                 help='Include Java/Kotlin overloads with the same owner and receiver; '
+                                      'batch exact IDs from archive-search for different receivers')
             command.add_argument('--input', required=True)
             command.add_argument('--format', choices=['json', 'text'], default='json')
             command.add_argument('--offset', type=int, default=0)

@@ -489,6 +489,33 @@ def _overload_group(nodes):
     return True
 
 
+def _overload_receiver_hint(nodes):
+    """Explain valid Kotlin families separated only by receiver; never select them."""
+    if not nodes or nodes[0].get('language') != 'kotlin':
+        return None
+    keys = ('path', 'parent_id', 'qualname', 'kind', 'language')
+    groups = {}
+    for node in nodes:
+        receiver = node.get('receiver_type')
+        if (not isinstance(receiver, str)
+                or any(node.get(key) != nodes[0].get(key) for key in keys)):
+            return None
+        groups.setdefault(receiver, []).append(node)
+    if len(groups) < 2 or not all(_overload_group(group) for group in groups.values()):
+        return None
+    labels = []
+    for receiver in sorted(groups)[:8]:
+        # Bound after escaping too: hostile Unicode/control bytes must not inflate
+        # diagnostics or inject terminal lines. These labels are not usable IDs.
+        label = receiver[:80]
+        while len(ascii(label)) > 92:
+            label = label[:-1]
+        labels.append(ascii(label + ('...' if label != receiver else '')))
+    if len(groups) > 8:
+        labels.append(f'{len(groups) - 8} more')
+    return ', '.join(labels)
+
+
 def source_archive_many(source: str | Path, queries: list[str], repo: str | Path, limit: int = 120,
                         budget_bytes: int = 12000, offset: int = 0, *, output_format: str = 'json',
                         overloads: bool = False) -> dict:
@@ -530,12 +557,22 @@ def source_archive_many(source: str | Path, queries: list[str], repo: str | Path
                             matches[number] += 1
                             if overloads and len(selected[number]) < 64:
                                 selected[number].append(data)
-        failed = [ascii(query[:80]) + ('...' if len(query) > 80 else '')
-                  for query, nodes, count in zip(queries, selected, matches)
-                  if not nodes or (count != 1 and not (overloads and count <= 64 and _overload_group(nodes)))]
+        failed, receiver_conflict = [], False
+        for query, nodes, count in zip(queries, selected, matches):
+            if nodes and (count == 1 or (overloads and count <= 64 and _overload_group(nodes))):
+                continue
+            label = ascii(query[:80]) + ('...' if len(query) > 80 else '')
+            hint = _overload_receiver_hint(nodes) if overloads and count <= 64 else None
+            if hint is not None:
+                label += ' (different Kotlin receiver identities, untrusted labels: ' + hint + ')'
+                receiver_conflict = True
+            failed.append(label)
         if failed:
+            guidance = ('; --overloads requires the same owner and receiver; use archive-search, '
+                        'then batch selected exact IDs with archive-source without --overloads'
+                        if receiver_conflict else '; use archive-search and an exact ID')
             raise ValueError('Declaration is ambiguous or absent for queries: ' + ', '.join(failed)
-                             + '; use archive-search and an exact ID')
+                             + guidance)
         targets, files, seen = [], {}, set()
         ordered = [node for group in selected for node in sorted(group, key=lambda item:
                    (item['path'], item['start_line'], item['end_line'], item['id']))]
