@@ -1,0 +1,9 @@
+# Requests command structure diagnostic
+
+The second Requests comparison used 17 baseline commands and 38 Columbus commands, but command count is not model round-trip count. The terminal event trace shows no overlapping baseline command items, versus a maximum of six active Columbus command items and fifteen starts while another command was active. Starts from an empty active set were 17 and 23 respectively; those are execution-overlap groups, not measured model turns. Baseline also combined several source reads inside individual shell commands.
+
+Columbus used 19 archive-source commands (three failed), four archive-callers commands and one archive-search command, plus fourteen other commands. The completed item output fields total 41,393, 5,217, zero and 41,831 bytes for those groups. Empty completed-item output is retained as observed, not treated as proof a command has no result or is useful. All event hashes and command/output totals match the saved terminal trial results.
+
+The trace already demonstrates parallel execution. Therefore a new batch command cannot be justified by assuming all 38 commands were serial model round trips. No per-inference usage is available in this trace, so it cannot allocate the 560,053 input tokens causally to individual commands or predict savings from batching. The independent source-line audit shows fewer source bytes while total model input/output increase; quality still fails. The declaration-name mismatch is separately fixed and tested, but its isolated model effect remains unmeasured.
+
+This diagnostic rejects an unsupported optimization assumption rather than adding another API. Future comparisons must retain actual total/cached/uncached usage and answer quality; fewer commands, concurrent work, smaller source packets and faster archive reads are not substitutes for that evidence. The ten completed comparisons remain unchanged.
