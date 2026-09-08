@@ -30,3 +30,5 @@ SCIP import and live language-server integration are possible next layers, not c
 Spring endpoint, Kafka topic, and SQL table edges are future adapters. Annotation metadata alone is not implementation of these relationships. Dynamic wiring needs candidate labels or runtime evidence.
 
 The parser does not invoke LLMs or execute target code. Exclusions are not secret detection. Treat DB/export/source responses with the same sensitivity as the repository.
+
+Java enhanced-for iterable expressions are evaluated in the enclosing scope, before the loop variable binding. Their calls use the ordinary declaration resolver. The loop body still has an opaque scope: loop-variable calls and nested iterable expressions inside that body remain unresolved. This does not infer collection element types or runtime dispatch.

@@ -1,0 +1,159 @@
+{
+  "compiler": "javac 17.0.20.1",
+  "cases": [
+    {
+      "name": "implicit",
+      "source": "class C { C[] items() { return new C[0]; } void hit() {} void run(C other) { for(C item : items()) { item.hit(); } } }",
+      "source_sha256": "4ec994af554a4dbbd3ea4ac6b1b1353a2f1eb6b6d15af4d745f1b515d48d5f7e",
+      "javac_return_code": 0,
+      "javac_stderr": "",
+      "javap": "Compiled from \"C.java\"\nclass C {\n  C();\n    Code:\n       0: aload_0\n       1: invokespecial #1                  // Method java/lang/Object.\"<init>\":()V\n       4: return\n\n  C[] items();\n    Code:\n       0: iconst_0\n       1: anewarray     #7                  // class C\n       4: areturn\n\n  void hit();\n    Code:\n       0: return\n\n  void run(C);\n    Code:\n       0: aload_0\n       1: invokevirtual #9                  // Method items:()[LC;\n       4: astore_2\n       5: aload_2\n       6: arraylength\n       7: istore_3\n       8: iconst_0\n       9: istore        4\n      11: iload         4\n      13: iload_3\n      14: if_icmpge     34\n      17: aload_2\n      18: iload         4\n      20: aaload\n      21: astore        5\n      23: aload         5\n      25: invokevirtual #13                 // Method hit:()V\n      28: iinc          4, 1\n      31: goto          11\n      34: return\n}\n",
+      "iterable_calls": [
+        {
+          "source": "C.java::C.run:method(C)",
+          "scope_id": "C.java::C.run:method(C)",
+          "kind": "calls",
+          "name": "items",
+          "member": "items",
+          "receiver": "",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "argument_facts": [],
+          "expected_type": "",
+          "explicit_type_arguments": false,
+          "static_context": false,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "items()",
+          "resolved": true,
+          "reason": "unique syntax candidate; runtime dispatch unverified",
+          "target": "C.java::C.items:method()",
+          "confidence": "heuristic"
+        }
+      ],
+      "loop_body_still_unresolved": true
+    },
+    {
+      "name": "parameter_receiver",
+      "source": "class C { C[] items() { return new C[0]; } void hit() {} void run(C other) { for(C item : other.items()) { item.hit(); } } }",
+      "source_sha256": "9d3746a4fa70467790032190b2bd000d1fa012dec9bf1a939dd8d787f0cbb42a",
+      "javac_return_code": 0,
+      "javac_stderr": "",
+      "javap": "Compiled from \"C.java\"\nclass C {\n  C();\n    Code:\n       0: aload_0\n       1: invokespecial #1                  // Method java/lang/Object.\"<init>\":()V\n       4: return\n\n  C[] items();\n    Code:\n       0: iconst_0\n       1: anewarray     #7                  // class C\n       4: areturn\n\n  void hit();\n    Code:\n       0: return\n\n  void run(C);\n    Code:\n       0: aload_1\n       1: invokevirtual #9                  // Method items:()[LC;\n       4: astore_2\n       5: aload_2\n       6: arraylength\n       7: istore_3\n       8: iconst_0\n       9: istore        4\n      11: iload         4\n      13: iload_3\n      14: if_icmpge     34\n      17: aload_2\n      18: iload         4\n      20: aaload\n      21: astore        5\n      23: aload         5\n      25: invokevirtual #13                 // Method hit:()V\n      28: iinc          4, 1\n      31: goto          11\n      34: return\n}\n",
+      "iterable_calls": [
+        {
+          "source": "C.java::C.run:method(C)",
+          "scope_id": "C.java::C.run:method(C)",
+          "kind": "calls",
+          "name": "other.items",
+          "member": "items",
+          "receiver": "other",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "argument_facts": [],
+          "expected_type": "",
+          "explicit_type_arguments": false,
+          "static_context": false,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "other.items()",
+          "resolved": true,
+          "reason": "unique syntax candidate; runtime dispatch unverified",
+          "target": "C.java::C.items:method()",
+          "confidence": "heuristic"
+        }
+      ],
+      "loop_body_still_unresolved": true
+    },
+    {
+      "name": "wrong_argument",
+      "source": "class C { C[] items() { return new C[0]; } void hit() {} void run(C other) { for(C item : items(1)) { item.hit(); } } }",
+      "source_sha256": "5ce5346b867f047f9e06229526c4102f363aa774eb226cbe2410308fd4ffdbcc",
+      "javac_return_code": 1,
+      "javac_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/tmp6jbyqd5m/C.java:1: error: method items in class C cannot be applied to given types;\nclass C { C[] items() { return new C[0]; } void hit() {} void run(C other) { for(C item : items(1)) { item.hit(); } } }\n                                                                                          ^\n  required: no arguments\n  found:    int\n  reason: actual and formal argument lists differ in length\n1 error\n",
+      "javap": null,
+      "iterable_calls": [
+        {
+          "source": "C.java::C.run:method(C)",
+          "scope_id": "C.java::C.run:method(C)",
+          "kind": "calls",
+          "name": "items",
+          "member": "items",
+          "receiver": "",
+          "constructor": false,
+          "argument_count": 1,
+          "argument_types": [
+            "int"
+          ],
+          "argument_facts": [
+            {}
+          ],
+          "expected_type": "",
+          "explicit_type_arguments": false,
+          "static_context": false,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "items(1)",
+          "resolved": false,
+          "reason": "argument count incompatible with declared parameters"
+        }
+      ],
+      "loop_body_still_unresolved": true
+    },
+    {
+      "name": "nested",
+      "source": "class C { C[] items() { return new C[0]; } void hit() {} void run(C other) { for(C item : items()) { for(C inner : items()) { inner.hit(); } } } }",
+      "source_sha256": "2854d1bef7ae6eadd596b9d4b54620b6eeb669e72325ae26500775eaa5c875fb",
+      "javac_return_code": 0,
+      "javac_stderr": "",
+      "javap": "Compiled from \"C.java\"\nclass C {\n  C();\n    Code:\n       0: aload_0\n       1: invokespecial #1                  // Method java/lang/Object.\"<init>\":()V\n       4: return\n\n  C[] items();\n    Code:\n       0: iconst_0\n       1: anewarray     #7                  // class C\n       4: areturn\n\n  void hit();\n    Code:\n       0: return\n\n  void run(C);\n    Code:\n       0: aload_0\n       1: invokevirtual #9                  // Method items:()[LC;\n       4: astore_2\n       5: aload_2\n       6: arraylength\n       7: istore_3\n       8: iconst_0\n       9: istore        4\n      11: iload         4\n      13: iload_3\n      14: if_icmpge     68\n      17: aload_2\n      18: iload         4\n      20: aaload\n      21: astore        5\n      23: aload_0\n      24: invokevirtual #9                  // Method items:()[LC;\n      27: astore        6\n      29: aload         6\n      31: arraylength\n      32: istore        7\n      34: iconst_0\n      35: istore        8\n      37: iload         8\n      39: iload         7\n      41: if_icmpge     62\n      44: aload         6\n      46: iload         8\n      48: aaload\n      49: astore        9\n      51: aload         9\n      53: invokevirtual #13                 // Method hit:()V\n      56: iinc          8, 1\n      59: goto          37\n      62: iinc          4, 1\n      65: goto          11\n      68: return\n}\n",
+      "iterable_calls": [
+        {
+          "source": "C.java::C.run:method(C)",
+          "scope_id": "C.java::C.run:method(C)",
+          "kind": "calls",
+          "name": "items",
+          "member": "items",
+          "receiver": "",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "argument_facts": [],
+          "expected_type": "",
+          "explicit_type_arguments": false,
+          "static_context": false,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "items()",
+          "resolved": true,
+          "reason": "unique syntax candidate; runtime dispatch unverified",
+          "target": "C.java::C.items:method()",
+          "confidence": "heuristic"
+        },
+        {
+          "source": "C.java::C.run:method(C)",
+          "scope_id": "C.java::C.run:method(C)::opaque:77",
+          "kind": "calls",
+          "name": "items",
+          "member": "items",
+          "receiver": "",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "argument_facts": [],
+          "expected_type": "",
+          "explicit_type_arguments": false,
+          "static_context": false,
+          "path": "C.java",
+          "line": 1,
+          "evidence": "items()",
+          "resolved": false,
+          "reason": "lambda, loop, catch or anonymous scope unsupported"
+        }
+      ],
+      "loop_body_still_unresolved": true
+    }
+  ]
+}

@@ -413,12 +413,19 @@ class _Parser:
         if node.type in {"lambda_literal", "lambda_expression", "anonymous_function",
                          "object_literal", "enhanced_for_statement", "for_statement",
                          "catch_block", "catch_clause"}:
+            # The iterable is evaluated before the Java loop binding exists.
+            # Keep the loop body opaque until its bindings can be resolved.
+            iterable = (node.child_by_field_name("value")
+                        if self.language == "java" and node.type == "enhanced_for_statement" else None)
+            if iterable is not None:
+                self.visit(iterable)
             previous = self.current
             key = f"{previous}::opaque:{node.start_byte}"
             self.scope(key, previous, "opaque", self.scopes[previous]["qualname"])
             self.current = key
             for child in node.named_children:
-                self.visit(child)
+                if child != iterable:
+                    self.visit(child)
             # References need a real symbol as their graph source.
             for ref in self.references:
                 if ref["source"] == key:

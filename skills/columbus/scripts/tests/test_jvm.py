@@ -9,6 +9,28 @@ from columbus.jvm import parse_jvm, resolve_jvm
 
 
 class JVMTests(unittest.TestCase):
+    def test_enhanced_for_iterable_uses_enclosing_scope(self):
+        source = '''class C {
+            C[] items() { return new C[0]; }
+            void hit() {}
+            void run() {
+                for (C item : items()) { item.hit(); }
+            }
+        }'''
+        parsed = parse_jvm('C.java', source)
+        resolve_jvm([parsed])
+        calls = {r['name']: r for r in parsed['references'] if r['kind'] == 'calls'}
+        self.assertTrue(calls['items']['resolved'])
+        self.assertEqual(calls['items']['target'], 'C.java::C.items:method()')
+        self.assertFalse(calls['item.hit']['resolved'])
+        self.assertIn('unsupported', calls['item.hit']['reason'])
+        # A nested loop's iterable still belongs to the unsupported outer body.
+        parsed = parse_jvm('C.java', source.replace('item.hit();',
+            'for (C inner : items()) { inner.hit(); }'))
+        resolve_jvm([parsed])
+        items = [r for r in parsed['references'] if r['name'] == 'items']
+        self.assertEqual([r['resolved'] for r in items], [True, False])
+
     def test_local_method_requires_complete_absence_from_base_chain(self):
         cases = [
             ('interface API {} class C implements API', True),
