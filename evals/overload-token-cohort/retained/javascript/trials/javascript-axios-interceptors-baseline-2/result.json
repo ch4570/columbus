@@ -1,0 +1,184 @@
+{
+  "schema": "columbus.exploration-observation/v1",
+  "case": "javascript-axios-interceptors",
+  "condition": "baseline",
+  "repeat": 2,
+  "model_requested": "gpt-5.6-sol",
+  "effort_requested": "xhigh",
+  "evidence_mode": "saved_archive",
+  "elapsed_seconds": 202.652,
+  "return_code": 0,
+  "timed_out": false,
+  "source_unchanged": true,
+  "usage": {
+    "input_tokens": 75690,
+    "cached_input_tokens": 46720,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 5916,
+    "reasoning_output_tokens": 3762,
+    "uncached_input_tokens": 28970
+  },
+  "commands": [
+    {
+      "command": "/bin/zsh -lc \"rg --files | rg '(\"'^|/)(Axios|InterceptorManager)'\"\\\\.js\"'$|(''^|/)axios'\"\\\\.js\"'$'\"'\"",
+      "exit_code": 0,
+      "output_bytes": 86,
+      "output_sha256": "d4489b614f77193253a1846bf44be6b4b7c44ec539068aeddc4ad5131091a952"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba lib/core/InterceptorManager.js | sed -n '1,140p'\"",
+      "exit_code": 0,
+      "output_bytes": 2066,
+      "output_sha256": "39267817ec6e0727f15b6e25c5d55a1656e30e54a54ce9b225ca4a3427f5dbe8"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n \\\"runWhen|synchronous|requestInterceptorChain|responseInterceptorChain|dispatchRequest|\\\\.then\\\\(\\\" lib/core/Axios.js\"",
+      "exit_code": 0,
+      "output_bytes": 1213,
+      "output_sha256": "1caa2c4e9468d6dc622738b7f77746ae19743d8c1e10148e4d57769afcc70996"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba lib/core/Axios.js | sed -n '1,180p'\"",
+      "exit_code": 0,
+      "output_bytes": 6616,
+      "output_sha256": "77c65627baa3b3c6e3b76867d7847b2a8aca0887c484bddea87134df3a3c1573"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba lib/core/Axios.js | sed -n '169,215p'\"",
+      "exit_code": 0,
+      "output_bytes": 1585,
+      "output_sha256": "e7279ab291936c7ce9936439265b0751f4e28dfe3b599afef6e2bc33b0c1a9c4"
+    },
+    {
+      "command": "/bin/zsh -lc 'rg -n \"function forEach|const forEach|forEach =\" lib/utils.js'",
+      "exit_code": 0,
+      "output_bytes": 99,
+      "output_sha256": "4a1b2cd883bb1dc87e821b38756f353fc190ec973dad0bab2f74923073362f03"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba lib/utils.js | sed -n '255,282p'\"",
+      "exit_code": 0,
+      "output_bytes": 875,
+      "output_sha256": "1948d3861b034ddece8e5207584094422c9b5f85129eb64515a742e397954a32"
+    }
+  ],
+  "command_count": 7,
+  "command_output_bytes": 12540,
+  "failed_commands": 0,
+  "other_tool_types": [],
+  "runtime_warnings": [],
+  "turn_failed": false,
+  "quality": {
+    "passed": false,
+    "findings": [
+      {
+        "id": "registration_removal",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "eligibility_order",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "promise_path",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "synchronous_errors",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "response_boundary",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "index_preflight": null,
+  "archive_preflight": {
+    "passed": true,
+    "archive_sha256": "9bdd1b2ca6ff306b3700d141bdeab1593f511e73046deaa89ff27c7b9e4b17c7",
+    "revision": "14898a983357327f60a7",
+    "source_files_verified": 242,
+    "indexed_source_files_verified": 237,
+    "counts": {
+      "files": 237,
+      "nodes": 778,
+      "scopes": 0,
+      "edges": 1270,
+      "references": 7258,
+      "imports": 390,
+      "diagnostics": 1
+    },
+    "consumer_index_absent": true
+  },
+  "archive_postflight": {
+    "passed": true,
+    "archive_sha256": "9bdd1b2ca6ff306b3700d141bdeab1593f511e73046deaa89ff27c7b9e4b17c7",
+    "revision": "14898a983357327f60a7",
+    "source_files_verified": 242,
+    "indexed_source_files_verified": 237,
+    "counts": {
+      "files": 237,
+      "nodes": 778,
+      "scopes": 0,
+      "edges": 1270,
+      "references": 7258,
+      "imports": 390,
+      "diagnostics": 1
+    },
+    "consumer_index_absent": true
+  },
+  "answer": {
+    "findings": [
+      {
+        "id": "registration_removal",
+        "path": "lib/core/InterceptorManager.js",
+        "start_line": 18,
+        "end_line": 25,
+        "quote": "use(fulfilled, rejected, options) {\n  this.handlers.push({\n    fulfilled,\n    rejected,\n    synchronous: options ? options.synchronous : false,\n    runWhen: options ? options.runWhen : null\n  });\n  return this.handlers.length - 1;\n}",
+        "explanation": "Each manager stores records in its own array. `use` appends a record and returns its zero-based array index as the removal ID. With no options object, `synchronous` defaults to `false` and `runWhen` to `null`; if an options object exists, its properties are copied directly, so omitted properties are `undefined`. `eject(id)` replaces a present record with `null` rather than splicing it, returns no status, and therefore preserves every other ID; later registrations append after the existing array length. `clear()` replaces the array with an empty one, so all prior slots disappear and the next registration receives ID 0. Iteration proceeds from low to high indexes and skips `null` slots, preserving registration order among remaining records."
+      },
+      {
+        "id": "eligibility_order",
+        "path": "lib/core/Axios.js",
+        "start_line": 132,
+        "end_line": 148,
+        "quote": "const requestInterceptorChain = [];\nlet synchronousRequestInterceptors = true;\nthis.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {\n  if (typeof interceptor.runWhen === 'function' && interceptor.runWhen(config) === false) {\n    return;\n  }\n\n  synchronousRequestInterceptors = synchronousRequestInterceptors && interceptor.synchronous;\n\n  requestInterceptorChain.unshift(interceptor.fulfilled, interceptor.rejected);\n});\n\nconst responseInterceptorChain = [];\nthis.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {\n  responseInterceptorChain.push(interceptor.fulfilled, interceptor.rejected);\n});",
+        "explanation": "During `_request` assembly, after the request configuration has been prepared but before any request interceptor executes, each request record's callable `runWhen` receives that shared assembled `config`. A record is skipped only when the predicate returns exactly `false`; other falsy values do not skip it. Skipped records are omitted both from execution and from synchronous-mode selection. The accumulator starts at `true` and ANDs only eligible request records' `synchronous` values, so synchronous mode is selected when every eligible request interceptor is truthy-synchronous, including when none are eligible. Request pairs are prepended while records are visited in registration order, making request execution reverse-registration order. Response pairs are appended and therefore execute in registration order. Response `runWhen` and `synchronous` options are never consulted and cannot affect mode selection."
+      },
+      {
+        "id": "promise_path",
+        "path": "lib/core/Axios.js",
+        "start_line": 154,
+        "end_line": 166,
+        "quote": "if (!synchronousRequestInterceptors) {\n  const chain = [dispatchRequest.bind(this), undefined];\n  chain.unshift(...requestInterceptorChain);\n  chain.push(...responseInterceptorChain);\n  len = chain.length;\n\n  promise = Promise.resolve(config);\n\n  while (i < len) {\n    promise = promise.then(chain[i++], chain[i++]);\n  }\n\n  return promise;\n}",
+        "explanation": "If any eligible request interceptor is not truthy-synchronous, Axios seeds a Promise with `config`, attaches eligible request pairs in reverse-registration order, then dispatch, then response pairs in registration order. Each fulfilled callback's returned value becomes the next fulfillment value, and returned Promises/thenables are assimilated. A throw or rejected result moves execution to a later rejection callback; a rejection callback can recover by returning a value or fulfilled Promise, while throwing or returning a rejection propagates failure. Because each pair is passed together to one `then`, its rejection callback handles rejection of the preceding stage, not an exception thrown by its own paired fulfilled callback. Such an exception can be handled only by a rejection callback in a subsequent stage. An unrecovered request-stage rejection skips dispatch's fulfilled callback but can still reach the already-attached response rejection handlers."
+      },
+      {
+        "id": "synchronous_errors",
+        "path": "lib/core/Axios.js",
+        "start_line": 169,
+        "end_line": 180,
+        "quote": "len = requestInterceptorChain.length;\n\nlet newConfig = config;\n\nwhile (i < len) {\n  const onFulfilled = requestInterceptorChain[i++];\n  const onRejected = requestInterceptorChain[i++];\n  try {\n    newConfig = onFulfilled(newConfig);\n  } catch (error) {\n    onRejected.call(this, error);\n    break;",
+        "explanation": "In synchronous mode, each fulfilled request callback is called directly and its return value immediately replaces `newConfig`; there is no Promise assimilation. If it throws, Axios directly invokes that same interceptor's rejection callback with the Axios instance as `this`. A normal rejection-callback return value—including a replacement configuration—is ignored, the request-interceptor loop stops, and dispatch proceeds with the current `newConfig`. Earlier successful replacements remain, and in-place changes made to the current configuration before the failing callback threw also survive because the failed assignment never replaces the existing reference. If the rejection callback is missing, `.call` itself throws a TypeError; if it throws, that error likewise escapes. In either case `_request` stops before dispatch and before response handlers are attached, while public `request()` catches and rethrows it through its async boundary, producing a rejected public Promise."
+      },
+      {
+        "id": "response_boundary",
+        "path": "lib/core/Axios.js",
+        "start_line": 184,
+        "end_line": 195,
+        "quote": "try {\n  promise = dispatchRequest.call(this, newConfig);\n} catch (error) {\n  return Promise.reject(error);\n}\n\ni = 0;\nlen = responseInterceptorChain.length;\n\nwhile (i < len) {\n  promise = promise.then(responseInterceptorChain[i++], responseInterceptorChain[i++]);\n}",
+        "explanation": "Response pairs are attached in registration order. After a normally returned dispatch Promise, fulfillment enters the next response fulfilled callback and rejection enters the next response rejection callback; returned values or fulfilled Promises continue fulfillment, rejection callbacks can recover by returning them, and throws or rejected results continue rejection. A response fulfilled callback's own paired rejection callback does not catch its throw; a later response rejection callback may. The exact boundary differs by request mode. In synchronous-request mode, response handlers are attached only after `dispatchRequest` returns normally: a Promise that it returns and later rejects is handled by them, but a synchronous dispatch throw is caught by this block and returned immediately as `Promise.reject(error)`, before any response handler is attached. In Promise-request mode, dispatch itself is a Promise stage and all response stages have already been appended; both a synchronous throw from dispatch and an asynchronously rejected dispatch Promise become rejection of that chain and can be recovered by response rejection handlers. The outer async `request()` resolves with the final recovered value or catches and rethrows the final unrecovered reason, leaving the public request rejected."
+      }
+    ]
+  },
+  "prompt_bytes": 3656,
+  "events_sha256": "b5d50f6bdeaf0b873bcaf748fb00ef87baa03f81e9fd2616012815b4bc87edab"
+}

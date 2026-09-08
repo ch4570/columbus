@@ -1,0 +1,146 @@
+{
+  "answer_sha256": "51772bb62a1110e2ee74fde974f280196d81814e505a43c9a635a323678c3f21",
+  "rubric_sha256": "358ffd7d026864662c1588e83f29ede68a84a7ad0eaf7c951762a624c384d1a2",
+  "findings": [
+    {
+      "id": "registration_removal",
+      "passed": false,
+      "reason": "Registration/options, null-slot retention, clear/reset and iteration are correctly explained, but the mandatory no-op behavior for absent or already-empty eject slots is not stated or quoted.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The prose and use quote establish manager-local array append/index IDs, retained callbacks/options, false/null defaults with no options and undefined omitted option fields. The eligibility finding establishes that a missing/falsy synchronous value does not select direct mode."
+        },
+        {
+          "criterion_index": 1,
+          "passed": false,
+          "reason": "The answer correctly explains null replacement instead of splicing, preserving other slots and appending later registrations. It does not establish that an absent or already-null slot makes eject a no-op. The only manager quote covers use, not the eject guard at InterceptorManager.js 35-39. Stating what eject does to an existing record and that it returns undefined does not establish its absent-slot behavior."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The explanation explicitly states clear replaces the array, IDs restart at zero and can collide with stale pre-clear IDs."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The answer states iteration preserves slot order and skips nulls. Combined with chain construction through those managers and its non-ejected response description, this establishes registration-order traversal and exclusion of ejected records from execution and request-mode voting."
+        }
+      ]
+    },
+    {
+      "id": "eligibility_order",
+      "passed": true,
+      "reason": "The answer correctly covers predicate timing/configuration, strict-false eligibility, retained-only truthy mode selection including the empty case, execution order and ignored response options.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The prose explicitly places callable runWhen evaluation during request-chain assembly against the assembled config, before any fulfilled request handler executes."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The prose distinguishes strict false from other falsy results. The full quoted typeof/function and === false guard also establishes that an absent or non-callable runWhen does not filter a handler."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The answer explicitly states that only eligible records participate in the initially true AND accumulator, all must be truthy-synchronous, and an empty/all-skipped set selects direct mode. Null-slot iteration supplies ejected-record exclusion."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The prose and quote establish request-pair unshift/newest-first order, response-pair push/oldest-first order, and that response runWhen/synchronous options are never consulted."
+        }
+      ]
+    },
+    {
+      "id": "promise_path",
+      "passed": true,
+      "reason": "The answer establishes the full Promise chain, return adoption, same-pair rejection limits, recovery and unhandled-request rejection bypassing dispatch while reaching response handlers.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The explanation explicitly chooses this branch for any eligible non-truthy-synchronous handler, starts at Promise.resolve(config) and orders reversed request pairs, dispatch and registration-order response pairs through then."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The answer states normal return forwarding, adoption of returned promises/thenables and propagation of thrown or rejected outcomes to later stages."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The prose explicitly explains that a same-then rejection callback handles the preceding promise's rejection rather than its own fulfilled callback's failure. Its missing-handler forwarding explanation and dispatch-skip example establish rejection bypassing fulfillment stages until recovery."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The answer describes normal-return recovery and promise adoption, continued rejection for absent/throwing/rejecting callbacks, and explicitly says unrecovered request rejection skips dispatch because its rejection slot is undefined and can then reach response rejection handlers. Recovery to fulfillment in the shown chain correspondingly enables dispatch with a valid config."
+        }
+      ]
+    },
+    {
+      "id": "synchronous_errors",
+      "passed": true,
+      "reason": "The prose correctly explains direct calls/config replacement, own paired rejection, ignored results and break, retained mutations and failures before dispatch with public rejection. The quote's final closing brace lies beyond its stated range, which is a separate citation defect.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The answer explicitly contrasts immediate direct fulfilled calls with Promise execution and states each successful returned configuration replaces newConfig for the next callback."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The explanation states the throwing handler's own paired rejection callback is called with Axios as this, ignores its normally returned value including promises and breaks the remaining request loop. The represented onRejected.call(this, error) supplies the error argument."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The prose explicitly states dispatch uses the last successfully assigned configuration, mutations made before the throw survive and no replacement return from the throwing callback is assigned. It does not claim rollback."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The answer describes the missing-callback call failure or rejection-callback throw replacing/escaping the original error, preventing dispatch and response attachment, and becoming rejection at the public async request boundary. Its direct-call representation also establishes ordinary non-callable failure."
+        }
+      ]
+    },
+    {
+      "id": "response_boundary",
+      "passed": true,
+      "reason": "The answer explicitly distinguishes when response pairs are collected versus attached and correctly compares synchronous dispatch throws with asynchronously rejected dispatch promises in both request modes.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The answer establishes registration-order response stages in both modes. It explicitly says direct-mode response attachment occurs only after dispatch returns normally, so a later rejection of that returned promise remains interceptable."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The exact quote and prose identify the direct dispatch catch returning Promise.reject before the attachment loop, leaving these response interceptors unable to observe or recover the synchronous throw."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The explanation explicitly states Promise-mode response then stages are already attached before dispatch executes, allowing either its synchronous throw or rejected returned promise to reach response rejection handlers."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The answer explains ordinary then transformation/recovery, downstream rather than same-pair handling of fulfilled throws, and public fulfillment after final recovery or rejection after a surviving error. Shared promise_path context covers missing/throwing/rejecting callbacks without guaranteeing recovery."
+        }
+      ]
+    }
+  ],
+  "execution_review": {
+    "events_sha256": "43a3066e9b2aa9fd8a6777016633d7d0c9465cfe8fedf4ca90a4c23af2e2fa9c",
+    "passed": true,
+    "reason": "Reviewed all command-event variants and all nine completed commands, item_1 through item_9. The run reads the explicitly supplied frozen SKILL.md, performs repository-local rg/nl/sed source discovery/reads, and invokes the explicitly supplied frozen Python wrapper only for two archive-search and two archive-source operations against the supplied graph and repository. Those tools are authorized in this Columbus prompt. There is no source/test/build execution, source write, synchronization, installation, index creation, web use, delegation or access to private catalogs/rubrics/controls/other trials. Other completed item types are agent messages. Graph usefulness/recognizer acceptance and citation validity are separate from this evidence-boundary review."
+  }
+}

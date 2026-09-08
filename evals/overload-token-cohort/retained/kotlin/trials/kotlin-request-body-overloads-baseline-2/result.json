@@ -1,0 +1,240 @@
+{
+  "schema": "columbus.exploration-observation/v1",
+  "case": "kotlin-request-body-overloads",
+  "condition": "baseline",
+  "repeat": 2,
+  "model_requested": "gpt-5.6-sol",
+  "effort_requested": "xhigh",
+  "evidence_mode": "saved_archive",
+  "elapsed_seconds": 265.764,
+  "return_code": 0,
+  "timed_out": false,
+  "source_unchanged": true,
+  "usage": {
+    "input_tokens": 156857,
+    "cached_input_tokens": 119296,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 7723,
+    "reasoning_output_tokens": 4619,
+    "uncached_input_tokens": 37561
+  },
+  "commands": [
+    {
+      "command": "/bin/zsh -lc \"rg -n --glob '*.kt' \\\"fun (String|ByteString|ByteArray|File)\\\\.toRequestBody|fun RequestBody\\\\.Companion\\\\.create|toRequestBody\\\\(\\\" .\"",
+      "exit_code": 0,
+      "output_bytes": 19680,
+      "output_sha256": "ec92da2116408702809b29312ed91ebee0e2f8f5f74f607083c08e7c82466854"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt | sed -n '1,280p'\"",
+      "exit_code": 0,
+      "output_bytes": 11467,
+      "output_sha256": "365826e7d14dc945c23893008bae289538cc626844a3267bb74ee92c96071c11"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n --glob '*.kt' \\\"chooseCharset|fun MediaType.*charset|fun charset\\\" okhttp/src\"",
+      "exit_code": 0,
+      "output_bytes": 1343,
+      "output_sha256": "97a9e8becb21debe24b2bd69436e5ef77355064be5d500e14425f402fbce7546"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba okhttp/src/commonJvmAndroid/kotlin/okhttp3/internal/internal.kt | sed -n '80,115p'\"",
+      "exit_code": 0,
+      "output_bytes": 1597,
+      "output_sha256": "69a0729fae3a8d46b74cefb9e2abab0119de64dba60288c917429bdf5622b35e"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba okhttp/src/commonJvmAndroid/kotlin/okhttp3/MediaType.kt | sed -n '1,90p'\"",
+      "exit_code": 0,
+      "output_bytes": 3599,
+      "output_sha256": "d9aea560a03da2dbc7904b97e489674a18eae6d0a90a69102500a403799cd45e"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n --glob '*.kt' \\\"fun checkOffsetAndCount|checkOffsetAndCount\\\" okhttp/src/common* okhttp/src/jvmMain || true\"",
+      "exit_code": 0,
+      "output_bytes": 614,
+      "output_sha256": "d8658955991bc07bd4e186009be16085b994063a8d50b77bbd884952277c4c5b"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba okhttp/src/commonJvmAndroid/kotlin/okhttp3/internal/-UtilCommon.kt | sed -n '360,390p'\"",
+      "exit_code": 0,
+      "output_bytes": 955,
+      "output_sha256": "ac436c6ccc4457b765390db2d2e879f9392d3009d475f92caec97bfcfa17aa43"
+    },
+    {
+      "command": "/bin/zsh -lc 'rg -n \"toMediaTypeOrNull|fun String.toMediaType|parameterNamesAndValues|PARAMETER\" okhttp/src/commonJvmAndroid/kotlin/okhttp3/MediaType.kt'",
+      "exit_code": 0,
+      "output_bytes": 927,
+      "output_sha256": "1be0ab0dbb90674fbf10e677281dcf1fd00644b71569bcf58a08d09c80a5ba1b"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n --glob '*.kt' \\\"charset=.*charset|unsupported.*charset|chooseCharset\\\" okhttp/src/*Test okhttp/src/jvmTest okhttp/src/commonTest 2>/dev/null || true\"",
+      "exit_code": 0,
+      "output_bytes": 1126,
+      "output_sha256": "9228ac80a76e3ad4c82bd471306bd42f007b5892dc4723c4c9458adedd75d7b2"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba okhttp/src/commonJvmAndroid/kotlin/okhttp3/MediaType.kt | sed -n '90,165p'\"",
+      "exit_code": 0,
+      "output_bytes": 2994,
+      "output_sha256": "083fbd54c2ff4c2d34a190b3751eb62f8775c3cb2ef4b71ef40e66e5a85fbfcd"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba okhttp/src/jvmTest/kotlin/okhttp3/RequestTest.kt | sed -n '115,180p'\"",
+      "exit_code": 0,
+      "output_bytes": 2908,
+      "output_sha256": "a2dc53ee256b6e2278ea96c467f652638bbb18e543c6d48f052d1087fc2ec1a0"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba okhttp/src/jvmTest/kotlin/okhttp3/MediaTypeTest.kt | sed -n '145,180p'\"",
+      "exit_code": 0,
+      "output_bytes": 1708,
+      "output_sha256": "306c45f593abf44c1963111df5341995fc18e6f498df6187d921ef910e1c7a47"
+    }
+  ],
+  "command_count": 12,
+  "command_output_bytes": 48918,
+  "failed_commands": 0,
+  "other_tool_types": [],
+  "runtime_warnings": [],
+  "turn_failed": false,
+  "quality": {
+    "passed": true,
+    "findings": [
+      {
+        "id": "legacy-string-bytestring",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "legacy-array-file",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "string-encoding",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "charset-policy",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "array-slice",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "bytestring-body",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "file-body",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "index_preflight": null,
+  "archive_preflight": {
+    "passed": true,
+    "archive_sha256": "e6d7d6d8dc7ac61db952bc59e3335638eeb75905e906db60c3bc9cc87bceeddc",
+    "revision": "475d06dbdd4d9e92f0f2",
+    "source_files_verified": 844,
+    "indexed_source_files_verified": 830,
+    "counts": {
+      "files": 830,
+      "nodes": 12924,
+      "scopes": 13163,
+      "edges": 21381,
+      "references": 58011,
+      "imports": 7287,
+      "diagnostics": 19
+    },
+    "consumer_index_absent": true
+  },
+  "archive_postflight": {
+    "passed": true,
+    "archive_sha256": "e6d7d6d8dc7ac61db952bc59e3335638eeb75905e906db60c3bc9cc87bceeddc",
+    "revision": "475d06dbdd4d9e92f0f2",
+    "source_files_verified": 844,
+    "indexed_source_files_verified": 830,
+    "counts": {
+      "files": 830,
+      "nodes": 12924,
+      "scopes": 13163,
+      "edges": 21381,
+      "references": 58011,
+      "imports": 7287,
+      "diagnostics": 19
+    },
+    "consumer_index_absent": true
+  },
+  "answer": {
+    "findings": [
+      {
+        "id": "legacy-string-bytestring",
+        "path": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt",
+        "start_line": 226,
+        "end_line": 239,
+        "quote": "    @JvmStatic\n    @Deprecated(\n      message = \"Moved to extension function. Put the 'content' argument first to fix Java\",\n      replaceWith =\n        ReplaceWith(\n          expression = \"content.toRequestBody(contentType)\",\n          imports = [\"okhttp3.RequestBody.Companion.toRequestBody\"],\n        ),\n      level = DeprecationLevel.WARNING,\n    )\n    fun create(\n      contentType: MediaType?,\n      content: ByteString,\n    ): RequestBody = content.toRequestBody(contentType)",
+        "explanation": "The deprecated `create(contentType, content: String)` delegates directly to `content.toRequestBody(contentType)`, and the quoted ByteString overload does the same for `ByteString`. The migration changes content-type-first calls into content-first receiver calls: `RequestBody.create(contentType, content)` becomes `content.toRequestBody(contentType)`; equivalently, the Java-facing static ordering puts content before the nullable content type. The wrappers add no behavior, so each resulting body has exactly its receiver extension's content type, length, and write semantics."
+      },
+      {
+        "id": "legacy-array-file",
+        "path": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt",
+        "start_line": 259,
+        "end_line": 272,
+        "quote": "    @JvmStatic\n    @Deprecated(\n      message = \"Moved to extension function. Put the 'file' argument first to fix Java\",\n      replaceWith =\n        ReplaceWith(\n          expression = \"file.asRequestBody(contentType)\",\n          imports = [\"okhttp3.RequestBody.Companion.asRequestBody\"],\n        ),\n      level = DeprecationLevel.WARNING,\n    )\n    fun create(\n      contentType: MediaType?,\n      file: File,\n    ): RequestBody = file.asRequestBody(contentType)",
+        "explanation": "The deprecated ByteArray declaration maps `create(contentType, content, offset, byteCount)` to `content.toRequestBody(contentType, offset, byteCount)`, preserving both slice arguments and their defaults (`offset = 0`, `byteCount = content.size`). The quoted File declaration maps `create(contentType, file)` to `file.asRequestBody(contentType)`. Thus migration makes the array/file the receiver—or first Java-facing argument—while the nullable content type follows it; the delegates do not wrap or copy the replacement bodies."
+      },
+      {
+        "id": "string-encoding",
+        "path": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt",
+        "start_line": 118,
+        "end_line": 128,
+        "quote": "    /**\n     * Returns a new request body that transmits this string. If [contentType] is non-null and lacks\n     * a charset, this will use UTF-8.\n     */\n    @JvmStatic\n    @JvmName(\"create\")\n    fun String.toRequestBody(contentType: MediaType? = null): RequestBody {\n      val (charset, finalContentType) = contentType.chooseCharset()\n      val bytes = toByteArray(charset)\n      return bytes.toRequestBody(finalContentType, 0, bytes.size)\n    }",
+        "explanation": "Charset and final content type are selected before encoding. The String is encoded once into a new ByteArray and delegated as the complete slice. Consequently, `contentLength()` is the encoded byte count, not the character count, and writes emit those precomputed bytes. Its content type is the helper's final type, which may be null, unchanged, or UTF-8-augmented. Like the ByteString body it has an exact precomputed length, but unlike ByteString it performs charset encoding and may alter the content type."
+      },
+      {
+        "id": "charset-policy",
+        "path": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/internal/internal.kt",
+        "start_line": 93,
+        "end_line": 106,
+        "quote": "internal fun MediaType?.chooseCharset(): Pair<Charset, MediaType?> {\n  var charset: Charset = Charsets.UTF_8\n  var finalContentType: MediaType? = this\n  if (this != null) {\n    val resolvedCharset = this.charset()\n    if (resolvedCharset == null) {\n      charset = Charsets.UTF_8\n      finalContentType = \"$this; charset=utf-8\".toMediaTypeOrNull()\n    } else {\n      charset = resolvedCharset\n    }\n  }\n  return charset to finalContentType\n}",
+        "explanation": "For a null media type, the result is UTF-8 plus a null final content type; nothing is appended. For a non-null type with a supported charset, that charset is used and the original MediaType is retained. A missing charset and an invalid or runtime-unsupported charset both make `MediaType.charset()` return null, selecting UTF-8 and augmenting the serialized type with `; charset=utf-8`. The augmentation uses nullable `toMediaTypeOrNull()`, so the code accepts a null parsed result rather than using the throwing parser. If the original type already contains an unsupported charset, appending does not override it: parameters remain ordered and later lookup returns the first charset parameter, so a subsequent `charset()` still encounters the unsupported value and returns its default/null. The String is nevertheless encoded with the separately returned UTF-8 charset."
+      },
+      {
+        "id": "array-slice",
+        "path": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt",
+        "start_line": 159,
+        "end_line": 178,
+        "quote": "    /** Returns a new request body that transmits this. */\n    @JvmOverloads\n    @JvmStatic\n    @JvmName(\"create\")\n    fun ByteArray.toRequestBody(\n      contentType: MediaType? = null,\n      offset: Int = 0,\n      byteCount: Int = size,\n    ): RequestBody {\n      checkOffsetAndCount(size.toLong(), offset.toLong(), byteCount.toLong())\n      return object : RequestBody() {\n        override fun contentType() = contentType\n\n        override fun contentLength() = byteCount.toLong()\n\n        override fun writeTo(sink: BufferedSink) {\n          sink.write(this@toRequestBody, offset, byteCount)\n        }\n      }\n    }",
+        "explanation": "Defaults are offset zero and count equal to the entire array size—not `size - offset`. Therefore, supplying a positive nonzero offset while omitting count attempts that offset plus the full size and fails validation. Bounds are checked eagerly before the body is returned; negative values, an offset past the array, or a count exceeding the remaining slice cause `ArrayIndexOutOfBoundsException`. A valid body preserves the supplied nullable content type, reports the fixed count as its byte length, and writes only `[offset, offset + byteCount)`. It retains the original array reference rather than copying, so element mutations after construction can change later writes."
+      },
+      {
+        "id": "bytestring-body",
+        "path": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt",
+        "start_line": 130,
+        "end_line": 141,
+        "quote": "    @JvmStatic\n    @JvmName(\"create\")\n    fun ByteString.toRequestBody(contentType: MediaType? = null): RequestBody =\n      object : RequestBody() {\n        override fun contentType() = contentType\n\n        override fun contentLength() = size.toLong()\n\n        override fun writeTo(sink: BufferedSink) {\n          sink.write(this@toRequestBody)\n        }\n      }",
+        "explanation": "The body returns the supplied nullable content type unchanged, reports the ByteString's byte size, and writes that immutable ByteString directly to the caller's sink. In contrast with String, it performs no charset lookup or encoding and never augments the media type; its bytes and length already describe the payload."
+      },
+      {
+        "id": "file-body",
+        "path": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt",
+        "start_line": 180,
+        "end_line": 192,
+        "quote": "    /** Returns a new request body that transmits the content of this. */\n    @JvmStatic\n    @JvmName(\"create\")\n    fun File.asRequestBody(contentType: MediaType? = null): RequestBody =\n      object : RequestBody() {\n        override fun contentType() = contentType\n\n        override fun contentLength() = length()\n\n        override fun writeTo(sink: BufferedSink) {\n          source().use { source -> sink.writeAll(source) }\n        }\n      }",
+        "explanation": "The supplied nullable content type is returned unchanged. File length is not captured at body creation: every `contentLength()` call invokes `length()` on the File at that time. Each `writeTo()` acquires a fresh source for the receiver File, transfers its current contents, and closes that source through `use`, including on failure. It does not close or take ownership of the caller-provided sink, as required by the RequestBody contract. This anonymous body does not override `isOneShot()`, so it inherits `false`. That permits repeated `writeTo()` calls at the contract level but does not snapshot the file or promise identical bytes: file changes between calls can alter both observed length and written content."
+      }
+    ]
+  },
+  "prompt_bytes": 3956,
+  "events_sha256": "eab54f7cba0f5d12ea397d82b6621a6383a018beda235fd9e5ab5e6f93aac663"
+}

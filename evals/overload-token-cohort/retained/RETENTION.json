@@ -1,0 +1,1170 @@
+{
+  "schema": "columbus.overload-token-retention/v1",
+  "created_at": "2026-09-08T16:31:26.426725+00:00",
+  "frozen_commit": "c4ee65c25d40c8085ee659df1da67df651c66b74",
+  "input_manifest_sha256": "f6394e9832690454024cf21728f10cba5933623f12ae3858f52dfb842f49914c",
+  "frozen_input_count": 108,
+  "postprocessor_sha256": "c8205805b299ef64e697f2787c4cd3a55fceebffeb03d004ca5803270475c8eb",
+  "python": "3.12.14 (main, Aug 12 2026, 13:57:54) [Clang 21.0.0 (clang-2100.1.1.101)]",
+  "trial_count": 12,
+  "shared_runtime": {
+    "directory": "runtime",
+    "files": {
+      "SKILL.md": "0b49697a532e2efcf565c8ae56395ee1b48413bb8a49ab3bd98219bfb14645d4",
+      "columbus/__init__.py": "f9364e1616a62a901f09b577f93dfc241d1446bfcdcbc420ac70c63f9c39b396",
+      "columbus/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "columbus/archive.py": "8334ca1301a6468533abb040024e1df040c8124c453976949c5fa8341fe8f2a6",
+      "columbus/bundle.py": "f73fe1c36c89211c823f6c94eae67efc054e8c69b835b3ef49371482e7dd7f00",
+      "columbus/cli.py": "0bd6071e6f8ce7880e00676f9a7559979b931dd552e1ec28bc3052cd1259165c",
+      "columbus/discovery.py": "31b40e39531a3e903d43285ecff26315e79bbac27adc86943fc61c7d5ad8fee3",
+      "columbus/export.py": "258f6b2df72a08da837480c96db82c78eeec63007d8d1c48baed8aa36b445957",
+      "columbus/graph_views.py": "9e935520bb990c2066cfdb943c37477e78378b5ffd868e31735cc6a5e261f1c7",
+      "columbus/hooks.py": "07e7e50d250904d03158bd559b32869c2a83185c6a318587278681e1956fcb42",
+      "columbus/index.py": "02c6f16c86dad621cbfcc40f9c81370a5cc57de2acde126b104b9597fcafd085",
+      "columbus/jvm.py": "7014b2d5a6894a5e9c734b6a6c2089ce667a897c295a61e1f23c46419c61bd8b",
+      "columbus/language_profiles.py": "cda7c22cce6227d2627225110adafa641c7b09134b7c5d800ffcf1329092a1ce",
+      "columbus/languages.py": "606fe8469d2cafdfa58d9026b86e0d7debc5922e40e4eb600af4b57a4909539b",
+      "columbus/mcp_server.py": "7c413eecf8f5d3b29323ea55ea4d6934d35588cd1fb652caef92222e7dc1f2a7",
+      "columbus/parser.py": "c3a58b7ccdfa58ec6a44e6c71659816af5e91699e255fa7e90fe50746b9f178a",
+      "columbus/polyglot.py": "6a9e43a09b48cfaad807aa279a712aea00c810a5204f9e1e63e2f4c57fc0848b",
+      "columbus/presentation.py": "6e465c7c8770e310e7257dd82763117e08a9ce85e30aea72eae5c0ee18323e7d",
+      "columbus/receipts.py": "97635b575de50f9d4b398d744e51f63cc65ebe207f5596377fea8cadb1bb785b",
+      "columbus/retrieval.py": "5cfcba64d81a4983b24c8217d7f817ff7ddc642d5466cc743dccf9ca74057bc2",
+      "columbus/sync_state.py": "f18f0fa4a6cc970de4f527356ac9af70c29a12111cc3c58e42ba7e267ed457d3",
+      "columbus/telemetry.py": "9f49124a606e3a30191c596c8bd40f7255d5fbbb93f5ba2a531940b7f63c32dc",
+      "columbus/tree.py": "2be73caa6fb142ef744d2e1d6812775ae7ad12502f72e5789fe02496a83426a1",
+      "columbus.py": "0b791210f2796253cc24b13d193c0cef0c602de6f1e9d1dcadd560b23c8db067",
+      "references/INDEX.md": "e215eb92a31b4200ce0b64a54a6ae3fbdabbfba26e226e6cac80f59c61411544",
+      "references/agent-context.md": "fa53dbce7fa65be429e8a303180d7aa8b2bb3952fbed3606f0cae534ea37f846",
+      "references/archive.md": "6c5b1003fdff9ee8cb073415dce3504cd8ca18979fd5fa6c4fbc376a3d3d8f25",
+      "references/bundle-sync.md": "4b2c5f5f6e3d7b4c6b682e7772925395205b503f075b5e2859151c33430b606b",
+      "references/index-sync.md": "e1d108d84faa00bd8bd27e92a5defafa231dae874a03f3b7f99e7bc0a74fe1c2",
+      "references/jvm-analysis.md": "71104487f7202decc2b83cdc590feb051b6bfcfa616d27cc8fbda1454b5bc6bb",
+      "references/operations.md": "488bebc9ebf3f1b10a04b98e696fd38ef61e0bb1a596161de88fd0bbd067097f",
+      "references/polyglot.md": "3e309b750cdc50ab2ca00d9b96f9c8f3598bea0e182a5f8e725cc1cd56477e8d",
+      "references/portable-ast.md": "9881b14dea6e477ff28f8fbc786e6d39e055bcdd6d2f2adfac33b4cb5751a9b2",
+      "references/principles.md": "7c7ff90899c6c94686be3b0a14b10a208a51e472d169129c7914380c3e872f07",
+      "references/technology-review.md": "6fe3c9bc8ee74cde87ce1794775f8cfbdb9b37fd8a7900a7364c45ba0217a348",
+      "references/validation.md": "b7cf54598683852cc70a5c7f49193d8822440deda155a97581f47d60b385b2bb"
+    },
+    "inventory_sha256": "8c83144956b31116d41a77ffc75b40fff2b691a6fa7d585c7b1d16863930f0ae"
+  },
+  "observations": {
+    "java": {
+      "original_observation": "/tmp/columbus-overload-token-java",
+      "case": "java-gson-fromjson-overloads",
+      "trials": {
+        "java-gson-fromjson-overloads-baseline-1": {
+          "result_sha256": "364325237e73c38b7449c14b0d036bab5736cb1e2f343f83248a12295bf00294",
+          "events_sha256": "fbf5a50d9253a62c1bae3bd508e879be8c516c52e3414b242b137709072c06b9",
+          "condition": "baseline",
+          "repeat": 1,
+          "return_code": 0,
+          "timed_out": false,
+          "turn_failed": false,
+          "completed_turns": 1,
+          "answer_present": true,
+          "answer_json_valid": true,
+          "started_at": "2026-09-08T16:02:36.867667+00:00",
+          "note": "Capture integrity only; failed/pending quality and token gates are not filtered out."
+        },
+        "java-gson-fromjson-overloads-baseline-2": {
+          "result_sha256": "4aa49495ca6b60df9880f97dd00ae59b7e75c96397e54138c47b0309a6b8e0d8",
+          "events_sha256": "fa587fad9289c41b87ff1b53a4ee0d5e2569d1db4f9ff48fe2f4c9726197356c",
+          "condition": "baseline",
+          "repeat": 2,
+          "return_code": 0,
+          "timed_out": false,
+          "turn_failed": false,
+          "completed_turns": 1,
+          "answer_present": true,
+          "answer_json_valid": true,
+          "started_at": "2026-09-08T16:23:00.585799+00:00",
+          "note": "Capture integrity only; failed/pending quality and token gates are not filtered out."
+        },
+        "java-gson-fromjson-overloads-columbus-1": {
+          "result_sha256": "09da547be7fa867aa43f41f88e1ec099b7a3b869c98829b0bd92e8016c2ba191",
+          "events_sha256": "7df2fc53fd55a898c3a14c9055507bf5df90940bc20204fea3443fd8e466c3ec",
+          "condition": "columbus",
+          "repeat": 1,
+          "return_code": 0,
+          "timed_out": false,
+          "turn_failed": false,
+          "completed_turns": 1,
+          "answer_present": true,
+          "answer_json_valid": true,
+          "started_at": "2026-09-08T16:09:07.327384+00:00",
+          "note": "Capture integrity only; failed/pending quality and token gates are not filtered out."
+        },
+        "java-gson-fromjson-overloads-columbus-2": {
+          "result_sha256": "df087af5b511393151fc738c068c22be1681d81106f44df6b6d7b0269df8de98",
+          "events_sha256": "0e0d8bfb3be510b32a9e90acb15b885d1a6ee9dba28db47ffa1a072c77064433",
+          "condition": "columbus",
+          "repeat": 2,
+          "return_code": 0,
+          "timed_out": false,
+          "turn_failed": false,
+          "completed_turns": 1,
+          "answer_present": true,
+          "answer_json_valid": true,
+          "started_at": "2026-09-08T16:15:53.583339+00:00",
+          "note": "Capture integrity only; failed/pending quality and token gates are not filtered out."
+        }
+      },
+      "runtime": {
+        "original_directory": "/tmp/columbus-overload-token-java/runtime",
+        "retained_directory": "runtime",
+        "inventory_sha256": "8c83144956b31116d41a77ffc75b40fff2b691a6fa7d585c7b1d16863930f0ae"
+      },
+      "source_zip": {
+        "repository_path": "evals/overload-token-cohort/java/source.zip",
+        "sha256": "0980ae32fae04e0cdd1c9637b19881e4dbfcda358d77c182e34326daedf49e4e"
+      }
+    },
+    "kotlin": {
+      "original_observation": "/tmp/columbus-overload-token-kotlin",
+      "case": "kotlin-request-body-overloads",
+      "trials": {
+        "kotlin-request-body-overloads-baseline-1": {
+          "result_sha256": "fd11aa3a37d6d899796d09babdc1b317c5c62d896655f7c412412efeae6c5878",
+          "events_sha256": "aa3e106fc7d181481ee923ab242f8297f64b671287a8250d62ebd741f09d66cf",
+          "condition": "baseline",
+          "repeat": 1,
+          "return_code": 0,
+          "timed_out": false,
+          "turn_failed": false,
+          "completed_turns": 1,
+          "answer_present": true,
+          "answer_json_valid": true,
+          "started_at": "2026-09-08T16:08:12.380274+00:00",
+          "note": "Capture integrity only; failed/pending quality and token gates are not filtered out."
+        },
+        "kotlin-request-body-overloads-baseline-2": {
+          "result_sha256": "3f2b4542ac65d9ccd78e3e268892d8ec620851c15fcb1b61b1cac30fd81e8ac0",
+          "events_sha256": "eab54f7cba0f5d12ea397d82b6621a6383a018beda235fd9e5ab5e6f93aac663",
+          "condition": "baseline",
+          "repeat": 2,
+          "return_code": 0,
+          "timed_out": false,
+          "turn_failed": false,
+          "completed_turns": 1,
+          "answer_present": true,
+          "answer_json_valid": true,
+          "started_at": "2026-09-08T16:12:58.725956+00:00",
+          "note": "Capture integrity only; failed/pending quality and token gates are not filtered out."
+        },
+        "kotlin-request-body-overloads-columbus-1": {
+          "result_sha256": "e9d16242a6d4b5689bf59827857184e552fa177fc17464d76943e1a649f7e333",
+          "events_sha256": "29cd2c8b35dccc4d2be244df363cb6709b96f157d368c516beb514e5c644023d",
+          "condition": "columbus",
+          "repeat": 1,
+          "return_code": 0,
+          "timed_out": false,
+          "turn_failed": false,
+          "completed_turns": 1,
+          "answer_present": true,
+          "answer_json_valid": true,
+          "started_at": "2026-09-08T16:02:40.381064+00:00",
+          "note": "Capture integrity only; failed/pending quality and token gates are not filtered out."
+        },
+        "kotlin-request-body-overloads-columbus-2": {
+          "result_sha256": "342e3cc1d0a7ca5e61c65206f74b4d54a019384338efc671cc9c084d51271194",
+          "events_sha256": "106171a18600e147fd8e836fa95b368cd6dc323a3712686398cbb36416119a4f",
+          "condition": "columbus",
+          "repeat": 2,
+          "return_code": 0,
+          "timed_out": false,
+          "turn_failed": false,
+          "completed_turns": 1,
+          "answer_present": true,
+          "answer_json_valid": true,
+          "started_at": "2026-09-08T16:17:26.581135+00:00",
+          "note": "Capture integrity only; failed/pending quality and token gates are not filtered out."
+        }
+      },
+      "runtime": {
+        "original_directory": "/tmp/columbus-overload-token-kotlin/runtime",
+        "retained_directory": "runtime",
+        "inventory_sha256": "8c83144956b31116d41a77ffc75b40fff2b691a6fa7d585c7b1d16863930f0ae"
+      },
+      "source_zip": {
+        "repository_path": "evals/overload-token-cohort/kotlin/source.zip",
+        "sha256": "0d15e84d42a532c9ba5df19024ecc3bd64792e63c72264c068f30455c60a87e4"
+      }
+    },
+    "javascript": {
+      "original_observation": "/tmp/columbus-overload-token-javascript",
+      "case": "javascript-axios-interceptors",
+      "trials": {
+        "javascript-axios-interceptors-baseline-1": {
+          "result_sha256": "ec93d512c6c5bff8dc94c622991a9aa84e180f466df888742cf068be66f12021",
+          "events_sha256": "012db6619d1c8ad2ce7bac6c95f41d07fab202c79bd010e57423e70a0a40689e",
+          "condition": "baseline",
+          "repeat": 1,
+          "return_code": 0,
+          "timed_out": false,
+          "turn_failed": false,
+          "completed_turns": 1,
+          "answer_present": true,
+          "answer_json_valid": true,
+          "started_at": "2026-09-08T16:02:37.619072+00:00",
+          "note": "Capture integrity only; failed/pending quality and token gates are not filtered out."
+        },
+        "javascript-axios-interceptors-baseline-2": {
+          "result_sha256": "d7e8590da166bb5faa7e0d5cd3acfcbee260e067acb54cc753316baeefe31b48",
+          "events_sha256": "b5d50f6bdeaf0b873bcaf748fb00ef87baa03f81e9fd2616012815b4bc87edab",
+          "condition": "baseline",
+          "repeat": 2,
+          "return_code": 0,
+          "timed_out": false,
+          "turn_failed": false,
+          "completed_turns": 1,
+          "answer_present": true,
+          "answer_json_valid": true,
+          "started_at": "2026-09-08T16:18:19.221628+00:00",
+          "note": "Capture integrity only; failed/pending quality and token gates are not filtered out."
+        },
+        "javascript-axios-interceptors-columbus-1": {
+          "result_sha256": "afcf1e7b8df6d938a4cb4ffa5eb88554cc2bafef8e64292c7de99009dbb8e326",
+          "events_sha256": "43a3066e9b2aa9fd8a6777016633d7d0c9465cfe8fedf4ca90a4c23af2e2fa9c",
+          "condition": "columbus",
+          "repeat": 1,
+          "return_code": 0,
+          "timed_out": false,
+          "turn_failed": false,
+          "completed_turns": 1,
+          "answer_present": true,
+          "answer_json_valid": true,
+          "started_at": "2026-09-08T16:07:17.728615+00:00",
+          "note": "Capture integrity only; failed/pending quality and token gates are not filtered out."
+        },
+        "javascript-axios-interceptors-columbus-2": {
+          "result_sha256": "15522b12d0b27eb4af988b22bb988b5a970f626fb9375d3fdf8d23a3b12ff37b",
+          "events_sha256": "908d665628d64f16b4e6ec81f8dabbb9e5f34c621629bf06590967e05bf0cb0d",
+          "condition": "columbus",
+          "repeat": 2,
+          "return_code": 0,
+          "timed_out": false,
+          "turn_failed": false,
+          "completed_turns": 1,
+          "answer_present": true,
+          "answer_json_valid": true,
+          "started_at": "2026-09-08T16:13:38.422944+00:00",
+          "note": "Capture integrity only; failed/pending quality and token gates are not filtered out."
+        }
+      },
+      "runtime": {
+        "original_directory": "/tmp/columbus-overload-token-javascript/runtime",
+        "retained_directory": "runtime",
+        "inventory_sha256": "8c83144956b31116d41a77ffc75b40fff2b691a6fa7d585c7b1d16863930f0ae"
+      },
+      "source_zip": {
+        "repository_path": "evals/overload-token-cohort/javascript/source.zip",
+        "sha256": "c53e20043fc22e23f2b8a47d12a68dac007a71c3f9ae652d3188ceb4ba2b2345"
+      }
+    }
+  },
+  "files": {
+    "runtime/SKILL.md": {
+      "bytes": 5392,
+      "sha256": "0b49697a532e2efcf565c8ae56395ee1b48413bb8a49ab3bd98219bfb14645d4",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/SKILL.md",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/SKILL.md",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/SKILL.md",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/SKILL.md"
+      }
+    },
+    "runtime/columbus.py": {
+      "bytes": 197,
+      "sha256": "0b791210f2796253cc24b13d193c0cef0c602de6f1e9d1dcadd560b23c8db067",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/columbus.py",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/columbus.py",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/columbus.py",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/columbus.py"
+      }
+    },
+    "runtime/columbus/__init__.py": {
+      "bytes": 97,
+      "sha256": "f9364e1616a62a901f09b577f93dfc241d1446bfcdcbc420ac70c63f9c39b396",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/columbus/__init__.py",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/columbus/__init__.py",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/columbus/__init__.py",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/columbus/__init__.py"
+      }
+    },
+    "runtime/columbus/__main__.py": {
+      "bytes": 48,
+      "sha256": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/columbus/__main__.py",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/columbus/__main__.py",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/columbus/__main__.py",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/columbus/__main__.py"
+      }
+    },
+    "runtime/columbus/archive.py": {
+      "bytes": 36811,
+      "sha256": "8334ca1301a6468533abb040024e1df040c8124c453976949c5fa8341fe8f2a6",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/columbus/archive.py",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/columbus/archive.py",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/columbus/archive.py",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/columbus/archive.py"
+      }
+    },
+    "runtime/columbus/bundle.py": {
+      "bytes": 1769,
+      "sha256": "f73fe1c36c89211c823f6c94eae67efc054e8c69b835b3ef49371482e7dd7f00",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/columbus/bundle.py",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/columbus/bundle.py",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/columbus/bundle.py",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/columbus/bundle.py"
+      }
+    },
+    "runtime/columbus/cli.py": {
+      "bytes": 25933,
+      "sha256": "0bd6071e6f8ce7880e00676f9a7559979b931dd552e1ec28bc3052cd1259165c",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/columbus/cli.py",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/columbus/cli.py",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/columbus/cli.py",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/columbus/cli.py"
+      }
+    },
+    "runtime/columbus/discovery.py": {
+      "bytes": 11684,
+      "sha256": "31b40e39531a3e903d43285ecff26315e79bbac27adc86943fc61c7d5ad8fee3",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/columbus/discovery.py",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/columbus/discovery.py",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/columbus/discovery.py",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/columbus/discovery.py"
+      }
+    },
+    "runtime/columbus/export.py": {
+      "bytes": 27070,
+      "sha256": "258f6b2df72a08da837480c96db82c78eeec63007d8d1c48baed8aa36b445957",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/columbus/export.py",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/columbus/export.py",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/columbus/export.py",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/columbus/export.py"
+      }
+    },
+    "runtime/columbus/graph_views.py": {
+      "bytes": 4643,
+      "sha256": "9e935520bb990c2066cfdb943c37477e78378b5ffd868e31735cc6a5e261f1c7",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/columbus/graph_views.py",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/columbus/graph_views.py",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/columbus/graph_views.py",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/columbus/graph_views.py"
+      }
+    },
+    "runtime/columbus/hooks.py": {
+      "bytes": 3892,
+      "sha256": "07e7e50d250904d03158bd559b32869c2a83185c6a318587278681e1956fcb42",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/columbus/hooks.py",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/columbus/hooks.py",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/columbus/hooks.py",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/columbus/hooks.py"
+      }
+    },
+    "runtime/columbus/index.py": {
+      "bytes": 51189,
+      "sha256": "02c6f16c86dad621cbfcc40f9c81370a5cc57de2acde126b104b9597fcafd085",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/columbus/index.py",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/columbus/index.py",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/columbus/index.py",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/columbus/index.py"
+      }
+    },
+    "runtime/columbus/jvm.py": {
+      "bytes": 64881,
+      "sha256": "7014b2d5a6894a5e9c734b6a6c2089ce667a897c295a61e1f23c46419c61bd8b",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/columbus/jvm.py",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/columbus/jvm.py",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/columbus/jvm.py",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/columbus/jvm.py"
+      }
+    },
+    "runtime/columbus/language_profiles.py": {
+      "bytes": 4978,
+      "sha256": "cda7c22cce6227d2627225110adafa641c7b09134b7c5d800ffcf1329092a1ce",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/columbus/language_profiles.py",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/columbus/language_profiles.py",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/columbus/language_profiles.py",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/columbus/language_profiles.py"
+      }
+    },
+    "runtime/columbus/languages.py": {
+      "bytes": 4723,
+      "sha256": "606fe8469d2cafdfa58d9026b86e0d7debc5922e40e4eb600af4b57a4909539b",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/columbus/languages.py",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/columbus/languages.py",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/columbus/languages.py",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/columbus/languages.py"
+      }
+    },
+    "runtime/columbus/mcp_server.py": {
+      "bytes": 9447,
+      "sha256": "7c413eecf8f5d3b29323ea55ea4d6934d35588cd1fb652caef92222e7dc1f2a7",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/columbus/mcp_server.py",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/columbus/mcp_server.py",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/columbus/mcp_server.py",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/columbus/mcp_server.py"
+      }
+    },
+    "runtime/columbus/parser.py": {
+      "bytes": 30504,
+      "sha256": "c3a58b7ccdfa58ec6a44e6c71659816af5e91699e255fa7e90fe50746b9f178a",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/columbus/parser.py",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/columbus/parser.py",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/columbus/parser.py",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/columbus/parser.py"
+      }
+    },
+    "runtime/columbus/polyglot.py": {
+      "bytes": 40760,
+      "sha256": "6a9e43a09b48cfaad807aa279a712aea00c810a5204f9e1e63e2f4c57fc0848b",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/columbus/polyglot.py",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/columbus/polyglot.py",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/columbus/polyglot.py",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/columbus/polyglot.py"
+      }
+    },
+    "runtime/columbus/presentation.py": {
+      "bytes": 13811,
+      "sha256": "6e465c7c8770e310e7257dd82763117e08a9ce85e30aea72eae5c0ee18323e7d",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/columbus/presentation.py",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/columbus/presentation.py",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/columbus/presentation.py",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/columbus/presentation.py"
+      }
+    },
+    "runtime/columbus/receipts.py": {
+      "bytes": 8325,
+      "sha256": "97635b575de50f9d4b398d744e51f63cc65ebe207f5596377fea8cadb1bb785b",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/columbus/receipts.py",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/columbus/receipts.py",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/columbus/receipts.py",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/columbus/receipts.py"
+      }
+    },
+    "runtime/columbus/retrieval.py": {
+      "bytes": 15212,
+      "sha256": "5cfcba64d81a4983b24c8217d7f817ff7ddc642d5466cc743dccf9ca74057bc2",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/columbus/retrieval.py",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/columbus/retrieval.py",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/columbus/retrieval.py",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/columbus/retrieval.py"
+      }
+    },
+    "runtime/columbus/sync_state.py": {
+      "bytes": 4842,
+      "sha256": "f18f0fa4a6cc970de4f527356ac9af70c29a12111cc3c58e42ba7e267ed457d3",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/columbus/sync_state.py",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/columbus/sync_state.py",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/columbus/sync_state.py",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/columbus/sync_state.py"
+      }
+    },
+    "runtime/columbus/telemetry.py": {
+      "bytes": 5846,
+      "sha256": "9f49124a606e3a30191c596c8bd40f7255d5fbbb93f5ba2a531940b7f63c32dc",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/columbus/telemetry.py",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/columbus/telemetry.py",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/columbus/telemetry.py",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/columbus/telemetry.py"
+      }
+    },
+    "runtime/columbus/tree.py": {
+      "bytes": 4646,
+      "sha256": "2be73caa6fb142ef744d2e1d6812775ae7ad12502f72e5789fe02496a83426a1",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/columbus/tree.py",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/columbus/tree.py",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/columbus/tree.py",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/columbus/tree.py"
+      }
+    },
+    "runtime/references/INDEX.md": {
+      "bytes": 1045,
+      "sha256": "e215eb92a31b4200ce0b64a54a6ae3fbdabbfba26e226e6cac80f59c61411544",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/references/INDEX.md",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/references/INDEX.md",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/references/INDEX.md",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/references/INDEX.md"
+      }
+    },
+    "runtime/references/agent-context.md": {
+      "bytes": 7187,
+      "sha256": "fa53dbce7fa65be429e8a303180d7aa8b2bb3952fbed3606f0cae534ea37f846",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/references/agent-context.md",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/references/agent-context.md",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/references/agent-context.md",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/references/agent-context.md"
+      }
+    },
+    "runtime/references/archive.md": {
+      "bytes": 12921,
+      "sha256": "6c5b1003fdff9ee8cb073415dce3504cd8ca18979fd5fa6c4fbc376a3d3d8f25",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/references/archive.md",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/references/archive.md",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/references/archive.md",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/references/archive.md"
+      }
+    },
+    "runtime/references/bundle-sync.md": {
+      "bytes": 2868,
+      "sha256": "4b2c5f5f6e3d7b4c6b682e7772925395205b503f075b5e2859151c33430b606b",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/references/bundle-sync.md",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/references/bundle-sync.md",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/references/bundle-sync.md",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/references/bundle-sync.md"
+      }
+    },
+    "runtime/references/index-sync.md": {
+      "bytes": 8106,
+      "sha256": "e1d108d84faa00bd8bd27e92a5defafa231dae874a03f3b7f99e7bc0a74fe1c2",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/references/index-sync.md",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/references/index-sync.md",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/references/index-sync.md",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/references/index-sync.md"
+      }
+    },
+    "runtime/references/jvm-analysis.md": {
+      "bytes": 5565,
+      "sha256": "71104487f7202decc2b83cdc590feb051b6bfcfa616d27cc8fbda1454b5bc6bb",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/references/jvm-analysis.md",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/references/jvm-analysis.md",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/references/jvm-analysis.md",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/references/jvm-analysis.md"
+      }
+    },
+    "runtime/references/operations.md": {
+      "bytes": 1639,
+      "sha256": "488bebc9ebf3f1b10a04b98e696fd38ef61e0bb1a596161de88fd0bbd067097f",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/references/operations.md",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/references/operations.md",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/references/operations.md",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/references/operations.md"
+      }
+    },
+    "runtime/references/polyglot.md": {
+      "bytes": 3722,
+      "sha256": "3e309b750cdc50ab2ca00d9b96f9c8f3598bea0e182a5f8e725cc1cd56477e8d",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/references/polyglot.md",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/references/polyglot.md",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/references/polyglot.md",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/references/polyglot.md"
+      }
+    },
+    "runtime/references/portable-ast.md": {
+      "bytes": 3144,
+      "sha256": "9881b14dea6e477ff28f8fbc786e6d39e055bcdd6d2f2adfac33b4cb5751a9b2",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/references/portable-ast.md",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/references/portable-ast.md",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/references/portable-ast.md",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/references/portable-ast.md"
+      }
+    },
+    "runtime/references/principles.md": {
+      "bytes": 612,
+      "sha256": "7c7ff90899c6c94686be3b0a14b10a208a51e472d169129c7914380c3e872f07",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/references/principles.md",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/references/principles.md",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/references/principles.md",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/references/principles.md"
+      }
+    },
+    "runtime/references/technology-review.md": {
+      "bytes": 3680,
+      "sha256": "6fe3c9bc8ee74cde87ce1794775f8cfbdb9b37fd8a7900a7364c45ba0217a348",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/references/technology-review.md",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/references/technology-review.md",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/references/technology-review.md",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/references/technology-review.md"
+      }
+    },
+    "runtime/references/validation.md": {
+      "bytes": 1519,
+      "sha256": "b7cf54598683852cc70a5c7f49193d8822440deda155a97581f47d60b385b2bb",
+      "original_path": "/tmp/columbus-overload-token-java/runtime/references/validation.md",
+      "original_paths": {
+        "java": "/tmp/columbus-overload-token-java/runtime/references/validation.md",
+        "kotlin": "/tmp/columbus-overload-token-kotlin/runtime/references/validation.md",
+        "javascript": "/tmp/columbus-overload-token-javascript/runtime/references/validation.md"
+      }
+    },
+    "java/manifest.json": {
+      "bytes": 43934,
+      "sha256": "ae43987e73bb03143ab36ff987a3830098b1c43754081826410cebd02696e12f",
+      "original_path": "/tmp/columbus-overload-token-java/manifest.json"
+    },
+    "java/engine.json": {
+      "bytes": 51357,
+      "sha256": "fef12a9a2fe99799546030a4cde5f497f0e0f8426ca3cfae7d7e73c4414e0127",
+      "original_path": "/tmp/columbus-overload-token-java/engine.json"
+    },
+    "java/cases.json": {
+      "bytes": 4874,
+      "sha256": "db5af3e50e3d194e952c649cbd07fb6858cb813f2c98eeff6ce4c2c6731be613",
+      "original_path": "/tmp/columbus-overload-token-java/cases.json"
+    },
+    "java/runner.json": {
+      "bytes": 40,
+      "sha256": "c11abf511a2b770a8f3cfa28d7dc05223409fec8e051b97fd108a36c06168afd",
+      "original_path": "/tmp/columbus-overload-token-java/runner.json"
+    },
+    "java/graph.jsonl.xz": {
+      "bytes": 1134344,
+      "sha256": "ade93949ec07761d9819b5b3b58fe6b3e1b9b8ccd357c868c43c504db8bc6dd8",
+      "original_path": "/tmp/columbus-overload-token-java/graph.jsonl.xz"
+    },
+    "java/trials/java-gson-fromjson-overloads-baseline-1/answer.json": {
+      "bytes": 9970,
+      "sha256": "2b82ef949ff1e8732495ac092bb846911a8f84ebc8088652a30b7f62a961a080",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-baseline-1/answer.json"
+    },
+    "java/trials/java-gson-fromjson-overloads-baseline-1/events.jsonl.gz": {
+      "bytes": 15629,
+      "sha256": "9ebed95d6311617c56f2952c3bd1489f95dd3e032fe27e2640fa5563b6c71e8f",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-baseline-1/events.jsonl",
+      "encoding": "gzip",
+      "uncompressed_bytes": 92971,
+      "uncompressed_sha256": "fbf5a50d9253a62c1bae3bd508e879be8c516c52e3414b242b137709072c06b9"
+    },
+    "java/trials/java-gson-fromjson-overloads-baseline-1/invocation.json": {
+      "bytes": 1019,
+      "sha256": "f9d708f0f0142ff20024fa5d562815c3ded66cb575db05e4b8745855302d4a5a",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-baseline-1/invocation.json"
+    },
+    "java/trials/java-gson-fromjson-overloads-baseline-1/process.json": {
+      "bytes": 71,
+      "sha256": "526dd5d875e6caa71515f48a9fad807d81270765eb67e85eebfcb63b490819fa",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-baseline-1/process.json"
+    },
+    "java/trials/java-gson-fromjson-overloads-baseline-1/prompt.txt": {
+      "bytes": 3975,
+      "sha256": "06c04c8a9f39c890518647e816cd956544312364bf7709fc9518be37663cde5f",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-baseline-1/prompt.txt"
+    },
+    "java/trials/java-gson-fromjson-overloads-baseline-1/result.json": {
+      "bytes": 18550,
+      "sha256": "364325237e73c38b7449c14b0d036bab5736cb1e2f343f83248a12295bf00294",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-baseline-1/result.json"
+    },
+    "java/trials/java-gson-fromjson-overloads-baseline-1/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-baseline-1/stderr.log"
+    },
+    "java/trials/java-gson-fromjson-overloads-baseline-2/answer.json": {
+      "bytes": 11001,
+      "sha256": "9b1c2328851ff94709de27734f5ad3fd58d927ecc0e93c529e10403f9509f66f",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-baseline-2/answer.json"
+    },
+    "java/trials/java-gson-fromjson-overloads-baseline-2/events.jsonl.gz": {
+      "bytes": 19755,
+      "sha256": "3669d8399f7b4054f628fdf7d8d9a7e3d43134186ade3ba2d36c398fb3f79307",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-baseline-2/events.jsonl",
+      "encoding": "gzip",
+      "uncompressed_bytes": 95494,
+      "uncompressed_sha256": "fa587fad9289c41b87ff1b53a4ee0d5e2569d1db4f9ff48fe2f4c9726197356c"
+    },
+    "java/trials/java-gson-fromjson-overloads-baseline-2/invocation.json": {
+      "bytes": 1019,
+      "sha256": "9824994a925aac74ad5835989640f2a9f74675f725b4ca21dfa73d833c72c23b",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-baseline-2/invocation.json"
+    },
+    "java/trials/java-gson-fromjson-overloads-baseline-2/process.json": {
+      "bytes": 71,
+      "sha256": "ef6305d56baecab24229c3be9b8da665275cfcdd8d7162f2a7e557cc70159d16",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-baseline-2/process.json"
+    },
+    "java/trials/java-gson-fromjson-overloads-baseline-2/prompt.txt": {
+      "bytes": 3975,
+      "sha256": "06c04c8a9f39c890518647e816cd956544312364bf7709fc9518be37663cde5f",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-baseline-2/prompt.txt"
+    },
+    "java/trials/java-gson-fromjson-overloads-baseline-2/result.json": {
+      "bytes": 19395,
+      "sha256": "4aa49495ca6b60df9880f97dd00ae59b7e75c96397e54138c47b0309a6b8e0d8",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-baseline-2/result.json"
+    },
+    "java/trials/java-gson-fromjson-overloads-baseline-2/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-baseline-2/stderr.log"
+    },
+    "java/trials/java-gson-fromjson-overloads-columbus-1/answer.json": {
+      "bytes": 9888,
+      "sha256": "5908478513c894187297b44db14d1aa552afc13b3b1521bfc9b73e94046fc1be",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-columbus-1/answer.json"
+    },
+    "java/trials/java-gson-fromjson-overloads-columbus-1/events.jsonl.gz": {
+      "bytes": 13492,
+      "sha256": "b870e462c84c7780ec3a89812cc7e520b00dfab5ff20ce00d057f77fee1765fe",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-columbus-1/events.jsonl",
+      "encoding": "gzip",
+      "uncompressed_bytes": 58125,
+      "uncompressed_sha256": "7df2fc53fd55a898c3a14c9055507bf5df90940bc20204fea3443fd8e466c3ec"
+    },
+    "java/trials/java-gson-fromjson-overloads-columbus-1/invocation.json": {
+      "bytes": 1019,
+      "sha256": "402890c5e607c6e323745beec4fa2cc5ee255cd8f76625ed54d71e9af6bc42e2",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-columbus-1/invocation.json"
+    },
+    "java/trials/java-gson-fromjson-overloads-columbus-1/process.json": {
+      "bytes": 71,
+      "sha256": "fd78f63f93bddf528c2259d22bee1f0fd5d25ccbc2bb55346053965726e260d2",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-columbus-1/process.json"
+    },
+    "java/trials/java-gson-fromjson-overloads-columbus-1/prompt.txt": {
+      "bytes": 4653,
+      "sha256": "e31952ecfbdab78b6b553a8d582f3b3c8809a65fa6612924e686c1b2183cbbeb",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-columbus-1/prompt.txt"
+    },
+    "java/trials/java-gson-fromjson-overloads-columbus-1/result.json": {
+      "bytes": 16469,
+      "sha256": "09da547be7fa867aa43f41f88e1ec099b7a3b869c98829b0bd92e8016c2ba191",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-columbus-1/result.json"
+    },
+    "java/trials/java-gson-fromjson-overloads-columbus-1/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-columbus-1/stderr.log"
+    },
+    "java/trials/java-gson-fromjson-overloads-columbus-2/answer.json": {
+      "bytes": 10403,
+      "sha256": "b2911e2dbdd6a1c9085b340211ab52195812d518a2ecdff47a70aee775affad5",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-columbus-2/answer.json"
+    },
+    "java/trials/java-gson-fromjson-overloads-columbus-2/events.jsonl.gz": {
+      "bytes": 24001,
+      "sha256": "25c7a3699669e2db122029d4a461fefb47d14e8e74bf5f963ec1b5fda9e97ffb",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-columbus-2/events.jsonl",
+      "encoding": "gzip",
+      "uncompressed_bytes": 137530,
+      "uncompressed_sha256": "0e0d8bfb3be510b32a9e90acb15b885d1a6ee9dba28db47ffa1a072c77064433"
+    },
+    "java/trials/java-gson-fromjson-overloads-columbus-2/invocation.json": {
+      "bytes": 1019,
+      "sha256": "b6cd6c781c6fe735fecef9948800e5c5bb83b953c4ccccb3b1a427d3bf5bbfb0",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-columbus-2/invocation.json"
+    },
+    "java/trials/java-gson-fromjson-overloads-columbus-2/process.json": {
+      "bytes": 71,
+      "sha256": "abb3c7e9ff2dcf59cf9f89fe57054949fbebb223d51b024585716c822390dddb",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-columbus-2/process.json"
+    },
+    "java/trials/java-gson-fromjson-overloads-columbus-2/prompt.txt": {
+      "bytes": 4653,
+      "sha256": "e31952ecfbdab78b6b553a8d582f3b3c8809a65fa6612924e686c1b2183cbbeb",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-columbus-2/prompt.txt"
+    },
+    "java/trials/java-gson-fromjson-overloads-columbus-2/result.json": {
+      "bytes": 17712,
+      "sha256": "df087af5b511393151fc738c068c22be1681d81106f44df6b6d7b0269df8de98",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-columbus-2/result.json"
+    },
+    "java/trials/java-gson-fromjson-overloads-columbus-2/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_path": "/tmp/columbus-overload-token-java/trials/java-gson-fromjson-overloads-columbus-2/stderr.log"
+    },
+    "kotlin/manifest.json": {
+      "bytes": 115860,
+      "sha256": "7f92bdb30aaa92e1873887534ec625469ce7079bb0c2aff0f203ce51830a5d44",
+      "original_path": "/tmp/columbus-overload-token-kotlin/manifest.json"
+    },
+    "kotlin/engine.json": {
+      "bytes": 124349,
+      "sha256": "b11a235a64c0445673a3a07fa060de42a979e74ebfe0e0aaf3ab2d717bfb10f0",
+      "original_path": "/tmp/columbus-overload-token-kotlin/engine.json"
+    },
+    "kotlin/cases.json": {
+      "bytes": 5268,
+      "sha256": "9b053b73763633e61784d1d5a22d8650fd00a81950e4e86e01b31682dd131e4f",
+      "original_path": "/tmp/columbus-overload-token-kotlin/cases.json"
+    },
+    "kotlin/runner.json": {
+      "bytes": 42,
+      "sha256": "39d2538fc5628c1121d4e75864f131edce21a4fdac8a2d8d039364bd1c75c639",
+      "original_path": "/tmp/columbus-overload-token-kotlin/runner.json"
+    },
+    "kotlin/graph.jsonl.xz": {
+      "bytes": 2637860,
+      "sha256": "e6d7d6d8dc7ac61db952bc59e3335638eeb75905e906db60c3bc9cc87bceeddc",
+      "original_path": "/tmp/columbus-overload-token-kotlin/graph.jsonl.xz"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-baseline-1/answer.json": {
+      "bytes": 8793,
+      "sha256": "651ff15afe873276df659149bc0688b4ba3a30a9058fb85bbcf8a118c7254b74",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-baseline-1/answer.json"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-baseline-1/events.jsonl.gz": {
+      "bytes": 15707,
+      "sha256": "981d0c12da8803f8bbf26f63900be4a1b070950e0da82c92ad337cfe0fef1984",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-baseline-1/events.jsonl",
+      "encoding": "gzip",
+      "uncompressed_bytes": 82289,
+      "uncompressed_sha256": "aa3e106fc7d181481ee923ab242f8297f64b671287a8250d62ebd741f09d66cf"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-baseline-1/invocation.json": {
+      "bytes": 1024,
+      "sha256": "02007f2c3d4462ca92c0a7eb5a6eedfa610834702965079f029f3e86f240e929",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-baseline-1/invocation.json"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-baseline-1/process.json": {
+      "bytes": 71,
+      "sha256": "9f5e7f50e3fcd8f937cd348674b2d772bab12d3c20c9dde20ccfe8d5ffb47c1e",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-baseline-1/process.json"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-baseline-1/prompt.txt": {
+      "bytes": 3956,
+      "sha256": "9d9391565bb33c5512c7b5bd710108c9e668c68ed176d5bb6fee56f18db5f287",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-baseline-1/prompt.txt"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-baseline-1/result.json": {
+      "bytes": 17265,
+      "sha256": "fd11aa3a37d6d899796d09babdc1b317c5c62d896655f7c412412efeae6c5878",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-baseline-1/result.json"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-baseline-1/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-baseline-1/stderr.log"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-baseline-2/answer.json": {
+      "bytes": 8650,
+      "sha256": "ede38dc1b32c2458d69f1f165e27c55b02c46f41e618480089543a59711dafeb",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-baseline-2/answer.json"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-baseline-2/events.jsonl.gz": {
+      "bytes": 13303,
+      "sha256": "70cb0395a4fc07a4b0906e0e7a255075f657ff628f9fc3d3dbde83da7d6c6b88",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-baseline-2/events.jsonl",
+      "encoding": "gzip",
+      "uncompressed_bytes": 66783,
+      "uncompressed_sha256": "eab54f7cba0f5d12ea397d82b6621a6383a018beda235fd9e5ab5e6f93aac663"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-baseline-2/invocation.json": {
+      "bytes": 1024,
+      "sha256": "d8eca7521a30ffb750fb195603d9e204095f97c9b147fd9da0426ba2d8477a05",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-baseline-2/invocation.json"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-baseline-2/process.json": {
+      "bytes": 71,
+      "sha256": "f8894cbf8d093e01b3bcb24e08a6138135ae6ef42f0f43dd10eb5c3fe44edd6a",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-baseline-2/process.json"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-baseline-2/prompt.txt": {
+      "bytes": 3956,
+      "sha256": "9d9391565bb33c5512c7b5bd710108c9e668c68ed176d5bb6fee56f18db5f287",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-baseline-2/prompt.txt"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-baseline-2/result.json": {
+      "bytes": 15979,
+      "sha256": "3f2b4542ac65d9ccd78e3e268892d8ec620851c15fcb1b61b1cac30fd81e8ac0",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-baseline-2/result.json"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-baseline-2/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-baseline-2/stderr.log"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-columbus-1/answer.json": {
+      "bytes": 8314,
+      "sha256": "107061e65e63025e88d0b236d518610f3532228f0b62a10ae65d8a6accbc1449",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-columbus-1/answer.json"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-columbus-1/events.jsonl.gz": {
+      "bytes": 14401,
+      "sha256": "d5a55167071574f2c2af5d7462e82c8874dbc634a676e35cecb5c34f75af624c",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-columbus-1/events.jsonl",
+      "encoding": "gzip",
+      "uncompressed_bytes": 78805,
+      "uncompressed_sha256": "29cd2c8b35dccc4d2be244df363cb6709b96f157d368c516beb514e5c644023d"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-columbus-1/invocation.json": {
+      "bytes": 1024,
+      "sha256": "f114fed95132cf1de20ce2b4212c94585ea67758207a095cf8d268099dea0b36",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-columbus-1/invocation.json"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-columbus-1/process.json": {
+      "bytes": 71,
+      "sha256": "573209eb78a2c5055804a4c5fd34070b74b7cf12546bdb1ce7b108b061e64139",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-columbus-1/process.json"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-columbus-1/prompt.txt": {
+      "bytes": 4642,
+      "sha256": "7013eaee60a7e3c1a149f3c6ba9bf014a8a028b522e05818864ebcc07fc52742",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-columbus-1/prompt.txt"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-columbus-1/result.json": {
+      "bytes": 19836,
+      "sha256": "e9d16242a6d4b5689bf59827857184e552fa177fc17464d76943e1a649f7e333",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-columbus-1/result.json"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-columbus-1/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-columbus-1/stderr.log"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-columbus-2/answer.json": {
+      "bytes": 8524,
+      "sha256": "2641687d4671232ef8b638bb8b7c0436be5b82bf4f2a33133d711198ff475cde",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-columbus-2/answer.json"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-columbus-2/events.jsonl.gz": {
+      "bytes": 14592,
+      "sha256": "d569eb71241a9e18fa1399ccb756262c3d545ddfe2c568a3248fee7ac2039c93",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-columbus-2/events.jsonl",
+      "encoding": "gzip",
+      "uncompressed_bytes": 68728,
+      "uncompressed_sha256": "106171a18600e147fd8e836fa95b368cd6dc323a3712686398cbb36416119a4f"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-columbus-2/invocation.json": {
+      "bytes": 1024,
+      "sha256": "ca455dbf2c8f73164dda8509f2160d8409f53e788c7342fade8244fd37658134",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-columbus-2/invocation.json"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-columbus-2/process.json": {
+      "bytes": 71,
+      "sha256": "1b7f3d51c38be1ffd8e9f4e1ce268a94f6f6e4420fc3f51c9e07ce79beb7504c",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-columbus-2/process.json"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-columbus-2/prompt.txt": {
+      "bytes": 4642,
+      "sha256": "7013eaee60a7e3c1a149f3c6ba9bf014a8a028b522e05818864ebcc07fc52742",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-columbus-2/prompt.txt"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-columbus-2/result.json": {
+      "bytes": 18500,
+      "sha256": "342e3cc1d0a7ca5e61c65206f74b4d54a019384338efc671cc9c084d51271194",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-columbus-2/result.json"
+    },
+    "kotlin/trials/kotlin-request-body-overloads-columbus-2/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_path": "/tmp/columbus-overload-token-kotlin/trials/kotlin-request-body-overloads-columbus-2/stderr.log"
+    },
+    "javascript/manifest.json": {
+      "bytes": 25862,
+      "sha256": "160033d11d0af13c24a29064b75934a0c1ab28480e2e0a404065516b91733c06",
+      "original_path": "/tmp/columbus-overload-token-javascript/manifest.json"
+    },
+    "javascript/engine.json": {
+      "bytes": 33131,
+      "sha256": "4929bb8738d1944399d74e5128201782ed3974b6faa3726f4c07b1c63d42c752",
+      "original_path": "/tmp/columbus-overload-token-javascript/engine.json"
+    },
+    "javascript/cases.json": {
+      "bytes": 4081,
+      "sha256": "fc91cabdd83992131732fa878847e5f74e13da9ae46e7f5b445d32afe9a3d053",
+      "original_path": "/tmp/columbus-overload-token-javascript/cases.json"
+    },
+    "javascript/runner.json": {
+      "bytes": 46,
+      "sha256": "271484e05a9141aa9d729b818bb738aaf31c53b0dc6f56d4af911bcee31948b0",
+      "original_path": "/tmp/columbus-overload-token-javascript/runner.json"
+    },
+    "javascript/graph.jsonl.xz": {
+      "bytes": 219392,
+      "sha256": "9bdd1b2ca6ff306b3700d141bdeab1593f511e73046deaa89ff27c7b9e4b17c7",
+      "original_path": "/tmp/columbus-overload-token-javascript/graph.jsonl.xz"
+    },
+    "javascript/trials/javascript-axios-interceptors-baseline-1/answer.json": {
+      "bytes": 6572,
+      "sha256": "b80cd38fc3954bb54f4b36b8518d9a6c34d60ad575150c5e33394d77d1458262",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-baseline-1/answer.json"
+    },
+    "javascript/trials/javascript-axios-interceptors-baseline-1/events.jsonl.gz": {
+      "bytes": 6964,
+      "sha256": "c00a9a4bb848519b42a829461d3b9d01ee40e57889a47df2462b90c3810b3121",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-baseline-1/events.jsonl",
+      "encoding": "gzip",
+      "uncompressed_bytes": 29051,
+      "uncompressed_sha256": "012db6619d1c8ad2ce7bac6c95f41d07fab202c79bd010e57423e70a0a40689e"
+    },
+    "javascript/trials/javascript-axios-interceptors-baseline-1/invocation.json": {
+      "bytes": 1032,
+      "sha256": "479d2d88dfc4fa554a0594936ef0fb4f1cfdfdb2ee88d49bd522f68ce3612c5c",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-baseline-1/invocation.json"
+    },
+    "javascript/trials/javascript-axios-interceptors-baseline-1/process.json": {
+      "bytes": 71,
+      "sha256": "46f8dadc871fd545979816201c97caa5fa9914dbd2a98ba1c4ebdbcc3ce2ac7a",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-baseline-1/process.json"
+    },
+    "javascript/trials/javascript-axios-interceptors-baseline-1/prompt.txt": {
+      "bytes": 3656,
+      "sha256": "47424ecee9d1fe10820ccf8018434c0cb28df1c29a8915da7c87947e0019cdb1",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-baseline-1/prompt.txt"
+    },
+    "javascript/trials/javascript-axios-interceptors-baseline-1/result.json": {
+      "bytes": 12696,
+      "sha256": "ec93d512c6c5bff8dc94c622991a9aa84e180f466df888742cf068be66f12021",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-baseline-1/result.json"
+    },
+    "javascript/trials/javascript-axios-interceptors-baseline-1/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-baseline-1/stderr.log"
+    },
+    "javascript/trials/javascript-axios-interceptors-baseline-2/answer.json": {
+      "bytes": 7371,
+      "sha256": "23ee7b536f02014ef3166c55a1d2dc1b0209d516b31e4aa23686b5beb56f7f01",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-baseline-2/answer.json"
+    },
+    "javascript/trials/javascript-axios-interceptors-baseline-2/events.jsonl.gz": {
+      "bytes": 6572,
+      "sha256": "f316ff1b4ed64860335f8ba88a42ebc9536ef3c7f44ebeb49e596f1e8b7e1618",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-baseline-2/events.jsonl",
+      "encoding": "gzip",
+      "uncompressed_bytes": 24681,
+      "uncompressed_sha256": "b5d50f6bdeaf0b873bcaf748fb00ef87baa03f81e9fd2616012815b4bc87edab"
+    },
+    "javascript/trials/javascript-axios-interceptors-baseline-2/invocation.json": {
+      "bytes": 1032,
+      "sha256": "80e6005f022636f94e716e94f576f41f4154c12e9b34f7efe4a60ce8efedc7ad",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-baseline-2/invocation.json"
+    },
+    "javascript/trials/javascript-axios-interceptors-baseline-2/process.json": {
+      "bytes": 71,
+      "sha256": "6b7bafe4777753ec678a659eec803b0c6e5abff757fe8f19c9d61b812d1dc3a2",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-baseline-2/process.json"
+    },
+    "javascript/trials/javascript-axios-interceptors-baseline-2/prompt.txt": {
+      "bytes": 3656,
+      "sha256": "47424ecee9d1fe10820ccf8018434c0cb28df1c29a8915da7c87947e0019cdb1",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-baseline-2/prompt.txt"
+    },
+    "javascript/trials/javascript-axios-interceptors-baseline-2/result.json": {
+      "bytes": 12376,
+      "sha256": "d7e8590da166bb5faa7e0d5cd3acfcbee260e067acb54cc753316baeefe31b48",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-baseline-2/result.json"
+    },
+    "javascript/trials/javascript-axios-interceptors-baseline-2/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-baseline-2/stderr.log"
+    },
+    "javascript/trials/javascript-axios-interceptors-columbus-1/answer.json": {
+      "bytes": 7400,
+      "sha256": "51772bb62a1110e2ee74fde974f280196d81814e505a43c9a635a323678c3f21",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-columbus-1/answer.json"
+    },
+    "javascript/trials/javascript-axios-interceptors-columbus-1/events.jsonl.gz": {
+      "bytes": 9947,
+      "sha256": "78eee0a3fa512d0b7656998f3760c748c4799a60d8c8536ccbd70c424aaa0563",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-columbus-1/events.jsonl",
+      "encoding": "gzip",
+      "uncompressed_bytes": 39107,
+      "uncompressed_sha256": "43a3066e9b2aa9fd8a6777016633d7d0c9465cfe8fedf4ca90a4c23af2e2fa9c"
+    },
+    "javascript/trials/javascript-axios-interceptors-columbus-1/invocation.json": {
+      "bytes": 1032,
+      "sha256": "d9041aa2b8956c077e6219ec9cc2e2052175a16e3d355bb5205a40605cf39a9f",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-columbus-1/invocation.json"
+    },
+    "javascript/trials/javascript-axios-interceptors-columbus-1/process.json": {
+      "bytes": 71,
+      "sha256": "01675ba8119930a1f03fe93cf4167545b8bfb667cff9d674443ba8ae4084f1dd",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-columbus-1/process.json"
+    },
+    "javascript/trials/javascript-axios-interceptors-columbus-1/prompt.txt": {
+      "bytes": 4358,
+      "sha256": "65e4b409e429f0f5dadef85ab46cb85b3581e97c50423a63ec74fd3122615200",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-columbus-1/prompt.txt"
+    },
+    "javascript/trials/javascript-axios-interceptors-columbus-1/result.json": {
+      "bytes": 13794,
+      "sha256": "afcf1e7b8df6d938a4cb4ffa5eb88554cc2bafef8e64292c7de99009dbb8e326",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-columbus-1/result.json"
+    },
+    "javascript/trials/javascript-axios-interceptors-columbus-1/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-columbus-1/stderr.log"
+    },
+    "javascript/trials/javascript-axios-interceptors-columbus-2/answer.json": {
+      "bytes": 7165,
+      "sha256": "299eb50787d1b0ba2fdea646ae8a8e6351735819fa36e07072f560e5ab141410",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-columbus-2/answer.json"
+    },
+    "javascript/trials/javascript-axios-interceptors-columbus-2/events.jsonl.gz": {
+      "bytes": 69259,
+      "sha256": "1dbbb4e95e949510d5e5dd83d49998bc680044d776121b23b8eb13a655efe4b7",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-columbus-2/events.jsonl",
+      "encoding": "gzip",
+      "uncompressed_bytes": 329461,
+      "uncompressed_sha256": "908d665628d64f16b4e6ec81f8dabbb9e5f34c621629bf06590967e05bf0cb0d"
+    },
+    "javascript/trials/javascript-axios-interceptors-columbus-2/invocation.json": {
+      "bytes": 1032,
+      "sha256": "e296ea54eed306eaa3e5ce23f552a260e8fbc6cb0e8304d0307f8c66c82eb9d5",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-columbus-2/invocation.json"
+    },
+    "javascript/trials/javascript-axios-interceptors-columbus-2/process.json": {
+      "bytes": 71,
+      "sha256": "d64354ff5a11c1581bc1e566eb319dcc7f19b23f8687a87fdb294955f88b339e",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-columbus-2/process.json"
+    },
+    "javascript/trials/javascript-axios-interceptors-columbus-2/prompt.txt": {
+      "bytes": 4358,
+      "sha256": "65e4b409e429f0f5dadef85ab46cb85b3581e97c50423a63ec74fd3122615200",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-columbus-2/prompt.txt"
+    },
+    "javascript/trials/javascript-axios-interceptors-columbus-2/result.json": {
+      "bytes": 13362,
+      "sha256": "15522b12d0b27eb4af988b22bb988b5a970f626fb9375d3fdf8d23a3b12ff37b",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-columbus-2/result.json"
+    },
+    "javascript/trials/javascript-axios-interceptors-columbus-2/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_path": "/tmp/columbus-overload-token-javascript/trials/javascript-axios-interceptors-columbus-2/stderr.log"
+    }
+  },
+  "limitations": [
+    "Post-execution retention only, not model execution, grading, or cohort acceptance.",
+    "Original absolute paths are unchanged; the frozen collector is not redirected to these copies.",
+    "Full source ZIPs and protocol files remain in the surrounding pinned repository.",
+    "Runtime source/skill files are retained; interpreter, installed dependencies and bytecode caches are not.",
+    "Identical runtime/skill inventories are stored once in runtime/; every original runtime path is preserved and no replay path is rewritten.",
+    "Gzip decompression reproduces original event bytes; compressed-stream hashes are recorded separately.",
+    "Failed terminal trials and absent/invalid answer artifacts are reported without replacement.",
+    "A filesystem failure can leave an incomplete destination; no overwrite, automatic cleanup or retry is performed."
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "reviewer": "root, independent of the evaluated model",
+  "answer_sha256": "2b82ef949ff1e8732495ac092bb846911a8f84ebc8088652a30b7f62a961a080",
+  "rubric_sha256": "a3ec0794ccc98ecd0dd6e1078f16346bc8655a4acdb8eafdaad2f57ffe0bfaf1",
+  "execution_review": {
+    "events_sha256": "fbf5a50d9253a62c1bae3bd508e879be8c516c52e3414b242b137709072c06b9",
+    "passed": true,
+    "reason": "All 16 completed commands are repository-local rg, sed, nl and head reads. No private catalog/rubric/trial/runtime/graph access, repository execution, web, delegation or source-write command appears. Multi-command shell reads remain in the allowed source corpus."
+  },
+  "citation_note": "The independent mechanical citation gate fails overload-routing: its quote includes the closing brace at physical line 1007 but claims a range ending at 1006. This semantic review does not waive that failure.",
+  "findings": [
+    {
+      "id": "overload-routing", "passed": true,
+      "reason": "All eleven overload shapes and actual delegation routes are accurately explained; the separate quoted-range error remains a citation failure.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "Enumerates the three three-form input families and two JsonReader forms, and explains Class selecting Type because Class implements Type."},
+        {"criterion_index": 1, "passed": true, "reason": "Explicitly states direct TypeToken.get delegation for Class and Type and the Type forms' unchecked return cast, without inventing a Class-to-Type hop."},
+        {"criterion_index": 2, "passed": true, "reason": "Explains StringReader, configured newJsonReader, JsonTreeReader and direct JsonReader/Type convergence on the TypeToken core."}
+      ]
+    },
+    {
+      "id": "null-shortcuts", "passed": true,
+      "reason": "Distinguishes Java-null guards from empty text and non-null JsonNull, with the valid-target ordering preserved.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "States String/TypeToken returns before StringReader construction and adapter work; Class/Type routes first convert the valid target then reach the shortcut."},
+        {"criterion_index": 1, "passed": true, "reason": "Explains the tree guard before wrapping/lookup and JsonNull's adapter-defined result rather than automatic Java null."},
+        {"criterion_index": 2, "passed": true, "reason": "Explicitly confines target conversion to valid arguments and places it before the guard; no out-of-scope invalid-target guarantee is asserted."}
+      ]
+    },
+    {
+      "id": "full-consumption", "passed": true,
+      "reason": "Covers the helper's normal-return placement, null-result skip, trailing-token/error mappings and absence on direct/tree routes. The answer expressly allows adapters to consume zero or multiple values; remaining trailing tokens refer to what the adapter leaves, not an enforced one-value limit.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "States String inherits Reader's check and the helper is reached only after a normal core return."},
+        {"criterion_index": 1, "passed": true, "reason": "Explicitly says any null adapter result short-circuits the peek, even with no consumption or trailing data."},
+        {"criterion_index": 2, "passed": true, "reason": "Explains END_DOCUMENT success, other tokens as JsonSyntaxException, malformed peek as JsonSyntaxException and other I/O as JsonIOException, preserving causes."},
+        {"criterion_index": 3, "passed": true, "reason": "Explains no direct/tree completion helper and unverified custom consumption; also explicitly permits multiple values here and zero/one/multiple values in adapter-result-validation."}
+      ]
+    },
+    {
+      "id": "reader-strictness", "passed": true,
+      "reason": "Accurately distinguishes initial reader configuration, temporary parse selection and restoration before completion checking.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "States newJsonReader selects configured strictness or LEGACY_STRICT, distinct from the later compatibility adjustment."},
+        {"criterion_index": 1, "passed": true, "reason": "Explains explicit Gson override, including explicit LEGACY_STRICT, and no-override behavior for existing LEGACY_STRICT/LENIENT/STRICT."},
+        {"criterion_index": 2, "passed": true, "reason": "Explains finally on success/failure and exact restoration before Reader's helper, with the default LENIENT-parse/LEGACY_STRICT-completion example."}
+      ]
+    },
+      {
+      "id": "adapter-result-validation", "passed": true,
+      "reason": "Correctly describes ordering, null allowance, primitive-wrapped raw assignability and the unwrapped mismatch exception.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "States initial peek succeeds before isEmpty changes, adapter lookup and read; quoted code preserves this sequence."},
+        {"criterion_index": 1, "passed": true, "reason": "Explains null bypass, primitive wrapping and isInstance, with int/Integer as example; the quote shows wrapping the target raw class."},
+        {"criterion_index": 2, "passed": true, "reason": "Explicitly allows subtype/interface instances, excludes generic-content validation and explains ClassCastException propagation before Reader completion."}
+      ]
+    },
+    {
+      "id": "eof-and-errors", "passed": true,
+      "reason": "All phase distinctions, exception causes and catch limits are supported by explanation and literal catch/finally quote.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "Explains true-until-peek isEmpty, initial EOFException returning null, and END_DOCUMENT still proceeding to lookup/read."},
+        {"criterion_index": 1, "passed": true, "reason": "Explains later EOF, IllegalStateException and other parse IOException becoming JsonSyntaxException with original causes."},
+        {"criterion_index": 2, "passed": true, "reason": "States AssertionError replacement includes Gson version and retains the original cause; the quote also shows original message inclusion."},
+        {"criterion_index": 3, "passed": true, "reason": "Explicitly lists unmatched ClassCastException/runtime/error propagation with finally restoration and the distinct completion-phase I/O mappings."}
+      ]
+    }
+  ]
+}
