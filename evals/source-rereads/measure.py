@@ -6,10 +6,10 @@ from pathlib import Path
 import re
 import shlex
 
-p=argparse.ArgumentParser();p.add_argument('observation',type=Path);p.add_argument('output',type=Path);p.add_argument('--case',default='archive-urlencode');a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('observation',type=Path);p.add_argument('output',type=Path);p.add_argument('--case',default='archive-urlencode');p.add_argument('--prefix',default='django/');a=p.parse_args()
 if not re.fullmatch(r'[a-z0-9][a-z0-9-]*',a.case):p.error('case must be a filename-safe case ID')
 manifest=json.loads((a.observation/'manifest.json').read_text())['source_manifest']
-result={'scope':'Verified bounded django/ source reads only; excludes rg, help, skill text, metadata and model tokens.', 'conditions':{}}
+result={'scope':f'Verified bounded {a.prefix} source reads only; excludes rg, help, skill text, metadata and model tokens.', 'conditions':{}}
 for condition in ['baseline','columbus']:
     trial=a.observation/'trials'/f'{a.case}-{condition}-1'
     recorded=json.loads((trial/'result.json').read_text())
@@ -17,7 +17,7 @@ for condition in ['baseline','columbus']:
     assert hashlib.sha256(raw).hexdigest()==recorded['events_sha256']
     seen=set();reads=[];unverified=[];files={};empty_ranges=[]
     def add(path,start,end,output,mode,command_id):
-        if not path.startswith('django/') or path not in manifest:return
+        if not path.startswith(a.prefix) or path not in manifest:return
         if path not in files:
             data=(a.observation/'repository'/path).read_bytes()
             assert hashlib.sha256(data).hexdigest()==manifest[path]
@@ -32,6 +32,12 @@ for condition in ['baseline','columbus']:
             numbered=[(int(m[1]),m[2]) for s in output.split('\n') if (m:=re.fullmatch(r'\s*(\d+)\t(.*)',s))]
             expected=[(n,lines[n-1].decode().rstrip('\n')) for n in range(start,end+1)]
             verified=any(numbered[i:i+len(expected)]==expected for i in range(len(numbered)))
+        elif mode=='archive-source':
+            escapes={n:f'\\u{n:04x}' for n in range(32)}
+            escapes.update({n:f'\\u{n:04x}' for n in (0x85,0x2028,0x2029)})
+            escapes.update({9:'\\t',10:'\\n',13:'\\r',127:'\\u007f'})
+            expected=[f'{n}| '+lines[n-1].decode().rstrip('\n').translate(escapes) for n in range(start,end+1)]
+            verified=output.rstrip('\n').split('\n')==expected
         else:
             verified=all(f'{n}| '+lines[n-1].decode().rstrip('\n') in output for n in range(start,end+1))
         if not verified:unverified.append({'path':path,'start':start,'end':end,'mode':mode});return
@@ -73,6 +79,15 @@ for condition in ['baseline','columbus']:
                 for part in spec.split(';'):
                     m=re.fullmatch(r'(\d+),(\d+)p',part)
                     add(path,int(m[1]),int(m[2]),output,mode,item['id'])
+        if 'archive-source' in command and output.startswith('columbus archive-source;'):
+            rows=output.split('\n')
+            if len(rows)>1 and rows[1].startswith('metadata '):
+                c=json.loads(rows[1][len('metadata '):])
+                if c.get('source_hash')!=manifest.get(c['path']):
+                    unverified.append({'path':c['path'],'start':c['start_line'],'end':c['end_line'],
+                                       'mode':'archive-source','reason':'source hash differs from source manifest'})
+                else:
+                    add(c['path'],c['start_line'],c['end_line'],'\n'.join(rows[2:]),'archive-source',item['id'])
         if any(name in command for name in ('archive-neighbors', 'archive-callers')) and 'call_context:' in output:
             page_files,page_nodes,section={},{},None
             context,block=None,[]

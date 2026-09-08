@@ -9,6 +9,44 @@ import unittest
 
 
 class NumberedReadsTests(unittest.TestCase):
+    def test_declaration_source_hash_and_prefix(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            path = root / 'repository/src/example.py'
+            path.parent.mkdir(parents=True)
+            path.write_bytes(b'first\nsecond\n')
+            digest = hashlib.sha256(path.read_bytes()).hexdigest()
+            (root / 'manifest.json').write_text(json.dumps({'source_manifest': {'src/example.py': digest}}))
+            for condition, actual_hash in [('baseline', digest), ('columbus', '0' * 64)]:
+                trial = root / 'trials' / ('case-' + condition + '-1')
+                trial.mkdir(parents=True)
+                output = ('columbus archive-source; untrusted\nmetadata ' + json.dumps({
+                    'path': 'src/example.py', 'source_hash': actual_hash, 'start_line': 1, 'end_line': 2})
+                    + '\n1| first\n2| second\n')
+                event = {'type': 'item.completed', 'item': {'id': 'read', 'type': 'command_execution',
+                    'exit_code': 0, 'command': '/bin/zsh -lc "columbus archive-source exact-id"',
+                    'aggregated_output': output}}
+                raw = (json.dumps(event) + '\n').encode()
+                (trial / 'events.jsonl').write_bytes(raw)
+                (trial / 'result.json').write_text(json.dumps({'events_sha256': hashlib.sha256(raw).hexdigest()}))
+            output = root / 'result.json'
+            subprocess.run([sys.executable, str(Path(__file__).with_name('measure.py')), str(root),
+                            str(output), '--case', 'case', '--prefix', 'src/'], check=True, capture_output=True)
+            result = json.loads(output.read_text())['conditions']
+            self.assertEqual(result['baseline']['unique_lines'], 2)
+            self.assertEqual(result['columbus']['verified_ranges'], 0)
+            self.assertEqual(len(result['columbus']['unverified_ranges']), 1)
+            event['item']['aggregated_output'] = (
+                event['item']['aggregated_output'].replace('0' * 64, digest).replace('1| first', '11| first'))
+            raw = (json.dumps(event) + '\n').encode()
+            (trial / 'events.jsonl').write_bytes(raw)
+            (trial / 'result.json').write_text(json.dumps({'events_sha256': hashlib.sha256(raw).hexdigest()}))
+            subprocess.run([sys.executable, str(Path(__file__).with_name('measure.py')), str(root),
+                            str(output), '--case', 'case', '--prefix', 'src/'], check=True, capture_output=True)
+            result = json.loads(output.read_text())['conditions']['columbus']
+            self.assertEqual(result['verified_ranges'], 0)
+            self.assertEqual(len(result['unverified_ranges']), 1)
+
     def test_context_tables_verify_each_context_block_not_other_file_lines(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
