@@ -17,3 +17,7 @@ PYTHONPATH=/tmp/columbus-archive-force-bytes-v3-trial/runtime .venv/bin/python \
 ```
 
 Fresh wheel and ZIP distribution verification passed; see distribution.txt. Platform CI is pending for the implementation commit.
+
+## Trace-audit block isolation
+
+A follow-up negative fixture exposed a flaw in the diagnostic source-read counter: swapped source blocks from two files passed when each expected line appeared elsewhere in the same command output. The audit now verifies each context against only its own displayed block and checks its hash against the frozen source manifest. Fixtures exercise correct table lookup, swapped blocks and a wrong file hash. Both tests pass after the fix; the before-fix failure is retained. Complete v2 and v3 source-read measurements remain exactly equal under the stricter audit. This changes the evidence counter only, not the runtime renderer or any completed model input/output.

@@ -75,6 +75,14 @@ for condition in ['baseline','columbus']:
                     add(path,int(m[1]),int(m[2]),output,mode,item['id'])
         if any(name in command for name in ('archive-neighbors', 'archive-callers')) and 'call_context:' in output:
             page_files,page_nodes,section={},{},None
+            context,block=None,[]
+            def check_context(c,lines):
+                if c is None:return
+                if c.get('source_hash')!=manifest.get(c['path']):
+                    unverified.append({'path':c['path'],'start':c['start_line'],'end':c['end_line'],
+                                       'mode':'archive-context','reason':'context hash differs from source manifest'})
+                    return
+                add(c['path'],c['start_line'],c['end_line'],'\n'.join(lines),'archive-context',item['id'])
             for line in output.split('\n'):
                 if line.startswith(('files ', 'nodes ', 'edges ')):
                     section=line.split()[0]
@@ -85,11 +93,15 @@ for condition in ['baseline','columbus']:
                     if section=='files':page_files[row[0]]=row[1:]
                     else:page_nodes[row[0]]=row[2]
                 elif line.startswith(('{"source_id":','{"source_node":')):
+                    check_context(context,block)
                     c=json.loads(line)
                     if 'source_node' in c:
                         c['source_id']=page_nodes[c.pop('source_node')]['id']
                         c['path'],c['source_hash']=page_files[c.pop('file_number')]
-                    add(c['path'],c['start_line'],c['end_line'],output,'archive-context',item['id'])
+                    context,block=c,[]
+                elif section=='contexts' and context is not None:
+                    block.append(line)
+            check_context(context,block)
     result['conditions'][condition]={'verified_ranges':len(reads),'unique_lines':len(seen),'source_bytes_returned':sum(x['bytes'] for x in reads),
         'repeated_source_bytes':sum(x['repeated_bytes'] for x in reads),'empty_ranges':empty_ranges,'unverified_ranges':unverified,'reads':reads,'events_sha256':recorded['events_sha256']}
 a.output.write_text(json.dumps(result,indent=2)+'\n')
