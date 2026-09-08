@@ -15,3 +15,5 @@ Fresh wheel/ZIP distribution verification passed. The candidate platform workflo
 ## Ancestor-only refresh regression
 
 A follow-up index test keeps the caller and intermediate class source unchanged while the transitive base changes through empty declaration, competing overload, syntax recovery, deletion and restoration. Each phase checks the caller resolution and compares all decoded file facts plus the full public graph against a fresh independent index. Restoration reproduces the complete original facts. This directly exercises the new per-resolver absence cache together with persisted parse-cache reuse; source identity of the caller alone must not preserve the old edge. All 242 engine tests pass with both ordinary and candidate parsers. The follow-up changes tests only; the runtime remains the implementation at 038b297.
+
+Ordinary platform run 34181717765 at implementation 038b297 completed successfully in all six OS/Python jobs, including distribution/install checks. platform-final.json preserves the exact revision and step conclusions. The separate candidate matrix remains pending; this receipt does not cover the later 71ea11b test-only addition.

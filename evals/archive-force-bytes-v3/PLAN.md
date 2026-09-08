@@ -1,0 +1,11 @@
+# Third force_bytes observation after behavior guidance
+
+This is a third observation of the same known task, not a held-out task or repository. Preserve the previous two pairs, including every semantic failure. The question, exact 37-owner/46-site oracle and all SOURCE-REVIEW.md criteria remain unchanged. Only the case ID changes. No model has started for this observation.
+
+The current configuration includes the skill guidance added after v2: account for input reassignment and downstream overrides, and look up named constants before assigning values to them. It also includes the two-pass archive callers implementation and subsequent shared runtime fixes. This is a combined configuration observation, not causal attribution to the skill sentence alone. The earlier audit found both omitted evidence already delivered and a missing flag definition; this observation must test the final answers, not merely whether more evidence was printed.
+
+Prepare a new source/runtime/archive at /tmp/columbus-archive-force-bytes-v3-trial from the same immutable Django ZIP. Use the unchanged observe_saved_callers.py harness. Verify source/runtime manifests, complete caller multiplicity, source context and citation negative controls. Commit this plan and hashes of frozen inputs before model execution. Do not expose grader findings, previous answers or this plan to either condition.
+
+Run baseline first and Columbus second, once each, requested gpt-5.6-sol/xhigh with 1200 seconds per condition. Existing user authorization for model observations applies. Do not restart either condition, extend deadlines, change frozen inputs or tune instructions after execution. Both receive the same neutral question. Keep timeouts and missing usage as unknown.
+
+Accept quality only when both exact caller/citation checks and manual review of every semantic criterion pass. Accept token savings for this pair only if both conditions pass quality and Columbus has lower total input and lower output. Report cached and uncached input, reasoning, latency and source-read evidence separately. Even a passing result supports only this repeated task/configuration and cannot by itself establish the full project objective or broad production savings. Failed results remain in the overview.
