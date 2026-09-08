@@ -9,6 +9,41 @@ from columbus.jvm import parse_jvm, resolve_jvm
 
 
 class JVMTests(unittest.TestCase):
+    def test_local_method_requires_complete_absence_from_base_chain(self):
+        cases = [
+            ('interface API {} class C implements API', True),
+            ('class Base {} class C extends Base', True),
+            ('interface Root {} interface API extends Root {} class C implements API', True),
+            ('class Base { void hit(int n) {} } class C extends Base', False),
+            ('interface API { void hit(int n); } abstract class C implements API', False),
+            ('class Base extends Missing {} class C extends Base', False),
+            ('class Base<T> {} class C extends Base<String>', False),
+            ('class Base extends C {} class C extends Base', False),
+        ]
+        for prefix, expected in cases:
+            for invocation in ['hit("x")', 'c.hit("x")']:
+                with self.subTest(prefix=prefix, invocation=invocation):
+                    file = self.parsed('C.java', prefix + ' { void hit(String s) {} void run(C c) { ' + invocation + '; } }')
+                    resolve_jvm([file])
+                    call, = [r for r in file['references'] if r['kind'] == 'calls']
+                    self.assertEqual(call['resolved'], expected)
+                    if expected:
+                        self.assertIn('C.hit:method(String)', call['target'])
+
+    def test_base_absence_keeps_partial_and_receiver_shadowing_guards(self):
+        for base, body in [
+            ('class Base { void broken( }', 'hit("x");'),
+            ('class Base {}', 'Object c = null; c.hit("x");'),
+            ('class Base {}', 'C.hit("x");'),
+        ]:
+            with self.subTest(base=base, body=body):
+                files = [parse_jvm('Base.java', base), self.parsed('C.java',
+                    'class C extends Base { void hit(String s) {} void run() { ' + body + ' } }')]
+                self.assertEqual(files[0]['partial'], 'broken' in base)
+                resolve_jvm(files)
+                call, = [r for r in files[1]['references'] if r['kind'] == 'calls']
+                self.assertFalse(call['resolved'])
+
     def test_assignment_context_uses_lexical_locals_and_parameters(self):
         for body,context,resolved in [
             ('void run() { String value; value=hit(1); }', 'String', False),

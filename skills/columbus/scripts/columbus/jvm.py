@@ -486,6 +486,12 @@ class _Resolver:
         self.symbols = {s["id"]: s for f in files for s in f["symbols"]}
         self.scopes = {k: v for f in files for k, v in f.get("_scopes", {}).items()}
         self.inherited_owners = {r["source"] for f in files for r in f["references"] if r["kind"] == "inherits"}
+        self.base_references = defaultdict(list)
+        for file in files:
+            for ref in file["references"]:
+                if ref["kind"] == "inherits":
+                    self.base_references[ref["source"]].append((file, ref))
+        self.inherited_absence = {}
         self.qualified, self.members = defaultdict(list), defaultdict(list)
         for symbol in self.symbols.values():
             if symbol["kind"] != "module" and not symbol.get("partial") and not symbol.get("local"):
@@ -501,6 +507,32 @@ class _Resolver:
                 return scope["bindings"][name]
             scope_id = scope["parent"]
         return None
+
+    def inherited_member_absent(self, owner, member, visiting=frozenset()):
+        """Prove a name absent from every explicit base before local lookup.
+
+        This does not select inherited overloads or collapse overrides. Unknown,
+        partial, generic and cyclic base chains retain the conservative gate.
+        """
+        key = (owner, member)
+        if owner in visiting:
+            return False
+        if key in self.inherited_absence:
+            return self.inherited_absence[key]
+        absent = True
+        for file, ref in self.base_references.get(owner, []):
+            bases = self.candidates(file, ref["member"], type_only=True, scope_id=ref["scope_id"])
+            if len(bases) != 1 or bases[0].get("language") != "java":
+                absent = False
+                break
+            base = bases[0]
+            if (self.java_access_reason(file, ref["scope_id"], base)
+                    or self.members.get((base["id"], member))
+                    or not self.inherited_member_absent(base["id"], member, visiting | {owner})):
+                absent = False
+                break
+        self.inherited_absence[key] = absent
+        return absent
 
     def type_binding(self, scope_id, name):
         while scope_id:
@@ -840,11 +872,17 @@ class _Resolver:
                 type_receiver = file["language"] == "java"
             if len(types) != 1:
                 return None, "receiver type external, ambiguous or unknown"
-            if types[0]["id"] in self.inherited_owners:
+            if (types[0]["id"] in self.inherited_owners
+                    and not (file["language"] == "java" and types[0].get("language") == "java"
+                             and self.members.get((types[0]["id"], member))
+                             and self.inherited_member_absent(types[0]["id"], member))):
                 return None, "inherited candidate set and argument applicability required"
             candidates = self.members.get((types[0]["id"], member), [])
         else:
-            if not ref["constructor"] and self.owner(scope_id) in self.inherited_owners:
+            if (not ref["constructor"] and self.owner(scope_id) in self.inherited_owners
+                    and not (file["language"] == "java"
+                             and self.members.get((self.owner(scope_id), member))
+                             and self.inherited_member_absent(self.owner(scope_id), member))):
                 return None, "inherited candidate set and argument applicability required"
             bindings = self.binding(scope_id, member)
             if bindings is not None:
