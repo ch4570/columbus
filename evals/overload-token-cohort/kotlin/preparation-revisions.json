@@ -1,0 +1,12 @@
+[
+  {
+    "previous_cases_sha256": "7bf3441bb4e7816b2e2c646597aebcdd00c6ad908026251d8745c959042f11df",
+    "finalized_cases_sha256": "9b053b73763633e61784d1d5a22d8650fd00a81950e4e86e01b31682dd131e4f",
+    "stage": "pre-freeze independent review; no models launched"
+  },
+  {
+    "previous_cases_sha256": "9b053b73763633e61784d1d5a22d8650fd00a81950e4e86e01b31682dd131e4f",
+    "finalized_cases_sha256": "9b053b73763633e61784d1d5a22d8650fd00a81950e4e86e01b31682dd131e4f",
+    "stage": "pre-freeze independent review; no models launched"
+  }
+]

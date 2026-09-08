@@ -1,0 +1,32 @@
+{
+  "registration_removal": [
+    "InterceptorManager.use appends a handler record containing the fulfilled/rejected callbacks and the supplied synchronous/runWhen options, then returns the appended array index (length minus one). With no options, synchronous is false and runWhen is null; an omitted synchronous property also does not opt into synchronous execution. Equivalent behavioral wording such as asynchronous by default is sufficient; do not invent a true default or required runWhen predicate.",
+    "eject replaces an existing handler slot with null rather than splicing the array. Remaining IDs do not shift, and later registrations append rather than filling the null slot. Ejecting an already empty or absent ordinary slot has no effect.",
+    "clear replaces the handler array with an empty array. A subsequent registration starts again at index zero, so returned numeric IDs are not globally unique across clears.",
+    "Manager iteration skips null slots and visits the surviving array entries in registration order. Ejected handlers therefore do not execute or participate in later request-mode selection. The task assumes no registration mutation during request construction."
+  ],
+  "eligibility_order": [
+    "Request runWhen is tested while constructing the chain, before any request fulfilled handler executes. It receives the current prepared request configuration, not the successive output of earlier fulfilled handlers.",
+    "Only a callable runWhen returning the boolean false excludes a handler. Other falsy values such as zero, null or undefined do not satisfy the strict-false test; an absent or non-callable runWhen does not filter it out.",
+    "The synchronous accumulator starts true and is combined with synchronous only for retained request handlers. Every retained handler must have a truthy synchronous option for the direct path; one missing/falsy option selects the Promise path. Skipped/ejected asynchronous handlers do not force that path, and no retained request handlers leaves the direct path selected.",
+    "Retained request pairs are prepended, giving reverse-registration execution order; response pairs are appended, giving registration order. Response runWhen and synchronous options are not consulted by this assembly and cannot filter responses or choose the request execution mode."
+  ],
+  "promise_path": [
+    "When the request accumulator is falsy, Axios starts with Promise.resolve(config) and repeatedly attaches fulfilled/rejected pairs. Request handlers precede dispatchRequest, and response handlers follow dispatch in the same chain; this is not the direct synchronous request loop.",
+    "Each fulfilled result is passed through the Promise chain to the next stage, including adoption of a returned promise. A thrown error or rejected returned promise changes the downstream state to rejection rather than immediately running the synchronous-loop catch behavior.",
+    "A fulfilled callback's throw is not caught by its own rejection callback in the same then pair. It reaches a later applicable rejection callback; intervening fulfilled callbacks are skipped while the chain remains rejected.",
+    "A rejection callback that returns normally, or returns a resolving promise, recovers the chain for subsequent fulfilled callbacks; throwing or returning a rejected promise keeps it rejected. Request-side recovery can reach dispatch when it supplies a valid configuration; unhandled request rejection skips dispatch but can reach a later response rejection callback."
+  ],
+  "synchronous_errors": [
+    "The direct path invokes each retained request fulfilled callback immediately with newConfig and assigns its successful return back to newConfig. It does not await each callback through Promise.then; the question assumes synchronous success returns a configuration object.",
+    "If a fulfilled callback throws, Axios calls that same handler's onRejected with the Axios instance as this and the error as its argument. If that rejection callback returns normally, its return value is ignored and the loop breaks, skipping all remaining request handlers; it is not a replacement configuration or an instruction to resume the loop.",
+    "After such a normally returning rejection callback, dispatch is attempted with the last successfully assigned newConfig. An assignment from the throwing fulfilled callback never completes, but mutations already made to the existing configuration object survive; do not promise rollback or an untouched original configuration.",
+    "A missing/non-callable rejection callback fails at the attempted call, and a throwing rejection callback also escapes the loop. These errors prevent dispatch and response-chain attachment on this path. They can throw out of _request, while the public async request wrapper reports a rejected promise; there is no catch-and-continue or universal conversion to a normal dispatch here."
+  ],
+  "response_boundary": [
+    "After dispatch returns its promise normally, response fulfilled/rejected pairs are attached in registration order in both request modes. A later asynchronous rejection of that returned promise can therefore reach response rejection handlers even when the request handlers ran synchronously.",
+    "In the direct request path, a synchronous throw from dispatchRequest is caught and returned as Promise.reject(error) before the response-chain loop runs. Those response handlers are not attached on this early-return path; the public request rejects instead of automatically giving them the error.",
+    "In the Promise request path, dispatch itself is a fulfilled stage of the already assembled chain. Its synchronous throw becomes a rejection that can reach later response rejection handlers. Do not generalize the direct-path early return to this Promise path, or equate a synchronous dispatch throw with a later rejection in the direct path.",
+    "Response results and errors continue through ordinary then semantics: fulfillment feeds later fulfillment, a throw/rejection goes to a later rejection handler rather than its own paired handler, and successful recovery enables subsequent fulfillment. The final chain determines the returned/public promise's fulfillment value or rejection; no response recovery is guaranteed when callbacks are missing or throw."
+  ]
+}

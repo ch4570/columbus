@@ -1,0 +1,92 @@
+{
+  "passed": true,
+  "queries": [
+    "Gson.fromJson"
+  ],
+  "source_queries": [
+    "com.google.gson.Gson.fromJson"
+  ],
+  "overloads": true,
+  "recognizer_version": "archive-evidence-v1",
+  "results": [
+    {
+      "format": "json",
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "/tmp/columbus-overload-token-java/runtime/columbus.py",
+        "archive-source",
+        "com.google.gson.Gson.fromJson",
+        "--overloads",
+        "--input",
+        "/tmp/columbus-overload-token-java/graph.jsonl.xz",
+        "--repo",
+        ".",
+        "--limit",
+        "300",
+        "--budget-bytes",
+        "32000",
+        "--format",
+        "json"
+      ],
+      "output_bytes": 10111,
+      "output_sha256": "49a462f9d76066ebe2bbc1307a3a301a6784bf6e2c930c295e9f6bccc2544c17",
+      "receipts": [
+        {
+          "recognizer_version": "archive-evidence-v1",
+          "command_id": "control-json",
+          "operation": "archive-source",
+          "encoding": "json-v1",
+          "useful_task_evidence": true,
+          "batch_used": true,
+          "relevant_paths": [
+            "gson/src/main/java/com/google/gson/Gson.java"
+          ],
+          "source_rows": 97,
+          "declarations": 11,
+          "edges": 0,
+          "output_sha256": "49a462f9d76066ebe2bbc1307a3a301a6784bf6e2c930c295e9f6bccc2544c17"
+        }
+      ]
+    },
+    {
+      "format": "text",
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "/tmp/columbus-overload-token-java/runtime/columbus.py",
+        "archive-source",
+        "com.google.gson.Gson.fromJson",
+        "--overloads",
+        "--input",
+        "/tmp/columbus-overload-token-java/graph.jsonl.xz",
+        "--repo",
+        ".",
+        "--limit",
+        "300",
+        "--budget-bytes",
+        "32000",
+        "--format",
+        "text"
+      ],
+      "output_bytes": 8122,
+      "output_sha256": "37be420130d20baa1b2875c9fd052dbb5fd5ff44e8c504d72772c6b003210019",
+      "receipts": [
+        {
+          "recognizer_version": "archive-evidence-v1",
+          "command_id": "control-text",
+          "operation": "archive-source",
+          "encoding": "source-table-text-v1",
+          "useful_task_evidence": true,
+          "batch_used": true,
+          "relevant_paths": [
+            "gson/src/main/java/com/google/gson/Gson.java"
+          ],
+          "source_rows": 97,
+          "declarations": 11,
+          "edges": 0,
+          "output_sha256": "37be420130d20baa1b2875c9fd052dbb5fd5ff44e8c504d72772c6b003210019"
+        }
+      ]
+    }
+  ],
+  "no_consumer_sqlite": true
+}
