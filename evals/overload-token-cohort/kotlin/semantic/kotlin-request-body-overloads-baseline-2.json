@@ -1,0 +1,175 @@
+{
+  "answer_sha256": "ede38dc1b32c2458d69f1f165e27c55b02c46f41e618480089543a59711dafeb",
+  "rubric_sha256": "2b1b224e6f38051261efcfcfe71b3c702393451a0c0fb13d8a1d80b464138dab",
+  "execution_review": {
+    "events_sha256": "eab54f7cba0f5d12ea397d82b6621a6383a018beda235fd9e5ab5e6f93aac663",
+    "passed": true,
+    "reason": "Audited all 12 completed command executions, item_0 through item_11, and the event item types. Every command is a zsh wrapper around repository-local rg searches or nl/sed source reads, with only true and stderr redirection to /dev/null as auxiliary shell operations. Reads cover the RequestBody implementation, charset/bounds helpers and repository test source; tests are read, not run. The 274-line central RequestBody read covers the requested dispersed declarations and base contracts. No command accesses parent experiment files, case catalogs, criteria, other trials, the frozen runtime/skill or saved graph; none executes upstream code/tests/builds, writes repository files, invokes a graph tool, uses the web or delegates. All command events have exit code 0; the only other completed item is the final agent message. This passes the baseline evidence boundary, not a claim that everything read was included in the answer."
+  },
+  "findings": [
+    {
+      "id": "legacy-string-bytestring",
+      "passed": true,
+      "reason": "Both receiver-specific legacy mappings and Kotlin/Java argument-order migration are explained; the ByteString representative quote is exact.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The explanation explicitly maps create(contentType, content: String) to content.toRequestBody(contentType); string-encoding separately establishes that receiver's implementation. This matches RequestBody.kt 221-224."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The explanation and exact 226-239 ByteString quote identify its own receiver delegate. The bytestring-body finding explicitly distinguishes that path from String charset encoding."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The answer describes content-type-first compatibility calls becoming Kotlin receiver calls and Java-facing content-first static calls, and assigns each body its own receiver extension's semantics rather than collapsing their implementations."
+        }
+      ]
+    },
+    {
+      "id": "legacy-array-file",
+      "passed": true,
+      "reason": "The array and File delegates, defaults and receiver/content-first migration are all covered.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The explanation gives the exact ByteArray receiver call, unchanged offset/count and defaults offset=0 and byteCount=content.size, matching RequestBody.kt 252-257."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The explanation and exact 259-272 quote route the legacy File declaration to file.asRequestBody(contentType), with no substitution of another receiver implementation."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "It explicitly makes the array/file the Kotlin receiver or first Java-facing argument while the nullable content type follows, preserving the compatibility-to-replacement argument-order distinction."
+        }
+      ]
+    },
+    {
+      "id": "string-encoding",
+      "passed": true,
+      "reason": "The exact extension quote and explanation cover charset-before-encoding, full encoded-array delegation, nullable final type and byte-based length/writes.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The explanation states that charset/final type are selected before encoding, and the exact quote shows chooseCharset followed by toByteArray(charset)."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The quote supplies finalContentType, offset 0 and bytes.size exactly. The prose explains complete-slice delegation, encoded byte count rather than character count, precomputed-byte writes and the helper's final nullable media type."
+        }
+      ]
+    },
+    {
+      "id": "charset-policy",
+      "passed": false,
+      "reason": "The main fallback and append-precedence behavior is correct, but the final answer omits the required Charset.forName/IllegalArgumentException handling detail and case-insensitive parameter-name matching. Those details appear in inspected source, not in the final explanation or any final quote.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The explanation explicitly states UTF-8 with a null final content type for null input and that nothing is appended; the helper quote confirms those defaults."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The prose explicitly uses a supported resolved charset while retaining the original MediaType, consistent with the quoted helper's else branch."
+        },
+        {
+          "criterion_index": 2,
+          "passed": false,
+          "reason": "The answer correctly states that missing or invalid/runtime-unsupported charset makes charset() return null, causing UTF-8 and appended-type parsing. It does not explain or quote the required Charset.forName lookup and IllegalArgumentException handling from MediaType.kt 44-51. The helper-only final quote does not supply those omitted positive details; their presence in the reading trace does not establish final coverage."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The prose identifies nullable toMediaTypeOrNull and acceptance of a null parsed result rather than a throwing parser, while the exact helper quote assigns that result to finalContentType. It does not promise augmentation always succeeds or that ordinary valid types necessarily fail."
+        },
+        {
+          "criterion_index": 4,
+          "passed": false,
+          "reason": "The explanation correctly describes appending rather than overriding, ordered first-charset lookup, and a later default/null result despite UTF-8 body bytes. However, it omits the required case-insensitive parameter-name matching from MediaType.kt 57-64, and no final quote contains that mechanism. Reading the implementation and tests is not a substitute for this missing final-answer detail."
+        }
+      ]
+    },
+    {
+      "id": "array-slice",
+      "passed": true,
+      "reason": "Defaults, eager bounds failure, selected-slice metadata/writing and original-array retention are fully covered.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The answer explicitly contrasts full array size with size-offset and states that a positive offset with omitted count fails validation; the quoted defaults agree."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The explanation places validation before body return and names negative values, offset past the array, excessive remaining count and ArrayIndexOutOfBoundsException. The quoted validation precedes the anonymous object, matching the bounds helper."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "Prose preserves nullable content type, fixed byte count and the selected half-open slice; the exact quote additionally supplies byteCount.toLong() and sink.write(original receiver, offset, byteCount)."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The answer expressly retains the original array rather than copying and explains that post-construction element mutations can change later writes."
+        }
+      ]
+    },
+    {
+      "id": "bytestring-body",
+      "passed": true,
+      "reason": "The exact ByteString body quote and prose establish unchanged type, Long byte length and direct writing without String encoding.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The explanation preserves supplied nullable content type and byte size; the exact 130-141 quote supplies size.toLong() explicitly."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The quote directly writes the ByteString receiver with sink.write. The prose explicitly excludes charset lookup, encoding and media-type augmentation for this path."
+        }
+      ]
+    },
+    {
+      "id": "file-body",
+      "passed": true,
+      "reason": "The File body and explanation cover current length queries, fresh owned sources, sink non-ownership, inherited false one-shot status and changing file contents.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The answer explicitly preserves nullable type and calls File.length() on each contentLength query rather than capturing it at construction; the exact File quote supports both."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The prose opens a fresh File source per write and closes it through use including failure, while distinguishing the caller-owned sink. The exact quote supplies source().use and sink.writeAll(source)."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The answer explicitly notes no isOneShot override and inherited false, matching the complete quoted anonymous File body and RequestBody.kt 99. It does not import FileDescriptor's override."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "Repeated calls are qualified as permitted at the contract level, not promised successful or byte-identical. The explanation expressly rejects a snapshot/identical-byte guarantee and says file changes can alter both observed length and content; it makes no network-retry claim."
+        }
+      ]
+    }
+  ]
+}

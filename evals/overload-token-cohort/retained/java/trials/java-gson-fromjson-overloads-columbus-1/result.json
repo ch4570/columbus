@@ -1,0 +1,209 @@
+{
+  "schema": "columbus.exploration-observation/v1",
+  "case": "java-gson-fromjson-overloads",
+  "condition": "columbus",
+  "repeat": 1,
+  "model_requested": "gpt-5.6-sol",
+  "effort_requested": "xhigh",
+  "evidence_mode": "saved_archive",
+  "elapsed_seconds": 405.499,
+  "return_code": 0,
+  "timed_out": false,
+  "source_unchanged": true,
+  "usage": {
+    "input_tokens": 190867,
+    "cached_input_tokens": 163200,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 11924,
+    "reasoning_output_tokens": 8937,
+    "uncached_input_tokens": 27667
+  },
+  "commands": [
+    {
+      "command": "/bin/zsh -lc \"sed -n '1,240p' /tmp/columbus-overload-token-java/runtime/SKILL.md\"",
+      "exit_code": 0,
+      "output_bytes": 5392,
+      "output_sha256": "0b49697a532e2efcf565c8ae56395ee1b48413bb8a49ab3bd98219bfb14645d4"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/personal/columbus/.venv/bin/python /tmp/columbus-overload-token-java/runtime/columbus.py archive-source Gson.fromJson --overloads --input /tmp/columbus-overload-token-java/graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 30000'",
+      "exit_code": 0,
+      "output_bytes": 8122,
+      "output_sha256": "37be420130d20baa1b2875c9fd052dbb5fd5ff44e8c504d72772c6b003210019"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n -C 12 \\\"assertFullConsumption|newJsonReader\\\\(\\\" gson/src/main/java/com/google/gson/Gson.java\"",
+      "exit_code": 0,
+      "output_bytes": 5095,
+      "output_sha256": "fae8f7396057c4d8e673e830ae742b82a01d4888e5506f0a1e6168a8c315e6e3"
+    },
+    {
+      "command": "/bin/zsh -lc \"sed -n '780,830p' gson/src/main/java/com/google/gson/Gson.java\nsed -n '990,1145p' gson/src/main/java/com/google/gson/Gson.java\nsed -n '1208,1232p' gson/src/main/java/com/google/gson/Gson.java\nrg -n \\\"Strictness strictness|setStrictness\\\\(|getStrictness\\\\(\\\" gson/src/main/java/com/google/gson/stream/JsonReader.java | head -30\"",
+      "exit_code": 0,
+      "output_bytes": 11992,
+      "output_sha256": "0b662158160bd78ba365b1fab20e06f72011197835a5a766b5973845dd112edf"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n -C 4 \\\"class JsonSyntaxException|JsonSyntaxException\\\\(Throwable|class JsonIOException|JsonIOException\\\\(Throwable\\\" gson/src/main/java/com/google/gson\"",
+      "exit_code": 0,
+      "output_bytes": 3040,
+      "output_sha256": "082c7c88995be07ccd3d97d4da9ab04391253d544e6701b0fb0109c561329dbf"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n \\\"public <T> T fromJson\\\\(\\\" gson/src/main/java/com/google/gson/Gson.java\"",
+      "exit_code": 0,
+      "output_bytes": 905,
+      "output_sha256": "3bc89b3b508f0b07fb3dc958aebcf4514eddb4283922ac404da33e153a2d037c"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n -C 3 \\\"static .*TypeToken.* get\\\\(\\\" gson/src/main/java/com/google/gson/reflect/TypeToken.java\"",
+      "exit_code": 0,
+      "output_bytes": 360,
+      "output_sha256": "aa139aec923524dc5bb18993e77d9f3638d4b3acb6ef4030cc5d1d282488cde8"
+    },
+    {
+      "command": "/bin/zsh -lc \"sed -n '315,435p' gson/src/main/java/com/google/gson/stream/JsonReader.java\"",
+      "exit_code": 0,
+      "output_bytes": 5896,
+      "output_sha256": "fb2de058f6272034515f25f0beb6610134d3c0987df6d9188fa940a4dc8743e5"
+    },
+    {
+      "command": "/bin/zsh -lc 'rg -n -C 2 \"private Strictness strictness\" gson/src/main/java/com/google/gson/stream/JsonReader.java'",
+      "exit_code": 0,
+      "output_bytes": 268,
+      "output_sha256": "829ee36ef58a7cf7fe31be00f22c83c1521e802d4e5fd6dee372fdace7b0ece7"
+    }
+  ],
+  "command_count": 9,
+  "command_output_bytes": 41070,
+  "failed_commands": 0,
+  "other_tool_types": [],
+  "runtime_warnings": [],
+  "turn_failed": false,
+  "quality": {
+    "passed": true,
+    "findings": [
+      {
+        "id": "overload-routing",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "null-shortcuts",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "full-consumption",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "reader-strictness",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "adapter-result-validation",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "eof-and-errors",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "index_preflight": null,
+  "archive_preflight": {
+    "passed": true,
+    "archive_sha256": "ade93949ec07761d9819b5b3b58fe6b3e1b9b8ccd357c868c43c504db8bc6dd8",
+    "revision": "1a4e614188fb3c227fbf",
+    "source_files_verified": 313,
+    "indexed_source_files_verified": 310,
+    "counts": {
+      "files": 310,
+      "nodes": 5629,
+      "scopes": 5441,
+      "edges": 9853,
+      "references": 23400,
+      "imports": 2671,
+      "diagnostics": 0
+    },
+    "consumer_index_absent": true
+  },
+  "archive_postflight": {
+    "passed": true,
+    "archive_sha256": "ade93949ec07761d9819b5b3b58fe6b3e1b9b8ccd357c868c43c504db8bc6dd8",
+    "revision": "1a4e614188fb3c227fbf",
+    "source_files_verified": 313,
+    "indexed_source_files_verified": 310,
+    "counts": {
+      "files": 310,
+      "nodes": 5629,
+      "scopes": 5441,
+      "edges": 9853,
+      "references": 23400,
+      "imports": 2671,
+      "diagnostics": 0
+    },
+    "consumer_index_absent": true
+  },
+  "answer": {
+    "findings": [
+      {
+        "id": "overload-routing",
+        "path": "gson/src/main/java/com/google/gson/Gson.java",
+        "start_line": 1001,
+        "end_line": 1007,
+        "quote": "  public <T> T fromJson(Reader json, TypeToken<T> typeOfT)\n      throws JsonIOException, JsonSyntaxException {\n    JsonReader jsonReader = newJsonReader(json);\n    T object = fromJson(jsonReader, typeOfT);\n    assertFullConsumption(object, jsonReader);\n    return object;\n  }",
+        "explanation": "There are 11 declared overloads: String × {Class<T>, Type, TypeToken<T>}; Reader × the same three; JsonReader × {Type, TypeToken<T>}; and JsonElement × {Class<T>, Type, TypeToken<T>}. Every Class overload delegates through TypeToken.get(Class); every Type overload delegates through TypeToken.get(Type) and performs an explicit unchecked (T) return cast. A non-null String is wrapped in StringReader and handed to the Reader/TypeToken overload shown here. That overload creates a configured JsonReader, invokes the common JsonReader/TypeToken implementation, and then checks full consumption. A JsonElement is wrapped in JsonTreeReader and sent directly to that same common implementation. There is deliberately no JsonReader/Class overload. Because Class implements java.lang.reflect.Type, fromJson(jsonReader, SomeClass.class) selects the JsonReader/Type overload, whose T is inferred from the call context rather than constrained by a Class<T> parameter; it then creates a token with TypeToken.get(Type), uses the common implementation, and applies the unchecked return cast."
+      },
+      {
+        "id": "null-shortcuts",
+        "path": "gson/src/main/java/com/google/gson/Gson.java",
+        "start_line": 1212,
+        "end_line": 1217,
+        "quote": "  public <T> T fromJson(JsonElement json, TypeToken<T> typeOfT) throws JsonSyntaxException {\n    if (json == null) {\n      return null;\n    }\n    return fromJson(new JsonTreeReader(json), typeOfT);\n  }",
+        "explanation": "Java-null String and JsonElement inputs are entry-point shortcuts. Their Class or Type overload first converts the valid target to a TypeToken and delegates; the TypeToken overload then returns null. For String, this happens before constructing StringReader, so there is no JsonReader, adapter lookup, parsing, validation, or completion check. The quoted tree check likewise occurs before constructing JsonTreeReader. JsonNull is a non-null JsonElement and therefore does not take this shortcut: it is wrapped in JsonTreeReader and passed through initial peek, adapter lookup, adapter read, and result validation. The entry point itself does not mandate that JsonNull—or textual JSON null—become Java null; the selected adapter controls that result."
+      },
+      {
+        "id": "full-consumption",
+        "path": "gson/src/main/java/com/google/gson/Gson.java",
+        "start_line": 1219,
+        "end_line": 1229,
+        "quote": "  private static void assertFullConsumption(Object obj, JsonReader reader) {\n    try {\n      if (obj != null && reader.peek() != JsonToken.END_DOCUMENT) {\n        throw new JsonSyntaxException(\"JSON document was not fully consumed.\");\n      }\n    } catch (MalformedJsonException e) {\n      throw new JsonSyntaxException(e);\n    } catch (IOException e) {\n      throw new JsonIOException(e);\n    }\n  }",
+        "explanation": "Every non-null String routes through Reader, and Reader/TypeToken calls this helper after the common parse returns. Direct JsonReader and JsonElement entry points do not call it, so they do not reject data left by an adapter. Even for String/Reader, this is only an end-position check, not proof that exactly one value was consumed: an adapter that consumes multiple values and reaches END_DOCUMENT passes. If the adapter returns null—including a custom adapter returning null without consuming anything—the condition short-circuits and trailing input is never inspected. For a non-null result, a successfully returned token other than END_DOCUMENT produces the message-only JsonSyntaxException shown. A MalformedJsonException from the completion peek becomes JsonSyntaxException with the malformed exception as cause; any other IOException, including an EOFException at this phase, becomes JsonIOException with that cause. If the core parse fails or result validation fails, this post-check is never reached."
+      },
+      {
+        "id": "reader-strictness",
+        "path": "gson/src/main/java/com/google/gson/Gson.java",
+        "start_line": 1089,
+        "end_line": 1097,
+        "quote": "    boolean isEmpty = true;\n    Strictness oldStrictness = reader.getStrictness();\n\n    if (this.strictness != null) {\n      reader.setStrictness(this.strictness);\n    } else if (reader.getStrictness() == Strictness.LEGACY_STRICT) {\n      // For backward compatibility change to LENIENT if reader has default strictness LEGACY_STRICT\n      reader.setStrictness(Strictness.LENIENT);\n    }",
+        "explanation": "JsonReader itself defaults to LEGACY_STRICT, and Gson.newJsonReader explicitly selects the Gson instance's configured strictness or LEGACY_STRICT when none was configured. In the common entry point, an explicit Gson strictness overrides any existing reader setting. Without an explicit Gson setting, an existing LEGACY_STRICT reader is temporarily changed to LENIENT; existing LENIENT and STRICT settings remain unchanged. A finally block restores oldStrictness on normal return, empty-input return, translated failure, and uncaught failures arising inside the parse try. For String/Reader, restoration occurs before control returns to the Reader overload and before assertFullConsumption runs. Consequently, an unconfigured newly created reader parses the value temporarily as LENIENT but performs the trailing-data peek after restoration to LEGACY_STRICT; explicit strictness remains in effect for both phases. Direct JsonReader and tree calls have restoration but no completion phase."
+      },
+      {
+        "id": "adapter-result-validation",
+        "path": "gson/src/main/java/com/google/gson/Gson.java",
+        "start_line": 1099,
+        "end_line": 1115,
+        "quote": "    try {\n      JsonToken unused = reader.peek();\n      isEmpty = false;\n      TypeAdapter<T> typeAdapter = getAdapter(typeOfT);\n      T object = typeAdapter.read(reader);\n      Class<?> expectedTypeWrapped = Primitives.wrap(typeOfT.getRawType());\n      if (object != null && !expectedTypeWrapped.isInstance(object)) {\n        throw new ClassCastException(\n            \"Type adapter '\"\n                + typeAdapter\n                + \"' returned wrong type; requested \"\n                + typeOfT.getRawType()\n                + \" but got instance of \"\n                + object.getClass()\n                + \"\\nVerify that the adapter was registered for the correct type.\");\n      }\n      return object;",
+        "explanation": "The common entry point first peeks, then marks the input non-empty after any successful peek, then looks up the adapter, invokes its read method, and finally validates the returned object. Thus an EOFException from the first peek prevents adapter lookup, while any returned token—including END_DOCUMENT—continues to lookup and read. Adapter consumption is not otherwise constrained here. A null adapter result is accepted for every requested raw type, including primitives, and skips validation. For a non-null result, primitive raw classes are wrapped first (for example, int is validated against Integer), then Class.isInstance performs an assignability check. Subclasses and interface implementations are accepted; exact-class equality is not required. Only the raw type is checked, so parameterized contents such as List<String> versus List<Integer> are not validated. A non-null raw-type mismatch throws the constructed ClassCastException; it is not caught by this method's catch clauses, though strictness is restored in finally."
+      },
+      {
+        "id": "eof-and-errors",
+        "path": "gson/src/main/java/com/google/gson/Gson.java",
+        "start_line": 1116,
+        "end_line": 1135,
+        "quote": "    } catch (EOFException e) {\n      /*\n       * For compatibility with JSON 1.5 and earlier, we return null for empty\n       * documents instead of throwing.\n       */\n      if (isEmpty) {\n        return null;\n      }\n      throw new JsonSyntaxException(e);\n    } catch (IllegalStateException e) {\n      throw new JsonSyntaxException(e);\n    } catch (IOException e) {\n      // TODO(inder): Figure out whether it is indeed right to rethrow this as JsonSyntaxException\n      throw new JsonSyntaxException(e);\n    } catch (AssertionError e) {\n      throw new AssertionError(\n          \"AssertionError (GSON \" + GsonBuildConfig.VERSION + \"): \" + e.getMessage(), e);\n    } finally {\n      reader.setStrictness(oldStrictness);\n    }",
+        "explanation": "isEmpty remains true only while the initial peek has not returned. An EOFException thrown by that initial peek is treated as an empty document: null is returned and the exception is discarded. If peek instead returns END_DOCUMENT, isEmpty becomes false and processing continues to adapter lookup/read; END_DOCUMENT is not an automatic null result. Any EOFException thrown later by adapter reading is therefore wrapped in JsonSyntaxException with the EOFException as cause. IllegalStateException and any other IOException arising in the parse try are likewise wrapped in JsonSyntaxException with the original exception as cause. An AssertionError is replaced with a new AssertionError whose message includes the Gson version and original message and whose cause is the original error. Other RuntimeExceptions—including the deliberate result-validation ClassCastException and adapter or lookup exceptions other than IllegalStateException—and Errors other than AssertionError are not caught and propagate after finally restores strictness. These catches cover the core parse try only. The later Reader/String completion peek has separate rules: END_DOCUMENT succeeds, MalformedJsonException becomes caused JsonSyntaxException, and other I/O—including EOFException—becomes caused JsonIOException; its runtime exceptions and AssertionErrors are not handled by this block."
+      }
+    ]
+  },
+  "prompt_bytes": 4653,
+  "events_sha256": "7df2fc53fd55a898c3a14c9055507bf5df90940bc20204fea3443fd8e466c3ec"
+}

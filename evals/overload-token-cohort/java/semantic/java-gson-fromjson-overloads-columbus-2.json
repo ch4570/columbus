@@ -1,0 +1,155 @@
+{
+  "reviewer": "root, independent of the evaluated model",
+  "answer_sha256": "b2911e2dbdd6a1c9085b340211ab52195812d518a2ecdff47a70aee775affad5",
+  "rubric_sha256": "a3ec0794ccc98ecd0dd6e1078f16346bc8655a4acdb8eafdaad2f57ffe0bfaf1",
+  "execution_review": {
+    "events_sha256": "0e0d8bfb3be510b32a9e90acb15b885d1a6ee9dba28db47ffa1a072c77064433",
+    "passed": true,
+    "reason": "All nine commands use the supplied frozen skill/runtime/archive or repository-local rg, sed and head reads. The source overload retrieval is a successful single frozen Python invocation. Other compound commands combine only permitted source reads. No private oracle/other-trial access, repository execution, web, delegation or source-writing command appears."
+  },
+  "citation_note": "The mechanical citation gate fails full-consumption: the literal helper quote includes its closing brace at physical line 1229, but end_line is 1228. Correct semantic coverage does not waive this separate range error.",
+  "findings": [
+    {
+      "id": "overload-routing",
+      "passed": true,
+      "reason": "All eleven overload shapes and actual delegation routes are accurately explained and the representative Reader handoff is literal and correctly bounded.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "Enumerates the three three-form input families and two JsonReader forms, and explains Class selecting Type because Class implements Type."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "Explicitly states direct TypeToken.get delegation for Class and Type and the Type forms' unchecked return cast, without inventing a Class-to-Type hop."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "Explains StringReader, configured newJsonReader, JsonTreeReader and direct JsonReader/Type convergence on the TypeToken core."
+        }
+      ]
+    },
+    {
+      "id": "null-shortcuts",
+      "passed": true,
+      "reason": "Distinguishes Java-null guards from empty text and non-null JsonNull, with the valid-target ordering preserved.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "States String/TypeToken returns before StringReader construction and adapter work; Class/Type routes first convert the valid target then reach the shortcut."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "Explains the tree guard before wrapping/lookup and JsonNull's adapter-defined result rather than automatic Java null."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "Explicitly confines target conversion to valid arguments and places it before the guard; no out-of-scope invalid-target guarantee is asserted."
+        }
+      ]
+    },
+    {
+      "id": "full-consumption",
+      "passed": true,
+      "reason": "Covers the helper's normal-return placement, any-null-result skip, trailing-token/error mappings and absence on direct/tree routes, explicitly allowing custom adapters to consume multiple values.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "Prose places the helper after core parsing/result validation and the correctly quoted Reader handoff invokes it only after fromJson returns, establishing normal-return sequencing; String delegation is explicit."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "Explicitly says any null adapter result short-circuits the peek, even with no consumption or trailing data."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "Explains END_DOCUMENT success, other tokens as JsonSyntaxException, malformed peek as JsonSyntaxException and other I/O as JsonIOException, preserving causes."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "Explains direct JsonReader and tree routes have no completion check and may leave input, while expressly allowing adapters to consume multiple values and denying a one-value postcondition in result validation."
+        }
+      ]
+    },
+    {
+      "id": "reader-strictness",
+      "passed": true,
+      "reason": "Accurately distinguishes initial reader configuration, temporary parse selection and restoration before completion checking.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "States newJsonReader selects configured strictness or LEGACY_STRICT, distinct from the later compatibility adjustment."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "Explains explicit Gson override, including explicit LEGACY_STRICT, and no-override behavior for existing LEGACY_STRICT/LENIENT/STRICT."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "Explains finally on success/failure and exact restoration before Reader's helper, with the default LENIENT-parse/LEGACY_STRICT-completion example."
+        }
+      ]
+    },
+    {
+      "id": "adapter-result-validation",
+      "passed": true,
+      "reason": "Correctly describes ordering, null allowance, primitive-wrapped raw assignability and the unwrapped mismatch exception.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "Explains peek, normal-return isEmpty update, full TypeToken lookup, one adapter read and subsequent validation in order, also showing the literal core sequence."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "Explains accepted null results, primitive wrapping with int/Integer example, and isInstance rather than exact-class identity; quoted code wraps the target raw class."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "Explicitly allows subtype/interface instances, excludes generic-content validation and explains ClassCastException propagation before Reader completion."
+        }
+      ]
+    },
+    {
+      "id": "eof-and-errors",
+      "passed": true,
+      "reason": "All phase distinctions, exception causes and catch limits are supported by explanation and literal catch/finally quote.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "Explains true-until-peek isEmpty, initial EOFException returning null, and END_DOCUMENT still proceeding to lookup/read."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "Explains later EOF, IllegalStateException and other parse IOException becoming JsonSyntaxException with original causes."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "States AssertionError replacement includes Gson version and retains the original cause; the quote also shows original message inclusion."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "Explicitly lists unmatched ClassCastException/runtime/error propagation with finally restoration and the distinct completion-phase I/O mappings."
+        }
+      ]
+    }
+  ]
+}

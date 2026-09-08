@@ -1,0 +1,188 @@
+{
+  "schema": "columbus.exploration-observation/v1",
+  "case": "javascript-axios-interceptors",
+  "condition": "columbus",
+  "repeat": 2,
+  "model_requested": "gpt-5.6-sol",
+  "effort_requested": "xhigh",
+  "evidence_mode": "saved_archive",
+  "elapsed_seconds": 279.509,
+  "return_code": 0,
+  "timed_out": false,
+  "source_unchanged": true,
+  "usage": {
+    "input_tokens": 131895,
+    "cached_input_tokens": 110080,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 8269,
+    "reasoning_output_tokens": 5769,
+    "uncached_input_tokens": 21815
+  },
+  "commands": [
+    {
+      "command": "/bin/zsh -lc \"sed -n '1,240p' /tmp/columbus-overload-token-javascript/runtime/SKILL.md\"",
+      "exit_code": 0,
+      "output_bytes": 5392,
+      "output_sha256": "0b49697a532e2efcf565c8ae56395ee1b48413bb8a49ab3bd98219bfb14645d4"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n \\\"class InterceptorManager|use\\\\(|eject\\\\(|clear\\\\(|runWhen|synchronousRequestInterceptors|requestInterceptorChain|response|response||dispatch|dispatch|Promise\\\" lib\"",
+      "exit_code": 0,
+      "output_bytes": 285707,
+      "output_sha256": "e6ace8da7d12cbc23b3d86b6a66272e6f81abf2b59b7212eccd56cc31bbd445f"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/personal/columbus/.venv/bin/python /tmp/columbus-overload-token-javascript/runtime/columbus.py archive-search synchronousRequestInterceptors --input /tmp/columbus-overload-token-javascript/graph.jsonl.xz --format text --budget-bytes 6000'",
+      "exit_code": 0,
+      "output_bytes": 395,
+      "output_sha256": "e46e07390f71c40541510d63bc7b7738ec2c4fc4747b33a4095bc41639492470"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/personal/columbus/.venv/bin/python /tmp/columbus-overload-token-javascript/runtime/columbus.py archive-search InterceptorManager --input /tmp/columbus-overload-token-javascript/graph.jsonl.xz --format text --budget-bytes 6000'",
+      "exit_code": 0,
+      "output_bytes": 2034,
+      "output_sha256": "6961c301d202ab900200d0c7f13b27a0cafbf3899a3b458b27830e915f809643"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba lib/core/Axios.js | sed -n '22,63p;132,198p'\"",
+      "exit_code": 0,
+      "output_bytes": 3848,
+      "output_sha256": "d2a3a9733dd5f284758ac44d8ffa9e1b7b4c9f5ee770b59ae44c15a4a73ea764"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba lib/core/InterceptorManager.js | sed -n '5,68p'\"",
+      "exit_code": 0,
+      "output_bytes": 1928,
+      "output_sha256": "4de48739dbdb7fc70d10cd634e387e8b0bcc4f3868fa6c7baf9cc60ee78011db"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/personal/columbus/.venv/bin/python /tmp/columbus-overload-token-javascript/runtime/columbus.py archive-source InterceptorManager.use Axios._request Axios.request --input /tmp/columbus-overload-token-javascript/graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 20000'",
+      "exit_code": 0,
+      "output_bytes": 6995,
+      "output_sha256": "cecc2bac85685925e0bca515ef5440001745c2e5184583880267a39b0ff39602"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n \\\"function forEach|const forEach|forEach\\\\(obj\\\" lib/utils.js && nl -ba lib/utils.js | sed -n '230,275p'\"",
+      "exit_code": 0,
+      "output_bytes": 1795,
+      "output_sha256": "1559ed0bb7d8c5a335d4a8377c6ac6925b0583ec0f5449848ff2f3a35b6cb228"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba lib/utils.js | sed -n '261,295p'\"",
+      "exit_code": 0,
+      "output_bytes": 1049,
+      "output_sha256": "ecd48af7bd2cbe2d9a1b08cf7de4dc3f270d472e4045fe4a2a1aa7fe8a6781f3"
+    }
+  ],
+  "command_count": 9,
+  "command_output_bytes": 309143,
+  "failed_commands": 0,
+  "other_tool_types": [],
+  "runtime_warnings": [],
+  "turn_failed": false,
+  "quality": {
+    "passed": false,
+    "findings": [
+      {
+        "id": "registration_removal",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "eligibility_order",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "promise_path",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "synchronous_errors",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "response_boundary",
+        "passed": false,
+        "reason": "missing or duplicate finding"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "index_preflight": null,
+  "archive_preflight": {
+    "passed": true,
+    "archive_sha256": "9bdd1b2ca6ff306b3700d141bdeab1593f511e73046deaa89ff27c7b9e4b17c7",
+    "revision": "14898a983357327f60a7",
+    "source_files_verified": 242,
+    "indexed_source_files_verified": 237,
+    "counts": {
+      "files": 237,
+      "nodes": 778,
+      "scopes": 0,
+      "edges": 1270,
+      "references": 7258,
+      "imports": 390,
+      "diagnostics": 1
+    },
+    "consumer_index_absent": true
+  },
+  "archive_postflight": {
+    "passed": true,
+    "archive_sha256": "9bdd1b2ca6ff306b3700d141bdeab1593f511e73046deaa89ff27c7b9e4b17c7",
+    "revision": "14898a983357327f60a7",
+    "source_files_verified": 242,
+    "indexed_source_files_verified": 237,
+    "counts": {
+      "files": 237,
+      "nodes": 778,
+      "scopes": 0,
+      "edges": 1270,
+      "references": 7258,
+      "imports": 390,
+      "diagnostics": 1
+    },
+    "consumer_index_absent": true
+  },
+  "answer": {
+    "findings": [
+      {
+        "id": "registration_removal",
+        "path": "lib/core/InterceptorManager.js",
+        "start_line": 5,
+        "end_line": 25,
+        "quote": "class InterceptorManager {\n  constructor() {\n    this.handlers = [];\n  }\n\n  /**\n   * Add a new interceptor to the stack\n   *\n   * @param {Function} fulfilled The function to handle `then` for a `Promise`\n   * @param {Function} rejected The function to handle `reject` for a `Promise`\n   *\n   * @return {Number} An ID used to remove interceptor later\n   */\n  use(fulfilled, rejected, options) {\n    this.handlers.push({\n      fulfilled,\n      rejected,\n      synchronous: options ? options.synchronous : false,\n      runWhen: options ? options.runWhen : null\n    });\n    return this.handlers.length - 1;",
+        "explanation": "Every Axios instance owns separate request and response managers, so each has an independent handlers array and ID namespace. use appends a record and returns its zero-based array index. With no/falsy options object, synchronous defaults to false and runWhen to null; with an options object, the corresponding property values are stored directly, so omitted properties become undefined. eject(id) replaces a currently present record with null: it does not splice, reuse, or renumber slots, and it returns undefined. Thus later registrations continue at the old array length. forEach visits slots in ascending order and skips null tombstones. clear replaces handlers with a fresh empty array, so iteration sees nothing and the next registration returns 0; because IDs are unversioned indexes, an old numeric ID can collide with a post-clear registration."
+      },
+      {
+        "id": "eligibility_order",
+        "path": "lib/core/Axios.js",
+        "start_line": 132,
+        "end_line": 148,
+        "quote": "    // filter out skipped interceptors\n    const requestInterceptorChain = [];\n    let synchronousRequestInterceptors = true;\n    this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {\n      if (typeof interceptor.runWhen === 'function' && interceptor.runWhen(config) === false) {\n        return;\n      }\n\n      synchronousRequestInterceptors = synchronousRequestInterceptors && interceptor.synchronous;\n\n      requestInterceptorChain.unshift(interceptor.fulfilled, interceptor.rejected);\n    });\n\n    const responseInterceptorChain = [];\n    this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {\n      responseInterceptorChain.push(interceptor.fulfilled, interceptor.rejected);\n    });",
+        "explanation": "During _request assembly, every request runWhen function is evaluated against the same already-prepared config, before any request interceptor runs. Skipping requires the predicate result to be exactly false; other results remain eligible. The skip occurs before synchronous-mode accumulation, so skipped interceptors cannot affect mode. The flag starts true and ANDs only eligible request records: synchronous mode is selected when every eligible request interceptor has a truthy synchronous option, including the empty-eligible-set case; any eligible false/undefined option selects the Promise path. Manager iteration is registration order, but each eligible request pair is unshifted, yielding reverse-registration/LIFO request order while preserving fulfilled/rejected adjacency. Response pairs are pushed, yielding registration/FIFO order. Response runWhen and synchronous options are never consulted here and cannot affect mode selection."
+      },
+      {
+        "id": "promise_path",
+        "path": "lib/core/Axios.js",
+        "start_line": 154,
+        "end_line": 164,
+        "quote": "    if (!synchronousRequestInterceptors) {\n      const chain = [dispatchRequest.bind(this), undefined];\n      chain.unshift(...requestInterceptorChain);\n      chain.push(...responseInterceptorChain);\n      len = chain.length;\n\n      promise = Promise.resolve(config);\n\n      while (i < len) {\n        promise = promise.then(chain[i++], chain[i++]);\n      }",
+        "explanation": "If any eligible request interceptor is not synchronous, assembly starts with Promise.resolve(config), places reverse-registration request pairs before dispatch, and places registration-order response pairs after dispatch. The loop attaches every pair with then before callbacks begin running. A fulfilled callback's returned value becomes the next fulfillment, and a returned promise/thenable is adopted; a throw becomes the next rejection. A rejection callback can recover by returning a value, while a missing callback forwards the rejection and a throwing callback replaces it with the new error. Crucially, the rejected callback paired in the same then does not catch a throw from its own fulfilled callback: both consume the preceding promise, so that throw reaches the next pair's rejection callback. Consequently an unrecovered request failure skips dispatch and can reach response rejection handlers. Response handlers are already attached as downstream stages when dispatch eventually executes, so even a synchronous dispatch throw inside that Promise stage becomes a rejection visible to them. The public async request awaits the final chain and rethrows any rejection left unrecovered."
+      },
+      {
+        "id": "synchronous_errors",
+        "path": "lib/core/Axios.js",
+        "start_line": 169,
+        "end_line": 197,
+        "quote": "    len = requestInterceptorChain.length;\n\n    let newConfig = config;\n\n    while (i < len) {\n      const onFulfilled = requestInterceptorChain[i++];\n      const onRejected = requestInterceptorChain[i++];\n      try {\n        newConfig = onFulfilled(newConfig);\n      } catch (error) {\n        onRejected.call(this, error);\n        break;\n      }\n    }\n\n    try {\n      promise = dispatchRequest.call(this, newConfig);\n    } catch (error) {\n      return Promise.reject(error);\n    }\n\n    i = 0;\n    len = responseInterceptorChain.length;\n\n    while (i < len) {\n      promise = promise.then(responseInterceptorChain[i++], responseInterceptorChain[i++]);\n    }\n\n    return promise;",
+        "explanation": "In synchronous mode, eligible request fulfilled callbacks execute directly and immediately, with each successful returned configuration replacing newConfig. Unlike the Promise path, the explicit catch invokes that interceptor's own paired rejection callback for its fulfilled callback's throw, with the Axios instance as receiver. The rejection callback's return value is ignored, the request loop always stops afterward, and—if it returns normally—dispatch proceeds with the last successfully assigned configuration. If the rejection callback is missing, onRejected.call itself throws a TypeError; if it throws, that replacement error escapes. Either case prevents dispatch and prevents response-handler attachment. The exact synchronous attachment boundary is successful return from dispatchRequest.call: only afterward are response then pairs attached. A synchronous dispatch throw instead takes the early Promise.reject return, bypassing all response interceptors; an asynchronously rejected promise returned by dispatch does pass through the subsequently attached response rejection handlers. The public async request catches/awaits both escaped synchronous errors and final promise rejections and rethrows the remaining reason."
+      }
+    ]
+  },
+  "prompt_bytes": 4358,
+  "events_sha256": "908d665628d64f16b4e6ec81f8dabbb9e5f34c621629bf06590967e05bf0cb0d"
+}

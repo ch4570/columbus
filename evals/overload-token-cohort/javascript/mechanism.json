@@ -1,0 +1,96 @@
+{
+  "passed": true,
+  "queries": [
+    "Axios._request",
+    "InterceptorManager.use"
+  ],
+  "source_queries": [
+    "lib/core/Axios.js::Axios._request:method",
+    "lib/core/InterceptorManager.js::InterceptorManager.use:method"
+  ],
+  "overloads": false,
+  "recognizer_version": "archive-evidence-v1",
+  "results": [
+    {
+      "format": "json",
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "/tmp/columbus-overload-token-javascript/runtime/columbus.py",
+        "archive-source",
+        "lib/core/Axios.js::Axios._request:method",
+        "lib/core/InterceptorManager.js::InterceptorManager.use:method",
+        "--input",
+        "/tmp/columbus-overload-token-javascript/graph.jsonl.xz",
+        "--repo",
+        ".",
+        "--limit",
+        "300",
+        "--budget-bytes",
+        "32000",
+        "--format",
+        "json"
+      ],
+      "output_bytes": 5354,
+      "output_sha256": "2990ca8844c37c4e3b64308bb55b65a9843268b1f0f454e01ade960912f733e8",
+      "receipts": [
+        {
+          "recognizer_version": "archive-evidence-v1",
+          "command_id": "control-json",
+          "operation": "archive-source",
+          "encoding": "json-v1",
+          "useful_task_evidence": true,
+          "batch_used": true,
+          "relevant_paths": [
+            "lib/core/Axios.js",
+            "lib/core/InterceptorManager.js"
+          ],
+          "source_rows": 143,
+          "declarations": 2,
+          "edges": 0,
+          "output_sha256": "2990ca8844c37c4e3b64308bb55b65a9843268b1f0f454e01ade960912f733e8"
+        }
+      ]
+    },
+    {
+      "format": "text",
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "/tmp/columbus-overload-token-javascript/runtime/columbus.py",
+        "archive-source",
+        "lib/core/Axios.js::Axios._request:method",
+        "lib/core/InterceptorManager.js::InterceptorManager.use:method",
+        "--input",
+        "/tmp/columbus-overload-token-javascript/graph.jsonl.xz",
+        "--repo",
+        ".",
+        "--limit",
+        "300",
+        "--budget-bytes",
+        "32000",
+        "--format",
+        "text"
+      ],
+      "output_bytes": 5895,
+      "output_sha256": "8ad3929acdd5456c27831d52ad79e739a5f12ca7b0d6529a33b9d45de0b10733",
+      "receipts": [
+        {
+          "recognizer_version": "archive-evidence-v1",
+          "command_id": "control-text",
+          "operation": "archive-source",
+          "encoding": "source-table-text-v1",
+          "useful_task_evidence": true,
+          "batch_used": true,
+          "relevant_paths": [
+            "lib/core/Axios.js",
+            "lib/core/InterceptorManager.js"
+          ],
+          "source_rows": 143,
+          "declarations": 2,
+          "edges": 0,
+          "output_sha256": "8ad3929acdd5456c27831d52ad79e739a5f12ca7b0d6529a33b9d45de0b10733"
+        }
+      ]
+    }
+  ],
+  "no_consumer_sqlite": true
+}

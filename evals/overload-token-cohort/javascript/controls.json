@@ -1,0 +1,110 @@
+{
+  "positive": {
+    "passed": true,
+    "findings": [
+      {
+        "id": "registration_removal",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "eligibility_order",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "promise_path",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "synchronous_errors",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "response_boundary",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "negative": {
+    "passed": false,
+    "findings": [
+      {
+        "id": "registration_removal",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "eligibility_order",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "promise_path",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "synchronous_errors",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "response_boundary",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "control_answer": {
+    "findings": [
+      {
+        "id": "registration_removal",
+        "path": "lib/core/InterceptorManager.js",
+        "start_line": 25,
+        "end_line": 25,
+        "quote": "    return this.handlers.length - 1;",
+        "explanation": "Mechanical citation control only; not a semantic answer."
+      },
+      {
+        "id": "eligibility_order",
+        "path": "lib/core/Axios.js",
+        "start_line": 142,
+        "end_line": 142,
+        "quote": "      requestInterceptorChain.unshift(interceptor.fulfilled, interceptor.rejected);",
+        "explanation": "Mechanical citation control only; not a semantic answer."
+      },
+      {
+        "id": "promise_path",
+        "path": "lib/core/Axios.js",
+        "start_line": 163,
+        "end_line": 163,
+        "quote": "        promise = promise.then(chain[i++], chain[i++]);",
+        "explanation": "Mechanical citation control only; not a semantic answer."
+      },
+      {
+        "id": "synchronous_errors",
+        "path": "lib/core/Axios.js",
+        "start_line": 179,
+        "end_line": 179,
+        "quote": "        onRejected.call(this, error);",
+        "explanation": "Mechanical citation control only; not a semantic answer."
+      },
+      {
+        "id": "response_boundary",
+        "path": "lib/core/Axios.js",
+        "start_line": 194,
+        "end_line": 194,
+        "quote": "      promise = promise.then(responseInterceptorChain[i++], responseInterceptorChain[i++]);",
+        "explanation": "Mechanical citation control only; not a semantic answer."
+      }
+    ]
+  }
+}
