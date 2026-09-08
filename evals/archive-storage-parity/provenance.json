@@ -1,0 +1,19 @@
+{
+  "exporter_revision": "04b35e4b764f78f417209523853c65aee7b1b55f",
+  "exporter_sha256": "c1052625e620f4e0e775708a42bedaabcfd1a1443918552e37fe615917ded828",
+  "verifier_sha256": "959c9f622d5df6e68b40f9f8e595f60b65ce0efc239256063a3460de42782516",
+  "django_archive_equals_completed_model_trial": true,
+  "model_trial_archive_sha256": "1d80eb233d8da303b984fc423bf453181b7443c636431cbeff4b6a18cf5a4e12",
+  "ratio_percent": {
+    "spring": {
+      "xz_of_indexed_source": 54.289273911563946,
+      "xz_of_sqlite": 4.001289496417367,
+      "xz_reduction_from_gzip": 22.869089739466062
+    },
+    "django": {
+      "xz_of_indexed_source": 24.399001163121426,
+      "xz_of_sqlite": 5.601941557184437,
+      "xz_reduction_from_gzip": 19.889101773027264
+    }
+  }
+}

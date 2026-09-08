@@ -1,0 +1,98 @@
+{
+  "database_bytes": 96608256,
+  "database_sha256": "46f7cdad7c1f370194315afce011fdb73d499faa925295e013d9cbf9c87f9c14",
+  "indexed_source_bytes": 7120331,
+  "source_files": 1166,
+  "source_manifest_sha256": "53bd4243666ca2f8ad02a3f00b349dd565ac10f1df889e8041bc4c1b87753143",
+  "parser_versions": {
+    "tree-sitter": "0.26.0",
+    "tree-sitter-java": "0.23.5+columbus.1",
+    "tree-sitter-kotlin": "1.1.0"
+  },
+  "archive_manifest": {
+    "format": "columbus-graph",
+    "version": 1,
+    "revision": "402dd2afedd4ae31e51f",
+    "analyzer_version": "columbus-1.0.0",
+    "analyzer_fingerprint": {
+      "languages": [
+        "java",
+        "json",
+        "kotlin",
+        "text",
+        "xml"
+      ],
+      "versions": {
+        "engine": "columbus-1.0.0",
+        "python_ast": "3.11.16",
+        "tree-sitter": "0.26.0",
+        "tree-sitter-java": "0.23.5+columbus.1",
+        "tree-sitter-kotlin": "1.1.0",
+        "analyzer_code": "4dcda1092ee502e52b6f",
+        "language_config": "44136fa355b3678a1146"
+      },
+      "fidelity": {
+        "java": "ast",
+        "json": "text",
+        "kotlin": "ast",
+        "text": "text",
+        "xml": "text"
+      }
+    },
+    "freshness": "index_snapshot",
+    "semantic_complete": false,
+    "truncated": false,
+    "source_bodies_included": false
+  },
+  "categories": {
+    "diagnostic": {
+      "count": 2,
+      "sha256": "f832dd2d1fa597287560567536890f804f6b1d08ca0d22532b6c9f516d63cb71"
+    },
+    "edge": {
+      "count": 31365,
+      "sha256": "5421fe8c50a1228bb3b9d8d3e4f9261bcfa9557bce3eb516793c35dcf53420fa"
+    },
+    "file": {
+      "count": 1166,
+      "sha256": "c6af8e97bce649a0e107c03393745c44eaa5116c2d1d7c521d4b97cd6346b6ae"
+    },
+    "import": {
+      "count": 7723,
+      "sha256": "ab3de213b0935a255c54373c869d320b14138b4cf3c9c46905dea55b043fb993"
+    },
+    "node": {
+      "count": 20811,
+      "sha256": "5edbb72b20e45fc30cfacc2d50c30b372c9b3bc3fdf7ebce2349efa19d373904"
+    },
+    "reference": {
+      "count": 68007,
+      "sha256": "8cd49a5ab17a8bf9690a28b9470d9dab1711e0deac9fbb8003caf64df461e26f"
+    },
+    "scope": {
+      "count": 20647,
+      "sha256": "9d9a779abf8c4ea17086d08d8328c0516413c9d70f768294a5fb04c18ed56213"
+    }
+  },
+  "codecs": {
+    "gzip": {
+      "bytes": 5011708,
+      "sha256": "2ddaef59606ca4d16f7d09b6b778c346fc9073a48af59ffb560745390866ee9e",
+      "export_seconds": 3.240911624976434,
+      "uncompressed_bytes": 124610633,
+      "uncompressed_sha256": "812c706e5041c95cd2f2270bc0b9110d62a2b8928094f12862a0582f85289b01",
+      "all_record_categories_equal_sqlite": true
+    },
+    "xz": {
+      "bytes": 3865576,
+      "sha256": "71a1edd18071b2842616675f6619062552ee41daae59550c7e590922bcf2473c",
+      "export_seconds": 4.106061333004618,
+      "uncompressed_bytes": 124610633,
+      "uncompressed_sha256": "812c706e5041c95cd2f2270bc0b9110d62a2b8928094f12862a0582f85289b01",
+      "all_record_categories_equal_sqlite": true
+    }
+  },
+  "database_and_source_unchanged": true,
+  "all_decompressed_bytes_equal": true,
+  "scope": "Full exported graph facts; excludes SQLite FTS/source bodies and does not prove compiler accuracy or model savings. Fixed codec order, unflushed caches, single timing observation."
+}
