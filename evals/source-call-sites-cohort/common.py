@@ -175,7 +175,7 @@ def argv(output, trial):
 def required_inputs():
     paths = {HERE / name for name in ('PLAN.md', 'PREFLIGHT.md', 'common.py', 'prepare.py', 'run.py',
              'collect.py', 'recognize.py', 'controls.py', 'sources.json', 'environment.json',
-             'reuse.py', 'GRAPH-REUSE.md', 'graph-bindings.json',
+             'reuse.py', 'GRAPH-REUSE.md', 'graph-bindings.json', 'CONTROL-CAPTURE.md',
              'LICENSE.spring-framework.txt')}
     for language in LANGUAGES:
         paths.update(HERE / language / name for name in ('cases.json', 'criteria.json', 'SOURCE-REVIEW.md',

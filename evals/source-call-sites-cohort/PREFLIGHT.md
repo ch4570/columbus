@@ -88,3 +88,26 @@ attempt and raw-byte receipts. They are not yet declared passed in this draft.
 Input freeze, committed/pushed freeze proof and native CI remain outstanding.
 No model has been launched. The historical 0/6 primary and 0/6 secondary results
 remain unchanged and no actual-model savings claim is made.
+
+## First native CI and pre-freeze corrections
+
+Initial head `129da366bf1dcaf2b848d43cc8b2637064938b74` failed native CI
+(PR run 34276269017; push run 34276190645). All six PR jobs were inspected.
+Python 3.11 rejected the deep JSON in decoding, while the test wrongly demanded
+a serialization-error note. Python 3.14 successfully supported the tested deep
+payload, invalidating that assumed failure and a second recursion/no-file test.
+These are retained test failures, not successful checks or model outcomes.
+
+Only protocol tests changed for that issue. A real bounded nested payload now
+checks the actual supported outcome or truthful failure stage; deterministic
+injected recursion errors check no-file and post-decode fallback contracts.
+Real lone-surrogate, cyclic and nonfinite inputs remain covered, as do all raw
+bytes, terminal/hash/preflight checks, fixed six slots and hard I/O failures.
+The corrected protocol tests passed locally on Python 3.11 (37 tests).
+Post-fix native checks remain required; no old CI run is retried or erased.
+
+Separately, the prospective adapter avoids a full source/call snapshot when no
+command could use that format. `CONTROL-CAPTURE.md` records the original in-memory
+capture version, offline profiling, receipt-parity checks and the explicit common
+pre/postflight dependency. All eligible candidates retain full original checks;
+the standalone recognizer is unchanged. This is not a model-token saving claim.

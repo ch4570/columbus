@@ -193,17 +193,21 @@ class SourceCallCohortProtocolTests(unittest.TestCase):
     def test_save_validates_complete_json_and_utf8_before_creating_any_path(self):
         cyclic = []
         cyclic.append(cyclic)
-        deep = 0
-        for _ in range(sys.getrecursionlimit() + 20):
-            deep = [deep]
         for name, value, error in (('surrogate', {'extra': '\ud800'}, UnicodeEncodeError),
-                                   ('cycle', cyclic, ValueError), ('deep', deep, RecursionError),
-                                   ('nonfinite', float('nan'), ValueError)):
+                                   ('cycle', cyclic, ValueError), ('nonfinite', float('nan'), ValueError)):
             destination = self.root / name / 'result.json'
             with self.subTest(name=name), self.assertRaises(error):
                 common.save(destination, value)
             self.assertFalse(destination.exists())
             self.assertFalse(destination.parent.exists())
+        # Encoder recursion limits are implementation/version dependent. Inject
+        # that specific failure to test save's no-file contract deterministically.
+        destination = self.root / 'injected-recursion' / 'result.json'
+        with mock.patch.object(common, 'serialize', side_effect=RecursionError('Injected encoding boundary')):
+            with self.assertRaises(RecursionError):
+                common.save(destination, {'nested': []})
+        self.assertFalse(destination.exists())
+        self.assertFalse(destination.parent.exists())
         destination = self.root / 'valid.json'
         value = {'unicode': '한글', 'line': 'a\nb'}
         common.save(destination, value)
@@ -428,7 +432,7 @@ class SourceCallCohortProtocolTests(unittest.TestCase):
                 self.assertNotIn('evaluation_error', result)
                 self.assertEqual(result['usage']['input_tokens'], 11)
 
-    def assert_first_answer_serialization_failure_continues(self, extra_json, error_class):
+    def assert_first_answer_outcome_keeps_all_slots(self, extra_json, error_class, *, stage='serialization'):
         self.observations()
         self.inventory()
         original = None
@@ -449,34 +453,98 @@ class SourceCallCohortProtocolTests(unittest.TestCase):
             result = common.read(trial / 'result.json')
             if index == 0:
                 self.assertEqual((trial / 'answer.json').read_bytes(), original)
-                self.assertEqual(result['evaluation_error']['class'], error_class)
-                self.assertEqual(result['answer'], {})
-                self.assertFalse(result['quality']['passed'])
-                self.assertIn('could not be serialized', result['quality']['note'])
-                self.assertIsNone(result['usage'])
-                self.assertNotIn('commands', result)
                 self.assertEqual(result['events_sha256'], common.sha(trial / 'events.jsonl'))
                 self.assertEqual(set(result['preflight']), set(common.CONDITIONS))
                 self.assertEqual(set(result['postflight']), set(common.CONDITIONS))
                 self.assertEqual(result['return_code'], common.read(trial / 'terminal.json')['return_code'])
+                actual_stage = stage() if callable(stage) else stage
+                if actual_stage is None:
+                    # Newer encoders/decoders can support this actual payload.
+                    # Do not invent a failure or recursively compare deep lists.
+                    self.assertNotIn('evaluation_error', result)
+                    self.assertTrue(result['quality']['passed'])
+                    self.assertEqual(result['usage']['input_tokens'], 11)
+                    value, depth = result['answer']['extra'], 0
+                    while isinstance(value, list):
+                        self.assertEqual(len(value), 1)
+                        value = value[0]
+                        depth += 1
+                    self.assertEqual(value, 0)
+                    self.assertEqual(depth, extra_json.count(b'['))
+                else:
+                    self.assertEqual(result['evaluation_error']['class'], error_class)
+                    self.assertEqual(result['answer'], {})
+                    self.assertFalse(result['quality']['passed'])
+                    if actual_stage == 'serialization':
+                        self.assertIn('could not be serialized', result['quality']['note'])
+                        self.assertIsNone(result['usage'])
+                        self.assertNotIn('commands', result)
+                    else:
+                        self.assertEqual(actual_stage, 'decoding')
+                        self.assertNotIn('could not be serialized', result['quality']['note'])
+                        self.assertEqual(result['usage']['input_tokens'], 11)
             else:
                 self.assertNotIn('evaluation_error', result)
                 self.assertTrue(result['quality']['passed'])
                 self.assertEqual(result['usage']['input_tokens'], 11)
 
     def test_escaped_lone_surrogate_extra_answer_is_preserved_without_omitting_slots(self):
-        self.assert_first_answer_serialization_failure_continues(b'"\\ud800"', 'UnicodeEncodeError')
+        self.assert_first_answer_outcome_keeps_all_slots(b'"\\ud800"', 'UnicodeEncodeError')
 
-    def test_deep_json_extra_answer_is_preserved_without_omitting_slots(self):
-        # Use the live stack depth, not a fixed 990-level value: unittest and
-        # direct discovery add different numbers of frames. JSON decoding fits,
-        # but encoding the enclosing result reaches the recursion boundary.
-        frame, frames = sys._getframe(), 0
-        while frame is not None:
-            frames += 1
-            frame = frame.f_back
-        depth = sys.getrecursionlimit() - frames - 7
-        self.assert_first_answer_serialization_failure_continues(b'[' * depth + b'0' + b']' * depth, 'RecursionError')
+    def test_supported_nested_json_keeps_success_and_all_slots(self):
+        self.assert_first_answer_outcome_keeps_all_slots(b'[' * 16 + b'0' + b']' * 16,
+                                                       'RecursionError', stage=None)
+
+    def test_deep_json_extra_answer_preserves_truthful_outcome_and_all_slots(self):
+        # Exercise real nested JSON without assuming a decoder or encoder depth
+        # limit. Observe failures if they occur; a supported payload must succeed.
+        read = runner.read
+        serialize = common.serialize
+        failures = []
+
+        def observed_read(path):
+            try:
+                return read(path)
+            except RecursionError:
+                self.assertEqual(Path(path).name, 'answer.json')
+                failures.append('decoding')
+                raise
+
+        def observed_serialize(value):
+            try:
+                return serialize(value)
+            except RecursionError:
+                self.assertIn('answer', value)
+                failures.append('serialization')
+                raise
+
+        def actual_stage():
+            self.assertLessEqual(len(failures), 1)
+            return failures[0] if failures else None
+
+        self.patch(runner, 'read', side_effect=observed_read)
+        self.patch(common, 'serialize', side_effect=observed_serialize)
+        depth = 2048  # Bounded real payload, not a claimed implementation limit.
+        self.assert_first_answer_outcome_keeps_all_slots(b'[' * depth + b'0' + b']' * depth,
+                                                       'RecursionError', stage=actual_stage)
+
+    def test_post_decode_recursion_error_preserves_serialization_fallback_and_later_slots(self):
+        # Inject only this boundary; the real lone-surrogate test above retains
+        # independent coverage of a genuine post-decode UTF-8 encoding failure.
+        serialize = common.serialize
+        failures = []
+
+        def recursion_at_result(value):
+            if isinstance(value, dict) and value.get('answer', {}).get('extra') is not None:
+                self.assertTrue(value['quality']['passed'])
+                serialize(value)  # The answer really decoded and is otherwise serializable.
+                failures.append('post-decode-result')
+                raise RecursionError('Injected post-decode result serialization boundary')
+            return serialize(value)
+
+        self.patch(common, 'serialize', side_effect=recursion_at_result)
+        self.assert_first_answer_outcome_keeps_all_slots(b'[' * 32 + b'0' + b']' * 32, 'RecursionError')
+        self.assertEqual(failures, ['post-decode-result'])
 
     def test_answer_permission_error_is_a_hard_failure_not_a_model_error(self):
         self.observations()

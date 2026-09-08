@@ -2,6 +2,11 @@
 
 Only this new prospective cohort receives the additional recognizer. Historical
 receipts, frozen inputs and results are not edited or regraded.
+
+This adapter requires the cohort's authoritative common pre/postflight checks.
+When no successful command can be a source/call delivery, it skips that
+recognizer's full snapshot load. The standalone recognizer remains strict even
+for empty streams; this adapter is not a replacement for frozen-input preflight.
 """
 from __future__ import annotations
 
@@ -37,9 +42,39 @@ def binding(observation):
             'source_manifest': manifest['source_manifest'], 'revision': frozen['revision']}
 
 
+def _has_source_call_candidate(events, prefix):
+    """Necessary conditions only: false positives still receive full validation."""
+    for event in events:
+        if not isinstance(event, dict) or event.get('type') != 'item.completed':
+            continue
+        item = event.get('item')
+        if (not isinstance(item, dict) or item.get('type') != 'command_execution'
+                or not isinstance(item.get('id'), str) or not item['id']
+                or item.get('status') != 'completed' or type(item.get('exit_code')) is not int
+                or item['exit_code'] != 0):
+            continue
+        try:
+            words = SOURCE_CALLS._shell_words(item['command'])
+            if words and Path(words[0]).name in {'sh', 'bash', 'zsh'}:
+                if len(words) != 3 or words[1] not in {'-c', '-lc'}:
+                    continue
+                words = SOURCE_CALLS._shell_words(words[2])
+            if (tuple(words[:3]) == tuple(prefix) and 'archive-source' in words[3:]
+                    and '--call-sites' in words[3:]):
+                return True
+        except SOURCE_CALLS._ERRORS:
+            continue
+    return False
+
+
 def evidence(events, observation, relationships):
+    # Materialize once so the legacy pass cannot consume a one-shot stream.
+    events = list(events)
     old = LEGACY.evidence(events, observation, relationships)
-    combined = SOURCE_CALLS.evidence(events, binding=binding(observation), relationships=relationships)
+    frozen = binding(observation)
+    combined = {'source_call_receipts': [], 'relationship_receipts': []}
+    if _has_source_call_candidate(events, frozen['invocation_prefix']):
+        combined = SOURCE_CALLS.evidence(events, binding=frozen, relationships=relationships)
     relationships_received = old['relationship_receipts'] + combined['relationship_receipts']
     return {**old, 'recognizer_version': VERSION,
             'source_calls_used': bool(combined['source_call_receipts']),
