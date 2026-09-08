@@ -1,0 +1,10 @@
+{
+  "evals/requests-redirects/PLAN.md": "cff140504af945c1332301a2b0349674ff3f5445f0cd0584c2a137f2f1abe1f4",
+  "evals/requests-redirects/SOURCE-REVIEW.md": "2734412dd27b89d8acb39474a161f8989e3c270e3a8d318027ddc020723d397b",
+  "evals/requests-redirects/cases.json": "91923077269fb2ebe31afc4e34fe32dad10b4812ca91ffbf2e2bb2ccddb3c110",
+  "evals/requests-redirects/source.json": "5190d24f0aa18b8ef6b0e8e2b178e57f4058f6ad5004c76c081dafb67f12fc4d",
+  "evals/requests-redirects/validate.py": "927b8d90e05f13a74efb5d795e48dde6c5822f078e6c096f82787557016a79a3",
+  "evals/exploration/observe_saved_callers.py": "9be45dea4385a70f16ce8bdb276710014c0555a2f20a30c17681b7c8e9a384e9",
+  "evals/exploration/answer.schema.json": "a5aff654fe899a710cbf44ad63e97f4d4818e314e24c2d71af29c4c4c863ae83",
+  "evals/archive-exploration/preflight.py": "981d18f13648886ac4198caba36339f8d855d4f02bbea1f75ae26d0268326869"
+}
