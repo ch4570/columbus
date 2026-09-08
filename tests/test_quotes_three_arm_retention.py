@@ -128,6 +128,38 @@ class ThreeArmRetentionTests(unittest.TestCase):
         result = retention.retain(output, terminal_confirmed=True, **kwargs)
         return output, result
 
+    def test_windows_path_and_fd_ctime_meanings_may_differ_but_both_must_stay_stable(self):
+        base = dict(st_dev=1, st_ino=2, st_size=3, st_mtime_ns=4, st_ctime_ns=5)
+        path = SimpleNamespace(**base)
+        fd = SimpleNamespace(**{**base, 'st_ctime_ns': 9})
+        self.assertTrue(retention.unchanged_stats(path, fd, fd, path, windows=True))
+        self.assertFalse(retention.unchanged_stats(path, fd, fd, path, windows=False))
+        self.assertTrue(retention.unchanged_stats(path, path, path, path, windows=False))
+        for position in range(4):
+            for field in base:
+                with self.subTest(position=position, field=field):
+                    snapshots = [path, fd, fd, path]
+                    changed = vars(snapshots[position]).copy()
+                    changed[field] += 1
+                    snapshots[position] = SimpleNamespace(**changed)
+                    self.assertFalse(retention.unchanged_stats(*snapshots, windows=True))
+
+    def test_stable_reader_preserves_bytes_with_distinct_windows_fd_ctime(self):
+        target = self.root / 'ctime-fixture.json'
+        target.write_bytes(b'{"raw":"unchanged"}\r\n')
+        real_fstat = retention.os.fstat
+
+        def fd_stat(descriptor):
+            actual = real_fstat(descriptor)
+            values = {name: getattr(actual, name) for name in
+                      ('st_dev', 'st_ino', 'st_size', 'st_mtime_ns', 'st_ctime_ns')}
+            values['st_ctime_ns'] += 123456
+            return SimpleNamespace(**values)
+
+        with mock.patch.object(retention.sys, 'platform', 'win32'), \
+                mock.patch.object(retention.os, 'fstat', side_effect=fd_stat):
+            self.assertEqual(retention.stable(target, self.root), b'{"raw":"unchanged"}\r\n')
+
     def test_all18_and_failed_runs_retained_with_exact_events_and_independent_verify(self):
         output, result = self.capture()
         self.assertTrue(result['verified'])

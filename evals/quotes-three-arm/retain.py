@@ -76,6 +76,16 @@ def relative(name):
     return name
 
 
+def unchanged_stats(before, opened, after, finished, *, windows):
+    identity = lambda item: (item.st_dev, item.st_ino, item.st_size, item.st_mtime_ns)
+    # Windows path stat can expose birthtime as ctime while fstat exposes
+    # ChangeTime. Compare each API's ctime before/after, never those two meanings.
+    return (identity(before) == identity(opened) == identity(after) == identity(finished)
+            and before.st_ctime_ns == finished.st_ctime_ns
+            and opened.st_ctime_ns == after.st_ctime_ns
+            and (windows or before.st_ctime_ns == opened.st_ctime_ns))
+
+
 def stable(path, root):
     path, root = Path(path).absolute(), Path(root).absolute()
     require(path.is_relative_to(root) and path.resolve().is_relative_to(root.resolve()), 'Evidence escapes its root')
@@ -90,9 +100,9 @@ def stable(path, root):
         opened = os.fstat(stream.fileno())
         raw = stream.read(MAX_FILE + 1)
         after = os.fstat(stream.fileno())
-    identity = lambda item: (item.st_dev, item.st_ino, item.st_size, item.st_mtime_ns, item.st_ctime_ns)
-    require(not path.is_symlink() and len(raw) <= MAX_FILE and len(raw) == after.st_size and identity(before) == identity(opened)
-            == identity(after) == identity(path.stat()), 'Evidence changed during read: ' + str(path))
+    require(not path.is_symlink() and len(raw) <= MAX_FILE and len(raw) == after.st_size
+            and unchanged_stats(before, opened, after, path.stat(), windows=sys.platform == 'win32'),
+            'Evidence changed during read: ' + str(path))
     return raw
 
 

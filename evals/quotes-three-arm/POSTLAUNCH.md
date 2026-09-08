@@ -87,3 +87,19 @@ Fourteen synthetic, model-free tests pass. Independent review found and then
 rechecked malformed runner-record handling, compressed-name collisions and raw
 record/summary consistency. No original experiment input or grader was changed
 to address these supplemental-tool defects.
+
+The first retention-tool CI head `8ec7f56` passed the Linux/macOS jobs but failed
+Windows Python 3.14.7 synthetic reads: the tool compared path-stat and fd-stat
+ctime values as if they had the same meaning. The exact-version CPython
+[path-stat implementation](https://github.com/python/cpython/blob/v3.14.7/Modules/posixmodule.c#L2297)
+maps ctime to birthtime, while its
+[fd-stat implementation](https://github.com/python/cpython/blob/v3.14.7/Python/fileutils.c#L1117)
+uses ChangeTime. This is a source-grounded explanation of the observed failure,
+not a direct dump of the CI machine's individual stat fields.
+
+The supplemental reader now compares device/inode/size/mtime across the two
+APIs, retains each API's own before/after ctime guard, and retains cross-ctime
+comparison on non-Windows platforms. Two regressions check differing but stable
+Windows ctimes, mutation of every checked field, and exact CRLF byte preservation
+through the reader. No sleep, retry or skipped test is used; same-API ctime and
+cross-API identity guards remain. Actual final-head platform CI is still required.
