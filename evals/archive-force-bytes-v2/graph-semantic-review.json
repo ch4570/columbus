@@ -1,0 +1,197 @@
+{
+  "condition": "columbus",
+  "answer_sha256": "ccfd3bd3f892ecf8c30ba0629566b3c28c8703ca2b91013f42381b824a5f1154",
+  "criteria_sha256": "383fb0d6ba8f016dd116cf22478540ad23bca3047022ee855b37d999ac7f4125",
+  "passed": false,
+  "reviewed_owners": 37,
+  "findings": [
+    {
+      "id": "PasswordResetForm.save",
+      "passed": false,
+      "note": "Conversion, defaults and loop gate are accurate; no blanket delivery-exception claim is made. However the frozen criterion for extra_email_context overriding uid is absent from both prose and quote."
+    },
+    {
+      "id": "DataSource.__getitem__",
+      "passed": true,
+      "note": "String-name gate, Layer wrapping, integer/type alternatives and GDALException-to-IndexError translation are identified."
+    },
+    {
+      "id": "DataSource.__init__",
+      "passed": true,
+      "note": "str/Path gate, default UTF-8 rather than self.encoding, pointer bypass and GDALException translation are accurate."
+    },
+    {
+      "id": "Driver.__init__",
+      "passed": true,
+      "note": "Case-insensitive alias lookup is in the quote; str-only conversion, integer/pointer alternatives and null-driver error are described."
+    },
+    {
+      "id": "Feature.index",
+      "passed": true,
+      "note": "Field name conversion, negative-index rejection and return are accurate; no blanket stringify claim."
+    },
+    {
+      "id": "OGRGeometry.from_gml",
+      "passed": true,
+      "note": "Default conversion to capi.from_gml and cls construction are accurate."
+    },
+    {
+      "id": "OGRGeometry.from_json",
+      "passed": true,
+      "note": "Default conversion to _from_json and OGRGeometry wrapping are accurate."
+    },
+    {
+      "id": "Layer.test_capability",
+      "passed": true,
+      "note": "Native capability query and bool result with default options; existing bytes preservation is accurate."
+    },
+    {
+      "id": "GDALRaster.__del__",
+      "passed": true,
+      "note": "VSI guard, name conversion, unlink and superclass destruction are covered."
+    },
+    {
+      "id": "GDALRaster.__init__",
+      "passed": true,
+      "note": "All five sites, branch guards, dictionary validation, failure-only unlink and error propagation are described. Quote shows retained ctypes buffer and repeated VSI-path conversions."
+    },
+    {
+      "id": "GDALRaster.clone",
+      "passed": true,
+      "note": "Truthy explicit name and MEM/non-MEM fallback selection, copy_ds and write-state preservation agree with source."
+    },
+    {
+      "id": "GDALRaster.vsi_buffer",
+      "passed": false,
+      "note": "Contradicts source: says deletion-on-read is requested. VSI_DELETE_BUFFER_ON_READ=False (raster/const.py:105); the quoted flag name alone cannot support that assertion."
+    },
+    {
+      "id": "SpatialReference.attr_value",
+      "passed": true,
+      "note": "Both argument type guards, conversion and attribute query are covered."
+    },
+    {
+      "id": "SpatialReference.auth_code",
+      "passed": true,
+      "note": "None bypass and non-None conversion are distinguished."
+    },
+    {
+      "id": "SpatialReference.auth_name",
+      "passed": true,
+      "note": "None bypass and non-None conversion are distinguished."
+    },
+    {
+      "id": "SpatialReference.import_user_input",
+      "passed": true,
+      "note": "Conversion and native import into existing pointer are accurate."
+    },
+    {
+      "id": "SpatialReference.import_wkt",
+      "passed": true,
+      "note": "Conversion, c_char_p/byref wrapping and native import are accurate."
+    },
+    {
+      "id": "SpatialReference.xml",
+      "passed": true,
+      "note": "Default empty dialect and force_bytes defaults; quote includes output pointer."
+    },
+    {
+      "id": "GEOSGeometry.__init__",
+      "passed": true,
+      "note": "Both direct calls, bytes decoding, bypass alternatives and errors are covered; quote substantiates forwarding max_geom_collections to both readers."
+    },
+    {
+      "id": "GEOSGeometryBase.from_ewkt",
+      "passed": true,
+      "note": "Whole-value conversion before first byte-semicolon split, optional SRID, invalid/empty rejection and geometry construction are covered."
+    },
+    {
+      "id": "GEOSGeometryBase.relate_pattern",
+      "passed": true,
+      "note": "At-most-nine validation is accurate; does not invent exact-nine length."
+    },
+    {
+      "id": "_WKTReader.read",
+      "passed": true,
+      "note": "Type and collection-depth guards precede conversion; default UTF-8 preserves existing bytes and errors are not locally caught."
+    },
+    {
+      "id": "EmailMessage._create_mime_attachment",
+      "passed": true,
+      "note": "message/rfc822 guard and EmailMessage/Message bypass; message_from_bytes and SafeMIMEMessage distinguished from base64/text branches."
+    },
+    {
+      "id": "_cookie_signer_key",
+      "passed": true,
+      "note": "Namespace prefix and default key conversion are accurate."
+    },
+    {
+      "id": "OracleParam.__init__",
+      "passed": false,
+      "note": "Length-only conversion, cursor charset, explicit strings_only, strict errors, bypass branches and input_size precedence are correct. Datetime/unsupported-Boolean preprocessing required by the frozen criteria is absent from prose and quote."
+    },
+    {
+      "id": "DatabaseOperations.convert_binaryfield_value",
+      "passed": true,
+      "note": "LOB-only read and conversion; non-LOB identity return are accurate."
+    },
+    {
+      "id": "AsyncRequestFactory.generic",
+      "passed": true,
+      "note": "Unconditional conversion, explicit charset and truthy content/FakePayload setup are accurately described."
+    },
+    {
+      "id": "FakePayload.write",
+      "passed": true,
+      "note": "Read-started rejection precedes conversion; buffer write and length update are accurate."
+    },
+    {
+      "id": "RequestFactory._encode_data",
+      "passed": true,
+      "note": "Multipart identity bypass and regex/default charset selection are accurate."
+    },
+    {
+      "id": "RequestFactory.generic",
+      "passed": false,
+      "note": "Unconditional conversion and truthy-body update are accurate. Later extra-field override required by the frozen criteria is absent from prose and quote."
+    },
+    {
+      "id": "encode_file.to_bytes",
+      "passed": true,
+      "note": "Separate nested helper; charset, filename/content-type selection and file.read conversion are covered."
+    },
+    {
+      "id": "encode_multipart.to_bytes",
+      "passed": true,
+      "note": "Nested owner, explicit charset, multipart use, outer None rejection and file delegation are covered; quote substantiates rejection."
+    },
+    {
+      "id": "constant_time_compare",
+      "passed": true,
+      "note": "Both same-line operands and defaults before secrets.compare_digest are covered."
+    },
+    {
+      "id": "pbkdf2",
+      "passed": true,
+      "note": "Two conversions, digest default, falsey dklen and pbkdf2_hmac arguments are covered."
+    },
+    {
+      "id": "salted_hmac",
+      "passed": true,
+      "note": "Three conversions and their ordering, None substitution, derived key and InvalidAlgorithm guard before value conversion are covered."
+    },
+    {
+      "id": "smart_bytes",
+      "passed": true,
+      "note": "Promise bypass and forwarding of all options; quoted strings_only documentation preserves protected-type caveat."
+    },
+    {
+      "id": "uri_to_iri",
+      "passed": true,
+      "note": "None guard, byte conversion, selective unquoting and broken-Unicode repair are covered without blanket percent-decoding claim."
+    }
+  ],
+  "passed_owners": 33,
+  "failed_owners": 4,
+  "scope": "Manual review of explanation and quote against predeclared criteria; no runtime execution claim."
+}

@@ -1,0 +1,1434 @@
+{
+  "baseline": {
+    "schema": "columbus.exploration-observation/v1",
+    "case": "archive-force-bytes-v2",
+    "condition": "baseline",
+    "repeat": 1,
+    "model_requested": "gpt-5.6-sol",
+    "effort_requested": "xhigh",
+    "evidence_mode": "saved_archive",
+    "elapsed_seconds": 684.543,
+    "return_code": 0,
+    "timed_out": false,
+    "source_unchanged": true,
+    "usage": {
+      "input_tokens": 568876,
+      "cached_input_tokens": 502784,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 19981,
+      "reasoning_output_tokens": 8463,
+      "uncached_input_tokens": 66092
+    },
+    "commands": [
+      {
+        "command": "/bin/zsh -lc \"rg -n --glob '*.py' 'force_bytes' django\"",
+        "exit_code": 0,
+        "output_bytes": 6490,
+        "output_sha256": "a4d2667d6c44490a9cd5e83009d2a9c450b7a3b41c5a1a649f6e1cc241a701a1"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/test/client.py | sed -n '85,130p;270,355p'\"",
+        "exit_code": 0,
+        "output_bytes": 5274,
+        "output_sha256": "56fba365e9bebf44f31673d13cd17032274654149db6a12e4426bec4ff91eab6"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/test/client.py | sed -n '425,462p;625,760p'\"",
+        "exit_code": 0,
+        "output_bytes": 7133,
+        "output_sha256": "1a8f3c7d8ad0907f5ccfd3ad2d06f92a5bdd78c7d2a16e3daa124cdb20991be4"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/db/backends/oracle/base.py | sed -n '420,462p;560,592p'\"",
+        "exit_code": 0,
+        "output_bytes": 3976,
+        "output_sha256": "9f5b87c58e00c663c1f4989e4d0ffb89b7d3217cde92ebff6a5f11cfa75f79cf"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/db/backends/oracle/operations.py | sed -n '238,270p'\"",
+        "exit_code": 0,
+        "output_bytes": 1548,
+        "output_sha256": "f121a6ac46a67b4c589c446cf1cfce580b35aa0cc1d2f440b66fe37c88cc299c"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/core/signing.py | sed -n '90,115p'; nl -ba django/core/mail/message.py | sed -n '380,412p'\"",
+        "exit_code": 0,
+        "output_bytes": 2615,
+        "output_sha256": "1e097d9d3b39da7bb8cd36227c1b323f2113dfc01ba959cb1f09cc2b6f50f6e9"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/gis/gdal/geometries.py | sed -n '145,185p'; nl -ba django/contrib/gis/gdal/driver.py | sed -n '30,60p'\"",
+        "exit_code": 0,
+        "output_bytes": 2843,
+        "output_sha256": "7bf5b2edfc6bf7025390a80d577599b13950284ffc050f2243d1d985e81faaf0"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/gis/gdal/raster/source.py | sed -n '145,180p;205,230p;270,300p'\"",
+        "exit_code": 0,
+        "output_bytes": 3970,
+        "output_sha256": "7aa1ebd402ab0a7e85adb16008e3ced47ab2400aad08b548225712a3a3b1c954"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/gis/gdal/layer.py | sed -n '215,245p'; nl -ba django/contrib/gis/gdal/datasource.py | sed -n '45,110p'\"",
+        "exit_code": 0,
+        "output_bytes": 3937,
+        "output_sha256": "667d10aa87abc7a0eed440c87580d730b89148196ce583d0462fcc1996a950e0"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/gis/gdal/raster/source.py | sed -n '480,520p'\"",
+        "exit_code": 0,
+        "output_bytes": 1445,
+        "output_sha256": "01778c764447b22d6284ad447f79a71443e071c9306a444523e4028f3958cc46"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/gis/gdal/srs.py | sed -n '135,175p;290,320p'\"",
+        "exit_code": 0,
+        "output_bytes": 2971,
+        "output_sha256": "a51d1e32aac817350399351ff9a652fb0f644615a1a67b353198f760bdb48dfb"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/gis/gdal/raster/source.py | sed -n '70,140p'\"",
+        "exit_code": 0,
+        "output_bytes": 3301,
+        "output_sha256": "23921977b3cc98d4cf579319fa37357e86c29aa18590e2f3d569fd3a2531a2ab"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/gis/gdal/srs.py | sed -n '330,350p'; nl -ba django/contrib/gis/gdal/feature.py | sed -n '100,125p'\"",
+        "exit_code": 0,
+        "output_bytes": 1633,
+        "output_sha256": "0649df326dc333e8c7e8d8c092d1b2bf99d8cb0acda724ec26b843bacdb2370b"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/gis/geos/geometry.py | sed -n '100,145p;340,368p'\"",
+        "exit_code": 0,
+        "output_bytes": 3221,
+        "output_sha256": "9f247bfc8586e0a223ca8844d9ffa2c4485a1eb230f23c29b959aef8b56fd871"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/auth/forms.py | sed -n '455,505p'\"",
+        "exit_code": 0,
+        "output_bytes": 2237,
+        "output_sha256": "4e54792825b63b197790d4dc29faf9cb3e2ced34d615cccb260020b945e210f9"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/utils/crypto.py | sed -n '1,95p'\"",
+        "exit_code": 0,
+        "output_bytes": 3201,
+        "output_sha256": "daac77b95a040d521079aa702c6a02a139e02710912cb40333b42c5f4e028538"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/gis/geos/geometry.py | sed -n '730,775p'\"",
+        "exit_code": 0,
+        "output_bytes": 2258,
+        "output_sha256": "6c603bfe00691093b6f512b7b70fecdf337ce8fa29a44ab125f8c6f8c6086600"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/gis/geos/prototypes/io.py | sed -n '225,265p'\"",
+        "exit_code": 0,
+        "output_bytes": 2096,
+        "output_sha256": "532ccaed46ca941d174685a0ce64282c0b893e4395f6d4751fd7da4e7041b6e6"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/utils/encoding.py | sed -n '65,105p;145,180p'\"",
+        "exit_code": 0,
+        "output_bytes": 3074,
+        "output_sha256": "7bf7f332211ee97fef537ed4d1d18ad29edca8840f62238ba7fa92d453a6b982"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/auth/forms.py | sed -n '405,430p'\"",
+        "exit_code": 0,
+        "output_bytes": 1086,
+        "output_sha256": "39f23abaea9cfc9a6277ce6766ac6b6fc25dd571280ea3f087c9248c6e024702"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/core/mail/message.py | sed -n '245,275p'; nl -ba django/contrib/gis/gdal/layer.py | sed -n '25,55p'; nl -ba django/contrib/gis/gdal/srs.py | sed -n '45,75p'\"",
+        "exit_code": 0,
+        "output_bytes": 4695,
+        "output_sha256": "735b2e956034a55fdd810d0be6271fd1f58a0562cca8a857c5aabf3c0cb4b863"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/db/backends/oracle/base.py | sed -n '390,425p'; nl -ba django/db/backends/oracle/operations.py | sed -n '1,45p;200,220p'; nl -ba django/test/client.py | sed -n '55,88p;360,405p'\"",
+        "exit_code": 0,
+        "output_bytes": 7648,
+        "output_sha256": "94a3d240f081c43516bc6166c71004aea56ac7b67503d1252b9431e37ff67924"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/gis/gdal/geometries.py | sed -n '100,130p'; nl -ba django/contrib/gis/geos/geometry.py | sed -n '70,95p;700,732p'; nl -ba django/contrib/gis/geos/prototypes/io.py | sed -n '170,210p'\"",
+        "exit_code": 0,
+        "output_bytes": 5305,
+        "output_sha256": "7cc69362c152426102f09c0db40341f8eb3bb2936a7362684dbcd9172958e1b9"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n --glob '*.py' '(from django\\\\.utils\\\\.encoding import[\"'^'\"\\\\n]*force_bytes|import django\\\\.utils\\\\.encoding|force_bytes as)' django\"",
+        "exit_code": 0,
+        "output_bytes": 1428,
+        "output_sha256": "049549776562e9196a5dfc398daf75bd61536bf193eaa829cdcf60416657d391"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n '\"'^class |''^    def (from_json|from_gml)'\"' django/contrib/gis/gdal/geometries.py | head -30\"",
+        "exit_code": 0,
+        "output_bytes": 608,
+        "output_sha256": "a634f415534c91d2d63e92d349ca6c7542b0e6c11759542846d2ec34ed8abca5"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/gis/gdal/raster/source.py | sed -n '130,218p'\"",
+        "exit_code": 0,
+        "output_bytes": 4282,
+        "output_sha256": "e3e8021623e05204f5938de03e4c2aec6df71f9f2f64ac145624b854cc5197a8"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n '\"'^class '\"' django/core/mail/message.py | head -20\"",
+        "exit_code": 0,
+        "output_bytes": 281,
+        "output_sha256": "d87f0e99800f5083f146d8f4c9c3dd6c3e29171fc193716e3726514b49667607"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/test/client.py | sed -n '338,368p'\"",
+        "exit_code": 0,
+        "output_bytes": 1167,
+        "output_sha256": "8bdc66f1ba4a869a4ffc1cd7549075990c9a02f07c0141f5c4a2541e4b3a6e9d"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/utils/encoding.py | sed -n '165,205p'\"",
+        "exit_code": 0,
+        "output_bytes": 1876,
+        "output_sha256": "aeec53e1cd4c53de3ff9c8acc150c440d7332a14419abdacb89a14dfce504a13"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n '\"'^class |''^    def (from_ewkt|relate_pattern)'\"' django/contrib/gis/geos/geometry.py | head -30\"",
+        "exit_code": 0,
+        "output_bytes": 200,
+        "output_sha256": "b787fbc7a946ada8a5675ffc2adb1757285f1634cc6f4628ae9f09c209192f7d"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n '\"'^class .*Password|''^class '\"' django/contrib/auth/forms.py | tail -15\"",
+        "exit_code": 0,
+        "output_bytes": 719,
+        "output_sha256": "89d309fd721d2b32a812e73d699a27dce1ae0dd71277dc42dba2f839029fb752"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/test/client.py | sed -n '745,790p'\"",
+        "exit_code": 0,
+        "output_bytes": 2102,
+        "output_sha256": "678a26a5035c88478faadfeb218b3b78f880145308a49ac3af7379a3375b40a2"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n '_cookie_signer_key\\\\(' django/core/signing.py django | head -20\"",
+        "exit_code": 0,
+        "output_bytes": 272,
+        "output_sha256": "b8524e32f2617cb7067a9b51f461489a3b5e54aa1115669f1b06a9e87f5fbab1"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/core/signing.py | sed -n '104,143p'\"",
+        "exit_code": 0,
+        "output_bytes": 1560,
+        "output_sha256": "0496aa48918b9955f7f9ce54c3fd49862d55ef6ccebd058c8c6a343cff6cf1be"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/gis/gdal/driver.py | sed -n '35,75p'\"",
+        "exit_code": 0,
+        "output_bytes": 1728,
+        "output_sha256": "57093152fedbfaee5fb87fbeadffc666d6792e303179024629c1c822bb94ed0e"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/gis/geos/geometry.py | sed -n '751,800p'\"",
+        "exit_code": 0,
+        "output_bytes": 2197,
+        "output_sha256": "dd6f614c1dfba303d8ca35ca206632934687e80f88924c2fe720d79d62a45bfe"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n 'def _preprocess_input' django/contrib/gis/gdal/raster/source.py; nl -ba django/contrib/gis/gdal/raster/source.py | sed -n '230,270p'\"",
+        "exit_code": 0,
+        "output_bytes": 2037,
+        "output_sha256": "e32a43f34fdc0eb82b7e946841759710035699b2d388ab374d4ed353b4e67e52"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n --glob '*.py' '(?<\"'![.'\"\\\\w])force_bytes\\\\s*\\\\(' django\"",
+        "exit_code": 2,
+        "output_bytes": 242,
+        "output_sha256": "654b615f5291690aa3b48293b044f10280edf46e126b0b4b3648b6558cec576c"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n --glob '*.py' 'force_bytes\\\\s*\\\\(' django\"",
+        "exit_code": 0,
+        "output_bytes": 4389,
+        "output_sha256": "0199acaa7f02fa924ba33cd962c972dec9d10bd153f697278076f2b0417ba904"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg --glob '*.py' 'force_bytes\\\\s*\\\\(' django | wc -l\"",
+        "exit_code": 0,
+        "output_bytes": 9,
+        "output_sha256": "472c1a68d36345518b414e7c46dd1f45d482892844e00247a892158758978067"
+      }
+    ],
+    "command_count": 40,
+    "command_output_bytes": 107054,
+    "failed_commands": 1,
+    "other_tool_types": [],
+    "runtime_warnings": [],
+    "turn_failed": false,
+    "quality": {
+      "passed": true,
+      "findings": [
+        {
+          "id": "PasswordResetForm.save",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "DataSource.__init__",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "DataSource.__getitem__",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "Driver.__init__",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "Feature.index",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "OGRGeometry.from_json",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "OGRGeometry.from_gml",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "Layer.test_capability",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "GDALRaster.__init__",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "GDALRaster.__del__",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "GDALRaster.vsi_buffer",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "GDALRaster.clone",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "SpatialReference.attr_value",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "SpatialReference.auth_name",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "SpatialReference.auth_code",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "SpatialReference.import_user_input",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "SpatialReference.import_wkt",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "SpatialReference.xml",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "GEOSGeometryBase.from_ewkt",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "GEOSGeometryBase.relate_pattern",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "GEOSGeometry.__init__",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "_WKTReader.read",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "EmailMessage._create_mime_attachment",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "_cookie_signer_key",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "OracleParam.__init__",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "DatabaseOperations.convert_binaryfield_value",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "FakePayload.write",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "encode_multipart.to_bytes",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "encode_file.to_bytes",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "RequestFactory._encode_data",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "RequestFactory.generic",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "AsyncRequestFactory.generic",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "salted_hmac",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "constant_time_compare",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "pbkdf2",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "smart_bytes",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "uri_to_iri",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "__exact_caller_set__",
+          "passed": true,
+          "reason": "no extra callers"
+        }
+      ],
+      "grader_version": "caller-enumeration-1",
+      "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+    },
+    "index_preflight": null,
+    "archive_preflight": {
+      "passed": true,
+      "archive_sha256": "1d80eb233d8da303b984fc423bf453181b7443c636431cbeff4b6a18cf5a4e12",
+      "revision": "6f504f681d66baba3acc",
+      "source_files_verified": 6928,
+      "indexed_source_files_verified": 5465,
+      "counts": {
+        "files": 5465,
+        "nodes": 46630,
+        "scopes": 46964,
+        "edges": 86828,
+        "references": 188003,
+        "imports": 18268,
+        "diagnostics": 1
+      },
+      "consumer_index_absent": true
+    },
+    "archive_postflight": {
+      "passed": true,
+      "archive_sha256": "1d80eb233d8da303b984fc423bf453181b7443c636431cbeff4b6a18cf5a4e12",
+      "revision": "6f504f681d66baba3acc",
+      "source_files_verified": 6928,
+      "indexed_source_files_verified": 5465,
+      "counts": {
+        "files": 5465,
+        "nodes": 46630,
+        "scopes": 46964,
+        "edges": 86828,
+        "references": 188003,
+        "imports": 18268,
+        "diagnostics": 1
+      },
+      "consumer_index_absent": true
+    },
+    "answer": {
+      "findings": [
+        {
+          "id": "PasswordResetForm.save",
+          "path": "django/contrib/auth/forms.py",
+          "start_line": 485,
+          "end_line": 493,
+          "quote": "        for user in self.get_users(email):\n            user_email = getattr(user, email_field_name)\n            user_pk_bytes = force_bytes(UserModel._meta.pk.value_to_string(user))\n            context = {\n                \"email\": user_email,\n                \"domain\": domain,\n                \"site_name\": site_name,\n                \"uid\": urlsafe_base64_encode(user_pk_bytes),\n                \"user\": user,",
+          "explanation": "The imported utility converts each selected user's serialized primary-key value to bytes. Those bytes are URL-safe-base64 encoded for the password-reset UID placed in the email context. The call omits all options: encoding=\"utf-8\", strings_only=False, and errors=\"strict\". It runs once per user yielded by get_users(); there is no local exception handling, so serialization, encoding, token, rendering, and delivery errors propagate."
+        },
+        {
+          "id": "DataSource.__init__",
+          "path": "django/contrib/gis/gdal/datasource.py",
+          "start_line": 64,
+          "end_line": 77,
+          "quote": "        if isinstance(ds_input, (str, Path)):\n            try:\n                # GDALOpenEx will auto-detect the data source type.\n                ds = capi.open_ds(\n                    force_bytes(ds_input),\n                    self._write | capi.GDAL_OF_VECTOR,\n                    None,\n                    None,\n                    None,\n                )\n            except GDALException:\n                # Making the error message more clear rather than something\n                # like \"Invalid pointer returned from OGROpen\".\n                raise GDALException('Could not open the datasource at \"%s\"' % ds_input)",
+          "explanation": "The imported utility converts a string or pathlib Path data-source location to the byte string expected by GDALOpenEx; the returned pointer is retained as the data source and used to obtain its driver. Encoding=\"utf-8\", strings_only=False, and errors=\"strict\" are all defaults. The call is reachable only for str/Path input. A GDALException from opening is replaced with a clearer GDALException; encoding failures are not separately caught. Other input types follow pointer-validation or error branches without calling force_bytes."
+        },
+        {
+          "id": "DataSource.__getitem__",
+          "path": "django/contrib/gis/gdal/datasource.py",
+          "start_line": 93,
+          "end_line": 110,
+          "quote": "    def __getitem__(self, index):\n        \"Allows use of the index [] operator to get a layer at the index.\"\n        if isinstance(index, str):\n            try:\n                layer = capi.get_layer_by_name(self.ptr, force_bytes(index))\n            except GDALException:\n                raise IndexError(\"Invalid OGR layer name given: %s.\" % index)\n        elif isinstance(index, int):\n            if 0 <= index < self.layer_count:\n                layer = capi.get_layer(self._ptr, index)\n            else:\n                raise IndexError(\n                    \"Index out of range when accessing layers in a datasource: %s.\"\n                    % index\n                )\n        else:\n            raise TypeError(\"Invalid index type: %s\" % type(index))\n        return Layer(layer, self)",
+          "explanation": "For a string index, the imported utility converts the layer name for GDAL's name lookup; the resulting pointer is wrapped in Layer. Encoding=\"utf-8\", strings_only=False, and errors=\"strict\" are defaults. Only the string branch reaches the call. GDALException is translated to IndexError; integer indices are range-checked, other types raise TypeError, and encoding errors propagate."
+        },
+        {
+          "id": "Driver.__init__",
+          "path": "django/contrib/gis/gdal/driver.py",
+          "start_line": 39,
+          "end_line": 65,
+          "quote": "        if isinstance(dr_input, str):\n            # If a string name of the driver was passed in\n            self.ensure_registered()\n\n            # Checking the alias dictionary (case-insensitive) to see if an\n            # alias exists for the given driver.\n            if dr_input.lower() in self._alias:\n                name = self._alias[dr_input.lower()]\n            else:\n                name = dr_input\n\n            # Attempting to get the GDAL/OGR driver by the string name.\n            driver = c_void_p(capi.get_driver_by_name(force_bytes(name)))\n        elif isinstance(dr_input, int):\n            self.ensure_registered()\n            driver = capi.get_driver(dr_input)\n        elif isinstance(dr_input, c_void_p):\n            driver = dr_input\n        else:\n            raise GDALException(\n                \"Unrecognized input type for GDAL/OGR Driver: %s\" % type(dr_input)\n            )\n\n        # Making sure we get a valid pointer to the OGR Driver\n        if not driver:\n            raise GDALException(\n                \"Could not initialize GDAL/OGR Driver on input: %s\" % dr_input",
+          "explanation": "In the string-input branch, the imported utility converts the alias-normalized GDAL driver name to the bytes required by get_driver_by_name. Encoding=\"utf-8\", strings_only=False, and errors=\"strict\" are defaults. Integer and pointer inputs bypass the call; unsupported types and a null resulting driver pointer raise GDALException. There is no local catch for encoding or GDAL lookup errors."
+        },
+        {
+          "id": "Feature.index",
+          "path": "django/contrib/gis/gdal/feature.py",
+          "start_line": 115,
+          "end_line": 120,
+          "quote": "    def index(self, field_name):\n        \"Return the index of the given field name.\"\n        i = capi.get_field_index(self.ptr, force_bytes(field_name))\n        if i < 0:\n            raise IndexError(\"Invalid OFT field name given: %s.\" % field_name)\n        return i",
+          "explanation": "The imported utility converts the requested OGR field name to bytes for get_field_index. Encoding=\"utf-8\", strings_only=False, and errors=\"strict\" are defaults. A negative C-API result is converted to IndexError; conversion and C-wrapper exceptions otherwise propagate."
+        },
+        {
+          "id": "OGRGeometry.from_json",
+          "path": "django/contrib/gis/gdal/geometries.py",
+          "start_line": 170,
+          "end_line": 172,
+          "quote": "    @staticmethod\n    def from_json(geom_input):\n        return OGRGeometry(OGRGeometry._from_json(force_bytes(geom_input)))",
+          "explanation": "The imported utility converts the GeoJSON input to bytes for OGRGeometry._from_json, whose GDAL pointer is immediately wrapped as an OGRGeometry. Encoding=\"utf-8\", strings_only=False, and errors=\"strict\" are defaults. This static method has no guards or local exception handling, so encoding, parsing, and construction errors propagate."
+        },
+        {
+          "id": "OGRGeometry.from_gml",
+          "path": "django/contrib/gis/gdal/geometries.py",
+          "start_line": 174,
+          "end_line": 176,
+          "quote": "    @classmethod\n    def from_gml(cls, gml_string):\n        return cls(capi.from_gml(force_bytes(gml_string)))",
+          "explanation": "The imported utility converts the GML input to bytes for GDAL's from_gml routine, and the returned pointer is passed to cls to construct the geometry. Encoding=\"utf-8\", strings_only=False, and errors=\"strict\" are defaults. There are no local guards or catches."
+        },
+        {
+          "id": "Layer.test_capability",
+          "path": "django/contrib/gis/gdal/layer.py",
+          "start_line": 226,
+          "end_line": 234,
+          "quote": "    def test_capability(self, capability):\n        \"\"\"\n        Return a bool indicating whether the this Layer supports the given\n        capability (a string).  Valid capability strings include:\n          'RandomRead', 'SequentialWrite', 'RandomWrite', 'FastSpatialFilter',\n          'FastFeatureCount', 'FastGetExtent', 'CreateField', 'Transactions',\n          'DeleteFeature', and 'FastSetNextByIndex'.\n        \"\"\"\n        return bool(capi.test_capability(self.ptr, force_bytes(capability)))",
+          "explanation": "The imported utility converts a GDAL capability name to bytes for the C capability query, whose result is normalized to bool. Encoding=\"utf-8\", strings_only=False, and errors=\"strict\" are defaults; an already-byte capability remains bytes. The method performs no validation or exception handling."
+        },
+        {
+          "id": "GDALRaster.__init__",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start_line": 99,
+          "end_line": 130,
+          "quote": "            try:\n                # GDALOpen will auto-detect the data source type.\n                self._ptr = capi.open_ds(force_bytes(ds_input), self._write)\n            except GDALException as err:\n                raise GDALException(\n                    'Could not open the datasource at \"{}\" ({}).'.format(ds_input, err)\n                )\n        elif isinstance(ds_input, bytes):\n            # Create a new raster in write mode.\n            self._write = 1\n            # Get size of buffer.\n            size = len(ds_input)\n            # Pass data to ctypes, keeping a reference to the ctypes object so\n            # that the vsimem file remains available until the GDALRaster is\n            # deleted.\n            self._ds_input = c_buffer(ds_input)\n            # Create random name to reference in vsimem filesystem.\n            vsi_path = os.path.join(VSI_MEM_FILESYSTEM_BASE_PATH, str(uuid.uuid4()))\n            # Create vsimem file from buffer.\n            capi.create_vsi_file_from_mem_buffer(\n                force_bytes(vsi_path),\n                byref(self._ds_input),\n                size,\n                VSI_TAKE_BUFFER_OWNERSHIP,\n            )\n            # Open the new vsimem file as a GDALRaster.\n            try:\n                self._ptr = capi.open_ds(force_bytes(vsi_path), self._write)\n            except GDALException:\n                # Remove the broken file from the VSI filesystem.\n                capi.unlink_vsi_file(force_bytes(vsi_path))\n                raise GDALException(\"Failed creating VSI raster from the input buffer.\")",
+          "explanation": "This method has five direct calls to the imported utility. A preprocessed string/Path location is converted for open_ds. For raw-byte raster input, the generated VSI path is converted for creating and opening the temporary file and again for cleanup after a failed open. In the dictionary branch, ds_input.get(\"name\", \"\") is converted for create_ds. Every call defaults to encoding=\"utf-8\", strings_only=False, errors=\"strict\". A nonexistent non-VSI path is rejected before conversion; string-open GDALException is wrapped with path context. Failed VSI opening triggers unlink and a new GDALException. Required dictionary fields are validated, while conversion and other C-wrapper errors propagate."
+        },
+        {
+          "id": "GDALRaster.__del__",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start_line": 218,
+          "end_line": 222,
+          "quote": "    def __del__(self):\n        if self.is_vsi_based:\n            # Remove the temporary file from the VSI in-memory filesystem.\n            capi.unlink_vsi_file(force_bytes(self.name))\n        super().__del__()",
+          "explanation": "When the raster is VSI-backed, the imported utility converts its GDAL name/path to bytes for unlinking the temporary virtual file before superclass destruction. Encoding=\"utf-8\", strings_only=False, and errors=\"strict\" are defaults. Non-VSI rasters bypass the call. The destructor has no local exception handling."
+        },
+        {
+          "id": "GDALRaster.vsi_buffer",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start_line": 276,
+          "end_line": 291,
+          "quote": "    @property\n    def vsi_buffer(self):\n        if not (\n            self.is_vsi_based and self.name.startswith(VSI_MEM_FILESYSTEM_BASE_PATH)\n        ):\n            return None\n        # Prepare an integer that will contain the buffer length.\n        out_length = c_int()\n        # Get the data using the vsi file name.\n        dat = capi.get_mem_buffer_from_vsi_file(\n            force_bytes(self.name),\n            byref(out_length),\n            VSI_DELETE_BUFFER_ON_READ,\n        )\n        # Read the full buffer pointer.\n        return string_at(dat, out_length.value)",
+          "explanation": "After confirming that the raster is specifically in GDAL's in-memory VSI filesystem, the imported utility converts self.name to bytes for get_mem_buffer_from_vsi_file. The C call deletes the VSI buffer on read, and string_at copies the returned pointer into Python bytes. Encoding=\"utf-8\", strings_only=False, and errors=\"strict\" are defaults. Nonmatching rasters return None; errors are not caught."
+        },
+        {
+          "id": "GDALRaster.clone",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start_line": 494,
+          "end_line": 513,
+          "quote": "    def clone(self, name=None):\n        \"\"\"Return a clone of this GDALRaster.\"\"\"\n        if name:\n            clone_name = name\n        elif self.driver.name != \"MEM\":\n            clone_name = self.name + \"_copy.\" + self.driver.name\n        else:\n            clone_name = os.path.join(VSI_MEM_FILESYSTEM_BASE_PATH, str(uuid.uuid4()))\n        return GDALRaster(\n            capi.copy_ds(\n                self.driver._ptr,\n                force_bytes(clone_name),\n                self._ptr,\n                c_int(),\n                c_char_p(),\n                c_void_p(),\n                c_void_p(),\n            ),\n            write=self._write,\n        )",
+          "explanation": "The imported utility converts the chosen clone destination\u2014an explicit truthy name, a derived disk-copy name, or a generated VSI path\u2014to bytes for GDAL copy_ds. Its returned pointer is wrapped in a GDALRaster preserving write mode. Encoding=\"utf-8\", strings_only=False, and errors=\"strict\" are defaults. Destination selection is guarded by name and driver type; errors propagate."
+        },
+        {
+          "id": "SpatialReference.attr_value",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start_line": 147,
+          "end_line": 154,
+          "quote": "    def attr_value(self, target, index=0):\n        \"\"\"\n        The attribute value for the given target node (e.g. 'PROJCS'). The index\n        keyword specifies an index of the child node to return.\n        \"\"\"\n        if not isinstance(target, str) or not isinstance(index, int):\n            raise TypeError\n        return capi.get_attr_value(self.ptr, force_bytes(target), index)",
+          "explanation": "After requiring a string target and integer child index, the imported utility converts the spatial-reference node name to bytes for GDAL's attribute lookup. Encoding=\"utf-8\", strings_only=False, and errors=\"strict\" are defaults. Invalid argument types raise TypeError before conversion; other errors propagate."
+        },
+        {
+          "id": "SpatialReference.auth_name",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start_line": 156,
+          "end_line": 160,
+          "quote": "    def auth_name(self, target):\n        \"Return the authority name for the given string target node.\"\n        return capi.get_auth_name(\n            self.ptr, target if target is None else force_bytes(target)\n        )",
+          "explanation": "A non-None authority target is converted by the imported utility and passed to GDAL's authority-name lookup; None is passed through to request the applicable/default node. Encoding=\"utf-8\", strings_only=False, and errors=\"strict\" are defaults. The conditional expression makes the source call runtime-unreachable for None, and there is no local validation or exception handling for other values."
+        },
+        {
+          "id": "SpatialReference.auth_code",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start_line": 162,
+          "end_line": 166,
+          "quote": "    def auth_code(self, target):\n        \"Return the authority code for the given string target node.\"\n        return capi.get_auth_code(\n            self.ptr, target if target is None else force_bytes(target)\n        )",
+          "explanation": "A non-None authority target is converted by the imported utility for GDAL's authority-code lookup, while None bypasses conversion and is passed directly. Encoding=\"utf-8\", strings_only=False, and errors=\"strict\" are defaults. There is no local validation or exception handling."
+        },
+        {
+          "id": "SpatialReference.import_user_input",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start_line": 307,
+          "end_line": 309,
+          "quote": "    def import_user_input(self, user_input):\n        \"Import the Spatial Reference from the given user input string.\"\n        capi.from_user_input(self.ptr, force_bytes(user_input))",
+          "explanation": "The imported utility converts GDAL's general user-input spatial-reference specification to bytes; from_user_input then imports it into this object's existing pointer. Encoding=\"utf-8\", strings_only=False, and errors=\"strict\" are defaults. There are no guards or local catches."
+        },
+        {
+          "id": "SpatialReference.import_wkt",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start_line": 311,
+          "end_line": 313,
+          "quote": "    def import_wkt(self, wkt):\n        \"Import the Spatial Reference from OGC WKT (string)\"\n        capi.from_wkt(self.ptr, byref(c_char_p(force_bytes(wkt))))",
+          "explanation": "The imported utility converts OGC WKT to bytes, which are wrapped in c_char_p and passed by reference to GDAL's WKT importer to initialize/update this spatial reference. Encoding=\"utf-8\", strings_only=False, and errors=\"strict\" are defaults. No guard or local exception handling is present."
+        },
+        {
+          "id": "SpatialReference.xml",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start_line": 340,
+          "end_line": 343,
+          "quote": "    @property\n    def xml(self, dialect=\"\"):\n        \"Return the XML representation of this Spatial Reference.\"\n        return capi.to_xml(self.ptr, byref(c_char_p()), force_bytes(dialect))",
+          "explanation": "The imported utility converts the XML-export dialect, defaulting first to the empty string, to bytes for GDAL's to_xml routine; that routine's decoded/wrapped result is returned. force_bytes itself uses encoding=\"utf-8\", strings_only=False, and errors=\"strict\" by default. There are no guards or catches."
+        },
+        {
+          "id": "GEOSGeometryBase.from_ewkt",
+          "path": "django/contrib/gis/geos/geometry.py",
+          "start_line": 127,
+          "end_line": 141,
+          "quote": "    def from_ewkt(ewkt):\n        ewkt = force_bytes(ewkt)\n        srid = None\n        parts = ewkt.split(b\";\", 1)\n        if len(parts) == 2:\n            srid_part, wkt = parts\n            match = re.match(rb\"SRID=(?P<srid>\\-?\\d+)\", srid_part)\n            if not match:\n                raise ValueError(\"EWKT has invalid SRID part.\")\n            srid = int(match[\"srid\"])\n        else:\n            wkt = ewkt\n        if not wkt:\n            raise ValueError(\"Expected WKT but got an empty string.\")\n        return GEOSGeometry(GEOSGeometry._from_wkt(wkt), srid=srid)",
+          "explanation": "The imported utility converts the complete EWKT value to bytes so byte delimiters and a byte regex can extract an optional SRID; the remaining WKT is parsed and used to construct GEOSGeometry. Encoding=\"utf-8\", strings_only=False, and errors=\"strict\" are defaults. Invalid SRID syntax and empty WKT raise ValueError after conversion; encoding and parser errors propagate."
+        },
+        {
+          "id": "GEOSGeometryBase.relate_pattern",
+          "path": "django/contrib/gis/geos/geometry.py",
+          "start_line": 350,
+          "end_line": 357,
+          "quote": "    def relate_pattern(self, other, pattern):\n        \"\"\"\n        Return true if the elements in the DE-9IM intersection matrix for the\n        two Geometries match the elements in pattern.\n        \"\"\"\n        if not isinstance(pattern, str) or len(pattern) > 9:\n            raise GEOSException(\"invalid intersection matrix pattern\")\n        return capi.geos_relatepattern(self.ptr, other.ptr, force_bytes(pattern))",
+          "explanation": "After requiring a string pattern of at most nine characters, the imported utility converts that DE-9IM pattern to bytes for GEOS's relate-pattern predicate. Encoding=\"utf-8\", strings_only=False, and errors=\"strict\" are defaults. Invalid type/length raises GEOSException before conversion; other failures propagate."
+        },
+        {
+          "id": "GEOSGeometry.__init__",
+          "path": "django/contrib/gis/geos/geometry.py",
+          "start_line": 751,
+          "end_line": 770,
+          "quote": "        input_srid = None\n        if isinstance(geo_input, bytes):\n            geo_input = force_str(geo_input)\n        if isinstance(geo_input, str):\n            wkt_m = wkt_regex.match(geo_input)\n            if wkt_m:\n                # Handle WKT input.\n                if wkt_m[\"srid\"]:\n                    input_srid = int(wkt_m[\"srid\"])\n                g = self._from_wkt(force_bytes(wkt_m[\"wkt\"]), max_geom_collections)\n            elif hex_regex.match(geo_input):\n                # Handle HEXEWKB input.\n                g = wkb_r().read(force_bytes(geo_input), max_geom_collections)\n            elif json_regex.match(geo_input):\n                # Handle GeoJSON input.\n                ogr = gdal.OGRGeometry.from_json(geo_input)\n                g = ogr._geos_ptr()\n                input_srid = ogr.srid\n            else:\n                raise ValueError(\"String input unrecognized as WKT EWKT, and HEXEWKB.\")",
+          "explanation": "This constructor has two direct calls to the imported utility. A matched WKT substring is converted to bytes for _from_wkt; a matched hexadecimal EWKB string is converted for the WKB reader. Both use default encoding=\"utf-8\", strings_only=False, errors=\"strict\". Incoming bytes are first decoded by force_str and may subsequently reach either call. GeoJSON, pointer, memoryview, and geometry-object branches bypass these source calls. Unrecognized strings raise ValueError, invalid types raise TypeError later, null parser results raise GEOSException, conflicting SRIDs raise ValueError, and conversion/parser errors are not caught."
+        },
+        {
+          "id": "_WKTReader.read",
+          "path": "django/contrib/gis/geos/prototypes/io.py",
+          "start_line": 249,
+          "end_line": 253,
+          "quote": "    def read(self, wkt, max_geom_collections=MAX_GEOM_COLLECTIONS):\n        if not isinstance(wkt, (bytes, str)):\n            raise TypeError(f\"'wkt' must be bytes or str (got {wkt!r} instead).\")\n        self.limit(wkt, max_geom_collections)\n        return wkt_reader_read(self.ptr, force_bytes(wkt))",
+          "explanation": "After accepting only bytes or str and applying the collection-depth limiter, the imported utility normalizes WKT to bytes for the low-level GEOS reader, which returns a pointer. Encoding=\"utf-8\", strings_only=False, and errors=\"strict\" are defaults. Invalid types raise TypeError and excessive nesting can raise ValueError before conversion; reader and encoding errors propagate."
+        },
+        {
+          "id": "EmailMessage._create_mime_attachment",
+          "path": "django/core/mail/message.py",
+          "start_line": 389,
+          "end_line": 404,
+          "quote": "        basetype, subtype = mimetype.split(\"/\", 1)\n        if basetype == \"text\":\n            encoding = self.encoding or settings.DEFAULT_CHARSET\n            attachment = SafeMIMEText(content, subtype, encoding)\n        elif basetype == \"message\" and subtype == \"rfc822\":\n            # Bug #18967: Per RFC 2046 Section 5.2.1, message/rfc822\n            # attachments must not be base64 encoded.\n            if isinstance(content, EmailMessage):\n                # convert content into an email.Message first\n                content = content.message()\n            elif not isinstance(content, Message):\n                # For compatibility with existing code, parse the message\n                # into an email.Message object if it is not one already.\n                content = message_from_bytes(force_bytes(content))\n\n            attachment = SafeMIMEMessage(content, subtype)",
+          "explanation": "Only for a message/rfc822 attachment whose content is neither Django's EmailMessage nor an email.message.Message does the imported utility convert content to bytes. message_from_bytes parses those bytes, and SafeMIMEMessage wraps the parsed message without base64 encoding. The call defaults to encoding=\"utf-8\", strings_only=False, errors=\"strict\"; it does not use self.encoding. Other MIME/content branches bypass it, and parsing or encoding errors propagate."
+        },
+        {
+          "id": "_cookie_signer_key",
+          "path": "django/core/signing.py",
+          "start_line": 104,
+          "end_line": 106,
+          "quote": "def _cookie_signer_key(key):\n    # SECRET_KEYS items may be str or bytes.\n    return b\"django.http.cookies\" + force_bytes(key)",
+          "explanation": "The imported utility normalizes a str-or-bytes secret key to bytes, then the function prefixes the cookie-signing namespace. The result is used as the Signer key (and this function is separately mapped over fallback keys). Encoding=\"utf-8\", strings_only=False, and errors=\"strict\" are defaults. There are no guards or catches in this direct lexical caller."
+        },
+        {
+          "id": "OracleParam.__init__",
+          "path": "django/db/backends/oracle/base.py",
+          "start_line": 439,
+          "end_line": 455,
+          "quote": "        if hasattr(param, \"bind_parameter\"):\n            self.force_bytes = param.bind_parameter(cursor)\n        elif isinstance(param, (bytes, datetime.timedelta)):\n            self.force_bytes = param\n        else:\n            # To transmit to the database, we need Unicode if supported\n            # To get size right, we must consider bytes.\n            self.force_bytes = force_str(param, cursor.charset, strings_only)\n            if isinstance(self.force_bytes, str):\n                # We could optimize by only converting up to 4000 bytes here\n                string_size = len(force_bytes(param, cursor.charset, strings_only))\n        if hasattr(param, \"input_size\"):\n            # If parameter has `input_size` attribute, use that.\n            self.input_size = param.input_size\n        elif string_size > 4000:\n            # Mark any string param greater than 4000 characters as a CLOB.\n            self.input_size = Database.DB_TYPE_CLOB",
+          "explanation": "The bare force_bytes call is the imported utility; self.force_bytes is a similarly named instance attribute, not a receiver call. For parameters handled through force_str, the original param is converted solely to measure its encoded byte length; values over 4000 bytes select Oracle's CLOB input size, while the separately converted self.force_bytes value is transmitted. The call explicitly passes encoding=cursor.charset and strings_only=strings_only (whose constructor default is False); errors is omitted and defaults to \"strict\". bind_parameter values, bytes, timedeltas, and force_str results that are not str bypass the call. An explicit param.input_size overrides the size decision. No conversion exception is caught."
+        },
+        {
+          "id": "DatabaseOperations.convert_binaryfield_value",
+          "path": "django/db/backends/oracle/operations.py",
+          "start_line": 251,
+          "end_line": 259,
+          "quote": "    def convert_textfield_value(self, value, expression, connection):\n        if isinstance(value, Database.LOB):\n            value = value.read()\n        return value\n\n    def convert_binaryfield_value(self, value, expression, connection):\n        if isinstance(value, Database.LOB):\n            value = force_bytes(value.read())\n        return value",
+          "explanation": "For an Oracle LOB result, the imported utility converts the value returned by LOB.read() to bytes so the BinaryField converter returns binary data downstream. Non-LOB values are returned unchanged. Encoding=\"utf-8\", strings_only=False, and errors=\"strict\" are defaults. There is no local exception handling around the read or conversion."
+        },
+        {
+          "id": "FakePayload.write",
+          "path": "django/test/client.py",
+          "start_line": 112,
+          "end_line": 117,
+          "quote": "    def write(self, b, /):\n        if self.read_started:\n            raise ValueError(\"Unable to write a payload after it's been read\")\n        content = force_bytes(b)\n        self.__content.write(content)\n        self.__len += len(content)",
+          "explanation": "The imported utility converts the supplied test-request payload to bytes before writing it to the internal BytesIO and increasing the simulated content length. Encoding=\"utf-8\", strings_only=False, and errors=\"strict\" are defaults. Writing after any read is rejected before conversion; conversion and BytesIO errors propagate."
+        },
+        {
+          "id": "encode_multipart.to_bytes",
+          "path": "django/test/client.py",
+          "start_line": 286,
+          "end_line": 289,
+          "quote": "    lines = []\n\n    def to_bytes(s):\n        return force_bytes(s, settings.DEFAULT_CHARSET)",
+          "explanation": "This nested lexical function directly converts each multipart fragment supplied by encode_multipart\u2014boundaries, disposition headers, separators, ordinary form values, and the closing boundary\u2014to bytes for accumulation and final CRLF joining. It explicitly uses encoding=settings.DEFAULT_CHARSET; strings_only=False and errors=\"strict\" are defaults. The nested body has no guard or catch. Runtime calls are controlled by the outer function's None/file/iterable branching, but encode_multipart itself is not a direct force_bytes caller."
+        },
+        {
+          "id": "encode_file.to_bytes",
+          "path": "django/test/client.py",
+          "start_line": 340,
+          "end_line": 367,
+          "quote": "def encode_file(boundary, key, file):\n    def to_bytes(s):\n        return force_bytes(s, settings.DEFAULT_CHARSET)\n\n    # file.name might not be a string. For example, it's an int for\n    # tempfile.TemporaryFile().\n    file_has_string_name = hasattr(file, \"name\") and isinstance(file.name, str)\n    filename = os.path.basename(file.name) if file_has_string_name else \"\"\n\n    if hasattr(file, \"content_type\"):\n        content_type = file.content_type\n    elif filename:\n        content_type = mimetypes.guess_type(filename)[0]\n    else:\n        content_type = None\n\n    if content_type is None:\n        content_type = \"application/octet-stream\"\n    filename = filename or key\n    return [\n        to_bytes(\"--%s\" % boundary),\n        to_bytes(\n            'Content-Disposition: form-data; name=\"%s\"; filename=\"%s\"' % (key, filename)\n        ),\n        to_bytes(\"Content-Type: %s\" % content_type),\n        b\"\",\n        to_bytes(file.read()),\n    ]",
+          "explanation": "This nested function converts the multipart file boundary, disposition header, content-type header, and file.read() result into byte chunks returned to encode_multipart for CRLF joining. It explicitly uses encoding=settings.DEFAULT_CHARSET; strings_only=False and errors=\"strict\" are defaults. The enclosing function guards non-string filenames and supplies fallback filename/content type, but the nested caller itself catches nothing, so read or encoding errors propagate."
+        },
+        {
+          "id": "RequestFactory._encode_data",
+          "path": "django/test/client.py",
+          "start_line": 438,
+          "end_line": 448,
+          "quote": "    def _encode_data(self, data, content_type):\n        if content_type is MULTIPART_CONTENT:\n            return encode_multipart(BOUNDARY, data)\n        else:\n            # Encode the content so that the byte representation is correct.\n            match = CONTENT_TYPE_RE.match(content_type)\n            if match:\n                charset = match[1]\n            else:\n                charset = settings.DEFAULT_CHARSET\n            return force_bytes(data, encoding=charset)",
+          "explanation": "For non-multipart request data, the imported utility converts the body using a charset extracted from content_type or settings.DEFAULT_CHARSET, and the resulting bytes flow into the test request body. encoding is explicitly passed by keyword as charset; strings_only=False and errors=\"strict\" are defaults. The MULTIPART_CONTENT identity branch bypasses this call and delegates to encode_multipart. There is no local exception handling."
+        },
+        {
+          "id": "RequestFactory.generic",
+          "path": "django/test/client.py",
+          "start_line": 645,
+          "end_line": 660,
+          "quote": "        \"\"\"Construct an arbitrary HTTP request.\"\"\"\n        parsed = urlsplit(str(path))  # path can be lazy\n        data = force_bytes(data, settings.DEFAULT_CHARSET)\n        r = {\n            \"PATH_INFO\": self._get_path(parsed),\n            \"REQUEST_METHOD\": method,\n            \"SERVER_PORT\": \"443\" if secure else \"80\",\n            \"wsgi.url_scheme\": \"https\" if secure else \"http\",\n        }\n        if data:\n            r.update(\n                {\n                    \"CONTENT_LENGTH\": str(len(data)),\n                    \"CONTENT_TYPE\": content_type,\n                    \"wsgi.input\": FakePayload(data),\n                }",
+          "explanation": "The imported utility converts the generic WSGI request body to bytes. Those bytes determine CONTENT_LENGTH and initialize FakePayload when nonempty; the completed environment is passed to self.request. The call explicitly uses encoding=settings.DEFAULT_CHARSET, with default strings_only=False and errors=\"strict\". Empty bytes suppress body headers/input. No conversion exception is caught."
+        },
+        {
+          "id": "AsyncRequestFactory.generic",
+          "path": "django/test/client.py",
+          "start_line": 745,
+          "end_line": 764,
+          "quote": "        \"\"\"Construct an arbitrary HTTP request.\"\"\"\n        parsed = urlsplit(str(path))  # path can be lazy.\n        data = force_bytes(data, settings.DEFAULT_CHARSET)\n        s = {\n            \"method\": method,\n            \"path\": self._get_path(parsed),\n            \"server\": (\"127.0.0.1\", \"443\" if secure else \"80\"),\n            \"scheme\": \"https\" if secure else \"http\",\n            \"headers\": [(b\"host\", b\"testserver\")],\n        }\n        if self.defaults:\n            extra = {**self.defaults, **extra}\n        if data:\n            s[\"headers\"].extend(\n                [\n                    (b\"content-length\", str(len(data)).encode(\"ascii\")),\n                    (b\"content-type\", content_type.encode(\"ascii\")),\n                ]\n            )\n            s[\"_body_file\"] = FakePayload(data)",
+          "explanation": "The imported utility converts the generic ASGI request body to bytes. Nonempty output supplies content headers and a FakePayload body file before the scope is passed to self.request. The call explicitly uses encoding=settings.DEFAULT_CHARSET; strings_only=False and errors=\"strict\" are defaults. Empty output bypasses body setup, and no conversion exception is caught."
+        },
+        {
+          "id": "salted_hmac",
+          "path": "django/utils/crypto.py",
+          "start_line": 27,
+          "end_line": 45,
+          "quote": "    if secret is None:\n        secret = settings.SECRET_KEY\n\n    key_salt = force_bytes(key_salt)\n    secret = force_bytes(secret)\n    try:\n        hasher = getattr(hashlib, algorithm)\n    except AttributeError as e:\n        raise InvalidAlgorithm(\n            \"%r is not an algorithm accepted by the hashlib module.\" % algorithm\n        ) from e\n    # We need to generate a derived key from our base key.  We can do this by\n    # passing the key_salt and our base key through a pseudo-random function.\n    key = hasher(key_salt + secret).digest()\n    # If len(key_salt + secret) > block size of the hash algorithm, the above\n    # line is redundant and could be replaced by key = key_salt + secret, since\n    # the hmac module does the same thing for keys longer than the block size.\n    # However, we need to ensure that we *always* do this.\n    return hmac.new(key, msg=force_bytes(value), digestmod=hasher)",
+          "explanation": "This function directly calls the imported utility three times: key_salt and either the supplied secret or settings.SECRET_KEY become bytes for deriving the HMAC key, and value becomes the HMAC message bytes. All three calls default to encoding=\"utf-8\", strings_only=False, errors=\"strict\". Only missing-secret substitution guards conversion. Unknown algorithms are translated from AttributeError to InvalidAlgorithm after the first two conversions; encoding and HMAC errors propagate."
+        },
+        {
+          "id": "constant_time_compare",
+          "path": "django/utils/crypto.py",
+          "start_line": 65,
+          "end_line": 67,
+          "quote": "def constant_time_compare(val1, val2):\n    \"\"\"Return True if the two strings are equal, False otherwise.\"\"\"\n    return secrets.compare_digest(force_bytes(val1), force_bytes(val2))",
+          "explanation": "The imported utility converts both comparison operands to bytes before secrets.compare_digest performs the constant-time equality check. Both calls use default encoding=\"utf-8\", strings_only=False, errors=\"strict\". There are no guards or catches; conversion/type errors propagate."
+        },
+        {
+          "id": "pbkdf2",
+          "path": "django/utils/crypto.py",
+          "start_line": 70,
+          "end_line": 77,
+          "quote": "def pbkdf2(password, salt, iterations, dklen=0, digest=None):\n    \"\"\"Return the hash of password using pbkdf2.\"\"\"\n    if digest is None:\n        digest = hashlib.sha256\n    dklen = dklen or None\n    password = force_bytes(password)\n    salt = force_bytes(salt)\n    return hashlib.pbkdf2_hmac(digest().name, password, salt, iterations, dklen)",
+          "explanation": "The imported utility converts password and salt to bytes consumed by hashlib.pbkdf2_hmac. Both calls use default encoding=\"utf-8\", strings_only=False, errors=\"strict\". The method substitutes SHA-256 for a missing digest and normalizes a falsey dklen to None; it performs no local exception handling."
+        },
+        {
+          "id": "smart_bytes",
+          "path": "django/utils/encoding.py",
+          "start_line": 75,
+          "end_line": 84,
+          "quote": "def smart_bytes(s, encoding=\"utf-8\", strings_only=False, errors=\"strict\"):\n    \"\"\"\n    Return a bytestring version of 's', encoded as specified in 'encoding'.\n\n    If strings_only is True, don't convert (some) non-string-like objects.\n    \"\"\"\n    if isinstance(s, Promise):\n        # The input is the result of a gettext_lazy() call.\n        return s\n    return force_bytes(s, encoding, strings_only, errors)",
+          "explanation": "This bare call resolves to django.utils.encoding.force_bytes defined later in the same module. It converts s for the return value while explicitly forwarding all three parameters: encoding (default \"utf-8\"), strings_only (default False), and errors (default \"strict\"). Promise instances are returned unchanged, so the lexical call is not runtime-reachable for that branch. There is no exception handling."
+        },
+        {
+          "id": "uri_to_iri",
+          "path": "django/utils/encoding.py",
+          "start_line": 165,
+          "end_line": 188,
+          "quote": "    if uri is None:\n        return uri\n    uri = force_bytes(uri)\n    # Fast selective unquote: First, split on '%' and then starting with the\n    # second block, decode the first 2 bytes if they represent a hex code to\n    # decode. The rest of the block is the part after '%AB', not containing\n    # any '%'. Add that to the output without further processing.\n    bits = uri.split(b\"%\")\n    if len(bits) == 1:\n        iri = uri\n    else:\n        parts = [bits[0]]\n        append = parts.append\n        hextobyte = _hextobyte\n        for item in bits[1:]:\n            hex = item[:2]\n            if hex in hextobyte:\n                append(hextobyte[item[:2]])\n                append(item[2:])\n            else:\n                append(b\"%\")\n                append(item)\n        iri = b\"\".join(parts)\n    return repercent_broken_unicode(iri).decode()",
+          "explanation": "This bare call resolves to force_bytes in the same module and normalizes the URI to bytes for percent-sequence splitting and selective unquoting; the repaired byte result is finally decoded to the returned IRI string. The call uses default encoding=\"utf-8\", strings_only=False, errors=\"strict\". None returns before the call. There is no local catch for conversion or final decoding errors."
+        }
+      ]
+    },
+    "prompt_bytes": 1661,
+    "events_sha256": "3ab1dd5cf25c6be53560e236e6e8165c4978fd0879ea6a97f069bc33e073f1f7"
+  },
+  "columbus": {
+    "schema": "columbus.exploration-observation/v1",
+    "case": "archive-force-bytes-v2",
+    "condition": "columbus",
+    "repeat": 1,
+    "model_requested": "gpt-5.6-sol",
+    "effort_requested": "xhigh",
+    "evidence_mode": "saved_archive",
+    "elapsed_seconds": 538.752,
+    "return_code": 0,
+    "timed_out": false,
+    "source_unchanged": true,
+    "usage": {
+      "input_tokens": 348408,
+      "cached_input_tokens": 284160,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 15009,
+      "reasoning_output_tokens": 5165,
+      "uncached_input_tokens": 64248
+    },
+    "commands": [
+      {
+        "command": "/bin/zsh -lc \"sed -n '1,240p' /private/tmp/columbus-archive-force-bytes-v2-trial/runtime/SKILL.md\"",
+        "exit_code": 0,
+        "output_bytes": 3790,
+        "output_sha256": "f5f7543ee3a0942f51412fcc9efabeb62d9f9a588f6e1279239972d4723caf57"
+      },
+      {
+        "command": "/bin/zsh -lc \"/Users/rex/Desktop/columbus/.venv/bin/python /private/tmp/columbus-archive-force-bytes-v2-trial/runtime/columbus.py archive-callers django.utils.encoding.force_bytes --input /private/tmp/columbus-archive-force-bytes-v2-trial/graph.jsonl.xz --repo . --path 'django/*' --context-lines 8 --format text --budget-bytes 30000\"",
+        "exit_code": 0,
+        "output_bytes": 29200,
+        "output_sha256": "85fb6d5aae7eacda810d93127c10c5a307b9f4452355328c89cb0266c6b2409c"
+      },
+      {
+        "command": "/bin/zsh -lc \"/Users/rex/Desktop/columbus/.venv/bin/python /private/tmp/columbus-archive-force-bytes-v2-trial/runtime/columbus.py archive-callers django.utils.encoding.force_bytes --input /private/tmp/columbus-archive-force-bytes-v2-trial/graph.jsonl.xz --repo . --path 'django/*' --context-lines 8 --format text --budget-bytes 30000 --offset 25\"",
+        "exit_code": 0,
+        "output_bytes": 22558,
+        "output_sha256": "1937a9fbde3b0fd1f425db34dea4bcac171fbe26b3379f71bc5e3e26136467c1"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n --glob '*.py' '\\\\bforce_bytes\\\\s*\\\\(' django\"",
+        "exit_code": 0,
+        "output_bytes": 4389,
+        "output_sha256": "5403bb639bafc679712956a74a96a640db244486706c68443a9f880d885364cf"
+      },
+      {
+        "command": "/bin/zsh -lc \"sed -n '70,110p' django/utils/encoding.py\nsed -n '450,510p' django/contrib/auth/forms.py\nsed -n '45,115p' django/contrib/gis/gdal/datasource.py\nsed -n '30,70p' django/contrib/gis/gdal/driver.py\nsed -n '105,125p' django/contrib/gis/gdal/feature.py\nsed -n '150,185p' django/contrib/gis/gdal/geometries.py\nsed -n '215,240p' django/contrib/gis/gdal/layer.py\"",
+        "exit_code": 0,
+        "output_bytes": 9975,
+        "output_sha256": "342f7e1659f5517bfdd7db784c4ccd799d5917266c2fa53a12086737413ea5c1"
+      },
+      {
+        "command": "/bin/zsh -lc \"sed -n '80,220p' django/contrib/gis/gdal/raster/source.py\nsed -n '218,300p' django/contrib/gis/gdal/raster/source.py\nsed -n '485,515p' django/contrib/gis/gdal/raster/source.py\nsed -n '135,175p' django/contrib/gis/gdal/srs.py\nsed -n '295,350p' django/contrib/gis/gdal/srs.py\"",
+        "exit_code": 0,
+        "output_bytes": 12914,
+        "output_sha256": "65424d6ecd562bb6595b574b583e136b0c7a60b627f69688075acb3251701d5b"
+      },
+      {
+        "command": "/bin/zsh -lc \"sed -n '115,145p' django/contrib/gis/geos/geometry.py\nsed -n '340,365p' django/contrib/gis/geos/geometry.py\nsed -n '720,800p' django/contrib/gis/geos/geometry.py\nsed -n '235,260p' django/contrib/gis/geos/prototypes/io.py\nsed -n '370,415p' django/core/mail/message.py\nsed -n '95,112p' django/core/signing.py\nsed -n '400,465p' django/db/backends/oracle/base.py\nsed -n '245,265p' django/db/backends/oracle/operations.py\"",
+        "exit_code": 0,
+        "output_bytes": 12133,
+        "output_sha256": "9ad31b338fe02906639b0d53b837a53bdce78242bc08ca64d98f4dfc06d95821"
+      },
+      {
+        "command": "/bin/zsh -lc \"sed -n '90,125p' django/test/client.py\nsed -n '260,360p' django/test/client.py\nsed -n '425,460p' django/test/client.py\nsed -n '620,680p' django/test/client.py\nsed -n '720,790p' django/test/client.py\nsed -n '1,85p' django/utils/crypto.py\nsed -n '145,195p' django/utils/encoding.py\"",
+        "exit_code": 0,
+        "output_bytes": 14735,
+        "output_sha256": "03f6d2ec8aaccfe64d52e672a849704e08c7fe713a6378759b7ded2e8a398d7c"
+      },
+      {
+        "command": "/bin/zsh -lc \"sed -n '330,380p' django/test/client.py\nsed -n '1,30p' django/test/client.py\nrg -n '\"'^from django'\"\\\\.utils\\\\.encoding import|\"'^import django'\"\\\\.utils\\\\.encoding' django/contrib/auth/forms.py django/contrib/gis/gdal/datasource.py django/contrib/gis/gdal/driver.py django/contrib/gis/gdal/feature.py django/contrib/gis/gdal/geometries.py django/contrib/gis/gdal/layer.py django/contrib/gis/gdal/raster/source.py django/contrib/gis/gdal/srs.py django/contrib/gis/geos/geometry.py django/contrib/gis/geos/prototypes/io.py django/core/mail/message.py django/core/signing.py django/db/backends/oracle/base.py django/db/backends/oracle/operations.py django/test/client.py django/utils/crypto.py\"",
+        "exit_code": 0,
+        "output_bytes": 3922,
+        "output_sha256": "e66b09a4f4f1d1db9030a025a263d79254e383257cb4b33309bf357623c70e28"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n --glob '*.py' '(force_bytes\\\\s+as|import\\\\s+django\\\\.utils\\\\.encoding|from\\\\s+django\\\\.utils\\\\s+import\\\\s+encoding|django\\\\.utils\\\\.encoding\\\\.force_bytes|encoding\\\\.force_bytes)' django\"",
+        "exit_code": 1,
+        "output_bytes": 0,
+        "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/gis/gdal/raster/source.py | sed -n '490,513p'\nnl -ba django/test/client.py | sed -n '280,350p'\nnl -ba django/contrib/gis/geos/geometry.py | sed -n '123,143p'\nnl -ba django/utils/encoding.py | sed -n '75,105p'\"",
+        "exit_code": 0,
+        "output_bytes": 6081,
+        "output_sha256": "d2b344524c89e34beea14ede5aee138558425874b84b051197c24e98c5545d41"
+      }
+    ],
+    "command_count": 11,
+    "command_output_bytes": 119697,
+    "failed_commands": 1,
+    "other_tool_types": [],
+    "runtime_warnings": [],
+    "turn_failed": false,
+    "quality": {
+      "passed": true,
+      "findings": [
+        {
+          "id": "PasswordResetForm.save",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "DataSource.__init__",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "DataSource.__getitem__",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "Driver.__init__",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "Feature.index",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "OGRGeometry.from_json",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "OGRGeometry.from_gml",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "Layer.test_capability",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "GDALRaster.__init__",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "GDALRaster.__del__",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "GDALRaster.vsi_buffer",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "GDALRaster.clone",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "SpatialReference.attr_value",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "SpatialReference.auth_name",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "SpatialReference.auth_code",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "SpatialReference.import_user_input",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "SpatialReference.import_wkt",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "SpatialReference.xml",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "GEOSGeometryBase.from_ewkt",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "GEOSGeometryBase.relate_pattern",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "GEOSGeometry.__init__",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "_WKTReader.read",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "EmailMessage._create_mime_attachment",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "_cookie_signer_key",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "OracleParam.__init__",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "DatabaseOperations.convert_binaryfield_value",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "FakePayload.write",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "encode_multipart.to_bytes",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "encode_file.to_bytes",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "RequestFactory._encode_data",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "RequestFactory.generic",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "AsyncRequestFactory.generic",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "salted_hmac",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "constant_time_compare",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "pbkdf2",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "smart_bytes",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "uri_to_iri",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "__exact_caller_set__",
+          "passed": true,
+          "reason": "no extra callers"
+        }
+      ],
+      "grader_version": "caller-enumeration-1",
+      "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+    },
+    "index_preflight": null,
+    "archive_preflight": {
+      "passed": true,
+      "archive_sha256": "1d80eb233d8da303b984fc423bf453181b7443c636431cbeff4b6a18cf5a4e12",
+      "revision": "6f504f681d66baba3acc",
+      "source_files_verified": 6928,
+      "indexed_source_files_verified": 5465,
+      "counts": {
+        "files": 5465,
+        "nodes": 46630,
+        "scopes": 46964,
+        "edges": 86828,
+        "references": 188003,
+        "imports": 18268,
+        "diagnostics": 1
+      },
+      "consumer_index_absent": true
+    },
+    "archive_postflight": {
+      "passed": true,
+      "archive_sha256": "1d80eb233d8da303b984fc423bf453181b7443c636431cbeff4b6a18cf5a4e12",
+      "revision": "6f504f681d66baba3acc",
+      "source_files_verified": 6928,
+      "indexed_source_files_verified": 5465,
+      "counts": {
+        "files": 5465,
+        "nodes": 46630,
+        "scopes": 46964,
+        "edges": 86828,
+        "references": 188003,
+        "imports": 18268,
+        "diagnostics": 1
+      },
+      "consumer_index_absent": true
+    },
+    "answer": {
+      "findings": [
+        {
+          "id": "PasswordResetForm.save",
+          "path": "django/contrib/auth/forms.py",
+          "start_line": 485,
+          "end_line": 493,
+          "quote": "        for user in self.get_users(email):\n            user_email = getattr(user, email_field_name)\n            user_pk_bytes = force_bytes(UserModel._meta.pk.value_to_string(user))\n            context = {\n                \"email\": user_email,\n                \"domain\": domain,\n                \"site_name\": site_name,\n                \"uid\": urlsafe_base64_encode(user_pk_bytes),\n                \"user\": user,",
+          "explanation": "The imported force_bytes converts each eligible user's serialized primary-key value to bytes for URL-safe base64 encoding; the resulting uid is placed in the password-reset email context. The call omits all options, so encoding='utf-8', strings_only=False, and errors='strict'. It is lexically direct but runs only inside the loop over get_users(email). There is no local conversion-error handling."
+        },
+        {
+          "id": "DataSource.__getitem__",
+          "path": "django/contrib/gis/gdal/datasource.py",
+          "start_line": 93,
+          "end_line": 100,
+          "quote": "    def __getitem__(self, index):\n        \"Allows use of the index [] operator to get a layer at the index.\"\n        if isinstance(index, str):\n            try:\n                layer = capi.get_layer_by_name(self.ptr, force_bytes(index))\n            except GDALException:\n                raise IndexError(\"Invalid OGR layer name given: %s.\" % index)\n        elif isinstance(index, int):",
+          "explanation": "The imported force_bytes converts a string layer name before passing it to GDAL's get_layer_by_name; the returned pointer is later wrapped as a Layer. All options are omitted: UTF-8, strings_only=False, errors='strict'. This lexical call is reachable only for str indexes; integer lookup uses a different receiver method and other types raise TypeError. GDALException is translated to IndexError, but encoding exceptions are not caught."
+        },
+        {
+          "id": "DataSource.__init__",
+          "path": "django/contrib/gis/gdal/datasource.py",
+          "start_line": 64,
+          "end_line": 74,
+          "quote": "        if isinstance(ds_input, (str, Path)):\n            try:\n                # GDALOpenEx will auto-detect the data source type.\n                ds = capi.open_ds(\n                    force_bytes(ds_input),\n                    self._write | capi.GDAL_OF_VECTOR,\n                    None,\n                    None,\n                    None,\n                )\n            except GDALException:",
+          "explanation": "The imported force_bytes converts a str or Path data-source location for GDALOpenEx; the returned dataset pointer initializes self.ptr and its Driver. The call uses default encoding='utf-8', strings_only=False, errors='strict'. Pointer inputs follow another branch, and invalid types avoid the call. GDALException from opening is replaced with a clearer GDALException; strict encoding failures are outside that exception class and are not handled here."
+        },
+        {
+          "id": "Driver.__init__",
+          "path": "django/contrib/gis/gdal/driver.py",
+          "start_line": 43,
+          "end_line": 52,
+          "quote": "            # Checking the alias dictionary (case-insensitive) to see if an\n            # alias exists for the given driver.\n            if dr_input.lower() in self._alias:\n                name = self._alias[dr_input.lower()]\n            else:\n                name = dr_input\n\n            # Attempting to get the GDAL/OGR driver by the string name.\n            driver = c_void_p(capi.get_driver_by_name(force_bytes(name)))\n        elif isinstance(dr_input, int):",
+          "explanation": "The imported force_bytes converts the normalized driver name\u2014possibly replaced through the alias table\u2014for GDAL's name lookup, whose pointer initializes the wrapper. The options are all default: UTF-8, strings_only=False, errors='strict'. This call runs only for str input; integer and c_void_p inputs use other branches. There is no local catch, and a null driver pointer is subsequently reported as GDALException."
+        },
+        {
+          "id": "Feature.index",
+          "path": "django/contrib/gis/gdal/feature.py",
+          "start_line": 115,
+          "end_line": 120,
+          "quote": "    def index(self, field_name):\n        \"Return the index of the given field name.\"\n        i = capi.get_field_index(self.ptr, force_bytes(field_name))\n        if i < 0:\n            raise IndexError(\"Invalid OFT field name given: %s.\" % field_name)\n        return i",
+          "explanation": "The imported force_bytes converts field_name for GDAL's field-index lookup. The numeric index is returned, while a negative result raises IndexError. The conversion uses default UTF-8, strings_only=False, and strict errors. There is no pre-conversion type guard or local exception handling for conversion/C-API exceptions."
+        },
+        {
+          "id": "OGRGeometry.from_gml",
+          "path": "django/contrib/gis/gdal/geometries.py",
+          "start_line": 175,
+          "end_line": 176,
+          "quote": "    def from_gml(cls, gml_string):\n        return cls(capi.from_gml(force_bytes(gml_string)))",
+          "explanation": "The imported force_bytes converts the GML input for the GDAL parser, and the resulting geometry pointer is passed to cls. The call uses encoding='utf-8', strings_only=False, errors='strict' by default. There are no guards or local exception handlers; this direct lexical call executes whenever the classmethod is invoked."
+        },
+        {
+          "id": "OGRGeometry.from_json",
+          "path": "django/contrib/gis/gdal/geometries.py",
+          "start_line": 171,
+          "end_line": 172,
+          "quote": "    def from_json(geom_input):\n        return OGRGeometry(OGRGeometry._from_json(force_bytes(geom_input)))",
+          "explanation": "The imported force_bytes converts the GeoJSON input before the class's distinct _from_json receiver method forwards it to GDAL; its result is wrapped in OGRGeometry. Encoding defaults to UTF-8, strings_only=False, errors='strict'. The static method has no guard or local exception handling, so the lexical call is reached on every invocation."
+        },
+        {
+          "id": "Layer.test_capability",
+          "path": "django/contrib/gis/gdal/layer.py",
+          "start_line": 226,
+          "end_line": 234,
+          "quote": "    def test_capability(self, capability):\n        \"\"\"\n        Return a bool indicating whether the this Layer supports the given\n        capability (a string).  Valid capability strings include:\n          'RandomRead', 'SequentialWrite', 'RandomWrite', 'FastSpatialFilter',\n          'FastFeatureCount', 'FastGetExtent', 'CreateField', 'Transactions',\n          'DeleteFeature', and 'FastSetNextByIndex'.\n        \"\"\"\n        return bool(capi.test_capability(self.ptr, force_bytes(capability)))",
+          "explanation": "The imported force_bytes converts the capability name for GDAL's capability query, and the C result is normalized to bool. All force_bytes arguments beyond the value are omitted, giving UTF-8, strings_only=False, and strict errors. Despite the docstring's string contract, there is no runtime type guard or local exception handling."
+        },
+        {
+          "id": "GDALRaster.__del__",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start_line": 218,
+          "end_line": 222,
+          "quote": "    def __del__(self):\n        if self.is_vsi_based:\n            # Remove the temporary file from the VSI in-memory filesystem.\n            capi.unlink_vsi_file(force_bytes(self.name))\n        super().__del__()",
+          "explanation": "The imported force_bytes converts the raster's name to the byte path expected by GDAL's VSI unlink operation. It uses default UTF-8, strings_only=False, errors='strict'. The lexical call runs only when is_vsi_based is true; afterward the superclass destructor runs. No exception is caught locally, including conversion or unlink failures."
+        },
+        {
+          "id": "GDALRaster.__init__",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start_line": 111,
+          "end_line": 130,
+          "quote": "            # Pass data to ctypes, keeping a reference to the ctypes object so\n            # that the vsimem file remains available until the GDALRaster is\n            # deleted.\n            self._ds_input = c_buffer(ds_input)\n            # Create random name to reference in vsimem filesystem.\n            vsi_path = os.path.join(VSI_MEM_FILESYSTEM_BASE_PATH, str(uuid.uuid4()))\n            # Create vsimem file from buffer.\n            capi.create_vsi_file_from_mem_buffer(\n                force_bytes(vsi_path),\n                byref(self._ds_input),\n                size,\n                VSI_TAKE_BUFFER_OWNERSHIP,\n            )\n            # Open the new vsimem file as a GDALRaster.\n            try:\n                self._ptr = capi.open_ds(force_bytes(vsi_path), self._write)\n            except GDALException:\n                # Remove the broken file from the VSI filesystem.\n                capi.unlink_vsi_file(force_bytes(vsi_path))\n                raise GDALException(\"Failed creating VSI raster from the input buffer.\")",
+          "explanation": "This method has five direct calls to the imported target, all with default UTF-8, strings_only=False, and strict errors. A preprocessed str path is encoded for open_ds after a non-VSI existence check; bytes input causes a generated VSI path to be encoded for creation, opening, and cleanup after an open GDALException; dict input encodes its name (defaulting to an empty string) for create_ds after driver/name, dimensions, and SRID validation. Existing-pointer and invalid-type branches do not execute these calls. String-path open errors are re-raised with context; VSI open failure triggers unlink and a new GDALException. Encoding failures and creation/unlink failures are not locally caught."
+        },
+        {
+          "id": "GDALRaster.clone",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start_line": 494,
+          "end_line": 513,
+          "quote": "    def clone(self, name=None):\n        \"\"\"Return a clone of this GDALRaster.\"\"\"\n        if name:\n            clone_name = name\n        elif self.driver.name != \"MEM\":\n            clone_name = self.name + \"_copy.\" + self.driver.name\n        else:\n            clone_name = os.path.join(VSI_MEM_FILESYSTEM_BASE_PATH, str(uuid.uuid4()))\n        return GDALRaster(\n            capi.copy_ds(\n                self.driver._ptr,\n                force_bytes(clone_name),\n                self._ptr,\n                c_int(),\n                c_char_p(),\n                c_void_p(),\n                c_void_p(),\n            ),\n            write=self._write,\n        )",
+          "explanation": "The imported force_bytes converts the chosen destination name for GDAL's copy_ds; its returned pointer is immediately wrapped as a GDALRaster preserving write mode. The name is the truthy argument, a derived file name for non-MEM drivers, or a generated VSI path. Conversion options are the defaults UTF-8, strings_only=False, errors='strict'. No branch avoids selecting a name, and there is no local exception handling."
+        },
+        {
+          "id": "GDALRaster.vsi_buffer",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start_line": 278,
+          "end_line": 291,
+          "quote": "        if not (\n            self.is_vsi_based and self.name.startswith(VSI_MEM_FILESYSTEM_BASE_PATH)\n        ):\n            return None\n        # Prepare an integer that will contain the buffer length.\n        out_length = c_int()\n        # Get the data using the vsi file name.\n        dat = capi.get_mem_buffer_from_vsi_file(\n            force_bytes(self.name),\n            byref(out_length),\n            VSI_DELETE_BUFFER_ON_READ,\n        )\n        # Read the full buffer pointer.\n        return string_at(dat, out_length.value)",
+          "explanation": "The property's imported force_bytes call converts the in-memory VSI file name for GDAL. GDAL returns a pointer and length, with deletion-on-read requested, and string_at copies the result into Python bytes. The call uses default UTF-8, strings_only=False, errors='strict'. It is reachable only for VSI-memory-backed rasters; all others return None. No local exceptions are caught."
+        },
+        {
+          "id": "SpatialReference.attr_value",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start_line": 147,
+          "end_line": 154,
+          "quote": "    def attr_value(self, target, index=0):\n        \"\"\"\n        The attribute value for the given target node (e.g. 'PROJCS'). The index\n        keyword specifies an index of the child node to return.\n        \"\"\"\n        if not isinstance(target, str) or not isinstance(index, int):\n            raise TypeError\n        return capi.get_attr_value(self.ptr, force_bytes(target), index)",
+          "explanation": "The imported force_bytes converts the validated string target node for GDAL's attribute lookup; the requested child index and C result flow directly through. It uses default UTF-8, strings_only=False, errors='strict'. Non-str targets or non-int indexes raise TypeError before runtime reaches the call. There is no local exception handling afterward."
+        },
+        {
+          "id": "SpatialReference.auth_code",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start_line": 162,
+          "end_line": 166,
+          "quote": "    def auth_code(self, target):\n        \"Return the authority code for the given string target node.\"\n        return capi.get_auth_code(\n            self.ptr, target if target is None else force_bytes(target)\n        )",
+          "explanation": "The imported force_bytes converts a non-None target node for GDAL's authority-code lookup. A None target bypasses the lexical call at runtime and is passed through directly. The conversion has default encoding='utf-8', strings_only=False, errors='strict'; there is no other type guard or local exception handling."
+        },
+        {
+          "id": "SpatialReference.auth_name",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start_line": 156,
+          "end_line": 160,
+          "quote": "    def auth_name(self, target):\n        \"Return the authority name for the given string target node.\"\n        return capi.get_auth_name(\n            self.ptr, target if target is None else force_bytes(target)\n        )",
+          "explanation": "The imported force_bytes converts a non-None target node for GDAL's authority-name lookup. None follows the conditional's other arm and therefore does not execute the call. The call otherwise uses UTF-8, strings_only=False, and strict errors by default, with no type validation or local exception handling."
+        },
+        {
+          "id": "SpatialReference.import_user_input",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start_line": 307,
+          "end_line": 309,
+          "quote": "    def import_user_input(self, user_input):\n        \"Import the Spatial Reference from the given user input string.\"\n        capi.from_user_input(self.ptr, force_bytes(user_input))",
+          "explanation": "The imported force_bytes converts the user-supplied spatial-reference description for GDAL's general user-input parser, which mutates the referenced SRS. All optional arguments are omitted: UTF-8, strings_only=False, errors='strict'. The method has no guards or local exception handlers, so its direct lexical call executes whenever invoked."
+        },
+        {
+          "id": "SpatialReference.import_wkt",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start_line": 311,
+          "end_line": 313,
+          "quote": "    def import_wkt(self, wkt):\n        \"Import the Spatial Reference from OGC WKT (string)\"\n        capi.from_wkt(self.ptr, byref(c_char_p(force_bytes(wkt))))",
+          "explanation": "The imported force_bytes converts WKT to bytes, which are wrapped in c_char_p and passed by reference to GDAL's WKT importer to populate the SRS. The conversion uses default UTF-8, strings_only=False, errors='strict'. There are no guards or local catches."
+        },
+        {
+          "id": "SpatialReference.xml",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start_line": 341,
+          "end_line": 343,
+          "quote": "    def xml(self, dialect=\"\"):\n        \"Return the XML representation of this Spatial Reference.\"\n        return capi.to_xml(self.ptr, byref(c_char_p()), force_bytes(dialect))",
+          "explanation": "The property's imported force_bytes call converts the requested XML dialect, including the default empty string, for GDAL's XML exporter; the exporter writes through the output c_char_p reference and returns the representation. force_bytes itself uses default UTF-8, strings_only=False, errors='strict'. There is no guard or local exception handling."
+        },
+        {
+          "id": "GEOSGeometry.__init__",
+          "path": "django/contrib/gis/geos/geometry.py",
+          "start_line": 752,
+          "end_line": 770,
+          "quote": "        if isinstance(geo_input, bytes):\n            geo_input = force_str(geo_input)\n        if isinstance(geo_input, str):\n            wkt_m = wkt_regex.match(geo_input)\n            if wkt_m:\n                # Handle WKT input.\n                if wkt_m[\"srid\"]:\n                    input_srid = int(wkt_m[\"srid\"])\n                g = self._from_wkt(force_bytes(wkt_m[\"wkt\"]), max_geom_collections)\n            elif hex_regex.match(geo_input):\n                # Handle HEXEWKB input.\n                g = wkb_r().read(force_bytes(geo_input), max_geom_collections)\n            elif json_regex.match(geo_input):\n                # Handle GeoJSON input.\n                ogr = gdal.OGRGeometry.from_json(geo_input)\n                g = ogr._geos_ptr()\n                input_srid = ogr.srid\n            else:\n                raise ValueError(\"String input unrecognized as WKT EWKT, and HEXEWKB.\")",
+          "explanation": "There are two direct imported force_bytes calls, both using default UTF-8, strings_only=False, errors='strict'. In the WKT branch the regex-captured WKT is encoded for self._from_wkt; in the HEXEWKB branch the whole string is encoded for the WKB reader. Bytes are first decoded by the distinct force_str function. Pointer, memoryview, cloned-geometry, and GeoJSON branches do not execute these lexical calls; GeoJSON's later OGR conversion is transitive and is separately attributed to OGRGeometry.from_json. Unrecognized strings, null parse results, and conflicting SRIDs raise local errors, but conversion errors are not caught."
+        },
+        {
+          "id": "GEOSGeometryBase.from_ewkt",
+          "path": "django/contrib/gis/geos/geometry.py",
+          "start_line": 127,
+          "end_line": 141,
+          "quote": "    def from_ewkt(ewkt):\n        ewkt = force_bytes(ewkt)\n        srid = None\n        parts = ewkt.split(b\";\", 1)\n        if len(parts) == 2:\n            srid_part, wkt = parts\n            match = re.match(rb\"SRID=(?P<srid>\\-?\\d+)\", srid_part)\n            if not match:\n                raise ValueError(\"EWKT has invalid SRID part.\")\n            srid = int(match[\"srid\"])\n        else:\n            wkt = ewkt\n        if not wkt:\n            raise ValueError(\"Expected WKT but got an empty string.\")\n        return GEOSGeometry(GEOSGeometry._from_wkt(wkt), srid=srid)",
+          "explanation": "The imported force_bytes normalizes EWKT to bytes so byte delimiters and a byte regex can separate and validate an optional SRID before the WKT is parsed into a GEOSGeometry. The call uses default UTF-8, strings_only=False, errors='strict'. It executes before all validation; malformed SRID or empty WKT raises ValueError, while conversion errors are not locally caught."
+        },
+        {
+          "id": "GEOSGeometryBase.relate_pattern",
+          "path": "django/contrib/gis/geos/geometry.py",
+          "start_line": 350,
+          "end_line": 357,
+          "quote": "    def relate_pattern(self, other, pattern):\n        \"\"\"\n        Return true if the elements in the DE-9IM intersection matrix for the\n        two Geometries match the elements in pattern.\n        \"\"\"\n        if not isinstance(pattern, str) or len(pattern) > 9:\n            raise GEOSException(\"invalid intersection matrix pattern\")\n        return capi.geos_relatepattern(self.ptr, other.ptr, force_bytes(pattern))",
+          "explanation": "The imported force_bytes converts a validated DE-9IM pattern for the GEOS relation predicate. The conversion defaults to UTF-8, strings_only=False, errors='strict'. Non-string or over-nine-character patterns raise GEOSException before the call; otherwise the C predicate receives both geometry pointers and the encoded pattern. No downstream exception is caught locally."
+        },
+        {
+          "id": "_WKTReader.read",
+          "path": "django/contrib/gis/geos/prototypes/io.py",
+          "start_line": 249,
+          "end_line": 253,
+          "quote": "    def read(self, wkt, max_geom_collections=MAX_GEOM_COLLECTIONS):\n        if not isinstance(wkt, (bytes, str)):\n            raise TypeError(f\"'wkt' must be bytes or str (got {wkt!r} instead).\")\n        self.limit(wkt, max_geom_collections)\n        return wkt_reader_read(self.ptr, force_bytes(wkt))",
+          "explanation": "The imported force_bytes converts str WKT, or leaves UTF-8 bytes unchanged, for the low-level GEOS wkt_reader_read call. It uses default UTF-8, strings_only=False, errors='strict'. A bytes/str type guard and the nesting limit run first; invalid types or excessive geometry-collection nesting prevent runtime reachability. There is no local catch around conversion or parsing."
+        },
+        {
+          "id": "EmailMessage._create_mime_attachment",
+          "path": "django/core/mail/message.py",
+          "start_line": 394,
+          "end_line": 404,
+          "quote": "            # Bug #18967: Per RFC 2046 Section 5.2.1, message/rfc822\n            # attachments must not be base64 encoded.\n            if isinstance(content, EmailMessage):\n                # convert content into an email.Message first\n                content = content.message()\n            elif not isinstance(content, Message):\n                # For compatibility with existing code, parse the message\n                # into an email.Message object if it is not one already.\n                content = message_from_bytes(force_bytes(content))\n\n            attachment = SafeMIMEMessage(content, subtype)",
+          "explanation": "The imported force_bytes converts raw message/rfc822 attachment content for email.message_from_bytes; the parsed Message is then wrapped in SafeMIMEMessage without base64 encoding. The call uses default UTF-8, strings_only=False, errors='strict'. It is reachable only for the message/rfc822 MIME branch when content is neither Django EmailMessage nor stdlib Message; text and other attachment branches avoid it. No local parsing or conversion exception handling is present."
+        },
+        {
+          "id": "_cookie_signer_key",
+          "path": "django/core/signing.py",
+          "start_line": 104,
+          "end_line": 106,
+          "quote": "def _cookie_signer_key(key):\n    # SECRET_KEYS items may be str or bytes.\n    return b\"django.http.cookies\" + force_bytes(key)",
+          "explanation": "The imported force_bytes normalizes a string-or-bytes secret key before prefixing it with the cookie-signing namespace; the concatenated bytes become signer key material. The call has default UTF-8, strings_only=False, errors='strict'. It is unconditional and has no local guards or exception handling."
+        },
+        {
+          "id": "OracleParam.__init__",
+          "path": "django/db/backends/oracle/base.py",
+          "start_line": 441,
+          "end_line": 455,
+          "quote": "        elif isinstance(param, (bytes, datetime.timedelta)):\n            self.force_bytes = param\n        else:\n            # To transmit to the database, we need Unicode if supported\n            # To get size right, we must consider bytes.\n            self.force_bytes = force_str(param, cursor.charset, strings_only)\n            if isinstance(self.force_bytes, str):\n                # We could optimize by only converting up to 4000 bytes here\n                string_size = len(force_bytes(param, cursor.charset, strings_only))\n        if hasattr(param, \"input_size\"):\n            # If parameter has `input_size` attribute, use that.\n            self.input_size = param.input_size\n        elif string_size > 4000:\n            # Mark any string param greater than 4000 characters as a CLOB.\n            self.input_size = Database.DB_TYPE_CLOB",
+          "explanation": "The direct imported function call converts the original parameter solely to measure its encoded byte length; that length can select Oracle CLOB input sizing when no explicit input_size exists. This is distinct from the self.force_bytes attribute and from force_str. encoding is explicitly cursor.charset, strings_only is explicitly the constructor argument, and errors is omitted so it is 'strict'. Runtime reaches the call only in the general parameter branch and only when force_str produced str; bind_parameter values, bytes, timedeltas, and protected values skipped by strings_only can avoid it. There is no local exception handling."
+        },
+        {
+          "id": "DatabaseOperations.convert_binaryfield_value",
+          "path": "django/db/backends/oracle/operations.py",
+          "start_line": 256,
+          "end_line": 259,
+          "quote": "    def convert_binaryfield_value(self, value, expression, connection):\n        if isinstance(value, Database.LOB):\n            value = force_bytes(value.read())\n        return value",
+          "explanation": "The imported force_bytes converts the contents read from an Oracle LOB into the bytes representation expected for a BinaryField result. It uses default UTF-8, strings_only=False, errors='strict'. The lexical call executes only for Database.LOB values; other values pass through unchanged. Read and conversion exceptions are not caught locally."
+        },
+        {
+          "id": "AsyncRequestFactory.generic",
+          "path": "django/test/client.py",
+          "start_line": 745,
+          "end_line": 760,
+          "quote": "        \"\"\"Construct an arbitrary HTTP request.\"\"\"\n        parsed = urlsplit(str(path))  # path can be lazy.\n        data = force_bytes(data, settings.DEFAULT_CHARSET)\n        s = {\n            \"method\": method,\n            \"path\": self._get_path(parsed),\n            \"server\": (\"127.0.0.1\", \"443\" if secure else \"80\"),\n            \"scheme\": \"https\" if secure else \"http\",\n            \"headers\": [(b\"host\", b\"testserver\")],\n        }\n        if self.defaults:\n            extra = {**self.defaults, **extra}\n        if data:\n            s[\"headers\"].extend(\n                [\n                    (b\"content-length\", str(len(data)).encode(\"ascii\")),",
+          "explanation": "The imported force_bytes converts the arbitrary request body before constructing the ASGI-like scope. encoding is explicitly settings.DEFAULT_CHARSET; strings_only=False and errors='strict' are defaults. The lexical call always runs after path parsing, even for empty data; only nonempty bytes are placed in FakePayload with content headers. There is no local conversion handling."
+        },
+        {
+          "id": "FakePayload.write",
+          "path": "django/test/client.py",
+          "start_line": 112,
+          "end_line": 117,
+          "quote": "    def write(self, b, /):\n        if self.read_started:\n            raise ValueError(\"Unable to write a payload after it's been read\")\n        content = force_bytes(b)\n        self.__content.write(content)\n        self.__len += len(content)",
+          "explanation": "The imported force_bytes normalizes appended payload content before writing it to the internal byte stream and increasing the tracked byte length. It uses default UTF-8, strings_only=False, errors='strict'. If reading has begun, ValueError is raised before runtime reaches the call. No conversion or stream-write exception is caught."
+        },
+        {
+          "id": "RequestFactory._encode_data",
+          "path": "django/test/client.py",
+          "start_line": 438,
+          "end_line": 448,
+          "quote": "    def _encode_data(self, data, content_type):\n        if content_type is MULTIPART_CONTENT:\n            return encode_multipart(BOUNDARY, data)\n        else:\n            # Encode the content so that the byte representation is correct.\n            match = CONTENT_TYPE_RE.match(content_type)\n            if match:\n                charset = match[1]\n            else:\n                charset = settings.DEFAULT_CHARSET\n            return force_bytes(data, encoding=charset)",
+          "explanation": "The imported force_bytes converts non-multipart request data using the charset parsed from content_type or settings.DEFAULT_CHARSET. encoding is explicit by keyword; strings_only=False and errors='strict' are defaults. Multipart identity takes the separate encode_multipart route and does not reach this lexical call. The returned bytes become the request body, with no local exception handling."
+        },
+        {
+          "id": "RequestFactory.generic",
+          "path": "django/test/client.py",
+          "start_line": 645,
+          "end_line": 660,
+          "quote": "        \"\"\"Construct an arbitrary HTTP request.\"\"\"\n        parsed = urlsplit(str(path))  # path can be lazy\n        data = force_bytes(data, settings.DEFAULT_CHARSET)\n        r = {\n            \"PATH_INFO\": self._get_path(parsed),\n            \"REQUEST_METHOD\": method,\n            \"SERVER_PORT\": \"443\" if secure else \"80\",\n            \"wsgi.url_scheme\": \"https\" if secure else \"http\",\n        }\n        if data:\n            r.update(\n                {\n                    \"CONTENT_LENGTH\": str(len(data)),\n                    \"CONTENT_TYPE\": content_type,\n                    \"wsgi.input\": FakePayload(data),\n                }",
+          "explanation": "The imported force_bytes converts arbitrary request data before building the WSGI environment. encoding is explicitly settings.DEFAULT_CHARSET, while strings_only=False and errors='strict' default. The call executes even for an empty body; only truthy data adds content metadata and FakePayload. There is no local conversion handling."
+        },
+        {
+          "id": "encode_file.to_bytes",
+          "path": "django/test/client.py",
+          "start_line": 340,
+          "end_line": 347,
+          "quote": "def encode_file(boundary, key, file):\n    def to_bytes(s):\n        return force_bytes(s, settings.DEFAULT_CHARSET)\n\n    # file.name might not be a string. For example, it's an int for\n    # tempfile.TemporaryFile().\n    file_has_string_name = hasattr(file, \"name\") and isinstance(file.name, str)\n    filename = os.path.basename(file.name) if file_has_string_name else \"\"",
+          "explanation": "This call belongs lexically to the nested to_bytes function, not to encode_file itself. When encode_file invokes it, it converts the multipart boundary, disposition and content-type headers, and file.read() result before returning a list of byte parts. encoding is explicitly settings.DEFAULT_CHARSET; strings_only=False and errors='strict' default. Filename/content-type fallback logic occurs in the outer function, while the nested caller has no guards or exception handling."
+        },
+        {
+          "id": "encode_multipart.to_bytes",
+          "path": "django/test/client.py",
+          "start_line": 286,
+          "end_line": 304,
+          "quote": "    lines = []\n\n    def to_bytes(s):\n        return force_bytes(s, settings.DEFAULT_CHARSET)\n\n    # Not by any means perfect, but good enough for our purposes.\n    def is_file(thing):\n        return hasattr(thing, \"read\") and callable(thing.read)\n\n    # Each bit of the multipart form data could be either a form value or a\n    # file, or a *list* of form values and/or files. Remember that HTTP field\n    # names can be duplicated!\n    for key, value in data.items():\n        if value is None:\n            raise TypeError(\n                \"Cannot encode None for key '%s' as POST data. Did you mean \"\n                \"to pass an empty string or omit the value?\" % key\n            )\n        elif is_file(value):",
+          "explanation": "This target call is owned by the nested to_bytes function, so encode_multipart is not itself a direct lexical caller. Runtime invocations encode generated multipart boundaries and headers plus scalar form items; the resulting parts are joined with CRLF. encoding is explicitly settings.DEFAULT_CHARSET, with default strings_only=False and errors='strict'. The outer function rejects None and delegates file values, but the nested caller itself has no guard or catch."
+        },
+        {
+          "id": "constant_time_compare",
+          "path": "django/utils/crypto.py",
+          "start_line": 65,
+          "end_line": 67,
+          "quote": "def constant_time_compare(val1, val2):\n    \"\"\"Return True if the two strings are equal, False otherwise.\"\"\"\n    return secrets.compare_digest(force_bytes(val1), force_bytes(val2))",
+          "explanation": "Both direct same-import calls convert the two comparison operands before secrets.compare_digest performs a timing-resistant equality check. Each uses default UTF-8, strings_only=False, errors='strict'. Both are evaluated on every invocation, with no guards or local exception handling."
+        },
+        {
+          "id": "pbkdf2",
+          "path": "django/utils/crypto.py",
+          "start_line": 70,
+          "end_line": 77,
+          "quote": "def pbkdf2(password, salt, iterations, dklen=0, digest=None):\n    \"\"\"Return the hash of password using pbkdf2.\"\"\"\n    if digest is None:\n        digest = hashlib.sha256\n    dklen = dklen or None\n    password = force_bytes(password)\n    salt = force_bytes(salt)\n    return hashlib.pbkdf2_hmac(digest().name, password, salt, iterations, dklen)",
+          "explanation": "Two direct imported calls convert the password and salt to bytes for hashlib.pbkdf2_hmac. Both use default UTF-8, strings_only=False, errors='strict'. The function first defaults the digest to SHA-256 and normalizes a falsey dklen to None; thereafter both conversions are unconditional. No conversion or hashing exception is caught."
+        },
+        {
+          "id": "salted_hmac",
+          "path": "django/utils/crypto.py",
+          "start_line": 27,
+          "end_line": 45,
+          "quote": "    if secret is None:\n        secret = settings.SECRET_KEY\n\n    key_salt = force_bytes(key_salt)\n    secret = force_bytes(secret)\n    try:\n        hasher = getattr(hashlib, algorithm)\n    except AttributeError as e:\n        raise InvalidAlgorithm(\n            \"%r is not an algorithm accepted by the hashlib module.\" % algorithm\n        ) from e\n    # We need to generate a derived key from our base key.  We can do this by\n    # passing the key_salt and our base key through a pseudo-random function.\n    key = hasher(key_salt + secret).digest()\n    # If len(key_salt + secret) > block size of the hash algorithm, the above\n    # line is redundant and could be replaced by key = key_salt + secret, since\n    # the hmac module does the same thing for keys longer than the block size.\n    # However, we need to ensure that we *always* do this.\n    return hmac.new(key, msg=force_bytes(value), digestmod=hasher)",
+          "explanation": "Three direct imported calls convert key_salt, the supplied/default settings.SECRET_KEY, and the message value. All use default UTF-8, strings_only=False, errors='strict'. The first two bytes values are hashed into the derived HMAC key; value is converted later as hmac.new's message. An absent secret is replaced before conversion. Only missing hashlib algorithms are caught and translated to InvalidAlgorithm; the message conversion is runtime-reachable only after a valid hasher and key, and encoding errors are not caught."
+        },
+        {
+          "id": "smart_bytes",
+          "path": "django/utils/encoding.py",
+          "start_line": 75,
+          "end_line": 84,
+          "quote": "def smart_bytes(s, encoding=\"utf-8\", strings_only=False, errors=\"strict\"):\n    \"\"\"\n    Return a bytestring version of 's', encoded as specified in 'encoding'.\n\n    If strings_only is True, don't convert (some) non-string-like objects.\n    \"\"\"\n    if isinstance(s, Promise):\n        # The input is the result of a gettext_lazy() call.\n        return s\n    return force_bytes(s, encoding, strings_only, errors)",
+          "explanation": "This same-module call directly invokes django.utils.encoding.force_bytes and forwards all four parameters positionally. Unless overridden at smart_bytes's boundary, they are encoding='utf-8', strings_only=False, errors='strict'. A Promise is returned unchanged, so the lexical call is not runtime-reachable for lazy translation values; other values are converted and returned. No exception is caught."
+        },
+        {
+          "id": "uri_to_iri",
+          "path": "django/utils/encoding.py",
+          "start_line": 165,
+          "end_line": 175,
+          "quote": "    if uri is None:\n        return uri\n    uri = force_bytes(uri)\n    # Fast selective unquote: First, split on '%' and then starting with the\n    # second block, decode the first 2 bytes if they represent a hex code to\n    # decode. The rest of the block is the part after '%AB', not containing\n    # any '%'. Add that to the output without further processing.\n    bits = uri.split(b\"%\")\n    if len(bits) == 1:\n        iri = uri\n    else:",
+          "explanation": "The same-module direct call normalizes a non-None URI to bytes for bytewise percent-sequence processing; the function selectively unquotes valid sequences, repairs/re-percent-encodes broken Unicode, and finally decodes to an IRI string. force_bytes uses default UTF-8, strings_only=False, errors='strict'. None returns before the call. There is no local exception handling."
+        }
+      ]
+    },
+    "prompt_bytes": 2398,
+    "events_sha256": "92efef8b4c6c54bba7e624c2a3bfc36ab32d11f088b50ddf98b9befb503dcd20"
+  }
+}
