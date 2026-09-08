@@ -266,8 +266,14 @@ class _Parser:
 
     def invocation_context(self, node):
         parent = node.parent
-        while parent and parent.type == "parenthesized_expression":
-            parent = parent.parent
+        while parent:
+            if parent.type == "parenthesized_expression":
+                node, parent = parent, parent.parent
+            elif self.language == "java" and parent.type == "ternary_expression" and node in (
+                    parent.child_by_field_name("consequence"), parent.child_by_field_name("alternative")):
+                node, parent = parent, parent.parent
+            else:
+                break
         if parent and parent.type == "variable_declarator" and parent.parent:
             return self.normalized(parent.parent.child_by_field_name("type"))
         if parent and parent.type == "return_statement":

@@ -1,0 +1,36 @@
+.........[columbus] Install pinned dependencies
+[columbus] Install pinned dependencies
+[columbus] Install pinned dependencies
+................F.........[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests b7k2drjl/managed installation/versions/1.0.0
+.[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests ctcsa_s9/managed installation/versions/1.0.0
+[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests ctcsa_s9/managed installation/versions/1.0.0
+.[columbus] Download https://github.com/ch4570/columbus/releases/download/v1.0.0/SHA256SUMS.txt
+[columbus] Download https://github.com/ch4570/columbus/releases/download/v1.0.0/columbus-1.0.0-py3-none-any.whl
+..[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests jcgx7uip/managed installation/versions/0.4.0
+[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests jcgx7uip/managed installation/versions/1.0.0
+[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests jcgx7uip/managed installation/versions/1.0.0
+.[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests 3n9vnkgf/managed installation/versions/1.0.0
+.[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests czubxpsc/managed installation/versions/1.0.0
+.[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests kl5lk2zv/managed installation/versions/1.0.0
+.[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests ip9uffm9/managed installation/versions/1.0.0
+.[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests kl4_xcch/managed installation/versions/1.0.0
+..[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests 59jvgqrk/managed installation/versions/1.0.0
+.[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests 0pg6hymz/managed installation/versions/1.0.0
+..[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests qmdfvqro/managed installation/versions/1.0.0
+...[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests wj5lp9f2/사용자 %data%! with spaces/versions/1.0.0
+.
+======================================================================
+FAIL: test_bundled_candidate_inventory_constraints_and_runtime_tampering (test_distribution.DistributionTests.test_bundled_candidate_inventory_constraints_and_runtime_tampering)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/rex/Desktop/columbus/tests/test_distribution.py", line 69, in test_bundled_candidate_inventory_constraints_and_runtime_tampering
+    self.assertEqual(first['sha256'], second['sha256'])
+AssertionError: 'bddd44e15363120bf457ae4ebcaef2df8ec9c8f3dc4bda327148ef5880c62ac4' != '1e2aa55addcd312c1ea0e823e296c555bb1dc9cb377dc31aff89d9275f512dc7'
+- bddd44e15363120bf457ae4ebcaef2df8ec9c8f3dc4bda327148ef5880c62ac4
++ 1e2aa55addcd312c1ea0e823e296c555bb1dc9cb377dc31aff89d9275f512dc7
+
+
+----------------------------------------------------------------------
+Ran 53 tests in 4.290s
+
+FAILED (failures=1)

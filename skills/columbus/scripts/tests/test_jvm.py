@@ -9,6 +9,20 @@ from columbus.jvm import parse_jvm, resolve_jvm
 
 
 class JVMTests(unittest.TestCase):
+    def test_conditional_branches_inherit_result_context_but_condition_does_not(self):
+        for body,context,resolved in [
+            ('String s=b ? hit(1) : null;', 'String', False),
+            ('Integer s=b ? hit(1) : null;', 'Integer', True),
+            ('String s=(b ? null : (b ? hit(1) : null));', 'String', False),
+            ('String s=hit(true) ? "a" : "b";', '', True),
+        ]:
+            with self.subTest(body=body):
+                file=self.parsed('C.java','class C { static <T> T hit(T v) { return v; } void run(boolean b) { '+body+' } }')
+                resolve_jvm([file])
+                call,=[r for r in file['references'] if r['member']=='hit']
+                self.assertEqual(call['expected_type'],context)
+                self.assertEqual(call['resolved'],resolved)
+
     def test_return_only_type_variables_retain_constraints(self):
         for declaration,context,expected in [
             ('static <T extends Number> T','String',False),
