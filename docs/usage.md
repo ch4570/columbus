@@ -29,6 +29,8 @@ columbus context checkout --mode signatures --format text --budget-tokens 1500
 
 An unfiltered map ranks declarations using incoming non-containment relationships. A query uses exact-name and lexical search. These are retrieval signals, not a semantic proof of relevance. Inspect the returned paths and signatures before choosing a symbol.
 
+`search` returns up to 50 matches per page and an opaque `next_cursor`. For more matches, pass that value as `--cursor` with the same query and path/language filters. Page size may change. Cursors are bound to the repository and index revision; restart without a cursor after synchronization changes the revision. A cursor does not verify source freshness.
+
 | Query | Returns | Source-body reads after synchronization |
 | --- | --- | --- |
 | `explore` | Small repository map in text | None |
@@ -74,7 +76,7 @@ Quote glob patterns so your shell does not expand them. Language values use dete
 | --- | --- | --- |
 | `--budget-bytes` | 2,048–64,000 | UTF-8 response budget for explore/map/context |
 | `--budget-tokens` | 700–21,000 | A byte budget derived from `tokens × 3` |
-| `--limit` on search | Query result limit | Limits candidate output |
+| `--limit` on search | 1–50 | Limits candidate output per page |
 | `--max-lines` on symbol | Source excerpt limit | Limits the selected source read |
 
 Explore defaults to 2,000 estimated tokens, equivalent to 6,000 bytes. An explicit `--budget-tokens` or `--budget-bytes` replaces that default. If both are supplied, the smaller byte limit applies.
@@ -116,6 +118,8 @@ columbus context calculateTotal --receipt .columbus/checkout-receipt.json --form
 ```
 
 Receipts track source character ranges delivered in earlier calls. They address overlapping parent/child symbols, repeated queries, and partial long lines, while a plain exclusion only removes an exact symbol ID. The [receipt contract](agents.md#context-receipts) explains freshness, partial output, and when to start a new receipt.
+
+Repeat an unchanged query/session while more evidence is needed and `receipt.has_more` is true (text: `receipt_continuation=more`), including after an empty page. Continuation reaches later lexical matches, not just unread source in the first 20 results. Changed filters start independent discovery, and a new revision restarts it. Sync stale source before continuing; raise the budget or narrow the query if no item fits. Exhaustion does not prove semantic completeness.
 
 For callers that already track exact IDs, `--exclude-id` is repeatable:
 

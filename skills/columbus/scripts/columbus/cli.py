@@ -174,6 +174,7 @@ def main(argv=None) -> int:
             command.add_argument('--language', help='Detected language name, e.g. python or typescript')
         if name == 'search':
             command.add_argument('--limit', type=int, default=10)
+            command.add_argument('--cursor', help='Continue this query/filter on the same indexed revision')
         if name in {'symbol', 'callers', 'neighbors', 'impact'}:
             command.add_argument('symbol_id')
         if name == 'callers':
@@ -336,7 +337,7 @@ def main(argv=None) -> int:
             elif index.status()['root'] != str(root):
                 raise ValueError('Selected index belongs to a different repository')
             if args.command == 'search':
-                result = index.search(args.query, args.limit, path=args.path, language=args.language)
+                result = index.search(args.query, args.limit, path=args.path, language=args.language, cursor=args.cursor)
             elif args.command == 'callers':
                 if args.pretty:
                     raise ValueError('callers does not support --pretty; its serialized output is byte-budgeted')

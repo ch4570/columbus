@@ -135,9 +135,8 @@ class TokenEconomyTests(unittest.TestCase):
         before = {item['source_hash'] for item in first['items']}
         source = self.root / '정산.py'
         source.write_text(source.read_text(encoding='utf-8') + '\ndef refund_new(): return "NEW_SOURCE"\n', encoding='utf-8', newline='\n')
-        stale = self.next_context()
-        self.assertGreater(stale['stale_candidates'], 0)
-        self.assertEqual(stale['items'], [])
+        with self.assertRaisesRegex(ValueError, 'Stale source prevents receipt continuation'):
+            self.next_context()
         self.index.refresh(self.root)
         changed = self.next_context()
         self.assertEqual(changed['receipt']['status'], 'revision_changed_hash_checked')
