@@ -1,0 +1,33 @@
+{
+  "metadata_sha256": {
+    "manifest.json": "9d3f5ff94e4cd135a07d7e26f2bbe3a1422c46929b2d639b33d0eedbd8f58ed4",
+    "engine.json": "1e20a31ff1bfea2ed5eeafd327c6487ecca8bebcf1f4a44b5dc58945200ae62f",
+    "cases.json": "c93201a766240244b0e4acf82c6a272723c858374395bd2a888cf3970ba2ff9d"
+  },
+  "index": {
+    "files": 112,
+    "symbols": 883,
+    "edges": 1188,
+    "indexed_bytes": 1495090,
+    "revision": "23d1f0347e082dcfd3d3"
+  },
+  "index_seconds": 0.475,
+  "archive": {
+    "archive_sha256": "65422f45e880ac587c66bc5c23e0d917cda24f8b6ace8158771ff092ad2bd270",
+    "bytes": 173816,
+    "counts": {
+      "files": 112,
+      "nodes": 883,
+      "scopes": 825,
+      "edges": 1188,
+      "references": 2674,
+      "imports": 471,
+      "diagnostics": 1
+    },
+    "export_seconds": 0.193,
+    "codec": "xz"
+  },
+  "prior_source_manifest_equal": true,
+  "prior_question_findings_rubric_equal_except_case_id": true,
+  "model_started": false
+}

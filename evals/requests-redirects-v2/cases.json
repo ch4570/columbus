@@ -1,0 +1,77 @@
+{
+  "schema": "columbus.exploration-cases/v1",
+  "cases": [
+    {
+      "id": "requests-redirects-v2",
+      "question": "Trace how Requests constructs and sends a redirected PreparedRequest: explain method changes, body/header retention and replay, cookies, origin authorization, proxy selection/authorization, URL normalization and termination. Distinguish source-level control flow from proven runtime dispatch. Base the answer on this repository snapshot; do not make network requests.",
+      "findings": [
+        {
+          "id": "dispatch",
+          "description": "Entry, redirect iteration, and the non-following mode.",
+          "path": "src/requests/sessions.py",
+          "marker": "gen = self.resolve_redirects(r, request, **kwargs)"
+        },
+        {
+          "id": "method_policy",
+          "description": "Status-specific HTTP method changes.",
+          "path": "src/requests/sessions.py",
+          "marker": "if response.status_code == codes.see_other and method != \"HEAD\":"
+        },
+        {
+          "id": "body_retention",
+          "description": "Which redirect responses preserve or remove body and entity headers.",
+          "path": "src/requests/sessions.py",
+          "marker": "purged_headers = (\"Content-Length\", \"Content-Type\", \"Transfer-Encoding\")"
+        },
+        {
+          "id": "body_position",
+          "description": "How streaming request preparation records a replay position.",
+          "path": "src/requests/models.py",
+          "marker": "self._body_position = body.tell()"
+        },
+        {
+          "id": "body_rewind",
+          "description": "When replay seeks and how failures are reported.",
+          "path": "src/requests/utils.py",
+          "marker": "body_seek = getattr(prepared_request.body, \"seek\", None)"
+        },
+        {
+          "id": "origin_auth_policy",
+          "description": "Host, scheme and port rules for retaining origin authorization.",
+          "path": "src/requests/sessions.py",
+          "marker": "if old_parsed.hostname != new_parsed.hostname:"
+        },
+        {
+          "id": "auth_rebuild",
+          "description": "Removal and possible replacement of origin authorization.",
+          "path": "src/requests/sessions.py",
+          "marker": "new_auth = get_netrc_auth(url) if self.trust_env else None"
+        },
+        {
+          "id": "proxy_selection",
+          "description": "Environment and explicit proxy precedence during redirects.",
+          "path": "src/requests/utils.py",
+          "marker": "new_proxies = proxies.copy()"
+        },
+        {
+          "id": "proxy_auth",
+          "description": "How proxy authorization is removed and possibly recreated.",
+          "path": "src/requests/sessions.py",
+          "marker": "if not scheme.startswith(\"https\") and username and password:"
+        },
+        {
+          "id": "cookies",
+          "description": "How cookies on the copied redirected request are rebuilt.",
+          "path": "src/requests/sessions.py",
+          "marker": "headers.pop(\"Cookie\", None)"
+        },
+        {
+          "id": "redirect_url",
+          "description": "Redirect target normalization, resource release and redirect limits.",
+          "path": "src/requests/sessions.py",
+          "marker": "previous_fragment = urlparse(req.url).fragment"
+        }
+      ]
+    }
+  ]
+}
