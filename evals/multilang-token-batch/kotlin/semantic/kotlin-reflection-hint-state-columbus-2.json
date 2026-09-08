@@ -1,0 +1,136 @@
+{
+  "answer_sha256": "8e11d41261b837c6792bf193975470aa5880d7bb893a9a13094608405cfab163",
+  "rubric_sha256": "f9fd59c76cfa416ba922bd6def03a8b969fd5f8bd716c201fd6d55a3a985b04b",
+  "findings": [
+    {
+      "id": "kotlin-delegation",
+      "passed": true,
+      "reason": "All semantic clauses are established by this answer across its explanations and actual source excerpts; no in-scope contradiction found.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The answer routes the reified T::class.java into Java getTypeHint(Class); its lookup finding also says absent lookup creates no registration, matching ReflectionHintsExtensions.kt:26-27 and ReflectionHints.java:76-87."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The explanation explicitly identifies noinline, the bound typeHint::invoke adapter, and the Java Class/Consumer overload; the guard and state findings establish that Java invokes it only after validation and builder acquisition. This matches ReflectionHintsExtensions.kt:36-37 and ReflectionHints.java:98-100,122-127."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The explanation identifies the spread of category elements into the Java Class/MemberCategory varargs overload, matching ReflectionHintsExtensions.kt:46-47 and ReflectionHints.java:137-142."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The delegated registration path is described or quoted as returning this, with the extensions forwarding those calls. The answer describes wrapper syntax and makes no runtime-reflection or reachability claim, consistent with ReflectionHintsExtensions.kt:36-47 and ReflectionHints.java:98-142."
+        }
+      ]
+    },
+    {
+      "id": "registration-class-guards",
+      "passed": true,
+      "reason": "All semantic clauses are established by this answer across its explanations and actual source excerpts; no in-scope contradiction found.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The answer explicitly identifies both Class registration null guards and IllegalArgumentException, matching ReflectionHints.java:122-139 and Assert.java:180-183."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The explanation says a noncanonical Class skips forwarding/registration and its customizer, while returning this; the quoted conditional confines TypeReference creation to the canonical branch, matching ReflectionHints.java:122-142."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The answer establishes canonical-Class conversion through TypeReference.of and delegation, and separately distinguishes the noncanonical lookup exception, matching ReflectionHints.java:122-142 and 86-87."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The answer makes no concurrency, loading, or native-image guarantee from the registration guards."
+        }
+      ]
+    },
+    {
+      "id": "registration-state-errors",
+      "passed": true,
+      "reason": "All semantic clauses are established by this answer across its explanations and actual source excerpts; no in-scope contradiction found.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The explanation identifies computeIfAbsent reusing one builder per equal TypeReference and invoking each customizer on it, matching ReflectionHints.java:98-101. Its additional canonical-name equality statement is supported for these Class-derived references by AbstractTypeReference.java:86-93."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The answer connects category registration with TypeHint.builtWith and withMembers and describes additions to a HashSet as accumulated deduplicated categories, matching ReflectionHints.java:111-112 and TypeHint.java:146-147,166,272-274."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The answer describes obtaining/storing the builder before direct accept, propagated callback exceptions, retained mapping, and retained pre-throw category mutations, including an empty builder if a first callback throws immediately, matching ReflectionHints.java:98-101."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The answer stays within non-null category/callback assumptions and member-category state; it does not add hostile-null or metadata-registration claims."
+        }
+      ]
+    },
+    {
+      "id": "lookup-absence-errors",
+      "passed": true,
+      "reason": "All semantic clauses are established by this answer across its explanations and actual source excerpts; no in-scope contradiction found.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The answer identifies Class-to-TypeReference conversion before map lookup and null without insertion for a valid absent type, matching ReflectionHints.java:76-87."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The answer traces TypeReference.of to ReflectionTypeReference.of and distinguishes null/noncanonical IllegalArgumentException from the registration skip, matching TypeReference.java:73-74, ReflectionTypeReference.java:45-48, and Assert.java:180-183."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The lookup excerpt builds an existing builder and the snapshot explanation identifies its current accumulated state; the answer makes no inference that missing hints prevent class loading or runtime reflection."
+        }
+      ]
+    },
+    {
+      "id": "category-snapshots",
+      "passed": true,
+      "reason": "All semantic clauses are established by this answer across its explanations and actual source excerpts; no in-scope contradiction found.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The answer says a lookup builds a new TypeHint whose categories are an immutable Set.copyOf copy, matching TypeHint.java:59-62,292-293 and ReflectionHints.java:76-78."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The answer explicitly distinguishes unchanged earlier TypeHint/category snapshots from fresh lookups observing later accumulated categories, matching retained-builder registration and new TypeHint construction."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The explanation explicitly says the set returned by getMemberCategories is the immutable category snapshot. This matches TypeHint.java:59-62,122-123; it makes no arbitrary deep-copy or thread-safety claim."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The answer makes no claim that creating or reading a hint executes reflected members or proves runtime dispatch."
+        }
+      ]
+    }
+  ]
+}

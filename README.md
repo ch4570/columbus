@@ -95,7 +95,7 @@ then run the relevant tests and synchronize the index.
 
 **Smaller tool responses are measurable. Lower model-token usage is a separate question.** The graphs are generated from recorded JSON; their data and plotting script ship with the source release.
 
-The [eleven recent model comparisons](evals/model-usage-overview/REPORT.md) contain no pair meeting the unchanged quality-preserving total-input/output reduction gate. Columbus 1.1 does not establish actual model-token savings. The charts below retain their historical engine versions and measurements.
+The [eleven earlier model comparisons](evals/model-usage-overview/REPORT.md) contain no pair meeting the unchanged quality-preserving total-input/output reduction gate. The separately frozen [Java, Kotlin/Java and JavaScript cohort](evals/multilang-token-batch/ANALYSIS.md) also fails all six pairs: actual input and output both increase in every comparison, and no pair satisfies the full citation/semantic gate. Columbus 1.1 does not establish actual model-token savings. The charts below retain their historical engine versions and measurements.
 
 ### Columbus 1.0: response delivery
 

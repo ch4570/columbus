@@ -1,0 +1,215 @@
+{
+  "schema": "columbus.exploration-observation/v1",
+  "case": "express-render-pipeline",
+  "condition": "baseline",
+  "repeat": 2,
+  "model_requested": "gpt-5.6-sol",
+  "effort_requested": "xhigh",
+  "evidence_mode": "saved_archive",
+  "elapsed_seconds": 422.431,
+  "return_code": 0,
+  "timed_out": false,
+  "source_unchanged": true,
+  "usage": {
+    "input_tokens": 170888,
+    "cached_input_tokens": 139264,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 12368,
+    "reasoning_output_tokens": 9463,
+    "uncached_input_tokens": 31624
+  },
+  "commands": [
+    {
+      "command": "/bin/zsh -lc \"rg -n \\\"res\\\\.render|app\\\\.render|function View|View.prototype.lookup|tryRender|defaultEngine|engines|view cache\\\" . --glob '\"'!node_modules'\"'\"",
+      "exit_code": 0,
+      "output_bytes": 11060,
+      "output_sha256": "2121abcd1cbaaaa3bb76465ff63290fac423b6e6c19d2bdb43aa5cd28e92dcb5"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba lib/application.js | sed -n '510,635p'\"",
+      "exit_code": 0,
+      "output_bytes": 3630,
+      "output_sha256": "36c462f21ffc327f2a56a8d85ceabf4f3f9c0d160156cb0904478e2c680c09d0"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba lib/view.js | sed -n '1,190p'\"",
+      "exit_code": 0,
+      "output_bytes": 4937,
+      "output_sha256": "6044dd6ef40871714df11823cbf48ffaba8007794edd3005babe25ee0d306a0f"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba lib/response.js | sed -n '880,925p'\"",
+      "exit_code": 0,
+      "output_bytes": 1364,
+      "output_sha256": "bf99e245bbb4fdd5a419a6509422a323961e695bc9197ebe71ce5e4f16069506"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba lib/application.js | sed -n '50,150p'; nl -ba lib/application.js | sed -n '260,310p'\"",
+      "exit_code": 0,
+      "output_bytes": 5082,
+      "output_sha256": "96fe9e9ff5c70e764d2853d84e839fadf1ec1008952b3173a9cc2e762fd20d83"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba lib/view.js | sed -n '133,215p'; nl -ba lib/application.js | sed -n '1,35p'\"",
+      "exit_code": 0,
+      "output_bytes": 2906,
+      "output_sha256": "860f0892fea67db2b3f3759f529782f50fe807d236280e169737a8f5298a0915"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n \\\"res\\\\.send =|statusCode|type\\\\('html'\\\\)|text/html\\\" lib/response.js | head -40; nl -ba lib/response.js | sed -n '120,210p'\"",
+      "exit_code": 0,
+      "output_bytes": 3603,
+      "output_sha256": "c3c72f4138581c147ccbcd600af9bfa3d530bb778e414beb20831da64727e64a"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n \\\"sync|asynchronous|async|context|arguments|multiple|twice|once\\\" test/app.render.js test/res.render.js test -g '*.js' | head -100\"",
+      "exit_code": 0,
+      "output_bytes": 6198,
+      "output_sha256": "174eb7c9a2a935bb331892479f0bbeb583c96eb01a6f12336c64041903481152"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n \\\"res\\\\.locals|locals = Object.create\\\" lib\"",
+      "exit_code": 0,
+      "output_bytes": 207,
+      "output_sha256": "91102d9fdd81ed65968856796aa1baac7d873ca60dab2e406c8cfee518fd4023"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba lib/application.js | sed -n '155,180p'\"",
+      "exit_code": 0,
+      "output_bytes": 670,
+      "output_sha256": "3b562f0a982fbce20c6c10f4d2ff3c9d72df6bca80ab19cbc8005c98241223ef"
+    }
+  ],
+  "command_count": 10,
+  "command_output_bytes": 39657,
+  "failed_commands": 0,
+  "other_tool_types": [],
+  "runtime_warnings": [],
+  "turn_failed": false,
+  "quality": {
+    "passed": false,
+    "findings": [
+      {
+        "id": "response_delegation",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "locals_and_cache",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "engine_selection",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "view_lookup",
+        "passed": false,
+        "reason": "required mechanism absent from citation"
+      },
+      {
+        "id": "error_boundary",
+        "passed": false,
+        "reason": "required mechanism absent from citation"
+      },
+      {
+        "id": "callback_timing",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "index_preflight": null,
+  "archive_preflight": {
+    "passed": true,
+    "archive_sha256": "bd61bd0b82500cc41a0eec60e223390591fa0059774160e4039b6b96774e6115",
+    "revision": "c765fa8aa9f3c5eb878d",
+    "source_files_verified": 213,
+    "indexed_source_files_verified": 211,
+    "counts": {
+      "files": 211,
+      "nodes": 424,
+      "scopes": 0,
+      "edges": 581,
+      "references": 11251,
+      "imports": 400,
+      "diagnostics": 0
+    },
+    "consumer_index_absent": true
+  },
+  "archive_postflight": {
+    "passed": true,
+    "archive_sha256": "bd61bd0b82500cc41a0eec60e223390591fa0059774160e4039b6b96774e6115",
+    "revision": "c765fa8aa9f3c5eb878d",
+    "source_files_verified": 213,
+    "indexed_source_files_verified": 211,
+    "counts": {
+      "files": 211,
+      "nodes": 424,
+      "scopes": 0,
+      "edges": 581,
+      "references": 11251,
+      "imports": 400,
+      "diagnostics": 0
+    },
+    "consumer_index_absent": true
+  },
+  "answer": {
+    "findings": [
+      {
+        "id": "response_delegation",
+        "path": "lib/response.js",
+        "start_line": 894,
+        "end_line": 918,
+        "quote": "// support callback function as second arg\nif (typeof options === 'function') {\n  done = options;\n  opts = {};\n}\n\n// merge res.locals\nopts._locals = self.locals;\n\n// default callback to respond\ndone = done || function (err, str) {\n  if (err) return req.next(err);\n  self.send(str);\n};\n\n// render\napp.render(view, opts, done);",
+        "explanation": "res.render accepts the callback as either the second argument or the third. A null, undefined, or otherwise falsy options value becomes {}, and a function in the options position becomes done. It then writes the response's locals object to opts._locals, overwriting any caller-supplied _locals and mutating a supplied options object. Request handling normally initializes res.locals to an empty null-prototype object. app.render performs the actual merge and render. A supplied truthy callback receives the result and suppresses automatic sending. Without one, the default callback forwards callback-delivered errors to req.next(err), otherwise calls res.send(str). That path does not itself force status 200 or a Content-Type: on a fresh response those are the normal effective defaults, while an already selected status/header can affect send. There is no type guard for a truthy non-function callback."
+      },
+      {
+        "id": "locals_and_cache",
+        "path": "lib/application.js",
+        "start_line": 535,
+        "end_line": 574,
+        "quote": "// merge options\nvar renderOptions = { ...this.locals, ...opts._locals, ...opts };\n\n// set .cache unless explicitly provided\nif (renderOptions.cache == null) {\n  renderOptions.cache = this.enabled('view cache');\n}",
+        "explanation": "The shallow spread order establishes precedence: app.locals is lowest, res.locals supplied as opts._locals is next, and the explicit top-level render options are highest; even an explicit undefined can overwrite a lower-layer value. The resulting _locals property is also retained because opts is spread last. cache equal to null or undefined falls back to the app's \"view cache\" setting; any non-null value is retained, with truthiness controlling lookup/insertion. View caching defaults on only in production unless configured. A truthy cache setting first checks this.cache[name], keyed only by the original name; a hit bypasses View construction and lookup. With cache false, an existing entry is ignored rather than removed. A newly constructed View is cached only after a successful path lookup, but it is inserted before tryRender, so a subsequent render error does not evict it. Engine caching is separate: this.engines is an extension-keyed map and is reused even when View caching is disabled; a successfully auto-loaded engine can remain cached even if the later file lookup fails."
+      },
+      {
+        "id": "engine_selection",
+        "path": "lib/view.js",
+        "start_line": 52,
+        "end_line": 91,
+        "quote": "if (!this.ext && !this.defaultEngine) {\n  throw new Error('No default engine was specified and no extension was provided.');\n}\n\nvar fileName = name;\n\nif (!this.ext) {\n  // get extension from default engine name\n  this.ext = this.defaultEngine[0] !== '.'\n    ? '.' + this.defaultEngine\n    : this.defaultEngine;\n\n  fileName += this.ext;\n}\n\nif (!opts.engines[this.ext]) {\n  // load engine\n  var mod = this.ext.slice(1)\n  debug('require \"%s\"', mod)\n\n  // default engine export\n  var fn = require(mod).__express\n\n  if (typeof fn !== 'function') {\n    throw new Error('Module \"' + mod + '\" does not provide a view engine.')\n  }\n\n  opts.engines[this.ext] = fn\n}",
+        "explanation": "An extension already present in name selects that extension's engine and ignores the default engine. Without an extension, defaultEngine is required, normalized to a leading dot, and appended to the lookup filename. Express does not configure a default view engine by default, so an extensionless name throws unless the app sets one. A truthy extension entry in opts.engines is reused. Otherwise the constructor requires the module named by the extension without its dot, reads __express, verifies that it is a function, and only then caches it. Module-resolution/evaluation errors, property-access errors, a missing default, or an invalid __express all throw synchronously from construction, before file lookup. app.engine separately normalizes its extension and requires the registered value to be a function; such explicit mappings need not expose __express. An already truthy map entry is not revalidated by View. Finally, app.render obtains the constructor from the configurable \"view\" setting: these selection rules are proven for the default built-in View, not for a replacement constructor."
+      },
+      {
+        "id": "view_lookup",
+        "path": "lib/view.js",
+        "start_line": 169,
+        "end_line": 205,
+        "quote": "// <path>.<ext>\nvar path = join(dir, file);\nvar stat = tryStat(path);\n\nif (stat && stat.isFile()) {\n  return path;\n}\n\n// <path>/index.<ext>\npath = join(dir, basename(file, ext), 'index' + ext);\nstat = tryStat(path);\n\nif (stat && stat.isFile()) {\n  return path;\n}",
+        "explanation": "The built-in lookup converts root to an array and examines roots in their configured order; the default is the absolute resolution of \"views\" from the process working directory. For each root it resolves root plus the selected filename, tries that direct path first, then tries <directory>/<basename-without-extension>/index<extension>. Thus the complete order is root 1 direct, root 1 index, root 2 direct, root 2 index, and so on; the first regular file wins. An absolute name causes path.resolve to supersede the root. fs.statSync is used, but tryStat catches every stat exception and returns undefined, so missing, inaccessible, and other stat failures all continue identically. Existing non-regular files also fail the isFile guard. Exhaustion returns undefined implicitly, which leaves View.path falsy for app.render to handle. Path-manipulation errors outside tryStat can still throw. This lookup contract belongs only to the built-in View."
+      },
+      {
+        "id": "error_boundary",
+        "path": "lib/application.js",
+        "start_line": 548,
+        "end_line": 575,
+        "quote": "if (!view) {\n  var View = this.get('view');\n\n  view = new View(name, {\n    defaultEngine: this.get('view engine'),\n    root: this.get('views'),\n    engines: engines\n  });\n\n  if (!view.path) {\n    var dirs = Array.isArray(view.root) && view.root.length > 1\n      ? 'directories \"' + view.root.slice(0, -1).join('\", \"') + '\" or \"' + view.root[view.root.length - 1] + '\"'\n      : 'directory \"' + view.root + '\"'\n    var err = new Error('Failed to lookup view \"' + name + '\" in views ' + dirs);\n    err.view = view;\n    return done(err);\n  }",
+        "explanation": "View construction occurs outside tryRender. Consequently, built-in failures such as no usable extension/default engine, require failure, invalid __express, or non-stat lookup failures—and arbitrary throws from a configured custom constructor—escape synchronously from app.render. Engine selection/loading precedes lookup, so those failures can preempt a missing-view result. If construction succeeds but path is falsy, app.render creates an error containing the searched root description, attaches the View as err.view, and calls done(err) immediately; it neither caches nor renders that View. With the built-in synchronous lookup, this callback delivery occurs before app.render returns. tryRender later wraps only view.render(options, callback): a synchronous throw from render or from the engine call is caught and passed to callback(err), while asynchronous throws are outside that boundary. The default res.render callback sends callback-delivered errors to req.next; an explicit callback receives them instead. Constructor throws never reach either callback through this layer, though an outer router may independently catch a route-handler throw. Callback invocation itself is not protected by an at-most-once or general error guard."
+      },
+      {
+        "id": "callback_timing",
+        "path": "lib/view.js",
+        "start_line": 133,
+        "end_line": 159,
+        "quote": "// render, normalizing sync callbacks\nthis.engine(this.path, options, function onRender() {\n  if (!sync) {\n    return callback.apply(this, arguments);\n  }\n\n  // copy arguments\n  var args = new Array(arguments.length);\n  var cntx = this;\n\n  for (var i = 0; i < arguments.length; i++) {\n    args[i] = arguments[i];\n  }\n\n  // force callback to be async\n  return process.nextTick(function renderTick() {\n    return callback.apply(cntx, args);\n  });\n});\n\nsync = false;",
+        "explanation": "The built-in View delegates to its selected engine with path, options, and an onRender callback. If the engine invokes onRender before the engine function returns, View copies every argument and the callback receiver, then delivers them on process.nextTick. If onRender occurs after the engine returns, View forwards the same arguments and receiver immediately in that later call stack, without adding another tick. The engine itself is configurable/arbitrary, so its actual timing, argument convention, callback receiver, and number of calls are not proven by Express; only this forwarding behavior is. There is no once flag or wrapper. Multiple engine callback invocations are all forwarded or queued, and an engine that never calls back yields no delivery. Moreover, a synchronous engine callback followed by a synchronous throw can queue one result and then cause tryRender to deliver the thrown error immediately, producing another callback later. Therefore the shown implementation does not guarantee at-most-once callback delivery."
+      }
+    ]
+  },
+  "prompt_bytes": 2298,
+  "events_sha256": "3746667479b4d214de0153c6ce0e9a4bdc484c6ba00091ea64ab924ffcd13b5f"
+}

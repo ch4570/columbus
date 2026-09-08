@@ -1,0 +1,178 @@
+{
+  "answer_sha256": "d1127939a62aaf750a8c7ff2b6521a4e56656a0aba4744c3f9da9696474c0250",
+  "rubric_sha256": "ff3b84236093310a51b52de8f6aa1b9a0f30255979e6f6a893684e9aee979b72",
+  "findings": [
+    {
+      "id": "response_delegation",
+      "passed": true,
+      "reason": "All required semantic clauses are established by prose or actual supporting source quotations.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "Prose identifies req.app, all falsy options becoming an empty object, and second-argument callback normalization; the quote confirms normalization."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "Prose explicitly says the selected options object is mutated and its _locals is unconditionally replaced; the quote shows the direct assignment."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The prose distinguishes explicit callback ownership from the default next/send behavior, and the quote returns on the error branch."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The quote directly delegates with app.render(view, opts, done); the prose assigns rendering delegation to req.app."
+        }
+      ]
+    },
+    {
+      "id": "locals_and_cache",
+      "passed": false,
+      "reason": "Required semantic evidence is missing for criterion indices 0, 4.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": false,
+          "reason": "The spread quotation establishes a fresh shallow precedence merge, but neither the prose nor an actual quote establishes app.render accepting a callback in its second argument or the complete missing/falsy options normalization; only omitted/null app options are mentioned."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The merged cache null check and setting lookup are quoted, while prose explains false as an explicit disable and production-only default enabling."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The cache lookup quote and cached-path/engine prose establish reuse; the error_boundary quotation supplies the if-not-view guard and configured constructor with defaultEngine, root, and the shared engines registry."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "Prose states exact requested-name caching, insertion before tryRender, retention after render errors, and no insertion for missing views."
+        },
+        {
+          "criterion_index": 4,
+          "passed": false,
+          "reason": "The answer distinguishes cached View objects from the engine registry, but does not establish that a reused View still renders using the current merged renderOptions. The cited line range includes that call, but the actual quote omits it."
+        }
+      ]
+    },
+    {
+      "id": "engine_selection",
+      "passed": true,
+      "reason": "All required semantic clauses are established by prose or actual supporting source quotations.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "Prose says path.extname(name) supplies the extension and an existing extension selects its engine while ignoring the default."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "Prose explains the required default, leading-dot normalization and append, and throwing for an extensionless name without a default."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The quote supplies truthy registry reuse, extension.slice(1), require(mod).__express, function validation and registry insertion; prose identifies synchronous module/export failures."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "Prose explicitly places engine registry loading before filesystem lookup; callback_timing quotes invocation of the selected engine, and the answer limits conclusions to built-in source behavior."
+        }
+      ]
+    },
+    {
+      "id": "view_lookup",
+      "passed": false,
+      "reason": "Required semantic evidence is missing for criterion indices 0.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": false,
+          "reason": "The answer explains ordered roots and first success but neither its prose nor an actual quote establishes resolving each root/name pair and splitting the result into directory and basename before this.resolve. Its quote contains only candidate resolution."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "Prose and quote give direct-file then index fallback, explicitly stating that an earlier root index beats a later root direct file."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "Both isFile guards are quoted; prose rejects directories, describes tryStat swallowing all stat errors, and permits both fallback and subsequent roots."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "Prose says exhausting roots leaves undefined and app.render converts that unsuccessful result to a missing-view error."
+        }
+      ]
+    },
+    {
+      "id": "error_boundary",
+      "passed": true,
+      "reason": "All required semantic clauses are established by prose or actual supporting source quotations.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The quote constructs the failed-name/root error, attaches err.view, and returns done(err); prose confirms immediate delivery before caching and rendering."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "Prose explicitly places new View outside tryRender and identifies missing-default, module-loading, and invalid-export failures as synchronous throws."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "Prose identifies the narrow view.render call catch, conversion of synchronous throws to callbacks, and exclusion of future asynchronous and next-tick throws."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The callback adapter quote in callback_timing preserves every argument, including error arguments; prose distinguishes req.next default error handling from explicit callback ownership."
+        }
+      ]
+    },
+    {
+      "id": "callback_timing",
+      "passed": false,
+      "reason": "Required semantic evidence is missing for criterion indices 0.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": false,
+          "reason": "The engine invocation and final sync = false are actually quoted, and prose explains early versus late callbacks, but neither prose nor the quote establishes the required initial sync = true declaration. The line range alone does not supply that omitted statement."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The quote and prose establish copying all synchronous callback arguments and receiver before nextTick delivery."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The false-flag apply branch is quoted and prose says later callbacks are forwarded immediately in their later invocation stack with arguments and context preserved."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "Prose explicitly denies a once guard and gives the synchronous callback followed by throw duplicate-delivery example."
+        },
+        {
+          "criterion_index": 4,
+          "passed": true,
+          "reason": "The answer allows custom Views to bypass normalization; error_boundary separately identifies immediate missing-path callbacks, synchronous caught render throws, and constructor throws without claiming every error is asynchronous."
+        }
+      ]
+    }
+  ]
+}

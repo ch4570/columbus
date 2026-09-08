@@ -1,5 +1,7 @@
 # Recent actual model usage
 
+The later [six-pair Java/Kotlin/JavaScript cohort](../multilang-token-batch/ANALYSIS.md) is reported separately: all twelve executions finish, all six Columbus runs use batch-source evidence, and every pair increases total input and output. Its 0/6 acceptance does not change the historical eleven-pair data below.
+
 None of these eleven recent comparisons establishes accepted overall token savings. This overview covers the two Django live-index caller comparisons and nine completed saved-archive comparisons (including two explicit force_bytes repeats), not every historical pilot. Different tasks and runtime revisions prevent treating them as repeated controlled measurements of one implementation. The first eight use the same Django source revision; the last three use the same Requests task and source. They are not eleven independent repository samples.
 
 | Task | Baseline input | Graph input | Baseline output | Graph output | Acceptance problem |

@@ -1,0 +1,220 @@
+{
+  "schema": "columbus.exploration-observation/v1",
+  "case": "java-property-resolution",
+  "condition": "baseline",
+  "repeat": 1,
+  "model_requested": "gpt-5.6-sol",
+  "effort_requested": "xhigh",
+  "evidence_mode": "saved_archive",
+  "elapsed_seconds": 304.629,
+  "return_code": 0,
+  "timed_out": false,
+  "source_unchanged": true,
+  "usage": {
+    "input_tokens": 166153,
+    "cached_input_tokens": 117120,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 8928,
+    "reasoning_output_tokens": 6494,
+    "uncached_input_tokens": 49033
+  },
+  "commands": [
+    {
+      "command": "/bin/zsh -lc \"rg --files | rg 'PropertySourcesPropertyResolver|AbstractPropertyResolver|PropertyResolver|PropertySource' | head -80\"",
+      "exit_code": 0,
+      "output_bytes": 2619,
+      "output_sha256": "30c06ec0a7d288c3474fdfca8eebcc150a6c1e6b902c85348d14da3d2a35f816"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java | sed -n '1,240p'\"",
+      "exit_code": 0,
+      "output_bytes": 4867,
+      "output_sha256": "b7a1f57134a143f2b3e258b88c0a132c7dcd6ccd41630c4e4cc8d7392fcc4adc"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/core/env/AbstractPropertyResolver.java | sed -n '1,340p'\"",
+      "exit_code": 0,
+      "output_bytes": 14412,
+      "output_sha256": "a5c4f5636eb9f47b3e51de6f50ca54ebc27f2dc0fa7f51f4c130952ae9766b4b"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/core/env/PropertyResolver.java | sed -n '1,240p'; nl -ba src/main/java/org/springframework/core/env/ConfigurablePropertyResolver.java | sed -n '1,220p'\"",
+      "exit_code": 0,
+      "output_bytes": 10376,
+      "output_sha256": "7ad2ee0ffe2d9adfa999bab8dabfb18aa94683451a1e661ec82c26727a28ee7a"
+    },
+    {
+      "command": "/bin/zsh -lc 'rg -n \"ignoreUnresolvable|resolveNested|resolvePlaceholders|resolveRequiredPlaceholders|conversionService|returns null|return null|throw|defaultValue|Required key|raw\" src/test/java/org/springframework/core/env/PropertySourcesPropertyResolverTests.java src/test/java/org/springframework/core/env/AbstractPropertyResolverTests.java'",
+      "exit_code": 0,
+      "output_bytes": 4325,
+      "output_sha256": "6dc3eed3470467f35b6b121ea163f07386cfff968a6491bc29a6e40fc92385cf"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/core/env/PropertySources.java | sed -n '1,150p'; nl -ba src/main/java/org/springframework/core/env/MutablePropertySources.java | sed -n '45,190p'; nl -ba src/main/java/org/springframework/core/env/PropertySource.java | sed -n '115,190p'\"",
+      "exit_code": 0,
+      "output_bytes": 10621,
+      "output_sha256": "6bd6499f318506c444deb15422f97074270ae4fd1b4ac03a89a027e5f3c2a043"
+    },
+    {
+      "command": "/bin/zsh -lc 'rg -n \"class PropertyPlaceholderHelper|replacePlaceholders|ignoreUnresolvablePlaceholders|parseStringValue|PlaceholderResolutionException\" src/main/java/org/springframework/util src/test/java/org/springframework/util | head -160'",
+      "exit_code": 0,
+      "output_bytes": 11426,
+      "output_sha256": "098dabf72f0fdd5736abc0b4fc4842d640b55df1252b3524fd9d2b707224e7e3"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/test/java/org/springframework/core/env/AbstractPropertyResolverTests.java | sed -n '1,260p'\"",
+      "exit_code": 0,
+      "output_bytes": 4632,
+      "output_sha256": "fb224570b8a2dd1324f3670e2c0479ddadcac4cb43767ef604f94106dbef6d13"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/util/PlaceholderParser.java | sed -n '275,375p'\"",
+      "exit_code": 0,
+      "output_bytes": 3645,
+      "output_sha256": "17c48745f1589401ec30236f67a357b63cae9b88c204b09c6830c20a9b626e62"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/util/PropertyPlaceholderHelper.java | sed -n '45,105p'; nl -ba src/main/java/org/springframework/util/PlaceholderParser.java | sed -n '108,138p'\"",
+      "exit_code": 0,
+      "output_bytes": 4660,
+      "output_sha256": "f258036d81fdca62e8af8f9a58942d5e67b69925fb83ec5cbbb5865c06d69f1f"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/test/java/org/springframework/core/env/PropertySourcesPropertyResolverTests.java | sed -n '35,178p'; nl -ba src/test/java/org/springframework/core/env/PropertySourcesPropertyResolverTests.java | sed -n '245,355p'\"",
+      "exit_code": 0,
+      "output_bytes": 12046,
+      "output_sha256": "99bf393adf76e4620ed6770e45f36c8eb7402e83810ec02555d740c595e204f8"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n \\\"getConversionService|setConversionService|ConversionService|convertValueIfNecessary|convert\\\\(\\\" src/test/java/org/springframework/core/env src/main/java/org/springframework/core/env | head -180\"",
+      "exit_code": 0,
+      "output_bytes": 4843,
+      "output_sha256": "9312be030b1691cae0bdf487ebd66d35a60cbfc194d9484d53585232b1c7d0e9"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/util/PlaceholderParser.java | sed -n '370,490p'; nl -ba src/main/java/org/springframework/util/PlaceholderParser.java | sed -n '490,590p'\"",
+      "exit_code": 0,
+      "output_bytes": 6570,
+      "output_sha256": "a6ea9bb125e22eb03d21a048e43531b97a3982d57bf603485c23faba63996aa4"
+    }
+  ],
+  "command_count": 13,
+  "command_output_bytes": 95042,
+  "failed_commands": 0,
+  "other_tool_types": [],
+  "runtime_warnings": [],
+  "turn_failed": false,
+  "quality": {
+    "passed": true,
+    "findings": [
+      {
+        "id": "source-selection",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "nested-value-processing",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "placeholder-policy",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "conversion-policy",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "missing-default-required",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "index_preflight": null,
+  "archive_preflight": {
+    "passed": true,
+    "archive_sha256": "2f272e5b32cd6089f306a106c3b0094d1297038cc2a8e3d0cddb14c526d2b09c",
+    "revision": "f52932877e570ad3267c",
+    "source_files_verified": 1166,
+    "indexed_source_files_verified": 1166,
+    "counts": {
+      "files": 1166,
+      "nodes": 20811,
+      "scopes": 20647,
+      "edges": 32145,
+      "references": 68007,
+      "imports": 7723,
+      "diagnostics": 16
+    },
+    "consumer_index_absent": true
+  },
+  "archive_postflight": {
+    "passed": true,
+    "archive_sha256": "2f272e5b32cd6089f306a106c3b0094d1297038cc2a8e3d0cddb14c526d2b09c",
+    "revision": "f52932877e570ad3267c",
+    "source_files_verified": 1166,
+    "indexed_source_files_verified": 1166,
+    "counts": {
+      "files": 1166,
+      "nodes": 20811,
+      "scopes": 20647,
+      "edges": 32145,
+      "references": 68007,
+      "imports": 7723,
+      "diagnostics": 16
+    },
+    "consumer_index_absent": true
+  },
+  "answer": {
+    "findings": [
+      {
+        "id": "source-selection",
+        "path": "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java",
+        "start_line": 73,
+        "end_line": 99,
+        "quote": "Object value = propertySource.getProperty(key);\n\t\t\t\tif (value != null) {",
+        "explanation": "Sources are queried directly in PropertySources iteration order; the first source returning a non-null raw value wins. A null result advances to the next source, and exhausting the sources (or having null PropertySources) returns null. Once a non-null value is found, placeholder processing, logging, and conversion occur inside that branch, followed by an immediate return—even if custom conversion returns null—so later sources are not consulted. An exception from a PropertySource or any subsequent processing propagates because nothing catches it; later sources are not tried. The resolver does not cache resolved property values: each call traverses the current sources again."
+      },
+      {
+        "id": "nested-value-processing",
+        "path": "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java",
+        "start_line": 59,
+        "end_line": 92,
+        "quote": "protected @Nullable String getPropertyAsRawString(String key) {\n\t\treturn getProperty(key, String.class, false);\n\t}",
+        "explanation": "Ordinary String and typed getProperty calls both enable nested-placeholder resolution. After retrieving a non-null source value, the resolver processes every String before conversion. A non-String CharSequence is processed only when the requested type is exactly String or CharSequence; other objects and CharSequence subtype requests are left unprocessed before conversion. The order is source retrieval, eligible nested-placeholder processing, found-key logging, then type conversion. Placeholder callbacks use getPropertyAsRawString(), which performs another ordered lookup and String conversion but disables this preliminary nested processing; the placeholder parser itself recursively processes placeholders in the returned raw String and applies its own policy."
+      },
+      {
+        "id": "placeholder-policy",
+        "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+        "start_line": 245,
+        "end_line": 283,
+        "quote": "if (value.isEmpty()) {\n\t\t\treturn value;\n\t\t}\n\t\treturn (this.ignoreUnresolvableNestedPlaceholders ?\n\t\t\t\tresolvePlaceholders(value) : resolveRequiredPlaceholders(value));",
+        "explanation": "Implicit placeholders nested in a retrieved property are strict by default; setIgnoreUnresolvableNestedPlaceholders(true) switches only those implicit lookups to non-strict processing. The explicit APIs are fixed independently of that setting: resolvePlaceholders is non-strict and preserves an unresolvable placeholder, while resolveRequiredPlaceholders is strict and throws PlaceholderResolutionException (an IllegalArgumentException). An empty nested value is returned immediately; an empty explicit input is returned unchanged, while null explicit input is rejected with IllegalArgumentException by PropertyPlaceholderHelper. Ignore mode suppresses only the missing/unresolvable-placeholder case by retaining its placeholder text. It does not suppress exceptions thrown by source/raw-value conversion, nor circular-placeholder errors. The strict and non-strict helper objects are lazily cached, but resolved property values are not."
+      },
+      {
+        "id": "conversion-policy",
+        "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+        "start_line": 289,
+        "end_line": 312,
+        "quote": "if (ClassUtils.isAssignableValue(targetType, value)) {\n\t\t\t\t\treturn (T) value;\n\t\t\t\t}\n\t\t\t\tconversionServiceToUse = DefaultConversionService.getSharedInstance();",
+        "explanation": "A null target type returns the original value. With no configured service, an already assignable value is also returned unchanged; otherwise conversion uses DefaultConversionService.getSharedInstance(). If setConversionService() has supplied a non-null configurable service, that service is always invoked, including for an already assignable value. getConversionService() is not merely observational: it lazily creates and stores a separate DefaultConversionService, returns that same per-resolver instance for configuration, and causes future conversions to use it instead of the shared instance. The service instance is cached, not conversion results. A converter's null result is returned immediately from the winning source, while a conversion exception propagates; neither outcome causes a later source to be tried."
+      },
+      {
+        "id": "missing-default-required",
+        "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+        "start_line": 209,
+        "end_line": 242,
+        "quote": "T value = getProperty(key, targetType);\n\t\treturn (value != null ? value : defaultValue);",
+        "explanation": "Nullable ordinary and typed retrieval return the underlying lookup result, including null when every source misses or when processing of the first non-null source value returns null. Default-valued overloads invoke the corresponding ordinary lookup and use the supplied default only when that completed call returns null; thus a null conversion result can select the API default, but an exception does not. Required overloads likewise call ordinary retrieval and throw IllegalStateException only for a null result, so a found source whose converter returns null is reported as not found; an empty String remains a valid required result. Source, placeholder, logging, or conversion exceptions propagate unchanged, without trying later sources, applying the API default, or replacing the failure with the required-key IllegalStateException."
+      }
+    ]
+  },
+  "prompt_bytes": 2088,
+  "events_sha256": "96d945bd96c8e3a93c74873ff53ce650acf15fe0991468e6ff36cc7d08ca9e37"
+}

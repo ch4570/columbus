@@ -1,0 +1,151 @@
+{
+  "answer_sha256": "6dbff40605bb16764f84511e5358f975644ae9f16af2cb16f8eb6487d1a7cebd",
+  "rubric_sha256": "f9fd59c76cfa416ba922bd6def03a8b969fd5f8bd716c201fd6d55a3a985b04b",
+  "findings": [
+    {
+      "id": "source-selection",
+      "passed": true,
+      "reason": "All required semantic clauses are established.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "Explicitly states PropertySources iteration order on every lookup without a universal priority claim; PropertySourcesPropertyResolver lines 73-80 confirm this."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "Explicitly states null source results advance, and null PropertySources or all-null results produce null, matching source lines 74-99."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "Explicitly states first non-null raw selection is processed once and conversion null returns immediately without later-source search; the source-selection quote also shows the direct return."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "Explicitly states source/processing exceptions are uncaught and abort lookup, and resolved values are not cached because subsequent calls query current sources again."
+        }
+      ]
+    },
+    {
+      "id": "nested-value-processing",
+      "passed": true,
+      "reason": "All required semantic clauses are established.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "Prose and actual method bodies establish ordinary String/typed true calls and raw String.class/false calls."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "Prose gives the correct String and exact String/CharSequence target eligibility; the source-selection quote explicitly contains resolveNestedPlaceholders(cs.toString()), supplying the required intermediate String conversion."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "Explicitly states retrieval, eligible nested resolution, then target conversion; ineligible objects/CharSequence targets bypass the nested step, and raw disables that step."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "Explicitly identifies getPropertyAsRawString as the placeholder callback and says it still selects a source and converts to String while disabling eager nested processing; AbstractPropertyResolver lines 285-286 confirm this."
+        }
+      ]
+    },
+    {
+      "id": "placeholder-policy",
+      "passed": false,
+      "reason": "Required semantic facts are omitted; see failed checks.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "Explicitly states the flag initially is false and implicit lookup is strict by default; the conditional quote establishes false/required and true/non-strict selection and unchanged empty nested values."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "States explicit APIs have independent non-strict/strict policies and corresponding helpers initialize lazily and are retained while resolved values are not cached; named helper policies establish their respective ignore modes."
+        },
+        {
+          "criterion_index": 2,
+          "passed": false,
+          "reason": "States unresolved text is retained in non-strict mode, but never identifies strict unresolved-placeholder failure as PlaceholderResolutionException or establishes its IllegalArgumentException superclass. The separate IllegalArgumentException statement concerns null explicit inputs; no actual quote supplies the missing strict-failure facts."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "Explicitly says non-strict handling does not catch source/raw lookup or conversion exceptions and circular detection still throws; source PlaceholderParser lines 341-365 confirm this boundary."
+        },
+        {
+          "criterion_index": 4,
+          "passed": true,
+          "reason": "The brief fallback boundary does not enumerate or invent complete escape/default-expression grammar."
+        }
+      ]
+    },
+    {
+      "id": "conversion-policy",
+      "passed": false,
+      "reason": "Required semantic facts are omitted; see failed checks.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": false,
+          "reason": "Does not state that a null requested target type returns the incoming value directly. No actual quote includes AbstractPropertyResolver lines 298-301; the quoted conversion service getter/setter does not establish the null-target branch."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "Explicitly confines the assignable shortcut to absence of a configured/initialized service and says configured conversion is directly invoked even for assignable values."
+        },
+        {
+          "criterion_index": 2,
+          "passed": false,
+          "reason": "Correctly states no-service assignable retention and the otherwise shared-service fallback, but does not establish that the shared fallback is not stored into the resolver field. Its actual quote covers getConversionService/setConversionService only, not the local fallback assignment at source lines 302-309."
+        },
+        {
+          "criterion_index": 3,
+          "passed": false,
+          "reason": "The actual getter/setter quote establishes synchronized initialization with rechecking, separate service storage, non-null validation and field replacement, while prose establishes later conversion use. However, neither prose nor an actual quote identifies IllegalArgumentException as the exception type for null setConversionService input; Assert.notNull call alone does not state that exception type."
+        },
+        {
+          "criterion_index": 4,
+          "passed": true,
+          "reason": "Explicitly says service output including null returns as-is and conversion exceptions propagate without shared-service retry, later sources, or other conversion paths; no universal success claim appears."
+        }
+      ]
+    },
+    {
+      "id": "missing-default-required",
+      "passed": true,
+      "reason": "All required semantic clauses are established.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "States ordinary/typed nullability and defaults only for completed null results. The source-selection prose explicitly counts empty String as non-null, and default conditional quotes preserve all non-null values."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "Prose and quoted required overloads establish lookup, IllegalStateException on null with the missing key in its message, and otherwise returning the value."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "Explicitly states winning-source conversion null can trigger API default or required-missing outcome without restarting source iteration."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "Explicitly states wrappers propagate placeholder/conversion failures without later-source/default fallback or replacement missing-key errors; validateRequiredProperties is not discussed."
+        }
+      ]
+    }
+  ]
+}
