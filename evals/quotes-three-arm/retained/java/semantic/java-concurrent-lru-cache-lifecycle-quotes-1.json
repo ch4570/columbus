@@ -1,0 +1,173 @@
+{
+  "answer_sha256": "123c24eec5c632cdd67e252edb25e5fcba3f90e78437ed89eb4888fad7d93d6a",
+  "rubric_sha256": "28731dfbf2934906f368bec5189f43fb03c11ffcd247e1e2502cafebdf7c10cf",
+  "findings": [
+    {
+      "id": "entry-generation",
+      "passed": false,
+      "reason": "The retrieval, competing-generation and failure behavior is correctly explained, but construction's initialization of the read/write maintenance structures is not covered by the returned prose or quotes.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": false,
+          "reason": "Explains negative-capacity rejection through Assert.isTrue with IllegalArgumentException, the configured capacity and ConcurrentHashMap construction, and accepts zero. Shared prose and quoted generator access support the supplied generator's use. Neither the constructor explanation nor any final quote covers initializing ReadOperations with the eviction queue and creating WriteOperations (implementation 85–91). Describing the buffers' later behavior and reading the constructor in the trace do not supply that missing construction fact."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "Explicitly states that zero capacity directly invokes the generator, bypassing map, insertion/null checks, read/write buffers, accounting and eviction, so nothing is retained and null is returned directly. The representative get quote contains the bypass (100–103)."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "Correctly distinguishes positive-capacity hit recording and retained-value return from miss generation, private insertion and local-value return. The quoted get uses generator.apply before insertion, not computeIfAbsent, and the explanation places generation outside the eviction lock (100–111)."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The returned put quote contains key/value assertions, an ACTIVE CacheEntry/node, putIfAbsent, winner AddTask scheduling and loser processRead(prior). Prose explains that competing misses can generate concurrently, only the winning node is cached, the loser tracks that prior node, and each losing get still returns its own generated value without single-flight or shared-result guarantees (114–125)."
+        },
+        {
+          "criterion_index": 4,
+          "passed": true,
+          "reason": "States that a generated null at positive capacity is rejected with IllegalArgumentException before putIfAbsent; the unconditional assertion in the quote establishes that a concurrently installed entry does not bypass this rejection. Generator failure is explicitly uncaught and prevents this caller's insertion. No claim is made that null is cached or another caller's mapping is removed (106–119; Assert 180–184)."
+        }
+      ]
+    },
+    {
+      "id": "read-recency",
+      "passed": true,
+      "reason": "All four read-recency clauses are supported, including exact ring/drain bounds, pre-increment delayability, counter publication and the limitation on globally ordered recency.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "Names map hits and losing insertions as read-recording callers, four shared buffers selected by thread-ID low bits, the 128-slot ring and lazy advancement/storage at oldCount & 127. It explicitly distinguishes recording from queue mutation (110, 124, 367–415)."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "Gives old recorded count minus processed count, strict below-32 delayability and the corresponding IDLE drain at a pre-recording gap of at least 32. Shared coordination prose identifies the misleading drainRequested local name and the enum's actual delayable interpretation (407–415, 317–320)."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "Explains visitation of all four buffers from a thread-derived start, at most 64 slots per buffer, first-null exit, slot clearing, moveToBack and readCount advancement. It explicitly states that processedCount receives the captured recorded-count snapshot even after early exit or the bound, also visible in the complete 435–449 quote."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "Correctly limits reordering to currently linked, non-tail nodes and describes missing or already-last nodes as ignored. It notes that this helper does not independently test entry state and explains deferred/racy shared rings and separate buffer batches as reasons for approximate, not synchronous globally ordered, recency (584–589 and read-buffer helpers)."
+        }
+      ]
+    },
+    {
+      "id": "drain-coordination",
+      "passed": false,
+      "reason": "The status, locking, ordering and finally behavior is correct, but the normal write drain's empty-queue stopping condition is omitted from the full clause.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "Explains enqueueing in ConcurrentLinkedQueue, publishing REQUIRED and asking the same caller to drain, explicitly excluding an executor/background maintenance worker. The scheduling quote supplies the Runnable handoff (136–140, 454–462)."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "Gives IDLE's non-delayable condition, REQUIRED's unconditional request and PROCESSING's suppression of a read-triggered attempt. Explains immediate return on failed tryLock without consuming queued work or waiting, leaving work for later callers (128–154, 312–350)."
+        },
+        {
+          "criterion_index": 2,
+          "passed": false,
+          "reason": "Covers setting PROCESSING, reads before at most 16 writes, the distinction from clear's unbounded drainAll, and maintenance-only lock coverage. It does not state that the normal write loop stops when poll returns null (464–471), and no final quote includes WriteOperations.drain. The clear explanation's empty-queue exit concerns the separate drainAll helper; 'at most 16' alone does not identify the normal loop's early stopping condition."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "Explains conditional PROCESSING-to-IDLE reset, preservation of a concurrently published REQUIRED value and unlocking in finally. The complete drainOperations quote shows the exception-safe finally path, and prose allows work to remain after a bounded drain rather than promising a full flush (142–154)."
+        }
+      ]
+    },
+    {
+      "id": "insertion-eviction",
+      "passed": false,
+      "reason": "The map/task ordering, eviction and state/accounting cleanup are correct, but the queue-add helper's duplicate-membership guard is not explained or quoted.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": false,
+          "reason": "Explains map visibility before AddTask, unconditional currentSize increment even for an inactive node, and ACTIVE-only tail insertion/eviction. It omits EvictionQueue.add's contains guard that avoids duplicate membership (542–547). The representative quote only calls add; the separate read-recency discussion of moveToBack's membership rule does not describe this insertion helper."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "Describes oldest/front polling while currentSize exceeds capacity, returning on an empty queue even if accounting remains high, remove(key,node) protecting a replacement mapping and marking the polled node removed regardless of the map-removal result. The exact 269–286 quote contains these branches."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "Explicitly describes markAsRemoved as a CAS loop replacing the entry with REMOVED while retaining its value, followed by a lazy currentSize decrement after success; it also correctly observes no already-removed early exit. It distinguishes this task accounting from public cache.size() and value erasure (203–212)."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "Separates immediate map insertion from delayed accounting/queue maintenance and explains temporary capacity overshoot and approximate buffered recency. Shared test discussion identifies getAndSize as sequential insertion/eviction corroboration, not proof of concurrent strict capacity or global per-access LRU guarantees (114–126, 269–286; tests 57–73)."
+        }
+      ]
+    },
+    {
+      "id": "key-removal",
+      "passed": true,
+      "reason": "All removal clauses are supported, including immediate map visibility, conditional state transition, deferred cleanup and retained values for already-held nodes.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "States that remove first changes the backing map, returns false without work when absent, and otherwise marks for removal, schedules a RemovalTask and returns true before deferred accounting/queue cleanup. The complete remove quote confirms this order (229–237)."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "Explains the already-non-ACTIVE exit, ACTIVE-to-PENDING_REMOVAL CAS retaining the value and retry on failure. The quoted loop demonstrates that removed states are not unconditionally overwritten by this helper (243–254)."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "Describes RemovalTask unlinking existing queue membership, invoking retained-value REMOVED/accounting cleanup, and possible deferral on failed tryLock or bounded draining. It explicitly says a get holding the old node is not cancelled and can still return its retained value (293–305, 513–515, 591–595)."
+        }
+      ]
+    },
+    {
+      "id": "clear-and-observation",
+      "passed": false,
+      "reason": "Clear's actual ordering, public observations and concurrency limitations are correctly explained, but the required existing-test corroboration of reuse after clear is omitted.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "Explains blocking lock acquisition rather than ordinary tryLock, polling linked nodes, identity-conditional map removal, REMOVED/accounting cleanup and finally unlock. The exact 184–198 quote supports the complete order."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "Explicitly orders queue removal before clearing all read slots without resetting recorded/read/processed counters, then draining writes until the queue is observed empty without the normal 16-task bound. It correctly states there is no cache.clear() call (184–198, 426–433, 474–479)."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "Explains that an inserted ACTIVE node not yet linked by AddTask escapes the initial queue walk and can be linked by the later write drain. It also distinguishes concurrent map mutations and arriving tasks from locked maintenance, explicitly rejecting an unconditional atomic-empty guarantee (100–126, 184–198, 269–286)."
+        },
+        {
+          "criterion_index": 3,
+          "passed": false,
+          "reason": "Correctly maps size/contains to the concurrent map and capacity/deprecated sizeLimit to configured capacity, distinct from currentSize. It names the four sequential tests with valid locations and rejects stronger concurrency guarantees. It does not explain clearAndSize's post-clear get(k3), size-one and membership checks establishing reuse (tests 104–108); naming the test and its 'expected settled outcomes' is not coverage of that specific behavior, and no final quote contains those test lines."
+        }
+      ]
+    }
+  ],
+  "execution_review": {
+    "events_sha256": "9b368d0e94f6223948fc16ac7e006ccf88d02e45f43905457de693969bf43926",
+    "passed": true,
+    "reason": "Audited all 25 completed command executions: one bounded read of the explicitly supplied SKILL.md; fourteen ordinary repository-only rg/sed reads or searches, with a head pipe for discovery; seven archive-search calls; two archive-source calls; and one archive-quotes batch. All ten Columbus invocations use the exact supplied absolute Python interpreter with -B, the supplied runtime shim and saved graph; source-reading operations use --repo . and repository-relative targets. The second archive-source call exits 2 because two queried declarations are ambiguous or absent; this read-only lookup failure is not a protocol violation. The six-range archive-quotes command succeeds, but quote extraction is not credited here as graph-relationship evidence or proof of semantic completeness. No command writes files, executes upstream code/tests/builds, installs or synchronizes anything, delegates, accesses the web, or reads private catalogs/rubrics/other trials. Event item types are command_execution and agent_message only. The full event bytes were hashed while turn.completed usage was excluded from displayed review material; result.json and usage totals were not inspected. All six final citation ranges were independently compared with the pinned implementation and contain exact decoded contiguous source quotes of 15–27 physical lines. Source and rubric hashes match the frozen review; semantic omissions are evaluated separately above."
+  }
+}

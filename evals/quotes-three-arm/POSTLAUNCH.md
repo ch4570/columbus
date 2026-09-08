@@ -103,3 +103,33 @@ comparison on non-Windows platforms. Two regressions check differing but stable
 Windows ctimes, mutation of every checked field, and exact CRLF byte preservation
 through the reader. No sleep, retry or skipped test is used; same-API ctime and
 cross-API identity guards remain. Actual final-head platform CI is still required.
+
+## Completed cohort and retained failure
+
+Retention-tool head `143834147681c76cb371b167b20559377f6858b7` subsequently passed
+all twelve actual Linux/macOS/Windows Python 3.11/3.14 jobs across
+[PR CI](https://github.com/ch4570/columbus/actions/runs/34264131611) and
+[push CI](https://github.com/ch4570/columbus/actions/runs/34264126683).
+Its sixteen retention tests and all 149 root tests passed locally. These results
+supersede the earlier pending-CI notes, not the original failed native runs.
+
+All 18 model processes completed without timeout or nonzero exit. The three
+original runner handles were actually polled to termination before capture.
+All eighteen independent reviews were completed before the frozen collector
+ran: it reports 123 unchanged inputs, three valid schedules, 18 verified trials,
+no pending review or collection error, and failure of every primary and secondary
+pair. An execution-policy failure is distinct from successful process exit.
+
+After those checks, the supplemental retainer captured 198 payloads, all eighteen
+reviews and the final report at 19:07:13 UTC on 2026-09-08. Capture completed with
+no issues and verified its own output. The external digest anchor and detailed
+failed decisions are in [RESULTS.md](RESULTS.md). Original live inputs and raw
+observations remain unchanged. No incomplete override, retry or selective result
+capture was used. This is development evidence, not a passed cost/quality gate.
+
+The completed capture adds one model-free root test that verifies all 198
+payloads and externally anchored retention/report hashes directly from this
+checkout, without original observation paths. A scoped `.gitattributes` rule
+disables Git text conversion for retained bytes. This exercises actual retained
+evidence on the next native CI matrix as well as the sixteen synthetic tests;
+it does not rerun a model or reinterpret a failed decision.
