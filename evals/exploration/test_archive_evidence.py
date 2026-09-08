@@ -166,20 +166,30 @@ class ArchiveEvidenceTests(unittest.TestCase):
         changed = dict(event, type='item.started')
         self.assertEqual(self.receipts(changed), [])
         command = event['item']['command']
-        invalid = [command.replace('/runtime/columbus.py', '/other/columbus.py'),
-                   command.replace('graph.jsonl.xz', 'wrong.jsonl.xz'),
-                   command.replace(str(self.repository), str(self.observation / 'elsewhere')),
+        words = shlex.split(command)
+
+        def replace_argument(original, replacement):
+            changed = list(words)
+            changed[changed.index(str(original))] = str(replacement)
+            return shlex.join(changed)
+
+        input_position = words.index('--input')
+        hidden_input = (shlex.join(words[:input_position] + ['--inp', str(self.observation / 'other.jsonl.xz')])
+                        + ' # ' + shlex.join(words[input_position:]))
+        invalid = [replace_argument(self.observation / 'runtime/columbus.py', self.observation / 'other/columbus.py'),
+                   replace_argument(self.archive, self.observation / 'wrong.jsonl.xz'),
+                   replace_argument(self.repository, self.observation / 'elsewhere'),
                    'echo ' + shlex.quote(command), 'python -c ' + shlex.quote(command),
                    command + '; true', command + ' | cat', command + ' && echo offered',
                    command + ' --input ' + str(self.archive),
                    command + ' --input=' + str(self.archive),
                    command + ' --inp /tmp/other.jsonl.xz',
                    command + ' --rep /tmp/elsewhere',
-                   command.replace('--input ' + str(self.archive),
-                                   '--inp /tmp/other.jsonl.xz # --input ' + str(self.archive)),
+                   hidden_input,
                    command.replace('python3.12 ', 'python-spoof ', 1)]
         for command in invalid:
             with self.subTest(command=command):
+                self.assertNotEqual(command, event['item']['command'], 'Negative control must alter the invocation')
                 changed = copy.deepcopy(event)
                 changed['item']['command'] = command
                 self.assertEqual(self.receipts(changed), [])

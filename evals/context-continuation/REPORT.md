@@ -43,6 +43,8 @@ Search now scans all matching candidates to rank pages instead of discarding lat
 
 [Local validation](validation.json) records 290 engine tests (including real MCP cursor roundtrips), 58 root tests, 29 exploration-harness tests, three continuous-session audit tests and 21/21 multilingual contracts. Skill frontmatter, compilation and dependency checks pass. The clean ordinary-parser wheel and relocated ZIP each retrieve all 50 search IDs and all 25 source files from a separate Unicode fixture with no repeated spans and 2,048-byte responses; standalone installation and existing archive/hash/budget/native-hook checks also pass. Artifact hashes and runtime/skill correspondence are retained. This is local functional evidence, not hosted final-commit checks, a model experiment, or release authorization.
 
+The initial hosted head `1dadd7a` exposed two Windows-only failures in the new archive recognizer's negative test commands: slash-based and unquoted string replacements left the original valid command unchanged. The controls now mutate parsed arguments and assert that every negative command differs from the positive input. Runtime and recognizer behavior are unchanged; all 29 observation tests pass locally after the test correction. The [original failed run](https://github.com/ch4570/columbus/actions/runs/34244519058) remains available; [PR #14](https://github.com/ch4570/columbus/pull/14) records final-head platform checks separately.
+
 ## Reproduce
 
 From the repository root, use Python 3.11+ with the project's normal dependencies. The harness creates and cleans temporary engine copies, Git roots, indexes, receipts and CLI probes. It does not modify the checkout's runtime or overwrite an existing observation file.
