@@ -1,0 +1,206 @@
+{
+  "condition": "baseline",
+  "answer_sha256": "92612efbd94ac492f590c8e7a7eccec5861a141193d85c04d43f7c2f2f0b0dbb",
+  "criteria_sha256": "383fb0d6ba8f016dd116cf22478540ad23bca3047022ee855b37d999ac7f4125",
+  "passed": false,
+  "reviewed_owners": 37,
+  "findings": [
+    {
+      "id": "PasswordResetForm.save",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "DataSource.__init__",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "DataSource.__getitem__",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "Driver.__init__",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "Feature.index",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "OGRGeometry.from_json",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "OGRGeometry.from_gml",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "Layer.test_capability",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "GDALRaster.__init__",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "GDALRaster.__del__",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "GDALRaster.vsi_buffer",
+      "passed": false,
+      "note": "Claims the native call deletes the buffer on read, but its argument VSI_DELETE_BUFFER_ON_READ is False. The predeclared criterion explicitly warns against inferring the flag value from its name."
+    },
+    {
+      "id": "GDALRaster.clone",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "SpatialReference.attr_value",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "SpatialReference.auth_name",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "SpatialReference.auth_code",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "SpatialReference.import_user_input",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "SpatialReference.import_wkt",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "SpatialReference.xml",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "GEOSGeometryBase.from_ewkt",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "GEOSGeometryBase.relate_pattern",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "GEOSGeometry.__init__",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "_WKTReader.read",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "EmailMessage._create_mime_attachment",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "_cookie_signer_key",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "OracleParam.__init__",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "DatabaseOperations.convert_binaryfield_value",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "FakePayload.write",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "encode_multipart.to_bytes",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "encode_file.to_bytes",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "RequestFactory._encode_data",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "RequestFactory.generic",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "AsyncRequestFactory.generic",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "smart_bytes",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "uri_to_iri",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "salted_hmac",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "constant_time_compare",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    },
+    {
+      "id": "pbkdf2",
+      "passed": true,
+      "note": "Input/options, direct-call guards, downstream use and exception handling agree with the predeclared criteria; cited source may substantiate noncontradictory omitted details."
+    }
+  ],
+  "failure_evidence": {
+    "path": "django/contrib/gis/gdal/raster/const.py",
+    "line": 105,
+    "quote": "VSI_DELETE_BUFFER_ON_READ = False",
+    "source_sha256": "0bfb2f05cfb1d39d8a2688c7d6dde90f5376f5debb850c7237cae6f2ed35e35a"
+  },
+  "review_boundaries": [
+    "PasswordResetForm extra context override and GEOS geometry-limit forwarding appear in quoted source without contradictory prose.",
+    "Per-call default options are specified throughout.",
+    "Multiple raster, HMAC, comparison and PBKDF2 sites are described within their lexical owners."
+  ],
+  "graph_review_pending": true
+}
