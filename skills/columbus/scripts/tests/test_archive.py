@@ -13,6 +13,28 @@ from columbus.index import RepositoryIndex
 
 
 class ArchiveTests(unittest.TestCase):
+    def test_literal_flag_assignments_are_searchable_without_callable_edges(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / 'flags.py'
+            source.write_text('DELETE_ON_READ = False\ndef run(): DELETE_ON_READ()\n')
+            index = RepositoryIndex(root / '.columbus/index.sqlite')
+            index.refresh(root)
+            for codec in ('gzip', 'xz'):
+                artifact = root / codec
+                archive(index, artifact, codec)
+                found = search_archive(artifact, 'flags.DELETE_ON_READ')['items']
+                self.assertEqual(len(found), 1)
+                self.assertEqual(found[0]['kind'], 'assignment')
+                self.assertEqual(found[0]['signature'], 'DELETE_ON_READ = False')
+                self.assertEqual(callers_archive(artifact, 'flags.DELETE_ON_READ')['edges'], [])
+            source.write_text('DELETE_ON_READ = True\nDELETE_ON_READ = False\n')
+            index.refresh(root)
+            archive(index, root / 'changed.xz', 'xz')
+            self.assertEqual(len(search_archive(root / 'changed.xz', 'flags.DELETE_ON_READ')['items']), 2)
+            with self.assertRaisesRegex(ValueError, 'ambiguous'):
+                callers_archive(root / 'changed.xz', 'flags.DELETE_ON_READ')
+
     def test_archive_callers_rejects_replacement_between_validated_passes(self):
         import os
         from columbus import archive as archive_module

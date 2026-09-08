@@ -16,6 +16,28 @@ def relations(files, kind="calls"):
 
 
 class ParserTests(unittest.TestCase):
+    def test_literal_assignments_are_search_evidence_not_callable_bindings(self):
+        file = parsed('flags', '''
+            FLAG = False
+            LIMIT: int = 8
+            FLAG = True
+            ALIAS = FLAG
+            def run():
+                LOCAL = False
+                FLAG()
+            class C:
+                MEMBER = False
+        ''')
+        importer = parsed('consumer', 'from flags import FLAG\nimport flags\nFLAG()\nflags.FLAG()\n')
+        nodes = [s for s in file['symbols'] if s['kind'] == 'assignment']
+        self.assertEqual([s['signature'] for s in nodes], ['FLAG = False', 'LIMIT = 8', 'FLAG = True'])
+        self.assertEqual(len({s['id'] for s in nodes}), 3)
+        self.assertEqual([s['start_line'] for s in nodes], [1, 2, 3])
+        self.assertEqual(relations([file, importer]), [])
+        self.assertFalse(importer['imports'][0]['resolved'])
+        excluded = parsed('limits', 'ANNOTATED: bool\nLOWER = ' + repr('x' * 257) + '\nsmall = False\n')
+        self.assertFalse(any(s['kind'] == 'assignment' for s in excluded['symbols']))
+
     def test_cached_evidence_matches_ast_byte_offsets_and_line_endings(self):
         for newline in ['\n', '\r\n', '\r']:
             source = newline.join(['def café():', '    return target("🙂é\u2028x",', '                  other("a\u0085b\f"))', ''])

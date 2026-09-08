@@ -235,6 +235,37 @@ class _Parser(ast.NodeVisitor):
         if isinstance(node.ctx, (ast.Store, ast.Del)):
             self._bind(node.id, {"kind": "local", "reason": "assignment"})
 
+    def _literal_assignment(self, node, targets):
+        # Searchable syntax evidence only. Keep the normal local binding so a
+        # named value never becomes a callable declaration or resolved import.
+        if self.scopes[self.current]['kind'] != 'module' or not isinstance(node.value, ast.Constant):
+            return
+        value = ast.unparse(node.value)
+        if len(value) > 256:
+            return
+        for target in targets:
+            if not isinstance(target, ast.Name) or not target.id.isupper():
+                continue
+            base = f'{self.path}::{target.id}:assignment'
+            ordinal = self.counts.get(base, 0) + 1
+            self.counts[base] = ordinal
+            self.symbols.append({
+                'id': base if ordinal == 1 else f'{base}#{ordinal}',
+                'path': self.path, 'module': self.module, 'name': target.id,
+                'qualname': target.id, 'kind': 'assignment',
+                'start_line': node.lineno, 'end_line': node.end_lineno or node.lineno,
+                'signature': f'{target.id} = {value}', 'doc': '',
+                'parent_id': self.scopes[self.current]['owner'],
+            })
+
+    def visit_Assign(self, node: ast.Assign) -> None:
+        self._literal_assignment(node, node.targets)
+        self.generic_visit(node)
+
+    def visit_AnnAssign(self, node: ast.AnnAssign) -> None:
+        self._literal_assignment(node, [node.target])
+        self.generic_visit(node)
+
     def visit_NamedExpr(self, node: ast.NamedExpr) -> None:
         self.visit(node.value)
         previous = self.current

@@ -1,0 +1,39 @@
+{
+  "files": 5466,
+  "added_assignment_nodes": 1179,
+  "source_manifest_sha256": "b3f2cc7ef4b81bce1ca15cdb1185e069ca82e6c1b26a0ef7314cfa6ffe5d0673",
+  "all_previous_facts_except_added_symbols_equal": true,
+  "all_non_contains_edges_equal": true,
+  "all_previous_fts_documents_equal": true,
+  "storage": [
+    {
+      "name": "before",
+      "sqlite_bytes": 153391104,
+      "archive_bytes": 8592976,
+      "archive_sha256": "151a587b9d8fbc1c20b5afadc2db3b118420d0f0efcbc30e5f95c2a475132028"
+    },
+    {
+      "name": "after",
+      "sqlite_bytes": 154386432,
+      "archive_bytes": 8630760,
+      "archive_sha256": "fe9db9aad0e4ecf63a322400c88bc6d11819ad94c29b26aea25d38b90cf45cfe"
+    }
+  ],
+  "saved_flag_search": [
+    {
+      "id": "django/contrib/gis/gdal/raster/const.py::VSI_DELETE_BUFFER_ON_READ:assignment",
+      "path": "django/contrib/gis/gdal/raster/const.py",
+      "name": "VSI_DELETE_BUFFER_ON_READ",
+      "kind": "assignment",
+      "start_line": 105,
+      "end_line": 105,
+      "language": "python",
+      "fidelity": "ast",
+      "partial": false,
+      "signature": "VSI_DELETE_BUFFER_ON_READ = False",
+      "source_hash": "0bfb2f05cfb1d39d8a2688c7d6dde90f5376f5debb850c7237cae6f2ed35e35a"
+    }
+  ],
+  "model_trial": false,
+  "runtime_value_or_immutability_claimed": false
+}
