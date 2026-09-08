@@ -7,6 +7,17 @@ skills: [columbus]
 
 # Budgeted retrieval
 
+## Local navigation
+
+- Direct callers: `callers IDENTIFIER --format text --context-lines 20 --budget-bytes 12000`; add the task's `--path` scope. Unique names or exact Python `module.qualname` work; search for an exact ID if ambiguous. Nested functions are separate callers.
+- Other navigation: `search IDENTIFIER --format text --limit 5`, then `explore ID` for verified source. Follow `next_cursor` with `--cursor` and unchanged query/filters if more matches are needed; restart after a revision change. `map --format text --budget-tokens 2000` gives orientation. Check coverage once if empty, then use source search.
+- All stored call sites: `neighbors ID --direction in --hops 1 --kinds calls --format text`. Incoming dependency paths: `impact ID --hops 3 --format text`.
+- Repeated source: `explore QUERY --session TASK` skips delivered ranges and continues later matches. Repeat unchanged options while more evidence is needed and `receipt_continuation=more` (JSON `receipt.has_more=true`), even after an empty page. Sync if source is stale. Start a new session after context loss or handoff.
+
+Add `--repo REPO` to local queries. They auto-sync unless `--snapshot` is requested; sync failure stops the query. After edits/tests use `sync --summary`, or `sync --summary --verify-content` for full hashing. Each worktree needs its own index.
+
+## Bounded context
+
 `map` ranks declarations by incoming non-containment dependencies; a query uses exact-name and FTS lexical ranking. It emits signatures/locations, no source bodies. The selection is bounded to 200 candidates (50 with a query); inspect `truncated`.
 
 `context --mode signatures` combines lexical results and one-hop calls/inheritance/imports without source-body reads. `--mode snippets` verifies selected file hashes and returns at most 80 lines per candidate within the total budget. Whole-file matches can search beyond the first 12,000 characters and choose an excerpt around the query. Overlapping line ranges are emitted once.
