@@ -19,3 +19,5 @@ Exactly 307 references gain a previously empty expected_type. Every other parsed
 The exact cf635cf distribution run 34173030266 and candidate run 34173030244 were in progress at the latest poll. The earlier 6594992 candidate success is recorded separately and is not attributed to this newer change.
 
 Follow-up: ordinary distribution run 34173030266 at cf635cf completed with all six jobs successful; platform-final.json retains the exact revision and job conclusions. Candidate run 34173030244 is still running at this poll.
+
+Final candidate follow-up: run 34173030244 at cf635cf completed successfully in all 13 candidate build/compiler, aggregation and shared-artifact installation jobs. candidate-final.json retains the exact revision and conclusions. Together with the six ordinary distribution jobs, this supplies platform verification for the 71-case conditional-context change; it does not prove complete JVM inference.
