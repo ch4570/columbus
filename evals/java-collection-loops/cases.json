@@ -1,0 +1,82 @@
+[
+  [
+    "list_parameter",
+    "class Item { void hit() {} } class C { void run(java.util.List<Item> values) { for(Item item : values) item.hit(); } }",
+    true,
+    [
+      "Item"
+    ]
+  ],
+  [
+    "collection_getter",
+    "class Item { void hit() {} } class C { java.util.Collection<Item> items() { return null; } void run() { for(Item item : items()) item.hit(); } }",
+    true,
+    [
+      "Item"
+    ]
+  ],
+  [
+    "receiver_getter",
+    "class Item { void hit() {} } class C { java.util.Collection<Item> items() { return null; } void run(C other) { for(Item item : other.items()) item.hit(); } }",
+    true,
+    [
+      "Item"
+    ]
+  ],
+  [
+    "list_var",
+    "class Item { void hit() {} } class C { void run(java.util.List<Item> values) { for(var item : values) item.hit(); } }",
+    true,
+    [
+      "Item"
+    ]
+  ],
+  [
+    "extends_wildcard",
+    "class Item { void hit() {} } class C { void run(java.util.List<? extends Item> values) { for(Item item : values) item.hit(); } }",
+    true,
+    [
+      "Item"
+    ]
+  ],
+  [
+    "super_wildcard",
+    "class Item { void hit() {} } class C { void run(java.util.List<? super Item> values) { for(Item item : values) item.hit(); } }",
+    false,
+    [
+      null
+    ]
+  ],
+  [
+    "raw_list",
+    "class Item { void hit() {} } class C { void run(java.util.List values) { for(Item item : values) item.hit(); } }",
+    false,
+    [
+      null
+    ]
+  ],
+  [
+    "same_name_non_iterable",
+    "class Item { void hit() {} } class List<T> {} class C { void run(List<Item> values) { for(Item item : values) item.hit(); } }",
+    false,
+    [
+      null
+    ]
+  ],
+  [
+    "custom_iterable",
+    "class Item { void hit() {} } class Values implements Iterable<Item> { public java.util.Iterator<Item> iterator() { return null; } } class C { void run(Values values) { for(Item item : values) item.hit(); } }",
+    true,
+    [
+      "Item"
+    ]
+  ],
+  [
+    "subtype_elements",
+    "class Item { void hit() {} } class Child extends Item {} class C { void run(java.util.List<Child> values) { for(Item item : values) item.hit(); } }",
+    true,
+    [
+      "Item"
+    ]
+  ]
+]

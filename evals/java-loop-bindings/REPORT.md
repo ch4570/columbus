@@ -13,3 +13,5 @@ The first expansion resolves explicit loop variables over array parameters or va
 Both Java grammar environments pass the ten compiler cases with --require-array-bindings, which now makes regression of the three supported positive scenarios fail. The previous 103-case compiler gate passes. Full engine tests pass 252 in each environment and root checks pass 53; final wheel/ZIP verification passes. Unit controls also reject a later-declared local array and an instance-field array used from a static method. CI runs the strengthened compiler probe on JVM/loop-probe changes.
 
 A fresh index of the same 1,166-file Spring corpus adds thirteen edges and removes none relative to the iterable-expression version. Source hashes match. The delta is retained in spring-array-diff.json; these thirteen additions are not all independently reviewed and do not establish corpus precision or model token savings. The full loop-binding and model-efficiency goals remain incomplete.
+
+Ordinary distribution CI 34190311107 at 4042849 passed all six platform/Python environments; receipt: platform-ordinary-final.json. The experimental grammar matrix is tracked separately.
