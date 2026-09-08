@@ -19,3 +19,7 @@ There are 1179 added assignment nodes. The observed SQLite footprint is 995328 b
 The fully qualified saved-graph search for django.contrib.gis.gdal.raster.const.VSI_DELETE_BUFFER_ON_READ previously returned no items and now returns one assignment at the source definition with signature VSI_DELETE_BUFFER_ON_READ = False. Results retain the source hash and syntax evidence. An agent must still inspect contradictory or multiple assignments and does not get runtime evaluation. No model experiment has shown that this availability fixes the prior answer errors or reduces tokens. Completed observation inputs are unchanged.
 
 Fresh wheel and ZIP distribution verification passed; see distribution.txt. Remote platform CI is pending for the implementation revision.
+
+## Incremental search invalidation
+
+A follow-up regression changes one file through False, True, repeated True/False assignments, a computed expression, an annotation without a value, an empty file and restoration. At every step it verifies the exact assignment signatures and compares the full public graph and complete returned FLAG search hits against an independently rebuilt index. This rejects stale values, duplicate IDs left after removal and obsolete FTS hits. Ordinary and candidate engine suites each pass 245 tests. The follow-up changes tests only; no model trial ran.

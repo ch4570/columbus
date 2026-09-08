@@ -26,6 +26,27 @@ class IndexTests(unittest.TestCase):
         self.write("orders.py", "from payments import refund_payment\ndef cancel_order():\n    return refund_payment(10)\n")
         return self.index.refresh(self.root)
 
+    def test_literal_assignment_search_tracks_reassignment_and_removal(self):
+        for number, (source, signatures) in enumerate([
+            ('FLAG = False\n', ['FLAG = False']),
+            ('FLAG = True\n', ['FLAG = True']),
+            ('FLAG = True\nFLAG = False\n', ['FLAG = True', 'FLAG = False']),
+            ('FLAG = choose()\n', []),
+            ('FLAG: bool\n', []),
+            ('', []),
+            ('FLAG = False\n', ['FLAG = False']),
+        ]):
+            with self.subTest(source=source):
+                self.write('flags.py', source)
+                self.index.refresh(self.root)
+                hits = self.index.search('FLAG')['hits']
+                assignments = [h for h in hits if h['kind'] == 'assignment']
+                self.assertEqual(sorted(h['signature'] for h in assignments), sorted(signatures))
+                fresh = RepositoryIndex(Path(self.temp.name) / ('literal-fresh-%d.sqlite' % number))
+                fresh.refresh(self.root)
+                self.assertEqual(self.index.graph(), fresh.graph())
+                self.assertEqual(hits, fresh.search('FLAG')['hits'])
+
     def test_java_base_absence_is_recomputed_after_ancestor_changes(self):
         from contextlib import closing
         import sqlite3
