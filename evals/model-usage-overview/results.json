@@ -1,5 +1,5 @@
 {
-  "scope": "Eight recent completed comparisons including two explicit force_bytes repeats; not the entire experiment history, not a population estimate. Missing usage remains null. Semantic judgments remain in each source report.",
+  "scope": "Nine recent completed comparisons including two explicit force_bytes repeats and one Requests task; not the entire experiment history, not a population estimate. Missing usage remains null. Semantic judgments remain in each source report.",
   "comparisons": [
     {
       "case": "django-callers",
@@ -295,6 +295,44 @@
             "uncached_input_tokens": 67176
           },
           "automatic_quality_passed": true
+        }
+      }
+    },
+    {
+      "case": "requests-redirects",
+      "results_sha256": "6b597a3c1c13e50cff023cbcd4c765890f6f71e78e7568f6abe8178c49b55c18",
+      "conditions": {
+        "baseline": {
+          "elapsed_seconds": 371.723,
+          "timed_out": false,
+          "return_code": 0,
+          "command_count": 24,
+          "command_output_bytes": 62661,
+          "usage": {
+            "input_tokens": 195098,
+            "cached_input_tokens": 153856,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 10803,
+            "reasoning_output_tokens": 7434,
+            "uncached_input_tokens": 41242
+          },
+          "automatic_quality_passed": false
+        },
+        "columbus": {
+          "elapsed_seconds": 603.599,
+          "timed_out": false,
+          "return_code": 0,
+          "command_count": 34,
+          "command_output_bytes": 55895,
+          "usage": {
+            "input_tokens": 511145,
+            "cached_input_tokens": 461696,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 16987,
+            "reasoning_output_tokens": 11879,
+            "uncached_input_tokens": 49449
+          },
+          "automatic_quality_passed": false
         }
       }
     }

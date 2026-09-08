@@ -1,0 +1,64 @@
+{
+  "condition": "columbus",
+  "review_basis": "Frozen SOURCE-REVIEW.md; omissions may be substantiated by actual quote, not merely a broad cited range. Review performed after both trials completed.",
+  "passed": false,
+  "passed_findings": 7,
+  "total_findings": 11,
+  "findings": [
+    {
+      "id": "dispatch",
+      "passed": false,
+      "note": "Correct adapter call, generator consumption, non-recursive hops, disabled _next and unresolved dynamic-dispatch limitation. Neither prose nor actual quote covers response hooks, default allow_redirects=True, history/final-response rearrangement or non-stream final-content consumption."
+    },
+    {
+      "id": "method_policy",
+      "passed": true,
+      "note": "Covers 303/302 except HEAD, 301 POST only and 307/308 retention."
+    },
+    {
+      "id": "body_retention",
+      "passed": true,
+      "note": "Correct status-based body/entity-header removal independently of method change, with retained 307/308 path."
+    },
+    {
+      "id": "body_position",
+      "passed": true,
+      "note": "Correct stream exclusions, tell offset and OSError sentinel; body_rewind explanation supplies later explicit sentinel failure. Quote is verbatim."
+    },
+    {
+      "id": "body_rewind",
+      "passed": true,
+      "note": "Covers non-None position plus retained length/transfer header, integer seek, OSError translation and missing-seek/non-integer failure including sentinel."
+    },
+    {
+      "id": "origin_auth_policy",
+      "passed": true,
+      "note": "Correct hostname, same-host standard-port upgrade, equivalent default ports and remaining scheme/port rules. Separate citation failure: quote omits intervening source comment lines."
+    },
+    {
+      "id": "auth_rebuild",
+      "passed": true,
+      "note": "Correct old/new URL policy, trust_env and netrc replacement. Separate citation failure: quote omits source comments before header deletion."
+    },
+    {
+      "id": "proxy_selection",
+      "passed": false,
+      "note": "Correct copied mapping, environment gate, scheme/all fallback, setdefault and bypass preservation. Neither prose nor quote covers None becoming an empty mapping, as required before the trial."
+    },
+    {
+      "id": "proxy_auth",
+      "passed": true,
+      "note": "Correct newly resolved scheme proxy, header deletion and non-HTTPS/truthy credential policy; actual quote includes missing-key handling and None credentials."
+    },
+    {
+      "id": "cookies",
+      "passed": false,
+      "note": "Correct old-request extraction, merged jar and rebuilt header; post-send extraction into the session jar is absent from prose and quote."
+    },
+    {
+      "id": "redirect_url",
+      "passed": false,
+      "note": "Correct URL normalization, fragment handling, native-text assignment, limit/close and termination; copy and disabled mode are covered in dispatch. Raw-read fallback describes decoding/chunk failures but omits required RuntimeError handling from both prose and quote. Separate citation failure: initial previous_fragment assignment is outside the cited range, despite a verbatim normalization quote."
+    }
+  ]
+}
