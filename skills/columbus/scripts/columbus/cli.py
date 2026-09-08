@@ -97,9 +97,18 @@ def main(argv=None) -> int:
     parser.add_argument('--version', action='version', version=__version__)
     _common(parser)
     sub = parser.add_subparsers(dest='command', required=True)
-    for name in ('doctor', 'init', 'archive-search', 'archive-source', 'archive-neighbors', 'archive-callers', 'archive', 'tree', 'hook-install', 'hook-update', 'sync', 'index', 'status', 'search', 'map', 'symbol', 'callers', 'neighbors', 'impact', 'context', 'explore', 'stats', 'graph', 'export', 'serve', 'telemetry'):
+    for name in ('doctor', 'init', 'archive-search', 'archive-source', 'archive-quotes', 'archive-neighbors', 'archive-callers', 'archive', 'tree', 'hook-install', 'hook-update', 'sync', 'index', 'status', 'search', 'map', 'symbol', 'callers', 'neighbors', 'impact', 'context', 'explore', 'stats', 'graph', 'export', 'serve', 'telemetry'):
         command = sub.add_parser(name)
         _common(command, subcommand=True)
+        if name == 'archive-quotes':
+            command.add_argument('--range', dest='ranges', action='append', nargs=3, required=True,
+                                 metavar=('PATH', 'START', 'END'),
+                                 help='Exact path and inclusive physical lines; repeat for 1–16 quotes, at most 400 total lines; use ./ before option-like paths')
+            command.add_argument('--input', required=True)
+            command.add_argument('--format', choices=['json'], default='json',
+                                 help='Copy-ready JSON quote/range objects; no semantic support check')
+            command.add_argument('--budget-bytes', type=int, default=6000,
+                                 help='512–64000 serialized UTF-8 bytes; complete batch or error, never clipped')
         if name == 'archive-source':
             command.add_argument('symbol_id', nargs='+', help='One declaration, or 2–16 unique declarations in one page')
             command.add_argument('--overloads', action='store_true',
@@ -210,6 +219,8 @@ def main(argv=None) -> int:
     args = parser.parse_args(argv)
     started = time.perf_counter()
     try:
+        if args.command == 'archive-quotes' and args.telemetry is not None:
+            raise ValueError('archive-quotes does not support --telemetry')
         if args.command == 'explore':
             if not args.query and (args.mode != 'snippets' or args.receipt is not None or args.exclude_id or args.session is not None):
                 raise ValueError('Explore without QUERY returns a map; --mode/--receipt/--exclude-id/--session require QUERY')
@@ -243,6 +254,8 @@ def main(argv=None) -> int:
             return 0 if result['ready'] else 2
         if args.command == 'index':
             args.repo = args.root
+        if args.command == 'archive-quotes' and args.db is not None:
+            raise ValueError('archive-quotes does not use --db; select source with --repo')
         db = Path(args.db).expanduser().resolve() if args.db else None
         if args.repo is None and db and db.is_file():
             root = Path(RepositoryIndex(db).status()['root'])
@@ -274,6 +287,16 @@ def main(argv=None) -> int:
             result = install_bundle(root, apply=not args.plan, skills_dir=args.skills_dir)
             print(json.dumps(result, ensure_ascii=False, indent=2 if args.pretty else None))
             return 2 if result['status'] in {'error', 'conflict'} else 0
+        if args.command == 'archive-quotes':
+            if args.pretty:
+                raise ValueError('archive-quotes rejects pretty output to preserve its byte budget')
+            from .quotes import quotes_archive, render_quotes
+            # One explicit ./ escapes option-like filenames without permitting
+            # parent traversal, general normalization or noncanonical archive keys.
+            ranges = [(path.removeprefix('./'), int(start), int(end)) for path, start, end in args.ranges]
+            result = quotes_archive(args.input, ranges, root, args.budget_bytes)
+            sys.stdout.write(render_quotes(result))
+            return 0
         index = RepositoryIndex(db or root / '.columbus/index-v1.sqlite')
         if args.command == 'tree':
             from .tree import records
@@ -396,5 +419,8 @@ def main(argv=None) -> int:
             telemetry.append(args.command, args.format, result, rendered, time.perf_counter() - started)
         return 0
     except (ValueError, OSError, RuntimeError, ImportError, SyntaxError, UnicodeError, sqlite3.Error) as exc:
-        print(f'columbus: {exc}', file=sys.stderr)
+        # Source readers can include an untrusted path in their diagnostics.
+        message = (json.dumps(str(exc), ensure_ascii=True)[1:-1]
+                   if args.command == 'archive-quotes' else str(exc))
+        print(f'columbus: {message}', file=sys.stderr)
         return 2
