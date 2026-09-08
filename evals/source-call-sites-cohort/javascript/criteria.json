@@ -1,0 +1,31 @@
+{
+  "uri_handoffs": [
+    "Axios.getUri first calls mergeConfig(this.defaults, config), then buildFullPath with the merged baseURL, url and allowAbsoluteUrls, then buildURL with that full path and the merged params and paramsSerializer. These are actual ordered helper calls, not an independent reimplementation in getUri.",
+    "The method directly returns the URI-building result synchronously. There is no local catch or Promise conversion: an exception from a selected serializer/helper propagates from this call.",
+    "The getUri body does not run the request/interceptor/adapter/dispatch pipeline or perform a network request. Its helper handoffs establish URI computation, not a guarantee that a later HTTP request will execute identically or successfully."
+  ],
+  "uri_config_merge": [
+    "mergeConfig creates a new config object. Its ordinary plain-object merges and array copies do not overwrite the supplied configs or mutate their plain params objects during URI construction. This is not a universal deep-clone guarantee: non-plain objects such as native URLSearchParams and functions may remain shared references.",
+    "url uses valueFromConfig2: it comes from the per-call config when not undefined, and does not fall back to a defaults.url. It is distinct from baseURL and paramsSerializer, whose defaultToConfig2 rule uses a defined per-call value or else the default. An explicit null is a defined override, not an undefined fallback.",
+    "params and allowAbsoluteUrls have no special mergeMap entry and use mergeDeepProperties. A defined per-call value wins or merges as appropriate; an undefined per-call value falls back to the default, while null params replaces default params. For the scoped boolean allowAbsoluteUrls this is value selection, not recursive object merging.",
+    "For plain-object params, both plain values are recursively merged with later per-call keys taking precedence; a plain source without a plain target is copied/merged into a fresh object. An array source is copied with slice and replaces rather than concatenates a prior array. Neither a blanket shallow spread nor preservation of every nested reference is an accurate description."
+  ],
+  "uri_base_path": [
+    "buildFullPath calls isAbsoluteURL. That helper recognizes scheme:// and protocol-relative // prefixes using its case-insensitive scheme regex, rather than treating every leading slash or every colon-containing string as absolute.",
+    "A truthy baseURL is joined when the requested URL is relative or allowAbsoluteUrls == false. Under the question's boolean-or-absent scope, explicit false therefore also joins an absolute URL; true or absent leaves an absolute URL unchanged. With no truthy base, the requested URL is returned unchanged even when false is supplied.",
+    "combineURLs uses string replacement and concatenation: for a truthy relativeURL it removes a matching one-or-two trailing-slash suffix from baseURL, removes all leading slashes from relativeURL, and inserts one slash; a falsy relativeURL returns baseURL. Do not assert arbitrary-length trailing slash runs are all stripped by this regex.",
+    "These helpers do not perform a URL-object resolution, dot-segment canonicalization, same-origin check or containment enforcement. In particular false can concatenate an absolute URL after the base as literal text; it is not a rejection or a security validation."
+  ],
+  "uri_serializer_selection": [
+    "buildURL returns the supplied URL immediately when params is falsy, before invoking a serializer or removing a fragment. A truthy empty params object instead goes through serialization and may still leave the URL unchanged when the resulting string is empty.",
+    "A function options value is normalized to an object with serialize set to that function; an object uses its serialize property. A truthy serialize function is invoked with params and the resulting options object, ahead of the native URLSearchParams or ordinary-object branches, and its result is used without the default pair encoding. Exceptions are not caught here.",
+    "Without a custom serializer, native URLSearchParams uses params.toString() directly; other scoped params are passed to new AxiosURLSearchParams(params, options).toString(_encode). The options.encode callback or the URI builder's default encode function is used on this latter pair-encoding path, not by the native URLSearchParams shortcut.",
+    "Only a truthy serializedParams result causes removal of the substring beginning at the first # and appending of the serialized string. The separator is ? when the remaining URL has no ?, otherwise &. A falsy/empty serialized result preserves the original URL including its fragment; no unconditional fragment stripping is implemented."
+  ],
+  "uri_parameter_materialization": [
+    "AxiosURLSearchParams initializes an empty _pairs collection and hands params to toFormData with itself as the append target. append stores name/value pairs, and toString encodes each key and value, forms key=value entries, and joins them with &. This path reuses the visitor to collect pairs rather than sending a multipart request.",
+    "The default visitor/build walk omits ordinary null and undefined object members; the flat-array branch also skips null/undefined elements. With default indexes=false, a top-level flat array emits repeated name[] keys for retained elements. The convertValue(null) empty-string branch does not imply these skipped ordinary null members are emitted.",
+    "Nested plain objects are recursively visited and renderKey uses bracket notation by default, while Date values become ISO strings and booleans become their string form. These rules are scoped to the default ordinary-object path, not asserted for a custom serializer or native URLSearchParams implementation.",
+    "buildURL's default encode applies encodeURIComponent and restores encoded colon, dollar and comma while changing encoded spaces to +. It does not restore brackets, so default bracketed array/nested keys have percent-encoded brackets in the final URI. This encoder is explicitly passed to AxiosURLSearchParams.toString and must not be confused with that class's separate fallback encoder."
+  ]
+}

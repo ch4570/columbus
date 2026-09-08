@@ -1,0 +1,298 @@
+{
+  "case": "java-classpath-resource-navigation",
+  "condition": "baseline",
+  "repeat": 1,
+  "return_code": 0,
+  "timed_out": false,
+  "finished_at": "2026-09-08T21:46:31.539402+00:00",
+  "elapsed_seconds": 329.2955272909894,
+  "usage": {
+    "input_tokens": 197731,
+    "cached_input_tokens": 155904,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 9764,
+    "reasoning_output_tokens": 5738,
+    "uncached_input_tokens": 41827
+  },
+  "preflight": {
+    "baseline": {
+      "passed": true,
+      "archive_sha256": "b624d888e8a35f55c6f43f3255c2b21878d56e75d1e764442e9571d1fa998b23",
+      "revision": "cf482b13ebb638a175d9",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    },
+    "control": {
+      "passed": true,
+      "archive_sha256": "b624d888e8a35f55c6f43f3255c2b21878d56e75d1e764442e9571d1fa998b23",
+      "revision": "cf482b13ebb638a175d9",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    },
+    "candidate": {
+      "passed": true,
+      "archive_sha256": "b624d888e8a35f55c6f43f3255c2b21878d56e75d1e764442e9571d1fa998b23",
+      "revision": "cf482b13ebb638a175d9",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    }
+  },
+  "postflight": {
+    "baseline": {
+      "passed": true,
+      "archive_sha256": "b624d888e8a35f55c6f43f3255c2b21878d56e75d1e764442e9571d1fa998b23",
+      "revision": "cf482b13ebb638a175d9",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    },
+    "control": {
+      "passed": true,
+      "archive_sha256": "b624d888e8a35f55c6f43f3255c2b21878d56e75d1e764442e9571d1fa998b23",
+      "revision": "cf482b13ebb638a175d9",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    },
+    "candidate": {
+      "passed": true,
+      "archive_sha256": "b624d888e8a35f55c6f43f3255c2b21878d56e75d1e764442e9571d1fa998b23",
+      "revision": "cf482b13ebb638a175d9",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    }
+  },
+  "events_sha256": "86c2afeb2bb8de489831b15c9a865ae572222ce1ff6030272df8ce5ce398d948",
+  "commands": [
+    {
+      "command": "/bin/zsh -lc \"rg -n --glob '*.java' 'class DefaultResourceLoader|class ClassPathResource|class ContextResource|pathWithinContext|createRelative\\\\(|getURL\\\\(|getInputStream\\\\(|getResource\\\\(String location\\\\)|isFileURL|pathApplyRelative'\"",
+      "exit_code": 0,
+      "output_bytes": 23020,
+      "output_sha256": "70999a5acee34824e72621d6284127473244b87709989d24f787d604a0ffb6d7"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/core/io/ClassPathResource.java | sed -n '45,265p'\"",
+      "exit_code": 0,
+      "output_bytes": 8604,
+      "output_sha256": "62b396ab4687251b1cb53532affd29daba901e0376c634c44299a546f5a9d3b6"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/core/io/DefaultResourceLoader.java | sed -n '70,195p;200,325p'\"",
+      "exit_code": 0,
+      "output_bytes": 9440,
+      "output_sha256": "e393c44e610e780da364a2a495524b46fbbc4b22ad67e9b4f13d0b3f9e9ad937"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/util/ResourceUtils.java | sed -n '40,110p;270,305p'\nnl -ba src/main/java/org/springframework/util/StringUtils.java | sed -n '690,735p'\"",
+      "exit_code": 0,
+      "output_bytes": 6713,
+      "output_sha256": "cdac0956bc2b6de5940e0dfbbc98ec98133f8a10fe1fbb2ba015312216ffb684"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/core/io/ClassRelativeResourceLoader.java | sed -n '35,100p'\nrg -n --glob '*.java' 'CLASSPATH_ALL_URL_PREFIX|CLASSPATH_URL_PREFIX|URL_PROTOCOL_FILE|URL_PROTOCOL_VFSFILE|URL_PROTOCOL_VFS'\"",
+      "exit_code": 0,
+      "output_bytes": 8879,
+      "output_sha256": "8a4f3e33cb0d1da60527fa022f8266cb15dadf427ec72bbf2a6bdc67f14175af"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/core/io/DefaultResourceLoader.java | sed -n '50,70p;153,200p;293,315p'\"",
+      "exit_code": 0,
+      "output_bytes": 3746,
+      "output_sha256": "9b36b50dc8b437091cf8e0b8161cf53a1c32570d70d9fdd6a09bdc28b387f99b"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/util/Assert.java | sed -n '170,190p'\nnl -ba src/main/java/org/springframework/core/io/ResourceLoader.java | sed -n '45,102p'\"",
+      "exit_code": 0,
+      "output_bytes": 4325,
+      "output_sha256": "6c0c2f11f660777d7a3c4419388707f6d61bd9af63d4c25b8d29754b70069581"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/util/StringUtils.java | sed -n '710,790p'\nrg -n --glob '*Tests.java' 'ProtocolResolver|protocolResolver|ClassPathContextResource|getPathWithinContext' src/test\"",
+      "exit_code": 1,
+      "output_bytes": 3267,
+      "output_sha256": "29f87ce6554d853912edce79f6cfdbeaae294d0daeb756f57bd9d9ccbd078d0f"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n --glob '*.java' 'ClassUtils.getDefaultClassLoader\\\\(' src/main/java/org/springframework/util/ClassUtils.java src/main/java/org/springframework/core/io/ClassPathResource.java\nnl -ba src/main/java/org/springframework/util/ClassUtils.java | sed -n '180,230p'\nrg -n 'ClassPathResource\\\\(null|new ClassPathResource\\\\(' src/test/java/org/springframework/core/io/ClassPathResourceTests.java | head -80\"",
+      "exit_code": 0,
+      "output_bytes": 6722,
+      "output_sha256": "f277f552d764d4b4358220d3055d01dfe2b27be1ac2a4af1f30bfe3b7cea3fff"
+    },
+    {
+      "command": "/bin/zsh -lc \"sed -n '1,230p' src/test/java/org/springframework/core/io/ClassPathResourceTests.java\"",
+      "exit_code": 0,
+      "output_bytes": 8686,
+      "output_sha256": "47d016ef962a1bc69452a3f17eec1cbd32de3f9c0f5ba914f875704826ee9e2b"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/util/ClassUtils.java | sed -n '212,255p'\nnl -ba src/main/java/org/springframework/core/io/ProtocolResolver.java | sed -n '30,90p'\"",
+      "exit_code": 0,
+      "output_bytes": 2751,
+      "output_sha256": "ec9d1c3962c852c1d8c5357ba0f1275c1406422a9a290ae047cadda233d22e21"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n --glob '*Tests.java' 'DefaultResourceLoader|classpath\\\\*:|FileUrlResource|ClassPathAllResource|getProtocolResolvers|addProtocolResolver' src/test/java/org/springframework/core/io src/test/java/org/springframework/core/io/support\"",
+      "exit_code": 0,
+      "output_bytes": 6801,
+      "output_sha256": "f6880ee8a53917bb98b0b825af4ebcc9bd94e467fca5b7742242b6b42193ddd8"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n --glob '*.java' 'class FileSystemResourceLoader|getResourceByPath\\\\(String path\\\\)' src/main/java/org/springframework/core/io\nnl -ba src/main/java/org/springframework/core/io/FileSystemResourceLoader.java | sed -n '55,90p'\"",
+      "exit_code": 0,
+      "output_bytes": 1074,
+      "output_sha256": "9562793ce69405921feab705c114e4f7b72f777d45f767c0e39858fee509a9c2"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n 'static URL toURL|URL toURL' src/main/java/org/springframework/util/ResourceUtils.java\nnl -ba src/main/java/org/springframework/util/ResourceUtils.java | sed -n '110,205p'\"",
+      "exit_code": 0,
+      "output_bytes": 4288,
+      "output_sha256": "a4aae9cc26171ca2545cb800b7a9b97253d123e0f6dae459b4f9c9c3a6661d52"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/util/ResourceUtils.java | sed -n '395,425p'\nrg -n 'toURI\\\\(String location\\\\)' src/main/java/org/springframework/util/ResourceUtils.java\"",
+      "exit_code": 0,
+      "output_bytes": 1395,
+      "output_sha256": "25aef5d0ed4b615fb0f2addd25d18a976f03bb89e925ba87fd4eb5d7453c18b0"
+    }
+  ],
+  "command_count": 15,
+  "command_output_bytes": 99711,
+  "failed_commands": 1,
+  "other_tool_types": [],
+  "runtime_warnings": [],
+  "turn_failed": false,
+  "answer": {
+    "findings": [
+      {
+        "id": "resource_location_routing",
+        "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+        "start_line": 155,
+        "end_line": 185,
+        "quote": "public Resource getResource(String location) {\n\tAssert.notNull(location, \"Location must not be null\");\n\n\tfor (ProtocolResolver protocolResolver : getProtocolResolvers()) {\n\t\tResource resource = protocolResolver.resolve(location, this);\n\t\tif (resource != null) {\n\t\t\treturn resource;\n\t\t}\n\t}\n\n\tif (location.startsWith(\"/\")) {\n\t\treturn getResourceByPath(location);\n\t}\n\telse if (location.startsWith(CLASSPATH_URL_PREFIX)) {\n\t\treturn new ClassPathResource(location.substring(CLASSPATH_URL_PREFIX.length()), getClassLoader());\n\t}\n\telse if (location.startsWith(CLASSPATH_ALL_URL_PREFIX)) {\n\t\treturn new ClassPathAllResource(location.substring(CLASSPATH_ALL_URL_PREFIX.length()), getClassLoader());\n\t}\n\telse {\n\t\ttry {\n\t\t\t// Try to parse the location as a URL...\n\t\t\tURL url = ResourceUtils.toURL(location);\n\t\t\treturn (ResourceUtils.isFileURL(url) ? new FileUrlResource(url) : new UrlResource(url));\n\t\t}\n\t\tcatch (MalformedURLException ex) {\n\t\t\t// No URL -> resolve as resource path.\n\t\t\treturn getResourceByPath(location);\n\t\t}\n\t}\n}",
+        "explanation": "A null location is rejected before any resolver with IllegalArgumentException and message \"Location must not be null\". Protocol resolvers are stored in a LinkedHashSet, so they run in registration/insertion order ahead of all built-in rules; null means “not handled,” while the first non-null Resource is returned immediately. Thereafter, a leading slash is sent unchanged to getResourceByPath(); the unmodified default hook constructs DefaultResourceLoader.ClassPathContextResource. A classpath: prefix is removed and produces ClassPathResource, while classpath*: is removed and produces the nested ClassPathAllResource multi-content handle. Other strings are parsed as URLs. ResourceUtils.isFileURL recognizes file, vfsfile, and vfs protocols, producing FileUrlResource; every other successfully parsed URL produces UrlResource. MalformedURLException causes the original location to fall back to getResourceByPath(), whose default result is again ClassPathContextResource. These branches only construct or return handles: they neither test existence nor open content."
+      },
+      {
+        "id": "classpath_coordinates",
+        "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+        "start_line": 110,
+        "end_line": 125,
+        "quote": "public ClassPathResource(String path, @Nullable Class<?> clazz) {\n\tAssert.notNull(path, \"Path must not be null\");\n\tthis.path = StringUtils.cleanPath(path);\n\n\tString absolutePath = this.path;\n\tif (clazz != null && !absolutePath.startsWith(\"/\")) {\n\t\tabsolutePath = ClassUtils.classPackageAsResourcePath(clazz) + \"/\" + absolutePath;\n\t}\n\telse if (absolutePath.startsWith(\"/\")) {\n\t\tabsolutePath = absolutePath.substring(1);\n\t}\n\tthis.absolutePath = absolutePath;\n\n\tthis.classLoader = null;\n\tthis.clazz = clazz;\n}",
+        "explanation": "Both context-taking constructors reject a null path with IllegalArgumentException and \"Path must not be null\", then apply StringUtils.cleanPath. In the cited Class constructor, the cleaned path is retained as the Class lookup coordinate: without a leading slash and with a non-null Class it is class-package-relative, while a leading slash makes Class lookup absolute. absolutePath is separately package-expanded for the relative case or has its leading slash removed for the absolute case. The fields retain clazz, including null, and set classLoader to null; a null Class therefore provides no package context and later selects the system lookup branch. getPath() exposes absolutePath, not necessarily the string supplied to Class.getResource; for a non-null Class and relative input it exposes the cleaned, package-qualified coordinate. getClassLoader() exposes clazz.getClassLoader() for a non-null Class, otherwise the stored loader.\n\nThe ClassLoader constructor cleans the path, strips a leading slash because ClassLoader APIs require a slashless absolute classpath coordinate, stores that value as both path and absolutePath, sets clazz to null, and stores either the explicit loader or the result of ClassUtils.getDefaultClassLoader(). The one-argument constructor delegates with a null ClassLoader. Default selection occurs while the handle is constructed—normally thread-context loader, then documented fallbacks—and is not dynamically repeated on each access; if selection still yields null, later operations use system lookup methods. By contrast, the Class constructor with a null Class stores both contexts as null. cleanPath performs lexical separator/dot normalization and resolvable .. folding; it is expressly not traversal protection and establishes no security boundary."
+      },
+      {
+        "id": "classpath_url_lookup",
+        "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+        "start_line": 173,
+        "end_line": 190,
+        "quote": "protected @Nullable URL resolveURL() {\n\ttry {\n\t\tif (this.clazz != null) {\n\t\t\treturn this.clazz.getResource(this.path);\n\t\t}\n\t\telse if (this.classLoader != null) {\n\t\t\treturn this.classLoader.getResource(this.absolutePath);\n\t\t}\n\t\telse {\n\t\t\treturn ClassLoader.getSystemResource(this.absolutePath);\n\t\t}\n\t}\n\tcatch (IllegalArgumentException ex) {\n\t\t// Should not happen according to the JDK's contract:\n\t\t// see https://github.com/openjdk/jdk/pull/2662\n\t\treturn null;\n\t}\n}",
+        "explanation": "resolveURL is the shared URL-resolution boundary. A Class-backed handle calls clazz.getResource(path), preserving the cleaned relative name or leading-slash absolute name expected by Class. A ClassLoader-backed handle calls classLoader.getResource(absolutePath), and a handle with neither context calls ClassLoader.getSystemResource(absolutePath); the latter two receive the cleaned slashless coordinate. IllegalArgumentException from any branch is suppressed into a null result. exists() simply reports whether resolveURL() is non-null, so missing or suppressed lookup returns false. getURL() calls the same helper but turns null into FileNotFoundException and otherwise returns the URL. Neither operation opens a stream or saves a successful lookup: getInputStream() performs a separate resource-as-stream lookup later, which can independently return null or fail, so successful exists()/getURL() does not guarantee a subsequent stream open."
+      },
+      {
+        "id": "classpath_stream_access",
+        "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+        "start_line": 200,
+        "end_line": 215,
+        "quote": "public InputStream getInputStream() throws IOException {\n\tInputStream is;\n\tif (this.clazz != null) {\n\t\tis = this.clazz.getResourceAsStream(this.path);\n\t}\n\telse if (this.classLoader != null) {\n\t\tis = this.classLoader.getResourceAsStream(this.absolutePath);\n\t}\n\telse {\n\t\tis = ClassLoader.getSystemResourceAsStream(this.absolutePath);\n\t}\n\tif (is == null) {\n\t\tthrow new FileNotFoundException(getDescription() + \" cannot be opened because it does not exist\");\n\t}\n\treturn is;\n}",
+        "explanation": "Stream access directly mirrors the three lookup contexts: Class.getResourceAsStream receives path, preserving class-relative versus leading-slash-absolute semantics; ClassLoader.getResourceAsStream receives absolutePath; and the no-context branch passes absolutePath to ClassLoader.getSystemResourceAsStream. A null result is converted to FileNotFoundException, while a non-null stream is returned unchanged. The method does not call resolveURL() or getURL(), so it neither reuses an earlier URL nor inherits resolveURL()'s IllegalArgumentException suppression. Each invocation performs the lookup again; successful content is not cached, and the method does not close the returned stream—the caller owns it."
+      },
+      {
+        "id": "classpath_relative_handles",
+        "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+        "start_line": 238,
+        "end_line": 242,
+        "quote": "public Resource createRelative(String relativePath) {\n\tString pathToUse = StringUtils.applyRelativePath(this.path, relativePath);\n\treturn (this.clazz != null ? new ClassPathResource(pathToUse, this.clazz) :\n\t\t\tnew ClassPathResource(pathToUse, this.classLoader));\n}",
+        "explanation": "Ordinary ClassPathResource applies the relative name to its stored lookup path, not getPath()/absolutePath, and then constructs a new handle. StringUtils.applyRelativePath finds the final slash, discards the final path segment, and appends the relative path; it inserts one slash only when the relative path does not already start with one. If the base contains no slash, the helper returns the relative path unchanged. Consequently a leading-slash relative path is joined directly to an existing directory prefix, but remains leading-slash when the base has no separator. The selected constructor cleans the combined path again, folding lexical dot segments. A ClassLoader constructor then removes any remaining leading slash; a non-null Class constructor retains it as an absolute Class lookup coordinate while exposing a slashless getPath().\n\nFor a non-null Class context, the exact Class is preserved. Otherwise the ClassLoader overload receives the stored loader, preserving an explicit or already-selected default loader. One edge case is a handle originally built with (Class<?>) null: it has no Class and no stored loader, so relative creation chooses the ClassLoader overload with null, which selects a default loader for the newly constructed handle.\n\nThe default loader’s ordinary-path hook instead creates ClassPathContextResource, a ClassPathResource subtype implementing ContextResource. Its getPathWithinContext() returns getPath(), and its createRelative() applies the same helper to getPath() and constructs another ClassPathContextResource with the same exposed loader, preserving the subtype. Explicit classpath: routing creates the ordinary ClassPathResource instead. All outcomes are descriptors only; neither relative construction nor lexical cleaning establishes existence or a filesystem/traversal security boundary."
+      }
+    ]
+  },
+  "quality": {
+    "passed": true,
+    "findings": [
+      {
+        "id": "resource_location_routing",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "classpath_coordinates",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "classpath_url_lookup",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "classpath_stream_access",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "classpath_relative_handles",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  }
+}

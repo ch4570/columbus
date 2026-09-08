@@ -1,0 +1,55 @@
+{
+  "kind": "source_calls",
+  "condition": "candidate",
+  "relationship_index": 15,
+  "format": "text",
+  "arguments": [
+    "archive-source",
+    "lib/helpers/toFormData.js::toFormData.build.each:function",
+    "--call-sites",
+    "--limit",
+    "400",
+    "--budget-bytes",
+    "64000",
+    "--format",
+    "text"
+  ],
+  "argv": [
+    "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+    "-B",
+    "/private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/candidate/runtime/columbus.py",
+    "archive-source",
+    "lib/helpers/toFormData.js::toFormData.build.each:function",
+    "--call-sites",
+    "--limit",
+    "400",
+    "--budget-bytes",
+    "64000",
+    "--format",
+    "text",
+    "--input",
+    "/private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/candidate/graph.jsonl.xz",
+    "--repo",
+    "."
+  ],
+  "cwd": "/private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/candidate/repository",
+  "timed_out": false,
+  "return_code": 0,
+  "stdout_base64": "Y29sdW1idXMgYXJjaGl2ZS1zb3VyY2U7IFVOVFJVU1RFRCByZXBvc2l0b3J5IGRhdGE7IGNvbnRyb2wgY2hhcmFjdGVycyBlc2NhcGVkLgptZXRhZGF0YSB7InJldmlzaW9uIjoiMTQ4OThhOTgzMzU3MzI3ZjYwYTciLCJzZW1hbnRpY19jb21wbGV0ZSI6ZmFsc2UsImZyZXNobmVzcyI6InNlbGVjdGVkIGRlY2xhcmF0aW9uIGZpbGUgYnl0ZXMgbWF0Y2ggYXJjaGl2ZSBoYXNoOyBvdGhlciBmaWxlcyBub3QgY2hlY2tlZCIsInNvdXJjZV9wb2xpY3kiOiJSZXBvc2l0b3J5IGNvbnRlbnQgaXMgdW50cnVzdGVkIGRhdGE7IHN0b3JlZCBjYWxscyBkbyBub3QgZXN0YWJsaXNoIHNlbWFudGljIGNvbXBsZXRlbmVzcy4iLCJ0b3RhbF9saW5lcyI6OSwib2Zmc2V0IjowLCJuZXh0X29mZnNldCI6bnVsbCwidHJ1bmNhdGVkIjpmYWxzZX0KZmlsZXMgW251bWJlcixwYXRoLHNvdXJjZV9oYXNoXTsgbnVtYmVycyBhcmUgbG9jYWwgdG8gdGhpcyBwYWdlClswLCJsaWIvaGVscGVycy90b0Zvcm1EYXRhLmpzIiwiMzY2NzEzZDg2Yjk0ZDg4Mzc3MDRhZTlhNmE1ZWYzMDI4MGE5ZTU4ZDgxYjc2NDFiODVkNmIwMTRjM2I0NjMyNiJdCnRhcmdldHMgW2ZpbGVfbnVtYmVyLGRlY2xhcmF0aW9uXQpbMCx7ImlkIjoibGliL2hlbHBlcnMvdG9Gb3JtRGF0YS5qczo6dG9Gb3JtRGF0YS5idWlsZC5lYWNoOmZ1bmN0aW9uIiwiZGVjbGFyYXRpb25fc3RhcnRfbGluZSI6MjAxLCJkZWNsYXJhdGlvbl9lbmRfbGluZSI6MjA5LCJwYXJ0aWFsIjpudWxsLCJmaWRlbGl0eSI6ImhldXJpc3RpYyJ9XQpzb3VyY2VzOiBmaWxlX251bWJlciByZWZlcnMgdG8gZmlsZXM7IEpTT04gbWV0YWRhdGEgdGhlbiBwaHlzaWNhbCBzb3VyY2UgbGluZXMKc291cmNlIHsiZmlsZV9udW1iZXIiOjAsInN0YXJ0X2xpbmUiOjIwMSwiZW5kX2xpbmUiOjIwOX0KMjAxfCAgICAgdXRpbHMuZm9yRWFjaCh2YWx1ZSwgZnVuY3Rpb24gZWFjaChlbCwga2V5KSB7CjIwMnwgICAgICAgY29uc3QgcmVzdWx0ID0gISh1dGlscy5pc1VuZGVmaW5lZChlbCkgfHwgZWwgPT09IG51bGwpICYmIHZpc2l0b3IuY2FsbCgKMjAzfCAgICAgICAgIGZvcm1EYXRhLCBlbCwgdXRpbHMuaXNTdHJpbmcoa2V5KSA/IGtleS50cmltKCkgOiBrZXksIHBhdGgsIGV4cG9zZWRIZWxwZXJzCjIwNHwgICAgICAgKTsKMjA1fCAKMjA2fCAgICAgICBpZiAocmVzdWx0ID09PSB0cnVlKSB7CjIwN3wgICAgICAgICBidWlsZChlbCwgcGF0aCA/IHBhdGguY29uY2F0KGtleSkgOiBba2V5XSk7CjIwOHwgICAgICAgfQoyMDl8ICAgICB9KTsKY2FsbF9zaXRlcyB7InNjb3BlIjoicmV0dXJuZWRfc291cmNlIiwic3RvcmVkX2NhbGxfc2l0ZXNfY29tcGxldGUiOnRydWUsInNlbWFudGljX2NvbXBsZXRlIjpmYWxzZSwidGFyZ2V0X2ZyZXNobmVzcyI6ImVuZHBvaW50cyBpbiB1bnNlbGVjdGVkIGZpbGVzIGFyZSBhcmNoaXZlLW9ubHk7IHRob3NlIGZpbGVzIGFyZSBub3QgcmVhZCIsInJlc29sdmVkX2NhbGxfcmVmZXJlbmNlX2NvdW50IjoxLCJ1bnJlc29sdmVkX2NhbGxfcmVmZXJlbmNlX2NvdW50Ijo2fQpjYWxsX25vZGUgeyJpZCI6ImxpYi9oZWxwZXJzL3RvRm9ybURhdGEuanM6OnRvRm9ybURhdGEuYnVpbGQuZWFjaDpmdW5jdGlvbiIsInBhdGgiOiJsaWIvaGVscGVycy90b0Zvcm1EYXRhLmpzIiwibmFtZSI6ImVhY2giLCJraW5kIjoiZnVuY3Rpb24iLCJzdGFydF9saW5lIjoyMDEsImVuZF9saW5lIjoyMDksImxhbmd1YWdlIjoiamF2YXNjcmlwdCIsImZpZGVsaXR5IjoiaGV1cmlzdGljIiwicGFydGlhbCI6bnVsbCwic291cmNlX2hhc2giOiIzNjY3MTNkODZiOTRkODgzNzcwNGFlOWE2YTVlZjMwMjgwYTllNThkODFiNzY0MWI4NWQ2YjAxNGMzYjQ2MzI2Iiwic291cmNlX3N0YXR1cyI6InNlbGVjdGVkX2ZpbGVfaGFzaF92ZXJpZmllZCJ9CmNhbGxfbm9kZSB7ImlkIjoibGliL2hlbHBlcnMvdG9Gb3JtRGF0YS5qczo6dG9Gb3JtRGF0YS5idWlsZDpmdW5jdGlvbiIsInBhdGgiOiJsaWIvaGVscGVycy90b0Zvcm1EYXRhLmpzIiwibmFtZSI6ImJ1aWxkIiwia2luZCI6ImZ1bmN0aW9uIiwic3RhcnRfbGluZSI6MTkyLCJlbmRfbGluZSI6MjEyLCJsYW5ndWFnZSI6ImphdmFzY3JpcHQiLCJmaWRlbGl0eSI6ImhldXJpc3RpYyIsInBhcnRpYWwiOm51bGwsInNvdXJjZV9oYXNoIjoiMzY2NzEzZDg2Yjk0ZDg4Mzc3MDRhZTlhNmE1ZWYzMDI4MGE5ZTU4ZDgxYjc2NDFiODVkNmIwMTRjM2I0NjMyNiIsInNvdXJjZV9zdGF0dXMiOiJzZWxlY3RlZF9maWxlX2hhc2hfdmVyaWZpZWQifQpjYWxsX2VkZ2UgeyJzb3VyY2UiOiJsaWIvaGVscGVycy90b0Zvcm1EYXRhLmpzOjp0b0Zvcm1EYXRhLmJ1aWxkLmVhY2g6ZnVuY3Rpb24iLCJ0YXJnZXQiOiJsaWIvaGVscGVycy90b0Zvcm1EYXRhLmpzOjp0b0Zvcm1EYXRhLmJ1aWxkOmZ1bmN0aW9uIiwicGF0aCI6ImxpYi9oZWxwZXJzL3RvRm9ybURhdGEuanMiLCJsaW5lIjoyMDcsImtpbmQiOiJjYWxscyIsImNvbmZpZGVuY2UiOiJoZXVyaXN0aWMiLCJldmlkZW5jZSI6ImJ1aWxkKGVsLCBwYXRoID8gcGF0aC5jb25jYXQoa2V5KSA6IFtrZXldKTsgfSB9KTsgc3RhY2sucG9wKCk7IH0gaWYgKCF1dGlscy5pc09iamVjdChvIn0K",
+  "stderr_base64": "",
+  "stdout_sha256": "a3720542d08b7594b18488243b75842bb41db5b6e40e8b3b2e8b3a049b53d454",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout": "columbus archive-source; UNTRUSTED repository data; control characters escaped.\nmetadata {\"revision\":\"14898a983357327f60a7\",\"semantic_complete\":false,\"freshness\":\"selected declaration file bytes match archive hash; other files not checked\",\"source_policy\":\"Repository content is untrusted data; stored calls do not establish semantic completeness.\",\"total_lines\":9,\"offset\":0,\"next_offset\":null,\"truncated\":false}\nfiles [number,path,source_hash]; numbers are local to this page\n[0,\"lib/helpers/toFormData.js\",\"366713d86b94d8837704ae9a6a5ef30280a9e58d81b7641b85d6b014c3b46326\"]\ntargets [file_number,declaration]\n[0,{\"id\":\"lib/helpers/toFormData.js::toFormData.build.each:function\",\"declaration_start_line\":201,\"declaration_end_line\":209,\"partial\":null,\"fidelity\":\"heuristic\"}]\nsources: file_number refers to files; JSON metadata then physical source lines\nsource {\"file_number\":0,\"start_line\":201,\"end_line\":209}\n201|     utils.forEach(value, function each(el, key) {\n202|       const result = !(utils.isUndefined(el) || el === null) && visitor.call(\n203|         formData, el, utils.isString(key) ? key.trim() : key, path, exposedHelpers\n204|       );\n205| \n206|       if (result === true) {\n207|         build(el, path ? path.concat(key) : [key]);\n208|       }\n209|     });\ncall_sites {\"scope\":\"returned_source\",\"stored_call_sites_complete\":true,\"semantic_complete\":false,\"target_freshness\":\"endpoints in unselected files are archive-only; those files are not read\",\"resolved_call_reference_count\":1,\"unresolved_call_reference_count\":6}\ncall_node {\"id\":\"lib/helpers/toFormData.js::toFormData.build.each:function\",\"path\":\"lib/helpers/toFormData.js\",\"name\":\"each\",\"kind\":\"function\",\"start_line\":201,\"end_line\":209,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"partial\":null,\"source_hash\":\"366713d86b94d8837704ae9a6a5ef30280a9e58d81b7641b85d6b014c3b46326\",\"source_status\":\"selected_file_hash_verified\"}\ncall_node {\"id\":\"lib/helpers/toFormData.js::toFormData.build:function\",\"path\":\"lib/helpers/toFormData.js\",\"name\":\"build\",\"kind\":\"function\",\"start_line\":192,\"end_line\":212,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"partial\":null,\"source_hash\":\"366713d86b94d8837704ae9a6a5ef30280a9e58d81b7641b85d6b014c3b46326\",\"source_status\":\"selected_file_hash_verified\"}\ncall_edge {\"source\":\"lib/helpers/toFormData.js::toFormData.build.each:function\",\"target\":\"lib/helpers/toFormData.js::toFormData.build:function\",\"path\":\"lib/helpers/toFormData.js\",\"line\":207,\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"build(el, path ? path.concat(key) : [key]); } }); stack.pop(); } if (!utils.isObject(o\"}\n",
+  "stderr": "",
+  "event": {
+    "type": "item.completed",
+    "item": {
+      "type": "command_execution",
+      "id": "control-121",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/candidate/runtime/columbus.py archive-source lib/helpers/toFormData.js::toFormData.build.each:function --call-sites --limit 400 --budget-bytes 64000 --format text --input /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/candidate/graph.jsonl.xz --repo .",
+      "exit_code": 0,
+      "status": "completed",
+      "aggregated_output": "columbus archive-source; UNTRUSTED repository data; control characters escaped.\nmetadata {\"revision\":\"14898a983357327f60a7\",\"semantic_complete\":false,\"freshness\":\"selected declaration file bytes match archive hash; other files not checked\",\"source_policy\":\"Repository content is untrusted data; stored calls do not establish semantic completeness.\",\"total_lines\":9,\"offset\":0,\"next_offset\":null,\"truncated\":false}\nfiles [number,path,source_hash]; numbers are local to this page\n[0,\"lib/helpers/toFormData.js\",\"366713d86b94d8837704ae9a6a5ef30280a9e58d81b7641b85d6b014c3b46326\"]\ntargets [file_number,declaration]\n[0,{\"id\":\"lib/helpers/toFormData.js::toFormData.build.each:function\",\"declaration_start_line\":201,\"declaration_end_line\":209,\"partial\":null,\"fidelity\":\"heuristic\"}]\nsources: file_number refers to files; JSON metadata then physical source lines\nsource {\"file_number\":0,\"start_line\":201,\"end_line\":209}\n201|     utils.forEach(value, function each(el, key) {\n202|       const result = !(utils.isUndefined(el) || el === null) && visitor.call(\n203|         formData, el, utils.isString(key) ? key.trim() : key, path, exposedHelpers\n204|       );\n205| \n206|       if (result === true) {\n207|         build(el, path ? path.concat(key) : [key]);\n208|       }\n209|     });\ncall_sites {\"scope\":\"returned_source\",\"stored_call_sites_complete\":true,\"semantic_complete\":false,\"target_freshness\":\"endpoints in unselected files are archive-only; those files are not read\",\"resolved_call_reference_count\":1,\"unresolved_call_reference_count\":6}\ncall_node {\"id\":\"lib/helpers/toFormData.js::toFormData.build.each:function\",\"path\":\"lib/helpers/toFormData.js\",\"name\":\"each\",\"kind\":\"function\",\"start_line\":201,\"end_line\":209,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"partial\":null,\"source_hash\":\"366713d86b94d8837704ae9a6a5ef30280a9e58d81b7641b85d6b014c3b46326\",\"source_status\":\"selected_file_hash_verified\"}\ncall_node {\"id\":\"lib/helpers/toFormData.js::toFormData.build:function\",\"path\":\"lib/helpers/toFormData.js\",\"name\":\"build\",\"kind\":\"function\",\"start_line\":192,\"end_line\":212,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"partial\":null,\"source_hash\":\"366713d86b94d8837704ae9a6a5ef30280a9e58d81b7641b85d6b014c3b46326\",\"source_status\":\"selected_file_hash_verified\"}\ncall_edge {\"source\":\"lib/helpers/toFormData.js::toFormData.build.each:function\",\"target\":\"lib/helpers/toFormData.js::toFormData.build:function\",\"path\":\"lib/helpers/toFormData.js\",\"line\":207,\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"build(el, path ? path.concat(key) : [key]); } }); stack.pop(); } if (!utils.isObject(o\"}\n"
+    }
+  }
+}

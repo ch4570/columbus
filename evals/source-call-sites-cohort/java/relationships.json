@@ -1,0 +1,116 @@
+[
+  {
+    "source": "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource.<init>:constructor(String,ClassLoader)",
+    "target": "src/main/java/org/springframework/util/StringUtils.java::org.springframework.util.StringUtils.cleanPath:method(String)",
+    "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+    "line": 86
+  },
+  {
+    "source": "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource.<init>:constructor(String,Class<?>)",
+    "target": "src/main/java/org/springframework/util/StringUtils.java::org.springframework.util.StringUtils.cleanPath:method(String)",
+    "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+    "line": 112
+  },
+  {
+    "source": "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource.exists:method()",
+    "target": "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource.resolveURL:method()",
+    "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+    "line": 154
+  },
+  {
+    "source": "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource.getURL:method()",
+    "target": "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource.resolveURL:method()",
+    "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+    "line": 225
+  },
+  {
+    "source": "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource.createRelative:method(String)",
+    "target": "src/main/java/org/springframework/util/StringUtils.java::org.springframework.util.StringUtils.applyRelativePath:method(String,String)",
+    "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+    "line": 239
+  },
+  {
+    "source": "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource.createRelative:method(String)",
+    "target": "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource:class",
+    "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+    "line": 240
+  },
+  {
+    "source": "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource.createRelative:method(String)",
+    "target": "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource:class",
+    "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+    "line": 241
+  },
+  {
+    "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+    "target": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getProtocolResolvers:method()",
+    "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+    "line": 158
+  },
+  {
+    "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+    "target": "src/main/java/org/springframework/core/io/ProtocolResolver.java::org.springframework.core.io.ProtocolResolver.resolve:method(String,ResourceLoader)",
+    "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+    "line": 159
+  },
+  {
+    "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+    "target": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResourceByPath:method(String)",
+    "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+    "line": 166
+  },
+  {
+    "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+    "target": "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource:class",
+    "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+    "line": 169
+  },
+  {
+    "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+    "target": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource:class",
+    "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+    "line": 172
+  },
+  {
+    "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+    "target": "src/main/java/org/springframework/util/ResourceUtils.java::org.springframework.util.ResourceUtils.toURL:method(String)",
+    "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+    "line": 177
+  },
+  {
+    "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+    "target": "src/main/java/org/springframework/core/io/FileUrlResource.java::org.springframework.core.io.FileUrlResource:class",
+    "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+    "line": 178
+  },
+  {
+    "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+    "target": "src/main/java/org/springframework/core/io/UrlResource.java::org.springframework.core.io.UrlResource:class",
+    "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+    "line": 178
+  },
+  {
+    "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+    "target": "src/main/java/org/springframework/util/ResourceUtils.java::org.springframework.util.ResourceUtils.isFileURL:method(URL)",
+    "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+    "line": 178
+  },
+  {
+    "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResourceByPath:method(String)",
+    "target": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathContextResource:class",
+    "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+    "line": 199
+  },
+  {
+    "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathContextResource.createRelative:method(String)",
+    "target": "src/main/java/org/springframework/util/StringUtils.java::org.springframework.util.StringUtils.applyRelativePath:method(String,String)",
+    "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+    "line": 310
+  },
+  {
+    "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathContextResource.createRelative:method(String)",
+    "target": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathContextResource:class",
+    "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+    "line": 311
+  }
+]

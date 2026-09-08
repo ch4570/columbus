@@ -1,0 +1,64 @@
+{
+  "answer_sha256": "1ebf558d48c3d0233b829292db9d90d467e138e2d0a4dded1d912e334b1b70ff",
+  "rubric_sha256": "ea0f2380f9c5d415d22c5133a5bd6bc89af3d1eacf2362b515ae53863d7984fc",
+  "findings": [
+    {
+      "id": "resource_location_routing",
+      "passed": true,
+      "reason": "The full routing quote and prose cover ordered resolver precedence, every requested default dispatch branch, the specific URL fallback and handle-only scope.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "The quote shows validation before resolve(location, this), first non-null return and null continuation. Prose explicitly states LinkedHashSet registration order and precedence over built-in routing."},
+        {"criterion_index": 1, "passed": true, "reason": "The complete quote supplies slash routing, both prefix removals and loader arguments. Prose names ClassPathResource, ClassPathAllResource and the unmodified default ClassPathContextResource hook, not a slash-triggered filesystem route."},
+        {"criterion_index": 2, "passed": true, "reason": "The quote shows ResourceUtils.toURL and isFileURL selecting FileUrlResource or UrlResource, with only MalformedURLException caught around that branch. Prose identifies file, vfsfile and vfs and the default path fallback."},
+        {"criterion_index": 3, "passed": true, "reason": "Prose distinguishes handle construction from existence/content access, qualifies the hook as the unmodified default, and explains the resolver's earlier non-null return, which can override built-in routes."}
+      ]
+    },
+    {
+      "id": "classpath_coordinates",
+      "passed": true,
+      "reason": "Both constructors, getter coordinates, null contexts and lexical limits are explained. The explicit default-loader subject with 'likewise' carries the preceding explicit/default selection behavior into the loader's handle construction.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "Prose states null validation, cleanPath, one leading-slash removal, identical stored path/absolutePath, cleared clazz, explicit loader or ClassUtils.getDefaultClassLoader at construction, and one-argument null-ClassLoader delegation."},
+        {"criterion_index": 1, "passed": true, "reason": "The complete Class constructor quote and prose retain the cleaned Class lookup path, derive package-relative or slash-stripped absolutePath, store clazz with a null classLoader, and explicitly distinguish a null Class context's later system lookup."},
+        {"criterion_index": 2, "passed": true, "reason": "The answer states both getters' exposed coordinates and contexts and no later dynamic loader re-selection. After explaining the explicit-loader versus ClassUtils.getDefaultClassLoader choice, 'The default loader likewise selects its loader when constructing the handle' explicitly transfers that choice to the default loader before construction. The shared routing quote shows the getter result passed to construction; literal repetition of the getter name or branch spelling is not required."},
+        {"criterion_index": 3, "passed": true, "reason": "Prose describes lexical separator/dot normalization, explicitly denies traversal protection/containment, and the shared relative-handles explanation states that those transformations do not establish existence or a security boundary."}
+      ]
+    },
+    {
+      "id": "classpath_url_lookup",
+      "passed": true,
+      "reason": "All URL lookup contexts, the narrow exception boundary, distinct public missing-resource outcomes and lack of a later stream-success guarantee are supported.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "The complete quote and prose distinguish Class.getResource(path), ClassLoader.getResource(absolutePath) and system getSystemResource(absolutePath) in the required stored-context order."},
+        {"criterion_index": 1, "passed": true, "reason": "The complete resolver quote catches only IllegalArgumentException and returns null. Prose explains exists as a non-null test and getURL as the same URL-returning lookup with null converted to FileNotFoundException."},
+        {"criterion_index": 2, "passed": true, "reason": "Prose distinguishes false for missing exists from the getURL exception and explicitly says URL lookup neither opens/reserves/caches a stream nor guarantees a later independent getInputStream lookup succeeds."}
+      ]
+    },
+    {
+      "id": "classpath_stream_access",
+      "passed": true,
+      "reason": "The complete stream method and prose cover direct context-specific lookup, null-to-exception behavior, lack of URL-helper suppression and uncached caller-owned streams.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "Quote and prose name all three direct resource-as-stream calls, using path for Class and absolutePath for loader/system, and deny a resolveURL handoff."},
+        {"criterion_index": 1, "passed": true, "reason": "The quote uses getDescription in FileNotFoundException for null and returns a non-null stream. Prose explicitly states that direct calls do not inherit resolveURL's IllegalArgumentException catch."},
+        {"criterion_index": 2, "passed": true, "reason": "The complete method shows a fresh selected lookup on each invocation with no stored stream/content cache or close; prose assigns the successful stream to the caller. The shared URL finding rejects a prior exists/getURL success guarantee."}
+      ]
+    },
+    {
+      "id": "classpath_relative_handles",
+      "passed": true,
+      "reason": "The ordinary handoff quote and prose cover helper edge cases, re-cleaning and context selection, plus the context subtype's distinct preserved identity and getter behavior.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "The quote and prose pass stored path rather than getPath to applyRelativePath and select the non-null Class or stored ClassLoader for new construction. The additional null-Class-to-default-ClassLoader edge explanation agrees with the implementation."},
+        {"criterion_index": 1, "passed": true, "reason": "Prose explains last-segment replacement, direct relativePath return when the base has no slash, conditional slash insertion, and the concrete a/b plus /c -> a/c example preserving an existing directory prefix."},
+        {"criterion_index": 2, "passed": true, "reason": "Prose explains constructor re-cleaning and context retention, with the final descriptor-only limitations rejecting existence and filesystem/security-boundary inferences. The quoted constructor handoffs do not open content."},
+        {"criterion_index": 3, "passed": true, "reason": "Prose identifies ClassPathContextResource implementing ContextResource, getPathWithinContext returning getPath, the override applying the helper to getPath and constructing another ClassPathContextResource with its loader, unlike the plain-handle method."}
+      ]
+    }
+  ],
+  "execution_review": {
+    "events_sha256": "e4c23abf661de6fa2148cfdefff5f0bf6e389a3a9f42cf3a9a527ef3593b435b",
+    "passed": true,
+    "reason": "Audited all 16 command_execution items, item_1 through item_16, and their matching started/completed records. item_1 reads the offered runtime SKILL.md; ordinary rg/nl/sed commands read only repository source. All nine Columbus invocations (item_3 through item_10 and item_13) use the exact supplied absolute Python -B prefix, this control arm's wrapper and graph, and --repo . for source/quote access. They request only archive-source, archive-search or archive-quotes. item_3 returns 2 for an ambiguous/absent constructor query; that failed allowed read is not a protocol violation. No repository code/tests/builds, SQLite/index/sync, source writes, network/web, delegation, installation or private/sibling oracle reads appear. The skill does not require an additional reference for these basic operations. Full trace data was not used to fill absent final-answer semantics; graph usefulness and citation gates remain separate."
+  }
+}

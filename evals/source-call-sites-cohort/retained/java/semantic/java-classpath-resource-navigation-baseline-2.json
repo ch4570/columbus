@@ -1,0 +1,64 @@
+{
+  "answer_sha256": "a1eb4e75e2ef729747d0e2431c59ad0b4cbeed758fa0f5add1429500ab8031b6",
+  "rubric_sha256": "ea0f2380f9c5d415d22c5133a5bd6bc89af3d1eacf2362b515ae53863d7984fc",
+  "findings": [
+    {
+      "id": "resource_location_routing",
+      "passed": true,
+      "reason": "The full routing quote and prose cover resolver validation/order, every requested built-in handle route, URL classification/fallback and the limited construction boundary.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "The quote validates before resolve(location, this), continues after null and returns the first non-null result. Prose explicitly identifies LinkedHashSet registration/insertion order and precedence over built-in routing."},
+        {"criterion_index": 1, "passed": true, "reason": "The full quote supplies the slash hook, both stripped classpath prefixes and loader arguments; prose names ClassPathResource, ClassPathAllResource and the unmodified default ClassPathContextResource path hook, not a slash-based filesystem handle."},
+        {"criterion_index": 2, "passed": true, "reason": "The quote shows ResourceUtils.toURL, isFileURL, FileUrlResource versus UrlResource and a catch limited to MalformedURLException around that branch. Prose names file, vfsfile and vfs and the same default path fallback."},
+        {"criterion_index": 3, "passed": true, "reason": "Prose qualifies the hook as overridable with an unmodified default implementation and distinguishes built-in handle construction from existence/content access. The earlier first non-null resolver return can override every built-in interpretation."}
+      ]
+    },
+    {
+      "id": "classpath_coordinates",
+      "passed": false,
+      "reason": "Path coordinates, context arguments, getter exposure and loader-selection timing are covered, but the ClassLoader constructor's cleared Class context is never stated or quoted.",
+      "checks": [
+        {"criterion_index": 0, "passed": false, "reason": "The answer covers validation, cleanPath, one leading-slash removal, identical stored coordinates, explicit/default loader selection and one-argument null-loader delegation. It does not state or quote that the ClassLoader constructor clears clazz or equivalently stores no Class context. The quoted Class-based constructor clears the opposite field, and the later getter/dispatch descriptions do not supply this distinct constructor initialization fact."},
+        {"criterion_index": 1, "passed": true, "reason": "The complete Class constructor quote and prose retain cleaned path, derive package-relative or slash-stripped absolutePath, store clazz while clearing classLoader, and explicitly distinguish a null Class context leading to system lookup rather than a stored default loader."},
+        {"criterion_index": 2, "passed": true, "reason": "Prose correctly describes getPath and both getClassLoader contexts, construction-time default selection and no dynamic re-selection. It expressly states that DefaultResourceLoader passes its explicit loader or currently selected default when constructing each handle; the preceding ClassUtils.getDefaultClassLoader explanation and routing quote identify the selection/handoff."},
+        {"criterion_index": 3, "passed": true, "reason": "Prose describes lexical separator/dot normalization with unresolved parents and explicitly denies traversal prevention/containment; the shared relative-handles explanation additionally rejects existence and filesystem-security inferences."}
+      ]
+    },
+    {
+      "id": "classpath_url_lookup",
+      "passed": true,
+      "reason": "All context-specific URL paths, the narrow exception suppression, distinct public missing-resource behavior and independent later stream lookup are supported.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "The full quote and prose use clazz.getResource(path), classLoader.getResource(absolutePath) and system getSystemResource(absolutePath), preserving Class-relative versus leading-slash coordinates."},
+        {"criterion_index": 1, "passed": true, "reason": "The complete resolver quote catches only IllegalArgumentException and returns null. Prose gives exists as a non-null test and getURL as FileNotFoundException on null or the URL otherwise."},
+        {"criterion_index": 2, "passed": true, "reason": "Prose distinguishes missing exists false from getURL's exception, explicitly says neither method opens/retains a stream, and denies a successful URL lookup as a guarantee for the separate later stream lookup."}
+      ]
+    },
+    {
+      "id": "classpath_stream_access",
+      "passed": true,
+      "reason": "The complete direct stream method and prose cover all branches, null handling, exception boundary and fresh caller-owned uncached streams.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "Quote and prose identify Class.getResourceAsStream(path), ClassLoader.getResourceAsStream(absolutePath) and system getSystemResourceAsStream(absolutePath), explicitly without resolveURL or reuse of its URL result."},
+        {"criterion_index": 1, "passed": true, "reason": "The complete quote uses getDescription in FileNotFoundException for null and returns the non-null stream; prose expressly states that resolveURL's IllegalArgumentException suppression is not inherited."},
+        {"criterion_index": 2, "passed": true, "reason": "Prose states no successful-stream close or stream/content cache, caller closing ownership and a new direct lookup per invocation. The shared URL explanation denies any prior exists/getURL success guarantee."}
+      ]
+    },
+    {
+      "id": "classpath_relative_handles",
+      "passed": false,
+      "reason": "Ordinary relative creation, helper edge cases and the context override's loader/subtype behavior are covered, but its ContextResource interface implementation is absent.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "The full ordinary-method quote and prose pass stored path rather than getPath to applyRelativePath and preserve non-null Class or pass the stored loader. The null-Class-to-null-ClassLoader constructor transition is correctly explained."},
+        {"criterion_index": 1, "passed": true, "reason": "Prose describes the last slash, replacement of the final segment, conditional separator insertion, preservation of an existing directory for /c, and direct relativePath return when the base lacks a slash."},
+        {"criterion_index": 2, "passed": true, "reason": "Prose explains constructor re-entry into cleanPath and context-specific leading-slash handling, and describes lexical coordinates rather than resource existence, content opening or containment/security guarantees."},
+        {"criterion_index": 3, "passed": false, "reason": "The answer supplies helper(getPath), new ClassPathContextResource with getClassLoader, subtype preservation and getPathWithinContext -> getPath. It never states or quotes that the subtype implements ContextResource. The class name and method behavior alone do not provide this interface declaration, and the shared quote is the plain ClassPathResource implementation."}
+      ]
+    }
+  ],
+  "execution_review": {
+    "events_sha256": "4eee030f01039939e5f7418b9709a26981b1dfea2128c69253305303a4f9b0c1",
+    "passed": true,
+    "reason": "Audited all seven command_execution items, item_1 through item_7, with matching started/completed records. The /bin/zsh -lc wrappers run repository-local rg/nl/sed/head searches and reads of source/tests. item_6 additionally requests git status --short and git rev-parse --show-prefix; both fail with 'not a git repository', so no Git repository or outside evidence is obtained and the command's final exit is 128. No repository code/tests/builds, source writes, graph/runtime/index use, web/network, delegation, installation or private/sibling oracle reads occur. No Columbus wrapper prefix is required for this baseline. Failed local metadata checks are not themselves protocol violations, and trace reads did not fill the terminal answer's missing constructor/interface facts."
+  }
+}

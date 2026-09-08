@@ -1,0 +1,304 @@
+{
+  "case": "java-classpath-resource-navigation",
+  "condition": "control",
+  "repeat": 1,
+  "return_code": 0,
+  "timed_out": false,
+  "finished_at": "2026-09-08T21:56:31.949645+00:00",
+  "elapsed_seconds": 381.58511949999956,
+  "usage": {
+    "input_tokens": 263687,
+    "cached_input_tokens": 227456,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 10987,
+    "reasoning_output_tokens": 6888,
+    "uncached_input_tokens": 36231
+  },
+  "preflight": {
+    "baseline": {
+      "passed": true,
+      "archive_sha256": "b624d888e8a35f55c6f43f3255c2b21878d56e75d1e764442e9571d1fa998b23",
+      "revision": "cf482b13ebb638a175d9",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    },
+    "control": {
+      "passed": true,
+      "archive_sha256": "b624d888e8a35f55c6f43f3255c2b21878d56e75d1e764442e9571d1fa998b23",
+      "revision": "cf482b13ebb638a175d9",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    },
+    "candidate": {
+      "passed": true,
+      "archive_sha256": "b624d888e8a35f55c6f43f3255c2b21878d56e75d1e764442e9571d1fa998b23",
+      "revision": "cf482b13ebb638a175d9",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    }
+  },
+  "postflight": {
+    "baseline": {
+      "passed": true,
+      "archive_sha256": "b624d888e8a35f55c6f43f3255c2b21878d56e75d1e764442e9571d1fa998b23",
+      "revision": "cf482b13ebb638a175d9",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    },
+    "control": {
+      "passed": true,
+      "archive_sha256": "b624d888e8a35f55c6f43f3255c2b21878d56e75d1e764442e9571d1fa998b23",
+      "revision": "cf482b13ebb638a175d9",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    },
+    "candidate": {
+      "passed": true,
+      "archive_sha256": "b624d888e8a35f55c6f43f3255c2b21878d56e75d1e764442e9571d1fa998b23",
+      "revision": "cf482b13ebb638a175d9",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    }
+  },
+  "events_sha256": "e4c23abf661de6fa2148cfdefff5f0bf6e389a3a9f42cf3a9a527ef3593b435b",
+  "commands": [
+    {
+      "command": "/bin/zsh -lc \"sed -n '1,240p' /private/tmp/columbus-source-call-observations.Jf0Jla/observations/java/control/runtime/SKILL.md\"",
+      "exit_code": 0,
+      "output_bytes": 5633,
+      "output_sha256": "368fb4899e5a483fd3caa4c0b7274f976d51cef5ce4fe36db985643da59123e3"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n --glob '*.java' 'class DefaultResourceLoader|class ClassPathResource|class ClassPathContextResource|class FileSystemContextResource|interface ProtocolResolver|classpath\\\\*:' .\"",
+      "exit_code": 0,
+      "output_bytes": 6251,
+      "output_sha256": "d89f1f1f22de852005b8f68af298675e8e3a2d105ae468c0508a88b7d35ac9f3"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-source-call-observations.Jf0Jla/observations/java/control/runtime/columbus.py archive-source 'DefaultResourceLoader.getResource' 'ClassPathResource.ClassPathResource' 'ClassPathResource.resolveURL' 'ClassPathResource.exists' 'ClassPathResource.getURL' 'ClassPathResource.getInputStream' 'ClassPathResource.createRelative' 'StringUtils.applyRelativePath' 'ResourceUtils.isFileURL' --overloads --input /private/tmp/columbus-source-call-observations.Jf0Jla/observations/java/control/graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 30000\"",
+      "exit_code": 2,
+      "output_bytes": 132,
+      "output_sha256": "393a423fd6d9084e4cc2800e9b023453dd45310ff9526a18df56f497c7549fa6"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-source-call-observations.Jf0Jla/observations/java/control/runtime/columbus.py archive-search 'StringUtils.applyRelativePath' --input /private/tmp/columbus-source-call-observations.Jf0Jla/observations/java/control/graph.jsonl.xz --format text --budget-bytes 5000\"",
+      "exit_code": 0,
+      "output_bytes": 897,
+      "output_sha256": "8068f2d1af198d7c6ff026c82fe7fb0884acbba13af3a910354e272632518176"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-source-call-observations.Jf0Jla/observations/java/control/runtime/columbus.py archive-search 'ClassPathResource.resolveURL' --input /private/tmp/columbus-source-call-observations.Jf0Jla/observations/java/control/graph.jsonl.xz --format text --budget-bytes 5000\"",
+      "exit_code": 0,
+      "output_bytes": 860,
+      "output_sha256": "2f5dcd250115f0ed62e81d804eb9029c61aa83ec21cc02ad2f17e960aa24d167"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-source-call-observations.Jf0Jla/observations/java/control/runtime/columbus.py archive-search 'ClassPathResource' --input /private/tmp/columbus-source-call-observations.Jf0Jla/observations/java/control/graph.jsonl.xz --format text --budget-bytes 5000\"",
+      "exit_code": 0,
+      "output_bytes": 2756,
+      "output_sha256": "a0a304ee2f7ee363d9ce984b52b00c2dcc48014e68e666cccb27d04760d657a8"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-source-call-observations.Jf0Jla/observations/java/control/runtime/columbus.py archive-search 'ClassPathResource.getInputStream' --input /private/tmp/columbus-source-call-observations.Jf0Jla/observations/java/control/graph.jsonl.xz --format text --budget-bytes 5000\"",
+      "exit_code": 0,
+      "output_bytes": 900,
+      "output_sha256": "210810dbdb64c0d2ec552979934960f6c988988de8c08567f3cba13877d28849"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-source-call-observations.Jf0Jla/observations/java/control/runtime/columbus.py archive-search 'ResourceUtils.isFileURL' --input /private/tmp/columbus-source-call-observations.Jf0Jla/observations/java/control/graph.jsonl.xz --format text --budget-bytes 5000\"",
+      "exit_code": 0,
+      "output_bytes": 839,
+      "output_sha256": "22a282d0501c398a67f615abadc8d07b75f2db85978085276924d462caaea37c"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-source-call-observations.Jf0Jla/observations/java/control/runtime/columbus.py archive-search 'DefaultResourceLoader.getResource' --input /private/tmp/columbus-source-call-observations.Jf0Jla/observations/java/control/graph.jsonl.xz --format text --budget-bytes 5000\"",
+      "exit_code": 0,
+      "output_bytes": 1973,
+      "output_sha256": "76240421ce8d255a82bafa9978f9d0196b3cf57d7da344dc63e00b4ce282cfed"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-source-call-observations.Jf0Jla/observations/java/control/runtime/columbus.py archive-source 'src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)' 'src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource.<init>:constructor(String,ClassLoader)' 'src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource.<init>:constructor(String,Class<?>)' 'src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource.resolveURL:method()' 'src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource.getInputStream:method()' --input /private/tmp/columbus-source-call-observations.Jf0Jla/observations/java/control/graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 20000\"",
+      "exit_code": 0,
+      "output_bytes": 5933,
+      "output_sha256": "10de24d740c27a46c7b46cb02c2b4363932caebdbb3bea2c8ec9d46863e51d3f"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/core/io/DefaultResourceLoader.java | sed -n '56,115p;145,210p;245,322p'\nnl -ba src/main/java/org/springframework/util/ResourceUtils.java | sed -n '48,94p;268,291p'\nnl -ba src/main/java/org/springframework/core/io/ClassPathResource.java | sed -n '45,240p'\nnl -ba src/main/java/org/springframework/util/StringUtils.java | sed -n '700,727p'\"",
+      "exit_code": 0,
+      "output_bytes": 20063,
+      "output_sha256": "f3408bf3975af72cda94fd592d5edce666a4805f77dedb376a925e6b0e3fc5fe"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/core/io/DefaultResourceLoader.java | sed -n '108,136p;198,218p;293,314p'\nnl -ba src/main/java/org/springframework/core/io/ClassPathResource.java | sed -n '232,250p'\nnl -ba src/main/java/org/springframework/util/StringUtils.java | sed -n '724,805p'\nnl -ba src/main/java/org/springframework/util/ClassUtils.java | sed -n '208,242p'\"",
+      "exit_code": 0,
+      "output_bytes": 8317,
+      "output_sha256": "50e701e83940c8f7e5b0c8c56785c15e9f30bbece47b84a51909aaf215ec8555"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-source-call-observations.Jf0Jla/observations/java/control/runtime/columbus.py archive-quotes --range src/main/java/org/springframework/core/io/DefaultResourceLoader.java 154 185 --range src/main/java/org/springframework/core/io/ClassPathResource.java 110 125 --range src/main/java/org/springframework/core/io/ClassPathResource.java 173 190 --range src/main/java/org/springframework/core/io/ClassPathResource.java 199 215 --range src/main/java/org/springframework/core/io/ClassPathResource.java 237 242 --input /private/tmp/columbus-source-call-observations.Jf0Jla/observations/java/control/graph.jsonl.xz --repo .'",
+      "exit_code": 0,
+      "output_bytes": 4521,
+      "output_sha256": "2efd9ff9f3b30512c7d2d42e673d46061ec7eaae4ded8f1c916cb152a0af2e96"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/core/io/ResourceLoader.java | sed -n '43,74p'\nnl -ba src/main/java/org/springframework/util/StringUtils.java | sed -n '800,835p'\"",
+      "exit_code": 0,
+      "output_bytes": 3355,
+      "output_sha256": "de2ca66b2b0ab409c07425af5cd02978398b47695070449149d11d24f5e36ec4"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n 'classPackageAsResourcePath' src/main/java/org/springframework/util/ClassUtils.java\nnl -ba src/main/java/org/springframework/util/ClassUtils.java | sed -n '832,858p'\"",
+      "exit_code": 0,
+      "output_bytes": 1410,
+      "output_sha256": "3476569bbab2613c6de9c60b1483da4a5817a308e30764e653af157e55735e6c"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/util/ClassUtils.java | sed -n '678,715p'\"",
+      "exit_code": 0,
+      "output_bytes": 1903,
+      "output_sha256": "697bbbabb4adba808eb9d0cde2dc9d65a87925ef1429c049c769997c9cf8062f"
+    }
+  ],
+  "command_count": 16,
+  "command_output_bytes": 65743,
+  "failed_commands": 1,
+  "other_tool_types": [],
+  "runtime_warnings": [],
+  "turn_failed": false,
+  "answer": {
+    "findings": [
+      {
+        "id": "resource_location_routing",
+        "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+        "start_line": 154,
+        "end_line": 185,
+        "quote": "\t@Override\n\tpublic Resource getResource(String location) {\n\t\tAssert.notNull(location, \"Location must not be null\");\n\n\t\tfor (ProtocolResolver protocolResolver : getProtocolResolvers()) {\n\t\t\tResource resource = protocolResolver.resolve(location, this);\n\t\t\tif (resource != null) {\n\t\t\t\treturn resource;\n\t\t\t}\n\t\t}\n\n\t\tif (location.startsWith(\"/\")) {\n\t\t\treturn getResourceByPath(location);\n\t\t}\n\t\telse if (location.startsWith(CLASSPATH_URL_PREFIX)) {\n\t\t\treturn new ClassPathResource(location.substring(CLASSPATH_URL_PREFIX.length()), getClassLoader());\n\t\t}\n\t\telse if (location.startsWith(CLASSPATH_ALL_URL_PREFIX)) {\n\t\t\treturn new ClassPathAllResource(location.substring(CLASSPATH_ALL_URL_PREFIX.length()), getClassLoader());\n\t\t}\n\t\telse {\n\t\t\ttry {\n\t\t\t\t// Try to parse the location as a URL...\n\t\t\t\tURL url = ResourceUtils.toURL(location);\n\t\t\t\treturn (ResourceUtils.isFileURL(url) ? new FileUrlResource(url) : new UrlResource(url));\n\t\t\t}\n\t\t\tcatch (MalformedURLException ex) {\n\t\t\t\t// No URL -> resolve as resource path.\n\t\t\t\treturn getResourceByPath(location);\n\t\t\t}\n\t\t}\n\t}",
+        "explanation": "The null assertion runs first and rejects a null location with IllegalArgumentException. Registered ProtocolResolvers are held in a LinkedHashSet and therefore consulted in registration order before built-in routing; the first non-null Resource is returned, while null allows the next resolver or normal dispatch. With the unmodified default path hook, a leading slash produces DefaultResourceLoader.ClassPathContextResource. `classpath:` produces ClassPathResource, and `classpath*:` produces DefaultResourceLoader.ClassPathAllResource. Other strings are parsed as URLs: ResourceUtils.isFileURL recognizes exactly `file`, `vfsfile`, and `vfs`, producing FileUrlResource; all other valid URL protocols produce UrlResource. A MalformedURLException falls back through getResourceByPath, whose default also constructs ClassPathContextResource. These branches only construct resource handles; they neither test existence nor open content."
+      },
+      {
+        "id": "classpath_coordinates",
+        "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+        "start_line": 110,
+        "end_line": 125,
+        "quote": "\tpublic ClassPathResource(String path, @Nullable Class<?> clazz) {\n\t\tAssert.notNull(path, \"Path must not be null\");\n\t\tthis.path = StringUtils.cleanPath(path);\n\n\t\tString absolutePath = this.path;\n\t\tif (clazz != null && !absolutePath.startsWith(\"/\")) {\n\t\t\tabsolutePath = ClassUtils.classPackageAsResourcePath(clazz) + \"/\" + absolutePath;\n\t\t}\n\t\telse if (absolutePath.startsWith(\"/\")) {\n\t\t\tabsolutePath = absolutePath.substring(1);\n\t\t}\n\t\tthis.absolutePath = absolutePath;\n\n\t\tthis.classLoader = null;\n\t\tthis.clazz = clazz;\n\t}",
+        "explanation": "Both context constructors reject a null path and apply StringUtils.cleanPath. That cleaning lexically normalizes separators and dot segments; StringUtils explicitly warns that it is not traversal protection or a containment check. With a non-null Class, the cleaned `path` is retained for Class.getResource: a non-leading path is class-package-relative, while a leading slash is absolute. The separately stored `absolutePath` is package-prefixed for the relative case or has one leading slash removed for the absolute case. A null Class leaves both context fields null and later uses the system-resource branches; it does not package-prefix the path. The ClassLoader constructor instead strips one leading slash from the cleaned path, stores that same value as both `path` and `absolutePath`, sets `clazz` null, and stores either the explicit loader or ClassUtils.getDefaultClassLoader() selected during construction. The one-argument constructor delegates with a null ClassLoader. The default loader likewise selects its loader when constructing the handle. No existing handle dynamically reselects its loader afterward. getPath returns `absolutePath`; getClassLoader returns the class's loader for a non-null Class context and otherwise the stored loader."
+      },
+      {
+        "id": "classpath_url_lookup",
+        "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+        "start_line": 173,
+        "end_line": 190,
+        "quote": "\tprotected @Nullable URL resolveURL() {\n\t\ttry {\n\t\t\tif (this.clazz != null) {\n\t\t\t\treturn this.clazz.getResource(this.path);\n\t\t\t}\n\t\t\telse if (this.classLoader != null) {\n\t\t\t\treturn this.classLoader.getResource(this.absolutePath);\n\t\t\t}\n\t\t\telse {\n\t\t\t\treturn ClassLoader.getSystemResource(this.absolutePath);\n\t\t\t}\n\t\t}\n\t\tcatch (IllegalArgumentException ex) {\n\t\t\t// Should not happen according to the JDK's contract:\n\t\t\t// see https://github.com/openjdk/jdk/pull/2662\n\t\t\treturn null;\n\t\t}\n\t}",
+        "explanation": "The shared resolver uses Class.getResource with `path`, preserving its package-relative or leading-slash semantics. Otherwise it uses ClassLoader.getResource with `absolutePath`, or ClassLoader.getSystemResource with `absolutePath` when both stored contexts are null. IllegalArgumentException from any branch is suppressed as an unresolved null result. exists merely tests whether resolveURL is non-null, so a missing resource or suppressed IllegalArgumentException yields false. getURL invokes the same helper but converts null into FileNotFoundException. A successful URL lookup does not open, reserve, or cache a stream; getInputStream later performs a separate direct lookup, so exists or getURL does not establish that the subsequent stream lookup will succeed."
+      },
+      {
+        "id": "classpath_stream_access",
+        "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+        "start_line": 199,
+        "end_line": 215,
+        "quote": "\t@Override\n\tpublic InputStream getInputStream() throws IOException {\n\t\tInputStream is;\n\t\tif (this.clazz != null) {\n\t\t\tis = this.clazz.getResourceAsStream(this.path);\n\t\t}\n\t\telse if (this.classLoader != null) {\n\t\t\tis = this.classLoader.getResourceAsStream(this.absolutePath);\n\t\t}\n\t\telse {\n\t\t\tis = ClassLoader.getSystemResourceAsStream(this.absolutePath);\n\t\t}\n\t\tif (is == null) {\n\t\t\tthrow new FileNotFoundException(getDescription() + \" cannot be opened because it does not exist\");\n\t\t}\n\t\treturn is;\n\t}",
+        "explanation": "Stream access directly dispatches to Class.getResourceAsStream with `path`, ClassLoader.getResourceAsStream with `absolutePath`, or ClassLoader.getSystemResourceAsStream with `absolutePath`. A null result becomes FileNotFoundException; a non-null stream is returned unchanged. This method does not call resolveURL and therefore does not reuse its IllegalArgumentException suppression—an unchecked exception from these direct calls is not caught here. It neither closes a successful stream nor caches its content; ownership of the returned stream passes to the caller."
+      },
+      {
+        "id": "classpath_relative_handles",
+        "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+        "start_line": 237,
+        "end_line": 242,
+        "quote": "\t@Override\n\tpublic Resource createRelative(String relativePath) {\n\t\tString pathToUse = StringUtils.applyRelativePath(this.path, relativePath);\n\t\treturn (this.clazz != null ? new ClassPathResource(pathToUse, this.clazz) :\n\t\t\t\tnew ClassPathResource(pathToUse, this.classLoader));\n\t}",
+        "explanation": "Ordinary ClassPathResource starts from its semantic `path`, not the package-expanded getPath value. StringUtils.applyRelativePath removes the final segment after the base path's last `/` and appends the relative path. With no separator in the base it returns the relative path alone. If the relative path begins with `/` and the base has a separator, no extra separator is inserted but the base directory remains—for example, `a/b` plus `/c` becomes `a/c`; if the base has no separator, `/c` remains `/c`. The newly invoked constructor cleans the combined path again, including lexical dot-segment normalization. A non-null Class is preserved; otherwise the stored ClassLoader is passed. The special original context `(path, (Class<?>) null)` has both fields null, so relative creation enters the ClassLoader constructor with null and selects its default loader for the new handle. DefaultResourceLoader.ClassPathContextResource differs by implementing ContextResource, applying the helper to getPath(), constructing another ClassPathContextResource with its loader (thus preserving the subtype), and returning getPath() from getPathWithinContext. Plain ClassPathResource creates a plain ClassPathResource. None of these path transformations tests existence or establishes a filesystem/security boundary."
+      }
+    ]
+  },
+  "quality": {
+    "passed": true,
+    "findings": [
+      {
+        "id": "resource_location_routing",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "classpath_coordinates",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "classpath_url_lookup",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "classpath_stream_access",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "classpath_relative_handles",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "kotlin_lookup_handoffs": [
+    "The bracket operator delegates getProperty(key) and returns String?. It is a nullable String convenience, not a generic index operation, a default-valued lookup or a separate source search.",
+    "The three generic extensions are inline with reified T : Any. The nullable getProperty<T>(key) returns T? and delegates (key, T::class.java); the default-valued form returns T and delegates (key, T::class.java, default); getRequiredProperty<T> returns T and delegates the corresponding required overload with (key, T::class.java).",
+    "The Kotlin layer supplies a runtime Class and does not implement source ordering, placeholder processing, conversion, fallback or required-error handling itself. T::class.java is not a full nested generic Type token and does not preserve arbitrary collection-element type information; declared non-null forms may still throw through their delegate."
+  ],
+  "ordered_property_lookup": [
+    "The concrete resolver's ordinary String and typed overloads enter its three-argument getProperty with nested resolution true; getPropertyAsRawString uses String.class and false. Raw means no nested-placeholder processing, not no conversion or no source search.",
+    "The resolver iterates its supplied PropertySources order and queries each source for the key until a raw non-null value appears. Raw null permits later sources. A null propertySources collection or no raw non-null match returns null; source names do not define a separate priority rule.",
+    "For the first raw non-null value, applicable placeholder processing runs and then the method directly returns convertValueIfNecessary. A null converted result does not resume iteration, and a thrown source/placeholder/conversion error is not caught to try a later source. First raw match and first successful conversion are different policies.",
+    "The lookup method has no resolved-value cache and re-queries the current sources on each call. Sequential changes to source values can therefore be observed; caching a placeholder helper or conversion service is not caching each property's resolved result."
+  ],
+  "nested_placeholder_policy": [
+    "With nested resolution enabled, every String value is resolved before target conversion. A non-String CharSequence is converted to a String for resolution only when the requested target is exactly String.class or CharSequence.class; requesting another target such as StringBuilder leaves that nested-resolution branch unused. Raw lookup disables both branches.",
+    "resolveNestedPlaceholders immediately returns an empty value. Otherwise ignoreUnresolvableNestedPlaceholders, initially false, chooses resolveRequiredPlaceholders by default or resolvePlaceholders when true. Strict unresolved placeholders throw; the permissive path can leave unresolved text rather than silently treating it as a missing property.",
+    "Direct resolvePlaceholders and resolveRequiredPlaceholders choose their own permissive/strict behavior, independent of the nested-resolution flag. They lazily retain distinct nonStrictHelper and strictHelper objects, constructed with the resolver's placeholder settings and the corresponding boolean policy.",
+    "Both public paths hand text to doResolvePlaceholders, which calls helper.replacePlaceholders(text, this::getPropertyAsRawString). Placeholder values thus use the concrete raw-string lookup callback without recursively enabling the source loop's nested flag; this callback handoff does not itself describe or replace the helper's parsing algorithm, and the retained helper is not a property-value cache."
+  ],
+  "property_conversion_service": [
+    "convertValueIfNecessary returns the original value immediately when targetType is null. With a target and no configured conversionService, it also returns the original value if ClassUtils.isAssignableValue succeeds, avoiding initialization/use of the shared service for that case.",
+    "If conversion is needed and no instance service exists, it obtains DefaultConversionService.getSharedInstance and calls convert(value, targetType). If an instance service has been supplied, it uses that service even for an otherwise assignable value; the assignability bypass is inside the no-instance-service branch.",
+    "setConversionService rejects null and stores the supplied service. getConversionService lazily creates, stores and returns an independent DefaultConversionService under its synchronized/double-check initialization, rather than returning the shared singleton. Calling the getter therefore changes later lookups to use that stored instance service.",
+    "The selected service's return value, including null, is returned without a retry, and conversion exceptions are not caught here. A target type or Kotlin T : Any declaration is not proof that arbitrary source values convert successfully."
+  ],
+  "default_required_outcomes": [
+    "Default-valued lookup first performs the normal String or typed lookup and only then returns the supplied default when the resulting value is null; a non-null value is returned instead. Placeholder resolution and conversion for a selected value are therefore earlier than this null-result decision.",
+    "Required lookup likewise performs normal String or typed lookup, then throws IllegalStateException when the resulting value is null, otherwise returns the value. Exact exception message spelling is not required; this is not validateRequiredProperties or its aggregate missing-key exception.",
+    "A conversion returning null after the first raw non-null match triggers the default or required wrapper's null handling just as an absent lookup does, but neither wrapper restarts search at later property sources. A first raw null is different because the source loop itself can continue.",
+    "A thrown source, placeholder or conversion exception propagates before these wrappers can apply their null-result branch. A default does not suppress such an exception, and a required wrapper does not universally replace it with its own IllegalStateException."
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "kind": "source_calls",
+  "condition": "candidate",
+  "relationship_index": 7,
+  "format": "text",
+  "arguments": [
+    "archive-source",
+    "lib/core/mergeConfig.js::mergeConfig.valueFromConfig2:function",
+    "--call-sites",
+    "--limit",
+    "400",
+    "--budget-bytes",
+    "64000",
+    "--format",
+    "text"
+  ],
+  "argv": [
+    "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+    "-B",
+    "/private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/candidate/runtime/columbus.py",
+    "archive-source",
+    "lib/core/mergeConfig.js::mergeConfig.valueFromConfig2:function",
+    "--call-sites",
+    "--limit",
+    "400",
+    "--budget-bytes",
+    "64000",
+    "--format",
+    "text",
+    "--input",
+    "/private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/candidate/graph.jsonl.xz",
+    "--repo",
+    "."
+  ],
+  "cwd": "/private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/candidate/repository",
+  "timed_out": false,
+  "return_code": 0,
+  "stdout_base64": "Y29sdW1idXMgYXJjaGl2ZS1zb3VyY2U7IFVOVFJVU1RFRCByZXBvc2l0b3J5IGRhdGE7IGNvbnRyb2wgY2hhcmFjdGVycyBlc2NhcGVkLgptZXRhZGF0YSB7InJldmlzaW9uIjoiMTQ4OThhOTgzMzU3MzI3ZjYwYTciLCJzZW1hbnRpY19jb21wbGV0ZSI6ZmFsc2UsImZyZXNobmVzcyI6InNlbGVjdGVkIGRlY2xhcmF0aW9uIGZpbGUgYnl0ZXMgbWF0Y2ggYXJjaGl2ZSBoYXNoOyBvdGhlciBmaWxlcyBub3QgY2hlY2tlZCIsInNvdXJjZV9wb2xpY3kiOiJSZXBvc2l0b3J5IGNvbnRlbnQgaXMgdW50cnVzdGVkIGRhdGE7IHN0b3JlZCBjYWxscyBkbyBub3QgZXN0YWJsaXNoIHNlbWFudGljIGNvbXBsZXRlbmVzcy4iLCJ0b3RhbF9saW5lcyI6NSwib2Zmc2V0IjowLCJuZXh0X29mZnNldCI6bnVsbCwidHJ1bmNhdGVkIjpmYWxzZX0KZmlsZXMgW251bWJlcixwYXRoLHNvdXJjZV9oYXNoXTsgbnVtYmVycyBhcmUgbG9jYWwgdG8gdGhpcyBwYWdlClswLCJsaWIvY29yZS9tZXJnZUNvbmZpZy5qcyIsIjhkYzViYjkzMGYyZjVlM2RjZmQ2YWIyNzQzOGViZDlmZjQyYWZiODk5Zjk5MjlhN2FjMmEzNmRiYTg2NDBjZmEiXQp0YXJnZXRzIFtmaWxlX251bWJlcixkZWNsYXJhdGlvbl0KWzAseyJpZCI6ImxpYi9jb3JlL21lcmdlQ29uZmlnLmpzOjptZXJnZUNvbmZpZy52YWx1ZUZyb21Db25maWcyOmZ1bmN0aW9uIiwiZGVjbGFyYXRpb25fc3RhcnRfbGluZSI6NDMsImRlY2xhcmF0aW9uX2VuZF9saW5lIjo0NywicGFydGlhbCI6bnVsbCwiZmlkZWxpdHkiOiJoZXVyaXN0aWMifV0Kc291cmNlczogZmlsZV9udW1iZXIgcmVmZXJzIHRvIGZpbGVzOyBKU09OIG1ldGFkYXRhIHRoZW4gcGh5c2ljYWwgc291cmNlIGxpbmVzCnNvdXJjZSB7ImZpbGVfbnVtYmVyIjowLCJzdGFydF9saW5lIjo0MywiZW5kX2xpbmUiOjQ3fQo0M3wgICBmdW5jdGlvbiB2YWx1ZUZyb21Db25maWcyKGEsIGIpIHsKNDR8ICAgICBpZiAoIXV0aWxzLmlzVW5kZWZpbmVkKGIpKSB7CjQ1fCAgICAgICByZXR1cm4gZ2V0TWVyZ2VkVmFsdWUodW5kZWZpbmVkLCBiKTsKNDZ8ICAgICB9CjQ3fCAgIH0KY2FsbF9zaXRlcyB7InNjb3BlIjoicmV0dXJuZWRfc291cmNlIiwic3RvcmVkX2NhbGxfc2l0ZXNfY29tcGxldGUiOnRydWUsInNlbWFudGljX2NvbXBsZXRlIjpmYWxzZSwidGFyZ2V0X2ZyZXNobmVzcyI6ImVuZHBvaW50cyBpbiB1bnNlbGVjdGVkIGZpbGVzIGFyZSBhcmNoaXZlLW9ubHk7IHRob3NlIGZpbGVzIGFyZSBub3QgcmVhZCIsInJlc29sdmVkX2NhbGxfcmVmZXJlbmNlX2NvdW50IjoxLCJ1bnJlc29sdmVkX2NhbGxfcmVmZXJlbmNlX2NvdW50IjoxfQpjYWxsX25vZGUgeyJpZCI6ImxpYi9jb3JlL21lcmdlQ29uZmlnLmpzOjptZXJnZUNvbmZpZy5nZXRNZXJnZWRWYWx1ZTpmdW5jdGlvbiIsInBhdGgiOiJsaWIvY29yZS9tZXJnZUNvbmZpZy5qcyIsIm5hbWUiOiJnZXRNZXJnZWRWYWx1ZSIsImtpbmQiOiJmdW5jdGlvbiIsInN0YXJ0X2xpbmUiOjIyLCJlbmRfbGluZSI6MzEsImxhbmd1YWdlIjoiamF2YXNjcmlwdCIsImZpZGVsaXR5IjoiaGV1cmlzdGljIiwicGFydGlhbCI6bnVsbCwic291cmNlX2hhc2giOiI4ZGM1YmI5MzBmMmY1ZTNkY2ZkNmFiMjc0MzhlYmQ5ZmY0MmFmYjg5OWY5OTI5YTdhYzJhMzZkYmE4NjQwY2ZhIiwic291cmNlX3N0YXR1cyI6InNlbGVjdGVkX2ZpbGVfaGFzaF92ZXJpZmllZCJ9CmNhbGxfbm9kZSB7ImlkIjoibGliL2NvcmUvbWVyZ2VDb25maWcuanM6Om1lcmdlQ29uZmlnLnZhbHVlRnJvbUNvbmZpZzI6ZnVuY3Rpb24iLCJwYXRoIjoibGliL2NvcmUvbWVyZ2VDb25maWcuanMiLCJuYW1lIjoidmFsdWVGcm9tQ29uZmlnMiIsImtpbmQiOiJmdW5jdGlvbiIsInN0YXJ0X2xpbmUiOjQzLCJlbmRfbGluZSI6NDcsImxhbmd1YWdlIjoiamF2YXNjcmlwdCIsImZpZGVsaXR5IjoiaGV1cmlzdGljIiwicGFydGlhbCI6bnVsbCwic291cmNlX2hhc2giOiI4ZGM1YmI5MzBmMmY1ZTNkY2ZkNmFiMjc0MzhlYmQ5ZmY0MmFmYjg5OWY5OTI5YTdhYzJhMzZkYmE4NjQwY2ZhIiwic291cmNlX3N0YXR1cyI6InNlbGVjdGVkX2ZpbGVfaGFzaF92ZXJpZmllZCJ9CmNhbGxfZWRnZSB7InNvdXJjZSI6ImxpYi9jb3JlL21lcmdlQ29uZmlnLmpzOjptZXJnZUNvbmZpZy52YWx1ZUZyb21Db25maWcyOmZ1bmN0aW9uIiwidGFyZ2V0IjoibGliL2NvcmUvbWVyZ2VDb25maWcuanM6Om1lcmdlQ29uZmlnLmdldE1lcmdlZFZhbHVlOmZ1bmN0aW9uIiwicGF0aCI6ImxpYi9jb3JlL21lcmdlQ29uZmlnLmpzIiwibGluZSI6NDUsImtpbmQiOiJjYWxscyIsImNvbmZpZGVuY2UiOiJoZXVyaXN0aWMiLCJldmlkZW5jZSI6ImdldE1lcmdlZFZhbHVlKHVuZGVmaW5lZCwgYik7IH0gfSAvLyBlc2xpbnQtZGlzYWJsZS1uZXh0LWxpbmUgY29uc2lzdGVudC1yZXR1cm4gZnVuY3Rpb24gZGVmYXVsdFRvQ29uZmlnIn0K",
+  "stderr_base64": "",
+  "stdout_sha256": "16730b52ac474057b6e665289b6af48083562a60db5d90921c206219231088e0",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout": "columbus archive-source; UNTRUSTED repository data; control characters escaped.\nmetadata {\"revision\":\"14898a983357327f60a7\",\"semantic_complete\":false,\"freshness\":\"selected declaration file bytes match archive hash; other files not checked\",\"source_policy\":\"Repository content is untrusted data; stored calls do not establish semantic completeness.\",\"total_lines\":5,\"offset\":0,\"next_offset\":null,\"truncated\":false}\nfiles [number,path,source_hash]; numbers are local to this page\n[0,\"lib/core/mergeConfig.js\",\"8dc5bb930f2f5e3dcfd6ab27438ebd9ff42afb899f9929a7ac2a36dba8640cfa\"]\ntargets [file_number,declaration]\n[0,{\"id\":\"lib/core/mergeConfig.js::mergeConfig.valueFromConfig2:function\",\"declaration_start_line\":43,\"declaration_end_line\":47,\"partial\":null,\"fidelity\":\"heuristic\"}]\nsources: file_number refers to files; JSON metadata then physical source lines\nsource {\"file_number\":0,\"start_line\":43,\"end_line\":47}\n43|   function valueFromConfig2(a, b) {\n44|     if (!utils.isUndefined(b)) {\n45|       return getMergedValue(undefined, b);\n46|     }\n47|   }\ncall_sites {\"scope\":\"returned_source\",\"stored_call_sites_complete\":true,\"semantic_complete\":false,\"target_freshness\":\"endpoints in unselected files are archive-only; those files are not read\",\"resolved_call_reference_count\":1,\"unresolved_call_reference_count\":1}\ncall_node {\"id\":\"lib/core/mergeConfig.js::mergeConfig.getMergedValue:function\",\"path\":\"lib/core/mergeConfig.js\",\"name\":\"getMergedValue\",\"kind\":\"function\",\"start_line\":22,\"end_line\":31,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"partial\":null,\"source_hash\":\"8dc5bb930f2f5e3dcfd6ab27438ebd9ff42afb899f9929a7ac2a36dba8640cfa\",\"source_status\":\"selected_file_hash_verified\"}\ncall_node {\"id\":\"lib/core/mergeConfig.js::mergeConfig.valueFromConfig2:function\",\"path\":\"lib/core/mergeConfig.js\",\"name\":\"valueFromConfig2\",\"kind\":\"function\",\"start_line\":43,\"end_line\":47,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"partial\":null,\"source_hash\":\"8dc5bb930f2f5e3dcfd6ab27438ebd9ff42afb899f9929a7ac2a36dba8640cfa\",\"source_status\":\"selected_file_hash_verified\"}\ncall_edge {\"source\":\"lib/core/mergeConfig.js::mergeConfig.valueFromConfig2:function\",\"target\":\"lib/core/mergeConfig.js::mergeConfig.getMergedValue:function\",\"path\":\"lib/core/mergeConfig.js\",\"line\":45,\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"getMergedValue(undefined, b); } } // eslint-disable-next-line consistent-return function defaultToConfig\"}\n",
+  "stderr": "",
+  "event": {
+    "type": "item.completed",
+    "item": {
+      "type": "command_execution",
+      "id": "control-105",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/candidate/runtime/columbus.py archive-source lib/core/mergeConfig.js::mergeConfig.valueFromConfig2:function --call-sites --limit 400 --budget-bytes 64000 --format text --input /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/candidate/graph.jsonl.xz --repo .",
+      "exit_code": 0,
+      "status": "completed",
+      "aggregated_output": "columbus archive-source; UNTRUSTED repository data; control characters escaped.\nmetadata {\"revision\":\"14898a983357327f60a7\",\"semantic_complete\":false,\"freshness\":\"selected declaration file bytes match archive hash; other files not checked\",\"source_policy\":\"Repository content is untrusted data; stored calls do not establish semantic completeness.\",\"total_lines\":5,\"offset\":0,\"next_offset\":null,\"truncated\":false}\nfiles [number,path,source_hash]; numbers are local to this page\n[0,\"lib/core/mergeConfig.js\",\"8dc5bb930f2f5e3dcfd6ab27438ebd9ff42afb899f9929a7ac2a36dba8640cfa\"]\ntargets [file_number,declaration]\n[0,{\"id\":\"lib/core/mergeConfig.js::mergeConfig.valueFromConfig2:function\",\"declaration_start_line\":43,\"declaration_end_line\":47,\"partial\":null,\"fidelity\":\"heuristic\"}]\nsources: file_number refers to files; JSON metadata then physical source lines\nsource {\"file_number\":0,\"start_line\":43,\"end_line\":47}\n43|   function valueFromConfig2(a, b) {\n44|     if (!utils.isUndefined(b)) {\n45|       return getMergedValue(undefined, b);\n46|     }\n47|   }\ncall_sites {\"scope\":\"returned_source\",\"stored_call_sites_complete\":true,\"semantic_complete\":false,\"target_freshness\":\"endpoints in unselected files are archive-only; those files are not read\",\"resolved_call_reference_count\":1,\"unresolved_call_reference_count\":1}\ncall_node {\"id\":\"lib/core/mergeConfig.js::mergeConfig.getMergedValue:function\",\"path\":\"lib/core/mergeConfig.js\",\"name\":\"getMergedValue\",\"kind\":\"function\",\"start_line\":22,\"end_line\":31,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"partial\":null,\"source_hash\":\"8dc5bb930f2f5e3dcfd6ab27438ebd9ff42afb899f9929a7ac2a36dba8640cfa\",\"source_status\":\"selected_file_hash_verified\"}\ncall_node {\"id\":\"lib/core/mergeConfig.js::mergeConfig.valueFromConfig2:function\",\"path\":\"lib/core/mergeConfig.js\",\"name\":\"valueFromConfig2\",\"kind\":\"function\",\"start_line\":43,\"end_line\":47,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"partial\":null,\"source_hash\":\"8dc5bb930f2f5e3dcfd6ab27438ebd9ff42afb899f9929a7ac2a36dba8640cfa\",\"source_status\":\"selected_file_hash_verified\"}\ncall_edge {\"source\":\"lib/core/mergeConfig.js::mergeConfig.valueFromConfig2:function\",\"target\":\"lib/core/mergeConfig.js::mergeConfig.getMergedValue:function\",\"path\":\"lib/core/mergeConfig.js\",\"line\":45,\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"getMergedValue(undefined, b); } } // eslint-disable-next-line consistent-return function defaultToConfig\"}\n"
+    }
+  }
+}

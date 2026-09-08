@@ -1,0 +1,65 @@
+{
+  "answer_sha256": "34a3e0c8ad27d3cda6d98e650029faaf21b451b13421f404775ce267a41b4039",
+  "rubric_sha256": "f13227a5521ad04ea49e3210b86ba9d4a8d5badd2554b15448dc915216167036",
+  "findings": [
+    {
+      "id": "kotlin_lookup_handoffs",
+      "passed": true,
+      "reason": "Identifies all Kotlin conveniences, Java overload arguments and return types, then follows inherited wrappers and virtual dispatch without attributing Java policy to Kotlin.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "Gives the bracket operator's nullable String signature and direct one-argument delegation, distinct from the three generic forms."},
+        {"criterion_index": 1, "passed": true, "reason": "Explicitly describes inline/reified T : Any and all three return types and argument lists; the complete extension quote identifies the corresponding getRequiredProperty delegate."},
+        {"criterion_index": 2, "passed": true, "reason": "Explains erased runtime Class without List element metadata, Java policy and virtual-dispatch ownership, and possible source/placeholder/conversion/required exceptions despite non-null Kotlin signatures."}
+      ]
+    },
+    {
+      "id": "ordered_property_lookup",
+      "passed": true,
+      "reason": "Explains ordered first-raw-match selection, no match/null behavior, direct conversion return, exception propagation and repeated source reads.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "Names ordinary String and typed calls with nested true and raw String.class with false; the nested finding explains that raw retains source lookup and String conversion."},
+        {"criterion_index": 1, "passed": true, "reason": "Collection iteration establishes precedence, raw null allows later sources, and null/empty/all-null collections return null. The source-loop quote uses names only in logging."},
+        {"criterion_index": 2, "passed": true, "reason": "Explicitly distinguishes raw non-null selection from conversion success and states that neither converted null nor source/placeholder/conversion errors cause a later-source attempt."},
+        {"criterion_index": 3, "passed": true, "reason": "Says each lookup iterates and invokes sources again, without a resolver property-result cache; helper caching is separately distinguished from value caching."}
+      ]
+    },
+    {
+      "id": "nested_placeholder_policy",
+      "passed": true,
+      "reason": "Covers exact source-loop gates and processing order, empty/strict/permissive behavior, distinct helpers and raw callback with helper-controlled recursion.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "Explains every String, toString for other CharSequence only for exactly String.class or CharSequence.class, excluded Object/StringBuilder targets, processing before conversion and raw bypass."},
+        {"criterion_index": 1, "passed": true, "reason": "Explicitly states immediate unchanged empty return, initially false strict selection, true permissive selection retaining unresolved placeholders, and strict PlaceholderResolutionException as an IllegalArgumentException."},
+        {"criterion_index": 2, "passed": true, "reason": "Identifies direct APIs as independently permissive/strict and separate lazy helper fields. The full constructor quote supplies configured prefix, suffix, separator, escape and corresponding boolean policy."},
+        {"criterion_index": 3, "passed": true, "reason": "The quote supplies doResolvePlaceholders and replacePlaceholders(text, this::getPropertyAsRawString); prose explains raw lookup rather than ordinary lookup recursion, allows parser-controlled replacement recursion, and excludes property-value caching."}
+      ]
+    },
+    {
+      "id": "property_conversion_service",
+      "passed": true,
+      "reason": "Correctly distinguishes no-target and no-service assignability shortcuts from shared and stored-service conversion, including getter state changes and null/error outcomes.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "Describes original-value return for null target and assignability return only without a resolver-specific service; quoted code explicitly avoids shared-service initialization in that case."},
+        {"criterion_index": 1, "passed": true, "reason": "Explains necessary conversion through the shared default and delegation of all non-null-target values to a configured service, including already-assignable values; the quote includes the final convert call."},
+        {"criterion_index": 2, "passed": true, "reason": "Explains null-rejecting setter storage and volatile/synchronized double-check getter construction of an independent, stored service that changes subsequent lookup behavior."},
+        {"criterion_index": 3, "passed": true, "reason": "States service null output and exceptions propagate without recovery, rejects universal convertibility, and explicitly excludes source retry in the lookup/default findings."}
+      ]
+    },
+    {
+      "id": "default_required_outcomes",
+      "passed": true,
+      "reason": "Follows both String and typed wrappers after the complete lookup pipeline and separates final null from thrown failures without restarting source selection.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "Explicitly places default substitution after lookup, placeholder processing and conversion; both complete quoted default bodies return the non-null result or supplied fallback."},
+        {"criterion_index": 1, "passed": true, "reason": "Identifies String and typed required wrappers, final-null IllegalStateException and ordinary lookup first; the complete quoted bodies return non-null values directly, with no aggregate validation path."},
+        {"criterion_index": 2, "passed": true, "reason": "Explicitly follows a selected raw non-null value converted to null into fallback/required failure without later-source restart, while the ordered finding distinguishes raw-null continuation."},
+        {"criterion_index": 3, "passed": true, "reason": "Explains that source, placeholder and conversion exceptions escape before null checks, so defaults are not applied and required wrappers do not replace those failures."}
+      ]
+    }
+  ],
+  "execution_review": {
+    "events_sha256": "1b127e3b48b4f8c906e367c4cd978df8395e009dc9fe60871bac7bf4ccab0a08",
+    "passed": true,
+    "reason": "Independently inspected all 16 actual command executions, including the rg-and-nl compound command, and all other event item types. Every command was an ordinary repository-relative rg search or bounded nl/sed source read. Bounded helper/parser, exception and source-iteration inspections support the requested boundaries and do not enumerate converter implementations or the full parser grammar in the answer. No graph/runtime/index/SQLite use, repository code/tests/build execution, writes, web/network, delegation, private harness/oracle or sibling-experiment access was observed. All commands completed successfully. Citation validity is assessed separately from semantic and execution compliance."
+  }
+}

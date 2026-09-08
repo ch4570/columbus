@@ -1,0 +1,310 @@
+{
+  "case": "javascript-axios-uri-composition",
+  "condition": "control",
+  "repeat": 1,
+  "return_code": 0,
+  "timed_out": false,
+  "finished_at": "2026-09-08T22:01:52.817270+00:00",
+  "elapsed_seconds": 435.27401583400206,
+  "usage": {
+    "input_tokens": 217204,
+    "cached_input_tokens": 181888,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 12873,
+    "reasoning_output_tokens": 9087,
+    "uncached_input_tokens": 35316
+  },
+  "preflight": {
+    "baseline": {
+      "passed": true,
+      "archive_sha256": "9bdd1b2ca6ff306b3700d141bdeab1593f511e73046deaa89ff27c7b9e4b17c7",
+      "revision": "14898a983357327f60a7",
+      "source_files_verified": 242,
+      "indexed_source_files_verified": 237,
+      "counts": {
+        "files": 237,
+        "nodes": 778,
+        "scopes": 0,
+        "edges": 1270,
+        "references": 7258,
+        "imports": 390,
+        "diagnostics": 1
+      },
+      "consumer_index_absent": true
+    },
+    "control": {
+      "passed": true,
+      "archive_sha256": "9bdd1b2ca6ff306b3700d141bdeab1593f511e73046deaa89ff27c7b9e4b17c7",
+      "revision": "14898a983357327f60a7",
+      "source_files_verified": 242,
+      "indexed_source_files_verified": 237,
+      "counts": {
+        "files": 237,
+        "nodes": 778,
+        "scopes": 0,
+        "edges": 1270,
+        "references": 7258,
+        "imports": 390,
+        "diagnostics": 1
+      },
+      "consumer_index_absent": true
+    },
+    "candidate": {
+      "passed": true,
+      "archive_sha256": "9bdd1b2ca6ff306b3700d141bdeab1593f511e73046deaa89ff27c7b9e4b17c7",
+      "revision": "14898a983357327f60a7",
+      "source_files_verified": 242,
+      "indexed_source_files_verified": 237,
+      "counts": {
+        "files": 237,
+        "nodes": 778,
+        "scopes": 0,
+        "edges": 1270,
+        "references": 7258,
+        "imports": 390,
+        "diagnostics": 1
+      },
+      "consumer_index_absent": true
+    }
+  },
+  "postflight": {
+    "baseline": {
+      "passed": true,
+      "archive_sha256": "9bdd1b2ca6ff306b3700d141bdeab1593f511e73046deaa89ff27c7b9e4b17c7",
+      "revision": "14898a983357327f60a7",
+      "source_files_verified": 242,
+      "indexed_source_files_verified": 237,
+      "counts": {
+        "files": 237,
+        "nodes": 778,
+        "scopes": 0,
+        "edges": 1270,
+        "references": 7258,
+        "imports": 390,
+        "diagnostics": 1
+      },
+      "consumer_index_absent": true
+    },
+    "control": {
+      "passed": true,
+      "archive_sha256": "9bdd1b2ca6ff306b3700d141bdeab1593f511e73046deaa89ff27c7b9e4b17c7",
+      "revision": "14898a983357327f60a7",
+      "source_files_verified": 242,
+      "indexed_source_files_verified": 237,
+      "counts": {
+        "files": 237,
+        "nodes": 778,
+        "scopes": 0,
+        "edges": 1270,
+        "references": 7258,
+        "imports": 390,
+        "diagnostics": 1
+      },
+      "consumer_index_absent": true
+    },
+    "candidate": {
+      "passed": true,
+      "archive_sha256": "9bdd1b2ca6ff306b3700d141bdeab1593f511e73046deaa89ff27c7b9e4b17c7",
+      "revision": "14898a983357327f60a7",
+      "source_files_verified": 242,
+      "indexed_source_files_verified": 237,
+      "counts": {
+        "files": 237,
+        "nodes": 778,
+        "scopes": 0,
+        "edges": 1270,
+        "references": 7258,
+        "imports": 390,
+        "diagnostics": 1
+      },
+      "consumer_index_absent": true
+    }
+  },
+  "events_sha256": "c445498a401859120f59c75ce38c86133dae7571aded05fdb1cce6956bc4d18f",
+  "commands": [
+    {
+      "command": "/bin/zsh -lc \"sed -n '1,240p' /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/runtime/SKILL.md\"",
+      "exit_code": 0,
+      "output_bytes": 5633,
+      "output_sha256": "368fb4899e5a483fd3caa4c0b7274f976d51cef5ce4fe36db985643da59123e3"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n --glob '\"'!node_modules'\"' \\\"getUri|function buildFullPath|const buildFullPath|function buildURL|const buildURL|mergeConfig\\\" . | head -n 160\"",
+      "exit_code": 0,
+      "output_bytes": 10073,
+      "output_sha256": "c9521c4344d09dc143ec41ef7fe033a27711988c1f998af2b6094884716beb19"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/runtime/columbus.py archive-source getUri buildFullPath buildURL mergeConfig AxiosURLSearchParams toFormData --input /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 30000'",
+      "exit_code": 2,
+      "output_bytes": 175,
+      "output_sha256": "4bcede4f32fd1d89d9a61ff33e582276a5538bcac8c3b0cf65221a68aec1f20a"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/runtime/columbus.py archive-search AxiosURLSearchParams --input /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/graph.jsonl.xz --format text --budget-bytes 6000'",
+      "exit_code": 0,
+      "output_bytes": 2113,
+      "output_sha256": "4629728fff8b4e25bffae64cd678821b82b99d5613092f8003075c1a9c15010a"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/runtime/columbus.py archive-search buildURL --input /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/graph.jsonl.xz --format text --budget-bytes 6000'",
+      "exit_code": 0,
+      "output_bytes": 1973,
+      "output_sha256": "4d433dcdfab1ed79f43f0edf2b794a2ee9ab227e0eb88a1e81468ccc030957bf"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/runtime/columbus.py archive-search getUri --input /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/graph.jsonl.xz --format text --budget-bytes 6000'",
+      "exit_code": 0,
+      "output_bytes": 667,
+      "output_sha256": "fa94e1ef530255b6942db1965bc6d0c5733d44de778378f764127626c5ba9dbd"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/runtime/columbus.py archive-search defaultVisitor --input /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/graph.jsonl.xz --format text --budget-bytes 6000'",
+      "exit_code": 0,
+      "output_bytes": 1085,
+      "output_sha256": "8e38934c2f17a36e11e7e115576c430c7ae46284cbd098297bfa6278f5e18d18"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/runtime/columbus.py archive-search toFormData --input /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/graph.jsonl.xz --format text --budget-bytes 6000'",
+      "exit_code": 0,
+      "output_bytes": 2049,
+      "output_sha256": "47b9a33dd76bc2b056abda07ec73d66e883fe9cebf0ca730cc1e8780679528f8"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/runtime/columbus.py archive-search mergeConfig --input /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/graph.jsonl.xz --format text --budget-bytes 6000'",
+      "exit_code": 0,
+      "output_bytes": 2124,
+      "output_sha256": "93c2fe1bae4b7fdc2b1f33a1e237dac58cd3a5b34e8e84df133a486d7e054c74"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/runtime/columbus.py archive-search isAbsoluteURL --input /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/graph.jsonl.xz --format text --budget-bytes 6000'",
+      "exit_code": 0,
+      "output_bytes": 1324,
+      "output_sha256": "c29c5f1d8dc3ddcb628f713241cc46f6b7c417ead102816d42d0854241ea8311"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/runtime/columbus.py archive-search buildFullPath --input /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/graph.jsonl.xz --format text --budget-bytes 6000'",
+      "exit_code": 0,
+      "output_bytes": 1343,
+      "output_sha256": "94d7c905fc6e2658592b71467e83791a74a4fe1d2abcc57a78cd1845730f2a6e"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/runtime/columbus.py archive-search combineURLs --input /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/graph.jsonl.xz --format text --budget-bytes 6000'",
+      "exit_code": 0,
+      "output_bytes": 1319,
+      "output_sha256": "5a6e4df831e42f4ff2539edb25df9e19cffdb44886c3a6b7024367f0c0a78b28"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/runtime/columbus.py archive-source 'lib/core/Axios.js::Axios.getUri:method' 'lib/core/buildFullPath.js::buildFullPath:function' 'lib/helpers/buildURL.js::buildURL:function' 'lib/core/mergeConfig.js::mergeConfig:function' 'lib/helpers/AxiosURLSearchParams.js::AxiosURLSearchParams:function' 'lib/helpers/toFormData.js::toFormData.defaultVisitor:function' 'lib/helpers/isAbsoluteURL.js::isAbsoluteURL:function' 'lib/helpers/combineURLs.js::combineURLs:function' --input /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 40000\"",
+      "exit_code": 0,
+      "output_bytes": 9900,
+      "output_sha256": "98ba1e7c8ccbf9e89f1891f1416cca479c4ab2cbfccd376acfbc31c6bddee213"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n \\\"const merge =|function merge|isPlainObject|isURLSearchParams|const forEach|function forEach\\\" lib/utils.js lib/helpers/toFormData.js lib/helpers/AxiosURLSearchParams.js && sed -n '1,85p' lib/helpers/AxiosURLSearchParams.js && sed -n '40,225p' lib/helpers/toFormData.js && sed -n '315,375p' lib/utils.js && sed -n '465,510p' lib/utils.js\"",
+      "exit_code": 0,
+      "output_bytes": 10007,
+      "output_sha256": "bfb3c0a6a0eb389d8715e16168f453113b50d6b0b988740adacfb0a6652ee9e1"
+    },
+    {
+      "command": "/bin/zsh -lc \"sed -n '1,58p' lib/helpers/buildURL.js && sed -n '1,55p' lib/helpers/toFormData.js && sed -n '120,150p' lib/utils.js && sed -n '250,290p' lib/utils.js && sed -n '335,365p' lib/utils.js\"",
+      "exit_code": 0,
+      "output_bytes": 5921,
+      "output_sha256": "77da2325108036bda9aea25e153f7e7ecc6d19a186244fa1e4262042d3695738"
+    },
+    {
+      "command": "/bin/zsh -lc 'rg -n -C 3 \"URLSearchParams|paramsSerializer|serialize|encode|array|date|null|hash|fragment|bracket|allowAbsoluteUrls|absolute\" test/specs/helpers/buildURL.spec.js test/specs/helpers/toFormData.spec.js test/specs/core/buildFullPath.spec.js test/specs/instance.spec.js | head -n 260'",
+      "exit_code": 0,
+      "output_bytes": 10530,
+      "output_sha256": "406ee0daeea26caa54c3d304c12041e2ac870429f6765b9acc487840ff9e51f0"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/runtime/columbus.py archive-quotes --range lib/core/Axios.js 200 204 --range lib/core/mergeConfig.js 43 74 --range lib/core/buildFullPath.js 16 22 --range lib/helpers/buildURL.js 31 67 --range lib/helpers/toFormData.js 148 182 --input /private/tmp/columbus-source-call-observations.Jf0Jla/observations/javascript/control/graph.jsonl.xz --repo .'",
+      "exit_code": 0,
+      "output_bytes": 0,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "command_count": 17,
+  "command_output_bytes": 66236,
+  "failed_commands": 1,
+  "other_tool_types": [],
+  "runtime_warnings": [],
+  "turn_failed": false,
+  "answer": {
+    "findings": [
+      {
+        "id": "uri_handoffs",
+        "path": "lib/core/Axios.js",
+        "start_line": 200,
+        "end_line": 204,
+        "quote": "  getUri(config) {\n    config = mergeConfig(this.defaults, config);\n    const fullPath = buildFullPath(config.baseURL, config.url, config.allowAbsoluteUrls);\n    return buildURL(fullPath, config.params, config.paramsSerializer);\n  }",
+        "explanation": "The instance method performs three ordered, synchronous handoffs: mergeConfig(this.defaults, config); buildFullPath with exactly the merged baseURL, url and allowAbsoluteUrls; then buildURL with exactly that fullPath, merged params and merged paramsSerializer. It returns buildURL's string directly. There is no Promise or catch here, so exceptions from merging, path construction, native serialization, object materialization, or user serializer/encoder callbacks escape synchronously. It never calls this.request, so request interceptors, adapter selection and HTTP/network dispatch are not entered; getUri only computes the URI, apart from executing any supplied serialization callbacks."
+      },
+      {
+        "id": "uri_config_merge",
+        "path": "lib/core/mergeConfig.js",
+        "start_line": 43,
+        "end_line": 74,
+        "quote": "  function valueFromConfig2(a, b) {\n    if (!utils.isUndefined(b)) {\n      return getMergedValue(undefined, b);\n    }\n  }\n\n  // eslint-disable-next-line consistent-return\n  function defaultToConfig2(a, b) {\n    if (!utils.isUndefined(b)) {\n      return getMergedValue(undefined, b);\n    } else if (!utils.isUndefined(a)) {\n      return getMergedValue(undefined, a);\n    }\n  }\n\n  // eslint-disable-next-line consistent-return\n  function mergeDirectKeys(a, b, prop) {\n    if (prop in config2) {\n      return getMergedValue(a, b);\n    } else if (prop in config1) {\n      return getMergedValue(undefined, a);\n    }\n  }\n\n  const mergeMap = {\n    url: valueFromConfig2,\n    method: valueFromConfig2,\n    data: valueFromConfig2,\n    baseURL: defaultToConfig2,\n    transformRequest: defaultToConfig2,\n    transformResponse: defaultToConfig2,\n    paramsSerializer: defaultToConfig2,",
+        "explanation": "mergeConfig substitutes {} for a missing/falsy per-call config, creates a new result object, and visits the union of the ordinary own enumerable keys. url uses valueFromConfig2, so only a defined per-call URL is selected: an instance-default url is not inherited. baseURL and paramsSerializer use defaultToConfig2: a per-call value other than undefined wins, so null wins for either, an empty baseURL also wins, and absent/undefined falls back to the instance default. Thus paramsSerializer:null disables a default serializer and lets buildURL use its standard path. params and allowAbsoluteUrls are not special map entries, so the fallback mergeDeepProperties rule selects a non-undefined per-call value (including null or false), otherwise the default. getMergedValue and utils.merge create fresh plain objects, recursively combine two plain objects with later/per-call values taking precedence, and copy arrays with slice; later arrays replace earlier arrays rather than concatenate. This merge machinery does not mutate the ordinary plain input configuration objects. It is not a universal deep clone: non-plain values are retained by reference, including a native URLSearchParams used as params and non-plain values such as Dates nested inside a copied plain params object; array elements are likewise only shallow-copied."
+      },
+      {
+        "id": "uri_base_path",
+        "path": "lib/core/buildFullPath.js",
+        "start_line": 16,
+        "end_line": 22,
+        "quote": "export default function buildFullPath(baseURL, requestedURL, allowAbsoluteUrls) {\n  let isRelativeUrl = !isAbsoluteURL(requestedURL);\n  if (baseURL && (isRelativeUrl || allowAbsoluteUrls == false)) {\n    return combineURLs(baseURL, requestedURL);\n  }\n  return requestedURL;\n}",
+        "explanation": "isAbsoluteURL recognizes only strings beginning with either // or a case-insensitive scheme of letter followed by letters/digits/+.- and then ://; protocol-relative URLs therefore count as absolute. A truthy merged baseURL is combined with every relative URL. It is also combined with an absolute or protocol-relative URL when allowAbsoluteUrls is explicitly false; when that flag is true or absent, an absolute URL is returned unchanged. A missing, null or empty baseURL is falsy, so the requested URL is returned even when allowAbsoluteUrls is false. combineURLs handles a nonempty requested URL by removing one or two terminal slashes from the base, removing all leading slashes from the requested string, and inserting one slash; an empty requested string returns the base verbatim. This is literal string joining—not standards-based URL resolution, origin enforcement, or normalization of traversal/dot segments, queries, or other URL components."
+      },
+      {
+        "id": "uri_serializer_selection",
+        "path": "lib/helpers/buildURL.js",
+        "start_line": 31,
+        "end_line": 67,
+        "quote": "export default function buildURL(url, params, options) {\n  /*eslint no-param-reassign:0*/\n  if (!params) {\n    return url;\n  }\n  \n  const _encode = options && options.encode || encode;\n\n  if (utils.isFunction(options)) {\n    options = {\n      serialize: options\n    };\n  } \n\n  const serializeFn = options && options.serialize;\n\n  let serializedParams;\n\n  if (serializeFn) {\n    serializedParams = serializeFn(params, options);\n  } else {\n    serializedParams = utils.isURLSearchParams(params) ?\n      params.toString() :\n      new AxiosURLSearchParams(params, options).toString(_encode);\n  }\n\n  if (serializedParams) {\n    const hashmarkIndex = url.indexOf(\"#\");\n\n    if (hashmarkIndex !== -1) {\n      url = url.slice(0, hashmarkIndex);\n    }\n    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;\n  }\n\n  return url;\n}",
+        "explanation": "Absent or null params take the initial fast path: the URL is returned unchanged and no serializer or encoder is invoked. A function-form paramsSerializer is normalized to a new {serialize: originalFunction} object, and that function is called as serializeFn(params, normalizedOptions). In object form, options.serialize is called with the raw merged params and that merged/copied options object. A serialize callback has first precedence even when params is a native URLSearchParams; otherwise native URLSearchParams uses its own toString(), while a plain object goes through AxiosURLSearchParams. options.encode is used automatically only on that default pair path, once for every key and value; AxiosURLSearchParams supplies it the value and its internal encoder callback. Native URLSearchParams and the custom serialize branch bypass automatic use of options.encode, although a serializer can choose to call an encoder itself. Serializer and encoder exceptions are uncaught and propagate synchronously through getUri. Fragment removal and delimiter insertion happen only for a nonempty serialized string: everything from the first # is removed, then ? is used if the remaining URL has no question mark, otherwise &. An empty serialized result—including an empty object, empty native URLSearchParams, or serializer returning \"\"—leaves the original URL exactly unchanged, including any fragment."
+      },
+      {
+        "id": "uri_parameter_materialization",
+        "path": "lib/helpers/toFormData.js",
+        "start_line": 148,
+        "end_line": 182,
+        "quote": "  function defaultVisitor(value, key, path) {\n    let arr = value;\n\n    if (value && !path && typeof value === 'object') {\n      if (utils.endsWith(key, '{}')) {\n        // eslint-disable-next-line no-param-reassign\n        key = metaTokens ? key : key.slice(0, -2);\n        // eslint-disable-next-line no-param-reassign\n        value = JSON.stringify(value);\n      } else if (\n        (utils.isArray(value) && isFlatArray(value)) ||\n        ((utils.isFileList(value) || utils.endsWith(key, '[]')) && (arr = utils.toArray(value))\n        )) {\n        // eslint-disable-next-line no-param-reassign\n        key = removeBrackets(key);\n\n        arr.forEach(function each(el, index) {\n          !(utils.isUndefined(el) || el === null) && formData.append(\n            // eslint-disable-next-line no-nested-ternary\n            indexes === true ? renderKey([key], index, dots) : (indexes === null ? key : key + '[]'),\n            convertValue(el)\n          );\n        });\n        return false;\n      }\n    }\n\n    if (isVisitable(value)) {\n      return true;\n    }\n\n    formData.append(renderKey(path, key, dots), convertValue(value));\n\n    return false;\n  }",
+        "explanation": "For the default plain-object branch, AxiosURLSearchParams creates an empty _pairs accumulator and passes itself to toFormData; its append method stores [name,value] pairs. The default visitor/build traversal recursively visits plain objects and arrays. Null and undefined object members are filtered before the visitor, and the flat-array branch separately omits null/undefined elements, so they produce no pair. With default indexes:false, a top-level flat-array property such as tags:['a','b'] produces repeated tags[] keys. Nested plain-object paths use brackets, such as outer[inner]; because flat-array expansion is gated by !path, an array below a nested object is recursively indexed, producing paths such as outer[arr][0]. Dates become toISOString() strings, booleans become \"true\" or \"false\", and ordinary numbers/strings pass through for later string coercion. AxiosURLSearchParams.toString encodes each accumulated key and value, joins them with =, and joins pairs with &. With buildURL's default encoder, spaces become +, colon, dollar and comma remain literal, while brackets remain percent-encoded as %5B and %5D; thus tags[] becomes tags%5B%5D. These traversal, conversion and default-character rules do not apply to native URLSearchParams.toString or a custom serialize callback, and the character rules are replaced when a custom encode callback is used."
+      }
+    ]
+  },
+  "quality": {
+    "passed": true,
+    "findings": [
+      {
+        "id": "uri_handoffs",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "uri_config_merge",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "uri_base_path",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "uri_serializer_selection",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "uri_parameter_materialization",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schema": "columbus.exploration-cases/v1",
+  "cases": [
+    {
+      "id": "javascript-axios-uri-composition",
+      "question": "Explain how an Axios instance computes a URI with getUri, starting from instance defaults and per-call configuration and following the actual helpers through base-path selection and query serialization. Discover the handoffs and explain the five requested mechanisms, including the stated edge cases. Distinguish this URI computation from executing an HTTP request. Assume ordinary own-property configuration objects; a per-call string URL and a string, null, empty or absent baseURL; allowAbsoluteUrls is boolean or absent. Params may be absent/null, a native URLSearchParams, or an acyclic plain object containing ordinary scalar values, Dates, nested plain objects and flat arrays. Serializer callbacks, when supplied, are callable and may return a string or throw. Binary/file values, custom visitors, special {} or [] key suffixes, prototype/accessor behavior and custom array-index/dot modes are outside scope. Do not execute this repository, enumerate adapters or infer network/security guarantees. For each finding, cite one representative implementation mechanism in one contiguous range of at most 40 physical lines; explain other inspected branches in prose without stitching quotations.",
+      "findings": [
+        {
+          "id": "uri_handoffs",
+          "description": "Identify the public method's ordered configuration, full-path and query-building handoffs, including the exact values passed between them. Explain its returned value and synchronous exception boundary, and whether it invokes request interceptors, an adapter or network dispatch. Cite the public method itself.",
+          "path": "lib/core/Axios.js",
+          "marker": "const fullPath = buildFullPath(config.baseURL, config.url, config.allowAbsoluteUrls);"
+        },
+        {
+          "id": "uri_config_merge",
+          "description": "Explain the new merged configuration object and non-mutation boundary for ordinary input configs; the special per-call-only URL rule; undefined-versus-null handling for baseURL and paramsSerializer; and how params and allowAbsoluteUrls use the fallback merge rule. Include recursive plain-object combination, later value precedence, array replacement/copying rather than concatenation, and why non-plain params do not imply a universal deep clone. Cite the option-selection helpers/map.",
+          "path": "lib/core/mergeConfig.js",
+          "marker": "url: valueFromConfig2,"
+        },
+        {
+          "id": "uri_base_path",
+          "description": "Explain how absolute and protocol-relative URLs are recognized, when a truthy baseURL is combined with a relative or absolute URL, and how an explicit false allowAbsoluteUrls and an absent base change the outcome. Follow the joining helper's slash behavior and empty-relative fallback; distinguish this string operation from URL resolution, origin enforcement or traversal normalization. Cite the full-path decision.",
+          "path": "lib/core/buildFullPath.js",
+          "marker": "if (baseURL && (isRelativeUrl || allowAbsoluteUrls == false)) {"
+        },
+        {
+          "id": "uri_serializer_selection",
+          "description": "Explain the no-params fast path; function-form versus object-form serializer normalization and arguments; custom serializer precedence over URLSearchParams and plain-object processing; and where a custom encoder is used or bypassed. Include propagation of serializer exceptions. Explain precisely when a fragment is removed and a question mark or ampersand is appended, and what an empty serialized result leaves unchanged. Cite the serializer selection and append branches.",
+          "path": "lib/helpers/buildURL.js",
+          "marker": "const serializeFn = options && options.serialize;"
+        },
+        {
+          "id": "uri_parameter_materialization",
+          "description": "Follow the default plain-object path into the pair accumulator and form-data visitor, then back to key/value encoding and joining. Explain omission of null/undefined members and flat-array elements, default flat-array keys, nested-object keys, Date/boolean conversion, and the URI builder's default handling of spaces, colon/dollar/comma and brackets. Distinguish these rules from the native URLSearchParams or custom-serializer paths. Cite the default visitor's array/nesting mechanism; supporting conversion/encoding code can be explained in prose.",
+          "path": "lib/helpers/toFormData.js",
+          "marker": "indexes === true ? renderKey([key], index, dots) : (indexes === null ? key : key + '[]'),"
+        }
+      ]
+    }
+  ]
+}
