@@ -18,7 +18,7 @@ class ArchiveSourceTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             body = ['def isolated():'] + ['    # 한글 ' + 'x' * 80 for _ in range(90)] + ['    return 1']
-            (root / 'source.py').write_text('\n'.join(body) + '\n')
+            (root / 'source.py').write_text('\n'.join(body) + '\n', encoding='utf-8')
             index = RepositoryIndex(root / '.columbus/index.sqlite')
             index.refresh(root)
             for codec in ('gzip', 'xz'):
