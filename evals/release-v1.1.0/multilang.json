@@ -1,0 +1,520 @@
+{
+  "scope": "Fixed language/fidelity, exact simple call, lossless archive and incremental parity contracts. No population precision or actual-token claim.",
+  "runtime_sha256": {
+    "__init__.py": "f9364e1616a62a901f09b577f93dfc241d1446bfcdcbc420ac70c63f9c39b396",
+    "languages.py": "606fe8469d2cafdfa58d9026b86e0d7debc5922e40e4eb600af4b57a4909539b",
+    "parser.py": "c3a58b7ccdfa58ec6a44e6c71659816af5e91699e255fa7e90fe50746b9f178a",
+    "jvm.py": "7014b2d5a6894a5e9c734b6a6c2089ce667a897c295a61e1f23c46419c61bd8b",
+    "polyglot.py": "6a9e43a09b48cfaad807aa279a712aea00c810a5204f9e1e63e2f4c57fc0848b",
+    "index.py": "01a2b6d9dc53a22142ea93bba1f42a5edb3a2406507191a0d62933673eaade06",
+    "archive.py": "ffd7b8c50e9d9f43c7f822f4b44f98fcdb545ab66a3833d70883e8fd7faf9511"
+  },
+  "required_pass_rate": 1.0,
+  "passed": true,
+  "cases": [
+    {
+      "path": "main.py",
+      "language": "python",
+      "fidelity": "ast",
+      "source": "def helper(): pass\ndef run(): helper()\n",
+      "source_sha256": "2948e4d66823ff9504b0bbf90e83cccaa8872dec3a3ad6579d89f7a405a3a1b1",
+      "files": 1,
+      "nodes": 3,
+      "calls": 1,
+      "archives": [
+        {
+          "codec": "gzip",
+          "bytes": 937,
+          "sha256": "d456becd1fcfe76e55ca8174185175a46c3ba27248934460b7ee128ba2197a55"
+        },
+        {
+          "codec": "xz",
+          "bytes": 1048,
+          "sha256": "96232b7dce1c58f308d6968ac9657e2d25e9548918846bdc7b27cbf99a828e6c"
+        }
+      ],
+      "incremental_fresh_parity": true,
+      "passed": true
+    },
+    {
+      "path": "Demo.java",
+      "language": "java",
+      "fidelity": "ast",
+      "source": "class Demo { void helper() {} void run() { helper(); } }",
+      "source_sha256": "52a689d81925bdd164886d2acfad4629dabc9c6f74b1c2f0473548fff1a1f631",
+      "files": 1,
+      "nodes": 4,
+      "calls": 1,
+      "archives": [
+        {
+          "codec": "gzip",
+          "bytes": 1094,
+          "sha256": "fc09964aaca39ccb7a5900a1a8ac267370634f8307579dd32a9c13791430cca0"
+        },
+        {
+          "codec": "xz",
+          "bytes": 1196,
+          "sha256": "a4aaeed8e8879deb80705d45d911bbb449524cadb2dea46f775d36545b11558d"
+        }
+      ],
+      "incremental_fresh_parity": true,
+      "passed": true
+    },
+    {
+      "path": "main.kt",
+      "language": "kotlin",
+      "fidelity": "ast",
+      "source": "fun helper() {}\nfun run() { helper() }",
+      "source_sha256": "8736044231d9d35c2c0817061b7c1ac73bd41013cd3e0c7149ec270fbfcf21b6",
+      "files": 1,
+      "nodes": 3,
+      "calls": 1,
+      "archives": [
+        {
+          "codec": "gzip",
+          "bytes": 994,
+          "sha256": "008754e3da6da8bfcf630ea5feeb6ce5298f14093bc6ee0e8ee9ac6c41717aba"
+        },
+        {
+          "codec": "xz",
+          "bytes": 1104,
+          "sha256": "cec37c494f48897f6879791066023e3e89a580cf6aa1488d21eecb3857e5c604"
+        }
+      ],
+      "incremental_fresh_parity": true,
+      "passed": true
+    },
+    {
+      "path": "main.js",
+      "language": "javascript",
+      "fidelity": "heuristic",
+      "source": "function helper() {}\nfunction run() { helper(); }",
+      "source_sha256": "93e40d4b82e2d4064c085d59429e48ca10107891f9c0658e35959f10e459231c",
+      "files": 1,
+      "nodes": 3,
+      "calls": 1,
+      "archives": [
+        {
+          "codec": "gzip",
+          "bytes": 743,
+          "sha256": "c533b00ee92856d8becfa100390ecfd8cd575c8b000346e6bde56ad1c9feee37"
+        },
+        {
+          "codec": "xz",
+          "bytes": 840,
+          "sha256": "c891099393a3daf2203c8b48daff1fb21a1aff952beaed54097ee0e05b38d712"
+        }
+      ],
+      "incremental_fresh_parity": true,
+      "passed": true
+    },
+    {
+      "path": "main.ts",
+      "language": "typescript",
+      "fidelity": "heuristic",
+      "source": "function helper(): void {}\nfunction run(): void { helper(); }",
+      "source_sha256": "307a26115f992e9ad8699e8e0f3068403aa550f52952956262950f6143a5142b",
+      "files": 1,
+      "nodes": 3,
+      "calls": 1,
+      "archives": [
+        {
+          "codec": "gzip",
+          "bytes": 746,
+          "sha256": "4b869fcce8680702aecf77e6d97c6081e8879d540d531e025e4c079398001dc6"
+        },
+        {
+          "codec": "xz",
+          "bytes": 844,
+          "sha256": "8963992ee43a52c75353741727e7f2eb0ea03f54439f205d8d68b61eb2a3054b"
+        }
+      ],
+      "incremental_fresh_parity": true,
+      "passed": true
+    },
+    {
+      "path": "main.jsx",
+      "language": "javascript",
+      "fidelity": "heuristic",
+      "source": "function helper() {}\nfunction run() { return <div>helper(){helper()}</div>; }",
+      "source_sha256": "155c75287c7d33b22fbac186a8d0a4f7c9154cd2c9496382728f4f28c492b69c",
+      "files": 1,
+      "nodes": 3,
+      "calls": 1,
+      "archives": [
+        {
+          "codec": "gzip",
+          "bytes": 754,
+          "sha256": "590f50aa7a6444a1bd2aef0c00c6560f69172a2afbd1a991b1f341fe31626a0c"
+        },
+        {
+          "codec": "xz",
+          "bytes": 848,
+          "sha256": "4d50268bb3cf777c90d2831efa36e5357da746f650ff8134d04f0617f0cb2e65"
+        }
+      ],
+      "incremental_fresh_parity": true,
+      "passed": true
+    },
+    {
+      "path": "main.tsx",
+      "language": "typescript",
+      "fidelity": "heuristic",
+      "source": "function helper() {}\nfunction run() { return <div>helper(){helper()}</div>; }",
+      "source_sha256": "155c75287c7d33b22fbac186a8d0a4f7c9154cd2c9496382728f4f28c492b69c",
+      "files": 1,
+      "nodes": 3,
+      "calls": 1,
+      "archives": [
+        {
+          "codec": "gzip",
+          "bytes": 753,
+          "sha256": "a7e4bb8a4b8432e49a16b51fe0828a4fb5f34578e36f40df699a308215009ca8"
+        },
+        {
+          "codec": "xz",
+          "bytes": 848,
+          "sha256": "3783a8844807c94a740651f13699022ce8600285099c8cac4f60f0cf29455129"
+        }
+      ],
+      "incremental_fresh_parity": true,
+      "passed": true
+    },
+    {
+      "path": "main.go",
+      "language": "go",
+      "fidelity": "heuristic",
+      "source": "package main\nfunc helper() {}\nfunc run() { helper() }",
+      "source_sha256": "0bd27ce5fa6fe9fc91e2eea7dfa686dba2ebd3157e26e8551c12bf83c048b516",
+      "files": 1,
+      "nodes": 3,
+      "calls": 1,
+      "archives": [
+        {
+          "codec": "gzip",
+          "bytes": 734,
+          "sha256": "a84cb9343df07444d4c9c954bca64e114744cab828dbc780f936fe5977e631f9"
+        },
+        {
+          "codec": "xz",
+          "bytes": 836,
+          "sha256": "1d1513722fbe5b76b5ce5c2580a27d90427d63459ffc61783165cecf62bf2eaf"
+        }
+      ],
+      "incremental_fresh_parity": true,
+      "passed": true
+    },
+    {
+      "path": "main.rs",
+      "language": "rust",
+      "fidelity": "heuristic",
+      "source": "fn helper() {}\nfn run() { helper(); }",
+      "source_sha256": "1a52c5246368cc757dab26c998558d20d5c1208b36895e99e157cf91e81df8b2",
+      "files": 1,
+      "nodes": 3,
+      "calls": 1,
+      "archives": [
+        {
+          "codec": "gzip",
+          "bytes": 738,
+          "sha256": "9bc7f0056fb6bae4684c10a2958948af2f50d58bfc8165a434124cca210238e0"
+        },
+        {
+          "codec": "xz",
+          "bytes": 840,
+          "sha256": "c786be87d7c747b74800bf936232926801d55bdf214b1dc998fd17d225792b66"
+        }
+      ],
+      "incremental_fresh_parity": true,
+      "passed": true
+    },
+    {
+      "path": "main.c",
+      "language": "c",
+      "fidelity": "heuristic",
+      "source": "void helper(void) {}\nvoid run(void) { helper(); }",
+      "source_sha256": "bca812bcfbbed372206ad5afa638ba100852db95efd5cd5f589475e48d9e71c0",
+      "files": 1,
+      "nodes": 3,
+      "calls": 1,
+      "archives": [
+        {
+          "codec": "gzip",
+          "bytes": 738,
+          "sha256": "c6817430a0724ddd666e24b52999bc97f1625e198541efd2f770e96dbb913504"
+        },
+        {
+          "codec": "xz",
+          "bytes": 836,
+          "sha256": "5bff013fc7f2500c4bff6cc7e0984c2cf48a7d1eb8664ba552e73d35e4390e76"
+        }
+      ],
+      "incremental_fresh_parity": true,
+      "passed": true
+    },
+    {
+      "path": "main.cpp",
+      "language": "cpp",
+      "fidelity": "heuristic",
+      "source": "void helper() {}\nvoid run() { helper(); }",
+      "source_sha256": "4e15c3044d5ae95550555cb8ed68d02717db01c46c8f727e8bafdb9202e1f2c6",
+      "files": 1,
+      "nodes": 3,
+      "calls": 1,
+      "archives": [
+        {
+          "codec": "gzip",
+          "bytes": 740,
+          "sha256": "a3d283e67e69c0b35db6777c0c1b0a0da139aef3af06922c358493756dc8b45b"
+        },
+        {
+          "codec": "xz",
+          "bytes": 840,
+          "sha256": "9f020eb0d7ac764362085f0d5e5a240fd72892352662c7d52c49a0ca58415fd7"
+        }
+      ],
+      "incremental_fresh_parity": true,
+      "passed": true
+    },
+    {
+      "path": "main.cs",
+      "language": "csharp",
+      "fidelity": "heuristic",
+      "source": "static void helper() {}\nstatic void run() { helper(); }",
+      "source_sha256": "52d2813b73d098c7f67aa76a672809a4e86e4f45ec67bf63ba0a609940d345f4",
+      "files": 1,
+      "nodes": 3,
+      "calls": 1,
+      "archives": [
+        {
+          "codec": "gzip",
+          "bytes": 745,
+          "sha256": "6cdd6792819aab81dc43865e9d2d6cbb638f722222e2d8664b0b6aac74b4f608"
+        },
+        {
+          "codec": "xz",
+          "bytes": 844,
+          "sha256": "3508c85cb3de876bad204bf809c580b0e289ed6c7f7698cdc6ffccd38df69f59"
+        }
+      ],
+      "incremental_fresh_parity": true,
+      "passed": true
+    },
+    {
+      "path": "main.php",
+      "language": "php",
+      "fidelity": "heuristic",
+      "source": "<?php\nfunction helper() {}\nfunction run() { helper(); }",
+      "source_sha256": "56032f501d7c36b2c9d496d2bad8f445697ed884533d7e53a5c1cc2dd578f106",
+      "files": 1,
+      "nodes": 3,
+      "calls": 1,
+      "archives": [
+        {
+          "codec": "gzip",
+          "bytes": 741,
+          "sha256": "2133d89339a75df37ab3fe7537a8ffc39a43fae2c562b387968bc97a72a1c622"
+        },
+        {
+          "codec": "xz",
+          "bytes": 840,
+          "sha256": "7c0bf1c351c25a0265fbe56e301249c5b3577282de4f688609b0d2abca02e278"
+        }
+      ],
+      "incremental_fresh_parity": true,
+      "passed": true
+    },
+    {
+      "path": "main.swift",
+      "language": "swift",
+      "fidelity": "heuristic",
+      "source": "func helper() {}\nfunc run() { helper() }",
+      "source_sha256": "8611baad2bc146ff8f7e446af38a3da29a14ae8129aab5ca4add1e82d87f2b09",
+      "files": 1,
+      "nodes": 3,
+      "calls": 1,
+      "archives": [
+        {
+          "codec": "gzip",
+          "bytes": 736,
+          "sha256": "6696569eec6c9821b2bc3d9459b05bd25a187c76acabff7a8d95d7ca5241a31b"
+        },
+        {
+          "codec": "xz",
+          "bytes": 836,
+          "sha256": "bb9d7ef3382b88a44235abd44d300e275b5c5aacdc0d78ebf7e7c1994faa3acf"
+        }
+      ],
+      "incremental_fresh_parity": true,
+      "passed": true
+    },
+    {
+      "path": "main.dart",
+      "language": "dart",
+      "fidelity": "heuristic",
+      "source": "void helper() {}\nvoid run() { helper(); }",
+      "source_sha256": "4e15c3044d5ae95550555cb8ed68d02717db01c46c8f727e8bafdb9202e1f2c6",
+      "files": 1,
+      "nodes": 3,
+      "calls": 1,
+      "archives": [
+        {
+          "codec": "gzip",
+          "bytes": 741,
+          "sha256": "69d70a9caeb94e6f85566ba8d9c544272a8316f5915da4105e3e7f28d54d8c63"
+        },
+        {
+          "codec": "xz",
+          "bytes": 840,
+          "sha256": "77211c57a5889475a0967251494b3b9e89bd1f21caba724f35e956f324c90385"
+        }
+      ],
+      "incremental_fresh_parity": true,
+      "passed": true
+    },
+    {
+      "path": "literal.jsx",
+      "language": "javascript",
+      "fidelity": "heuristic",
+      "source": "function helper() {}\nfunction run() { return <div>helper() function fake()</div>; }",
+      "source_sha256": "eba956e9928a22808997c4a15d290d16eb89ff67f2b573e910575f0d4863d604",
+      "files": 1,
+      "nodes": 3,
+      "calls": 0,
+      "archives": [
+        {
+          "codec": "gzip",
+          "bytes": 677,
+          "sha256": "bfe0380d0d6fd62502abf7dcceb36b68613fecc6e2a5e0ce2e8376a165005190"
+        },
+        {
+          "codec": "xz",
+          "bytes": 776,
+          "sha256": "7d6b039c0b840ccd2f3a3fd2d56e4823ccc3fe7c4724d235d03a1d7263aa7c7d"
+        }
+      ],
+      "incremental_fresh_parity": true,
+      "passed": true
+    },
+    {
+      "path": "literal.tsx",
+      "language": "typescript",
+      "fidelity": "heuristic",
+      "source": "function helper() {}\nfunction run() { return <div>helper() function fake()</div>; }",
+      "source_sha256": "eba956e9928a22808997c4a15d290d16eb89ff67f2b573e910575f0d4863d604",
+      "files": 1,
+      "nodes": 3,
+      "calls": 0,
+      "archives": [
+        {
+          "codec": "gzip",
+          "bytes": 674,
+          "sha256": "c286b0c46953e9269e183c2dc56a865d3bb493b26cf61f9681e0592770aad87b"
+        },
+        {
+          "codec": "xz",
+          "bytes": 776,
+          "sha256": "73dd5f5e1fd81ed61fe4002dee34e1c98067aa0305e33a502dd63e27c2be4dd2"
+        }
+      ],
+      "incremental_fresh_parity": true,
+      "passed": true
+    },
+    {
+      "path": "generic.tsx",
+      "language": "typescript",
+      "fidelity": "heuristic",
+      "source": "function helper() {}\nconst id = <T extends Foo>(value: T) => helper() || \"</T>\";\nfunction run() { helper(); }",
+      "source_sha256": "2079b9015f8b88b5bdf80e881c844dec4445afb0c1a78dc68f5b501d33eb43a3",
+      "files": 1,
+      "nodes": 3,
+      "calls": 2,
+      "archives": [
+        {
+          "codec": "gzip",
+          "bytes": 796,
+          "sha256": "2a1aad97480855b91a2e0bab68f624f6ec14aa33b5d528ebecfa9ade9b21348f"
+        },
+        {
+          "codec": "xz",
+          "bytes": 892,
+          "sha256": "0a0ef7967813bb11d46ac56855bece8eedc23a16ba8bdb4fac0b2537463f86ec"
+        }
+      ],
+      "incremental_fresh_parity": true,
+      "passed": true
+    },
+    {
+      "path": "return-type.tsx",
+      "language": "typescript",
+      "fidelity": "heuristic",
+      "source": "function helper() {}\nconst id = <T extends object>(value: T): unknown => helper() || \"</T>\";\nfunction run() { helper(); }",
+      "source_sha256": "76a8be09f49f6d738ea6374a6ef52e55b7c755c8e8591e33ebce51705b15d6d7",
+      "files": 1,
+      "nodes": 3,
+      "calls": 2,
+      "archives": [
+        {
+          "codec": "gzip",
+          "bytes": 799,
+          "sha256": "cd803e4a7396c36b056e25453f1ea6ffc6ae56ec5bd25989841e3d347742bf2a"
+        },
+        {
+          "codec": "xz",
+          "bytes": 892,
+          "sha256": "2cba9b90f68b1e6b28517efe8a3eea18928cd76e550715b7ec05906999c12d2c"
+        }
+      ],
+      "incremental_fresh_parity": true,
+      "passed": true
+    },
+    {
+      "path": "regex.tsx",
+      "language": "typescript",
+      "fidelity": "heuristic",
+      "source": "function helper() {}\nfunction run() { return <div>{true && /}/.test(value) ? helper() : null}helper()</div>; }",
+      "source_sha256": "d34fa8d7c102499fc22618b3484a83712e3224f2730d038a74ad88941b54a26a",
+      "files": 1,
+      "nodes": 3,
+      "calls": 1,
+      "archives": [
+        {
+          "codec": "gzip",
+          "bytes": 854,
+          "sha256": "a2eb73630f5d555f309fb157f1af6c7107554a70f68a861c936e095afd5f98a7"
+        },
+        {
+          "codec": "xz",
+          "bytes": 952,
+          "sha256": "9b4084667f8283a8b52ec21e538467e14749fc1117b1476fab87957fb19ba6d6"
+        }
+      ],
+      "incremental_fresh_parity": true,
+      "passed": true
+    },
+    {
+      "path": "notes.unknown",
+      "language": "text",
+      "fidelity": "text",
+      "source": "function fake()\nhelper() is documentation, not executable source.\n",
+      "source_sha256": "13b8c8402b3a75252fc07b1f74341b3ef3db25368b9048a95f3da51f7804323d",
+      "files": 1,
+      "nodes": 1,
+      "calls": 0,
+      "archives": [
+        {
+          "codec": "gzip",
+          "bytes": 512,
+          "sha256": "c3a4995276a9f77d626c1b9b7294fab00e8100d0f961aa145a6bacf8e82501d9"
+        },
+        {
+          "codec": "xz",
+          "bytes": 616,
+          "sha256": "be92d7cb2be4b6a1eed222c0cf6050eee9873a9b9926b25fd43e1185230d3298"
+        }
+      ],
+      "incremental_fresh_parity": true,
+      "passed": true
+    }
+  ]
+}

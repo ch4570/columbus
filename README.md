@@ -4,7 +4,7 @@
 
 **Navigate your codebase. Bring back the context you need.**
 
-[한국어](README.ko.md) · [Download 1.0.0](https://github.com/ch4570/columbus/releases/tag/v1.0.0) · [Benchmarks](docs/benchmarks/README.md) · [Installation](INSTALL.md) · [Validation](VALIDATION.md)
+[한국어](README.ko.md) · [Download 1.1.0](https://github.com/ch4570/columbus/releases/tag/v1.1.0) · [Benchmarks](docs/benchmarks/README.md) · [Installation](INSTALL.md) · [Validation](VALIDATION.md)
 
 [Real spring-core evaluation: three navigation fixes, measured indexing costs, and unresolved graph limits.](evals/spring-core/README.md)
 
@@ -14,16 +14,18 @@ Columbus gives coding agents a local map of a repository. Find an entry point, f
 
 No LLM or API key is needed to index a repository. Columbus does not build or execute the project. Python, Java, and Kotlin use ASTs; 43 profiles use declaration heuristics; other UTF-8 text stays searchable as files. [Language coverage](docs/languages.md).
 
-Source development now includes parent-first AST JSONL trees (`columbus tree --label NAME`), portable agent-skill installation, and explicit pre-commit refresh integration. [AST processing and repository workflow](docs/portable-ast-workflow.md). These additions require a revision newer than the v1.0.0 release assets.
+Columbus 1.1 includes parent-first AST JSONL trees (`columbus tree --label NAME`), portable agent-skill installation, and explicit pre-commit refresh integration. [AST processing and repository workflow](docs/portable-ast-workflow.md).
 
-Development builds can also keep a complete compressed graph in Git and query stored relationships without SQLite or project source. [Versioned graph workflow](docs/portable-graph-workflow.md). This requires the newer pinned source version in that guide, not the v1.0.0 download above.
+Keep a complete gzip/XZ graph in Git and query stored relationships without SQLite or project source. With a matching checkout, read bounded declaration source verified against the archive's hashes. [Versioned graph workflow](docs/portable-graph-workflow.md).
+
+The ordinary distribution uses upstream Java grammar `0.23.5`; the experimental annotation-parser candidate `0.23.5+columbus.1` remains separate. [Release scope and compatibility](docs/releases/1.1.0.md).
 
 ## Set sail in three commands
 
 Requires **Python 3.11+** and [uv](https://docs.astral.sh/uv/getting-started/installation/). Run the last two commands inside the project you want to explore.
 
 ```sh
-uv tool install https://github.com/ch4570/columbus/releases/download/v1.0.0/columbus-1.0.0-py3-none-any.whl
+uv tool install https://github.com/ch4570/columbus/releases/download/v1.1.0/columbus-1.1.0-py3-none-any.whl
 columbus explore
 columbus explore checkout
 ```
@@ -38,11 +40,11 @@ columbus explore checkout
 Download the standalone installer, then run it:
 
 ```sh
-curl -fL https://github.com/ch4570/columbus/releases/download/v1.0.0/get-columbus.py -o get-columbus.py
+curl -fL https://github.com/ch4570/columbus/releases/download/v1.1.0/get-columbus.py -o get-columbus.py
 python3 get-columbus.py
 ```
 
-On Windows, download [get-columbus.py](https://github.com/ch4570/columbus/releases/download/v1.0.0/get-columbus.py) and run `py -3 get-columbus.py`. The installer verifies the wheel's SHA-256, creates a dedicated user environment, checks its health, and prints the command location. It preserves unrelated installations and shell configuration. [Offline installation and troubleshooting](INSTALL.md).
+On Windows, download [get-columbus.py](https://github.com/ch4570/columbus/releases/download/v1.1.0/get-columbus.py) and run `py -3 get-columbus.py`. The installer verifies the wheel's SHA-256, creates a dedicated user environment, checks its health, and prints the command location. It preserves unrelated installations and shell configuration. [Offline installation and troubleshooting](INSTALL.md).
 
 </details>
 
@@ -92,6 +94,8 @@ then run the relevant tests and synchronize the index.
 ## Benchmarks, with the rough seas included
 
 **Smaller tool responses are measurable. Lower model-token usage is a separate question.** The graphs are generated from recorded JSON; their data and plotting script ship with the source release.
+
+The [eleven recent model comparisons](evals/model-usage-overview/REPORT.md) contain no pair meeting the unchanged quality-preserving total-input/output reduction gate. Columbus 1.1 does not establish actual model-token savings. The charts below retain their historical engine versions and measurements.
 
 ### Columbus 1.0: response delivery
 

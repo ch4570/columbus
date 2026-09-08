@@ -4,7 +4,7 @@
 
 **코드의 지도를 펼치고, 필요한 맥락만 가져옵니다.**
 
-[English](README.md) · [1.0.0 다운로드](https://github.com/ch4570/columbus/releases/tag/v1.0.0) · [벤치마크](docs/benchmarks/README.md) · [설치](INSTALL.md) · [검증 기록](VALIDATION.md)
+[English](README.md) · [1.1.0 다운로드](https://github.com/ch4570/columbus/releases/tag/v1.1.0) · [벤치마크](docs/benchmarks/README.md) · [설치](INSTALL.md) · [검증 기록](VALIDATION.md)
 
 [실제 spring-core 검증: 탐색 결함 3개 수정, 색인 비용과 미해결 그래프 한계.](evals/spring-core/README.md)
 
@@ -14,16 +14,18 @@ Columbus는 코딩 에이전트가 저장소를 탐색하는 로컬 코드 지�
 
 색인에 LLM이나 API 키가 필요하지 않으며 대상 프로젝트를 빌드하거나 실행하지 않습니다. Python·Java·Kotlin은 AST, 43개 프로필은 선언 추출 휴리스틱을 사용합니다. 나머지 UTF-8 텍스트도 파일 단위로 검색합니다. 언어 감지와 분석 정확도는 다릅니다. [지원 범위](docs/languages.md).
 
-개발 소스에는 부모 관계를 보존하는 AST JSONL 트리(`columbus tree --label NAME`), 다른 레포에 설치하는 에이전트 스킬, pre-commit 갱신 기능이 추가되어 있습니다. [AST 처리·레포 설치·훅 사용법](docs/portable-ast-workflow.md). 이 기능은 기존 v1.0.0 배포 파일보다 최신 소스가 필요합니다.
+Columbus 1.1에는 부모 관계를 보존하는 AST JSONL 트리(`columbus tree --label NAME`), 다른 레포에 설치하는 에이전트 스킬, pre-commit 갱신 기능이 포함되어 있습니다. [AST 처리·레포 설치·훅 사용법](docs/portable-ast-workflow.md).
 
-개발 버전에서는 압축 그래프를 Git에 보관하고 원본 소스·SQLite 없이 저장된 관계를 조회할 수 있습니다. [레포에 그래프 보관하기](docs/portable-graph-workflow.md). 위 v1.0.0 다운로드가 아니라 해당 가이드에 고정한 최신 소스 버전이 필요합니다.
+gzip/XZ 압축 그래프를 Git에 보관하고 원본 소스·SQLite 없이 저장된 관계를 조회할 수 있습니다. 같은 소스 체크아웃이 있으면 그래프의 해시를 검증해 필요한 선언 본문도 제한된 크기로 읽습니다. [레포에 그래프 보관하기](docs/portable-graph-workflow.md).
+
+일반 배포는 upstream Java 문법 `0.23.5`를 사용합니다. 애너테이션 파싱을 수정한 실험용 후보 `0.23.5+columbus.1`은 별도입니다. [릴리스 범위와 호환성](docs/releases/1.1.0.md).
 
 ## 세 명령으로 출발하기
 
 **Python 3.11 이상**과 [uv](https://docs.astral.sh/uv/getting-started/installation/)가 필요합니다. 설치한 뒤 탐색할 프로젝트 디렉터리에서 실행하세요.
 
 ```sh
-uv tool install https://github.com/ch4570/columbus/releases/download/v1.0.0/columbus-1.0.0-py3-none-any.whl
+uv tool install https://github.com/ch4570/columbus/releases/download/v1.1.0/columbus-1.1.0-py3-none-any.whl
 columbus explore
 columbus explore checkout
 ```
@@ -38,11 +40,11 @@ columbus explore checkout
 설치기를 파일로 내려받고 실행합니다.
 
 ```sh
-curl -fL https://github.com/ch4570/columbus/releases/download/v1.0.0/get-columbus.py -o get-columbus.py
+curl -fL https://github.com/ch4570/columbus/releases/download/v1.1.0/get-columbus.py -o get-columbus.py
 python3 get-columbus.py
 ```
 
-Windows에서는 [get-columbus.py](https://github.com/ch4570/columbus/releases/download/v1.0.0/get-columbus.py)를 내려받아 `py -3 get-columbus.py`로 실행하세요. 설치기가 wheel 체크섬을 확인하고 사용자 전용 환경을 만든 뒤 명령 위치를 안내합니다. 다른 프로그램의 설치와 셸 설정 파일은 보존합니다. [오프라인 설치·문제 해결](INSTALL.md).
+Windows에서는 [get-columbus.py](https://github.com/ch4570/columbus/releases/download/v1.1.0/get-columbus.py)를 내려받아 `py -3 get-columbus.py`로 실행하세요. 설치기가 wheel 체크섬을 확인하고 사용자 전용 환경을 만든 뒤 명령 위치를 안내합니다. 다른 프로그램의 설치와 셸 설정 파일은 보존합니다. [오프라인 설치·문제 해결](INSTALL.md).
 
 </details>
 
@@ -90,6 +92,8 @@ map을 사용해줘. 이번 작업의 소스 조회에는 같은 세션을 쓰�
 ## 좋은 결과와 회귀를 함께 보여주는 벤치마크
 
 **도구 응답이 작아지는 것과 실제 모델 토큰이 줄어드는 것은 다른 측정입니다.** 그래프는 기록한 JSON에서 생성하며, 데이터와 생성 스크립트를 소스 릴리스에 포함합니다.
+
+[최근 모델 비교 11쌍](evals/model-usage-overview/REPORT.md) 중 기존 품질을 유지하면서 전체 입력·출력을 줄이는 합격 조건을 충족한 쌍은 없습니다. Columbus 1.1의 실제 모델 토큰 절감을 주장하지 않습니다. 아래 그래프는 당시 엔진 버전과 측정값을 그대로 보여줍니다.
 
 ### Columbus 1.0 응답량
 

@@ -25,13 +25,236 @@ CONTROL_WORDS = {"if", "for", "while", "switch", "catch", "with", "match", "when
                  "synchronized", "foreach", "using", "lock", "checked", "unchecked", "delete"}
 
 
-def mask_source(source: str, language: str) -> tuple[str, list[dict]]:
+def _jsx_start(source: str, offset: int) -> bool:
+    cursor = offset - 1
+    while cursor >= 0 and source[cursor].isspace():
+        cursor -= 1
+    if cursor < 0 or source[cursor] in '=(:,![{;?&|>+-*/%^~':
+        return True
+    end = cursor + 1
+    while cursor >= 0 and (source[cursor].isalnum() or source[cursor] in '_$'):
+        cursor -= 1
+    return source[cursor + 1:end] in {'return', 'yield', 'case', 'throw'}
+
+
+def _generic_arrow_start(source: str, start: int) -> bool:
+    """Disambiguate constrained TSX arrows before looking for JSX close tags."""
+    if not re.match(r'<' + IDENT + r'\s+(?:extends\b)', source[start:]):
+        return False
+
+    def opaque_end(cursor):
+        if source.startswith(('//', '/*'), cursor):
+            block = source.startswith('/*', cursor)
+            stop = source.find('*/' if block else '\n', cursor + 2)
+            return len(source) if stop < 0 else stop + (2 if block else 1)
+        if source[cursor] in '\"\'`':
+            quote = source[cursor]
+            cursor += 1
+            while cursor < len(source):
+                if source[cursor] == '\\':
+                    cursor += 2
+                elif source[cursor] == quote:
+                    return cursor + 1
+                else:
+                    cursor += 1
+            return len(source)
+        return None
+
+    def balanced_end(cursor, opening, closing):
+        if cursor >= len(source) or source[cursor] != opening:
+            return None
+        nesting = 1
+        cursor += 1
+        while cursor < len(source):
+            opaque = opaque_end(cursor)
+            if opaque is not None:
+                cursor = opaque
+                continue
+            if source[cursor] == opening:
+                nesting += 1
+            elif source[cursor] == closing and not (closing == '>' and source[cursor - 1] == '='):
+                nesting -= 1
+                if not nesting:
+                    return cursor + 1
+            cursor += 1
+        return None
+
+    cursor = balanced_end(start, '<', '>')
+    if cursor is None:
+        return False
+    while cursor < len(source) and source[cursor].isspace():
+        cursor += 1
+    cursor = balanced_end(cursor, '(', ')')
+    if cursor is None:
+        return False
+    while cursor < len(source) and source[cursor].isspace():
+        cursor += 1
+    if source.startswith(':', cursor):
+        # Return annotations can contain objects, tuples, generics and arrow
+        # types. They are code even when a later string looks like </T>.
+        cursor += 1
+        seen_type = False
+        while cursor < len(source):
+            opaque = opaque_end(cursor)
+            if opaque is not None:
+                seen_type |= source[cursor] in '\"\'`'
+                cursor = opaque
+                continue
+            if source.startswith('=>', cursor):
+                return seen_type
+            token = source[cursor]
+            if token in '({[<':
+                closing = {'(': ')', '{': '}', '[': ']', '<': '>'}[token]
+                cursor = balanced_end(cursor, token, closing)
+                if cursor is None:
+                    return False
+                seen_type = True
+                continue
+            if token in ')}]>;':
+                return False
+            seen_type |= not token.isspace()
+            cursor += 1
+        return False
+    return source.startswith('=>', cursor)
+
+
+def _jsx_regions(source: str, start: int, depth: int = 0) -> tuple[int, list[tuple[int, int]]] | None:
+    """Recognize a complete JSX element and return only its non-code spans.
+
+    Requiring a matching close (or a self-closing tag) avoids treating ordinary
+    TypeScript generic headers and comparison operators as JSX. Braced values
+    retain their JavaScript, including nested JSX values; this is still a
+    lexical mask, not JSX name resolution or a syntax validator.
+    """
+    if depth > 128 or _generic_arrow_start(source, start):
+        return None
+    size = len(source)
+    regions = []
+
+    def expression(cursor):
+        nesting = 1
+        cursor += 1
+        while cursor < size:
+            if source.startswith(('//', '/*'), cursor):
+                block = source.startswith('/*', cursor)
+                stop = source.find('*/' if block else '\n', cursor + 2)
+                if stop < 0:
+                    return None
+                cursor = stop + (2 if block else 1)
+                continue
+            character = source[cursor]
+            if character in '\"\'`':
+                quote = character
+                cursor += 1
+                while cursor < size:
+                    if source[cursor] == '\\':
+                        cursor += 2
+                    elif source[cursor] == quote:
+                        cursor += 1
+                        break
+                    else:
+                        cursor += 1
+                continue
+            if character == '/':
+                prefix = source[:cursor].rstrip()
+                if not prefix or prefix[-1] in '=(:,![{;?&|' or re.search(r'\b(?:return|yield|case)\s*$', prefix):
+                    regex_cursor, in_class = cursor + 1, False
+                    while regex_cursor < size and source[regex_cursor] != '\n':
+                        token = source[regex_cursor]
+                        if token == '\\':
+                            regex_cursor += 2
+                            continue
+                        if token == '[':
+                            in_class = True
+                        elif token == ']':
+                            in_class = False
+                        elif token == '/' and not in_class:
+                            cursor = regex_cursor + 1
+                            break
+                        regex_cursor += 1
+                    else:
+                        cursor += 1
+                    continue
+            if character == '<' and _jsx_start(source, cursor):
+                nested = _jsx_regions(source, cursor, depth + 1)
+                if nested:
+                    cursor, spans = nested
+                    regions.extend(spans)
+                    continue
+            if character == '{':
+                nesting += 1
+            elif character == '}':
+                nesting -= 1
+                if not nesting:
+                    return cursor + 1
+            cursor += 1
+        return None
+
+    opening = re.match(r'<(?P<name>[A-Za-z_$][\w$.:\-]*)(?=[\s/>])|<(?=>)', source[start:])
+    if not opening:
+        return None
+    name = opening.group('name') or ''
+    cursor, chunk = start + opening.end(), start
+    while cursor < size:
+        character = source[cursor]
+        if character in '\"\'':
+            stop = source.find(character, cursor + 1)
+            if stop < 0:
+                return None
+            cursor = stop + 1
+        elif character == '{':
+            regions.append((chunk, cursor))
+            stop = expression(cursor)
+            if stop is None:
+                return None
+            cursor = chunk = stop
+        elif source.startswith('/>', cursor):
+            regions.append((chunk, cursor + 2))
+            return cursor + 2, regions
+        elif character == '>':
+            cursor += 1
+            regions.append((chunk, cursor))
+            break
+        else:
+            cursor += 1
+    else:
+        return None
+    chunk = cursor
+    while cursor < size:
+        if source.startswith('</', cursor):
+            closing = re.match(r'</' + re.escape(name) + r'\s*>', source[cursor:])
+            if not closing:
+                return None
+            cursor += closing.end()
+            regions.append((chunk, cursor))
+            return cursor, regions
+        if source[cursor] == '<':
+            regions.append((chunk, cursor))
+            nested = _jsx_regions(source, cursor, depth + 1)
+            if not nested:
+                return None
+            cursor, spans = nested
+            regions.extend(spans)
+            chunk = cursor
+        elif source[cursor] == '{':
+            regions.append((chunk, cursor))
+            stop = expression(cursor)
+            if stop is None:
+                return None
+            cursor = chunk = stop
+        else:
+            cursor += 1
+    return None
+
+
+def mask_source(source: str, language: str, *, jsx: bool = True) -> tuple[str, list[dict]]:
     """Blank comments and literal bodies, preserving offsets and line numbers.
 
     Interpolated string expressions are deliberately omitted too: resolving
     them without a language grammar would manufacture misleading call facts.
     """
     chars, literals, size, i = list(source), [], len(source), 0
+    jsx_regions = {}
 
     def blank(start, end):
         for offset in range(start, end):
@@ -39,6 +262,16 @@ def mask_source(source: str, language: str) -> tuple[str, list[dict]]:
                 chars[offset] = " "
 
     while i < size:
+        if i in jsx_regions:
+            end = jsx_regions[i]
+            blank(i, end)
+            i = end
+            continue
+        if jsx and source[i] == '<' and language in {'javascript', 'typescript'} and _jsx_start(source, i):
+            element = _jsx_regions(source, i)
+            if element:
+                jsx_regions.update((start, end) for start, end in element[1] if start < end)
+                continue
         start, end, literal = i, None, False
         if source.startswith("/*", i) and language not in {"ruby", "shell", "lua", "haskell"}:
             # Nested block comments occur in Rust, Swift, Kotlin and several DSLs.
@@ -116,7 +349,7 @@ def mask_source(source: str, language: str) -> tuple[str, list[dict]]:
             # A regex literal can contain apparent declarations/calls. Recognize
             # expression-start positions; division remains ordinary source.
             prefix = source[:i].rstrip()
-            if not prefix or prefix[-1] in "=(:,![{;?" or re.search(r"\b(?:return|yield|case)\s*$", prefix):
+            if not prefix or prefix[-1] in "=(:,![{;?&|" or re.search(r"\b(?:return|yield|case)\s*$", prefix):
                 cursor, in_class = i + 1, False
                 while cursor < size and source[cursor] != "\n":
                     if source[cursor] == "\\":
@@ -226,7 +459,10 @@ def parse_polyglot(path: str, source: str, module: str, language: str, config: d
         result["analysis_note"] = "Text module only; declaration and call semantics are unavailable."
         return result
     result["analysis_note"] = "Lexical heuristics; receiver dispatch, macros, overloads and external packages are unresolved."
-    masked, literals = mask_source(source, language)
+    # TypeScript only permits JSX in .tsx; angle assertions in .ts/.mts/.cts
+    # must remain ordinary code even if a later string resembles a close tag.
+    masked, literals = mask_source(source, language,
+                                   jsx=language != 'typescript' or PurePosixPath(path).suffix.lower() == '.tsx')
     braces = _braces(masked)
     candidates, seen = [], set()
     for kind, pattern in _patterns(language, config):

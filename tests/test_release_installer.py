@@ -351,7 +351,7 @@ class ReleaseInstallerTests(unittest.TestCase):
         with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit) as stopped:
             installer.main(["--offline"])
         self.assertEqual(stopped.exception.code, 2)
-        args = self.arguments()
+        args = self.arguments(installer.DEFAULT_VERSION)
         output = io.StringIO()
         with patch.object(installer, "invoke", side_effect=self.fake_invoke), contextlib.redirect_stdout(output):
             result = installer.main(["--prefix", str(self.prefix), "--bin-dir", str(self.bin_dir),

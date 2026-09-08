@@ -2,7 +2,13 @@
 
 This file describes source and bundle versions. A version entry does not imply publication to a package registry or a GitHub release.
 
-## Unreleased
+## 1.1.0
+
+- Export complete gzip/XZ graph archives for version control and query saved declarations, relationships and callers without a consumer SQLite index. Read bounded declaration source against archived hashes when the matching checkout is available.
+- Compress parse facts and search document bodies in schema 4, reuse unchanged facts, and preserve transactional graph/search refresh. Schema 2/3 indexes upgrade on synchronization; older engines require separate database paths.
+- Correct supported Java namespace, access, argument and enhanced-for/getter resolution, including cross-package return types and `this` arguments. Keep unsupported references unresolved and Python receiver hints separately labelled as opt-in retrieval candidates.
+- Extend the agent skill with bounded archive queries, verified source pagination and contiguous citation guidance.
+- Prevent JSX/TSX literal element text from creating false calls or declarations while retaining supported embedded code expressions.
 
 - Expose parent-first AST declaration trees as JSONL with labels, source hashes/spans, parse status and bounded node counts.
 - Support an installable `columbus-sync` pre-commit hook and opt-in native Git hooks, preserving existing hook managers and staged source.
@@ -13,6 +19,8 @@ This file describes source and bundle versions. A version entry does not imply p
 - Include Java annotation interfaces and their elements in declaration search and import graphs.
 - Preserve exact symbol IDs in search and bounded context so long Java paths cannot displace the requested method.
 - Add a reproducible [spring-core field evaluation](evals/spring-core/README.md), with raw timings, source checks, remaining graph gaps, and storage/response costs.
+
+The ordinary distribution retains upstream `tree-sitter-java==0.23.5`. The experimental `0.23.5+columbus.1` annotation-parser candidate and its shared ZIP are separately tested artifacts, not the default release dependency. Actual model-token savings remain unproven: [eleven recent comparisons](evals/model-usage-overview/REPORT.md) contain no pair meeting the unchanged quality-preserving total-input/output reduction gate. See [release notes](docs/releases/1.1.0.md) for compatibility and remaining limits.
 
 ## 1.0.0 — Columbus · 2026-09-07
 

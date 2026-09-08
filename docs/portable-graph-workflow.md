@@ -1,11 +1,11 @@
 # Keep a graph in Git and explore it without SQLite
 
-This workflow requires development revision `c27137e11c61b5d18c4698ece6c6eca0d1281654` or newer. The published v1.0.0 assets do not include these archive commands. Install the pinned source into an isolated environment using Python 3.11+:
+This workflow requires Columbus 1.1.0 or newer. Install the pinned wheel into an isolated environment using Python 3.11+:
 
 ```sh
 python -m venv .venv
 # Activate the environment, then:
-python -m pip install "git+https://github.com/ch4570/columbus@c27137e11c61b5d18c4698ece6c6eca0d1281654"
+python -m pip install https://github.com/ch4570/columbus/releases/download/v1.1.0/columbus-1.1.0-py3-none-any.whl
 ```
 
 Run the following inside the project being indexed. Add `.columbus/` to its `.gitignore`; SQLite is a local cache. Keep the compressed archive at a versioned path outside that ignored directory:
@@ -33,12 +33,21 @@ Use `out` for outgoing edges or `both` for either direction. Omit `--kinds` to i
 
 These commands do not create SQLite or read project source. They return source locations/hashes, declarations and saved edges. `semantic_complete=false` and unresolved counts remain visible. An absent saved edge does not prove there is no dependency, and archive freshness does not verify a receiving checkout. For changes to code, use the matching source checkout and normal `explore`/`symbol` queries to verify current bytes. Do not load the full decompressed JSONL into model context.
 
+For a known declaration, `archive-callers` combines unique-name resolution and incoming saved calls. `archive-source` reads its body from a matching checkout and rejects a stale file:
+
+```sh
+columbus archive-callers Class.method --input graph-v1.jsonl.gz --format text --budget-bytes 12000
+columbus archive-source Class.method --input graph-v1.jsonl.gz --repo /path/to/matching-checkout --format text --budget-bytes 12000
+```
+
+Both accept exact IDs or unique declaration names; use `archive-search` when the owner is unknown or the name is ambiguous. Follow the returned `next_offset` with otherwise unchanged arguments. For `archive-source`, the offset counts lines within the declaration; for caller queries it counts edges. Source reads do not build SQLite or add source bodies to the graph. [Complete query contract](../skills/columbus/references/archive.md).
+
 The agent skill includes this route in its archive reference. Install the managed skill with `columbus init --repo /path/to/project`; tell the agent where the versioned graph is located. This does not automatically force graph use or establish model-token savings.
 
 The [executable workflow probe](../evals/archive-workflow/verify.py) creates a small Git repository, tracks the archive but excludes SQLite, deletes the producer, and verifies incoming calls using only the moved graph. [Receipts and limits](../evals/archive-workflow/REPORT.md).
 
 ## Optional XZ storage
 
-XZ requires source revision `69eb8d56ccd8ab7b8e5e133a8d2158819fafa12f` or a later descendant; the older pinned revision in the basic example supports gzip only. With an XZ-capable installation, use `archive --output codegraph/graph-v1.jsonl.xz --compression xz` and pass that file to the same archive-search/archive-neighbors commands. Current readers detect the codec from its contents. Older readers cannot open XZ. The `.xz` artifact is excluded from source indexing and can be committed outside `.columbus/` just like gzip.
+Columbus 1.1 supports XZ alongside the gzip default. Use `archive --output codegraph/graph-v1.jsonl.xz --compression xz` and pass that file to the same archive query commands. Current readers detect the codec from its contents. Earlier development readers that support only gzip cannot open XZ; v1.0.0 has no archive commands. The `.xz` artifact is excluded from source indexing and can be committed outside `.columbus/` just like gzip.
 
 XZ preserves the same complete JSONL content and saves storage, with slower decompression. The recorded full Django example is about 8.59 MB instead of 10.73 MB; one search plus three caller pages took about 10.70 seconds instead of 7.47 seconds on one unflushed host. Keep gzip for repeated-query speed or older-reader compatibility. Use a new filename for every export; existing files are not overwritten.

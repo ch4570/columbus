@@ -2,7 +2,7 @@
 
 [Overview](README.md) · [한국어 소개](README.ko.md) · [CLI usage](docs/usage.md)
 
-**Columbus 1.0.0** is distributed through GitHub Releases. The commands below install that exact version; no PyPI package with the same name is assumed.
+**Columbus 1.1.0** is distributed through GitHub Releases. The commands below install that exact version; no PyPI package with the same name is assumed.
 
 Install a CLI once for use across repositories, or install a ZIP bundle with a dedicated runtime in one project. Neither approach requires the target project to use Python.
 
@@ -19,6 +19,8 @@ Install a CLI once for use across repositories, or install a ZIP bundle with a d
 
 The wheel contains the Python package and installable skill. The ZIP contains source, the installer, documentation, and examples. **Neither includes Python or a platform-independent set of dependency wheels.** Initial dependency installation needs a package index unless you prepare an offline wheelhouse.
 
+The ordinary v1.1.0 artifacts use upstream `tree-sitter-java==0.23.5`. The separately tested `0.23.5+columbus.1` annotation-parser candidate is experimental and is not bundled or selected by this release's default installation. Candidate CI results do not describe the ordinary artifact's annotation coverage.
+
 ## Install the CLI
 
 ### Recommended: one command with uv or pipx
@@ -26,28 +28,28 @@ The wheel contains the Python package and installable skill. The ZIP contains so
 Install the pinned GitHub release with whichever tool you already use:
 
 ```sh
-uv tool install https://github.com/ch4570/columbus/releases/download/v1.0.0/columbus-1.0.0-py3-none-any.whl
+uv tool install https://github.com/ch4570/columbus/releases/download/v1.1.0/columbus-1.1.0-py3-none-any.whl
 ```
 
 ```sh
-pipx install https://github.com/ch4570/columbus/releases/download/v1.0.0/columbus-1.0.0-py3-none-any.whl
+pipx install https://github.com/ch4570/columbus/releases/download/v1.1.0/columbus-1.1.0-py3-none-any.whl
 ```
 
 Then open your project and run `columbus explore`, or pass `--repo /absolute/path/to/project`. Use `columbus doctor` to check the installation. If the command is not on PATH, use `uv tool update-shell` or `pipx ensurepath`, then open a new terminal.
 
 ### Python only: download and run the release installer
 
-If you have Python 3.11+ but do not use uv or pipx, download [get-columbus.py from release v1.0.0](https://github.com/ch4570/columbus/releases/download/v1.0.0/get-columbus.py), review it, and run it. On macOS/Linux, these two commands download a local file and execute it:
+If you have Python 3.11+ but do not use uv or pipx, download [get-columbus.py from release v1.1.0](https://github.com/ch4570/columbus/releases/download/v1.1.0/get-columbus.py), review it, and run it. On macOS/Linux, these two commands download a local file and execute it:
 
 ```sh
-curl -fL https://github.com/ch4570/columbus/releases/download/v1.0.0/get-columbus.py -o get-columbus.py
+curl -fL https://github.com/ch4570/columbus/releases/download/v1.1.0/get-columbus.py -o get-columbus.py
 python3 get-columbus.py
 ```
 
 On Windows, use PowerShell:
 
 ```powershell
-Invoke-WebRequest https://github.com/ch4570/columbus/releases/download/v1.0.0/get-columbus.py -OutFile get-columbus.py
+Invoke-WebRequest https://github.com/ch4570/columbus/releases/download/v1.1.0/get-columbus.py -OutFile get-columbus.py
 py -3 get-columbus.py
 ```
 
@@ -66,7 +68,7 @@ For a completely offline installation, copy the release wheel, `SHA256SUMS.txt`,
 
 ```sh
 python3 get-columbus.py --offline \
-  --wheel /absolute/path/to/columbus-1.0.0-py3-none-any.whl \
+  --wheel /absolute/path/to/columbus-1.1.0-py3-none-any.whl \
   --checksum-file /absolute/path/to/SHA256SUMS.txt \
   --wheelhouse /absolute/path/to/wheels
 ```
@@ -86,9 +88,9 @@ uv tool install .
 From a reviewed wheel copied to your machine:
 
 ```sh
-pipx install /absolute/path/to/columbus-1.0.0-py3-none-any.whl
+pipx install /absolute/path/to/columbus-1.1.0-py3-none-any.whl
 # Alternative:
-uv tool install /absolute/path/to/columbus-1.0.0-py3-none-any.whl
+uv tool install /absolute/path/to/columbus-1.1.0-py3-none-any.whl
 ```
 
 After installation, use an existing project directory:
@@ -110,7 +112,7 @@ If you only have pip, use a dedicated environment. On macOS/Linux:
 
 ```sh
 python3 -m venv /absolute/path/to/columbus-env
-/absolute/path/to/columbus-env/bin/python -m pip install /absolute/path/to/columbus-1.0.0-py3-none-any.whl
+/absolute/path/to/columbus-env/bin/python -m pip install /absolute/path/to/columbus-1.1.0-py3-none-any.whl
 /absolute/path/to/columbus-env/bin/columbus doctor
 ```
 
@@ -118,7 +120,7 @@ On Windows, use PowerShell and the `Scripts` directory:
 
 ```powershell
 py -3 -m venv C:\tools\columbus-env
-C:\tools\columbus-env\Scripts\python.exe -m pip install C:\downloads\columbus-1.0.0-py3-none-any.whl
+C:\tools\columbus-env\Scripts\python.exe -m pip install C:\downloads\columbus-1.1.0-py3-none-any.whl
 C:\tools\columbus-env\Scripts\columbus.exe map --repo C:\projects\example --format text
 ```
 
@@ -149,7 +151,7 @@ Build the ZIP from a source checkout, or use a previously built archive:
 python3 scripts/build_bundle.py
 ```
 
-Extract `dist/columbus-1.0.0.zip`, open its extracted directory, and run:
+Extract `dist/columbus-1.1.0.zip`, open its extracted directory, and run:
 
 ```sh
 python3 install.py --repo /absolute/path/to/project
@@ -187,7 +189,7 @@ For a dedicated environment with pip:
 
 ```sh
 python -m pip install --no-index --find-links /absolute/path/to/wheels \
-  /absolute/path/to/columbus-1.0.0-py3-none-any.whl
+  /absolute/path/to/columbus-1.1.0-py3-none-any.whl
 ```
 
 For MCP, also download `skills/columbus/scripts/requirements-mcp.txt`; add `--mcp` to the ZIP installer or install the wheel's `[mcp]` extra. Keep the requirements files with the wheelhouse so dependency pins remain reviewable.
@@ -197,26 +199,28 @@ For MCP, also download `skills/columbus/scripts/requirements-mcp.txt`; add `--mc
 Install the optional dependency in the same environment that runs `columbus serve`:
 
 ```sh
-python -m pip install '/absolute/path/to/columbus-1.0.0-py3-none-any.whl[mcp]'
+python -m pip install '/absolute/path/to/columbus-1.1.0-py3-none-any.whl[mcp]'
 columbus sync --repo /absolute/path/to/project
 columbus serve --repo /absolute/path/to/project
 ```
 
-With pipx, use `pipx install '/absolute/path/to/columbus-1.0.0-py3-none-any.whl[mcp]'` when installing. For ZIP installation, pass `--mcp`. The server uses stdio and a saved index; it does not synchronize on each request. See [client configuration and tools](docs/agents.md#mcp).
+With pipx, use `pipx install '/absolute/path/to/columbus-1.1.0-py3-none-any.whl[mcp]'` when installing. For ZIP installation, pass `--mcp`. The server uses stdio and a saved index; it does not synchronize on each request. See [client configuration and tools](docs/agents.md#mcp).
 
 ## Updates and local files
 
 Reinstall the new wheel with your chosen tool, then run `columbus init --repo PATH` to update the installed skill. Examples for an existing installation:
 
 ```sh
-pipx install --force /absolute/path/to/columbus-1.0.0-py3-none-any.whl
+pipx install --force /absolute/path/to/columbus-1.1.0-py3-none-any.whl
 # Or, for a uv installation:
-uv tool install --force /absolute/path/to/columbus-1.0.0-py3-none-any.whl
+uv tool install --force /absolute/path/to/columbus-1.1.0-py3-none-any.whl
 ```
 
 For a ZIP installation, run the new bundle's `install.py` against the same project. Review reported conflicts rather than deleting locally edited skill files. A runtime ownership marker prevents adoption of an unrelated environment. If dependency installation fails, fix the reported issue and rerun; an interrupted package install may have partially changed the environment.
 
 The default graph cache is `.columbus/index-v1.sqlite`. Add `.columbus/` to the target project's ignore rules. The directory may also contain a dedicated runtime, receipts, and telemetry, so deleting it removes more than the graph. Columbus 1.0 uses new installation and cache paths. See the migration instructions below if you used the RepoAtlas preview.
+
+Columbus 1.1 reads schema 2/3 caches and upgrades them transactionally to compressed schema 4 on synchronization. Older engines reject schema 4; use a separate `--db` path when comparing or returning to an older engine. Migration does not automatically shrink existing SQLite files. Portable gzip/XZ graphs are separate artifacts and can be stored outside `.columbus/`. [Versioned graph workflow](docs/portable-graph-workflow.md).
 
 ## Troubleshooting
 
@@ -234,14 +238,14 @@ For a reproducible report, include `doctor`, the exact command, relevant diagnos
 
 ## Releases that require authentication
 
-If this repository or a private fork requires GitHub sign-in, direct asset URLs cannot be downloaded anonymously. Sign in to the release page and download the wheel; then run `uv tool install ./columbus-1.0.0-py3-none-any.whl` or `pipx install ./columbus-1.0.0-py3-none-any.whl`.
+If this repository or a private fork requires GitHub sign-in, direct asset URLs cannot be downloaded anonymously. Sign in to the release page and download the wheel; then run `uv tool install ./columbus-1.1.0-py3-none-any.whl` or `pipx install ./columbus-1.1.0-py3-none-any.whl`.
 
 With the GitHub CLI already authenticated, download the installer inputs together:
 
 ```sh
-gh release download v1.0.0 --repo ch4570/columbus \
-  --pattern 'columbus-1.0.0-py3-none-any.whl' --pattern SHA256SUMS.txt --pattern get-columbus.py
-python3 get-columbus.py --wheel ./columbus-1.0.0-py3-none-any.whl --checksum-file ./SHA256SUMS.txt
+gh release download v1.1.0 --repo ch4570/columbus \
+  --pattern 'columbus-1.1.0-py3-none-any.whl' --pattern SHA256SUMS.txt --pattern get-columbus.py
+python3 get-columbus.py --wheel ./columbus-1.1.0-py3-none-any.whl --checksum-file ./SHA256SUMS.txt
 ```
 
 Use `py -3` instead of `python3` on Windows. No GitHub token is stored by the installer. Dependencies still come from the public package index unless you also provide `--offline --wheelhouse PATH`.

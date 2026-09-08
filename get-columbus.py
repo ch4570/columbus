@@ -19,7 +19,7 @@ import urllib.error
 import urllib.request
 
 
-DEFAULT_VERSION = "1.0.0"
+DEFAULT_VERSION = "1.1.0"
 RELEASES = "https://github.com/ch4570/columbus/releases/download"
 OWNER = "columbus-release-installer"
 PREFIX_MARKER = ".columbus-install.json"
