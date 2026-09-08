@@ -1,0 +1,384 @@
+{
+  "scope": "Ten isolated loop cases with manually specified declaration owners; no runtime-dispatch assertion. Missing targets count as gaps, not correct resolution.",
+  "cases": [
+    {
+      "name": "explicit_array",
+      "source": "class Item { void hit() {} } class Wrong { void hit() {} Item[] values() { return new Item[0]; } } class C { void run(Item[] values) { for(Item item : values) item.hit(); } }",
+      "source_sha256": "7fe07ece7cab8a38e363fe7f713ab7737765f85f8e8ddbcf71d6970e3d1b2f34",
+      "javac_return_code": 0,
+      "javac_stderr": "",
+      "javap": "Compiled from \"C.java\"\nclass C {\n  C();\n    Code:\n       0: aload_0\n       1: invokespecial #1                  // Method java/lang/Object.\"<init>\":()V\n       4: return\n\n  void run(Item[]);\n    Code:\n       0: aload_1\n       1: astore_2\n       2: aload_2\n       3: arraylength\n       4: istore_3\n       5: iconst_0\n       6: istore        4\n       8: iload         4\n      10: iload_3\n      11: if_icmpge     31\n      14: aload_2\n      15: iload         4\n      17: aaload\n      18: astore        5\n      20: aload         5\n      22: invokevirtual #7                  // Method Item.hit:()V\n      25: iinc          4, 1\n      28: goto          8\n      31: return\n}\n",
+      "calls": [
+        {
+          "expected_static_target": "C.java::Item.hit:method()",
+          "actual": {
+            "source": "C.java::C.run:method(Item[])",
+            "scope_id": "C.java::C.run:method(Item[])::opaque:135",
+            "kind": "calls",
+            "name": "item.hit",
+            "member": "hit",
+            "receiver": "item",
+            "constructor": false,
+            "argument_count": 0,
+            "argument_types": [],
+            "argument_facts": [],
+            "expected_type": "",
+            "explicit_type_arguments": false,
+            "static_context": false,
+            "path": "C.java",
+            "line": 1,
+            "evidence": "item.hit()",
+            "resolved": false,
+            "reason": "lambda, loop, catch or anonymous scope unsupported"
+          },
+          "resolved_expected_target": false
+        }
+      ]
+    },
+    {
+      "name": "field_shadow_and_restore",
+      "source": "class Item { void hit() {} } class Wrong { void hit() {} Item[] values() { return new Item[0]; } } class C { Wrong item; void run(Item[] values) { for(Item item : values) item.hit(); item.hit(); } }",
+      "source_sha256": "a9e431b5742a90e79667515d1be51a26f29bdd8fce2bc2c2a4d7d5459222484c",
+      "javac_return_code": 0,
+      "javac_stderr": "",
+      "javap": "Compiled from \"C.java\"\nclass C {\n  Wrong item;\n\n  C();\n    Code:\n       0: aload_0\n       1: invokespecial #1                  // Method java/lang/Object.\"<init>\":()V\n       4: return\n\n  void run(Item[]);\n    Code:\n       0: aload_1\n       1: astore_2\n       2: aload_2\n       3: arraylength\n       4: istore_3\n       5: iconst_0\n       6: istore        4\n       8: iload         4\n      10: iload_3\n      11: if_icmpge     31\n      14: aload_2\n      15: iload         4\n      17: aaload\n      18: astore        5\n      20: aload         5\n      22: invokevirtual #7                  // Method Item.hit:()V\n      25: iinc          4, 1\n      28: goto          8\n      31: aload_0\n      32: getfield      #12                 // Field item:LWrong;\n      35: invokevirtual #18                 // Method Wrong.hit:()V\n      38: return\n}\n",
+      "calls": [
+        {
+          "expected_static_target": "C.java::Item.hit:method()",
+          "actual": {
+            "source": "C.java::C.run:method(Item[])",
+            "scope_id": "C.java::C.run:method(Item[])::opaque:147",
+            "kind": "calls",
+            "name": "item.hit",
+            "member": "hit",
+            "receiver": "item",
+            "constructor": false,
+            "argument_count": 0,
+            "argument_types": [],
+            "argument_facts": [],
+            "expected_type": "",
+            "explicit_type_arguments": false,
+            "static_context": false,
+            "path": "C.java",
+            "line": 1,
+            "evidence": "item.hit()",
+            "resolved": false,
+            "reason": "lambda, loop, catch or anonymous scope unsupported"
+          },
+          "resolved_expected_target": false
+        },
+        {
+          "expected_static_target": "C.java::Wrong.hit:method()",
+          "actual": {
+            "source": "C.java::C.run:method(Item[])",
+            "scope_id": "C.java::C.run:method(Item[])",
+            "kind": "calls",
+            "name": "item.hit",
+            "member": "hit",
+            "receiver": "item",
+            "constructor": false,
+            "argument_count": 0,
+            "argument_types": [],
+            "argument_facts": [],
+            "expected_type": "",
+            "explicit_type_arguments": false,
+            "static_context": false,
+            "path": "C.java",
+            "line": 1,
+            "evidence": "item.hit()",
+            "resolved": true,
+            "reason": "unique syntax candidate; runtime dispatch unverified",
+            "target": "C.java::Wrong.hit:method()",
+            "confidence": "heuristic"
+          },
+          "resolved_expected_target": true
+        }
+      ]
+    },
+    {
+      "name": "iterable_before_binding",
+      "source": "class Item { void hit() {} } class Wrong { void hit() {} Item[] values() { return new Item[0]; } } class C { Wrong item; void run() { for(Item item : item.values()) item.hit(); } }",
+      "source_sha256": "18a74ada646b5559120e71f7bb1fe99725a2437d2b8378ad5c15739480ae3d0b",
+      "javac_return_code": 0,
+      "javac_stderr": "",
+      "javap": "Compiled from \"C.java\"\nclass C {\n  Wrong item;\n\n  C();\n    Code:\n       0: aload_0\n       1: invokespecial #1                  // Method java/lang/Object.\"<init>\":()V\n       4: return\n\n  void run();\n    Code:\n       0: aload_0\n       1: getfield      #7                  // Field item:LWrong;\n       4: invokevirtual #13                 // Method Wrong.values:()[LItem;\n       7: astore_1\n       8: aload_1\n       9: arraylength\n      10: istore_2\n      11: iconst_0\n      12: istore_3\n      13: iload_3\n      14: iload_2\n      15: if_icmpge     34\n      18: aload_1\n      19: iload_3\n      20: aaload\n      21: astore        4\n      23: aload         4\n      25: invokevirtual #19                 // Method Item.hit:()V\n      28: iinc          3, 1\n      31: goto          13\n      34: return\n}\n",
+      "calls": [
+        {
+          "expected_static_target": "C.java::Item.hit:method()",
+          "actual": {
+            "source": "C.java::C.run:method()",
+            "scope_id": "C.java::C.run:method()::opaque:134",
+            "kind": "calls",
+            "name": "item.hit",
+            "member": "hit",
+            "receiver": "item",
+            "constructor": false,
+            "argument_count": 0,
+            "argument_types": [],
+            "argument_facts": [],
+            "expected_type": "",
+            "explicit_type_arguments": false,
+            "static_context": false,
+            "path": "C.java",
+            "line": 1,
+            "evidence": "item.hit()",
+            "resolved": false,
+            "reason": "lambda, loop, catch or anonymous scope unsupported"
+          },
+          "resolved_expected_target": false
+        }
+      ]
+    },
+    {
+      "name": "nested",
+      "source": "class Item { void hit() {} } class Wrong { void hit() {} Item[] values() { return new Item[0]; } } class C { void run(Item[][] values) { for(Item[] row : values) for(Item item : row) item.hit(); } }",
+      "source_sha256": "30d3b73db703ff7d8c34161ca84aa4e0d730f3580d491f0b5f6c7f006f04008b",
+      "javac_return_code": 0,
+      "javac_stderr": "",
+      "javap": "Compiled from \"C.java\"\nclass C {\n  C();\n    Code:\n       0: aload_0\n       1: invokespecial #1                  // Method java/lang/Object.\"<init>\":()V\n       4: return\n\n  void run(Item[][]);\n    Code:\n       0: aload_1\n       1: astore_2\n       2: aload_2\n       3: arraylength\n       4: istore_3\n       5: iconst_0\n       6: istore        4\n       8: iload         4\n      10: iload_3\n      11: if_icmpge     63\n      14: aload_2\n      15: iload         4\n      17: aaload\n      18: astore        5\n      20: aload         5\n      22: astore        6\n      24: aload         6\n      26: arraylength\n      27: istore        7\n      29: iconst_0\n      30: istore        8\n      32: iload         8\n      34: iload         7\n      36: if_icmpge     57\n      39: aload         6\n      41: iload         8\n      43: aaload\n      44: astore        9\n      46: aload         9\n      48: invokevirtual #7                  // Method Item.hit:()V\n      51: iinc          8, 1\n      54: goto          32\n      57: iinc          4, 1\n      60: goto          8\n      63: return\n}\n",
+      "calls": [
+        {
+          "expected_static_target": "C.java::Item.hit:method()",
+          "actual": {
+            "source": "C.java::C.run:method(Item[][])",
+            "scope_id": "C.java::C.run:method(Item[][])::opaque:137::opaque:162",
+            "kind": "calls",
+            "name": "item.hit",
+            "member": "hit",
+            "receiver": "item",
+            "constructor": false,
+            "argument_count": 0,
+            "argument_types": [],
+            "argument_facts": [],
+            "expected_type": "",
+            "explicit_type_arguments": false,
+            "static_context": false,
+            "path": "C.java",
+            "line": 1,
+            "evidence": "item.hit()",
+            "resolved": false,
+            "reason": "lambda, loop, catch or anonymous scope unsupported"
+          },
+          "resolved_expected_target": false
+        }
+      ]
+    },
+    {
+      "name": "var_inference",
+      "source": "class Item { void hit() {} } class Wrong { void hit() {} Item[] values() { return new Item[0]; } } class C { void run(Item[] values) { for(var item : values) item.hit(); } }",
+      "source_sha256": "d2910d66a4ad249684e6ba88afa090c4e527ebe73b4e56e2eb09d079cbc28908",
+      "javac_return_code": 0,
+      "javac_stderr": "",
+      "javap": "Compiled from \"C.java\"\nclass C {\n  C();\n    Code:\n       0: aload_0\n       1: invokespecial #1                  // Method java/lang/Object.\"<init>\":()V\n       4: return\n\n  void run(Item[]);\n    Code:\n       0: aload_1\n       1: astore_2\n       2: aload_2\n       3: arraylength\n       4: istore_3\n       5: iconst_0\n       6: istore        4\n       8: iload         4\n      10: iload_3\n      11: if_icmpge     31\n      14: aload_2\n      15: iload         4\n      17: aaload\n      18: astore        5\n      20: aload         5\n      22: invokevirtual #7                  // Method Item.hit:()V\n      25: iinc          4, 1\n      28: goto          8\n      31: return\n}\n",
+      "calls": [
+        {
+          "expected_static_target": "C.java::Item.hit:method()",
+          "actual": {
+            "source": "C.java::C.run:method(Item[])",
+            "scope_id": "C.java::C.run:method(Item[])::opaque:135",
+            "kind": "calls",
+            "name": "item.hit",
+            "member": "hit",
+            "receiver": "item",
+            "constructor": false,
+            "argument_count": 0,
+            "argument_types": [],
+            "argument_facts": [],
+            "expected_type": "",
+            "explicit_type_arguments": false,
+            "static_context": false,
+            "path": "C.java",
+            "line": 1,
+            "evidence": "item.hit()",
+            "resolved": false,
+            "reason": "lambda, loop, catch or anonymous scope unsupported"
+          },
+          "resolved_expected_target": false
+        }
+      ]
+    },
+    {
+      "name": "generic_shadow",
+      "source": "class Item { void hit() {} } class Wrong { void hit() {} Item[] values() { return new Item[0]; } } class T { void hit() {} } class C<T extends Item> { void run(T[] values) { for(T item : values) item.hit(); } }",
+      "source_sha256": "fb1816eafe41347ae5f35bd4a8f353157c8bc051fe0ad0ddc37aff6a63ffa24f",
+      "javac_return_code": 0,
+      "javac_stderr": "",
+      "javap": "Compiled from \"C.java\"\nclass C<T extends Item> {\n  C();\n    Code:\n       0: aload_0\n       1: invokespecial #1                  // Method java/lang/Object.\"<init>\":()V\n       4: return\n\n  void run(T[]);\n    Code:\n       0: aload_1\n       1: astore_2\n       2: aload_2\n       3: arraylength\n       4: istore_3\n       5: iconst_0\n       6: istore        4\n       8: iload         4\n      10: iload_3\n      11: if_icmpge     31\n      14: aload_2\n      15: iload         4\n      17: aaload\n      18: astore        5\n      20: aload         5\n      22: invokevirtual #7                  // Method Item.hit:()V\n      25: iinc          4, 1\n      28: goto          8\n      31: return\n}\n",
+      "calls": [
+        {
+          "expected_static_target": "C.java::Item.hit:method()",
+          "actual": {
+            "source": "C.java::C.run:method(T[])",
+            "scope_id": "C.java::C.run:method(T[])::opaque:174",
+            "kind": "calls",
+            "name": "item.hit",
+            "member": "hit",
+            "receiver": "item",
+            "constructor": false,
+            "argument_count": 0,
+            "argument_types": [],
+            "argument_facts": [],
+            "expected_type": "",
+            "explicit_type_arguments": false,
+            "static_context": false,
+            "path": "C.java",
+            "line": 1,
+            "evidence": "item.hit()",
+            "resolved": false,
+            "reason": "lambda, loop, catch or anonymous scope unsupported"
+          },
+          "resolved_expected_target": false
+        }
+      ]
+    },
+    {
+      "name": "outside_scope",
+      "source": "class Item { void hit() {} } class Wrong { void hit() {} Item[] values() { return new Item[0]; } } class C { void run(Item[] values) { for(Item item : values) {} item.hit(); } }",
+      "source_sha256": "93b3af9e3425b4adadaf1eda9f96704bba4b93ccb99620211d6b1a7fb7554306",
+      "javac_return_code": 1,
+      "javac_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/tmp04_wqaam/C.java:1: error: cannot find symbol\nclass Item { void hit() {} } class Wrong { void hit() {} Item[] values() { return new Item[0]; } } class C { void run(Item[] values) { for(Item item : values) {} item.hit(); } }\n                                                                                                                                                                  ^\n  symbol:   variable item\n  location: class C\n1 error\n",
+      "javap": null,
+      "calls": [
+        {
+          "expected_static_target": null,
+          "actual": {
+            "source": "C.java::C.run:method(Item[])",
+            "scope_id": "C.java::C.run:method(Item[])",
+            "kind": "calls",
+            "name": "item.hit",
+            "member": "hit",
+            "receiver": "item",
+            "constructor": false,
+            "argument_count": 0,
+            "argument_types": [],
+            "argument_facts": [],
+            "expected_type": "",
+            "explicit_type_arguments": false,
+            "static_context": false,
+            "path": "C.java",
+            "line": 1,
+            "evidence": "item.hit()",
+            "resolved": false,
+            "reason": "receiver type external, ambiguous or unknown"
+          },
+          "resolved_expected_target": false
+        }
+      ]
+    },
+    {
+      "name": "incompatible_iterable",
+      "source": "class Item { void hit() {} } class Wrong { void hit() {} Item[] values() { return new Item[0]; } } class C { void run(Wrong[] values) { for(Item item : values) item.hit(); } }",
+      "source_sha256": "3c07971821e1a76b3038f6239f0b306db06a028c3c7f903cf6526bdeb7ce44c8",
+      "javac_return_code": 1,
+      "javac_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/tmphcwqa2vo/C.java:1: error: incompatible types: Wrong cannot be converted to Item\nclass Item { void hit() {} } class Wrong { void hit() {} Item[] values() { return new Item[0]; } } class C { void run(Wrong[] values) { for(Item item : values) item.hit(); } }\n                                                                                                                                                        ^\n1 error\n",
+      "javap": null,
+      "calls": [
+        {
+          "expected_static_target": null,
+          "actual": {
+            "source": "C.java::C.run:method(Wrong[])",
+            "scope_id": "C.java::C.run:method(Wrong[])::opaque:136",
+            "kind": "calls",
+            "name": "item.hit",
+            "member": "hit",
+            "receiver": "item",
+            "constructor": false,
+            "argument_count": 0,
+            "argument_types": [],
+            "argument_facts": [],
+            "expected_type": "",
+            "explicit_type_arguments": false,
+            "static_context": false,
+            "path": "C.java",
+            "line": 1,
+            "evidence": "item.hit()",
+            "resolved": false,
+            "reason": "lambda, loop, catch or anonymous scope unsupported"
+          },
+          "resolved_expected_target": false
+        }
+      ]
+    },
+    {
+      "name": "local_name_conflict",
+      "source": "class Item { void hit() {} } class Wrong { void hit() {} Item[] values() { return new Item[0]; } } class C { void run(Item[] values) { Item item=null; for(Item item : values) item.hit(); } }",
+      "source_sha256": "e4b4baff360205cb7695eab24b7cdf623e2124314514c1ce80cfb23a330d2b0e",
+      "javac_return_code": 1,
+      "javac_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/tmphwxztqte/C.java:1: error: variable item is already defined in method run(Item[])\nclass Item { void hit() {} } class Wrong { void hit() {} Item[] values() { return new Item[0]; } } class C { void run(Item[] values) { Item item=null; for(Item item : values) item.hit(); } }\n                                                                                                                                                                ^\n1 error\n",
+      "javap": null,
+      "calls": [
+        {
+          "expected_static_target": null,
+          "actual": {
+            "source": "C.java::C.run:method(Item[])",
+            "scope_id": "C.java::C.run:method(Item[])::opaque:151",
+            "kind": "calls",
+            "name": "item.hit",
+            "member": "hit",
+            "receiver": "item",
+            "constructor": false,
+            "argument_count": 0,
+            "argument_types": [],
+            "argument_facts": [],
+            "expected_type": "",
+            "explicit_type_arguments": false,
+            "static_context": false,
+            "path": "C.java",
+            "line": 1,
+            "evidence": "item.hit()",
+            "resolved": false,
+            "reason": "lambda, loop, catch or anonymous scope unsupported"
+          },
+          "resolved_expected_target": false
+        }
+      ]
+    },
+    {
+      "name": "wrong_argument",
+      "source": "class Item { void hit() {} } class Wrong { void hit() {} Item[] values() { return new Item[0]; } } class C { void run(Item[] values) { for(Item item : values) item.hit(1); } }",
+      "source_sha256": "a39c5bb644eb70e049165dcf836f3374ed01331e9262a555528352d77ff9c67b",
+      "javac_return_code": 1,
+      "javac_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/tmp9r45l31r/C.java:1: error: method hit in class Item cannot be applied to given types;\nclass Item { void hit() {} } class Wrong { void hit() {} Item[] values() { return new Item[0]; } } class C { void run(Item[] values) { for(Item item : values) item.hit(1); } }\n                                                                                                                                                                   ^\n  required: no arguments\n  found:    int\n  reason: actual and formal argument lists differ in length\n1 error\n",
+      "javap": null,
+      "calls": [
+        {
+          "expected_static_target": null,
+          "actual": {
+            "source": "C.java::C.run:method(Item[])",
+            "scope_id": "C.java::C.run:method(Item[])::opaque:135",
+            "kind": "calls",
+            "name": "item.hit",
+            "member": "hit",
+            "receiver": "item",
+            "constructor": false,
+            "argument_count": 1,
+            "argument_types": [
+              "int"
+            ],
+            "argument_facts": [
+              {}
+            ],
+            "expected_type": "",
+            "explicit_type_arguments": false,
+            "static_context": false,
+            "path": "C.java",
+            "line": 1,
+            "evidence": "item.hit(1)",
+            "resolved": false,
+            "reason": "lambda, loop, catch or anonymous scope unsupported"
+          },
+          "resolved_expected_target": false
+        }
+      ]
+    }
+  ],
+  "compiler": "javac 17.0.20.1",
+  "python": "3.11.16 (main, Aug 14 2026, 15:24:25) [Clang 22.1.3 ]",
+  "analyzer_sha256": "67cfdfd84ffbf2a4b49a5dc948180d10dc07778417c95ed2eb5acbcf5a752cd2",
+  "versions": {
+    "tree-sitter": "0.26.0",
+    "tree-sitter-java": "0.23.5+columbus.1"
+  },
+  "expected_valid_calls": 7,
+  "resolved_expected_calls": 1
+}
