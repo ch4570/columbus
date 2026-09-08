@@ -1,0 +1,100 @@
+{
+  "schema": "columbus.prospective-source-review/v1",
+  "status": "prospective source review; no model trials or upstream execution",
+  "repository": "https://github.com/spring-projects/spring-framework",
+  "commit": "4c8c6409a27a62ab163d3b6196ad862b7c835440",
+  "corpus_id": "spring-core-navigation-4c8c6409",
+  "snapshot_scope": "Existing spring-core subtree fixture, not the complete Spring Framework repository. Reused corpus; new cache-lifecycle operation.",
+  "source_root_at_review": "/tmp/columbus-spring-framework/spring-core",
+  "fixture_at_review": "/tmp/columbus-spring-navigation-source.zip",
+  "fixture_sha256": "68572527bfad750c2ab2c55dcbab1324568a4584d0d122cc3a4dfac8c139bd0c",
+  "fixture_bytes": 2174897,
+  "archive_prefix": "spring-core/",
+  "files": 1166,
+  "source_bytes": 7120331,
+  "corpus_manifest_sha256": "53bd4243666ca2f8ad02a3f00b349dd565ac10f1df889e8041bc4c1b87753143",
+  "corpus_manifest_encoding": "SHA256 of UTF-8 json.dumps(relative_path_to_raw_sha256, sort_keys=True, separators=(',', ':')); paths omit spring-core/ prefix",
+  "all_fixture_members_match_local_source": true,
+  "reviewed_files_match_pinned_git_blobs_and_fixture": true,
+  "local_untracked_index_excluded_from_fixture": true,
+  "license": {
+    "type": "Apache-2.0",
+    "reviewed_files_retain_license_headers": true,
+    "standalone_license_in_fixture": false,
+    "upstream_path": "LICENSE.txt",
+    "upstream_sha256": "56dfc19e0dc836e30177332f73e8e6fbc297941acf3d906eec6eaaa46c2c452a",
+    "note": "The upstream repository-root license is outside this existing subtree ZIP; retain this scope distinction when publishing artifacts."
+  },
+  "reviewed_files": [
+    {
+      "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+      "sha256": "58ee866e0b18b50749eb36579a81dae974518aa02a495fbbf99a0de92ad47e9a",
+      "bytes": 14998,
+      "physical_lines": 598,
+      "role": "Complete cache lifecycle and all nested maintenance structures"
+    },
+    {
+      "path": "src/test/java/org/springframework/util/ConcurrentLruCacheTests.java",
+      "sha256": "60ed16448d89f9c998d48ad554f2c033b0a97ca08260fa81309ced239d10b54a",
+      "bytes": 3939,
+      "physical_lines": 111,
+      "role": "Sequential corroboration only; tests inspected, not executed"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/Assert.java",
+      "sha256": "70f8bec8b969dd22e280724a3f85788a6d4b9baa8f84176fb85c217607944590",
+      "bytes": 25324,
+      "physical_lines": 652,
+      "role": "Exception types at isTrue and notNull boundaries"
+    }
+  ],
+  "suggested_graph_relationships": [
+    {
+      "kind": "calls",
+      "source_path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+      "source_qualname": "ConcurrentLruCache.get",
+      "line": 107,
+      "target_path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+      "target_qualname": "ConcurrentLruCache.put",
+      "target_declaration_start_line": 114,
+      "reason": "Navigate from a public miss to private race-aware insertion; graph edge is not proof of return-value semantics."
+    },
+    {
+      "kind": "calls",
+      "source_path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+      "source_qualname": "ConcurrentLruCache.drainOperations",
+      "line": 147,
+      "target_path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+      "target_qualname": "ConcurrentLruCache.WriteOperations.drain",
+      "target_declaration_start_line": 464,
+      "reason": "Navigate from lock coordination through the typed write-operations field to the bounded task drain."
+    }
+  ],
+  "graph_control_status": "Before model launch or input freeze, all eight calls edges emitted for the ConcurrentLruCache production file were independently checked against source and retained in relationships.json. The two earlier suggestions remain valid source calls but are unresolved graph references, so neither is an acceptance edge. Successful archive response controls remain separate from this source review.",
+  "prelaunch_resolved_relationship_review": {
+    "archive": "graph.jsonl.xz",
+    "archive_sha256": "b624d888e8a35f55c6f43f3255c2b21878d56e75d1e764442e9571d1fa998b23",
+    "relationships_file": "relationships.json",
+    "production_path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+    "source_sha256": "58ee866e0b18b50749eb36579a81dae974518aa02a495fbbf99a0de92ad47e9a",
+    "all_emitted_production_calls_included": true,
+    "relationship_count": 8,
+    "call_lines_with_distinct_targets": [91, 408, 132, 139, 121, 121, 235, 235],
+    "confidence": "All eight archive edges are heuristic static calls; constructor allocation edges target class nodes, not proof of runtime invocation or behavior.",
+    "task_relevance": "Initialization of write buffering; read-buffer stripe selection; read/write requests entering the maintenance drain; and addition/removal task creation and scheduling are all central to the complete requested lifecycle. No arbitrary two-edge subset limits the valid relationship set."
+  },
+  "unresolved_reviewed_suggestions": [
+    {
+      "line": 107,
+      "evidence": "put(key, value)",
+      "resolved": false,
+      "archive_reason": "generic declaring-type substitution requires semantic analysis"
+    },
+    {
+      "line": 147,
+      "evidence": "this.writeOperations.drain()",
+      "resolved": false,
+      "archive_reason": "complex, this or super receiver unsupported"
+    }
+  ]
+}
