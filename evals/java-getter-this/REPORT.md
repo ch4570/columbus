@@ -1,0 +1,7 @@
+# Getter-loop this-argument compiler discrepancy
+
+The current analyzer emits Item.hit(Other) for a C instance passed as `this`, but javac rejects the source because C cannot convert to Other. Two controls compile: exact C and an API interface implemented by C. All three currently emit targets, so before.json records one false edge, not a passing precision result. javap confirms each valid static declaration invocation; no compiled source is executed.
+
+The newly enabled getter loop exposes the existing ordinary-call handling of unknown expressions: `this` has no argument type fact and bypasses literal applicability checks. Merely resolving the loop receiver does not validate its arguments. The prior Spring ProtocolResolver edge remains source-reviewed, not a general proof of argument applicability. Fixing this requires preserving the enclosing instance identity and proving supported assignment conversions or retaining unresolved status. Blanket rejection would also lose the two valid controls.
+
+Run probe.py with --jdk and --output to reproduce the inventory. --require-no-false turns any mismatched emitted target into a failure and is intended for the subsequent fix. The default inventory deliberately records the known failure. These sources were fixed before the fix; do not replace the negative case to obtain a passing result. The running Requests model trial uses a separate frozen runtime and is unaffected by these files.
