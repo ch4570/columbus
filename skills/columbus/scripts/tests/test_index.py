@@ -85,6 +85,44 @@ class IndexTests(unittest.TestCase):
                     initial = facts
         self.assertEqual(facts, initial)
 
+    def test_java_getter_loop_relinks_unchanged_consumers(self):
+        from contextlib import closing
+        import sqlite3
+        from columbus.index import decode_parse
+
+        for package in ('a', 'b'):
+            self.write(package + '/Item.java', 'package ' + package +
+                       '; public class Item { public void hit() {} }')
+        self.write('c/C.java', 'package c; class C { void run(p.Source source) { '
+                   'for(var item : source.items()) item.hit(); } }')
+
+        def snapshot(index):
+            with closing(sqlite3.connect(index.db)) as conn:
+                return {p: decode_parse(data) for p, data in conn.execute('SELECT path,parsed FROM files')}
+
+        initial = None
+        for number, package in enumerate(('a', 'b', None, 'a')):
+            with self.subTest(package=package):
+                if package is None:
+                    (self.root / 'p/Source.java').unlink()
+                else:
+                    self.write('p/Source.java', 'package p; import ' + package +
+                               '.Item; public class Source { public java.util.List<Item> items() { return null; } }')
+                status = self.index.refresh(self.root)
+                if number:
+                    self.assertEqual(status['refresh']['parsed_files'], 0 if package is None else 1)
+                facts = snapshot(self.index)
+                call, = [r for r in facts['c/C.java']['references'] if r['member'] == 'hit']
+                expected = (package + '/Item.java::' + package + '.Item.hit:method()') if package else None
+                self.assertEqual(call.get('target'), expected)
+                fresh = RepositoryIndex(Path(self.temp.name) / ('getter-fresh-%d.sqlite' % number))
+                fresh.refresh(self.root)
+                self.assertEqual(facts, snapshot(fresh))
+                self.assertEqual(self.index.graph(), fresh.graph())
+                if number == 0:
+                    initial = facts
+        self.assertEqual(facts, initial)
+
     def test_exact_id_context_survives_long_path_and_noisy_overloads(self):
         path = 'src/main/java/org/example/resource/navigation/DefaultResourceLoader.java'
         self.write(path, 'package org.example.resource.navigation; class DefaultResourceLoader {\n'
