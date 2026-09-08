@@ -29,6 +29,8 @@ columbus context checkout --mode signatures --format text --budget-tokens 1500
 
 검색어가 없는 map은 포함 관계를 제외한 들어오는 관계 수로 선언을 정렬합니다. 검색어가 있으면 이름 일치와 전체 텍스트 검색 순위를 사용합니다. 관련도를 판단하는 신호이므로 결과의 경로와 선언을 확인한 뒤 심볼을 고르세요.
 
+`search`는 페이지당 최대 50개와 `next_cursor`를 반환합니다. 더 필요하면 같은 검색어·경로·언어 필터에 그 값을 `--cursor`로 전달하세요. 페이지 크기는 바꿔도 됩니다. 커서는 저장소와 색인 revision에 묶이므로 동기화로 revision이 바뀌면 커서 없이 다시 시작합니다. 커서 자체는 소스 최신성 검증이 아닙니다.
+
 | 조회 | 반환 내용 | 동기화 이후 소스 본문 읽기 |
 | --- | --- | --- |
 | `explore` | 짧은 저장소 지도, text 출력 | 없음 |
@@ -74,7 +76,7 @@ glob은 셸이 먼저 펼치지 않도록 따옴표로 감쌉니다. 언어 이�
 | --- | --- | --- |
 | `--budget-bytes` | 2,048–64,000 | explore/map/context의 UTF-8 응답 예산 |
 | `--budget-tokens` | 700–21,000 | `tokens × 3`으로 계산한 바이트 예산 |
-| search의 `--limit` | 결과 수 | 검색 후보 제한 |
+| search의 `--limit` | 1–50 | 페이지별 검색 후보 제한 |
 | symbol의 `--max-lines` | 코드 줄 수 | 소스 조각 제한 |
 
 explore의 기본 예산은 추정 토큰 2,000개, 즉 6,000바이트입니다. `--budget-tokens`나 `--budget-bytes`를 명시하면 그 값이 기본 예산을 대체합니다. 둘 다 지정하면 더 작은 바이트 한도를 적용합니다.
@@ -116,6 +118,8 @@ columbus context calculateTotal --receipt .columbus/checkout-receipt.json --form
 ```
 
 receipt는 앞선 조회에서 전달한 소스의 문자 범위를 기록합니다. 같은 검색을 반복하거나 부모·자식 심볼이 겹치는 경우 이미 전달한 범위를 제외하며, 긴 줄의 일부만 받았을 때도 이어 읽을 수 있습니다. 최신성·부분 출력·새 receipt를 시작할 조건은 [receipt 계약](agents.md#context-receipts)에 정리했습니다.
+
+근거가 더 필요하고 `receipt.has_more=true`(text: `receipt_continuation=more`)이면 같은 검색어·세션·필터로 이어 읽습니다. 빈 페이지 뒤에도 결과가 남을 수 있으며, 처음 20개 뒤의 검색 결과까지 진행합니다. 필터 변경 시 별도 탐색을 시작하고 revision 변경 시 탐색을 재시작하되, 이미 전달한 소스는 해시가 일치하면 재사용합니다. stale 소스는 먼저 동기화하고, 항목 하나도 예산에 들어가지 않으면 예산을 늘리거나 범위를 좁히세요. 탐색 종료가 모든 의미적 의존성을 확인했다는 뜻은 아닙니다. 기존 v1 receipt는 저장 시 v2로 갱신되므로 이전 엔진으로 돌아갈 때는 별도 receipt를 사용합니다.
 
 호출 측에서 심볼 ID를 관리한다면 `--exclude-id`를 반복할 수도 있습니다.
 

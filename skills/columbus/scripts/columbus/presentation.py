@@ -57,6 +57,12 @@ def text_output(packet: dict, command: str = '') -> str:
     if packet.get('receipt'):
         lines.append(f"receipt={_line(packet['receipt']['status'])} "
                      f"seen_source_bytes={packet['receipt']['seen_source_bytes']}")
+        if 'has_more' in packet['receipt']:
+            lines.append('receipt_continuation=' + ('more; stale source requires sync before continuation'
+                         if packet.get('stale_candidates') else 'more; repeat with the same receipt and query options'
+                         if packet['receipt']['has_more'] else 'exhausted'))
+    if 'hits' in packet and 'next_cursor' in packet:
+        lines.append('next_cursor=' + (packet['next_cursor'] or 'null'))
     items = packet.get('items', packet.get('hits', packet.get('nodes', [packet] if 'id' in packet else [])))
     lines.append(f"items={len(items)}")
     for item in items:

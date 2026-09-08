@@ -24,9 +24,9 @@ Source context is hash-verified and numbered. When verbatim citations are requir
 ## Local index
 
 - Direct callers: `callers IDENTIFIER --format text --context-lines 20 --budget-bytes 12000`; add the task's `--path` scope. Unique names or exact Python `module.qualname` work; search for an exact ID if ambiguous. Nested functions are separate callers.
-- Other navigation: `search IDENTIFIER --format text --limit 5`, then `explore ID` for verified source. `map --format text --budget-tokens 2000` gives orientation. Check coverage once if empty, then use source search.
+- Other navigation: `search IDENTIFIER --format text --limit 5`, then `explore ID` for verified source. Follow `next_cursor` with `--cursor` and unchanged query/filters if more matches are needed; restart after a revision change. `map --format text --budget-tokens 2000` gives orientation. Check coverage once if empty, then use source search.
 - All stored call sites: `neighbors ID --direction in --hops 1 --kinds calls --format text`. Incoming dependency paths: `impact ID --hops 3 --format text`.
-- Repeated source: `explore ID --session TASK` skips delivered ranges. Start a new session after context loss or handoff.
+- Repeated source: `explore QUERY --session TASK` skips delivered ranges and continues later matches. Repeat unchanged options while more evidence is needed and `receipt_continuation=more` (JSON `receipt.has_more=true`), even after an empty page. Sync if source is stale. Start a new session after context loss or handoff.
 
 Add `--repo REPO` to local queries. They auto-sync unless `--snapshot` is requested; sync failure stops the query. After edits/tests use `sync --summary`, or `sync --summary --verify-content` for full hashing. Each worktree needs its own index.
 

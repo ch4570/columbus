@@ -1,7 +1,7 @@
 ---
 title: Budgeted agent context
 source: ../scripts/columbus/retrieval.py
-last_fetched: 2026-09-07
+last_fetched: 2026-09-09
 skills: [columbus]
 ---
 
@@ -10,6 +10,8 @@ skills: [columbus]
 `map` ranks declarations by incoming non-containment dependencies; a query uses exact-name and FTS lexical ranking. It emits signatures/locations, no source bodies. The selection is bounded to 200 candidates (50 with a query); inspect `truncated`.
 
 `context --mode signatures` combines lexical results and one-hop calls/inheritance/imports without source-body reads. `--mode snippets` verifies selected file hashes and returns at most 80 lines per candidate within the total budget. Whole-file matches can search beyond the first 12,000 characters and choose an excerpt around the query. Overlapping line ranges are emitted once.
+
+`search --limit 1..50` returns `next_cursor`; pass it with `--cursor` and the same query, path/language filters and index revision. The limit may change between pages. Cursors are opaque, repository/snapshot-bound and not source verification. A changed revision requires a fresh search. Results are no longer capped at the first 150 lexical candidates.
 
 `--exclude-id` removes already-seen candidate IDs. Exclusions are caller-owned, do not persist, and do not imply source verification. They filter exact symbol IDs, not every overlapping parent/child ID in the file. Excluding a truncated symbol also excludes its unread remainder. Reuse them only while `revision` is unchanged. Source read failures increment `stale_candidates`; no stale source is returned as verified.
 
@@ -21,7 +23,13 @@ skills: [columbus]
 
 The CLI shortcut `explore [QUERY]` selects text output and a 2,000 estimated-token default; an explicit byte/token budget replaces that default. With no query it returns a map. `explore QUERY --session TASK_NAME` or `context QUERY --session TASK_NAME` selects `.columbus/sessions/TASK_NAME/receipt.json` and `queries.jsonl`. `stats TASK_NAME` reads the log without synchronizing or requiring an index. Names must be safe single path segments; session directories cannot traverse symlinks. A session cannot be combined with caller-specified receipt/telemetry paths or used for maps/signatures. Choose a fresh name after context loss or an agent change.
 
-`context --receipt PATH` is a CLI snippets-only feature. It stores repository identity, revision, raw-file hash, normalized decoded-view hash, and half-open character ranges actually delivered. Reusing a receipt skips already delivered ranges across overlapping symbol IDs and continues unread parts of truncated symbols/lines. If bytes or decoding change, the affected spans are not reused. Legacy raw-only receipts safely re-emit source before upgrading.
+`context --receipt PATH` is a CLI snippets-only feature. It stores repository identity, revision, raw-file hash, normalized decoded-view hash, half-open character ranges actually delivered, and bounded discovery cursors. Reusing a receipt skips already delivered ranges across overlapping symbol IDs, continues unread parts of truncated symbols/lines, and advances beyond the first 20 lexical matches. If bytes or decoding change, the affected spans are not reused. Legacy v1 receipts upgrade on successful save; raw-only spans safely re-emit source before upgrading. Older engines reject v2 receipts; use a separate file when switching back.
+
+Repeat the same query, mode, path/language and exclusions while more evidence is needed and `receipt.has_more` is true (text: `receipt_continuation=more`). An empty page can still have more results: one invocation examines at most 12 pages of 20 lexical candidates, plus bounded one-hop dependencies. `has_more=false` exhausts this retrieval strategy, not every semantic dependency. Omission counts describe visited candidates, not a repository-wide total. Stale source pins discovery for a retry after `sync`; if nothing can be delivered, retrieval fails explicitly instead of repeating empty success. Increase the budget or narrow the query if one source item cannot fit.
+
+Discovery is scoped by a hash of query/mode/filters/exclusions; changing them starts independent discovery while preserving source deduplication. Budget and format may change. A revision change restarts discovery and still hash-checks returned source. At most 128 scopes are retained; eviction restarts discovery only. Opaque cursors remain in the receipt file, outside the model response budget; they may contain ranked symbol IDs but no raw query. Earlier pages are not revalidated on every continuation. Source files outside the visited candidates are not verified.
+
+Python callers open a fresh `ReceiptFile` per query, pass its `.data` to retrieval, and save the unchanged result with that same instance before another query. An identical copied/JSON-roundtripped response is accepted; altered or unassociated responses are rejected. Plain dictionary receipts expose `continuation_scope`/`next_cursor` in the response, within its byte budget, for explicit state transfer.
 
 Receipts do not restore agent memory. Use a fresh file after a new task, agent handoff without the old source, or context loss. Use separate receipts for concurrent callers. Place files under `.columbus/` to keep them out of the source index. Existing invalid/unrelated files are preserved.
 

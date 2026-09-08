@@ -81,6 +81,8 @@ columbus stats checkout
 
 `init` installs `.agents/skills/columbus/SKILL.md` in the current project. A named session keeps a source receipt and local query measurements under `.columbus/sessions/checkout/`. Later snippet queries omit source ranges already delivered and continue unread portions. `stats` reports query count, response bytes, and source bytes.
 
+When more evidence is needed, repeat an unchanged query/session while `receipt_continuation=more` (JSON: `receipt.has_more=true`), including after an empty page. Sessions now advance beyond the first 20 lexical matches; [source-coverage regression checks](evals/context-continuation/REPORT.md) retain the former failure and the bounded continuation results. Sync stale source before continuing.
+
 A receipt records delivered source; it does not restore a model's lost context. Use a new session for a new task, another agent, or after context loss. Telemetry is opt-in and records metadata without queries or source bodies. Add `.columbus/` to your project's ignore rules.
 
 ```text

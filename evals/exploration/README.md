@@ -69,4 +69,17 @@ python scripts/observe_delivery.py
 
 CI runs these deterministic checks and never launches the model trials. The separate `scripts/benchmark_context.py` remains a synthetic whole-source-versus-response illustration; it is not the baseline used here.
 
+## Archive evidence for future cohorts
+
+[archive_evidence.py](archive_evidence.py) provides the opt-in `archive-evidence-v1` recognizer for new collectors:
+
+```python
+from archive_evidence import graph_evidence
+receipts = graph_evidence(events, observation_directory, task_evidence_paths)
+```
+
+It recognizes successful commands against the frozen runtime/archive and validates JSON, legacy source text and current file/declaration-table text. Receipts report operation, encoding, output hash, task-path relevance and batch use without retaining source or conversation text. Empty, failed, malformed or merely offered commands do not establish useful graph evidence. Recognition is not an answer-quality grade or an independent source/hash verification gate.
+
+Before any new model run, freeze/hash this module, its tests and the new collector alongside the source, archive, runtime, skill, task catalog and full quality rubric. Record `recognizer_version` in results; keep actual input/output, citation and semantic checks separate. Historical collectors and frozen cohorts deliberately retain their original recognizers and acceptance criteria. These parser tests neither rerun nor upgrade prior failed results.
+
 Custom predeclared tasks can now be prepared with `prepare --fixture SOURCE.zip --cases CATALOG.json`. The catalog is copied into the observation directory and hash-checked at execution and summary time; later edits to the external catalog cannot rewrite prepared tasks. Historical observations without a frozen catalog retain their original hash validation. IDs and evidence paths are validated. The new [relational pilot plan](results/relational-pilot/PLAN.md) has a prepared current-source fixture but no model measurements yet.

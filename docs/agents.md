@@ -71,11 +71,15 @@ columbus context calculateTotal --mode snippets --format text --budget-tokens 20
 
 Receipts apply to `--mode snippets`, the context default. Declaration-only exploration does not use a receipt because it has not delivered source. A receipt records only the character ranges actually emitted, including a partial long line. Later calls can retrieve an unread remainder and omit already-delivered ranges across parent/child symbols.
 
+Repeated identical queries also advance through later lexical matches. Continue only while more evidence is needed and JSON `receipt.has_more=true` (text: `receipt_continuation=more`); an empty response alone does not mean exhaustion. Each call visits at most 12 pages of 20 lexical candidates plus bounded one-hop dependencies. Stale source must be synchronized before continuation; if no source can be delivered, the command fails explicitly. A budget too small for even one item also fails instead of looping on empty output.
+
+The v2 file stores at most 128 discovery cursors, keyed by a hash of query/mode/path/language/exclusions. Changing those options starts independent discovery without discarding delivered-source spans; budget and output format may change. An index revision change restarts discovery. Cursors stay in the receipt file instead of occupying model response space. They are not source verification: only visited source candidates are checked, and exhaustion is relative to this lexical/one-hop strategy. Existing v1 receipts upgrade on successful save; use a separate receipt with an older engine that cannot read v2.
+
 Use a new receipt for an unrelated task or an agent that did not receive the earlier context. A receipt is a record of delivery, not a shared memory store: it does not restore code to an agent's context after compaction. If earlier context is no longer available, start a new receipt or retrieve without it.
 
 Review the returned freshness, deduplication, omission, and truncation indicators. Each file records a raw-byte `source_hash` and a `source_view_hash` for the decoded text with normalized newlines. Prior character ranges are reused only when both match. This keeps unchanged source reusable across index revisions while exposing file changes or a changed decoding rule. A receipt from another repository is rejected. Receipts apply to context retrieval, not arbitrary shell reads, `symbol` calls, or another agent's transcript.
 
-Receipts are limited to 1 MiB and validate their format before reuse. Use separate receipt files for concurrent agent tasks; an observed conflicting edit is rejected. The file contains repository/file hashes, repository-relative paths, and character ranges, not source bodies.
+Receipts are limited to 1 MiB and validate their format before reuse. Use separate receipt files for concurrent agent tasks; an observed conflicting edit is rejected. The file contains repository/file hashes, repository-relative paths, character ranges and opaque cursors that may contain ranked symbol IDs, not source bodies or raw queries. Python callers open a fresh `ReceiptFile` per query, pass its `.data` to retrieval, then save the unaltered response through that same instance; identical copies are accepted, changed or unassociated responses are rejected.
 
 The older `--exclude-id` option is caller-owned and removes an exact symbol ID. It cannot account for overlapping ranges of different symbols and can suppress an unread remainder. Prefer a receipt for repeated source retrieval; reset a manually maintained exclusion list when the index revision changes.
 
@@ -119,7 +123,7 @@ Replace `command` with the installed executable's real path, including `columbus
 | --- | --- |
 | `repository_map` | A bounded repository overview |
 | `index_status` | Index metadata and freshness information |
-| `find_symbols` | Lexical search and exact IDs |
+| `find_symbols` | Lexical search and exact IDs; resume `next_cursor` with `cursor` and unchanged query/filters/revision |
 | `read_symbol` | Selected verified source |
 | `graph_neighbors` | Bounded relationship traversal |
 | `build_context` | Declarations or bounded source snippets |
