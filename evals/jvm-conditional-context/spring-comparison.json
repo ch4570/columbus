@@ -1,0 +1,2520 @@
+{
+  "before_revision": "6594992e9c0cee1180d08e771b1970d124a5dfb7",
+  "after_revision": "cf635cf970f1eab67f3063dc946fd07ec9df9436",
+  "source_manifest_sha256": "53bd4243666ca2f8ad02a3f00b349dd565ac10f1df889e8041bc4c1b87753143",
+  "files": 1166,
+  "edges": 31365,
+  "all_edge_tuples_equal": true,
+  "all_other_parsed_fields_equal": true,
+  "runtime_manifests": {
+    "before": {
+      "columbus/__init__.py": "87f632dcdb12b5a9b78e5961202c87910906399c90157131799707e5b35b375c",
+      "columbus/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "columbus/archive.py": "0f7c25e896c75fdc6fc297242578e55af0fa4e1f83a95451529381f2cf301418",
+      "columbus/bundle.py": "f73fe1c36c89211c823f6c94eae67efc054e8c69b835b3ef49371482e7dd7f00",
+      "columbus/cli.py": "96a7dc15b0919332c6b303e0a93145f62d53d9c1c9b76315ffea61c6c9267e7d",
+      "columbus/discovery.py": "31b40e39531a3e903d43285ecff26315e79bbac27adc86943fc61c7d5ad8fee3",
+      "columbus/export.py": "258f6b2df72a08da837480c96db82c78eeec63007d8d1c48baed8aa36b445957",
+      "columbus/graph_views.py": "9e935520bb990c2066cfdb943c37477e78378b5ffd868e31735cc6a5e261f1c7",
+      "columbus/hooks.py": "07e7e50d250904d03158bd559b32869c2a83185c6a318587278681e1956fcb42",
+      "columbus/index.py": "202c00206be8567066b2ba1538f4048205bc7088fb30466ffdbccf7c90789f88",
+      "columbus/jvm.py": "c81f3c3f2c1b485adea391115bb7c901288945cf1295ad43a7e60a9c1bf3031c",
+      "columbus/language_profiles.py": "cda7c22cce6227d2627225110adafa641c7b09134b7c5d800ffcf1329092a1ce",
+      "columbus/languages.py": "606fe8469d2cafdfa58d9026b86e0d7debc5922e40e4eb600af4b57a4909539b",
+      "columbus/mcp_server.py": "8205f39755c51f1486fd66a1f9c993502fb2a614376510757cb4d1bdf29641c7",
+      "columbus/parser.py": "06aade1a1ce3e49cb75cc2c137ab6816b4d79768cd5a3225eaa24d2d126775a0",
+      "columbus/polyglot.py": "fdaf6ff2253945b31eeca00f87175ea9179be9c7b404db5468403d4a269948ae",
+      "columbus/presentation.py": "81ceb1cff54187efad4c63643c434dc679dc3cb8dd51aab90de8ba9c75ae6652",
+      "columbus/receipts.py": "11068a6fd2d78a8d22a86c102b199c395c5f001e50ed5ff010f6893ab9b13ca9",
+      "columbus/retrieval.py": "bdf731d03095efc705f6470a1c0721bb72117cd286a600ff5b0cae38f3d33dd5",
+      "columbus/sync_state.py": "f18f0fa4a6cc970de4f527356ac9af70c29a12111cc3c58e42ba7e267ed457d3",
+      "columbus/telemetry.py": "9f49124a606e3a30191c596c8bd40f7255d5fbbb93f5ba2a531940b7f63c32dc",
+      "columbus/tree.py": "2be73caa6fb142ef744d2e1d6812775ae7ad12502f72e5789fe02496a83426a1",
+      "columbus.py": "0b791210f2796253cc24b13d193c0cef0c602de6f1e9d1dcadd560b23c8db067"
+    },
+    "after": {
+      "columbus/__init__.py": "87f632dcdb12b5a9b78e5961202c87910906399c90157131799707e5b35b375c",
+      "columbus/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "columbus/archive.py": "0f7c25e896c75fdc6fc297242578e55af0fa4e1f83a95451529381f2cf301418",
+      "columbus/bundle.py": "f73fe1c36c89211c823f6c94eae67efc054e8c69b835b3ef49371482e7dd7f00",
+      "columbus/cli.py": "96a7dc15b0919332c6b303e0a93145f62d53d9c1c9b76315ffea61c6c9267e7d",
+      "columbus/discovery.py": "31b40e39531a3e903d43285ecff26315e79bbac27adc86943fc61c7d5ad8fee3",
+      "columbus/export.py": "258f6b2df72a08da837480c96db82c78eeec63007d8d1c48baed8aa36b445957",
+      "columbus/graph_views.py": "9e935520bb990c2066cfdb943c37477e78378b5ffd868e31735cc6a5e261f1c7",
+      "columbus/hooks.py": "07e7e50d250904d03158bd559b32869c2a83185c6a318587278681e1956fcb42",
+      "columbus/index.py": "202c00206be8567066b2ba1538f4048205bc7088fb30466ffdbccf7c90789f88",
+      "columbus/jvm.py": "0c96e573fda4d5895e077ee8cc01391e27afcb9ab7cc070654e2e6c25dd74212",
+      "columbus/language_profiles.py": "cda7c22cce6227d2627225110adafa641c7b09134b7c5d800ffcf1329092a1ce",
+      "columbus/languages.py": "606fe8469d2cafdfa58d9026b86e0d7debc5922e40e4eb600af4b57a4909539b",
+      "columbus/mcp_server.py": "8205f39755c51f1486fd66a1f9c993502fb2a614376510757cb4d1bdf29641c7",
+      "columbus/parser.py": "06aade1a1ce3e49cb75cc2c137ab6816b4d79768cd5a3225eaa24d2d126775a0",
+      "columbus/polyglot.py": "fdaf6ff2253945b31eeca00f87175ea9179be9c7b404db5468403d4a269948ae",
+      "columbus/presentation.py": "81ceb1cff54187efad4c63643c434dc679dc3cb8dd51aab90de8ba9c75ae6652",
+      "columbus/receipts.py": "11068a6fd2d78a8d22a86c102b199c395c5f001e50ed5ff010f6893ab9b13ca9",
+      "columbus/retrieval.py": "bdf731d03095efc705f6470a1c0721bb72117cd286a600ff5b0cae38f3d33dd5",
+      "columbus/sync_state.py": "f18f0fa4a6cc970de4f527356ac9af70c29a12111cc3c58e42ba7e267ed457d3",
+      "columbus/telemetry.py": "9f49124a606e3a30191c596c8bd40f7255d5fbbb93f5ba2a531940b7f63c32dc",
+      "columbus/tree.py": "2be73caa6fb142ef744d2e1d6812775ae7ad12502f72e5789fe02496a83426a1",
+      "columbus.py": "0b791210f2796253cc24b13d193c0cef0c602de6f1e9d1dcadd560b23c8db067"
+    }
+  },
+  "context_changes": [
+    {
+      "path": "src/main/java/org/springframework/aot/generate/ClassNameGenerator.java",
+      "source": "src/main/java/org/springframework/aot/generate/ClassNameGenerator.java::org.springframework.aot.generate.ClassNameGenerator.clean:method(String)",
+      "line": 125,
+      "evidence": "clean.toString()",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/aot/generate/GeneratedClass.java",
+      "source": "src/main/java/org/springframework/aot/generate/GeneratedClass.java::org.springframework.aot.generate.GeneratedClass.generateSequencedMethodName:method(MethodName)",
+      "line": 93,
+      "evidence": "name.toString()",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/aot/generate/GeneratedFiles.java",
+      "source": "src/main/java/org/springframework/aot/generate/GeneratedFiles.java::org.springframework.aot.generate.GeneratedFiles.FileHandler.getContent:method()",
+      "line": 269,
+      "evidence": "this.existingContent.get()",
+      "before": "",
+      "after": "InputStreamSource"
+    },
+    {
+      "path": "src/main/java/org/springframework/aot/generate/GeneratedTypeReference.java",
+      "source": "src/main/java/org/springframework/aot/generate/GeneratedTypeReference.java::org.springframework.aot.generate.GeneratedTypeReference.safeCreate:method(ClassName)",
+      "line": 42,
+      "evidence": "new GeneratedTypeReference(className)",
+      "before": "",
+      "after": "GeneratedTypeReference"
+    },
+    {
+      "path": "src/main/java/org/springframework/aot/generate/InMemoryGeneratedFiles.java",
+      "source": "src/main/java/org/springframework/aot/generate/InMemoryGeneratedFiles.java::org.springframework.aot.generate.InMemoryGeneratedFiles.getGeneratedFile:method(Kind,String)",
+      "line": 86,
+      "evidence": "paths.get(path)",
+      "before": "",
+      "after": "InputStreamSource"
+    },
+    {
+      "path": "src/main/java/org/springframework/aot/generate/MethodName.java",
+      "source": "src/main/java/org/springframework/aot/generate/MethodName.java::org.springframework.aot.generate.MethodName.clean:method(String)",
+      "line": 116,
+      "evidence": "part.toCharArray()",
+      "before": "",
+      "after": "char[]"
+    },
+    {
+      "path": "src/main/java/org/springframework/aot/generate/MethodName.java",
+      "source": "src/main/java/org/springframework/aot/generate/MethodName.java::org.springframework.aot.generate.MethodName.clean:method(String)",
+      "line": 120,
+      "evidence": "Character.toUpperCase(ch)",
+      "before": "",
+      "after": "char"
+    },
+    {
+      "path": "src/main/java/org/springframework/aot/generate/MethodReference.java",
+      "source": "src/main/java/org/springframework/aot/generate/MethodReference.java::org.springframework.aot.generate.MethodReference.ArgumentCodeGenerator.and:method(ArgumentCodeGenerator)",
+      "line": 133,
+      "evidence": "argumentCodeGenerator.generateCode(type)",
+      "before": "",
+      "after": "ArgumentCodeGenerator"
+    },
+    {
+      "path": "src/main/java/org/springframework/aot/generate/ValueCodeGeneratorDelegates.java",
+      "source": "src/main/java/org/springframework/aot/generate/ValueCodeGeneratorDelegates.java::org.springframework.aot.generate.ValueCodeGeneratorDelegates.PrimitiveDelegate.escape:method(char)",
+      "line": 258,
+      "evidence": "Character.toString(ch)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/aot/generate/ValueCodeGeneratorDelegates.java",
+      "source": "src/main/java/org/springframework/aot/generate/ValueCodeGeneratorDelegates.java::org.springframework.aot.generate.ValueCodeGeneratorDelegates.PrimitiveDelegate.escape:method(char)",
+      "line": 259,
+      "evidence": "String.format(\"\\\\u%04x\", (int) ch)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/aot/hint/AbstractTypeReference.java",
+      "source": "src/main/java/org/springframework/aot/hint/AbstractTypeReference.java::org.springframework.aot.hint.AbstractTypeReference.getName:method()",
+      "line": 52,
+      "evidence": "addPackageIfNecessary(simpleName)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/aot/hint/ReflectionHints.java",
+      "source": "src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.getTypeHint:method(TypeReference)",
+      "line": 78,
+      "evidence": "typeHintBuilder.build()",
+      "before": "",
+      "after": "TypeHint"
+    },
+    {
+      "path": "src/main/java/org/springframework/aot/hint/ReflectionTypeReference.java",
+      "source": "src/main/java/org/springframework/aot/hint/ReflectionTypeReference.java::org.springframework.aot.hint.ReflectionTypeReference.getEnclosingClass:method(Class<?>)",
+      "line": 40,
+      "evidence": "type.componentType().getEnclosingClass()",
+      "before": "",
+      "after": "Class<?>"
+    },
+    {
+      "path": "src/main/java/org/springframework/aot/hint/ReflectionTypeReference.java",
+      "source": "src/main/java/org/springframework/aot/hint/ReflectionTypeReference.java::org.springframework.aot.hint.ReflectionTypeReference.getEnclosingClass:method(Class<?>)",
+      "line": 41,
+      "evidence": "type.getEnclosingClass()",
+      "before": "",
+      "after": "Class<?>"
+    },
+    {
+      "path": "src/main/java/org/springframework/aot/hint/ReflectionTypeReference.java",
+      "source": "src/main/java/org/springframework/aot/hint/ReflectionTypeReference.java::org.springframework.aot.hint.ReflectionTypeReference.getEnclosingClass:method(Class<?>)",
+      "line": 42,
+      "evidence": "new ReflectionTypeReference(candidate)",
+      "before": "",
+      "after": "TypeReference"
+    },
+    {
+      "path": "src/main/java/org/springframework/aot/hint/ResourceHints.java",
+      "source": "src/main/java/org/springframework/aot/hint/ResourceHints.java::org.springframework.aot.hint.ResourceHints.resourcePatternHints:method()",
+      "line": 62,
+      "evidence": "Stream.concat(Stream.of(typesPatternResourceHint()), patterns)",
+      "before": "",
+      "after": "Stream<ResourcePatternHints>"
+    },
+    {
+      "path": "src/main/java/org/springframework/aot/hint/ResourceHints.java",
+      "source": "src/main/java/org/springframework/aot/hint/ResourceHints.java::org.springframework.aot.hint.ResourceHints.registerPatternIfPresent:method(ClassLoader,String,Consumer<ResourcePatternHints.Builder>)",
+      "line": 85,
+      "evidence": "ClassUtils.getDefaultClassLoader()",
+      "before": "",
+      "after": "ClassLoader"
+    },
+    {
+      "path": "src/main/java/org/springframework/aot/hint/SimpleTypeReference.java",
+      "source": "src/main/java/org/springframework/aot/hint/SimpleTypeReference.java::org.springframework.aot.hint.SimpleTypeReference.buildName:method(TypeReference,StringBuilder)",
+      "line": 104,
+      "evidence": "type.getSimpleName()",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/aot/hint/annotation/ReflectiveRuntimeHintsRegistrar.java",
+      "source": "src/main/java/org/springframework/aot/hint/annotation/ReflectiveRuntimeHintsRegistrar.java::org.springframework.aot.hint.annotation.ReflectiveRuntimeHintsRegistrar.createEntry:method(AnnotatedElement)",
+      "line": 126,
+      "evidence": "processors.get(0)",
+      "before": "",
+      "after": "ReflectiveProcessor"
+    },
+    {
+      "path": "src/main/java/org/springframework/aot/hint/annotation/ReflectiveRuntimeHintsRegistrar.java",
+      "source": "src/main/java/org/springframework/aot/hint/annotation/ReflectiveRuntimeHintsRegistrar.java::org.springframework.aot.hint.annotation.ReflectiveRuntimeHintsRegistrar.createEntry:method(AnnotatedElement)",
+      "line": 127,
+      "evidence": "new DelegatingReflectiveProcessor(processors)",
+      "before": "",
+      "after": "ReflectiveProcessor"
+    },
+    {
+      "path": "src/main/java/org/springframework/aot/hint/predicate/ResourceHintsPredicates.java",
+      "source": "src/main/java/org/springframework/aot/hint/predicate/ResourceHintsPredicates.java::org.springframework.aot.hint.predicate.ResourceHintsPredicates.forResource:method(String)",
+      "line": 98,
+      "evidence": "resourceName.substring(1)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/aot/hint/support/FilePatternResourceHintsRegistrar.java",
+      "source": "src/main/java/org/springframework/aot/hint/support/FilePatternResourceHintsRegistrar.java::org.springframework.aot.hint.support.FilePatternResourceHintsRegistrar.registerHints:method(ResourceHints,ClassLoader)",
+      "line": 62,
+      "evidence": "ClassUtils.getDefaultClassLoader()",
+      "before": "",
+      "after": "ClassLoader"
+    },
+    {
+      "path": "src/main/java/org/springframework/aot/hint/support/SpringFactoriesLoaderRuntimeHints.java",
+      "source": "src/main/java/org/springframework/aot/hint/support/SpringFactoriesLoaderRuntimeHints.java::org.springframework.aot.hint.support.SpringFactoriesLoaderRuntimeHints.registerHints:method(RuntimeHints,ClassLoader)",
+      "line": 51,
+      "evidence": "ClassUtils.getDefaultClassLoader()",
+      "before": "",
+      "after": "ClassLoader"
+    },
+    {
+      "path": "src/main/java/org/springframework/asm/ClassReader.java",
+      "source": "src/main/java/org/springframework/asm/ClassReader.java::org.springframework.asm.ClassReader.accept:method(ClassVisitor,Attribute[],int)",
+      "line": 600,
+      "evidence": "readUTF8(cpInfoOffsets[methodIndex], charBuffer)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/asm/ClassReader.java",
+      "source": "src/main/java/org/springframework/asm/ClassReader.java::org.springframework.asm.ClassReader.accept:method(ClassVisitor,Attribute[],int)",
+      "line": 601,
+      "evidence": "readUTF8(cpInfoOffsets[methodIndex] + 2, charBuffer)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/asm/ClassReader.java",
+      "source": "src/main/java/org/springframework/asm/ClassReader.java::org.springframework.asm.ClassReader.readTypeAnnotations:method(MethodVisitor,Context,int,boolean)",
+      "line": 2821,
+      "evidence": "new TypePath(classFileBuffer, currentOffset)",
+      "before": "",
+      "after": "TypePath"
+    },
+    {
+      "path": "src/main/java/org/springframework/asm/ClassWriter.java",
+      "source": "src/main/java/org/springframework/asm/ClassWriter.java::org.springframework.asm.ClassWriter.getClassLoader:method()",
+      "line": 1101,
+      "evidence": "getClass().getClassLoader()",
+      "before": "",
+      "after": "ClassLoader"
+    },
+    {
+      "path": "src/main/java/org/springframework/asm/Frame.java",
+      "source": "src/main/java/org/springframework/asm/Frame.java::org.springframework.asm.Frame.push:method(SymbolTable,String)",
+      "line": 560,
+      "evidence": "Type.getReturnTypeOffset(descriptor)",
+      "before": "",
+      "after": "int"
+    },
+    {
+      "path": "src/main/java/org/springframework/cglib/beans/BeanGenerator.java",
+      "source": "src/main/java/org/springframework/cglib/beans/BeanGenerator.java::org.springframework.cglib.beans.BeanGenerator.createHelper:method()",
+      "line": 106,
+      "evidence": "superclass.getName()",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/cglib/beans/BeanGenerator.java",
+      "source": "src/main/java/org/springframework/cglib/beans/BeanGenerator.java::org.springframework.cglib.beans.BeanGenerator.nextInstance:method(Object)",
+      "line": 144,
+      "evidence": "instance.getClass()",
+      "before": "",
+      "after": "Class"
+    },
+    {
+      "path": "src/main/java/org/springframework/cglib/core/EmitUtils.java",
+      "source": "src/main/java/org/springframework/cglib/core/EmitUtils.java::org.springframework.cglib.core.EmitUtils.wrap_undeclared_throwable:method(CodeEmitter,Block,Type[],Type)",
+      "line": 912,
+      "evidence": "new HashSet(Arrays.asList(exceptions))",
+      "before": "",
+      "after": "Set"
+    },
+    {
+      "path": "src/main/java/org/springframework/cglib/core/ReflectUtils.java",
+      "source": "src/main/java/org/springframework/cglib/core/ReflectUtils.java::org.springframework.cglib.core.ReflectUtils.getClassInfo:method(Class)",
+      "line": 646,
+      "evidence": "Type.getType(clazz.getSuperclass())",
+      "before": "",
+      "after": "Type"
+    },
+    {
+      "path": "src/main/java/org/springframework/cglib/core/TypeUtils.java",
+      "source": "src/main/java/org/springframework/cglib/core/TypeUtils.java::org.springframework.cglib.core.TypeUtils.getPackageName:method(String)",
+      "line": 96,
+      "evidence": "className.substring(0, idx)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/cglib/core/WeakCacheKey.java",
+      "source": "src/main/java/org/springframework/cglib/core/WeakCacheKey.java::org.springframework.cglib.core.WeakCacheKey.toString:method()",
+      "line": 40,
+      "evidence": "t.toString()",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/cglib/proxy/Enhancer.java",
+      "source": "src/main/java/org/springframework/cglib/proxy/Enhancer.java::org.springframework.cglib.proxy.Enhancer.emitMethods:method(ClassEmitter,List,List)",
+      "line": 1212,
+      "evidence": "actualMethods.iterator()",
+      "before": "",
+      "after": "Iterator"
+    },
+    {
+      "path": "src/main/java/org/springframework/cglib/transform/impl/InterceptFieldTransformer.java",
+      "source": "src/main/java/org/springframework/cglib/transform/impl/InterceptFieldTransformer.java::org.springframework.cglib.transform.impl.InterceptFieldTransformer.callbackName:method(Type)",
+      "line": 216,
+      "evidence": "TypeUtils.upperFirst(TypeUtils.getClassName(type))",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/BridgeMethodResolver.java",
+      "source": "src/main/java/org/springframework/core/BridgeMethodResolver.java::org.springframework.core.BridgeMethodResolver.resolveBridgeMethod:method(Method,Class<?>)",
+      "line": 112,
+      "evidence": "new MethodClassKey(bridgeMethod, targetClass)",
+      "before": "",
+      "after": "Object"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/BridgeMethodResolver.java",
+      "source": "src/main/java/org/springframework/core/BridgeMethodResolver.java::org.springframework.core.BridgeMethodResolver.searchCandidates:method(List<Method>,Method,Class<?>)",
+      "line": 166,
+      "evidence": "candidateMethods.get(0)",
+      "before": "",
+      "after": "Method"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/CollectionFactory.java",
+      "source": "src/main/java/org/springframework/core/CollectionFactory.java::org.springframework.core.CollectionFactory.createStringAdaptingProperties.getProperty:function(String)",
+      "line": 355,
+      "evidence": "value.toString()",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/Constants.java",
+      "source": "src/main/java/org/springframework/core/Constants.java::org.springframework.core.Constants.getNames:method(String)",
+      "line": 166,
+      "evidence": "namePrefix.trim().toUpperCase(Locale.ENGLISH)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/Constants.java",
+      "source": "src/main/java/org/springframework/core/Constants.java::org.springframework.core.Constants.getNamesForSuffix:method(String)",
+      "line": 198,
+      "evidence": "nameSuffix.trim().toUpperCase(Locale.ENGLISH)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/Constants.java",
+      "source": "src/main/java/org/springframework/core/Constants.java::org.springframework.core.Constants.getValues:method(String)",
+      "line": 220,
+      "evidence": "namePrefix.trim().toUpperCase(Locale.ENGLISH)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/Constants.java",
+      "source": "src/main/java/org/springframework/core/Constants.java::org.springframework.core.Constants.getValuesForSuffix:method(String)",
+      "line": 252,
+      "evidence": "nameSuffix.trim().toUpperCase(Locale.ENGLISH)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/Constants.java",
+      "source": "src/main/java/org/springframework/core/Constants.java::org.springframework.core.Constants.toCode:method(Object,String)",
+      "line": 272,
+      "evidence": "namePrefix.trim().toUpperCase(Locale.ENGLISH)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/Constants.java",
+      "source": "src/main/java/org/springframework/core/Constants.java::org.springframework.core.Constants.toCodeForSuffix:method(Object,String)",
+      "line": 303,
+      "evidence": "nameSuffix.trim().toUpperCase(Locale.ENGLISH)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/Conventions.java",
+      "source": "src/main/java/org/springframework/core/Conventions.java::org.springframework.core.Conventions.getVariableName:method(Object)",
+      "line": 88,
+      "evidence": "pluralize(name)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/Conventions.java",
+      "source": "src/main/java/org/springframework/core/Conventions.java::org.springframework.core.Conventions.getVariableNameForParameter:method(MethodParameter)",
+      "line": 129,
+      "evidence": "pluralize(name)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/Conventions.java",
+      "source": "src/main/java/org/springframework/core/Conventions.java::org.springframework.core.Conventions.getVariableNameForReturnType:method(Method,Class<?>,Object)",
+      "line": 211,
+      "evidence": "pluralize(name)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/CoroutinesUtils.java",
+      "source": "src/main/java/org/springframework/core/CoroutinesUtils.java::org.springframework.core.CoroutinesUtils.invokeSuspendingFunction:method(Method,Object,Object...)",
+      "line": 101,
+      "evidence": "Dispatchers.getUnconfined().plus(new PropagationContextElement())",
+      "before": "",
+      "after": "CoroutineContext"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/CoroutinesUtils.java",
+      "source": "src/main/java/org/springframework/core/CoroutinesUtils.java::org.springframework.core.CoroutinesUtils.invokeSuspendingFunction:method(Method,Object,Object...)",
+      "line": 101,
+      "evidence": "Dispatchers.getUnconfined()",
+      "before": "",
+      "after": "CoroutineContext"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/GenericTypeResolver.java",
+      "source": "src/main/java/org/springframework/core/GenericTypeResolver.java::org.springframework.core.GenericTypeResolver.TypeVariableMapVariableResolver.resolveVariable:method(TypeVariable<?>)",
+      "line": 310,
+      "evidence": "ResolvableType.forType(type)",
+      "before": "",
+      "after": "ResolvableType"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/KotlinReflectionParameterNameDiscoverer.java",
+      "source": "src/main/java/org/springframework/core/KotlinReflectionParameterNameDiscoverer.java::org.springframework.core.KotlinReflectionParameterNameDiscoverer.getParameterNames:method(Method)",
+      "line": 48,
+      "evidence": "getParameterNames(function.getParameters())",
+      "before": "",
+      "after": "String@Nullable[]"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/MethodParameter.java",
+      "source": "src/main/java/org/springframework/core/MethodParameter.java::org.springframework.core.MethodParameter.nestedIfOptional:method()",
+      "line": 419,
+      "evidence": "nested()",
+      "before": "",
+      "after": "MethodParameter"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/MethodParameter.java",
+      "source": "src/main/java/org/springframework/core/MethodParameter.java::org.springframework.core.MethodParameter.getContainingClass:method()",
+      "line": 454,
+      "evidence": "getDeclaringClass()",
+      "before": "",
+      "after": "Class<?>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/Nullness.java",
+      "source": "src/main/java/org/springframework/core/Nullness.java::org.springframework.core.Nullness.forMethodReturnType:method(Method)",
+      "line": 93,
+      "evidence": "jSpecifyNullness(method, method.getDeclaringClass(), method.getAnnotatedReturnType())",
+      "before": "",
+      "after": "Nullness"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/Nullness.java",
+      "source": "src/main/java/org/springframework/core/Nullness.java::org.springframework.core.Nullness.forParameter:method(Parameter)",
+      "line": 109,
+      "evidence": "jSpecifyNullness(executable, executable.getDeclaringClass(), parameter.getAnnotatedType())",
+      "before": "",
+      "after": "Nullness"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/Nullness.java",
+      "source": "src/main/java/org/springframework/core/Nullness.java::org.springframework.core.Nullness.forMethodParameter:method(MethodParameter)",
+      "line": 119,
+      "evidence": "forMethodReturnType(Objects.requireNonNull(methodParameter.getMethod()))",
+      "before": "",
+      "after": "Nullness"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/Nullness.java",
+      "source": "src/main/java/org/springframework/core/Nullness.java::org.springframework.core.Nullness.forMethodParameter:method(MethodParameter)",
+      "line": 120,
+      "evidence": "forParameter(methodParameter.getParameter())",
+      "before": "",
+      "after": "Nullness"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/Nullness.java",
+      "source": "src/main/java/org/springframework/core/Nullness.java::org.springframework.core.Nullness.forField:method(Field)",
+      "line": 133,
+      "evidence": "jSpecifyNullness(field, field.getDeclaringClass(), field.getAnnotatedType())",
+      "before": "",
+      "after": "Nullness"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/OrderComparator.java",
+      "source": "src/main/java/org/springframework/core/OrderComparator.java::org.springframework.core.OrderComparator.getOrder:method(Object,OrderSourceProvider)",
+      "line": 118,
+      "evidence": "getOrder(obj)",
+      "before": "",
+      "after": "int"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/OrderComparator.java",
+      "source": "src/main/java/org/springframework/core/OrderComparator.java::org.springframework.core.OrderComparator.findOrder:method(Object)",
+      "line": 146,
+      "evidence": "ordered.getOrder()",
+      "before": "",
+      "after": "Integer"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/PropagationContextElement.java",
+      "source": "src/main/java/org/springframework/core/PropagationContextElement.java::org.springframework.core.PropagationContextElement.ReactorDelegate.captureFrom:method(CoroutineContext)",
+      "line": 109,
+      "evidence": "reactorContext.getContext()",
+      "before": "",
+      "after": "ContextView"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/ReactiveAdapterRegistry.java",
+      "source": "src/main/java/org/springframework/core/ReactiveAdapterRegistry.java::org.springframework.core.ReactiveAdapterRegistry.buildAdapter:method(ReactiveTypeDescriptor,Function<Object,Publisher<?>>,Function<Publisher<?>,Object>)",
+      "line": 167,
+      "evidence": "new ReactorAdapter(descriptor, toAdapter, fromAdapter)",
+      "before": "",
+      "after": "ReactiveAdapter"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/ReactiveAdapterRegistry.java",
+      "source": "src/main/java/org/springframework/core/ReactiveAdapterRegistry.java::org.springframework.core.ReactiveAdapterRegistry.buildAdapter:method(ReactiveTypeDescriptor,Function<Object,Publisher<?>>,Function<Publisher<?>,Object>)",
+      "line": 168,
+      "evidence": "new ReactiveAdapter(descriptor, toAdapter, fromAdapter)",
+      "before": "",
+      "after": "ReactiveAdapter"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/ReactiveAdapterRegistry.java",
+      "source": "src/main/java/org/springframework/core/ReactiveAdapterRegistry.java::org.springframework.core.ReactiveAdapterRegistry.getAdapter:method(Class<?>,Object)",
+      "line": 200,
+      "evidence": "optional.orElse(null)",
+      "before": "",
+      "after": "Object"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/ReactiveAdapterRegistry.java",
+      "source": "src/main/java/org/springframework/core/ReactiveAdapterRegistry.java::org.springframework.core.ReactiveAdapterRegistry.getAdapter:method(Class<?>,Object)",
+      "line": 201,
+      "evidence": "sourceToUse.getClass()",
+      "before": "",
+      "after": "Class<?>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/ReactiveAdapterRegistry.java",
+      "source": "src/main/java/org/springframework/core/ReactiveAdapterRegistry.java::org.springframework.core.ReactiveAdapterRegistry.ReactorAdapter.toPublisher:method(Object)",
+      "line": 262,
+      "evidence": "Flux.from(publisher)",
+      "before": "",
+      "after": "Publisher<T>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/ReactiveAdapterRegistry.java",
+      "source": "src/main/java/org/springframework/core/ReactiveAdapterRegistry.java::org.springframework.core.ReactiveAdapterRegistry.ReactorAdapter.toPublisher:method(Object)",
+      "line": 262,
+      "evidence": "Mono.from(publisher)",
+      "before": "",
+      "after": "Publisher<T>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/ResolvableType.java",
+      "source": "src/main/java/org/springframework/core/ResolvableType.java::org.springframework.core.ResolvableType.getSource:method()",
+      "line": 226,
+      "evidence": "this.typeProvider.getSource()",
+      "before": "",
+      "after": "Object"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/ResolvableType.java",
+      "source": "src/main/java/org/springframework/core/ResolvableType.java::org.springframework.core.ResolvableType.isAssignableFrom:method(Class<?>)",
+      "line": 261,
+      "evidence": "ClassUtils.isAssignable(clazz, other)",
+      "before": "",
+      "after": "boolean"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/ResolvableType.java",
+      "source": "src/main/java/org/springframework/core/ResolvableType.java::org.springframework.core.ResolvableType.isAssignableFrom:method(Class<?>)",
+      "line": 262,
+      "evidence": "isAssignableFrom(forClass(other), false, null, false)",
+      "before": "",
+      "after": "boolean"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/ResolvableType.java",
+      "source": "src/main/java/org/springframework/core/ResolvableType.java::org.springframework.core.ResolvableType.isAssignableFrom:method(ResolvableType,boolean,Map<Type,Type>,boolean)",
+      "line": 310,
+      "evidence": "clazz.isAssignableFrom(otherClazz)",
+      "before": "",
+      "after": "boolean"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/ResolvableType.java",
+      "source": "src/main/java/org/springframework/core/ResolvableType.java::org.springframework.core.ResolvableType.isAssignableFrom:method(ResolvableType,boolean,Map<Type,Type>,boolean)",
+      "line": 310,
+      "evidence": "ClassUtils.isAssignable(clazz, otherClazz)",
+      "before": "",
+      "after": "boolean"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/ResolvableType.java",
+      "source": "src/main/java/org/springframework/core/ResolvableType.java::org.springframework.core.ResolvableType.isAssignableFrom:method(ResolvableType,boolean,Map<Type,Type>,boolean)",
+      "line": 338,
+      "evidence": "otherBounds.equalsType(this, matchedBefore)",
+      "before": "",
+      "after": "boolean"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/ResolvableType.java",
+      "source": "src/main/java/org/springframework/core/ResolvableType.java::org.springframework.core.ResolvableType.isAssignableFrom:method(ResolvableType,boolean,Map<Type,Type>,boolean)",
+      "line": 339,
+      "evidence": "otherBounds.isAssignableTo(this, matchedBefore)",
+      "before": "",
+      "after": "boolean"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/ResolvableType.java",
+      "source": "src/main/java/org/springframework/core/ResolvableType.java::org.springframework.core.ResolvableType.getNested:method(int,Map<Integer,Integer>)",
+      "line": 729,
+      "evidence": "typeIndexesPerLevel.get(i)",
+      "before": "",
+      "after": "Integer"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/ResolvableType.java",
+      "source": "src/main/java/org/springframework/core/ResolvableType.java::org.springframework.core.ResolvableType.resolveClass:method()",
+      "line": 910,
+      "evidence": "Array.newInstance(resolvedComponent, 0).getClass()",
+      "before": "",
+      "after": "Class<?>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/ResolvableType.java",
+      "source": "src/main/java/org/springframework/core/ResolvableType.java::org.springframework.core.ResolvableType.hashCode:method()",
+      "line": 1032,
+      "evidence": "calculateHashCode()",
+      "before": "",
+      "after": "int"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/ResolvableType.java",
+      "source": "src/main/java/org/springframework/core/ResolvableType.java::org.springframework.core.ResolvableType.forClass:method(Class<?>,Class<?>)",
+      "line": 1152,
+      "evidence": "forType(baseType)",
+      "before": "",
+      "after": "ResolvableType"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/ResolvableType.java",
+      "source": "src/main/java/org/springframework/core/ResolvableType.java::org.springframework.core.ResolvableType.forClassWithGenerics:method(Class<?>,ResolvableType...)",
+      "line": 1188,
+      "evidence": "generic.getType()",
+      "before": "",
+      "after": "Type"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/ResolvableType.java",
+      "source": "src/main/java/org/springframework/core/ResolvableType.java::org.springframework.core.ResolvableType.forInstance:method(Object)",
+      "line": 1213,
+      "evidence": "forClass(instance.getClass())",
+      "before": "",
+      "after": "ResolvableType"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/SpringProperties.java",
+      "source": "src/main/java/org/springframework/core/SpringProperties.java::org.springframework.core.SpringProperties:class",
+      "line": 67,
+      "evidence": "cl.getResource(PROPERTIES_RESOURCE_LOCATION)",
+      "before": "",
+      "after": "URL"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/SpringProperties.java",
+      "source": "src/main/java/org/springframework/core/SpringProperties.java::org.springframework.core.SpringProperties:class",
+      "line": 68,
+      "evidence": "ClassLoader.getSystemResource(PROPERTIES_RESOURCE_LOCATION)",
+      "before": "",
+      "after": "URL"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/SpringProperties.java",
+      "source": "src/main/java/org/springframework/core/SpringProperties.java::org.springframework.core.SpringProperties.checkFlag:method(String)",
+      "line": 160,
+      "evidence": "Boolean.valueOf(flag)",
+      "before": "",
+      "after": "Boolean"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/SpringVersion.java",
+      "source": "src/main/java/org/springframework/core/SpringVersion.java::org.springframework.core.SpringVersion.getVersion:method()",
+      "line": 47,
+      "evidence": "pkg.getImplementationVersion()",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/AbstractMergedAnnotation.java",
+      "source": "src/main/java/org/springframework/core/annotation/AbstractMergedAnnotation.java::org.springframework.core.annotation.AbstractMergedAnnotation.synthesize:method(Predicate<?superMergedAnnotation<A>>)",
+      "line": 199,
+      "evidence": "Optional.of(synthesize())",
+      "before": "",
+      "after": "Optional<A>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/AbstractMergedAnnotation.java",
+      "source": "src/main/java/org/springframework/core/annotation/AbstractMergedAnnotation.java::org.springframework.core.annotation.AbstractMergedAnnotation.synthesize:method(Predicate<?superMergedAnnotation<A>>)",
+      "line": 199,
+      "evidence": "Optional.empty()",
+      "before": "",
+      "after": "Optional<A>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/AnnotatedElementAdapter.java",
+      "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementAdapter.java::org.springframework.core.annotation.AnnotatedElementAdapter.getAnnotations:method()",
+      "line": 93,
+      "evidence": "this.annotations.clone()",
+      "before": "",
+      "after": "Annotation[]"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/AnnotatedMethod.java",
+      "source": "src/main/java/org/springframework/core/annotation/AnnotatedMethod.java::org.springframework.core.annotation.AnnotatedMethod.ReturnValueMethodParameter.getParameterType:method()",
+      "line": 362,
+      "evidence": "super.getParameterType()",
+      "before": "",
+      "after": "Class<?>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/AnnotationAwareOrderComparator.java",
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationAwareOrderComparator.java::org.springframework.core.annotation.AnnotationAwareOrderComparator.findOrderFromAnnotation:method(Object)",
+      "line": 72,
+      "evidence": "obj.getClass()",
+      "before": "",
+      "after": "AnnotatedElement"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/AnnotationTypeMappings.java",
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationTypeMappings.java::org.springframework.core.annotation.AnnotationTypeMappings.Cache.get:method(Class<?extendsAnnotation>)",
+      "line": 300,
+      "evidence": "getOrCreate(annotationType, new HashSet<>())",
+      "before": "",
+      "after": "AnnotationTypeMappings"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/AnnotationUtils.java",
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationUtils.java::org.springframework.core.annotation.AnnotationUtils.getRepeatableAnnotations:method(AnnotatedElement,Class<A>,Class<?extendsAnnotation>)",
+      "line": 391,
+      "evidence": "RepeatableContainers.explicitRepeatable(annotationType, containerAnnotationType)",
+      "before": "",
+      "after": "RepeatableContainers"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/AnnotationUtils.java",
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationUtils.java::org.springframework.core.annotation.AnnotationUtils.getRepeatableAnnotations:method(AnnotatedElement,Class<A>,Class<?extendsAnnotation>)",
+      "line": 392,
+      "evidence": "RepeatableContainers.standardRepeatables()",
+      "before": "",
+      "after": "RepeatableContainers"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/AnnotationUtils.java",
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationUtils.java::org.springframework.core.annotation.AnnotationUtils.getDeclaredRepeatableAnnotations:method(AnnotatedElement,Class<A>,Class<?extendsAnnotation>)",
+      "line": 472,
+      "evidence": "RepeatableContainers.explicitRepeatable(annotationType, containerAnnotationType)",
+      "before": "",
+      "after": "RepeatableContainers"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/AnnotationUtils.java",
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationUtils.java::org.springframework.core.annotation.AnnotationUtils.getDeclaredRepeatableAnnotations:method(AnnotatedElement,Class<A>,Class<?extendsAnnotation>)",
+      "line": 473,
+      "evidence": "RepeatableContainers.standardRepeatables()",
+      "before": "",
+      "after": "RepeatableContainers"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/AnnotationUtils.java",
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationUtils.java::org.springframework.core.annotation.AnnotationUtils.getDefaultValue:method(Annotation,String)",
+      "line": 1174,
+      "evidence": "getDefaultValue(annotation.annotationType(), attributeName)",
+      "before": "",
+      "after": "Object"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java",
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.processMethodInheritedAnnotations:method(C,Method,AnnotationsProcessor<C,R>)",
+      "line": 253,
+      "evidence": "processMethodAnnotations(context, 0, source, processor)",
+      "before": "",
+      "after": "R"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java",
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.processElement:method(C,AnnotatedElement,AnnotationsProcessor<C,R>)",
+      "line": 411,
+      "evidence": "processor.doWithAnnotations( context, 0, source, getDeclaredAnnotations(source, false))",
+      "before": "",
+      "after": "R"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/MergedAnnotationsCollection.java",
+      "source": "src/main/java/org/springframework/core/annotation/MergedAnnotationsCollection.java::org.springframework.core.annotation.MergedAnnotationsCollection.get:method(Class<A>,Predicate<?superMergedAnnotation<A>>,MergedAnnotationSelector<A>)",
+      "line": 137,
+      "evidence": "MergedAnnotation.missing()",
+      "before": "",
+      "after": "MergedAnnotation<A>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/MergedAnnotationsCollection.java",
+      "source": "src/main/java/org/springframework/core/annotation/MergedAnnotationsCollection.java::org.springframework.core.annotation.MergedAnnotationsCollection.get:method(String,Predicate<?superMergedAnnotation<A>>,MergedAnnotationSelector<A>)",
+      "line": 158,
+      "evidence": "MergedAnnotation.missing()",
+      "before": "",
+      "after": "MergedAnnotation<A>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/MergedAnnotationsCollection.java",
+      "source": "src/main/java/org/springframework/core/annotation/MergedAnnotationsCollection.java::org.springframework.core.annotation.MergedAnnotationsCollection.find:method(Object,Predicate<?superMergedAnnotation<A>>,MergedAnnotationSelector<A>)",
+      "line": 181,
+      "evidence": "TypeMappedAnnotation.createIfPossible(mapping, root, IntrospectionFailureLogger.INFO)",
+      "before": "",
+      "after": "MergedAnnotation<A>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/MergedAnnotationsCollection.java",
+      "source": "src/main/java/org/springframework/core/annotation/MergedAnnotationsCollection.java::org.springframework.core.annotation.MergedAnnotationsCollection.AnnotationsSpliterator.getMapping:method(int,int)",
+      "line": 279,
+      "evidence": "mappings.get(mappingIndex)",
+      "before": "",
+      "after": "AnnotationTypeMapping"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotation.java",
+      "source": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotation.java::org.springframework.core.annotation.TypeMappedAnnotation.getTypeForMapOptions:method(Method,Adapt[])",
+      "line": 298,
+      "evidence": "attributeType.componentType()",
+      "before": "",
+      "after": "Class<?>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotation.java",
+      "source": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotation.java::org.springframework.core.annotation.TypeMappedAnnotation.adaptValueForMapOptions:method(Method,Object,Class<?>,Function<MergedAnnotation<?>,T>,Adapt[])",
+      "line": 310,
+      "evidence": "annotation.asMap(factory, adaptations)",
+      "before": "",
+      "after": "Object"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotation.java",
+      "source": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotation.java::org.springframework.core.annotation.TypeMappedAnnotation.adaptValueForMapOptions:method(Method,Object,Class<?>,Function<MergedAnnotation<?>,T>,Adapt[])",
+      "line": 310,
+      "evidence": "annotation.synthesize()",
+      "before": "",
+      "after": "Object"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotation.java",
+      "source": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotation.java::org.springframework.core.annotation.TypeMappedAnnotation.getAttributeValue:method(String,Class<T>)",
+      "line": 374,
+      "evidence": "getValue(attributeIndex, type)",
+      "before": "",
+      "after": "T"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotation.java",
+      "source": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotation.java::org.springframework.core.annotation.TypeMappedAnnotation.getValue:method(int,boolean)",
+      "line": 414,
+      "evidence": "attribute.getDefaultValue()",
+      "before": "",
+      "after": "Object"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotation.java",
+      "source": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotation.java::org.springframework.core.annotation.TypeMappedAnnotation.getAttributeIndex:method(String,boolean)",
+      "line": 577,
+      "evidence": "this.mapping.getAttributes().indexOf(attributeName)",
+      "before": "",
+      "after": "int"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotation.java",
+      "source": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotation.java::org.springframework.core.annotation.TypeMappedAnnotation.extractFromMap:method(Method,Object)",
+      "line": 669,
+      "evidence": "((Map<String, ?>) map).get(attribute.getName())",
+      "before": "",
+      "after": "Object"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java",
+      "source": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java::org.springframework.core.annotation.TypeMappedAnnotations.get:method(Class<A>,Predicate<?superMergedAnnotation<A>>,MergedAnnotationSelector<A>)",
+      "line": 152,
+      "evidence": "MergedAnnotation.missing()",
+      "before": "",
+      "after": "MergedAnnotation<A>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java",
+      "source": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java::org.springframework.core.annotation.TypeMappedAnnotations.get:method(String,Predicate<?superMergedAnnotation<A>>,MergedAnnotationSelector<A>)",
+      "line": 177,
+      "evidence": "MergedAnnotation.missing()",
+      "before": "",
+      "after": "MergedAnnotation<A>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java",
+      "source": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java::org.springframework.core.annotation.TypeMappedAnnotations.Aggregate.getMapping:method(int,int)",
+      "line": 517,
+      "evidence": "mappings.get(mappingIndex)",
+      "before": "",
+      "after": "AnnotationTypeMapping"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/codec/AbstractCharSequenceDecoder.java",
+      "source": "src/main/java/org/springframework/core/codec/AbstractCharSequenceDecoder.java::org.springframework.core.codec.AbstractCharSequenceDecoder.processDataBuffer:method(DataBuffer,DataBufferUtils.Matcher,LimitedDataBufferList)",
+      "line": 165,
+      "evidence": "Collections.emptyList()",
+      "before": "",
+      "after": "Collection<DataBuffer>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/codec/Decoder.java",
+      "source": "src/main/java/org/springframework/core/codec/Decoder.java::org.springframework.core.codec.Decoder.getDecodableMimeTypes:method(ResolvableType)",
+      "line": 133,
+      "evidence": "getDecodableMimeTypes()",
+      "before": "",
+      "after": "List<MimeType>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/codec/Decoder.java",
+      "source": "src/main/java/org/springframework/core/codec/Decoder.java::org.springframework.core.codec.Decoder.getDecodableMimeTypes:method(ResolvableType)",
+      "line": 133,
+      "evidence": "Collections.emptyList()",
+      "before": "",
+      "after": "List<MimeType>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/codec/Encoder.java",
+      "source": "src/main/java/org/springframework/core/codec/Encoder.java::org.springframework.core.codec.Encoder.getEncodableMimeTypes:method(ResolvableType)",
+      "line": 114,
+      "evidence": "getEncodableMimeTypes()",
+      "before": "",
+      "after": "List<MimeType>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/codec/Encoder.java",
+      "source": "src/main/java/org/springframework/core/codec/Encoder.java::org.springframework.core.codec.Encoder.getEncodableMimeTypes:method(ResolvableType)",
+      "line": 114,
+      "evidence": "Collections.emptyList()",
+      "before": "",
+      "after": "List<MimeType>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/codec/Hints.java",
+      "source": "src/main/java/org/springframework/core/codec/Hints.java::org.springframework.core.codec.Hints.merge:method(Map<String,Object>,Map<String,Object>)",
+      "line": 122,
+      "evidence": "Collections.emptyMap()",
+      "before": "",
+      "after": "Map<String,Object>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/codec/ResourceRegionEncoder.java",
+      "source": "src/main/java/org/springframework/core/codec/ResourceRegionEncoder.java::org.springframework.core.codec.ResourceRegionEncoder.encode:method(Publisher<?extendsResourceRegion>,DataBufferFactory,ResolvableType,MimeType,Map<String,Object>)",
+      "line": 100,
+      "evidence": "toAsciiBytes(\"Content-Type: \" + mimeType + \"\\r\\n\")",
+      "before": "",
+      "after": "byte[]"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/convert/TypeDescriptor.java",
+      "source": "src/main/java/org/springframework/core/convert/TypeDescriptor.java::org.springframework.core.convert.TypeDescriptor.forObject:method(Object)",
+      "line": 564,
+      "evidence": "valueOf(source.getClass())",
+      "before": "",
+      "after": "TypeDescriptor"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/convert/TypeDescriptor.java",
+      "source": "src/main/java/org/springframework/core/convert/TypeDescriptor.java::org.springframework.core.convert.TypeDescriptor.valueOf:method(Class<?>)",
+      "line": 582,
+      "evidence": "new TypeDescriptor(ResolvableType.forClass(type), null, null)",
+      "before": "",
+      "after": "TypeDescriptor"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/convert/converter/Converter.java",
+      "source": "src/main/java/org/springframework/core/convert/converter/Converter.java::org.springframework.core.convert.converter.Converter.andThen:method(Converter<?superT,?extends@NullableU>)",
+      "line": 64,
+      "evidence": "after.convert(initialResult)",
+      "before": "",
+      "after": "Converter<S,@NullableU>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/convert/support/ByteBufferConverter.java",
+      "source": "src/main/java/org/springframework/core/convert/support/ByteBufferConverter.java::org.springframework.core.convert.support.ByteBufferConverter.convert:method(Object,TypeDescriptor,TypeDescriptor)",
+      "line": 84,
+      "evidence": "buffer.duplicate()",
+      "before": "",
+      "after": "Object"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/convert/support/ByteBufferConverter.java",
+      "source": "src/main/java/org/springframework/core/convert/support/ByteBufferConverter.java::org.springframework.core.convert.support.ByteBufferConverter.convert:method(Object,TypeDescriptor,TypeDescriptor)",
+      "line": 84,
+      "evidence": "convertFromByteBuffer(buffer, targetType)",
+      "before": "",
+      "after": "Object"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/convert/support/FallbackObjectToStringConverter.java",
+      "source": "src/main/java/org/springframework/core/convert/support/FallbackObjectToStringConverter.java::org.springframework.core.convert.support.FallbackObjectToStringConverter.convert:method(Object,TypeDescriptor,TypeDescriptor)",
+      "line": 66,
+      "evidence": "source.toString()",
+      "before": "",
+      "after": "Object"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/convert/support/ObjectToObjectConverter.java",
+      "source": "src/main/java/org/springframework/core/convert/support/ObjectToObjectConverter.java::org.springframework.core.convert.support.ObjectToObjectConverter.isApplicable:method(Executable,Class<?>)",
+      "line": 160,
+      "evidence": "ClassUtils.isAssignable(method.getDeclaringClass(), sourceClass)",
+      "before": "",
+      "after": "boolean"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/convert/support/StreamConverter.java",
+      "source": "src/main/java/org/springframework/core/convert/support/StreamConverter.java::org.springframework.core.convert.support.StreamConverter.convertFromStream:method(Stream<?>,TypeDescriptor,TypeDescriptor)",
+      "line": 105,
+      "evidence": "source.collect(Collectors.<Object>toList())",
+      "before": "",
+      "after": "List<Object>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/convert/support/StreamConverter.java",
+      "source": "src/main/java/org/springframework/core/convert/support/StreamConverter.java::org.springframework.core.convert.support.StreamConverter.convertFromStream:method(Stream<?>,TypeDescriptor,TypeDescriptor)",
+      "line": 105,
+      "evidence": "Collections.emptyList()",
+      "before": "",
+      "after": "List<Object>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/convert/support/StringToUUIDConverter.java",
+      "source": "src/main/java/org/springframework/core/convert/support/StringToUUIDConverter.java::org.springframework.core.convert.support.StringToUUIDConverter.convert:method(String)",
+      "line": 37,
+      "evidence": "UUID.fromString(source.trim())",
+      "before": "",
+      "after": "UUID"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+      "source": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.resolveNestedPlaceholders:method(String)",
+      "line": 277,
+      "evidence": "resolvePlaceholders(value)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+      "source": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.resolveNestedPlaceholders:method(String)",
+      "line": 277,
+      "evidence": "resolveRequiredPlaceholders(value)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/env/JOptCommandLinePropertySource.java",
+      "source": "src/main/java/org/springframework/core/env/JOptCommandLinePropertySource.java::org.springframework.core.env.JOptCommandLinePropertySource.getOptionValues:method(String)",
+      "line": 114,
+      "evidence": "Collections.emptyList()",
+      "before": "",
+      "after": "List<String>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/env/JOptCommandLinePropertySource.java",
+      "source": "src/main/java/org/springframework/core/env/JOptCommandLinePropertySource.java::org.springframework.core.env.JOptCommandLinePropertySource.getNonOptionArgs:method()",
+      "line": 126,
+      "evidence": "Collections.emptyList()",
+      "before": "",
+      "after": "List<String>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/env/JOptCommandLinePropertySource.java",
+      "source": "src/main/java/org/springframework/core/env/JOptCommandLinePropertySource.java::org.springframework.core.env.JOptCommandLinePropertySource.getNonOptionArgs:method()",
+      "line": 127,
+      "evidence": "Collections.unmodifiableList(stringArgValues)",
+      "before": "",
+      "after": "List<String>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/env/MutablePropertySources.java",
+      "source": "src/main/java/org/springframework/core/env/MutablePropertySources.java::org.springframework.core.env.MutablePropertySources.remove:method(String)",
+      "line": 160,
+      "evidence": "this.propertySourceList.remove(index)",
+      "before": "",
+      "after": "PropertySource<?>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/env/ProfilesParser.java",
+      "source": "src/main/java/org/springframework/core/env/ProfilesParser.java::org.springframework.core.env.ProfilesParser.merge:method(String,List<Profiles>,Operator)",
+      "line": 115,
+      "evidence": "and(profiles)",
+      "before": "",
+      "after": "Profiles"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/env/ProfilesParser.java",
+      "source": "src/main/java/org/springframework/core/env/ProfilesParser.java::org.springframework.core.env.ProfilesParser.merge:method(String,List<Profiles>,Operator)",
+      "line": 115,
+      "evidence": "or(profiles)",
+      "before": "",
+      "after": "Profiles"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+      "source": "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource.getClassLoader:method()",
+      "line": 143,
+      "evidence": "this.clazz.getClassLoader()",
+      "before": "",
+      "after": "ClassLoader"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+      "source": "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource.createRelative:method(String)",
+      "line": 240,
+      "evidence": "new ClassPathResource(pathToUse, this.clazz)",
+      "before": "",
+      "after": "Resource"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+      "source": "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource.createRelative:method(String)",
+      "line": 241,
+      "evidence": "new ClassPathResource(pathToUse, this.classLoader)",
+      "before": "",
+      "after": "Resource"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+      "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getClassLoader:method()",
+      "line": 107,
+      "evidence": "ClassUtils.getDefaultClassLoader()",
+      "before": "",
+      "after": "ClassLoader"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+      "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+      "line": 178,
+      "evidence": "new FileUrlResource(url)",
+      "before": "",
+      "after": "Resource"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+      "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+      "line": 178,
+      "evidence": "new UrlResource(url)",
+      "before": "",
+      "after": "Resource"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+      "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource.contentLength:method()",
+      "line": 229,
+      "evidence": "cl.getResources(getPath())",
+      "before": "",
+      "after": "Enumeration<URL>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+      "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource.contentLength:method()",
+      "line": 229,
+      "evidence": "ClassLoader.getSystemResources(getPath())",
+      "before": "",
+      "after": "Enumeration<URL>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+      "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource.getInputStream:method()",
+      "line": 245,
+      "evidence": "cl.getResources(getPath())",
+      "before": "",
+      "after": "Enumeration<URL>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+      "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource.getInputStream:method()",
+      "line": 245,
+      "evidence": "ClassLoader.getSystemResources(getPath())",
+      "before": "",
+      "after": "Enumeration<URL>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+      "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource.consumeContent:method(IOConsumer<InputStream>)",
+      "line": 272,
+      "evidence": "cl.getResources(getPath())",
+      "before": "",
+      "after": "Enumeration<URL>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+      "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource.consumeContent:method(IOConsumer<InputStream>)",
+      "line": 272,
+      "evidence": "ClassLoader.getSystemResources(getPath())",
+      "before": "",
+      "after": "Enumeration<URL>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/FileSystemResource.java",
+      "source": "src/main/java/org/springframework/core/io/FileSystemResource.java::org.springframework.core.io.FileSystemResource.exists:method()",
+      "line": 169,
+      "evidence": "this.file.exists()",
+      "before": "",
+      "after": "boolean"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/FileSystemResource.java",
+      "source": "src/main/java/org/springframework/core/io/FileSystemResource.java::org.springframework.core.io.FileSystemResource.exists:method()",
+      "line": 169,
+      "evidence": "Files.exists(this.filePath)",
+      "before": "",
+      "after": "boolean"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/FileSystemResource.java",
+      "source": "src/main/java/org/springframework/core/io/FileSystemResource.java::org.springframework.core.io.FileSystemResource.getURL:method()",
+      "line": 250,
+      "evidence": "this.file.toURI().toURL()",
+      "before": "",
+      "after": "URL"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/FileSystemResource.java",
+      "source": "src/main/java/org/springframework/core/io/FileSystemResource.java::org.springframework.core.io.FileSystemResource.getURL:method()",
+      "line": 250,
+      "evidence": "this.filePath.toUri().toURL()",
+      "before": "",
+      "after": "URL"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/FileSystemResource.java",
+      "source": "src/main/java/org/springframework/core/io/FileSystemResource.java::org.springframework.core.io.FileSystemResource.getFile:method()",
+      "line": 292,
+      "evidence": "this.filePath.toFile()",
+      "before": "",
+      "after": "File"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/FileSystemResource.java",
+      "source": "src/main/java/org/springframework/core/io/FileSystemResource.java::org.springframework.core.io.FileSystemResource.createRelative:method(String)",
+      "line": 375,
+      "evidence": "new FileSystemResource(pathToUse)",
+      "before": "",
+      "after": "Resource"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/FileSystemResource.java",
+      "source": "src/main/java/org/springframework/core/io/FileSystemResource.java::org.springframework.core.io.FileSystemResource.createRelative:method(String)",
+      "line": 376,
+      "evidence": "new FileSystemResource(this.filePath.getFileSystem(), pathToUse)",
+      "before": "",
+      "after": "Resource"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/FileSystemResource.java",
+      "source": "src/main/java/org/springframework/core/io/FileSystemResource.java::org.springframework.core.io.FileSystemResource.getFilename:method()",
+      "line": 386,
+      "evidence": "this.file.getName()",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/FileSystemResource.java",
+      "source": "src/main/java/org/springframework/core/io/FileSystemResource.java::org.springframework.core.io.FileSystemResource.getFilename:method()",
+      "line": 386,
+      "evidence": "this.filePath.getFileName().toString()",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/ResourceEditor.java",
+      "source": "src/main/java/org/springframework/core/io/ResourceEditor.java::org.springframework.core.io.ResourceEditor.resolvePath:method(String)",
+      "line": 119,
+      "evidence": "this.propertyResolver.resolvePlaceholders(path)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/ResourceEditor.java",
+      "source": "src/main/java/org/springframework/core/io/ResourceEditor.java::org.springframework.core.io.ResourceEditor.resolvePath:method(String)",
+      "line": 120,
+      "evidence": "this.propertyResolver.resolveRequiredPlaceholders(path)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/ResourceEditor.java",
+      "source": "src/main/java/org/springframework/core/io/ResourceEditor.java::org.springframework.core.io.ResourceEditor.getAsText:method()",
+      "line": 129,
+      "evidence": "value.getURL().toExternalForm()",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/UrlResource.java",
+      "source": "src/main/java/org/springframework/core/io/UrlResource.java::org.springframework.core.io.UrlResource.getFilename:method()",
+      "line": 372,
+      "evidence": "URLDecoder.decode(filename, StandardCharsets.UTF_8)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java",
+      "source": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java::org.springframework.core.io.buffer.DataBufferUtils.read:method(Resource,long,DataBufferFactory,int)",
+      "line": 236,
+      "evidence": "skipUntilByteCount(result, position)",
+      "before": "",
+      "after": "Flux<DataBuffer>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java",
+      "source": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java::org.springframework.core.io.buffer.DataBufferUtils.matcher:method(byte[]...)",
+      "line": 703,
+      "evidence": "createMatcher(delimiters[0])",
+      "before": "",
+      "after": "Matcher"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java",
+      "source": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java::org.springframework.core.io.buffer.DataBufferUtils.matcher:method(byte[]...)",
+      "line": 703,
+      "evidence": "new CompositeMatcher(delimiters)",
+      "before": "",
+      "after": "Matcher"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/buffer/DefaultDataBuffer.java",
+      "source": "src/main/java/org/springframework/core/io/buffer/DefaultDataBuffer.java::org.springframework.core.io.buffer.DefaultDataBuffer.allocate:method(int,boolean)",
+      "line": 237,
+      "evidence": "ByteBuffer.allocateDirect(capacity)",
+      "before": "",
+      "after": "ByteBuffer"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/buffer/DefaultDataBuffer.java",
+      "source": "src/main/java/org/springframework/core/io/buffer/DefaultDataBuffer.java::org.springframework.core.io.buffer.DefaultDataBuffer.allocate:method(int,boolean)",
+      "line": 237,
+      "evidence": "ByteBuffer.allocate(capacity)",
+      "before": "",
+      "after": "ByteBuffer"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/buffer/DefaultDataBufferFactory.java",
+      "source": "src/main/java/org/springframework/core/io/buffer/DefaultDataBufferFactory.java::org.springframework.core.io.buffer.DefaultDataBufferFactory.allocateBuffer:method(int)",
+      "line": 96,
+      "evidence": "ByteBuffer.allocateDirect(initialCapacity)",
+      "before": "",
+      "after": "ByteBuffer"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/buffer/DefaultDataBufferFactory.java",
+      "source": "src/main/java/org/springframework/core/io/buffer/DefaultDataBufferFactory.java::org.springframework.core.io.buffer.DefaultDataBufferFactory.allocateBuffer:method(int)",
+      "line": 97,
+      "evidence": "ByteBuffer.allocate(initialCapacity)",
+      "before": "",
+      "after": "ByteBuffer"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/buffer/NettyDataBuffer.java",
+      "source": "src/main/java/org/springframework/core/io/buffer/NettyDataBuffer.java::org.springframework.core.io.buffer.NettyDataBuffer.toByteBuffer:method(int,int)",
+      "line": 308,
+      "evidence": "ByteBuffer.allocateDirect(length)",
+      "before": "",
+      "after": "ByteBuffer"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/buffer/NettyDataBuffer.java",
+      "source": "src/main/java/org/springframework/core/io/buffer/NettyDataBuffer.java::org.springframework.core.io.buffer.NettyDataBuffer.toByteBuffer:method(int,int)",
+      "line": 309,
+      "evidence": "ByteBuffer.allocate(length)",
+      "before": "",
+      "after": "ByteBuffer"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/buffer/NettyDataBuffer.java",
+      "source": "src/main/java/org/springframework/core/io/buffer/NettyDataBuffer.java::org.springframework.core.io.buffer.NettyDataBuffer.ByteBufferIterator.next:method()",
+      "line": 416,
+      "evidence": "next.asReadOnlyBuffer()",
+      "before": "",
+      "after": "ByteBuffer"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/DefaultPropertySourceFactory.java",
+      "source": "src/main/java/org/springframework/core/io/support/DefaultPropertySourceFactory.java::org.springframework.core.io.support.DefaultPropertySourceFactory.createPropertySource:method(String,EncodedResource)",
+      "line": 38,
+      "evidence": "new ResourcePropertySource(name, resource)",
+      "before": "",
+      "after": "PropertySource<?>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/DefaultPropertySourceFactory.java",
+      "source": "src/main/java/org/springframework/core/io/support/DefaultPropertySourceFactory.java::org.springframework.core.io.support.DefaultPropertySourceFactory.createPropertySource:method(String,EncodedResource)",
+      "line": 38,
+      "evidence": "new ResourcePropertySource(resource)",
+      "before": "",
+      "after": "PropertySource<?>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java",
+      "source": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java::org.springframework.core.io.support.PathMatchingResourcePatternResolver:class",
+      "line": 227,
+      "evidence": "Collections.emptySet()",
+      "before": "",
+      "after": "Set<String>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java",
+      "source": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java::org.springframework.core.io.support.PathMatchingResourcePatternResolver:class",
+      "line": 228,
+      "evidence": "ModuleFinder.ofSystem().findAll().stream() .map(moduleReference -> moduleReference.descriptor().name()) .collect(Collectors.toSet())",
+      "before": "",
+      "after": "Set<String>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java",
+      "source": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java::org.springframework.core.io.support.PathMatchingResourcePatternResolver.doFindAllClassPathResources:method(String)",
+      "line": 439,
+      "evidence": "cl.getResources(path)",
+      "before": "",
+      "after": "Enumeration<URL>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java",
+      "source": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java::org.springframework.core.io.support.PathMatchingResourcePatternResolver.doFindAllClassPathResources:method(String)",
+      "line": 439,
+      "evidence": "ClassLoader.getSystemResources(path)",
+      "before": "",
+      "after": "Enumeration<URL>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java",
+      "source": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java::org.springframework.core.io.support.PathMatchingResourcePatternResolver.addAllClassLoaderJarRoots:method(ClassLoader,Set<Resource>)",
+      "line": 516,
+      "evidence": "new UrlResource(url)",
+      "before": "",
+      "after": "UrlResource"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java",
+      "source": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java::org.springframework.core.io.support.PathMatchingResourcePatternResolver.addAllClassLoaderJarRoots:method(ClassLoader,Set<Resource>)",
+      "line": 517,
+      "evidence": "new UrlResource(ResourceUtils.JAR_URL_PREFIX + url + ResourceUtils.JAR_URL_SEPARATOR)",
+      "before": "",
+      "after": "UrlResource"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java",
+      "source": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java::org.springframework.core.io.support.PathMatchingResourcePatternResolver.getClassPathManifestEntriesFromJar:method(File)",
+      "line": 621,
+      "evidence": "manifest.getMainAttributes()",
+      "before": "",
+      "after": "Attributes"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java",
+      "source": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java::org.springframework.core.io.support.PathMatchingResourcePatternResolver.getClassPathManifestEntriesFromJar:method(File)",
+      "line": 622,
+      "evidence": "attributes.getValue(Name.CLASS_PATH)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java",
+      "source": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java::org.springframework.core.io.support.PathMatchingResourcePatternResolver.getClassPathManifestEntriesFromJar:method(File)",
+      "line": 650,
+      "evidence": "new File(parent, path)",
+      "before": "",
+      "after": "File"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java",
+      "source": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java::org.springframework.core.io.support.PathMatchingResourcePatternResolver.convertModuleSystemURI:method(URI)",
+      "line": 1187,
+      "evidence": "new FileSystemResource(uri.getPath())",
+      "before": "",
+      "after": "Resource"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java",
+      "source": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java::org.springframework.core.io.support.PathMatchingResourcePatternResolver.convertModuleSystemURI:method(URI)",
+      "line": 1187,
+      "evidence": "UrlResource.from(uri)",
+      "before": "",
+      "after": "Resource"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java",
+      "source": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java::org.springframework.core.io.support.PathMatchingResourcePatternResolver.stripLeadingSlash:method(String)",
+      "line": 1191,
+      "evidence": "path.substring(1)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java",
+      "source": "src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java::org.springframework.core.io.support.PathMatchingResourcePatternResolver.ClassPathManifestEntry.createAlternative:method(String,Boolean)",
+      "line": 1319,
+      "evidence": "path.substring(1)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/PropertiesLoaderUtils.java",
+      "source": "src/main/java/org/springframework/core/io/support/PropertiesLoaderUtils.java::org.springframework.core.io.support.PropertiesLoaderUtils.loadAllProperties:method(String,ClassLoader)",
+      "line": 176,
+      "evidence": "classLoaderToUse.getResources(resourceName)",
+      "before": "",
+      "after": "Enumeration<URL>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/PropertiesLoaderUtils.java",
+      "source": "src/main/java/org/springframework/core/io/support/PropertiesLoaderUtils.java::org.springframework.core.io.support.PropertiesLoaderUtils.loadAllProperties:method(String,ClassLoader)",
+      "line": 177,
+      "evidence": "ClassLoader.getSystemResources(resourceName)",
+      "before": "",
+      "after": "Enumeration<URL>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/PropertySourceProcessor.java",
+      "source": "src/main/java/org/springframework/core/io/support/PropertySourceProcessor.java::org.springframework.core.io.support.PropertySourceProcessor.processPropertySource:method(PropertySourceDescriptor)",
+      "line": 86,
+      "evidence": "instantiateClass(descriptor.propertySourceFactory())",
+      "before": "",
+      "after": "PropertySourceFactory"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/PropertySourceProcessor.java",
+      "source": "src/main/java/org/springframework/core/io/support/PropertySourceProcessor.java::org.springframework.core.io.support.PropertySourceProcessor.addPropertySource:method(PropertySource<?>)",
+      "line": 119,
+      "evidence": "rps.withResourceName()",
+      "before": "",
+      "after": "PropertySource<?>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/ResourceArrayPropertyEditor.java",
+      "source": "src/main/java/org/springframework/core/io/support/ResourceArrayPropertyEditor.java::org.springframework.core.io.support.ResourceArrayPropertyEditor.setValue:method(Object)",
+      "line": 147,
+      "evidence": "Arrays.asList((Object[]) value)",
+      "before": "",
+      "after": "Collection<?>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/ResourceArrayPropertyEditor.java",
+      "source": "src/main/java/org/springframework/core/io/support/ResourceArrayPropertyEditor.java::org.springframework.core.io.support.ResourceArrayPropertyEditor.resolvePath:method(String)",
+      "line": 196,
+      "evidence": "this.propertyResolver.resolvePlaceholders(path)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/ResourceArrayPropertyEditor.java",
+      "source": "src/main/java/org/springframework/core/io/support/ResourceArrayPropertyEditor.java::org.springframework.core.io.support.ResourceArrayPropertyEditor.resolvePath:method(String)",
+      "line": 197,
+      "evidence": "this.propertyResolver.resolveRequiredPlaceholders(path)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java",
+      "source": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.forResourceLocation:method(String,ClassLoader)",
+      "line": 321,
+      "evidence": "SpringFactoriesLoader.class.getClassLoader()",
+      "before": "",
+      "after": "ClassLoader"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java",
+      "source": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.FactoryInstantiator.resolveArgs:method(ArgumentResolver)",
+      "line": 384,
+      "evidence": "Arrays.stream(types).map(argumentResolver::resolve).toArray()",
+      "before": "",
+      "after": "Object[]"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java",
+      "source": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.FactoryInstantiator.findPrimaryKotlinConstructor:method(Class<?>)",
+      "line": 410,
+      "evidence": "KotlinDelegate.findPrimaryConstructor(factoryImplementationClass)",
+      "before": "",
+      "after": "Constructor<?>"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java",
+      "source": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.and:method(ArgumentResolver)",
+      "line": 536,
+      "evidence": "argumentResolver.resolve(type)",
+      "before": "",
+      "after": "ArgumentResolver"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/retry/RetryTemplate.java",
+      "source": "src/main/java/org/springframework/core/retry/RetryTemplate.java::org.springframework.core.retry.RetryTemplate.checkIfTimeoutExceeded:method(long,long,long,Retryable<?>,RetryState)",
+      "line": 217,
+      "evidence": "\"\"\" Retry policy for operation '%s' would exceed timeout (%dms) due \\ to pending sleep time (%dms); preemptively aborting execution\"\"\" .formatted(retryable.getName(), timeout, sleepTime)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/retry/RetryTemplate.java",
+      "source": "src/main/java/org/springframework/core/retry/RetryTemplate.java::org.springframework.core.retry.RetryTemplate.checkIfTimeoutExceeded:method(long,long,long,Retryable<?>,RetryState)",
+      "line": 221,
+      "evidence": "\"Retry policy for operation '%s' exceeded timeout (%dms); aborting execution\" .formatted(retryable.getName(), timeout)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/task/SimpleAsyncTaskExecutor.java",
+      "source": "src/main/java/org/springframework/core/task/SimpleAsyncTaskExecutor.java::org.springframework.core.task.SimpleAsyncTaskExecutor.execute:method(Runnable,long)",
+      "line": 317,
+      "evidence": "this.taskDecorator.decorate(task)",
+      "before": "",
+      "after": "Runnable"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/task/SimpleAsyncTaskExecutor.java",
+      "source": "src/main/java/org/springframework/core/task/SimpleAsyncTaskExecutor.java::org.springframework.core.task.SimpleAsyncTaskExecutor.newThread:method(Runnable)",
+      "line": 379,
+      "evidence": "this.threadFactory.newThread(task)",
+      "before": "",
+      "after": "Thread"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/task/SimpleAsyncTaskExecutor.java",
+      "source": "src/main/java/org/springframework/core/task/SimpleAsyncTaskExecutor.java::org.springframework.core.task.SimpleAsyncTaskExecutor.newThread:method(Runnable)",
+      "line": 379,
+      "evidence": "createThread(task)",
+      "before": "",
+      "after": "Thread"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/type/StandardClassMetadata.java",
+      "source": "src/main/java/org/springframework/core/type/StandardClassMetadata.java::org.springframework.core.type.StandardClassMetadata.getEnclosingClassName:method()",
+      "line": 94,
+      "evidence": "enclosingClass.getName()",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/type/StandardClassMetadata.java",
+      "source": "src/main/java/org/springframework/core/type/StandardClassMetadata.java::org.springframework.core.type.StandardClassMetadata.getSuperClassName:method()",
+      "line": 100,
+      "evidence": "superClass.getName()",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/type/classreading/MergedAnnotationReadingVisitor.java",
+      "source": "src/main/java/org/springframework/core/type/classreading/MergedAnnotationReadingVisitor.java::org.springframework.core.type.classreading.MergedAnnotationReadingVisitor.visitEnd:method()",
+      "line": 95,
+      "evidence": "Collections.emptyMap()",
+      "before": "",
+      "after": "Map<String,Object>"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/AntPathMatcher.java",
+      "source": "src/main/java/org/springframework/util/AntPathMatcher.java::org.springframework.util.AntPathMatcher.combine:method(String,String)",
+      "line": 592,
+      "evidence": "pattern2.substring(0, dotPos2)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/AntPathMatcher.java",
+      "source": "src/main/java/org/springframework/util/AntPathMatcher.java::org.springframework.util.AntPathMatcher.combine:method(String,String)",
+      "line": 593,
+      "evidence": "pattern2.substring(dotPos2)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/AntPathMatcher.java",
+      "source": "src/main/java/org/springframework/util/AntPathMatcher.java::org.springframework.util.AntPathMatcher.AntPathStringMatcher.matchStrings:method(String,Map<String,String>)",
+      "line": 723,
+      "evidence": "this.rawPattern.equals(str)",
+      "before": "",
+      "after": "boolean"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/AntPathMatcher.java",
+      "source": "src/main/java/org/springframework/util/AntPathMatcher.java::org.springframework.util.AntPathMatcher.AntPathStringMatcher.matchStrings:method(String,Map<String,String>)",
+      "line": 723,
+      "evidence": "this.rawPattern.equalsIgnoreCase(str)",
+      "before": "",
+      "after": "boolean"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/Assert.java",
+      "source": "src/main/java/org/springframework/util/Assert.java::org.springframework.util.Assert.instanceCheckFailed:method(Class<?>,Object,String)",
+      "line": 604,
+      "evidence": "obj.getClass().getName()",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/Assert.java",
+      "source": "src/main/java/org/springframework/util/Assert.java::org.springframework.util.Assert.nullSafeGet:method(Supplier<String>)",
+      "line": 649,
+      "evidence": "messageSupplier.get()",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ClassUtils.java",
+      "source": "src/main/java/org/springframework/util/ClassUtils.java::org.springframework.util.ClassUtils.resolvePrimitiveIfNecessary:method(Class<?>)",
+      "line": 555,
+      "evidence": "primitiveTypeToWrapperMap.get(clazz)",
+      "before": "",
+      "after": "Class<?>"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ClassUtils.java",
+      "source": "src/main/java/org/springframework/util/ClassUtils.java::org.springframework.util.ClassUtils.isAssignableValue:method(Class<?>,Object)",
+      "line": 646,
+      "evidence": "isAssignable(type, value.getClass())",
+      "before": "",
+      "after": "boolean"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ClassUtils.java",
+      "source": "src/main/java/org/springframework/util/ClassUtils.java::org.springframework.util.ClassUtils.toClassArray:method(Collection<Class<?>>)",
+      "line": 762,
+      "evidence": "collection.toArray(EMPTY_CLASS_ARRAY)",
+      "before": "",
+      "after": "Class<?>[]"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ClassUtils.java",
+      "source": "src/main/java/org/springframework/util/ClassUtils.java::org.springframework.util.ClassUtils.getPackageName:method(String)",
+      "line": 1131,
+      "evidence": "fqClassName.substring(0, lastDotIndex)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ClassUtils.java",
+      "source": "src/main/java/org/springframework/util/ClassUtils.java::org.springframework.util.ClassUtils.getCanonicalName:method(Class<?>)",
+      "line": 1145,
+      "evidence": "clazz.getTypeName()",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/CollectionUtils.java",
+      "source": "src/main/java/org/springframework/util/CollectionUtils.java::org.springframework.util.CollectionUtils.toIterator:method(Enumeration<E>)",
+      "line": 502,
+      "evidence": "enumeration.asIterator()",
+      "before": "",
+      "after": "Iterator<E>"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/CollectionUtils.java",
+      "source": "src/main/java/org/springframework/util/CollectionUtils.java::org.springframework.util.CollectionUtils.toIterator:method(Enumeration<E>)",
+      "line": 502,
+      "evidence": "Collections.emptyIterator()",
+      "before": "",
+      "after": "Iterator<E>"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ConcurrentReferenceHashMap.java",
+      "source": "src/main/java/org/springframework/util/ConcurrentReferenceHashMap.java::org.springframework.util.ConcurrentReferenceHashMap.getHash:method(Object)",
+      "line": 238,
+      "evidence": "o.hashCode()",
+      "before": "",
+      "after": "int"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ConcurrentReferenceHashMap.java",
+      "source": "src/main/java/org/springframework/util/ConcurrentReferenceHashMap.java::org.springframework.util.ConcurrentReferenceHashMap.get:method(Object)",
+      "line": 251,
+      "evidence": "ref.get()",
+      "before": "",
+      "after": "Entry<K,V>"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ConcurrentReferenceHashMap.java",
+      "source": "src/main/java/org/springframework/util/ConcurrentReferenceHashMap.java::org.springframework.util.ConcurrentReferenceHashMap.get:method(Object)",
+      "line": 252,
+      "evidence": "entry.getValue()",
+      "before": "",
+      "after": "V"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ConcurrentReferenceHashMap.java",
+      "source": "src/main/java/org/springframework/util/ConcurrentReferenceHashMap.java::org.springframework.util.ConcurrentReferenceHashMap.getOrDefault:method(Object,V)",
+      "line": 258,
+      "evidence": "ref.get()",
+      "before": "",
+      "after": "Entry<K,V>"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ConcurrentReferenceHashMap.java",
+      "source": "src/main/java/org/springframework/util/ConcurrentReferenceHashMap.java::org.springframework.util.ConcurrentReferenceHashMap.getOrDefault:method(Object,V)",
+      "line": 259,
+      "evidence": "entry.getValue()",
+      "before": "",
+      "after": "V"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ConcurrentReferenceHashMap.java",
+      "source": "src/main/java/org/springframework/util/ConcurrentReferenceHashMap.java::org.springframework.util.ConcurrentReferenceHashMap.containsKey:method(Object)",
+      "line": 265,
+      "evidence": "ref.get()",
+      "before": "",
+      "after": "Entry<K,V>"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ConcurrentReferenceHashMap.java",
+      "source": "src/main/java/org/springframework/util/ConcurrentReferenceHashMap.java::org.springframework.util.ConcurrentReferenceHashMap.computeIfAbsent:method(K,Function<@Nullable?superK,@Nullable?extendsV>)",
+      "line": 376,
+      "evidence": "ref.get()",
+      "before": "",
+      "after": "Entry<K,V>"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ConcurrentReferenceHashMap.java",
+      "source": "src/main/java/org/springframework/util/ConcurrentReferenceHashMap.java::org.springframework.util.ConcurrentReferenceHashMap.computeIfPresent:method(K,BiFunction<@Nullable?superK,@Nullable?superV,@Nullable?extendsV>)",
+      "line": 402,
+      "evidence": "ref.get()",
+      "before": "",
+      "after": "Entry<K,V>"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ConcurrentReferenceHashMap.java",
+      "source": "src/main/java/org/springframework/util/ConcurrentReferenceHashMap.java::org.springframework.util.ConcurrentReferenceHashMap.Segment.doTask:method(int,Object,Task<T>)",
+      "line": 680,
+      "evidence": "ref.get()",
+      "before": "",
+      "after": "Entry<K,V>"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ConcurrentReferenceHashMap.java",
+      "source": "src/main/java/org/springframework/util/ConcurrentReferenceHashMap.java::org.springframework.util.ConcurrentReferenceHashMap.EntrySet.contains:method(Object)",
+      "line": 1009,
+      "evidence": "ref.get()",
+      "before": "",
+      "after": "Entry<K,V>"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ExceptionTypeFilter.java",
+      "source": "src/main/java/org/springframework/util/ExceptionTypeFilter.java::org.springframework.util.ExceptionTypeFilter.match:method(Throwable,boolean)",
+      "line": 90,
+      "evidence": "matchTraversingCauses(exception)",
+      "before": "",
+      "after": "boolean"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ExceptionTypeFilter.java",
+      "source": "src/main/java/org/springframework/util/ExceptionTypeFilter.java::org.springframework.util.ExceptionTypeFilter.match:method(Throwable,boolean)",
+      "line": 90,
+      "evidence": "match(exception.getClass())",
+      "before": "",
+      "after": "boolean"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/MimeType.java",
+      "source": "src/main/java/org/springframework/util/MimeType.java::org.springframework.util.MimeType.parametersHashCode:method()",
+      "line": 538,
+      "evidence": "getCharset()",
+      "before": "",
+      "after": "Object"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/MimeType.java",
+      "source": "src/main/java/org/springframework/util/MimeType.java::org.springframework.util.MimeType.parametersHashCode:method()",
+      "line": 538,
+      "evidence": "unquote(entry.getValue())",
+      "before": "",
+      "after": "Object"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/MultiValueMapAdapter.java",
+      "source": "src/main/java/org/springframework/util/MultiValueMapAdapter.java::org.springframework.util.MultiValueMapAdapter.getFirst:method(K)",
+      "line": 61,
+      "evidence": "values.get(0)",
+      "before": "",
+      "after": "V"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/NumberUtils.java",
+      "source": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.decodeBigInteger:method(String)",
+      "line": 314,
+      "evidence": "result.negate()",
+      "before": "",
+      "after": "BigInteger"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ObjectUtils.java",
+      "source": "src/main/java/org/springframework/util/ObjectUtils.java::org.springframework.util.ObjectUtils.nullSafeClassName:method(Object)",
+      "line": 602,
+      "evidence": "obj.getClass().getName()",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ObjectUtils.java",
+      "source": "src/main/java/org/springframework/util/ObjectUtils.java::org.springframework.util.ObjectUtils.nullSafeConciseToString:method(Object)",
+      "line": 905,
+      "evidence": "\"Optional[%s]\".formatted(nullSafeConciseToString(optional.get()))",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/PatternMatchUtils.java",
+      "source": "src/main/java/org/springframework/util/PatternMatchUtils.java::org.springframework.util.PatternMatchUtils.simpleMatch:method(String,String,boolean)",
+      "line": 62,
+      "evidence": "pattern.equalsIgnoreCase(str)",
+      "before": "",
+      "after": "boolean"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/PatternMatchUtils.java",
+      "source": "src/main/java/org/springframework/util/PatternMatchUtils.java::org.springframework.util.PatternMatchUtils.simpleMatch:method(String,String,boolean)",
+      "line": 62,
+      "evidence": "pattern.equals(str)",
+      "before": "",
+      "after": "boolean"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/PatternMatchUtils.java",
+      "source": "src/main/java/org/springframework/util/PatternMatchUtils.java::org.springframework.util.PatternMatchUtils.simpleMatch:method(String,String,boolean)",
+      "line": 72,
+      "evidence": "StringUtils.endsWithIgnoreCase(str, part)",
+      "before": "",
+      "after": "boolean"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/PatternMatchUtils.java",
+      "source": "src/main/java/org/springframework/util/PatternMatchUtils.java::org.springframework.util.PatternMatchUtils.simpleMatch:method(String,String,boolean)",
+      "line": 72,
+      "evidence": "str.endsWith(part)",
+      "before": "",
+      "after": "boolean"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/PatternMatchUtils.java",
+      "source": "src/main/java/org/springframework/util/PatternMatchUtils.java::org.springframework.util.PatternMatchUtils.checkStartsWith:method(String,String,int,boolean)",
+      "line": 95,
+      "evidence": "StringUtils.startsWithIgnoreCase(pattern, part)",
+      "before": "",
+      "after": "boolean"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/PatternMatchUtils.java",
+      "source": "src/main/java/org/springframework/util/PatternMatchUtils.java::org.springframework.util.PatternMatchUtils.checkStartsWith:method(String,String,int,boolean)",
+      "line": 95,
+      "evidence": "pattern.startsWith(part)",
+      "before": "",
+      "after": "boolean"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/PlaceholderParser.java",
+      "source": "src/main/java/org/springframework/util/PlaceholderParser.java::org.springframework.util.PlaceholderParser.parse:method(String,boolean)",
+      "line": 168,
+      "evidence": "List.of(createNestedPlaceholderPart(value, parts))",
+      "before": "",
+      "after": "List<Part>"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/PlaceholderParser.java",
+      "source": "src/main/java/org/springframework/util/PlaceholderParser.java::org.springframework.util.PlaceholderParser.PartResolutionContext.handleUnresolvablePlaceholder:method(String,String)",
+      "line": 345,
+      "evidence": "toPlaceholderText(text)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ReflectionUtils.java",
+      "source": "src/main/java/org/springframework/util/ReflectionUtils.java::org.springframework.util.ReflectionUtils.findMethod:method(Class<?>,String,Class<?>...)",
+      "line": 239,
+      "evidence": "searchType.getMethods()",
+      "before": "",
+      "after": "Method[]"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ReflectionUtils.java",
+      "source": "src/main/java/org/springframework/util/ReflectionUtils.java::org.springframework.util.ReflectionUtils.findMethod:method(Class<?>,String,Class<?>...)",
+      "line": 240,
+      "evidence": "getDeclaredMethods(searchType, false)",
+      "before": "",
+      "after": "Method[]"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ReflectionUtils.java",
+      "source": "src/main/java/org/springframework/util/ReflectionUtils.java::org.springframework.util.ReflectionUtils.getDeclaredMethods:method(Class<?>,boolean)",
+      "line": 486,
+      "evidence": "result.clone()",
+      "before": "",
+      "after": "Method[]"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ResourceUtils.java",
+      "source": "src/main/java/org/springframework/util/ResourceUtils.java::org.springframework.util.ResourceUtils.getURL:method(String)",
+      "line": 141,
+      "evidence": "cl.getResource(path)",
+      "before": "",
+      "after": "URL"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ResourceUtils.java",
+      "source": "src/main/java/org/springframework/util/ResourceUtils.java::org.springframework.util.ResourceUtils.getURL:method(String)",
+      "line": 141,
+      "evidence": "ClassLoader.getSystemResource(path)",
+      "before": "",
+      "after": "URL"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ResourceUtils.java",
+      "source": "src/main/java/org/springframework/util/ResourceUtils.java::org.springframework.util.ResourceUtils.getFile:method(String)",
+      "line": 183,
+      "evidence": "cl.getResource(path)",
+      "before": "",
+      "after": "URL"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/ResourceUtils.java",
+      "source": "src/main/java/org/springframework/util/ResourceUtils.java::org.springframework.util.ResourceUtils.getFile:method(String)",
+      "line": 183,
+      "evidence": "ClassLoader.getSystemResource(path)",
+      "before": "",
+      "after": "URL"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/SingleToMultiValueMapAdapter.java",
+      "source": "src/main/java/org/springframework/util/SingleToMultiValueMapAdapter.java::org.springframework.util.SingleToMultiValueMapAdapter.get:method(Object)",
+      "line": 156,
+      "evidence": "Collections.singletonList(value)",
+      "before": "",
+      "after": "List<V>"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/SingleToMultiValueMapAdapter.java",
+      "source": "src/main/java/org/springframework/util/SingleToMultiValueMapAdapter.java::org.springframework.util.SingleToMultiValueMapAdapter.put:method(K,List<V>)",
+      "line": 163,
+      "evidence": "Collections.singletonList(result)",
+      "before": "",
+      "after": "List<V>"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/SingleToMultiValueMapAdapter.java",
+      "source": "src/main/java/org/springframework/util/SingleToMultiValueMapAdapter.java::org.springframework.util.SingleToMultiValueMapAdapter.put:method(K,List<V>)",
+      "line": 167,
+      "evidence": "Collections.singletonList(result)",
+      "before": "",
+      "after": "List<V>"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/SingleToMultiValueMapAdapter.java",
+      "source": "src/main/java/org/springframework/util/SingleToMultiValueMapAdapter.java::org.springframework.util.SingleToMultiValueMapAdapter.remove:method(Object)",
+      "line": 177,
+      "evidence": "Collections.singletonList(result)",
+      "before": "",
+      "after": "List<V>"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/StopWatch.java",
+      "source": "src/main/java/org/springframework/util/StopWatch.java::org.springframework.util.StopWatch.prettyPrint:method(TimeUnit)",
+      "line": 326,
+      "evidence": "nf.format(getTotalTimeNanos())",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/StopWatch.java",
+      "source": "src/main/java/org/springframework/util/StopWatch.java::org.springframework.util.StopWatch.prettyPrint:method(TimeUnit)",
+      "line": 326,
+      "evidence": "nf.format(getTotalTime(timeUnit))",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/StreamUtils.java",
+      "source": "src/main/java/org/springframework/util/StreamUtils.java::org.springframework.util.StreamUtils.copyRange:method(InputStream,OutputStream,long,long)",
+      "line": 182,
+      "evidence": "in.read(buffer, 0, (int) bytesToCopy)",
+      "before": "",
+      "after": "int"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/StreamUtils.java",
+      "source": "src/main/java/org/springframework/util/StreamUtils.java::org.springframework.util.StreamUtils.copyRange:method(InputStream,OutputStream,long,long)",
+      "line": 183,
+      "evidence": "in.read(buffer)",
+      "before": "",
+      "after": "int"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/StringUtils.java",
+      "source": "src/main/java/org/springframework/util/StringUtils.java::org.springframework.util.StringUtils.quoteIfString:method(Object)",
+      "line": 539,
+      "evidence": "quote(str)",
+      "before": "",
+      "after": "Object"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/StringUtils.java",
+      "source": "src/main/java/org/springframework/util/StringUtils.java::org.springframework.util.StringUtils.getFilename:method(String)",
+      "line": 644,
+      "evidence": "path.substring(separatorIndex + 1)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/StringUtils.java",
+      "source": "src/main/java/org/springframework/util/StringUtils.java::org.springframework.util.StringUtils.toStringArray:method(Collection<String>)",
+      "line": 1005,
+      "evidence": "collection.toArray(EMPTY_STRING_ARRAY)",
+      "before": "",
+      "after": "String[]"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/StringUtils.java",
+      "source": "src/main/java/org/springframework/util/StringUtils.java::org.springframework.util.StringUtils.toStringArray:method(Enumeration<String>)",
+      "line": 1016,
+      "evidence": "toStringArray(Collections.list(enumeration))",
+      "before": "",
+      "after": "String[]"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/UnmodifiableMultiValueMap.java",
+      "source": "src/main/java/org/springframework/util/UnmodifiableMultiValueMap.java::org.springframework.util.UnmodifiableMultiValueMap.get:method(Object)",
+      "line": 92,
+      "evidence": "Collections.unmodifiableList(result)",
+      "before": "",
+      "after": "List<V>"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/backoff/FixedBackOff.java",
+      "source": "src/main/java/org/springframework/util/backoff/FixedBackOff.java::org.springframework.util.backoff.FixedBackOff.toString:method()",
+      "line": 119,
+      "evidence": "String.valueOf(FixedBackOff.this.maxAttempts)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/backoff/FixedBackOff.java",
+      "source": "src/main/java/org/springframework/util/backoff/FixedBackOff.java::org.springframework.util.backoff.FixedBackOff.FixedBackOffExecution.toString:method()",
+      "line": 143,
+      "evidence": "String.valueOf(FixedBackOff.this.maxAttempts)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/comparator/NullSafeComparator.java",
+      "source": "src/main/java/org/springframework/util/comparator/NullSafeComparator.java::org.springframework.util.comparator.NullSafeComparator.compare:method(T,T)",
+      "line": 99,
+      "evidence": "Comparator.nullsFirst(this.nonNullComparator)",
+      "before": "",
+      "after": "Comparator<T>"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/comparator/NullSafeComparator.java",
+      "source": "src/main/java/org/springframework/util/comparator/NullSafeComparator.java::org.springframework.util.comparator.NullSafeComparator.compare:method(T,T)",
+      "line": 99,
+      "evidence": "Comparator.nullsLast(this.nonNullComparator)",
+      "before": "",
+      "after": "Comparator<T>"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/function/SingletonSupplier.java",
+      "source": "src/main/java/org/springframework/util/function/SingletonSupplier.java::org.springframework.util.function.SingletonSupplier.ofNullable:method(T)",
+      "line": 157,
+      "evidence": "new SingletonSupplier<>(instance)",
+      "before": "",
+      "after": "SingletonSupplier<T>"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/function/SingletonSupplier.java",
+      "source": "src/main/java/org/springframework/util/function/SingletonSupplier.java::org.springframework.util.function.SingletonSupplier.ofNullable:method(Supplier<T>)",
+      "line": 176,
+      "evidence": "new SingletonSupplier<>(supplier)",
+      "before": "",
+      "after": "SingletonSupplier<T>"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/function/SupplierUtils.java",
+      "source": "src/main/java/org/springframework/util/function/SupplierUtils.java::org.springframework.util.function.SupplierUtils.resolve:method(Supplier<T>)",
+      "line": 42,
+      "evidence": "supplier.get()",
+      "before": "",
+      "after": "T"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/function/SupplierUtils.java",
+      "source": "src/main/java/org/springframework/util/function/SupplierUtils.java::org.springframework.util.function.SupplierUtils.resolve:method(Object)",
+      "line": 54,
+      "evidence": "supplier.get()",
+      "before": "",
+      "after": "Object"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/unit/DataSize.java",
+      "source": "src/main/java/org/springframework/util/unit/DataSize.java::org.springframework.util.unit.DataSize.DataSizeUtils.determineDataUnit:method(String,DataUnit)",
+      "line": 290,
+      "evidence": "DataUnit.fromSuffix(suffix)",
+      "before": "",
+      "after": "DataUnit"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/xml/DomUtils.java",
+      "source": "src/main/java/org/springframework/util/xml/DomUtils.java::org.springframework.util.xml.DomUtils.getChildElementValueByTagName:method(Element,String)",
+      "line": 116,
+      "evidence": "getTextValue(child)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/xml/SimpleNamespaceContext.java",
+      "source": "src/main/java/org/springframework/util/xml/SimpleNamespaceContext.java::org.springframework.util.xml.SimpleNamespaceContext.getPrefix:method(String)",
+      "line": 72,
+      "evidence": "prefixes.iterator().next()",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/xml/SimpleNamespaceContext.java",
+      "source": "src/main/java/org/springframework/util/xml/SimpleNamespaceContext.java::org.springframework.util.xml.SimpleNamespaceContext.getPrefixesSet:method(String)",
+      "line": 93,
+      "evidence": "Collections.unmodifiableSet(prefixes)",
+      "before": "",
+      "after": "Set<String>"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/xml/SimpleNamespaceContext.java",
+      "source": "src/main/java/org/springframework/util/xml/SimpleNamespaceContext.java::org.springframework.util.xml.SimpleNamespaceContext.getPrefixesSet:method(String)",
+      "line": 93,
+      "evidence": "Collections.emptySet()",
+      "before": "",
+      "after": "Set<String>"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/xml/StaxEventXMLReader.java",
+      "source": "src/main/java/org/springframework/util/xml/StaxEventXMLReader.java::org.springframework.util.xml.StaxEventXMLReader.handleStartDocument.getColumnNumber:function()",
+      "line": 159,
+      "evidence": "location.getColumnNumber()",
+      "before": "",
+      "after": "int"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/xml/StaxEventXMLReader.java",
+      "source": "src/main/java/org/springframework/util/xml/StaxEventXMLReader.java::org.springframework.util.xml.StaxEventXMLReader.handleStartDocument.getLineNumber:function()",
+      "line": 163,
+      "evidence": "location.getLineNumber()",
+      "before": "",
+      "after": "int"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/xml/StaxEventXMLReader.java",
+      "source": "src/main/java/org/springframework/util/xml/StaxEventXMLReader.java::org.springframework.util.xml.StaxEventXMLReader.handleStartDocument.getPublicId:function()",
+      "line": 167,
+      "evidence": "location.getPublicId()",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/xml/StaxEventXMLReader.java",
+      "source": "src/main/java/org/springframework/util/xml/StaxEventXMLReader.java::org.springframework.util.xml.StaxEventXMLReader.handleStartDocument.getSystemId:function()",
+      "line": 171,
+      "evidence": "location.getSystemId()",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/xml/StaxStreamXMLReader.java",
+      "source": "src/main/java/org/springframework/util/xml/StaxStreamXMLReader.java::org.springframework.util.xml.StaxStreamXMLReader.handleStartDocument.getColumnNumber:function()",
+      "line": 137,
+      "evidence": "location.getColumnNumber()",
+      "before": "",
+      "after": "int"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/xml/StaxStreamXMLReader.java",
+      "source": "src/main/java/org/springframework/util/xml/StaxStreamXMLReader.java::org.springframework.util.xml.StaxStreamXMLReader.handleStartDocument.getLineNumber:function()",
+      "line": 141,
+      "evidence": "location.getLineNumber()",
+      "before": "",
+      "after": "int"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/xml/StaxStreamXMLReader.java",
+      "source": "src/main/java/org/springframework/util/xml/StaxStreamXMLReader.java::org.springframework.util.xml.StaxStreamXMLReader.handleStartDocument.getPublicId:function()",
+      "line": 145,
+      "evidence": "location.getPublicId()",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/xml/StaxStreamXMLReader.java",
+      "source": "src/main/java/org/springframework/util/xml/StaxStreamXMLReader.java::org.springframework.util.xml.StaxStreamXMLReader.handleStartDocument.getSystemId:function()",
+      "line": 149,
+      "evidence": "location.getSystemId()",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/xml/XmlValidationModeDetector.java",
+      "source": "src/main/java/org/springframework/util/xml/XmlValidationModeDetector.java::org.springframework.util.xml.XmlValidationModeDetector.consume:method(String)",
+      "line": 177,
+      "evidence": "endComment(line)",
+      "before": "",
+      "after": "int"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/xml/XmlValidationModeDetector.java",
+      "source": "src/main/java/org/springframework/util/xml/XmlValidationModeDetector.java::org.springframework.util.xml.XmlValidationModeDetector.consume:method(String)",
+      "line": 177,
+      "evidence": "startComment(line)",
+      "before": "",
+      "after": "int"
+    },
+    {
+      "path": "src/main/java/org/springframework/util/xml/XmlValidationModeDetector.java",
+      "source": "src/main/java/org/springframework/util/xml/XmlValidationModeDetector.java::org.springframework.util.xml.XmlValidationModeDetector.consume:method(String)",
+      "line": 178,
+      "evidence": "line.substring(index)",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/main/java24/org/springframework/core/type/classreading/ClassFileAnnotationDelegate.java",
+      "source": "src/main/java24/org/springframework/core/type/classreading/ClassFileAnnotationDelegate.java::org.springframework.core.type.classreading.ClassFileAnnotationDelegate.createMergedAnnotation:method(String,Annotation,ClassLoader)",
+      "line": 78,
+      "evidence": "Collections.emptyMap()",
+      "before": "",
+      "after": "Map<String,Object>"
+    },
+    {
+      "path": "src/main/java24/org/springframework/core/type/classreading/ClassFileAnnotationDelegate.java",
+      "source": "src/main/java24/org/springframework/core/type/classreading/ClassFileAnnotationDelegate.java::org.springframework.core.type.classreading.ClassFileAnnotationDelegate.parseArrayValue:method(String,ClassLoader,AnnotationValue.OfArray)",
+      "line": 111,
+      "evidence": "resolveArrayElementType(values, classLoader)",
+      "before": "",
+      "after": "Class<?>"
+    },
+    {
+      "path": "src/main/java24/org/springframework/core/type/classreading/ClassFileAnnotationMetadata.java",
+      "source": "src/main/java24/org/springframework/core/type/classreading/ClassFileAnnotationMetadata.java::org.springframework.core.type.classreading.ClassFileAnnotationMetadata.resolveTypeName:method(ClassDesc)",
+      "line": 234,
+      "evidence": "type.displayName()",
+      "before": "",
+      "after": "String"
+    },
+    {
+      "path": "src/test/java/org/springframework/core/annotation/AnnotationTypeMappingsTests.java",
+      "source": "src/test/java/org/springframework/core/annotation/AnnotationTypeMappingsTests.java::org.springframework.core.annotation.AnnotationTypeMappingsTests.getAliasMapping:method(AnnotationTypeMapping,int)",
+      "line": 452,
+      "evidence": "mapping.getRoot().getAttributes().get(mapped)",
+      "before": "",
+      "after": "Method"
+    },
+    {
+      "path": "src/test/java/org/springframework/core/annotation/MergedAnnotationsComposedOnSingleAnnotatedElementTests.java",
+      "source": "src/test/java/org/springframework/core/annotation/MergedAnnotationsComposedOnSingleAnnotatedElementTests.java::org.springframework.core.annotation.MergedAnnotationsComposedOnSingleAnnotatedElementTests.getBridgeMethod:method()",
+      "line": 182,
+      "evidence": "methods.get(0)",
+      "before": "",
+      "after": "Method"
+    },
+    {
+      "path": "src/test/java/org/springframework/core/annotation/MergedAnnotationsComposedOnSingleAnnotatedElementTests.java",
+      "source": "src/test/java/org/springframework/core/annotation/MergedAnnotationsComposedOnSingleAnnotatedElementTests.java::org.springframework.core.annotation.MergedAnnotationsComposedOnSingleAnnotatedElementTests.getBridgeMethod:method()",
+      "line": 182,
+      "evidence": "methods.get(1)",
+      "before": "",
+      "after": "Method"
+    },
+    {
+      "path": "src/test/java/org/springframework/core/annotation/MergedAnnotationsTests.java",
+      "source": "src/test/java/org/springframework/core/annotation/MergedAnnotationsTests.java::org.springframework.core.annotation.MergedAnnotationsTests.getWithTypeHierarchyFromBridgeMethod:method()",
+      "line": 697,
+      "evidence": "methods.get(0)",
+      "before": "",
+      "after": "Method"
+    },
+    {
+      "path": "src/test/java/org/springframework/core/annotation/MergedAnnotationsTests.java",
+      "source": "src/test/java/org/springframework/core/annotation/MergedAnnotationsTests.java::org.springframework.core.annotation.MergedAnnotationsTests.getWithTypeHierarchyFromBridgeMethod:method()",
+      "line": 697,
+      "evidence": "methods.get(1)",
+      "before": "",
+      "after": "Method"
+    },
+    {
+      "path": "src/test/java/org/springframework/core/annotation/MergedAnnotationsTests.java",
+      "source": "src/test/java/org/springframework/core/annotation/MergedAnnotationsTests.java::org.springframework.core.annotation.MergedAnnotationsTests.getWithTypeHierarchyFromBridgeMethod:method()",
+      "line": 699,
+      "evidence": "methods.get(1)",
+      "before": "",
+      "after": "Method"
+    },
+    {
+      "path": "src/test/java/org/springframework/core/annotation/MergedAnnotationsTests.java",
+      "source": "src/test/java/org/springframework/core/annotation/MergedAnnotationsTests.java::org.springframework.core.annotation.MergedAnnotationsTests.getWithTypeHierarchyFromBridgeMethod:method()",
+      "line": 699,
+      "evidence": "methods.get(0)",
+      "before": "",
+      "after": "Method"
+    },
+    {
+      "path": "src/test/java/org/springframework/core/annotation/MergedAnnotationsTests.java",
+      "source": "src/test/java/org/springframework/core/annotation/MergedAnnotationsTests.java::org.springframework.core.annotation.MergedAnnotationsTests.testJavaRepeatables:method(SearchStrategy,Class<?>,String[])",
+      "line": 1446,
+      "evidence": "element.getDeclaredAnnotationsByType(MyRepeatable.class)",
+      "before": "",
+      "after": "MyRepeatable[]"
+    },
+    {
+      "path": "src/test/java/org/springframework/core/annotation/MergedAnnotationsTests.java",
+      "source": "src/test/java/org/springframework/core/annotation/MergedAnnotationsTests.java::org.springframework.core.annotation.MergedAnnotationsTests.testJavaRepeatables:method(SearchStrategy,Class<?>,String[])",
+      "line": 1447,
+      "evidence": "element.getAnnotationsByType(MyRepeatable.class)",
+      "before": "",
+      "after": "MyRepeatable[]"
+    },
+    {
+      "path": "src/test/java/org/springframework/core/convert/support/ObjectToObjectConverterTests.java",
+      "source": "src/test/java/org/springframework/core/convert/support/ObjectToObjectConverterTests.java::org.springframework.core.convert.support.ObjectToObjectConverterTests.Data.valueOf:method(String)",
+      "line": 123,
+      "evidence": "Optional.of(new Data(string))",
+      "before": "",
+      "after": "Optional<Data>"
+    },
+    {
+      "path": "src/test/java/org/springframework/core/convert/support/ObjectToObjectConverterTests.java",
+      "source": "src/test/java/org/springframework/core/convert/support/ObjectToObjectConverterTests.java::org.springframework.core.convert.support.ObjectToObjectConverterTests.Data.valueOf:method(String)",
+      "line": 123,
+      "evidence": "Optional.empty()",
+      "before": "",
+      "after": "Optional<Data>"
+    },
+    {
+      "path": "src/test/java/org/springframework/util/ConcurrentReferenceHashMapTests.java",
+      "source": "src/test/java/org/springframework/util/ConcurrentReferenceHashMapTests.java::org.springframework.util.ConcurrentReferenceHashMapTests.TestWeakConcurrentCache.getHash:method(Object)",
+      "line": 735,
+      "evidence": "o.hashCode()",
+      "before": "",
+      "after": "int"
+    },
+    {
+      "path": "src/test/java/org/springframework/util/ConcurrentReferenceHashMapTests.java",
+      "source": "src/test/java/org/springframework/util/ConcurrentReferenceHashMapTests.java::org.springframework.util.ConcurrentReferenceHashMapTests.TestWeakConcurrentCache.createReferenceManager.pollForPurge:function()",
+      "line": 751,
+      "evidence": "TestWeakConcurrentCache.this.queue.removeFirst()",
+      "before": "",
+      "after": "Reference<K,V>"
+    },
+    {
+      "path": "src/testFixtures/java/org/springframework/core/testfixture/TestGroupsCondition.java",
+      "source": "src/testFixtures/java/org/springframework/core/testfixture/TestGroupsCondition.java::org.springframework.core.testfixture.TestGroupsCondition.evaluateExecutionCondition:method(ExtensionContext)",
+      "line": 53,
+      "evidence": "enabled(\"Enabled for TestGroups: \" + Arrays.toString(testGroups))",
+      "before": "",
+      "after": "ConditionEvaluationResult"
+    },
+    {
+      "path": "src/testFixtures/java/org/springframework/core/testfixture/TestGroupsCondition.java",
+      "source": "src/testFixtures/java/org/springframework/core/testfixture/TestGroupsCondition.java::org.springframework.core.testfixture.TestGroupsCondition.evaluateExecutionCondition:method(ExtensionContext)",
+      "line": 54,
+      "evidence": "disabled(\"Disabled for TestGroups: \" + Arrays.toString(testGroups))",
+      "before": "",
+      "after": "ConditionEvaluationResult"
+    }
+  ],
+  "compiler_accuracy_claimed": false
+}
