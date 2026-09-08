@@ -21,3 +21,5 @@ spring-ordinary-audit.json and spring-candidate-audit.json retain every changed 
 This source-corpus comparison found no additional lost or gained edges from the assignment fix. It does not prove all existing Spring targets correct, recover prior conservative omissions, or compile Spring. The independent 84-case compiler gate remains the evidence for the six concrete invalid-call shapes. Actual model token savings remain unproven.
 
 At the retained observation, exact-commit ordinary run 34176266780 and candidate run 34176266809 are both in progress. Their final platform conclusions remain pending.
+
+Follow-up: ordinary distribution run 34176266780 completed successfully in all six jobs at 7bb9066; platform-final.json retains the result. Candidate run 34176266809 remained in progress at that observation.

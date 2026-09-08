@@ -1,0 +1,5 @@
+# force_bytes repeat with direct archive callers
+
+Preparation completed with the same question, exact caller inventory and manual semantic criteria as the original failed pair. This is a repeat, not a holdout sample. PLAN.md predeclares the fixed 1200-second, baseline-first, once-per-condition comparison and acceptance criteria. The dedicated harness differs in one prompt line, deferring command selection to the supplied skill.
+
+All 6928 source files and frozen runtime hashes passed the preflight; 883 production Python files match the independent oracle's 37 owners and 46 call sites. The documented direct archive caller command returns all sites through six bounded context pages with exact source excerpts, including same-line multiplicity. Citation controls reject each incorrect quote plus missing, duplicate and extra findings. Consumer SQLite is absent. freeze.json records preparation cost and artifact size/hash. No model was started when these preparation receipts were generated; execution results and complete semantic review remain pending.
