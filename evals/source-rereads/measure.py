@@ -65,7 +65,7 @@ for condition in ['baseline','columbus']:
                 for part in spec.split(';'):
                     m=re.fullmatch(r'(\d+),(\d+)p',part)
                     add(path,int(m[1]),int(m[2]),output,mode,item['id'])
-        if 'archive-neighbors' in command and 'call_context:' in output:
+        if any(name in command for name in ('archive-neighbors', 'archive-callers')) and 'call_context:' in output:
             for line in output.split('\n'):
                 if not line.startswith('{"source_id":'):continue
                 c=json.loads(line);add(c['path'],c['start_line'],c['end_line'],output,'archive-context',item['id'])

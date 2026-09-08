@@ -17,7 +17,7 @@ columbus archive-callers IDENTIFIER --input GRAPH --repo REPO --context-lines 20
 
 Use a unique exact name, qualified name or ID; Python `module.qualname` is supported. If ambiguous or absent, use `archive-search IDENTIFIER --input GRAPH --format text --budget-bytes 6000` and retry with the correct exact ID. Add `--path 'src/*'` for the task's caller subtree; this filters before pagination. For call locations alone, use a smaller context radius (0–40). For behavior, inspect branches before and after the call. Follow `next_offset` with `--offset` and otherwise identical options until null. Increase the budget if one edge cannot fit. A page can omit needed source or later branches.
 
-Source context is hash-verified and numbered: reuse it for citations. Read additional source for missing ranges, imports, helper behavior or unresolved questions. Without local source, omit `--repo` and `--context-lines`; results then describe only the saved snapshot. Do not load the whole graph into context.
+Source context is hash-verified and numbered: reuse it for citations. For behavior explanations, account for input reassignment before the call and downstream overrides in the returned source. Look up named flag/constant definitions with a bounded source search before assigning them a value. Read additional source for missing ranges, imports, helper behavior or unresolved questions. Without local source, omit `--repo` and `--context-lines`; results then describe only the saved snapshot. Do not load the whole graph into context.
 
 ## Local index
 
