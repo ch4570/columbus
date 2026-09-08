@@ -74,9 +74,22 @@ for condition in ['baseline','columbus']:
                     m=re.fullmatch(r'(\d+),(\d+)p',part)
                     add(path,int(m[1]),int(m[2]),output,mode,item['id'])
         if any(name in command for name in ('archive-neighbors', 'archive-callers')) and 'call_context:' in output:
+            page_files,page_nodes,section={},{},None
             for line in output.split('\n'):
-                if not line.startswith('{"source_id":'):continue
-                c=json.loads(line);add(c['path'],c['start_line'],c['end_line'],output,'archive-context',item['id'])
+                if line.startswith(('files ', 'nodes ', 'edges ')):
+                    section=line.split()[0]
+                elif line.startswith('call_context:'):
+                    section='contexts'
+                elif line.startswith('[') and section in {'files','nodes'}:
+                    row=json.loads(line)
+                    if section=='files':page_files[row[0]]=row[1:]
+                    else:page_nodes[row[0]]=row[2]
+                elif line.startswith(('{"source_id":','{"source_node":')):
+                    c=json.loads(line)
+                    if 'source_node' in c:
+                        c['source_id']=page_nodes[c.pop('source_node')]['id']
+                        c['path'],c['source_hash']=page_files[c.pop('file_number')]
+                    add(c['path'],c['start_line'],c['end_line'],output,'archive-context',item['id'])
     result['conditions'][condition]={'verified_ranges':len(reads),'unique_lines':len(seen),'source_bytes_returned':sum(x['bytes'] for x in reads),
         'repeated_source_bytes':sum(x['repeated_bytes'] for x in reads),'empty_ranges':empty_ranges,'unverified_ranges':unverified,'reads':reads,'events_sha256':recorded['events_sha256']}
 a.output.write_text(json.dumps(result,indent=2)+'\n')

@@ -102,7 +102,8 @@ def archive_neighbors_text(packet: dict) -> str:
     numbers = {node['id']: number for number, node in enumerate(nodes)}
     paths = {node['path']: node.get('source_hash') for node in nodes}
     files = sorted({(node['path'], node.get('source_hash')) for node in nodes}
-                   | {(edge['path'], paths.get(edge['path'])) for edge in packet['edges']},
+                   | {(edge['path'], paths.get(edge['path'])) for edge in packet['edges']}
+                   | {(context['path'], context.get('source_hash')) for context in packet.get('call_context', [])},
                    key=lambda pair: (pair[0], pair[1] or ''))
     file_numbers = {pair: number for number, pair in enumerate(files)}
     lines = ['columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.',
@@ -118,9 +119,12 @@ def archive_neighbors_text(packet: dict) -> str:
         lines.append(row([numbers[edge['source']], numbers[edge['target']], file_numbers[(edge['path'], paths.get(edge['path']))],
                           {k: v for k, v in edge.items() if k not in {'source', 'target', 'path'}}]))
     if 'call_context' in packet:
-        lines.append('call_context: JSON metadata followed by physical source lines; control characters escaped')
+        lines.append('call_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped')
         for context in packet['call_context']:
-            lines.append(row({k: v for k, v in context.items() if k != 'source'}))
+            lines.append(row(dict(source_node=numbers[context['source_id']],
+                                  file_number=file_numbers[(context['path'], context.get('source_hash'))],
+                                  **{k: v for k, v in context.items()
+                                     if k not in {'source', 'source_id', 'path', 'source_hash'}})))
             lines.extend(f'{number}| {_line(line)}' for number, line in
                          enumerate(context['source'].split('\n'), context['start_line']))
     return '\n'.join(lines) + '\n'

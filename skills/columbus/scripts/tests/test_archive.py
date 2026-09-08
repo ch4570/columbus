@@ -282,6 +282,31 @@ class ArchiveTests(unittest.TestCase):
                     output = render(packet, fmt, 'archive-neighbors') + ('\n' if fmt == 'json' else '')
                     self.assertLessEqual(len(output.encode()), 3000)
                     self.assertTrue(packet['edges'])
+                    if fmt == 'text':
+                        files, nodes, contexts = {}, {}, []
+                        section = None
+                        for line in output.splitlines():
+                            if line.startswith(('files ', 'nodes ', 'edges ')):
+                                section = line.split()[0]
+                            elif line.startswith('call_context:'):
+                                section = 'contexts'
+                            elif line.startswith('['):
+                                row = json.loads(line)
+                                if section == 'files':
+                                    files[row[0]] = row[1:]
+                                elif section == 'nodes':
+                                    nodes[row[0]] = row[2]
+                            elif section == 'contexts' and line.startswith('{'):
+                                context = json.loads(line)
+                                owner = nodes[context.pop('source_node')]['id']
+                                path, digest = files[context.pop('file_number')]
+                                contexts.append(dict(context, source_id=owner, path=path,
+                                                     source_hash=digest, source=''))
+                            elif section == 'contexts' and '| ' in line:
+                                number, text = line.split('| ', 1)
+                                self.assertEqual(int(number), contexts[-1]['start_line'])
+                                contexts[-1]['source'] = text
+                        self.assertEqual(contexts, packet['call_context'])
                     for context in packet['call_context']:
                         sites.extend((context['source_id'], line) for line in context['call_lines'])
                         self.assertEqual(context['source'], source.read_text().splitlines()[context['start_line']-1])
