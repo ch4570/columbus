@@ -23,3 +23,5 @@ Fresh wheel and ZIP distribution verification passed; see distribution.txt. Remo
 ## Incremental search invalidation
 
 A follow-up regression changes one file through False, True, repeated True/False assignments, a computed expression, an annotation without a value, an empty file and restoration. At every step it verifies the exact assignment signatures and compares the full public graph and complete returned FLAG search hits against an independently rebuilt index. This rejects stale values, duplicate IDs left after removal and obsolete FTS hits. Ordinary and candidate engine suites each pass 245 tests. The follow-up changes tests only; no model trial ran.
+
+Implementation platform run 34185167580 at e828415 completed successfully in all six OS/Python jobs, including clean distribution and pre-commit verification. platform-final.json retains exact revision and step conclusions. This covers the runtime implementation; the later eaef6e1 test-only addition has separate CI. No model effectiveness or token-savings claim follows from this platform result.
