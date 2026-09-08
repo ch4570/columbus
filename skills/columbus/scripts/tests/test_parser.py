@@ -151,6 +151,19 @@ class ParserTests(unittest.TestCase):
         imports = relations([helper, caller], "imports")
         self.assertEqual(imports[0]["target"], "company/pkg/helper.py::module")
 
+    def test_namespace_component_boundaries_do_not_resolve_partial_names(self):
+        for expression, count in [('company.pkg.helper.run()', 1),
+                                  ('company.pk.helper.run()', 0),
+                                  ('company.pkg.hel.run()', 0),
+                                  ('company.pkg.helper_extra.run()', 0)]:
+            with self.subTest(expression=expression):
+                helper = parsed("company.pkg.helper", "def run(): pass")
+                caller = parsed("main", "import company.pkg.helper\n" + expression)
+                calls = relations([helper, caller])
+                self.assertEqual(len(calls), count)
+                if calls:
+                    self.assertEqual(calls[0]['target'], 'company/pkg/helper.py::run:function')
+
     def test_comprehension_and_lambda_parameters_are_local(self):
         file = parsed("main", """
             def target(): pass

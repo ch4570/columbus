@@ -1,0 +1,271 @@
+{
+  "files": 5466,
+  "symbols": 46631,
+  "edges": 86828,
+  "edit": {
+    "mode": "fast",
+    "check": "metadata_checked",
+    "parsed_files": 1,
+    "cached_parses_loaded": 5465,
+    "reused_files": 5465,
+    "metadata_reused_files": 5465,
+    "added_files": 0,
+    "removed_files": 0,
+    "hashed_files": 1,
+    "hashed_bytes": 8820,
+    "discovery_probe_files": 7814,
+    "discovery_probe_bytes": 48973750,
+    "config_hashed_files": 0,
+    "config_hashed_bytes": 0,
+    "head_changed": false,
+    "branch_changed": false,
+    "git_state_changed": false,
+    "config_changed": false,
+    "global_relink": true,
+    "elapsed_seconds": 17.1194
+  },
+  "profile": [
+    {
+      "file": "index.py",
+      "line": 84,
+      "name": "refresh",
+      "calls": 1,
+      "own_seconds": 0.11844892500000001,
+      "cumulative_seconds": 17.372394250000003
+    },
+    {
+      "file": "languages.py",
+      "line": 83,
+      "name": "resolve_files",
+      "calls": 1,
+      "own_seconds": 0.009317709,
+      "cumulative_seconds": 6.441837542
+    },
+    {
+      "file": "parser.py",
+      "line": 559,
+      "name": "resolve_files",
+      "calls": 1,
+      "own_seconds": 0.226040034,
+      "cumulative_seconds": 6.365216417
+    },
+    {
+      "file": "parser.py",
+      "line": 542,
+      "name": "reference",
+      "calls": 203337,
+      "own_seconds": 0.12155320200000001,
+      "cumulative_seconds": 5.506073682
+    },
+    {
+      "file": "parser.py",
+      "line": 464,
+      "name": "attribute",
+      "calls": 73327,
+      "own_seconds": 0.032619603000000004,
+      "cumulative_seconds": 4.722152219000001
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method builtins.any>",
+      "calls": 33081,
+      "own_seconds": 0.6836481950000001,
+      "cumulative_seconds": 4.687722097
+    },
+    {
+      "file": "parser.py",
+      "line": 484,
+      "name": "<genexpr>",
+      "calls": 15623821,
+      "own_seconds": 3.132909996,
+      "cumulative_seconds": 3.992936572
+    },
+    {
+      "file": "discovery.py",
+      "line": 115,
+      "name": "discover",
+      "calls": 2,
+      "own_seconds": 0.129022635,
+      "cumulative_seconds": 3.961743708
+    },
+    {
+      "file": "discovery.py",
+      "line": 48,
+      "name": "safe_source",
+      "calls": 24657,
+      "own_seconds": 0.093428695,
+      "cumulative_seconds": 3.659173365
+    },
+    {
+      "file": "pathlib.py",
+      "line": 981,
+      "name": "resolve",
+      "calls": 35599,
+      "own_seconds": 0.032921548,
+      "cumulative_seconds": 2.120875592
+    },
+    {
+      "file": "index.py",
+      "line": 256,
+      "name": "<listcomp>",
+      "calls": 1,
+      "own_seconds": 0.003694923,
+      "cumulative_seconds": 2.009443417
+    },
+    {
+      "file": "index.py",
+      "line": 42,
+      "name": "encode_parse",
+      "calls": 5466,
+      "own_seconds": 0.007894294000000001,
+      "cumulative_seconds": 1.98669171
+    },
+    {
+      "file": "sync_state.py",
+      "line": 61,
+      "name": "file_stat",
+      "calls": 10938,
+      "own_seconds": 0.008749453,
+      "cumulative_seconds": 1.8698277040000002
+    },
+    {
+      "file": "<frozen posixpath>",
+      "line": 409,
+      "name": "realpath",
+      "calls": 35599,
+      "own_seconds": 0.029971092,
+      "cumulative_seconds": 1.643938617
+    },
+    {
+      "file": "pathlib.py",
+      "line": 484,
+      "name": "_parse_args",
+      "calls": 354007,
+      "own_seconds": 0.304949332,
+      "cumulative_seconds": 1.616090779
+    },
+    {
+      "file": "<frozen posixpath>",
+      "line": 418,
+      "name": "_joinrealpath",
+      "calls": 35600,
+      "own_seconds": 0.341363487,
+      "cumulative_seconds": 1.511430765
+    },
+    {
+      "file": "__init__.py",
+      "line": 183,
+      "name": "dumps",
+      "calls": 85480,
+      "own_seconds": 0.058253036,
+      "cumulative_seconds": 1.311825406
+    },
+    {
+      "file": "pathlib.py",
+      "line": 56,
+      "name": "parse_parts",
+      "calls": 354008,
+      "own_seconds": 0.823765395,
+      "cumulative_seconds": 1.234645121
+    },
+    {
+      "file": "encoder.py",
+      "line": 183,
+      "name": "encode",
+      "calls": 85480,
+      "own_seconds": 0.05729501100000001,
+      "cumulative_seconds": 1.2288116150000001
+    },
+    {
+      "file": "index.py",
+      "line": 38,
+      "name": "compact",
+      "calls": 57587,
+      "own_seconds": 0.017058643000000002,
+      "cumulative_seconds": 1.224630683
+    },
+    {
+      "file": "index.py",
+      "line": 47,
+      "name": "decode_parse",
+      "calls": 5465,
+      "own_seconds": 0.00713932,
+      "cumulative_seconds": 1.18789532
+    },
+    {
+      "file": "encoder.py",
+      "line": 205,
+      "name": "iterencode",
+      "calls": 85472,
+      "own_seconds": 1.154894542,
+      "cumulative_seconds": 1.154894542
+    },
+    {
+      "file": "__init__.py",
+      "line": 299,
+      "name": "loads",
+      "calls": 11010,
+      "own_seconds": 0.01070123,
+      "cumulative_seconds": 1.086451768
+    },
+    {
+      "file": "pathlib.py",
+      "line": 504,
+      "name": "_from_parts",
+      "calls": 173668,
+      "own_seconds": 0.09510761300000001,
+      "cumulative_seconds": 1.078008528
+    },
+    {
+      "file": "decoder.py",
+      "line": 332,
+      "name": "decode",
+      "calls": 11010,
+      "own_seconds": 0.023833453,
+      "cumulative_seconds": 1.0506447330000002
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "name": "<method 'execute' of 'sqlite3.Connection' objects>",
+      "calls": 139007,
+      "own_seconds": 1.049314625,
+      "cumulative_seconds": 1.049314625
+    },
+    {
+      "file": "decoder.py",
+      "line": 343,
+      "name": "raw_decode",
+      "calls": 11010,
+      "own_seconds": 1.0218645560000001,
+      "cumulative_seconds": 1.0218645560000001
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method zlib.compress>",
+      "calls": 5481,
+      "own_seconds": 1.014159727,
+      "cumulative_seconds": 1.014159727
+    },
+    {
+      "file": "index.py",
+      "line": 140,
+      "name": "<dictcomp>",
+      "calls": 1,
+      "own_seconds": 0.003079128,
+      "cumulative_seconds": 0.9321525410000001
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "name": "<method 'startswith' of 'str' objects>",
+      "calls": 16129785,
+      "own_seconds": 0.9065705890000001,
+      "cumulative_seconds": 0.9065705890000001
+    }
+  ],
+  "restored_counts_equal": true,
+  "scope": "Instrumented one-edit diagnosis, temporary copy, unflushed caches; no latency speedup or complete graph parity claim."
+}

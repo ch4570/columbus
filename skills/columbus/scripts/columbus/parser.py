@@ -375,6 +375,9 @@ class _Resolver:
         self.modules: dict[str, list[dict[str, Any]]] = {}
         for file in files:
             self.modules.setdefault(file["module"], []).append(file)
+        self.module_prefixes = set(self.modules)
+        for module in self.modules:
+            self.module_prefixes.update(module[:i] for i, char in enumerate(module) if char == ".")
         self.receiver_bases = {target for file in files for ref in file["references"]
                                if ref["kind"] == "inherits" and (target := self.reference(ref))}
         self.class_mutations: dict[str, set[str]] = {}
@@ -481,7 +484,7 @@ class _Resolver:
                 else:
                     candidate = f"{target}.{head}"
                     # Intermediate namespace packages may have no __init__.py.
-                    if not any(m == candidate or m.startswith(candidate + ".") for m in self.modules):
+                    if candidate not in self.module_prefixes:
                         return None
                     value = ("module", candidate)
             elif self.symbols[target]["kind"] == "class":
