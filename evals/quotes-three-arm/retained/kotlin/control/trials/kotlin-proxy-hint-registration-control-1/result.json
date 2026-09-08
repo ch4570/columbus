@@ -1,0 +1,269 @@
+{
+  "case": "kotlin-proxy-hint-registration",
+  "condition": "control",
+  "repeat": 1,
+  "return_code": 0,
+  "timed_out": false,
+  "finished_at": "2026-09-08T18:06:50.855937+00:00",
+  "elapsed_seconds": 329.1440475000127,
+  "usage": {
+    "input_tokens": 190362,
+    "cached_input_tokens": 146944,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 9476,
+    "reasoning_output_tokens": 6201,
+    "uncached_input_tokens": 43418
+  },
+  "commands": [
+    {
+      "command": "/bin/zsh -lc \"sed -n '1,240p' /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/runtime/SKILL.md\"",
+      "exit_code": 0,
+      "output_bytes": 5392,
+      "output_sha256": "0b49697a532e2efcf565c8ae56395ee1b48413bb8a49ab3bd98219bfb14645d4"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n --glob '*.{kt,java}' 'ProxyHints|JdkProxyHint|registerJdkProxy|reachableType|withInterfaces|javaSerialization' .\"",
+      "exit_code": 0,
+      "output_bytes": 30540,
+      "output_sha256": "4126304586ce96128a5b5376b5713f9e5d43a97f9261c715b6bff76128856830"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/runtime/columbus.py archive-source ProxyHints JdkProxyHint TypeReference --overloads --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 30000'",
+      "exit_code": 2,
+      "output_bytes": 110,
+      "output_sha256": "70c9b6bf6ae5f37165c89a5fc7086a0f66b43e96298c0b466f2cb22cf2bbdbba"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/runtime/columbus.py archive-search TypeReference --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/graph.jsonl.xz --format text --budget-bytes 10000'",
+      "exit_code": 0,
+      "output_bytes": 2681,
+      "output_sha256": "766af340d285566c13dfce79e55b6e81cffc9a6c559bec51bbd51bfa9bf7a2d8"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/runtime/columbus.py archive-source ProxyHints JdkProxyHint --overloads --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 30000'",
+      "exit_code": 0,
+      "output_bytes": 8738,
+      "output_sha256": "90c4d228d3fdbe51a2f58e1726a4fbae00a6b4e77c495c170c43890e88f3173c"
+    },
+    {
+      "command": "/bin/zsh -lc \"sed -n '1,220p' src/main/java/org/springframework/aot/hint/TypeReference.java && rg -n --glob '*.java' 'class .*TypeReference|implements TypeReference|TypeReference\\\\.of|listOf\\\\(' src/main/java/org/springframework/aot/hint src/test/java/org/springframework/aot/hint\"",
+      "exit_code": 0,
+      "output_bytes": 30387,
+      "output_sha256": "aabf6048a7870015a991fe646d91d7379b21ef73f04e6c1942d76d1b94aa06d2"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/kotlin/org/springframework/aot/hint/ProxyHintsExtensions.kt | sed -n '1,80p'; nl -ba src/main/kotlin/org/springframework/aot/hint/JdkProxyHintExtensions.kt | sed -n '1,80p'; nl -ba src/test/kotlin/org/springframework/aot/hint/ProxyHintsExtensionsTests.kt | sed -n '1,90p'; nl -ba src/test/kotlin/org/springframework/aot/hint/JdkProxyHintExtensionsTests.kt | sed -n '1,90p'; nl -ba src/main/java/org/springframework/aot/hint/AbstractTypeReference.java | sed -n '1,200p'; nl -ba src/main/java/org/springframework/aot/hint/ReflectionTypeReference.java | sed -n '1,180p'; nl -ba src/main/java/org/springframework/aot/hint/SimpleTypeReference.java | sed -n '1,180p'\"",
+      "exit_code": 0,
+      "output_bytes": 15162,
+      "output_sha256": "6314656f5856ae6b1a0cacc383caa62e3d2e3cbad9fa1afa972bb00256adc997"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/test/java/org/springframework/aot/hint/JdkProxyHintTests.java | sed -n '1,130p'; nl -ba src/test/java/org/springframework/aot/hint/ProxyHintsTests.java | sed -n '1,145p'; nl -ba src/test/java/org/springframework/aot/hint/TypeReferenceTests.java | sed -n '65,100p'; nl -ba src/main/java/org/springframework/aot/hint/JdkProxyHint.java | sed -n '30,180p'; nl -ba src/main/java/org/springframework/aot/hint/ProxyHints.java | sed -n '25,90p'; nl -ba src/main/java/org/springframework/aot/hint/TypeReference.java | sed -n '60,105p'\"",
+      "exit_code": 0,
+      "output_bytes": 19155,
+      "output_sha256": "7ccbc40bcee2fcd1bb79c0fa6db58f19fc3a0596e10c50da6a4a894e0852fd9d"
+    }
+  ],
+  "command_count": 8,
+  "command_output_bytes": 112165,
+  "failed_commands": 1,
+  "other_tool_types": [],
+  "runtime_warnings": [],
+  "turn_failed": false,
+  "answer": {
+    "findings": [
+      {
+        "id": "kotlin-bridges",
+        "path": "src/main/kotlin/org/springframework/aot/hint/ProxyHintsExtensions.kt",
+        "start_line": 21,
+        "end_line": 28,
+        "quote": "/**\n * Extension for [ProxyHints.registerJdkProxy] providing a [KClass] based variant.\n *\n * @author Sebastien Deleuze\n * @since 6.0.5\n */\nfun ProxyHints.registerJdkProxy(vararg proxiedInterfaces: KClass<*>) =\n\tregisterJdkProxy(*proxiedInterfaces.map { it.java }.toTypedArray())",
+        "explanation": "This extension maps every KClass to its Java Class from left to right, materializes a Class array, and spreads it into ProxyHints.registerJdkProxy(Class<?>...). The related JdkProxyHint.Builder extension performs the identical map/array/spread handoff to Builder.proxiedInterfaces(Class<?>...). Mapping preserves argument sequence, empty input, and every duplicate occurrence. Both expression-bodied extensions return the Java call's value: the ProxyHints overload ultimately returns the same ProxyHints receiver, while the builder overload returns the same Builder, preserving fluent chaining. The Kotlin tests mock those Java receivers, stub the Class-varargs member to return the receiver, and verify the exact converted String/Int Class arguments in order. They establish bridge selection and conversion, but do not execute Java validation; String and Int in those mocked examples therefore do not demonstrate that real registration accepts concrete or primitive classes—it does not."
+      },
+      {
+        "id": "registration-lifecycle",
+        "path": "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+        "start_line": 48,
+        "end_line": 53,
+        "quote": "\tpublic ProxyHints registerJdkProxy(Consumer<JdkProxyHint.Builder> jdkProxyHint) {\n\t\tJdkProxyHint.Builder builder = new JdkProxyHint.Builder();\n\t\tjdkProxyHint.accept(builder);\n\t\tthis.jdkProxies.add(builder.build());\n\t\treturn this;\n\t}",
+        "explanation": "The Class<?>... and TypeReference... entry points each return a call to this consumer overload, supplying a lambda that invokes the corresponding Builder.proxiedInterfaces overload with the original array. Every registration therefore creates a fresh builder, invokes the callback, builds the completed hint, inserts that hint, and only then returns the same ProxyHints instance. Java evaluates builder.build() before calling Set.add. There is no exception handling: a callback/configuration exception or a build exception propagates, insertion is skipped, and no partially configured builder or new hint is retained by ProxyHints. Existing registered hints remain unchanged. A successful insertion of an equal hint may be suppressed by the set, but the fluent receiver is still returned."
+      },
+      {
+        "id": "interface-validation",
+        "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+        "start_line": 168,
+        "end_line": 177,
+        "quote": "\t\tprivate static List<TypeReference> toTypeReferences(Class<?>... proxiedInterfaces) {\n\t\t\tList<String> invalidTypes = Arrays.stream(proxiedInterfaces)\n\t\t\t\t\t.filter(candidate -> !candidate.isInterface() || candidate.isSealed())\n\t\t\t\t\t.map(Class::getName)\n\t\t\t\t\t.toList();\n\t\t\tif (!invalidTypes.isEmpty()) {\n\t\t\t\tthrow new IllegalArgumentException(\"The following must be non-sealed interfaces: \" + invalidTypes);\n\t\t\t}\n\t\t\treturn TypeReference.listOf(proxiedInterfaces);\n\t\t}",
+        "explanation": "Only the Class-based builder route performs interface validation. It evaluates this helper before addAll, scans all inputs, and rejects every Class that is not an interface or is a sealed interface. If any are invalid, it throws IllegalArgumentException with their Class.getName() values before appending any element from that builder call; previously appended builder state may still exist, but consumer registration aborts without storing it. Valid Classes flow through TypeReference.listOf(Class<?>...), which streams them through TypeReference.of(Class<?>), then ReflectionTypeReference.of, preserving order and wrapping each Class as a Class-backed TypeReference. In contrast, proxiedInterfaces(TypeReference...) directly appends Arrays.asList(...) and performs no resolution, isInterface, or isSealed check. It can consequently describe an unavailable named type or even a known non-interface type; registration stores references rather than proving proxy eligibility."
+      },
+      {
+        "id": "interface-storage",
+        "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+        "start_line": 43,
+        "end_line": 47,
+        "quote": "\tprivate JdkProxyHint(Builder builder) {\n\t\tthis.proxiedInterfaces = List.copyOf(builder.proxiedInterfaces);\n\t\tthis.reachableType = builder.reachableType;\n\t\tthis.javaSerialization = builder.javaSerialization;\n\t}",
+        "explanation": "A Builder starts with an empty LinkedList. Both proxiedInterfaces overloads use addAll, so each call appends after prior calls, array order is retained, and repeated interfaces remain repeated. Empty varargs append nothing; a callback that adds nothing can still build and register a valid hint whose interface list is empty. Construction uses List.copyOf, producing an unmodifiable, independent snapshot, so later additions to the builder do not alter an already completed hint. For the specified contract-violating case—a non-null TypeReference array containing null—the direct TypeReference overload initially succeeds because Arrays.asList and LinkedList permit the null. Failure is delayed until List.copyOf during build, which throws NullPointerException; in consumer registration this occurs after the callback and before Set.add, leaving no new stored hint."
+      },
+      {
+        "id": "hint-state-identity",
+        "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+        "start_line": 90,
+        "end_line": 101,
+        "quote": "\t@Override\n\tpublic boolean equals(@Nullable Object other) {\n\t\treturn (this == other || (other instanceof JdkProxyHint that &&\n\t\t\t\tthis.proxiedInterfaces.equals(that.proxiedInterfaces) &&\n\t\t\t\tObjects.equals(this.reachableType, that.reachableType) &&\n\t\t\t\tObjects.equals(this.javaSerialization, that.javaSerialization)));\n\t}\n\n\t@Override\n\tpublic int hashCode() {\n\t\treturn Objects.hash(this.proxiedInterfaces);\n\t}",
+        "explanation": "A fresh builder's reachableType is null and javaSerialization is false. onReachableType(TypeReference) and withJavaSerialization(boolean) assign the supplied value and return the same builder; repeated setter calls overwrite the prior value. Construction snapshots the current reference and boolean, so subsequent builder setters cannot change the completed hint. Equality requires the ordered interface list—including its repetitions—the reachable type, and the serialization flag all to match. hashCode is deliberately narrower and hashes only the interface list. Thus hints differing only in reachable type or serialization are unequal but have the same hash, a legal metadata-only collision that equality resolves. The completed hint exposes the defaults as getReachableType() == null and hasJavaSerialization() == false."
+      },
+      {
+        "id": "registry-deduplication",
+        "path": "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+        "start_line": 30,
+        "end_line": 41,
+        "quote": "public class ProxyHints {\n\n\tprivate final Set<JdkProxyHint> jdkProxies = new LinkedHashSet<>();\n\n\n\t/**\n\t * Return the interface-based proxies that are required.\n\t * @return a stream of {@link JdkProxyHint}\n\t */\n\tpublic Stream<JdkProxyHint> jdkProxyHints() {\n\t\treturn this.jdkProxies.stream();\n\t}",
+        "explanation": "Completed hints are inserted into a LinkedHashSet, and the exposed stream retains its encounter order. The first unique hint therefore keeps its insertion position; a later equal hint is suppressed without replacing or moving it. Deduplication uses whole JdkProxyHint hash/equality, with no sorting and no union or merging of interface lists. The built-in Class-backed ReflectionTypeReference and name-backed SimpleTypeReference both inherit AbstractTypeReference equality and hashing: equality compares canonical names across TypeReference implementations and hashing uses that canonical name. Consequently equivalent Class- and name-backed references for the same type can make otherwise identical hints deduplicate. Reordered interfaces are distinct because List.equals is order-sensitive; a repeated-interface list is distinct from the unrepeated list, though two identical repetition sequences deduplicate. Changed reachable-type or serialization metadata also makes hints distinct despite their shared interface-only hash. Registering [A] and [A, B] thus stores two ordered hints rather than merging them into one."
+      }
+    ]
+  },
+  "quality": {
+    "passed": true,
+    "findings": [
+      {
+        "id": "kotlin-bridges",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "registration-lifecycle",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "interface-validation",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "interface-storage",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "hint-state-identity",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "registry-deduplication",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "preflight": {
+    "baseline": {
+      "passed": true,
+      "archive_sha256": "7a8d957112b48ec2710afb16263211638540d5489b25dc6f313d4dd6b2afbcea",
+      "revision": "3352a120ff0a3ffe0b24",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    },
+    "control": {
+      "passed": true,
+      "archive_sha256": "7a8d957112b48ec2710afb16263211638540d5489b25dc6f313d4dd6b2afbcea",
+      "revision": "3352a120ff0a3ffe0b24",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    },
+    "quotes": {
+      "passed": true,
+      "archive_sha256": "7a8d957112b48ec2710afb16263211638540d5489b25dc6f313d4dd6b2afbcea",
+      "revision": "3352a120ff0a3ffe0b24",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    }
+  },
+  "postflight": {
+    "baseline": {
+      "passed": true,
+      "archive_sha256": "7a8d957112b48ec2710afb16263211638540d5489b25dc6f313d4dd6b2afbcea",
+      "revision": "3352a120ff0a3ffe0b24",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    },
+    "control": {
+      "passed": true,
+      "archive_sha256": "7a8d957112b48ec2710afb16263211638540d5489b25dc6f313d4dd6b2afbcea",
+      "revision": "3352a120ff0a3ffe0b24",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    },
+    "quotes": {
+      "passed": true,
+      "archive_sha256": "7a8d957112b48ec2710afb16263211638540d5489b25dc6f313d4dd6b2afbcea",
+      "revision": "3352a120ff0a3ffe0b24",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    }
+  },
+  "events_sha256": "b8a1ab1d21f575cc08255fd21d7e2264258112b513ef462744a2bf429e1c76fc"
+}

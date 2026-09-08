@@ -1,0 +1,245 @@
+{
+  "case": "javascript-express-download-transfer",
+  "condition": "baseline",
+  "repeat": 2,
+  "return_code": 0,
+  "timed_out": false,
+  "finished_at": "2026-09-08T18:35:17.215514+00:00",
+  "elapsed_seconds": 307.55340924998745,
+  "usage": {
+    "input_tokens": 40488,
+    "cached_input_tokens": 23296,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 9375,
+    "reasoning_output_tokens": 6403,
+    "uncached_input_tokens": 17192
+  },
+  "commands": [
+    {
+      "command": "/bin/zsh -lc \"rg -n \\\"res\\\\.download|sendFile|sendfile|function sendfile|onFinished|on-finished|content-disposition|file\\\\.on|stream\\\\.on\\\" . --glob '\"'!node_modules/**'\"'\"",
+      "exit_code": 0,
+      "output_bytes": 14603,
+      "output_sha256": "8eb93bd778efefdae9d6b00480809cee9d1809bb3fd06dbd2f7a0c97d0cd811e"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba lib/response.js | sed -n '915,1010p'\"",
+      "exit_code": 0,
+      "output_bytes": 2386,
+      "output_sha256": "9ac607f5f3c0650ce4d66469cc16085b018d5b1a4ee1786f6542505c099e14ab"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba lib/response.js | sed -n '1,35p'\"",
+      "exit_code": 0,
+      "output_bytes": 1262,
+      "output_sha256": "af7e5c99889f677d4c6cd49d6c768ff70676f3be45fe4fe254f334589e41e3b9"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba lib/response.js | sed -n '365,490p'\"",
+      "exit_code": 0,
+      "output_bytes": 4259,
+      "output_sha256": "a1e2372fd52ac1b530dfc9775c3b8672a6ac6d7b82aeefaed1901536896ea74c"
+    }
+  ],
+  "command_count": 4,
+  "command_output_bytes": 22510,
+  "failed_commands": 0,
+  "other_tool_types": [],
+  "runtime_warnings": [],
+  "turn_failed": false,
+  "answer": {
+    "findings": [
+      {
+        "id": "download_arguments",
+        "path": "lib/response.js",
+        "start_line": 435,
+        "end_line": 455,
+        "quote": "res.download = function download (path, filename, options, callback) {\n  var done = callback;\n  var name = filename;\n  var opts = options || null\n\n  // support function as second or third arg\n  if (typeof filename === 'function') {\n    done = filename;\n    name = null;\n    opts = null\n  } else if (typeof options === 'function') {\n    done = options\n    opts = null\n  }\n\n  // support optional filename, where options may be in it's place\n  if (typeof filename === 'object' &&\n    (typeof options === 'function' || options === undefined)) {\n    name = null\n    opts = filename\n  }",
+        "explanation": "At entry, `done`, `name`, and `opts` come respectively from the fourth callback, second filename, and third options argument (`opts` falls back to null). A second-position function becomes `done` and clears both filename and options. Otherwise, a third-position function becomes `done`, clears options, and retains the filename. The original second argument is then reclassified as options exactly when it is an object and the original third argument is either a function or undefined. Thus `(path, optionsObject, callback)` first normalizes the third-position callback and then retains it while assigning the second-position object to `opts`; `(path, optionsObject)` assigns that object without introducing a callback. Four-argument use retains the initial fourth-position callback. After deriving headers/options and computing `fullPath`, download returns `this.sendFile(fullPath, opts, done)`: it hands the request to the public `sendFile` method rather than starting a separate transfer."
+      },
+      {
+        "id": "download_options",
+        "path": "lib/response.js",
+        "start_line": 457,
+        "end_line": 483,
+        "quote": "  // set Content-Disposition when file is sent\n  var headers = {\n    'Content-Disposition': contentDisposition.create(basename(name || path))\n  };\n\n  // merge user-provided headers\n  if (opts && opts.headers) {\n    var keys = Object.keys(opts.headers)\n    for (var i = 0; i < keys.length; i++) {\n      var key = keys[i]\n      if (key.toLowerCase() !== 'content-disposition') {\n        headers[key] = opts.headers[key]\n      }\n    }\n  }\n\n  // merge user-provided options\n  opts = Object.create(opts)\n  opts.headers = headers\n\n  // Resolve the full path for sendFile\n  var fullPath = !opts.root\n    ? resolve(path)\n    : path\n\n  // send file\n  return this.sendFile(fullPath, opts, done)",
+        "explanation": "The attachment filename is the basename of the alternate `name` when it is truthy, otherwise the basename of the original `path`; an empty alternate name therefore falls back to the original path. This affects only Content-Disposition—the source path used below remains `path`. A fresh headers object is created. Only own enumerable keys of the supplied headers object are copied, and every casing of `Content-Disposition` is excluded by the lowercase comparison, so it cannot replace the generated value. `Object.create(opts)` makes a new derived options object whose prototype is the original options object; with no options, the earlier null normalization produces a null-prototype object. The fresh headers object is installed as an own property. For the assumed plain mutable objects, this construction neither mutates the original options object nor its headers object; subsequent `sendFile` assignment of `etag` lands on the derived object. The inherited-or-own `root` value is tested for truthiness: a falsy root causes `resolve(path)`, while a truthy root preserves the original path for delegation. This handoff itself establishes no filesystem-containment property."
+      },
+      {
+        "id": "sendfile_setup",
+        "path": "lib/response.js",
+        "start_line": 373,
+        "end_line": 406,
+        "quote": "res.sendFile = function sendFile(path, options, callback) {\n  var done = callback;\n  var req = this.req;\n  var res = this;\n  var next = req.next;\n  var opts = options || {};\n\n  if (!path) {\n    throw new TypeError('path argument is required to res.sendFile');\n  }\n\n  if (typeof path !== 'string') {\n    throw new TypeError('path must be a string to res.sendFile')\n  }\n\n  // support function as second arg\n  if (typeof options === 'function') {\n    done = options;\n    opts = {};\n  }\n\n  if (!opts.root && !pathIsAbsolute(path)) {\n    throw new TypeError('path must be absolute or specify root to res.sendFile');\n  }\n\n  // create file stream\n  var pathname = encodeURI(path);\n\n  // wire application etag option to send\n  opts.etag = this.app.enabled('etag');\n  var file = send(req, pathname, opts);\n\n  // transfer\n  sendfile(res, file, opts, function (err) {",
+        "explanation": "This is the public camel-case `res.sendFile`; the lowercase lexical `sendfile` at line 921 is a distinct private transfer helper. Missing and empty paths fail the initial falsy check synchronously. A truthy non-string then fails the type check. Those checks precede second-position callback normalization. For a valid string, a function in `options` becomes `done` and `opts` becomes a fresh object. Otherwise no/falsey options produce a fresh object, while a supplied ordinary options object is used directly without cloning. After normalization, a relative path is rejected synchronously unless `opts.root` is truthy; an absolute path does not require root. The validated original path is URI-encoded, then the application’s current `etag` setting is assigned to `opts.etag`, overriding that property. Consequently direct `sendFile(path, optionsObject, ...)` mutates that caller object, whereas download passes its derived object and leaves its original options object unchanged. The imported `send` function is called with request, encoded pathname, and the same options object to create `file`; that object is then passed with the response and options to private lowercase `sendfile`."
+      },
+      {
+        "id": "callback_routing",
+        "path": "lib/response.js",
+        "start_line": 405,
+        "end_line": 414,
+        "quote": "  // transfer\n  sendfile(res, file, opts, function (err) {\n    if (done) return done(err);\n    if (err && err.code === 'EISDIR') return next();\n\n    // next() all but write errors\n    if (err && err.code !== 'ECONNABORTED' && err.syscall !== 'write') {\n      next(err);\n    }\n  });",
+        "explanation": "A supplied callback has unconditional precedence: the completion closure immediately invokes it with the helper’s error or with undefined on success, so every transfer error bypasses all automatic `next` routing. There is no `headersSent` check or automatic response in that branch; handling a partial response is the caller’s responsibility. Without a callback, `EISDIR` routes to `next()` without an error; `ECONNABORTED` and errors whose `syscall` is `write` are not forwarded; every other error routes to `next(err)`; successful completion performs no further action. The explicit missing/empty, non-string, and relative-without-root exceptions occur before stream creation and before the private helper, so they are synchronous throws and are not converted into callback completions. More generally, the shown setup/helper invocation has no try/catch, so a synchronous setup exception propagates rather than entering this completion closure."
+      },
+      {
+        "id": "transfer_events",
+        "path": "lib/response.js",
+        "start_line": 987,
+        "end_line": 1008,
+        "quote": "  file.on('directory', ondirectory);\n  file.on('end', onend);\n  file.on('error', onerror);\n  file.on('file', onfile);\n  file.on('stream', onstream);\n  onFinished(res, onfinish);\n\n  if (options.headers) {\n    // set headers on successful transfer\n    file.on('headers', function headers(res) {\n      var obj = options.headers;\n      var keys = Object.keys(obj);\n\n      for (var i = 0; i < keys.length; i++) {\n        var k = keys[i];\n        res.setHeader(k, obj[k]);\n      }\n    });\n  }\n\n  // pipe\n  file.pipe(res);",
+        "explanation": "Private `sendfile` registers the five file listeners in order—`directory`, `end`, `error`, `file`, and `stream`—then registers response completion through `onFinished`, conditionally registers `headers`, and only afterward calls `file.pipe(res)`. Each helper call has its own `done = false` guard. Directory, abort, error, end, and deferred successful-finish handlers check it, set it before invoking the callback, and thereby suppress repeated and callback-reentrant terminal events. Directory and abort create synthetic errors with `EISDIR` and `ECONNABORTED`; the error handler forwards its original error object; `end` completes without an error. Header-listener installation depends on `options.headers` being truthy at setup. When `headers` is actually emitted, the handler reads the then-current `options.headers`, enumerates its then-current own enumerable keys, and forwards each value through `res.setHeader`. A terminal failure before any headers event does not itself execute this loop. The headers handler has no `done` guard, however, so the source does not prohibit a later headers event from setting them; event ordering must not be inferred here. Conversely, if headers were already set and a later terminal failure occurs, no code rolls them back."
+      },
+      {
+        "id": "finish_race",
+        "path": "lib/response.js",
+        "start_line": 959,
+        "end_line": 985,
+        "quote": "  // file\n  function onfile() {\n    streaming = false;\n  }\n\n  // finished\n  function onfinish(err) {\n    if (err && err.code === 'ECONNRESET') return onaborted();\n    if (err) return onerror(err);\n    if (done) return;\n\n    setImmediate(function () {\n      if (streaming !== false && !done) {\n        onaborted();\n        return;\n      }\n\n      if (done) return;\n      done = true;\n      callback();\n    });\n  }\n\n  // streaming\n  function onstream() {\n    streaming = true;\n  }",
+        "explanation": "`streaming` is initially declared without a value, so its initial state is undefined. A `stream` event changes it to true and a `file` event changes it to false; the most recent assignment is what later checks observe. At response finish, `ECONNRESET` is converted through `onaborted` into the synthetic `ECONNABORTED` error, while any other finish error is forwarded unchanged through `onerror`. Those terminal handlers’ guards suppress callbacks if completion already occurred; a no-error finish also checks `done` before deferring. The deferred `setImmediate` re-reads the latest state rather than capturing it: while not done, undefined or true satisfies `streaming !== false` and is treated as an abort, whereas false proceeds to successful completion. If an end, directory, error, abort, or another deferred finish completes the transfer between scheduling and execution, it sets `done`; both deferred guards then prevent a duplicate callback."
+      }
+    ]
+  },
+  "quality": {
+    "passed": true,
+    "findings": [
+      {
+        "id": "download_arguments",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "download_options",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "sendfile_setup",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "callback_routing",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "transfer_events",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "finish_race",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "preflight": {
+    "baseline": {
+      "passed": true,
+      "archive_sha256": "e36126105e72f4a8399254b787bd80c329102e3d872120503721db8f9a943c0e",
+      "revision": "bcba2230bf65c920c9fb",
+      "source_files_verified": 213,
+      "indexed_source_files_verified": 211,
+      "counts": {
+        "files": 211,
+        "nodes": 424,
+        "scopes": 0,
+        "edges": 581,
+        "references": 11251,
+        "imports": 400,
+        "diagnostics": 0
+      },
+      "consumer_index_absent": true
+    },
+    "control": {
+      "passed": true,
+      "archive_sha256": "e36126105e72f4a8399254b787bd80c329102e3d872120503721db8f9a943c0e",
+      "revision": "bcba2230bf65c920c9fb",
+      "source_files_verified": 213,
+      "indexed_source_files_verified": 211,
+      "counts": {
+        "files": 211,
+        "nodes": 424,
+        "scopes": 0,
+        "edges": 581,
+        "references": 11251,
+        "imports": 400,
+        "diagnostics": 0
+      },
+      "consumer_index_absent": true
+    },
+    "quotes": {
+      "passed": true,
+      "archive_sha256": "e36126105e72f4a8399254b787bd80c329102e3d872120503721db8f9a943c0e",
+      "revision": "bcba2230bf65c920c9fb",
+      "source_files_verified": 213,
+      "indexed_source_files_verified": 211,
+      "counts": {
+        "files": 211,
+        "nodes": 424,
+        "scopes": 0,
+        "edges": 581,
+        "references": 11251,
+        "imports": 400,
+        "diagnostics": 0
+      },
+      "consumer_index_absent": true
+    }
+  },
+  "postflight": {
+    "baseline": {
+      "passed": true,
+      "archive_sha256": "e36126105e72f4a8399254b787bd80c329102e3d872120503721db8f9a943c0e",
+      "revision": "bcba2230bf65c920c9fb",
+      "source_files_verified": 213,
+      "indexed_source_files_verified": 211,
+      "counts": {
+        "files": 211,
+        "nodes": 424,
+        "scopes": 0,
+        "edges": 581,
+        "references": 11251,
+        "imports": 400,
+        "diagnostics": 0
+      },
+      "consumer_index_absent": true
+    },
+    "control": {
+      "passed": true,
+      "archive_sha256": "e36126105e72f4a8399254b787bd80c329102e3d872120503721db8f9a943c0e",
+      "revision": "bcba2230bf65c920c9fb",
+      "source_files_verified": 213,
+      "indexed_source_files_verified": 211,
+      "counts": {
+        "files": 211,
+        "nodes": 424,
+        "scopes": 0,
+        "edges": 581,
+        "references": 11251,
+        "imports": 400,
+        "diagnostics": 0
+      },
+      "consumer_index_absent": true
+    },
+    "quotes": {
+      "passed": true,
+      "archive_sha256": "e36126105e72f4a8399254b787bd80c329102e3d872120503721db8f9a943c0e",
+      "revision": "bcba2230bf65c920c9fb",
+      "source_files_verified": 213,
+      "indexed_source_files_verified": 211,
+      "counts": {
+        "files": 211,
+        "nodes": 424,
+        "scopes": 0,
+        "edges": 581,
+        "references": 11251,
+        "imports": 400,
+        "diagnostics": 0
+      },
+      "consumer_index_absent": true
+    }
+  },
+  "events_sha256": "7946ec704785563e11583fbbe63e13910cc2436c0141187bce395f5e7e31225b"
+}
