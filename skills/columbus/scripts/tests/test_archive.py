@@ -8,11 +8,53 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from columbus.archive import archive, search_archive, neighbors_archive
+from columbus.archive import archive, search_archive, neighbors_archive, callers_archive
 from columbus.index import RepositoryIndex
 
 
 class ArchiveTests(unittest.TestCase):
+    def test_archive_callers_exact_resolution_and_source_free_parity(self):
+        from columbus.cli import main
+        from contextlib import redirect_stdout
+        import io
+        with tempfile.TemporaryDirectory() as consumer:
+            artifacts = [Path(consumer) / codec for codec in ('gzip', 'xz')]
+            with tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                for package in ('one', 'two'):
+                    (root / package).mkdir()
+                    (root / package / '__init__.py').write_text('')
+                    (root / package / 'mod.py').write_text(
+                        'def target(): pass\ndef caller(): target()\ndef caller2(): target()\n')
+                index = RepositoryIndex(root / '.columbus/index.sqlite')
+                index.refresh(root)
+                for artifact, codec in zip(artifacts, ('gzip', 'xz')):
+                    archive(index, artifact, compression=codec)
+                target = 'one/mod.py::target:function'
+                expected = neighbors_archive(artifacts[0], target, 'in', ['calls'], repo=root, context_lines=0)
+                self.assertEqual(callers_archive(artifacts[0], 'one.mod.target', repo=root, context_lines=0), expected)
+                (root / 'one/mod.py').write_text('changed')
+                with self.assertRaises(ValueError):
+                    callers_archive(artifacts[0], 'one.mod.target', repo=root, context_lines=0)
+            for artifact in artifacts:
+                for query in ('target', 'mod.target', 'arget', 'absent'):
+                    with self.assertRaisesRegex(ValueError, 'ambiguous or absent'):
+                        callers_archive(artifact, query)
+                for query in (target, 'one.mod.target'):
+                    for fmt in ('json', 'text'):
+                        for offset in (0, 1):
+                            options = dict(limit=1, offset=offset, output_format=fmt, path='one/*', budget_bytes=3000)
+                            self.assertEqual(callers_archive(artifact, query, **options),
+                                             neighbors_archive(artifact, target, 'in', ['calls'], **options))
+                output = io.StringIO()
+                with redirect_stdout(output):
+                    code = main(['archive-callers', 'one.mod.target', '--input', str(artifact),
+                                 '--repo', consumer, '--format', 'text', '--budget-bytes', '3000'])
+                self.assertEqual(code, 0)
+                self.assertIn('archive-neighbors', output.getvalue())
+                self.assertLessEqual(len(output.getvalue().encode()), 3000)
+            self.assertFalse((Path(consumer) / '.columbus').exists())
+
     def test_python_module_qualified_archive_search_without_source(self):
         with tempfile.TemporaryDirectory() as consumer:
             artifacts = [Path(consumer) / ('graph.' + codec) for codec in ('gzip', 'xz')]

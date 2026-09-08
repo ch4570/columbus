@@ -97,7 +97,7 @@ def main(argv=None) -> int:
     parser.add_argument('--version', action='version', version=__version__)
     _common(parser)
     sub = parser.add_subparsers(dest='command', required=True)
-    for name in ('doctor', 'init', 'archive-search', 'archive-neighbors', 'archive', 'tree', 'hook-install', 'hook-update', 'sync', 'index', 'status', 'search', 'map', 'symbol', 'callers', 'neighbors', 'impact', 'context', 'explore', 'stats', 'graph', 'export', 'serve', 'telemetry'):
+    for name in ('doctor', 'init', 'archive-search', 'archive-neighbors', 'archive-callers', 'archive', 'tree', 'hook-install', 'hook-update', 'sync', 'index', 'status', 'search', 'map', 'symbol', 'callers', 'neighbors', 'impact', 'context', 'explore', 'stats', 'graph', 'export', 'serve', 'telemetry'):
         command = sub.add_parser(name)
         _common(command, subcommand=True)
         if name == 'archive-search':
@@ -106,15 +106,16 @@ def main(argv=None) -> int:
             command.add_argument('--input', required=True)
             command.add_argument('--limit', type=int, default=5)
             command.add_argument('--budget-bytes', type=int, default=6000)
-        if name == 'archive-neighbors':
+        if name in {'archive-neighbors', 'archive-callers'}:
             command.add_argument('--path', help='Case-sensitive glob on edge paths, before counting/pagination')
             command.add_argument('--format', choices=['json', 'text'], default='json')
-            command.add_argument('--context-lines', type=int, help='Verified source radius 0–40 around calls; requires --kinds calls')
+            command.add_argument('--context-lines', type=int, help='Verified source radius 0–40 around calls; archive-neighbors requires --kinds calls')
             command.add_argument('--offset', type=int, default=0)
             command.add_argument('symbol_id')
             command.add_argument('--input', required=True)
-            command.add_argument('--direction', choices=['in', 'out', 'both'], default='out')
-            command.add_argument('--kinds', nargs='+')
+            if name == 'archive-neighbors':
+                command.add_argument('--direction', choices=['in', 'out', 'both'], default='out')
+                command.add_argument('--kinds', nargs='+')
             command.add_argument('--limit', type=int, default=50)
             command.add_argument('--budget-bytes', type=int, default=6000)
         if name == 'archive':
@@ -282,6 +283,12 @@ def main(argv=None) -> int:
                 raise ValueError('archive-search rejects pretty output to preserve its byte budget')
             from .archive import search_archive
             result = search_archive(args.input, args.query, args.limit, args.budget_bytes, output_format=args.format)
+        elif args.command == 'archive-callers':
+            if args.pretty:
+                raise ValueError('archive-callers rejects pretty output to preserve its byte budget')
+            from .archive import callers_archive
+            result = callers_archive(args.input, args.symbol_id, args.limit, args.budget_bytes, args.offset,
+                                     output_format=args.format, repo=root, context_lines=args.context_lines, path=args.path)
         elif args.command == 'archive-neighbors':
             if args.pretty:
                 raise ValueError('archive-neighbors rejects pretty output to preserve its byte budget')

@@ -130,7 +130,7 @@ def render(packet: dict, output_format: str = 'json', command: str = '') -> str:
     if output_format == 'text':
         if command == 'archive-search':
             return archive_search_text(packet)
-        if command == 'archive-neighbors':
+        if command in {'archive-neighbors', 'archive-callers'}:
             return archive_neighbors_text(packet)
         return caller_text(packet) if command == 'callers' else text_output(packet, command)
     if output_format != 'json':

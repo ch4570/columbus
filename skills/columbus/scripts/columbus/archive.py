@@ -195,6 +195,46 @@ def _validated_rows(raw):
         raise ValueError('Incomplete archive or record count mismatch')
 
 
+def callers_archive(source: str | Path, query: str, limit: int = 50, budget_bytes: int = 6000,
+                    offset: int = 0, *, output_format: str = 'json', repo: str | Path | None = None,
+                    context_lines: int | None = None, path: str | None = None) -> dict:
+    """Resolve one exact stored declaration, then return bounded incoming calls."""
+    if not isinstance(query, str) or not 1 <= len(query) <= 2048:
+        raise ValueError('An exact declaration name or ID of 1–2048 characters is required')
+    source = Path(source)
+    def stamp():
+        stat = source.stat()
+        return stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns
+    before = stamp()
+    selected, count, exact_id = None, 0, None
+    try:
+        with source.open('rb') as raw:
+            for kind, data in _validated_rows(raw):
+                if kind != 'node':
+                    continue
+                canonical = ''
+                if data.get('language') == 'python' and data.get('module'):
+                    canonical = (data['module'] if data.get('kind') == 'module'
+                                 else data['module'] + '.' + data.get('qualname', data['name']))
+                if query == data['id']:
+                    exact_id = data['id']
+                if query in (data['id'], data['name'], data.get('qualname'), canonical):
+                    selected = data['id']
+                    count += 1
+        if stamp() != before:
+            raise ValueError('Archive changed during query; retry')
+        if exact_id is None and count != 1:
+            raise ValueError('Declaration is ambiguous or absent; use archive-search and an exact ID')
+        result = neighbors_archive(source, exact_id or selected, 'in', ['calls'], limit, budget_bytes,
+                                   offset, output_format=output_format, repo=repo,
+                                   context_lines=context_lines, path=path)
+        if stamp() != before:
+            raise ValueError('Archive changed during query; retry')
+        return result
+    except (KeyError, TypeError, AttributeError, EOFError, lzma.LZMAError) as exc:
+        raise ValueError('Malformed or incomplete graph archive') from exc
+
+
 def neighbors_archive(source: str | Path, symbol_id: str, direction: str = 'out',
                       kinds: list[str] | None = None, limit: int = 50, budget_bytes: int = 6000, offset: int = 0,
                       *, output_format: str = 'json', repo: str | Path | None = None,
