@@ -1,0 +1,73 @@
+{
+  "source_revision": "4c8c6409a27a62ab163d3b6196ad862b7c835440",
+  "source_manifest_sha256": "53bd4243666ca2f8ad02a3f00b349dd565ac10f1df889e8041bc4c1b87753143",
+  "revisions": {
+    "before": "8c47f9946e2ff9daf2e8e5f2899a4fa1590e7bbc",
+    "after": "7bb9066757220707a4ffc4518173bca53a91616a"
+  },
+  "runtime_changes": [
+    "columbus/jvm.py"
+  ],
+  "source_files": 1166,
+  "source_hashes_equal": true,
+  "base_syntax_except_expected_type_equal": true,
+  "before_edges": 30512,
+  "after_edges": 30512,
+  "added": [],
+  "removed": [],
+  "fingerprints": {
+    "before": {
+      "languages": [
+        "java",
+        "json",
+        "kotlin",
+        "text",
+        "xml"
+      ],
+      "versions": {
+        "engine": "columbus-1.0.0",
+        "python_ast": "3.11.16",
+        "tree-sitter": "0.26.0",
+        "tree-sitter-java": "0.23.5",
+        "tree-sitter-kotlin": "1.1.0",
+        "analyzer_code": "5acb0ba31a39cb73f649",
+        "language_config": "44136fa355b3678a1146"
+      },
+      "fidelity": {
+        "java": "ast",
+        "json": "text",
+        "kotlin": "ast",
+        "text": "text",
+        "xml": "text"
+      }
+    },
+    "after": {
+      "languages": [
+        "java",
+        "json",
+        "kotlin",
+        "text",
+        "xml"
+      ],
+      "versions": {
+        "engine": "columbus-1.0.0",
+        "python_ast": "3.11.16",
+        "tree-sitter": "0.26.0",
+        "tree-sitter-java": "0.23.5",
+        "tree-sitter-kotlin": "1.1.0",
+        "analyzer_code": "4dcda1092ee502e52b6f",
+        "language_config": "44136fa355b3678a1146"
+      },
+      "fidelity": {
+        "java": "ast",
+        "json": "text",
+        "kotlin": "ast",
+        "text": "text",
+        "xml": "text"
+      }
+    }
+  },
+  "compiler_accuracy_claimed": false,
+  "model_trial": false,
+  "context_change_count": 772
+}
