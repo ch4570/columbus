@@ -1,0 +1,607 @@
+{
+  "scope": "Verified bounded src/requests/ source reads only; excludes rg, help, skill text, metadata and model tokens.",
+  "conditions": {
+    "baseline": {
+      "verified_ranges": 34,
+      "unique_lines": 1457,
+      "source_bytes_returned": 61269,
+      "repeated_source_bytes": 8740,
+      "empty_ranges": [],
+      "unverified_ranges": [],
+      "reads": [
+        {
+          "command_id": "item_3",
+          "path": "src/requests/sessions.py",
+          "start": 120,
+          "end": 281,
+          "mode": "nl",
+          "bytes": 6444,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_4",
+          "path": "src/requests/models.py",
+          "start": 480,
+          "end": 558,
+          "mode": "nl",
+          "bytes": 2774,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_5",
+          "path": "src/requests/sessions.py",
+          "start": 670,
+          "end": 750,
+          "mode": "nl",
+          "bytes": 2862,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_7",
+          "path": "src/requests/sessions.py",
+          "start": 282,
+          "end": 352,
+          "mode": "nl",
+          "bytes": 2968,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_6",
+          "path": "src/requests/models.py",
+          "start": 330,
+          "end": 405,
+          "mode": "nl",
+          "bytes": 2342,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_8",
+          "path": "src/requests/utils.py",
+          "start": 1050,
+          "end": 1086,
+          "mode": "nl",
+          "bytes": 1109,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_9",
+          "path": "src/requests/sessions.py",
+          "start": 333,
+          "end": 360,
+          "mode": "nl",
+          "bytes": 1012,
+          "repeated_bytes": 831,
+          "repeated_lines": 20
+        },
+        {
+          "command_id": "item_9",
+          "path": "src/requests/utils.py",
+          "start": 840,
+          "end": 910,
+          "mode": "nl",
+          "bytes": 2008,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_12",
+          "path": "src/requests/sessions.py",
+          "start": 530,
+          "end": 600,
+          "mode": "nl",
+          "bytes": 3007,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_12",
+          "path": "src/requests/sessions.py",
+          "start": 750,
+          "end": 806,
+          "mode": "nl",
+          "bytes": 2066,
+          "repeated_bytes": 78,
+          "repeated_lines": 1
+        },
+        {
+          "command_id": "item_12",
+          "path": "src/requests/utils.py",
+          "start": 750,
+          "end": 828,
+          "mode": "nl",
+          "bytes": 2543,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_12",
+          "path": "src/requests/utils.py",
+          "start": 828,
+          "end": 852,
+          "mode": "nl",
+          "bytes": 687,
+          "repeated_bytes": 328,
+          "repeated_lines": 14
+        },
+        {
+          "command_id": "item_12",
+          "path": "src/requests/adapters.py",
+          "start": 430,
+          "end": 505,
+          "mode": "nl",
+          "bytes": 3084,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_13",
+          "path": "src/requests/sessions.py",
+          "start": 61,
+          "end": 90,
+          "mode": "nl",
+          "bytes": 1034,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_15",
+          "path": "src/requests/adapters.py",
+          "start": 168,
+          "end": 240,
+          "mode": "nl",
+          "bytes": 2345,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_15",
+          "path": "src/requests/adapters.py",
+          "start": 578,
+          "end": 600,
+          "mode": "nl",
+          "bytes": 901,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_15",
+          "path": "src/requests/adapters.py",
+          "start": 635,
+          "end": 650,
+          "mode": "nl",
+          "bytes": 592,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_16",
+          "path": "src/requests/adapters.py",
+          "start": 242,
+          "end": 274,
+          "mode": "nl",
+          "bytes": 1406,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_16",
+          "path": "src/requests/adapters.py",
+          "start": 528,
+          "end": 588,
+          "mode": "nl",
+          "bytes": 2358,
+          "repeated_bytes": 308,
+          "repeated_lines": 11
+        },
+        {
+          "command_id": "item_16",
+          "path": "src/requests/adapters.py",
+          "start": 590,
+          "end": 653,
+          "mode": "nl",
+          "bytes": 2578,
+          "repeated_bytes": 1184,
+          "repeated_lines": 27
+        },
+        {
+          "command_id": "item_17",
+          "path": "src/requests/sessions.py",
+          "start": 90,
+          "end": 127,
+          "mode": "nl",
+          "bytes": 1744,
+          "repeated_bytes": 392,
+          "repeated_lines": 9
+        },
+        {
+          "command_id": "item_17",
+          "path": "src/requests/models.py",
+          "start": 810,
+          "end": 842,
+          "mode": "nl",
+          "bytes": 1228,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_17",
+          "path": "src/requests/models.py",
+          "start": 970,
+          "end": 995,
+          "mode": "nl",
+          "bytes": 876,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_18",
+          "path": "src/requests/models.py",
+          "start": 64,
+          "end": 80,
+          "mode": "nl",
+          "bytes": 390,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_18",
+          "path": "src/requests/models.py",
+          "start": 760,
+          "end": 785,
+          "mode": "nl",
+          "bytes": 889,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_18",
+          "path": "src/requests/sessions.py",
+          "start": 173,
+          "end": 220,
+          "mode": "nl",
+          "bytes": 1950,
+          "repeated_bytes": 1950,
+          "repeated_lines": 48
+        },
+        {
+          "command_id": "item_19",
+          "path": "src/requests/api.py",
+          "start": 45,
+          "end": 65,
+          "mode": "nl",
+          "bytes": 622,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_19",
+          "path": "src/requests/sessions.py",
+          "start": 673,
+          "end": 748,
+          "mode": "nl",
+          "bytes": 2728,
+          "repeated_bytes": 2728,
+          "repeated_lines": 76
+        },
+        {
+          "command_id": "item_19",
+          "path": "src/requests/sessions.py",
+          "start": 255,
+          "end": 281,
+          "mode": "nl",
+          "bytes": 852,
+          "repeated_bytes": 852,
+          "repeated_lines": 27
+        },
+        {
+          "command_id": "item_20",
+          "path": "src/requests/cookies.py",
+          "start": 124,
+          "end": 139,
+          "mode": "nl",
+          "bytes": 679,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_20",
+          "path": "src/requests/models.py",
+          "start": 610,
+          "end": 650,
+          "mode": "nl",
+          "bytes": 1498,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_20",
+          "path": "src/requests/cookies.py",
+          "start": 530,
+          "end": 561,
+          "mode": "nl",
+          "bytes": 1102,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_21",
+          "path": "src/requests/models.py",
+          "start": 590,
+          "end": 612,
+          "mode": "nl",
+          "bytes": 732,
+          "repeated_bytes": 89,
+          "repeated_lines": 3
+        },
+        {
+          "command_id": "item_21",
+          "path": "src/requests/sessions.py",
+          "start": 445,
+          "end": 500,
+          "mode": "nl",
+          "bytes": 1859,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        }
+      ],
+      "events_sha256": "6b8350c611247921285cd665efda020f8bc1122d569e3017846d3b0b995978e3"
+    },
+    "columbus": {
+      "verified_ranges": 24,
+      "unique_lines": 884,
+      "source_bytes_returned": 44144,
+      "repeated_source_bytes": 10170,
+      "empty_ranges": [],
+      "unverified_ranges": [],
+      "reads": [
+        {
+          "command_id": "item_5",
+          "path": "src/requests/sessions.py",
+          "start": 159,
+          "end": 278,
+          "mode": "archive-source",
+          "bytes": 4697,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_6",
+          "path": "src/requests/sessions.py",
+          "start": 279,
+          "end": 280,
+          "mode": "archive-source",
+          "bytes": 80,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_8",
+          "path": "src/requests/sessions.py",
+          "start": 673,
+          "end": 748,
+          "mode": "archive-source",
+          "bytes": 2728,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_11",
+          "path": "src/requests/sessions.py",
+          "start": 110,
+          "end": 160,
+          "mode": "nl",
+          "bytes": 2321,
+          "repeated_bytes": 41,
+          "repeated_lines": 2
+        },
+        {
+          "command_id": "item_11",
+          "path": "src/requests/sessions.py",
+          "start": 280,
+          "end": 355,
+          "mode": "nl",
+          "bytes": 3039,
+          "repeated_bytes": 27,
+          "repeated_lines": 1
+        },
+        {
+          "command_id": "item_14",
+          "path": "src/requests/models.py",
+          "start": 500,
+          "end": 571,
+          "mode": "nl",
+          "bytes": 2559,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_14",
+          "path": "src/requests/utils.py",
+          "start": 1068,
+          "end": 1086,
+          "mode": "nl",
+          "bytes": 701,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_17",
+          "path": "src/requests/sessions.py",
+          "start": 585,
+          "end": 675,
+          "mode": "nl",
+          "bytes": 3382,
+          "repeated_bytes": 81,
+          "repeated_lines": 3
+        },
+        {
+          "command_id": "item_17",
+          "path": "src/requests/sessions.py",
+          "start": 690,
+          "end": 745,
+          "mode": "nl",
+          "bytes": 1911,
+          "repeated_bytes": 1911,
+          "repeated_lines": 56
+        },
+        {
+          "command_id": "item_20",
+          "path": "src/requests/sessions.py",
+          "start": 696,
+          "end": 742,
+          "mode": "nl",
+          "bytes": 1653,
+          "repeated_bytes": 1653,
+          "repeated_lines": 47
+        },
+        {
+          "command_id": "item_21",
+          "path": "src/requests/sessions.py",
+          "start": 60,
+          "end": 100,
+          "mode": "nl",
+          "bytes": 1454,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_21",
+          "path": "src/requests/sessions.py",
+          "start": 540,
+          "end": 592,
+          "mode": "nl",
+          "bytes": 2120,
+          "repeated_bytes": 195,
+          "repeated_lines": 8
+        },
+        {
+          "command_id": "item_21",
+          "path": "src/requests/sessions.py",
+          "start": 750,
+          "end": 780,
+          "mode": "nl",
+          "bytes": 1213,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_21",
+          "path": "src/requests/utils.py",
+          "start": 839,
+          "end": 879,
+          "mode": "nl",
+          "bytes": 1297,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_22",
+          "path": "src/requests/adapters.py",
+          "start": 185,
+          "end": 235,
+          "mode": "nl",
+          "bytes": 1871,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_22",
+          "path": "src/requests/adapters.py",
+          "start": 390,
+          "end": 445,
+          "mode": "nl",
+          "bytes": 2815,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_22",
+          "path": "src/requests/adapters.py",
+          "start": 525,
+          "end": 555,
+          "mode": "nl",
+          "bytes": 1166,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_25",
+          "path": "src/requests/sessions.py",
+          "start": 700,
+          "end": 741,
+          "mode": "nl",
+          "bytes": 1469,
+          "repeated_bytes": 1469,
+          "repeated_lines": 42
+        },
+        {
+          "command_id": "item_25",
+          "path": "src/requests/sessions.py",
+          "start": 221,
+          "end": 257,
+          "mode": "nl",
+          "bytes": 1789,
+          "repeated_bytes": 1789,
+          "repeated_lines": 37
+        },
+        {
+          "command_id": "item_25",
+          "path": "src/requests/utils.py",
+          "start": 839,
+          "end": 878,
+          "mode": "nl",
+          "bytes": 1296,
+          "repeated_bytes": 1296,
+          "repeated_lines": 40
+        },
+        {
+          "command_id": "item_25",
+          "path": "src/requests/sessions.py",
+          "start": 177,
+          "end": 216,
+          "mode": "nl",
+          "bytes": 1708,
+          "repeated_bytes": 1708,
+          "repeated_lines": 40
+        },
+        {
+          "command_id": "item_26",
+          "path": "src/requests/models.py",
+          "start": 585,
+          "end": 610,
+          "mode": "nl",
+          "bytes": 884,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_26",
+          "path": "src/requests/auth.py",
+          "start": 69,
+          "end": 100,
+          "mode": "nl",
+          "bytes": 914,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_30",
+          "path": "src/requests/cookies.py",
+          "start": 124,
+          "end": 152,
+          "mode": "nl",
+          "bytes": 1077,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        }
+      ],
+      "events_sha256": "cd46e40b1d6624b3484ab9f3d00d9155a7e55d245ada8cf17411d5a359542867"
+    }
+  }
+}

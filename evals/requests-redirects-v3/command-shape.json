@@ -1,0 +1,63 @@
+{
+  "scope": "Completed Requests command-item observations; overlap is not model-turn count.",
+  "case": "requests-redirects-v3",
+  "conditions": {
+    "baseline": {
+      "groups": {
+        "other": {
+          "commands": 22,
+          "failed": 1,
+          "output_bytes": 101570
+        }
+      },
+      "peak_active_command_items": 2,
+      "starts_while_another_command_active": 2,
+      "starts_with_no_command_active": 20,
+      "events_sha256": "6b8350c611247921285cd665efda020f8bc1122d569e3017846d3b0b995978e3",
+      "usage": {
+        "input_tokens": 463561,
+        "cached_input_tokens": 407552,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 16470,
+        "reasoning_output_tokens": 11866,
+        "uncached_input_tokens": 56009
+      }
+    },
+    "columbus": {
+      "groups": {
+        "other": {
+          "commands": 24,
+          "failed": 1,
+          "output_bytes": 89210
+        },
+        "archive-search": {
+          "commands": 2,
+          "failed": 0,
+          "output_bytes": 1912
+        },
+        "archive-source": {
+          "commands": 3,
+          "failed": 0,
+          "output_bytes": 10402
+        },
+        "archive-callers": {
+          "commands": 2,
+          "failed": 0,
+          "output_bytes": 2638
+        }
+      },
+      "peak_active_command_items": 1,
+      "starts_while_another_command_active": 0,
+      "starts_with_no_command_active": 31,
+      "events_sha256": "cd46e40b1d6624b3484ab9f3d00d9155a7e55d245ada8cf17411d5a359542867",
+      "usage": {
+        "input_tokens": 887922,
+        "cached_input_tokens": 792576,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 21073,
+        "reasoning_output_tokens": 15039,
+        "uncached_input_tokens": 95346
+      }
+    }
+  }
+}

@@ -7,10 +7,11 @@ from pathlib import Path
 parser = argparse.ArgumentParser()
 parser.add_argument('observation', type=Path)
 parser.add_argument('output', type=Path)
+parser.add_argument('--case', default='requests-redirects-v2')
 args = parser.parse_args()
-result = {'scope': 'Completed Requests v2 command-item observations; overlap is not model-turn count.', 'conditions': {}}
+result = {'scope': 'Completed Requests command-item observations; overlap is not model-turn count.', 'case': args.case, 'conditions': {}}
 for condition in ('baseline', 'columbus'):
-    trial = args.observation / 'trials' / f'requests-redirects-v2-{condition}-1'
+    trial = args.observation / 'trials' / f'{args.case}-{condition}-1'
     recorded = json.loads((trial / 'result.json').read_text())
     raw = (trial / 'events.jsonl').read_bytes()
     assert hashlib.sha256(raw).hexdigest() == recorded['events_sha256']
