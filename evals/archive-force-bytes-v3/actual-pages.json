@@ -1,0 +1,27 @@
+{
+  "scope": "First complete actual tool-output page chain only; not final model answer or usage.",
+  "pages": [
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/columbus/.venv/bin/python /private/tmp/columbus-archive-force-bytes-v3-trial/runtime/columbus.py archive-callers django.utils.encoding.force_bytes --input /private/tmp/columbus-archive-force-bytes-v3-trial/graph.jsonl.xz --repo . --path 'django/*' --context-lines 12 --format text --budget-bytes 30000\"",
+      "offset": 0,
+      "next_offset": 22,
+      "edges": 22,
+      "bytes": 28027,
+      "output_sha256": "1a33c452eeef50807a6fdcfe510ef13e24c89f850ce35b4f9e4a634cebdbb5f4"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/columbus/.venv/bin/python /private/tmp/columbus-archive-force-bytes-v3-trial/runtime/columbus.py archive-callers django.utils.encoding.force_bytes --input /private/tmp/columbus-archive-force-bytes-v3-trial/graph.jsonl.xz --repo . --path 'django/*' --context-lines 12 --format text --budget-bytes 30000 --offset 22\"",
+      "offset": 22,
+      "next_offset": null,
+      "edges": 24,
+      "bytes": 28027,
+      "output_sha256": "9393fcb6b50e6d79a9b5e44627d75a455d2776275c861b496c184f4330623640"
+    }
+  ],
+  "call_sites": 46,
+  "owners": 37,
+  "oracle_parity": true,
+  "source_context_radius": 12,
+  "byte_budget_per_page": 30000,
+  "token_savings_claimed": false
+}
