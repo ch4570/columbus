@@ -17,3 +17,5 @@ The initial comparator stopped at its base-syntax equality assertion because it 
 Exactly 307 references gain a previously empty expected_type. Every other parsed field and all 31,365 complete edge tuples remain equal. spring-comparison.json retains all new contexts and both runtime manifests. The source-manifest hash remains 53bd4243666ca2f8ad02a3f00b349dd565ac10f1df889e8041bc4c1b87753143. This proves the bounded extraction change has no edge regression on this corpus, not that every extracted context or preexisting edge is compiler-correct. It does not regain unsupported generic-bound coverage.
 
 The exact cf635cf distribution run 34173030266 and candidate run 34173030244 were in progress at the latest poll. The earlier 6594992 candidate success is recorded separately and is not attributed to this newer change.
+
+Follow-up: ordinary distribution run 34173030266 at cf635cf completed with all six jobs successful; platform-final.json retains the exact revision and job conclusions. Candidate run 34173030244 is still running at this poll.
