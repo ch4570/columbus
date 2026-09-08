@@ -135,6 +135,10 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
 
         def verify_callers(prefix, target):
             source = target / 'caller_probe.py'
+            overload_source = ('class OverloadProbe {\n'
+                               '  int choose() { return 1; }\n'
+                               '  int choose(int value) { return value; }\n}\n').encode()
+            (target / 'OverloadProbe.java').write_bytes(overload_source)
             original = ("def evidence_target(): return 1\n"
                         "def outer():\n    def inner():\n        evidence_target()\n    inner()\n"
                         "def direct():\n    value = 'a\u2028b'\n    evidence_target()\n"
@@ -183,8 +187,30 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
             with tempfile.TemporaryDirectory(dir=root, prefix='archive source consumer ') as folder:
                 consumer = Path(folder)
                 (consumer / 'caller_probe.py').write_bytes(original)
+                (consumer / 'OverloadProbe.java').write_bytes(overload_source)
                 artifact = consumer / 'graph.xz'
                 run([*prefix, 'archive', '--repo', target, '--snapshot', '--output', artifact, '--compression', 'xz'])
+                search_command = [*prefix, 'archive-search', 'choose', '--input', artifact,
+                                  '--repo', consumer, '--path', 'OverloadProbe.java', '--language', 'java']
+                choices = json.loads(run(search_command))
+                if choices['matched_nodes'] != 2 or choices['truncated']:
+                    raise VerificationError('Installed filtered archive search lost overloads')
+                if json.loads(run([*search_command, '--language', 'python']))['matched_nodes']:
+                    raise VerificationError('Installed archive search ignored the language filter')
+                overload_command = [*prefix, 'archive-source', 'OverloadProbe.choose', '--input', artifact,
+                                    '--repo', consumer, '--budget-bytes', '2048']
+                run(overload_command, expected=2)
+                overloads = json.loads(run([*overload_command, '--overloads']))
+                if ({item['id'] for item in overloads['targets']} != {item['id'] for item in choices['items']}
+                        or overloads['total_lines'] != 2 or overloads['truncated']
+                        or overloads['sources'][0]['source'] != '\n'.join(overload_source.decode().splitlines()[1:3])):
+                    raise VerificationError('Installed grouped source lost exact declarations or source lines')
+                overload_text = run([*overload_command, '--overloads', '--format', 'text'])
+                if (len(overload_text.encode('utf-8')) > 2048
+                        or overload_text.count(hashlib.sha256(overload_source).hexdigest()) != 1):
+                    raise VerificationError('Installed grouped text lost its shared hash or byte bound')
+                (consumer / 'OverloadProbe.java').write_bytes(overload_source + b'// stale\n')
+                run([*overload_command, '--overloads'], expected=2)
                 archive_command = [*prefix, 'archive-neighbors', packet['target'], '--input', artifact,
                                    '--repo', consumer, '--direction', 'in', '--kinds', 'calls', '--context-lines', '2']
                 context = json.loads(run(archive_command))

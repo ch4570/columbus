@@ -4,6 +4,7 @@ This file describes source and bundle versions. A version entry does not imply p
 
 ## 1.1.0
 
+- Narrow saved declaration search with `--path`/`--language`, retrieve same-owner Java/Kotlin overloads with `archive-source --overloads`, and share file/hash metadata in batch text while retaining exact source and pagination. These changes address observed discovery overhead; actual model-token acceptance remains unmet.
 - Read multiple declaration bodies with one `archive-source` invocation, shared byte budget and deduplicated source-line pagination. Actual model-token savings remain subject to the prospective multilingual gate.
 
 - Export complete gzip/XZ graph archives for version control and query saved declarations, relationships and callers without a consumer SQLite index. Read bounded declaration source against archived hashes when the matching checkout is available.
