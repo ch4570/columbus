@@ -213,6 +213,22 @@ def _neighbor_options(symbol_id, direction, kinds, limit, budget_bytes, offset, 
         raise ValueError('kinds must contain nonempty edge kinds')
 
 
+def _declaration_rank(data, query):
+    """Exact identity, exact name, then qualified suffix; never fuzzy ownership."""
+    if query == data['id']:
+        return 0
+    canonical = ''
+    if data.get('language') == 'python' and data.get('module'):
+        canonical = (data['module'] if data.get('kind') == 'module'
+                     else data['module'] + '.' + data.get('qualname', data['name']))
+    if query in (data['name'], data.get('qualname'), canonical):
+        return 1
+    if '.' in query and '::' not in query and any(name.endswith('.' + query) for name in
+                                                (data.get('qualname', ''), canonical) if name):
+        return 2
+    return 3
+
+
 def callers_archive(source: str | Path, query: str, limit: int = 50, budget_bytes: int = 6000,
                     offset: int = 0, *, output_format: str = 'json', repo: str | Path | None = None,
                     context_lines: int | None = None, path: str | None = None) -> dict:
@@ -227,7 +243,6 @@ def callers_archive(source: str | Path, query: str, limit: int = 50, budget_byte
     before = stamp()
     selected, count, exact_id = None, 0, None
     suffix_selected, suffix_count = None, 0
-    suffix = '.' + query if '.' in query and '::' not in query else None
     edge_phase, ordered = False, True
     edges, matched, diagnostics, references, unresolved = [], 0, 0, 0, 0
     try:
@@ -253,17 +268,13 @@ def callers_archive(source: str | Path, query: str, limit: int = 50, budget_byte
                     continue
                 if edge_phase:
                     ordered = False
-                canonical = ''
-                if data.get('language') == 'python' and data.get('module'):
-                    canonical = (data['module'] if data.get('kind') == 'module'
-                                 else data['module'] + '.' + data.get('qualname', data['name']))
-                if query == data['id']:
+                rank = _declaration_rank(data, query)
+                if rank == 0:
                     exact_id = data['id']
-                if query in (data['id'], data['name'], data.get('qualname'), canonical):
+                if rank <= 1:
                     selected = data['id']
                     count += 1
-                elif suffix and any(name.endswith(suffix) for name in
-                                    (data.get('qualname', ''), canonical) if name):
+                elif rank == 2:
                     suffix_selected = data['id']
                     suffix_count += 1
         if stamp() != before:
@@ -382,7 +393,7 @@ def source_archive(source: str | Path, symbol_id: str, repo: str | Path, limit: 
     from .sync_state import read_stable
     from .presentation import archive_source_text
     if not isinstance(symbol_id, str) or not 1 <= len(symbol_id) <= 2048:
-        raise ValueError('An exact symbol ID of 1–2048 characters is required')
+        raise ValueError('A declaration name or ID of 1–2048 characters is required')
     if type(limit) is not int or not 1 <= limit <= 400:
         raise ValueError('limit must be between 1 and 400 source lines')
     if type(offset) is not int or offset < 0:
@@ -393,18 +404,21 @@ def source_archive(source: str | Path, symbol_id: str, repo: str | Path, limit: 
         raise ValueError('format must be json or text')
     try:
         node, hashes = None, {}
+        best_rank, matches = 3, 0
         with Path(source).open('rb') as raw:
             for kind, data in _validated_rows(raw):
                 if kind == 'manifest':
                     manifest = data
                 elif kind == 'file':
                     hashes[data['path']] = data['hash']
-                elif kind == 'node' and data['id'] == symbol_id:
-                    if node is not None:
-                        raise ValueError('Duplicate source declaration ID')
-                    node = data
-        if node is None:
-            raise ValueError('Declaration absent; use archive-search and an exact ID')
+                elif kind == 'node':
+                    rank = _declaration_rank(data, symbol_id)
+                    if rank < best_rank:
+                        node, best_rank, matches = data, rank, 1
+                    elif rank == best_rank and rank < 3:
+                        matches += 1
+        if node is None or matches != 1:
+            raise ValueError('Declaration is ambiguous or absent; use archive-search and an exact ID')
         data, _ = read_stable(Path(repo).resolve(), node['path'])
         source_hash = hashes.get(node['path'])
         if digest(data) != source_hash:
@@ -417,7 +431,7 @@ def source_archive(source: str | Path, symbol_id: str, repo: str | Path, limit: 
         if offset >= total:
             raise ValueError('offset is outside the declaration')
         size = min(limit, total - offset)
-        result = dict(target=symbol_id, path=node['path'], source_hash=source_hash,
+        result = dict(target=node['id'], path=node['path'], source_hash=source_hash,
                       revision=manifest['revision'], partial=bool(node.get('partial')),
                       fidelity=node.get('fidelity'), semantic_complete=False,
                       freshness='returned file bytes match archive hash; other files not checked',

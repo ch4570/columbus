@@ -14,6 +14,45 @@ from columbus.presentation import archive_source_text
 
 
 class ArchiveSourceTests(unittest.TestCase):
+    def test_unique_names_suffixes_and_ambiguity(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for folder in ('src/pkg', 'external/other'):
+                path = root / folder
+                path.mkdir(parents=True)
+                (path / 'mod.py').write_text('class Owner:\n    def target(self): return 1\n', encoding='utf-8')
+            index = RepositoryIndex(root / '.columbus/index.sqlite')
+            index.refresh(root)
+            target = 'src/pkg/mod.py::Owner.target:method'
+            for codec, opener in [('gzip', gzip.open), ('xz', lzma.open)]:
+                artifact = root / codec
+                archive(index, artifact, codec)
+                expected = source_archive(artifact, target, root)
+                for query in ('src.pkg.mod.Owner.target', 'pkg.mod.Owner.target'):
+                    self.assertEqual(source_archive(artifact, query, root), expected)
+                for query in ('target', 'Owner.target', 'mod.Owner.target', 'kg.mod.Owner.target',
+                              'PKG.mod.Owner.target', 'pkg.mod.WrongOwner.target'):
+                    with self.assertRaisesRegex(ValueError, 'ambiguous or absent'):
+                        source_archive(artifact, query, root)
+                with opener(artifact, 'rt') as stream:
+                    rows = [json.loads(line) for line in stream]
+                other = 'external/other/mod.py::Owner.target:method'
+                for module, ambiguous in [('pkg.mod', False), ('external.pkg.mod', True)]:
+                    for row in rows:
+                        if row['record'] == 'node' and row['data']['id'] == other:
+                            row['data']['module'] = module
+                    reordered = ([rows[0]] + [r for r in rows[1:-1] if r['record'] != 'node']
+                                 + [r for r in rows[1:-1] if r['record'] == 'node'] + [rows[-1]])
+                    with opener(artifact, 'wt') as stream:
+                        stream.write(''.join(json.dumps(row) + '\n' for row in reordered))
+                    if ambiguous:
+                        with self.assertRaisesRegex(ValueError, 'ambiguous or absent'):
+                            source_archive(artifact, 'pkg.mod.Owner.target', root)
+                    else:
+                        self.assertEqual(source_archive(artifact, 'pkg.mod.Owner.target', root),
+                                         source_archive(artifact, other, root))
+                    self.assertEqual(source_archive(artifact, target, root), expected)
+
     def test_no_edge_declaration_pagination_and_cli(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -66,7 +105,9 @@ class ArchiveSourceTests(unittest.TestCase):
                 artifact = root / codec
                 archive(index, artifact, codec)
                 with self.assertRaisesRegex(ValueError, 'exact ID'):
-                    source_archive(artifact, 'target', root)
+                    source_archive(artifact, 'arget', root)
+                self.assertEqual(source_archive(artifact, 'target', root),
+                                 source_archive(artifact, 'a.py::target:function', root))
                 with self.assertRaisesRegex(ValueError, 'offset'):
                     source_archive(artifact, 'a.py::target:function', root, offset=1)
                 with opener(artifact, 'rt') as stream:
