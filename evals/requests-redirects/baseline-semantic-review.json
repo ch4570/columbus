@@ -1,0 +1,64 @@
+{
+  "condition": "baseline",
+  "review_basis": "Frozen SOURCE-REVIEW.md; omissions may be substantiated by actual quote, not merely a broad cited range. Review performed before Columbus completion.",
+  "passed": false,
+  "passed_findings": 6,
+  "total_findings": 11,
+  "findings": [
+    {
+      "id": "dispatch",
+      "passed": false,
+      "note": "Correct adapter send, generator consumption, allow_redirects=False hop, disabled _next and static-dispatch distinction. Neither prose nor quoted excerpt covers response hooks, default allow_redirects=True, history/final-response rearrangement or non-stream final-content consumption."
+    },
+    {
+      "id": "method_policy",
+      "passed": true,
+      "note": "Covers 303/302 except HEAD, 301 POST only and 307/308 retention."
+    },
+    {
+      "id": "body_retention",
+      "passed": true,
+      "note": "Correct status-based body/entity-header removal independently of method change, with retained 307/308 path."
+    },
+    {
+      "id": "body_position",
+      "passed": true,
+      "note": "Correct iterable exclusions, tell position, OSError non-None sentinel and later explicit rewind failure. Separate citation failure: the quote removes two source comment lines without representing the omission; semantic content remains correct."
+    },
+    {
+      "id": "body_rewind",
+      "passed": true,
+      "note": "Covers non-None position plus retained length/transfer header, integer seek, OSError translation and missing-seek/non-integer failure including sentinel."
+    },
+    {
+      "id": "origin_auth_policy",
+      "passed": true,
+      "note": "Correct different-host rule, standard-port same-host upgrade exception, equivalent default ports, remaining scheme/port changes and unchanged non-default port."
+    },
+    {
+      "id": "auth_rebuild",
+      "passed": true,
+      "note": "Quoted policy call uses previous response request URL and destination URL; prose covers trust_env/netrc reapplication or replacement."
+    },
+    {
+      "id": "proxy_selection",
+      "passed": false,
+      "note": "Correct environment gate, scheme/all fallback, setdefault and preservation of existing proxy entries under bypass. Neither prose nor quote covers None becoming an empty mapping, a predeclared input guard."
+    },
+    {
+      "id": "proxy_auth",
+      "passed": false,
+      "note": "Correct header removal, scheme-key credentials and truthy credentials/non-HTTPS policy. Missing-key handling is absent from both prose and quote; quote stops before except KeyError."
+    },
+    {
+      "id": "cookies",
+      "passed": false,
+      "note": "Correct old-request extraction, merge and rebuilt header. Neither prose nor quote covers extraction into session cookies again after the redirected send."
+    },
+    {
+      "id": "redirect_url",
+      "passed": false,
+      "note": "Covers copy, limit, close, URL/fragment normalization and refreshed target. Fallback described only as decoding failures, omitting required RuntimeError handling; neither quote nor prose supplies that guard. Prepared URL assignment is also not stated. Disabled-mode no-send is correctly covered in dispatch. Separate citation failure: frozen marker is the initial previous_fragment assignment, outside the cited range, although the supplied fragment quote itself is verbatim."
+    }
+  ]
+}
