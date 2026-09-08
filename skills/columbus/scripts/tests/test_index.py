@@ -46,6 +46,35 @@ class IndexTests(unittest.TestCase):
         self.assertFalse(self.index.search(target['id'], language='python')['hits'])
         self.assertEqual(2, len([s for s in candidates if s['name']=='getResource']))
 
+    def test_relink_reuses_identical_cache_but_updates_unchanged_callers(self):
+        import sqlite3
+        import zlib
+        from columbus.index import decode_parse
+        self.write('lib.py', 'def hit(): return 1\n')
+        self.write('caller.py', 'from lib import hit\ndef run(): return hit()\n')
+        self.write('other.py', 'def independent(): return "' + 'unchanged' * 50 + '"\n')
+        self.index.refresh(self.root)
+        with sqlite3.connect(self.index.db) as conn:
+            row = conn.execute("SELECT parsed FROM files WHERE path='other.py'").fetchone()[0]
+            # A valid alternate compression makes recompression observable.
+            preserved = zlib.compress(zlib.decompress(row), level=0)
+            conn.execute("UPDATE files SET parsed=? WHERE path='other.py'", (preserved,))
+            caller_before = conn.execute("SELECT parsed FROM files WHERE path='caller.py'").fetchone()[0]
+        self.write('lib.py', 'def renamed(): return 1\n')
+        self.index.refresh(self.root)
+        with sqlite3.connect(self.index.db) as conn:
+            blobs = dict(conn.execute('SELECT path,parsed FROM files'))
+        self.assertEqual(blobs['other.py'], preserved)
+        self.assertNotEqual(blobs['caller.py'], caller_before)
+        caller = decode_parse(blobs['caller.py'])
+        self.assertTrue(all(not r['resolved'] for r in caller['references'] if r['kind'] == 'calls'))
+        clean = RepositoryIndex(Path(self.temp.name) / 'clean-cache.sqlite')
+        clean.refresh(self.root)
+        with sqlite3.connect(clean.db) as conn:
+            clean_facts = {p: decode_parse(b) for p, b in conn.execute('SELECT path,parsed FROM files')}
+        self.assertEqual({p: decode_parse(b) for p, b in blobs.items()}, clean_facts)
+        self.assertEqual(self.index.graph(), clean.graph())
+
     def test_incremental_delete_and_full_rebuild_equivalence(self):
         first = self.seed()
         self.assertEqual(first["refresh"]["parsed_files"], 2)

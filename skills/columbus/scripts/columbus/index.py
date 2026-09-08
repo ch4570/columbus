@@ -201,8 +201,10 @@ class RepositoryIndex:
             if has_changes:
                 for record in records:
                     if record["parsed"] is None:
-                        record["parsed"] = decode_parse(conn.execute(
-                            "SELECT parsed FROM files WHERE path=?", (record["path"],)).fetchone()[0])
+                        saved = conn.execute("SELECT parsed FROM files WHERE path=?", (record["path"],)).fetchone()[0]
+                        serialized = zlib.decompress(saved) if isinstance(saved, bytes) else saved.encode("utf-8")
+                        record["parsed"] = json.loads(serialized)
+                        record["cached_parse_digest"] = digest(serialized)
                         cached_parses_loaded += 1
                     diagnostics.extend({"path": record["path"], "message": str(message)}
                                        for message in record["parsed"].get("diagnostics", []))
@@ -252,9 +254,17 @@ class RepositoryIndex:
             # Stat updates are necessary even if a touched file has identical bytes.
             # Internal stat maps stay in tables, never in status output.
             if has_changes:
-                conn.execute("DELETE FROM files")
-                conn.executemany("INSERT INTO files VALUES(?,?,?,?,?)", [
-                    (r["path"], r["hash"], r["size"], encode_parse(r["parsed"]), compact(r["stat"])) for r in records])
+                conn.executemany("DELETE FROM files WHERE path=?", [(path,) for path in removed])
+                for record in records:
+                    serialized = compact(record["parsed"]).encode("utf-8")
+                    if record.get("cached_parse_digest") == digest(serialized):
+                        # Source identity alone is insufficient: relinking can change
+                        # cached references in a file whose source did not change.
+                        conn.execute("UPDATE files SET hash=?,size=?,stat=? WHERE path=?", (
+                            record["hash"], record["size"], compact(record["stat"]), record["path"]))
+                    else:
+                        conn.execute("INSERT OR REPLACE INTO files VALUES(?,?,?,?,?)", (
+                            record["path"], record["hash"], record["size"], zlib.compress(serialized), compact(record["stat"])))
             else:
                 conn.executemany("UPDATE files SET stat=? WHERE path=?", [
                     (compact(r["stat"]), r["path"]) for r in records
