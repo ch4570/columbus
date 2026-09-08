@@ -22,7 +22,7 @@ From this checkout, with the compatible development interpreter:
 
 The output directory must not exist. The script executes exactly three read-only variants: one `archive-quotes` batch, one existing `archive-source` batch, and one compound ordinary `sed` read. It checks source/runtime/archive hashes before and after execution. Target Python code is never imported or executed; there are no models or network calls.
 
-The existing batch is an efficient equal-source comparator, not four separate calls: ordered exact IDs for `request`, `Session.__enter__`, `Session.__exit__` and `Session.close`, with `--offset 41 --limit 13`, skip only the request declaration's preceding documentation. Both archive variants use a 6,000-byte budget. The ordinary comparator uses one non-login `/bin/sh -c` invocation containing two `sed` commands, with multiple exact ranges in the second command; login profiles are not loaded.
+The existing batch is an efficient equal-source comparator, not four separate calls: ordered exact IDs for `request`, `Session.__enter__`, `Session.__exit__` and `Session.close`, with `--offset 41 --limit 13`, skip the request declaration's preceding signature, docstring and blank lines (14–54). Both archive variants use a 6,000-byte budget. The ordinary comparator uses one non-login `/bin/sh -c` invocation containing two `sed` commands, with multiple exact ranges in the second command; login profiles are not loaded.
 
 ## Measurement and metadata boundaries
 
