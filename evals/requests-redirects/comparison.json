@@ -9,8 +9,8 @@
     "reasoning_output_tokens": 59.79284369114877
   },
   "semantic_passed_findings": {
-    "baseline": 6,
-    "columbus": 7
+    "baseline": 5,
+    "columbus": 6
   },
   "scope": "One predeclared Requests pair, not a population estimate or replacement for previous failures."
 }

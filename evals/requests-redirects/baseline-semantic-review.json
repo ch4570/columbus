@@ -2,7 +2,7 @@
   "condition": "baseline",
   "review_basis": "Frozen SOURCE-REVIEW.md; omissions may be substantiated by actual quote, not merely a broad cited range. Review performed before Columbus completion.",
   "passed": false,
-  "passed_findings": 6,
+  "passed_findings": 5,
   "total_findings": 11,
   "findings": [
     {
@@ -17,8 +17,8 @@
     },
     {
       "id": "body_retention",
-      "passed": true,
-      "note": "Correct status-based body/entity-header removal independently of method change, with retained 307/308 path."
+      "passed": false,
+      "note": "Correct status-based body/entity-header retention/removal, but neither prose nor actual quote states the predeclared rebuild_method-before-purge ordering. Audit correction: the original review accepted the status rule while overlooking this required ordering; no rubric or model answer changed."
     },
     {
       "id": "body_position",
@@ -60,5 +60,6 @@
       "passed": false,
       "note": "Covers copy, limit, close, URL/fragment normalization and refreshed target. Fallback described only as decoding failures, omitting required RuntimeError handling; neither quote nor prose supplies that guard. Prepared URL assignment is also not stated. Disabled-mode no-send is correctly covered in dispatch. Separate citation failure: frozen marker is the initial previous_fragment assignment, outside the cited range, although the supplied fragment quote itself is verbatim."
     }
-  ]
+  ],
+  "audit_correction": "Rechecked body_retention ordering against the unchanged SOURCE-REVIEW.md during the second observation; previous counts 6/11 baseline and 7/11 Columbus corrected to 5/11 and 6/11."
 }
