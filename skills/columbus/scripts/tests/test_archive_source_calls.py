@@ -369,13 +369,31 @@ class ArchiveSourceCallsTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, '[Ss]tale|hash|changed'):
                 source_calls_archive(artifact, ['outer'], root, budget_bytes=64000)
 
-    def test_archive_replacement_between_passes_and_during_source_read_is_rejected(self):
+    @staticmethod
+    def _replace_open_archive(replacement, artifact, *, windows):
+        """Record the actual mutation; Windows may forbid replacing an open file."""
+        try:
+            os.replace(replacement, artifact)
+        except PermissionError:
+            if not windows:
+                raise
+            # An OS refusal does not exercise the reader's snapshot guard.
+            # Make a real, deterministic metadata change without a timing sleep.
+            before = artifact.stat()
+            changed_mtime = before.st_mtime_ns + 1_000_000_000
+            os.utime(artifact, ns=(before.st_atime_ns, changed_mtime))
+            if artifact.stat().st_mtime_ns != changed_mtime:
+                raise AssertionError('Could not perform the explicit archive mtime mutation')
+            return 'mtime-after-windows-replace-denial'
+        return 'replacement'
+
+    def _assert_archive_mutation_is_detected(self, *, force_windows_denial=False):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             body = self._fixture(root)
             for codec in ('gzip', 'xz'):
                 for phase in ('scan', 'source'):
-                    with self.subTest(codec=codec, phase=phase):
+                    with self.subTest(codec=codec, phase=phase, forced_windows_denial=force_windows_denial):
                         artifact = self._write(root, body, codec)
                         before = artifact.stat()
                         replacement = root / 'replacement'
@@ -383,17 +401,27 @@ class ArchiveSourceCallsTests(unittest.TestCase):
                         os.utime(replacement, ns=(before.st_atime_ns, before.st_mtime_ns))
                         self.assertEqual(replacement.stat().st_size, before.st_size)
                         scans = 0
+                        mutation_modes = []
+
+                        def mutate_archive():
+                            if force_windows_denial:
+                                with patch.object(os, 'replace', side_effect=PermissionError('open archive denied')) as replace:
+                                    mode = self._replace_open_archive(replacement, artifact, windows=True)
+                                replace.assert_called_once_with(replacement, artifact)
+                            else:
+                                mode = self._replace_open_archive(replacement, artifact, windows=os.name == 'nt')
+                            mutation_modes.append(mode)
 
                         def replacing_rows(raw):
                             nonlocal scans
                             scans += 1
                             yield from _validated_rows(raw)
                             if scans == 1:
-                                os.replace(replacement, artifact)
+                                mutate_archive()
 
                         def replacing_read(*args, **kwargs):
                             result = read_stable(*args, **kwargs)
-                            os.replace(replacement, artifact)
+                            mutate_archive()
                             return result
 
                         target = 'columbus.source_calls.' + ('_validated_rows' if phase == 'scan' else 'read_stable')
@@ -401,6 +429,28 @@ class ArchiveSourceCallsTests(unittest.TestCase):
                         with patch(target, side_effect=replacement_call):
                             with self.assertRaisesRegex(ValueError, '[Aa]rchive changed|[Aa]rchive.*chang'):
                                 source_calls_archive(artifact, ['outer'], root, budget_bytes=64000)
+                        self.assertEqual(len(mutation_modes), 1)
+                        if force_windows_denial:
+                            self.assertEqual(mutation_modes, ['mtime-after-windows-replace-denial'])
+                        elif os.name != 'nt':
+                            # POSIX continues to exercise actual replacement of
+                            # the open archive, never a metadata-only substitute.
+                            self.assertEqual(mutation_modes, ['replacement'])
+                        else:
+                            self.assertIn(mutation_modes[0], ('replacement', 'mtime-after-windows-replace-denial'))
+
+    def test_archive_replacement_between_passes_and_during_source_read_is_rejected(self):
+        self._assert_archive_mutation_is_detected()
+
+    def test_windows_denied_replacement_still_requires_reader_mutation_detection(self):
+        self._assert_archive_mutation_is_detected(force_windows_denial=True)
+
+    def test_non_windows_replacement_denial_is_not_hidden_by_fallback(self):
+        with patch.object(os, 'replace', side_effect=PermissionError('unexpected denial')), \
+             patch.object(os, 'utime') as touch:
+            with self.assertRaises(PermissionError):
+                self._replace_open_archive(Path('replacement'), Path('artifact'), windows=False)
+        touch.assert_not_called()
 
     def test_all_validated_passes_reach_eof_and_record_order_does_not_change_output(self):
         with tempfile.TemporaryDirectory() as directory:
