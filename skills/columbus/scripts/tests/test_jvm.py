@@ -9,6 +9,28 @@ from columbus.jvm import parse_jvm, resolve_jvm
 
 
 class JVMTests(unittest.TestCase):
+    def test_array_loop_bindings_preserve_scope_and_reject_conflicts(self):
+        prefix = 'class Item { void hit() {} } class Wrong { void hit() {} } '
+        cases = [
+            ('Wrong item; void run(Item[] values) { for(Item item : values) item.hit(); item.hit(); }',
+             ['C.java::Item.hit:method()', 'C.java::Wrong.hit:method()']),
+            ('void run(Item[][] values) { for(Item[] row : values) for(Item item : row) item.hit(); }',
+             ['C.java::Item.hit:method()']),
+            ('void run(Wrong[] values) { for(Item item : values) item.hit(); }', [None]),
+            ('void run(Item[] values) { Item item=null; for(Item item : values) item.hit(); }', [None]),
+            ('void run(Item[] values) { for(Item item : values) {} item.hit(); }', [None]),
+            ('void run(Item[] values) { for(var item : values) item.hit(); }', [None]),
+            ('void run() { for(Item item : values) item.hit(); Item[] values=null; }', [None]),
+            ('Item[] values; static void run() { for(Item item : values) item.hit(); }', [None]),
+        ]
+        for body, expected in cases:
+            with self.subTest(body=body):
+                parsed = parse_jvm('C.java', prefix + 'class C { ' + body + ' }')
+                resolve_jvm([parsed])
+                calls = [r.get('target') for r in parsed['references']
+                         if r['kind'] == 'calls' and r['member'] == 'hit']
+                self.assertEqual(calls, expected)
+
     def test_enhanced_for_iterable_uses_enclosing_scope(self):
         source = '''class C {
             C[] items() { return new C[0]; }

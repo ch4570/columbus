@@ -408,21 +408,30 @@ class _Parser:
         if node.type in {"call_expression", "method_invocation", "object_creation_expression"}:
             self.call(node)
             return
-        # Receiver lambdas, anonymous classes and loop/catch bindings need scopes
-        # beyond this v1 extractor; retain calls as unresolved in an opaque scope.
+        # Receiver lambdas, anonymous classes and unsupported bindings stay opaque.
+        # Array loops have explicit bindings guarded by the resolver.
         if node.type in {"lambda_literal", "lambda_expression", "anonymous_function",
                          "object_literal", "enhanced_for_statement", "for_statement",
                          "catch_block", "catch_clause"}:
             # The iterable is evaluated before the Java loop binding exists.
-            # Keep the loop body opaque until its bindings can be resolved.
+            # Loop bindings are validated independently before resolving body calls.
             iterable = (node.child_by_field_name("value")
                         if self.language == "java" and node.type == "enhanced_for_statement" else None)
             if iterable is not None:
                 self.visit(iterable)
             previous = self.current
-            key = f"{previous}::opaque:{node.start_byte}"
-            self.scope(key, previous, "opaque", self.scopes[previous]["qualname"])
+            loop = self.language == "java" and node.type == "enhanced_for_statement"
+            kind = "array_loop" if loop else "opaque"
+            key = f"{previous}::{kind}:{node.start_byte}"
+            self.scope(key, previous, kind, self.scopes[previous]["qualname"])
             self.current = key
+            if loop:
+                name = self.text(node.child_by_field_name("name"))
+                declared = self.normalized(node.child_by_field_name("type"))
+                declared += self.normalized(node.child_by_field_name("dimensions"))
+                self.bind(name, declared, reason="loop variable")
+                self.scopes[key]["loop_variable"] = name
+                self.scopes[key]["iterable_fact"] = self.argument_fact(iterable) if iterable else {}
             for child in node.named_children:
                 if child != iterable:
                     self.visit(child)
@@ -513,6 +522,29 @@ class _Resolver:
             if name in scope["bindings"]:
                 return scope["bindings"][name]
             scope_id = scope["parent"]
+        return None
+
+    def array_loop_reason(self, file, scope):
+        """Require a known array element identity before using loop bindings."""
+        name = scope.get("loop_variable")
+        outer = self.scopes.get(scope["parent"], {})
+        while outer and outer["kind"] not in CLASS_KINDS | {"module"}:
+            if name in outer["bindings"]:
+                return "loop variable conflicts with an enclosing local"
+            outer = self.scopes.get(outer["parent"], {})
+        fact = scope.get("iterable_fact", {})
+        bindings = self.binding(scope["parent"], fact.get("name", "")) if fact.get("kind") == "name" else None
+        if (not bindings or len(bindings) != 1
+                or bindings[0].get("reason") not in {"parameter", "loop variable"}
+                or not bindings[0].get("type", "").endswith("[]")):
+            return "loop iterable element type unsupported"
+        own = scope["bindings"].get(name, [])
+        if len(own) != 1:
+            return "ambiguous loop variable"
+        element = self.reference_type_name(file, scope["parent"], bindings[0]["type"][:-2])
+        declared = self.reference_type_name(file, scope["id"], own[0]["type"])
+        if not element or not declared or element != declared:
+            return "loop element assignment unsupported or incompatible"
         return None
 
     def inherited_member_absent(self, owner, member, visiting=frozenset()):
@@ -847,6 +879,10 @@ class _Resolver:
         while scope:
             if scope.get("kind") == "opaque":
                 return None, "lambda, loop, catch or anonymous scope unsupported"
+            if scope.get("kind") == "array_loop":
+                reason = self.array_loop_reason(file, scope)
+                if reason:
+                    return None, reason
             symbol = self.symbols.get(scope.get("id"), {})
             if symbol.get("receiver_type"):
                 return None, "extension receiver dispatch unsupported"

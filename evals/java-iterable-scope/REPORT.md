@@ -11,3 +11,5 @@ On the fixed Spring spring-core corpus (1,166 files), the prior base-absence ind
 The broader loop-variable type-resolution and independent-corpus requirements remain open. This fixes the incorrect scope boundary without claiming completion of the entire issue or the model-efficiency goal.
 
 Follow-up source review covers all eleven added edges: each matches the source-level declared receiver/import and method signature. Per-edge judgments, bounded source excerpts and file hashes are in spring-source-review.json. This supersedes the earlier statement that only the DefaultResourceLoader edge had been source-reviewed. Selection is the new-edge delta, not an unbiased precision sample; these real-source calls were not compiled or executed, and interface/runtime implementation targets remain unproven. The iterable compiler gate is now included in the candidate CI matrix and triggers on JVM resolver or compiler-probe changes.
+
+Candidate CI 34189534258 at e573c9a completed all thirteen jobs successfully, including the six compiler/engine environments and aggregate distribution checks. The final receipt is platform-final.json.
