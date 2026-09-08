@@ -13,6 +13,32 @@ from columbus.index import RepositoryIndex
 
 
 class ArchiveTests(unittest.TestCase):
+    def test_python_module_qualified_archive_search_without_source(self):
+        with tempfile.TemporaryDirectory() as consumer:
+            artifacts = [Path(consumer) / ('graph.' + codec) for codec in ('gzip', 'xz')]
+            with tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                for package in ('one', 'two'):
+                    (root / package).mkdir()
+                    (root / package / '__init__.py').write_text('')
+                    (root / package / 'encoding.py').write_text('def force_bytes(): pass\nclass Codec:\n    def encode(self): pass\n')
+                index = RepositoryIndex(root / '.columbus/index.sqlite')
+                index.refresh(root)
+                for artifact, codec in zip(artifacts, ('gzip', 'xz')):
+                    archive(index, artifact, compression=codec)
+            self.assertFalse(root.exists())
+            for artifact in artifacts:
+                for fmt in ('json', 'text'):
+                    exact = search_archive(artifact, 'one.encoding.force_bytes', output_format=fmt)
+                    self.assertEqual([i['id'] for i in exact['items']], ['one/encoding.py::force_bytes:function'])
+                    suffix = search_archive(artifact, 'encoding.force_bytes', output_format=fmt)
+                    self.assertEqual(len(suffix['items']), 2)
+                    self.assertEqual(suffix['matched_nodes'], 2)
+                    self.assertEqual(search_archive(artifact, 'oding.force_bytes', output_format=fmt)['items'], [])
+                    method = search_archive(artifact, 'one.encoding.Codec.encode', output_format=fmt)
+                    self.assertEqual([i['path'] for i in method['items']], ['one/encoding.py'])
+                    self.assertEqual(len(search_archive(artifact, 'force_bytes', output_format=fmt)['items']), 2)
+
     def test_search_text_preserves_ranked_evidence_and_rendered_budget(self):
         from columbus.presentation import render
         with tempfile.TemporaryDirectory() as directory:

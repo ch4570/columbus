@@ -122,13 +122,18 @@ def _search_archive(source: str | Path, query: str, limit: int = 5, budget_bytes
                 hashes[data['path']] = data['hash']
             if kind != 'node':
                 continue
-            exact = query in (data['id'], data['name'], data['qualname'])
-            if not exact and query.casefold() not in (data['id'] + ' ' + data['name']).casefold():
+            canonical = ''
+            if data.get('language') == 'python' and data.get('module'):
+                canonical = data['module'] if data['kind'] == 'module' else data['module'] + '.' + data['qualname']
+            exact = query in (data['id'], data['name'], data['qualname'], canonical)
+            qualified = bool(suffix and any(name.casefold() == query.casefold() or
+                                             name.casefold().endswith(suffix)
+                                             for name in (data['qualname'], canonical) if name))
+            if not exact and not qualified and query.casefold() not in (data['id'] + ' ' + data['name']).casefold():
                 continue
             matches += 1
             item = {key: data[key] for key in ('id', 'path', 'name', 'kind', 'start_line', 'end_line', 'language', 'fidelity', 'partial') if key in data}
             item['signature'] = data.get('signature', '')[:240]
-            qualified = bool(suffix and data['qualname'].casefold().endswith(suffix))
             selected.append((0 if exact else 1 if qualified else 2, data['id'], item))
             selected.sort(key=lambda item: item[:2])
             del selected[limit:]
