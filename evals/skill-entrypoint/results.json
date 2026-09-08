@@ -1,0 +1,19 @@
+{
+  "before_revision": "c5063d0",
+  "before_bytes": 5839,
+  "after_bytes": 3706,
+  "before_sha256": "960eeaba328befde10e80d7b32908cc0a20e381bb6a57d6a59ed6fbac8007e57",
+  "after_sha256": "d94202abaf26cebbf5002462abe64706d91e9aa80f8b1d646eb0e12a53a4137d",
+  "linked_references_exist": [
+    "references/archive.md",
+    "references/agent-context.md",
+    "references/portable-ast.md",
+    "references/operations.md",
+    "references/index-sync.md",
+    "references/polyglot.md",
+    "references/jvm-analysis.md"
+  ],
+  "validator_passed": true,
+  "model_trial": false,
+  "actual_token_savings_claimed": false
+}
