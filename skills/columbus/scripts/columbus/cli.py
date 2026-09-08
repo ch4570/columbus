@@ -111,6 +111,8 @@ def main(argv=None) -> int:
                                  help='512–64000 serialized UTF-8 bytes; complete batch or error, never clipped')
         if name == 'archive-source':
             command.add_argument('symbol_id', nargs='+', help='One declaration, or 2–16 unique declarations in one page')
+            command.add_argument('--call-sites', action='store_true',
+                                 help='Include every stored call on the returned source page; shares its line cursor and byte budget, not runtime completeness')
             command.add_argument('--overloads', action='store_true',
                                  help='Include Java/Kotlin overloads with the same owner and receiver; '
                                       'batch exact IDs from archive-search for different receivers')
@@ -219,8 +221,11 @@ def main(argv=None) -> int:
     args = parser.parse_args(argv)
     started = time.perf_counter()
     try:
-        if args.command == 'archive-quotes' and args.telemetry is not None:
-            raise ValueError('archive-quotes does not support --telemetry')
+        source_call_sites = args.command == 'archive-source' and args.call_sites
+        read_only_archive = args.command == 'archive-quotes' or source_call_sites
+        archive_label = 'archive-source --call-sites' if source_call_sites else args.command
+        if read_only_archive and args.telemetry is not None:
+            raise ValueError(archive_label + ' does not support --telemetry')
         if args.command == 'explore':
             if not args.query and (args.mode != 'snippets' or args.receipt is not None or args.exclude_id or args.session is not None):
                 raise ValueError('Explore without QUERY returns a map; --mode/--receipt/--exclude-id/--session require QUERY')
@@ -254,8 +259,8 @@ def main(argv=None) -> int:
             return 0 if result['ready'] else 2
         if args.command == 'index':
             args.repo = args.root
-        if args.command == 'archive-quotes' and args.db is not None:
-            raise ValueError('archive-quotes does not use --db; select source with --repo')
+        if read_only_archive and args.db is not None:
+            raise ValueError(archive_label + ' does not use --db; select source with --repo')
         db = Path(args.db).expanduser().resolve() if args.db else None
         if args.repo is None and db and db.is_file():
             root = Path(RepositoryIndex(db).status()['root'])
@@ -296,6 +301,14 @@ def main(argv=None) -> int:
             ranges = [(path.removeprefix('./'), int(start), int(end)) for path, start, end in args.ranges]
             result = quotes_archive(args.input, ranges, root, args.budget_bytes)
             sys.stdout.write(render_quotes(result))
+            return 0
+        if source_call_sites:
+            if args.pretty:
+                raise ValueError('archive-source --call-sites rejects --pretty to preserve its byte budget')
+            from .source_calls import source_calls_archive, source_calls_json, source_calls_text
+            result = source_calls_archive(args.input, args.symbol_id, root, args.limit, args.budget_bytes,
+                                          args.offset, output_format=args.format, overloads=args.overloads)
+            sys.stdout.write(source_calls_text(result) if args.format == 'text' else source_calls_json(result))
             return 0
         index = RepositoryIndex(db or root / '.columbus/index-v1.sqlite')
         if args.command == 'tree':
@@ -421,6 +434,7 @@ def main(argv=None) -> int:
     except (ValueError, OSError, RuntimeError, ImportError, SyntaxError, UnicodeError, sqlite3.Error) as exc:
         # Source readers can include an untrusted path in their diagnostics.
         message = (json.dumps(str(exc), ensure_ascii=True)[1:-1]
-                   if args.command == 'archive-quotes' else str(exc))
+                   if args.command == 'archive-quotes' or (args.command == 'archive-source' and args.call_sites)
+                   else str(exc))
         print(f'columbus: {message}', file=sys.stderr)
         return 2
