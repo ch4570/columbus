@@ -1,0 +1,197 @@
+{
+  "condition": "columbus",
+  "answer_sha256": "27792ddb2d041950a637ef08ef362e97794a6fac3a0cd50df9fe24524879b7bb",
+  "criteria_sha256": "383fb0d6ba8f016dd116cf22478540ad23bca3047022ee855b37d999ac7f4125",
+  "passed": false,
+  "reviewed_owners": 37,
+  "findings": [
+    {
+      "id": "PasswordResetForm.save",
+      "passed": false,
+      "note": "False claim that mail errors propagate: forms.py:433-438 catches Exception around email_message.send. The extra_email_context override is present in the quote, but cannot repair this separate contradiction."
+    },
+    {
+      "id": "DataSource.__init__",
+      "passed": true,
+      "note": "str/Path and pointer alternatives, default UTF-8 versus constructor encoding, and GDALException translation are covered."
+    },
+    {
+      "id": "DataSource.__getitem__",
+      "passed": true,
+      "note": "String lookup, bounded integer bypass, invalid-type rejection, Layer wrapping and IndexError translation are covered."
+    },
+    {
+      "id": "Driver.__init__",
+      "passed": true,
+      "note": "Alias selection, integer/pointer bypass and invalid input/driver checks appear in prose and quote."
+    },
+    {
+      "id": "Feature.index",
+      "passed": true,
+      "note": "Field conversion and negative-index rejection are accurate without claiming all input is text."
+    },
+    {
+      "id": "OGRGeometry.from_json",
+      "passed": true,
+      "note": "Conversion into the GDAL JSON parser and OGRGeometry construction are accurate."
+    },
+    {
+      "id": "OGRGeometry.from_gml",
+      "passed": true,
+      "note": "GML conversion into capi.from_gml and cls construction are accurate."
+    },
+    {
+      "id": "Layer.test_capability",
+      "passed": true,
+      "note": "Capability conversion and boolean return are accurate."
+    },
+    {
+      "id": "GDALRaster.__init__",
+      "passed": false,
+      "note": "All five calls, preprocessing, dictionary validation and pointer bypass are covered, but required invalid-input rejection at raster/source.py:214-215 is absent from both prose and quote. The quote ends in the bytes branch."
+    },
+    {
+      "id": "GDALRaster.__del__",
+      "passed": true,
+      "note": "VSI guard, name conversion, unlink and superclass destruction are covered."
+    },
+    {
+      "id": "GDALRaster.vsi_buffer",
+      "passed": false,
+      "note": "False claim that the lookup requests deletion on read. raster/const.py:105 sets VSI_DELETE_BUFFER_ON_READ=False."
+    },
+    {
+      "id": "GDALRaster.clone",
+      "passed": true,
+      "note": "Truthy supplied name, non-MEM filename, generated VSI name, copy and write-mode preservation are covered."
+    },
+    {
+      "id": "SpatialReference.attr_value",
+      "passed": true,
+      "note": "str/int validation precedes target conversion and native lookup."
+    },
+    {
+      "id": "SpatialReference.auth_name",
+      "passed": true,
+      "note": "None bypass and non-None conversion are accurate."
+    },
+    {
+      "id": "SpatialReference.auth_code",
+      "passed": true,
+      "note": "None bypass and non-None conversion are accurate."
+    },
+    {
+      "id": "SpatialReference.import_user_input",
+      "passed": true,
+      "note": "Input conversion and native import are accurate."
+    },
+    {
+      "id": "SpatialReference.import_wkt",
+      "passed": true,
+      "note": "WKT conversion, c_char_p/byref wrapping and import are covered."
+    },
+    {
+      "id": "SpatialReference.xml",
+      "passed": true,
+      "note": "Dialect default, conversion and native XML export are covered."
+    },
+    {
+      "id": "GEOSGeometryBase.from_ewkt",
+      "passed": true,
+      "note": "Whole EWKT conversion, optional SRID split, invalid-prefix/empty-WKT checks and construction are covered."
+    },
+    {
+      "id": "GEOSGeometryBase.relate_pattern",
+      "passed": true,
+      "note": "At-most-nine length and str validation are accurate; no invented exact-nine rule."
+    },
+    {
+      "id": "GEOSGeometry.__init__",
+      "passed": true,
+      "note": "Both conversion branches, preprocessing, alternatives, max collection limit, invalid input/null geometry and conflicting SRID checks are covered by prose and quote."
+    },
+    {
+      "id": "_WKTReader.read",
+      "passed": true,
+      "note": "Type and collection-limit rejection before conversion are covered."
+    },
+    {
+      "id": "EmailMessage._create_mime_attachment",
+      "passed": true,
+      "note": "Only raw message/rfc822 content converts; both message object alternatives and SafeMIMEMessage are covered."
+    },
+    {
+      "id": "_cookie_signer_key",
+      "passed": true,
+      "note": "Default key conversion and fixed cookie namespace are accurate."
+    },
+    {
+      "id": "OracleParam.__init__",
+      "passed": false,
+      "note": "Preprocessing, options, length-only purpose and input_size precedence are covered. However the frozen criterion also requires the fallback input_size=None alternative (oracle/base.py:461-462); the quote ends at the Boolean alternative and prose does not cover the fallback."
+    },
+    {
+      "id": "DatabaseOperations.convert_binaryfield_value",
+      "passed": true,
+      "note": "Only read LOB values convert; other values are unchanged."
+    },
+    {
+      "id": "FakePayload.write",
+      "passed": true,
+      "note": "Read-started guard, conversion, stream write and byte-length accounting are covered."
+    },
+    {
+      "id": "encode_multipart.to_bytes",
+      "passed": true,
+      "note": "Separate lexical helper, explicit default charset, None rejection, file delegation and CRLF assembly are covered."
+    },
+    {
+      "id": "encode_file.to_bytes",
+      "passed": true,
+      "note": "Separate helper, charset, header/file-data conversion and filename/content-type selection are covered."
+    },
+    {
+      "id": "RequestFactory._encode_data",
+      "passed": true,
+      "note": "Multipart identity bypass and regex charset/default fallback are covered."
+    },
+    {
+      "id": "RequestFactory.generic",
+      "passed": true,
+      "note": "Conversion and truthy body construction are accurate. The quote explicitly includes r.update(extra), substantiating the omitted override detail under the frozen quote rule."
+    },
+    {
+      "id": "AsyncRequestFactory.generic",
+      "passed": true,
+      "note": "Unconditional conversion and truthy-result headers/body file are covered."
+    },
+    {
+      "id": "salted_hmac",
+      "passed": true,
+      "note": "All three conversions, None-only secret fallback, algorithm error and ordering are substantiated by prose and quote."
+    },
+    {
+      "id": "constant_time_compare",
+      "passed": true,
+      "note": "Both same-line conversions and compare_digest are covered."
+    },
+    {
+      "id": "pbkdf2",
+      "passed": true,
+      "note": "Password/salt conversion, None-only digest fallback and falsey dklen are covered."
+    },
+    {
+      "id": "smart_bytes",
+      "passed": true,
+      "note": "Promise bypass and all forwarded options are covered."
+    },
+    {
+      "id": "uri_to_iri",
+      "passed": true,
+      "note": "None bypass and selective unquoting/broken Unicode repair are accurate."
+    }
+  ],
+  "passed_owners": 33,
+  "failed_owners": 4,
+  "scope": "Manual review of every predeclared owner criterion and submitted quote. Two contradictory claims and two omissions; no runtime execution or model attention claim."
+}

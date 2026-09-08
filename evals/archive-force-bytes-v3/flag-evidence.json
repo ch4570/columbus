@@ -1,0 +1,17 @@
+{
+  "scope": "Exact false-definition text in completed command outputs only; absence does not prove absence of equivalent clues or model attention.",
+  "conditions": {
+    "baseline": {
+      "events_sha256": "a3712caf466db34a6bdb246ea44616e33db1380ae255fb77ffcc7566038319b4",
+      "completed_commands": 56,
+      "completed_turns": 1,
+      "exact_false_definition_outputs": []
+    },
+    "columbus": {
+      "events_sha256": "8309e82d29bcbd822c8c5336908cc3c5f4890d35f9b6d0cde293725e54b266fc",
+      "completed_commands": 52,
+      "completed_turns": 1,
+      "exact_false_definition_outputs": []
+    }
+  }
+}
