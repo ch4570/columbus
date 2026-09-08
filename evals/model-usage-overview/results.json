@@ -1,0 +1,188 @@
+{
+  "scope": "Five recent completed comparisons; not the entire experiment history, not a population estimate. Missing usage remains null. Semantic judgments remain in each source report.",
+  "comparisons": [
+    {
+      "case": "django-callers",
+      "results_sha256": "0536cdac658bdd15e558db0196d519fab310c6599aa1cdc914518cb6db559cbe",
+      "conditions": {
+        "baseline": {
+          "elapsed_seconds": 180.722,
+          "timed_out": false,
+          "return_code": 0,
+          "command_count": 14,
+          "command_output_bytes": 28519,
+          "usage": {
+            "input_tokens": 69777,
+            "cached_input_tokens": 51072,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 5280,
+            "reasoning_output_tokens": 2342,
+            "uncached_input_tokens": 18705
+          },
+          "automatic_quality_passed": true
+        },
+        "columbus": {
+          "elapsed_seconds": 283.728,
+          "timed_out": false,
+          "return_code": 0,
+          "command_count": 20,
+          "command_output_bytes": 38324,
+          "usage": {
+            "input_tokens": 110525,
+            "cached_input_tokens": 85504,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 8313,
+            "reasoning_output_tokens": 4585,
+            "uncached_input_tokens": 25021
+          },
+          "automatic_quality_passed": true
+        }
+      }
+    },
+    {
+      "case": "django-html-callers",
+      "results_sha256": "ee9d66555f94d725927c567cef06ddc41ea3094c8004a1e75c02fca1bb0044e4",
+      "conditions": {
+        "baseline": {
+          "elapsed_seconds": 229.436,
+          "timed_out": false,
+          "return_code": 0,
+          "command_count": 17,
+          "command_output_bytes": 32624,
+          "usage": {
+            "input_tokens": 52873,
+            "cached_input_tokens": 33536,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 6901,
+            "reasoning_output_tokens": 3837,
+            "uncached_input_tokens": 19337
+          },
+          "automatic_quality_passed": false
+        },
+        "columbus": {
+          "elapsed_seconds": 309.382,
+          "timed_out": false,
+          "return_code": 0,
+          "command_count": 10,
+          "command_output_bytes": 35248,
+          "usage": {
+            "input_tokens": 171833,
+            "cached_input_tokens": 146688,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 9128,
+            "reasoning_output_tokens": 5343,
+            "uncached_input_tokens": 25145
+          },
+          "automatic_quality_passed": true
+        }
+      }
+    },
+    {
+      "case": "archive-capfirst",
+      "results_sha256": "964a1038538b45432b51881d0558d56cb66e14383ec685ed84186c81f17dd769",
+      "conditions": {
+        "baseline": {
+          "elapsed_seconds": 361.567,
+          "timed_out": false,
+          "return_code": 0,
+          "command_count": 40,
+          "command_output_bytes": 90641,
+          "usage": {
+            "input_tokens": 221419,
+            "cached_input_tokens": 183936,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 10499,
+            "reasoning_output_tokens": 5134,
+            "uncached_input_tokens": 37483
+          },
+          "automatic_quality_passed": true
+        },
+        "columbus": {
+          "elapsed_seconds": 603.108,
+          "timed_out": true,
+          "return_code": 0,
+          "command_count": 42,
+          "command_output_bytes": 101160,
+          "usage": null,
+          "automatic_quality_passed": false
+        }
+      }
+    },
+    {
+      "case": "archive-urlencode",
+      "results_sha256": "b9b64f2d1aef481735a910274952cde93f6d01b89c2801a1ffc98be9e166630d",
+      "conditions": {
+        "baseline": {
+          "elapsed_seconds": 441.208,
+          "timed_out": false,
+          "return_code": 0,
+          "command_count": 13,
+          "command_output_bytes": 127927,
+          "usage": {
+            "input_tokens": 379707,
+            "cached_input_tokens": 321536,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 12594,
+            "reasoning_output_tokens": 8259,
+            "uncached_input_tokens": 58171
+          },
+          "automatic_quality_passed": true
+        },
+        "columbus": {
+          "elapsed_seconds": 495.087,
+          "timed_out": false,
+          "return_code": 0,
+          "command_count": 24,
+          "command_output_bytes": 77246,
+          "usage": {
+            "input_tokens": 555486,
+            "cached_input_tokens": 514944,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 13297,
+            "reasoning_output_tokens": 7503,
+            "uncached_input_tokens": 40542
+          },
+          "automatic_quality_passed": true
+        }
+      }
+    },
+    {
+      "case": "archive-safe-redirect",
+      "results_sha256": "2bec487b0cc2752fd2795df2dbc004251fc4727dca29469d27ff797c80eb40a8",
+      "conditions": {
+        "baseline": {
+          "elapsed_seconds": 157.54,
+          "timed_out": false,
+          "return_code": 0,
+          "command_count": 3,
+          "command_output_bytes": 8627,
+          "usage": {
+            "input_tokens": 29960,
+            "cached_input_tokens": 18048,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 4581,
+            "reasoning_output_tokens": 3244,
+            "uncached_input_tokens": 11912
+          },
+          "automatic_quality_passed": true
+        },
+        "columbus": {
+          "elapsed_seconds": 228.52,
+          "timed_out": false,
+          "return_code": 0,
+          "command_count": 8,
+          "command_output_bytes": 29729,
+          "usage": {
+            "input_tokens": 90104,
+            "cached_input_tokens": 71680,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 5909,
+            "reasoning_output_tokens": 3990,
+            "uncached_input_tokens": 18424
+          },
+          "automatic_quality_passed": true
+        }
+      }
+    }
+  ]
+}
