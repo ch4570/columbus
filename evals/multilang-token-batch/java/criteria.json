@@ -1,0 +1,34 @@
+{
+  "source-selection": [
+    "Lookup traverses the supplied PropertySources in its iteration order; do not invent a universal environment/source priority order.",
+    "A null PropertySources collection or no non-null source value returns null. Null results from individual sources are skipped.",
+    "The first non-null raw value is processed and its converted result returned immediately. A conversion returning null still ends this search; later sources are not tried.",
+    "Placeholder/conversion exceptions propagate; there is no catch-and-fallback to a lower-priority source. The lookup does not cache resolved property values, so later calls query the current sources again."
+  ],
+  "nested-value-processing": [
+    "Ordinary String and typed getProperty overloads pass resolveNestedPlaceholders=true; getPropertyAsRawString passes false and requests String conversion.",
+    "With resolution enabled, any String value is resolved before conversion. A non-String CharSequence is converted to a string and resolved only when the requested target is String or CharSequence; do not apply that branch to every target type or every object.",
+    "When resolution is disabled or no eligible string-like branch applies, the raw value goes straight to later conversion. The sequence is source selection, eligible nested resolution, then conversion.",
+    "Placeholder helper lookup uses this::getPropertyAsRawString. Raw means nested-placeholder expansion is disabled here; it does not mean type conversion is disabled."
+  ],
+  "placeholder-policy": [
+    "ignoreUnresolvableNestedPlaceholders initially equals false. Empty nested values return unchanged; otherwise false selects resolveRequiredPlaceholders and true selects resolvePlaceholders.",
+    "Explicit resolvePlaceholders and resolveRequiredPlaceholders choose their own non-strict/strict helpers regardless of the nested flag. Helpers are created lazily with ignore=true/false respectively; these are not cached property results.",
+    "An unresolved placeholder is retained in placeholder form under the non-strict policy; strict resolution throws PlaceholderResolutionException, an IllegalArgumentException subtype. Do not confuse this with getRequiredProperty absence, which throws IllegalStateException.",
+    "Ignoring unresolvable placeholders is not a promise to suppress every error: circular placeholder references still throw. No placeholder or conversion exceptions are swallowed by the resolver lookup.",
+    "Detailed escape/default-expression grammar is outside the task; do not substitute an imagined complete placeholder algorithm for these reviewed boundaries."
+  ],
+  "conversion-policy": [
+    "A null requested target type returns the value directly.",
+    "If a conversion service is already configured, its convert method is used. The assignable-value shortcut is only in the no-configured-service branch; do not claim custom conversion is always bypassed for assignable values.",
+    "With no configured service, an assignable value is returned directly; otherwise DefaultConversionService.getSharedInstance() supplies conversion. This fallback does not store that shared instance into the resolver field.",
+    "getConversionService() instead initializes and stores a separate DefaultConversionService with synchronization/rechecking; subsequent property conversions see that configured service. setConversionService rejects null with IllegalArgumentException and replaces the field for non-null input.",
+    "Conversion output, including null, is returned as-is. Conversion failures propagate rather than being translated into missing-property fallback or trying another source. Do not promise that every target conversion succeeds."
+  ],
+  "missing-default-required": [
+    "Ordinary nullable retrieval returns its lookup/conversion result. String and typed default overloads return the default only when that result is null; an empty string is not absence.",
+    "Both required overloads perform lookup and throw IllegalStateException with the missing key when the result is null; otherwise they return the value.",
+    "Because conversion may return null, a default or required-missing outcome can occur even after a non-null raw source value was found. This does not restart source iteration.",
+    "Placeholder and conversion exceptions occur during delegated lookup and propagate through default/required overloads; these overloads do not catch them and substitute a default. The separate validateRequiredProperties aggregation API is outside this task."
+  ]
+}

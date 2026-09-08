@@ -40,6 +40,8 @@ columbus archive-callers Class.method --input graph-v1.jsonl.gz --format text --
 columbus archive-source Class.method --input graph-v1.jsonl.gz --repo /path/to/matching-checkout --format text --budget-bytes 12000
 ```
 
+When related declaration names are already known, batch them with `archive-source Class.method Other.helper --input GRAPH --repo REPO --format text --limit 400 --budget-bytes 20000`. Up to 16 names share one byte budget and deduplicated source. In batch mode, `next_offset` counts the union of selected source lines; keep the identifier list and order unchanged across pages.
+
 Both accept exact IDs or unique declaration names; use `archive-search` when the owner is unknown or the name is ambiguous. Follow the returned `next_offset` with otherwise unchanged arguments. For `archive-source`, the offset counts lines within the declaration; for caller queries it counts edges. Source reads do not build SQLite or add source bodies to the graph. [Complete query contract](../skills/columbus/references/archive.md).
 
 The agent skill includes this route in its archive reference. Install the managed skill with `columbus init --repo /path/to/project`; tell the agent where the versioned graph is located. This does not automatically force graph use or establish model-token savings.

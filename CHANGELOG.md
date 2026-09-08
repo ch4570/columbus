@@ -4,6 +4,8 @@ This file describes source and bundle versions. A version entry does not imply p
 
 ## 1.1.0
 
+- Read multiple declaration bodies with one `archive-source` invocation, shared byte budget and deduplicated source-line pagination. Actual model-token savings remain subject to the prospective multilingual gate.
+
 - Export complete gzip/XZ graph archives for version control and query saved declarations, relationships and callers without a consumer SQLite index. Read bounded declaration source against archived hashes when the matching checkout is available.
 - Compress parse facts and search document bodies in schema 4, reuse unchanged facts, and preserve transactional graph/search refresh. Schema 2/3 indexes upgrade on synchronization; older engines require separate database paths.
 - Correct supported Java namespace, access, argument and enhanced-for/getter resolution, including cross-package return types and `this` arguments. Keep unsupported references unresolved and Python receiver hints separately labelled as opt-in retrieval candidates.

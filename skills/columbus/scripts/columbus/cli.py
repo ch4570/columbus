@@ -101,7 +101,7 @@ def main(argv=None) -> int:
         command = sub.add_parser(name)
         _common(command, subcommand=True)
         if name == 'archive-source':
-            command.add_argument('symbol_id')
+            command.add_argument('symbol_id', nargs='+', help='One declaration, or 2–16 unique declarations in one page')
             command.add_argument('--input', required=True)
             command.add_argument('--format', choices=['json', 'text'], default='json')
             command.add_argument('--offset', type=int, default=0)
@@ -288,9 +288,13 @@ def main(argv=None) -> int:
         elif args.command == 'archive-source':
             if args.pretty:
                 raise ValueError('archive-source rejects pretty output to preserve its byte budget')
-            from .archive import source_archive
-            result = source_archive(args.input, args.symbol_id, root, args.limit, args.budget_bytes, args.offset,
-                                    output_format=args.format)
+            from .archive import source_archive, source_archive_many
+            if len(args.symbol_id) == 1:
+                result = source_archive(args.input, args.symbol_id[0], root, args.limit, args.budget_bytes, args.offset,
+                                        output_format=args.format)
+            else:
+                result = source_archive_many(args.input, args.symbol_id, root, args.limit, args.budget_bytes, args.offset,
+                                             output_format=args.format)
         elif args.command == 'archive-search':
             if args.pretty:
                 raise ValueError('archive-search rejects pretty output to preserve its byte budget')

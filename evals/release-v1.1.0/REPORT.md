@@ -19,7 +19,7 @@ Local validation uses macOS and Python 3.11. The distribution workflow now runs 
 
 Versions in the package, skill bundle and release installer are 1.1.0. The ordinary release continues to use upstream `tree-sitter-java==0.23.5`; passing the separate experimental-parser suite does not make that candidate the published default.
 
-Actual model-token savings remain unproven: none of the [eleven recent comparisons](../model-usage-overview/REPORT.md) meets the unchanged quality-preserving input/output reduction gate. No additional model experiment was run for this release evaluation. The acceptance distinction and pending release criterion are recorded in [PLAN.md](PLAN.md). These local functional results alone do not establish that the user’s conditional merge/release threshold has been met.
+Actual model-token savings remain unproven: none of the [eleven recent comparisons](../model-usage-overview/REPORT.md) meets the unchanged quality-preserving input/output reduction gate. No additional model experiment was run for this release evaluation. The user has confirmed actual model-token savings are mandatory; [PLAN.md](PLAN.md) records that release criterion. These local functional results do not satisfy the conditional merge/release threshold.
 
 Reproduce the multilingual gate from the repository root:
 

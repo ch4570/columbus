@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "queries": [
+    "src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt::org.springframework.aot.hint.getTypeHint:function()@ReflectionHints",
+    "src/main/java/org/springframework/aot/hint/TypeHint.java::org.springframework.aot.hint.TypeHint:class"
+  ],
+  "targets": [
+    {
+      "id": "src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt::org.springframework.aot.hint.getTypeHint:function()@ReflectionHints",
+      "path": "src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt",
+      "source_hash": "c4f6e2bb2770b787ace1e0b90d6b7d19d80be84468fe627939317fce0874982e",
+      "declaration_start_line": 26,
+      "declaration_end_line": 27,
+      "partial": false,
+      "fidelity": "ast"
+    },
+    {
+      "id": "src/main/java/org/springframework/aot/hint/TypeHint.java::org.springframework.aot.hint.TypeHint:class",
+      "path": "src/main/java/org/springframework/aot/hint/TypeHint.java",
+      "source_hash": "a291ac10434ed0ef55fb66a6c8f14b869d9475fb1b05c0551714524d4921ad75",
+      "declaration_start_line": 42,
+      "declaration_end_line": 321,
+      "partial": false,
+      "fidelity": "ast"
+    }
+  ],
+  "bytes": 12150,
+  "output_sha256": "b6ce395f7cf13f3936be896d67e1b91474e10675a21e50090a4299cba3d7f7c7",
+  "total_lines": 282,
+  "next_offset": null,
+  "no_consumer_sqlite": true,
+  "preparation_correction": "Use the recorded exact Kotlin extension ID including its @ReflectionHints receiver suffix; initial guessed ID was rejected. No model trial had started."
+}

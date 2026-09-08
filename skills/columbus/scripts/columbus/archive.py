@@ -451,6 +451,107 @@ def source_archive(source: str | Path, symbol_id: str, repo: str | Path, limit: 
         raise ValueError('Malformed or incomplete graph archive') from exc
 
 
+def source_archive_many(source: str | Path, queries: list[str], repo: str | Path, limit: int = 120,
+                        budget_bytes: int = 12000, offset: int = 0, *, output_format: str = 'json') -> dict:
+    """Read several declarations in one scan, paging their union of source lines."""
+    from .discovery import digest
+    from .languages import code_lines, decode_source
+    from .sync_state import read_stable
+    from .presentation import archive_source_text
+    if (not isinstance(queries, (list, tuple)) or not 2 <= len(queries) <= 16
+            or any(not isinstance(query, str) or not 1 <= len(query) <= 2048 for query in queries)
+            or len(set(queries)) != len(queries)):
+        raise ValueError('Provide 2–16 unique declaration names or IDs of 1–2048 characters')
+    if type(limit) is not int or not 1 <= limit <= 400:
+        raise ValueError('limit must be between 1 and 400 source lines')
+    if type(offset) is not int or offset < 0:
+        raise ValueError('offset must be a nonnegative source-line offset')
+    if type(budget_bytes) is not int or not 2048 <= budget_bytes <= 64000:
+        raise ValueError('budget-bytes must be between 2048 and 64000')
+    if output_format not in {'json', 'text'}:
+        raise ValueError('format must be json or text')
+    try:
+        selected, ranks, matches = [None] * len(queries), [3] * len(queries), [0] * len(queries)
+        hashes = {}
+        with Path(source).open('rb') as raw:
+            for kind, data in _validated_rows(raw):
+                if kind == 'manifest':
+                    manifest = data
+                elif kind == 'file':
+                    hashes[data['path']] = data['hash']
+                elif kind == 'node':
+                    for number, query in enumerate(queries):
+                        rank = _declaration_rank(data, query)
+                        if rank < ranks[number]:
+                            selected[number], ranks[number], matches[number] = data, rank, 1
+                        elif rank == ranks[number] and rank < 3:
+                            matches[number] += 1
+        failed = [ascii(query[:80]) + ('...' if len(query) > 80 else '')
+                  for query, node, count in zip(queries, selected, matches) if node is None or count != 1]
+        if failed:
+            raise ValueError('Declaration is ambiguous or absent for queries: ' + ', '.join(failed)
+                             + '; use archive-search and an exact ID')
+        targets, files, seen = [], {}, set()
+        for node in selected:
+            if node['id'] in seen:
+                continue
+            seen.add(node['id'])
+            path = node['path']
+            if path not in files:
+                data, _ = read_stable(Path(repo).resolve(), path)
+                if digest(data) != hashes.get(path):
+                    raise ValueError(f'Stale source: {path}; regenerate the archive before reading source')
+                lines = code_lines(decode_source(path, data, language=node.get('language')), node.get('language'))
+                files[path] = dict(lines=lines, ranges=[], language=node.get('language'))
+            current = files[path]
+            if current['language'] != node.get('language'):
+                raise ValueError('Conflicting declaration languages for one source file')
+            start, end = node['start_line'], node['end_line']
+            if type(start) is not int or type(end) is not int or not 1 <= start <= end <= len(current['lines']):
+                raise ValueError('Declaration range outside verified source')
+            current['ranges'].append((start, end))
+            targets.append(dict(id=node['id'], path=path, source_hash=hashes[path],
+                                declaration_start_line=start, declaration_end_line=end,
+                                partial=bool(node.get('partial')), fidelity=node.get('fidelity')))
+        spans, total = [], 0
+        for path, current in files.items():
+            merged = []
+            for start, end in sorted(current['ranges']):
+                if merged and start <= merged[-1][1] + 1:
+                    merged[-1][1] = max(merged[-1][1], end)
+                else:
+                    merged.append([start, end])
+            for start, end in merged:
+                spans.append((path, start, end, total))
+                total += end - start + 1
+        if offset >= total:
+            raise ValueError('offset is outside the selected declarations')
+        result = dict(targets=targets, revision=manifest['revision'], semantic_complete=False,
+                      freshness='selected declaration file bytes match archive hash; other files not checked',
+                      total_lines=total, offset=offset, sources=[])
+        size = min(limit, total - offset)
+        while size:
+            blocks = []
+            for path, start, end, position in spans:
+                first = max(offset, position)
+                stop = min(offset + size, position + end - start + 1)
+                if first >= stop:
+                    continue
+                block_start, block_end = start + first - position, start + stop - position - 1
+                blocks.append(dict(path=path, source_hash=hashes[path], start_line=block_start,
+                                   end_line=block_end,
+                                   source='\n'.join(files[path]['lines'][block_start - 1:block_end])))
+            result.update(sources=blocks, next_offset=offset + size if offset + size < total else None,
+                          truncated=bool(offset or offset + size < total))
+            rendered = archive_source_text(result) if output_format == 'text' else compact(result) + '\n'
+            if len(rendered.encode()) <= budget_bytes:
+                return result
+            size -= 1
+        raise ValueError('Budget too small for one source line and declaration metadata; increase budget-bytes')
+    except (KeyError, TypeError, AttributeError, EOFError, lzma.LZMAError) as exc:
+        raise ValueError('Malformed or incomplete graph archive') from exc
+
+
 def _call_context(edges, nodes, repo, radius, cache):
     """Merge nearby sites within their lexical owner; never execute repository code."""
     from .discovery import digest

@@ -201,8 +201,27 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
                 rendered = run([*archive_command, '--format', 'text'])
                 if len(rendered.encode('utf-8')) > 6000 or 'call_context:' not in rendered:
                     raise VerificationError('Installed archive context text failed budget/rendering')
+                batch_command = [*prefix, 'archive-source', 'outer', 'outer.inner', 'evidence_target',
+                                 '--input', artifact, '--repo', consumer, '--budget-bytes', '6000']
+                batch = json.loads(run(batch_command))
+                expected_source = '\n'.join(original.decode('utf-8').splitlines()[:5])
+                if (len(batch['targets']) != 3 or batch['total_lines'] != 5 or batch['truncated']
+                        or len(batch['sources']) != 1 or batch['sources'][0]['source'] != expected_source):
+                    raise VerificationError('Installed batch declaration source lost or duplicated selected lines')
+                delivered, offset = [], 0
+                while offset is not None:
+                    page = json.loads(run([*batch_command, '--limit', '2', '--offset', str(offset)]))
+                    delivered.extend((block['path'], line) for block in page['sources']
+                                     for line in range(block['start_line'], block['end_line'] + 1))
+                    offset = page['next_offset']
+                if delivered != [('caller_probe.py', line) for line in range(1, 6)]:
+                    raise VerificationError('Installed batch declaration pagination skipped or repeated source')
+                batch_text = run([*batch_command, '--format', 'text'])
+                if len(batch_text.encode('utf-8')) > 6000 or '1| def evidence_target()' not in batch_text:
+                    raise VerificationError('Installed batch declaration text lost source or exceeded its budget')
                 (consumer / 'caller_probe.py').write_bytes(original + b'# stale\n')
                 run(archive_command, expected=2)
+                run(batch_command, expected=2)
                 if (consumer / '.columbus').exists():
                     raise VerificationError('Archive call context created a consumer index')
             try:

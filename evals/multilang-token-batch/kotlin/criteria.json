@@ -1,0 +1,31 @@
+{
+  "kotlin-delegation": [
+    "getTypeHint<T>() passes the reified T::class.java to Java getTypeHint(Class<?>). It is a lookup, not automatic registration.",
+    "The callback registration extension passes T::class.java and typeHint::invoke to the Java Class/Consumer overload. The Kotlin callback is noinline; it is adapted and passed through rather than invoked before Java registration.",
+    "The category overload passes T::class.java and spreads *memberCategories to the Java Class/varargs overload. It does not package all categories as one category or invoke the callback overload with the caller callback.",
+    "Registration delegates return the same ReflectionHints instance on normal completion. These extensions add syntax convenience; they do not prove runtime reflective reachability or execute reflected members."
+  ],
+  "registration-class-guards": [
+    "Both Class-based registerType overloads reject a null Class with IllegalArgumentException via Assert.notNull.",
+    "A non-null Class with no canonical name is skipped: no TypeReference is created, no builder is registered and the consumer is not invoked; normal return is still this.",
+    "A Class with a canonical name is converted through TypeReference.of and delegated to its TypeReference overload. Do not generalize the skip policy to the lookup path or claim every class always registers.",
+    "No concurrency, type-loading or native-image execution guarantee follows from these guards."
+  ],
+  "registration-state-errors": [
+    "The TypeReference registration path uses computeIfAbsent to keep one builder per type key and then invokes the consumer on that builder for every registration; repeated calls do not replace the builder.",
+    "The category path creates a consumer using TypeHint.builtWith, which calls Builder.withMembers. withMembers adds to a HashSet, so categories accumulate and duplicate categories collapse rather than replacing prior categories or promising insertion order.",
+    "Callbacks run synchronously after the builder has been obtained/stored. Callback exceptions propagate; there is no rollback or removal. A newly stored builder and any mutations made before throwing can remain observable. Do not claim transactional registration or that every thrown callback necessarily changed a category.",
+    "The task assumes non-null category arrays/elements and a non-null callback; hostile null misuse of those arguments and constructor/method/field metadata registration are outside scope."
+  ],
+  "lookup-absence-errors": [
+    "The class lookup first calls TypeReference.of(Class), then performs a map lookup. An absent valid type yields null and does not create/register a builder.",
+    "TypeReference.of(Class) delegates to ReflectionTypeReference.of, which rejects a null Class or null canonical name with IllegalArgumentException. Lookup does not share class-registration\u2019s silent skip for a noncanonical class.",
+    "If a builder exists, the result is built from its current state. A missing stored hint is not evidence that the class cannot load or that reflection is forbidden at runtime."
+  ],
+  "category-snapshots": [
+    "Builder.build constructs a new TypeHint, and its constructor copies the builder category set with Set.copyOf. A returned category set is an immutable snapshot, not the live mutable builder HashSet.",
+    "After more categories are registered for the same builder, a later getTypeHint builds a new result with current accumulated categories; an earlier TypeHint/category set is not retroactively updated.",
+    "getMemberCategories returns that copied set. This is a category-snapshot statement, not a guarantee that arbitrary callback-owned objects are deeply copied or that registrations are thread-safe.",
+    "Do not claim that merely creating or reading hints performs reflective operations or proves runtime dispatch."
+  ]
+}

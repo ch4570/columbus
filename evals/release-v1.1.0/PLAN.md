@@ -1,6 +1,6 @@
 # v1.1.0 release acceptance preparation
 
-The user requested multilingual evaluation followed by merge and release only after the acceptance threshold is met. Whether measured actual-model token savings are mandatory for this release is awaiting user clarification. No merge or tag is authorized by these proposed functional checks alone until that condition is resolved.
+The user requested multilingual evaluation followed by merge and release only after the acceptance threshold is met, and explicitly confirmed that actual model-token savings are mandatory. Functional checks alone do not authorize merge or release. Both conditions must satisfy the complete predeclared quality criteria, and Columbus must reduce both total input (including its cached subset) and output tokens.
 
 Functional release requirements:
 
@@ -12,6 +12,6 @@ Functional release requirements:
 - Package, bundle, installer and tag versions agree on 1.1.0. Wheel, ZIP and installer checksums and clean installation/relocation tests pass.
 - Experimental Java grammar stays a separate tested candidate; the ordinary release uses upstream 0.23.5. Release notes disclose the difference and no actual-token savings claim.
 
-If actual-model savings are also required, the existing unchanged gate remains: both baseline and Columbus answers pass all quality criteria and Columbus reduces both total input and output. All eleven recent pairs fail that gate; cached input and response-byte reductions do not substitute. No new model trial or relaxed scoring is implied by this release plan.
+Actual-model savings are required. The existing unchanged gate remains: both baseline and Columbus answers pass all quality criteria and Columbus reduces both total input and output. All eleven recent pairs fail that gate; cached input and response-byte reductions do not substitute. The next actual-model cohort is predeclared in [the multilingual token protocol](../multilang-token-batch/PLAN.md); prior failures and their scoring remain unchanged.
 
 Merge must target the verified final PR SHA. Tag only the resulting verified merge commit. GitHub Release assets must be produced by the successful tag workflow, and published version/checksums must then be checked. No PyPI publication is configured.

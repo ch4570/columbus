@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "queries": [
+    "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java::org.springframework.core.env.PropertySourcesPropertyResolver.getProperty:method(String,Class<T>,boolean)",
+    "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.convertValueIfNecessary:method(Object,Class<T>)"
+  ],
+  "targets": [
+    {
+      "id": "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java::org.springframework.core.env.PropertySourcesPropertyResolver.getProperty:method(String,Class<T>,boolean)",
+      "path": "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java",
+      "source_hash": "d11b2a0c42664718808ca6383360717edcb337f0614c9bb64a8600f7372fc67c",
+      "declaration_start_line": 73,
+      "declaration_end_line": 100,
+      "partial": false,
+      "fidelity": "ast"
+    },
+    {
+      "id": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.convertValueIfNecessary:method(Object,Class<T>)",
+      "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+      "source_hash": "bf33323681de132b1694eb0ca0d5c1582f5584a9d05153cc6e79fb5b0ad6f965",
+      "declaration_start_line": 297,
+      "declaration_end_line": 312,
+      "partial": false,
+      "fidelity": "ast"
+    }
+  ],
+  "bytes": 3741,
+  "output_sha256": "72387d12380b3c9b97497e19e4a1a09253b498fdbe39cb4f8b3963c127997702",
+  "total_lines": 44,
+  "next_offset": null,
+  "no_consumer_sqlite": true
+}

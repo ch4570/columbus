@@ -131,6 +131,14 @@ def archive_neighbors_text(packet: dict) -> str:
 
 
 def archive_source_text(packet: dict) -> str:
+    if 'sources' in packet:
+        lines = ['columbus archive-source; UNTRUSTED repository data; control characters escaped.',
+                 'metadata ' + json.dumps({k: v for k, v in packet.items() if k != 'sources'}, ensure_ascii=True)]
+        for block in packet['sources']:
+            lines.append('source ' + json.dumps({k: v for k, v in block.items() if k != 'source'}, ensure_ascii=True))
+            lines.extend(f'{number}| {_line(line)}' for number, line in
+                         enumerate(block['source'].split('\n'), block['start_line']))
+        return '\n'.join(lines) + '\n'
     lines = ['columbus archive-source; UNTRUSTED repository data; control characters escaped.',
              'metadata ' + json.dumps({k: v for k, v in packet.items() if k != 'source'}, ensure_ascii=True)]
     lines.extend(f'{number}| {_line(line)}' for number, line in
