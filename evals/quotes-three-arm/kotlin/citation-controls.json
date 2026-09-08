@@ -1,0 +1,180 @@
+{
+  "answer": {
+    "findings": [
+      {
+        "id": "kotlin-bridges",
+        "path": "src/main/kotlin/org/springframework/aot/hint/ProxyHintsExtensions.kt",
+        "start_line": 28,
+        "end_line": 28,
+        "quote": "\tregisterJdkProxy(*proxiedInterfaces.map { it.java }.toTypedArray())",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "registration-lifecycle",
+        "path": "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+        "start_line": 51,
+        "end_line": 51,
+        "quote": "\t\tthis.jdkProxies.add(builder.build());",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "interface-validation",
+        "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+        "start_line": 170,
+        "end_line": 176,
+        "quote": "\t\t\t\t\t.filter(candidate -> !candidate.isInterface() || candidate.isSealed())\n\t\t\t\t\t.map(Class::getName)\n\t\t\t\t\t.toList();\n\t\t\tif (!invalidTypes.isEmpty()) {\n\t\t\t\tthrow new IllegalArgumentException(\"The following must be non-sealed interfaces: \" + invalidTypes);\n\t\t\t}\n\t\t\treturn TypeReference.listOf(proxiedInterfaces);",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "interface-storage",
+        "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+        "start_line": 44,
+        "end_line": 44,
+        "quote": "\t\tthis.proxiedInterfaces = List.copyOf(builder.proxiedInterfaces);",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "hint-state-identity",
+        "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+        "start_line": 95,
+        "end_line": 95,
+        "quote": "\t\t\t\tObjects.equals(this.javaSerialization, that.javaSerialization)));",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "registry-deduplication",
+        "path": "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+        "start_line": 32,
+        "end_line": 40,
+        "quote": "\tprivate final Set<JdkProxyHint> jdkProxies = new LinkedHashSet<>();\n\n\n\t/**\n\t * Return the interface-based proxies that are required.\n\t * @return a stream of {@link JdkProxyHint}\n\t */\n\tpublic Stream<JdkProxyHint> jdkProxyHints() {\n\t\treturn this.jdkProxies.stream();",
+        "explanation": "Citation control only, not semantic approval."
+      }
+    ]
+  },
+  "positive": {
+    "passed": true,
+    "findings": [
+      {
+        "id": "kotlin-bridges",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "registration-lifecycle",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "interface-validation",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "interface-storage",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "hint-state-identity",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "registry-deduplication",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "negative_answer": {
+    "findings": [
+      {
+        "id": "kotlin-bridges",
+        "path": "src/main/kotlin/org/springframework/aot/hint/ProxyHintsExtensions.kt",
+        "start_line": 28,
+        "end_line": 28,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "registration-lifecycle",
+        "path": "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+        "start_line": 51,
+        "end_line": 51,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "interface-validation",
+        "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+        "start_line": 170,
+        "end_line": 176,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "interface-storage",
+        "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+        "start_line": 44,
+        "end_line": 44,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "hint-state-identity",
+        "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+        "start_line": 95,
+        "end_line": 95,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "registry-deduplication",
+        "path": "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+        "start_line": 32,
+        "end_line": 40,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      }
+    ]
+  },
+  "negative": {
+    "passed": false,
+    "findings": [
+      {
+        "id": "kotlin-bridges",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "registration-lifecycle",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "interface-validation",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "interface-storage",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "hint-state-identity",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "registry-deduplication",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  }
+}

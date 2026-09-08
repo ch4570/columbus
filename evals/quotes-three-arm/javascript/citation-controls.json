@@ -1,0 +1,180 @@
+{
+  "answer": {
+    "findings": [
+      {
+        "id": "download_arguments",
+        "path": "lib/response.js",
+        "start_line": 451,
+        "end_line": 451,
+        "quote": "  if (typeof filename === 'object' &&",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "download_options",
+        "path": "lib/response.js",
+        "start_line": 474,
+        "end_line": 483,
+        "quote": "  opts = Object.create(opts)\n  opts.headers = headers\n\n  // Resolve the full path for sendFile\n  var fullPath = !opts.root\n    ? resolve(path)\n    : path\n\n  // send file\n  return this.sendFile(fullPath, opts, done)",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "sendfile_setup",
+        "path": "lib/response.js",
+        "start_line": 403,
+        "end_line": 403,
+        "quote": "  var file = send(req, pathname, opts);",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "callback_routing",
+        "path": "lib/response.js",
+        "start_line": 407,
+        "end_line": 407,
+        "quote": "    if (done) return done(err);",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "transfer_events",
+        "path": "lib/response.js",
+        "start_line": 1008,
+        "end_line": 1008,
+        "quote": "  file.pipe(res);",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "finish_race",
+        "path": "lib/response.js",
+        "start_line": 971,
+        "end_line": 972,
+        "quote": "      if (streaming !== false && !done) {\n        onaborted();",
+        "explanation": "Citation control only, not semantic approval."
+      }
+    ]
+  },
+  "positive": {
+    "passed": true,
+    "findings": [
+      {
+        "id": "download_arguments",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "download_options",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "sendfile_setup",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "callback_routing",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "transfer_events",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "finish_race",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "negative_answer": {
+    "findings": [
+      {
+        "id": "download_arguments",
+        "path": "lib/response.js",
+        "start_line": 451,
+        "end_line": 451,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "download_options",
+        "path": "lib/response.js",
+        "start_line": 474,
+        "end_line": 483,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "sendfile_setup",
+        "path": "lib/response.js",
+        "start_line": 403,
+        "end_line": 403,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "callback_routing",
+        "path": "lib/response.js",
+        "start_line": 407,
+        "end_line": 407,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "transfer_events",
+        "path": "lib/response.js",
+        "start_line": 1008,
+        "end_line": 1008,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "finish_race",
+        "path": "lib/response.js",
+        "start_line": 971,
+        "end_line": 972,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      }
+    ]
+  },
+  "negative": {
+    "passed": false,
+    "findings": [
+      {
+        "id": "download_arguments",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "download_options",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "sendfile_setup",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "callback_routing",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "transfer_events",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "finish_race",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  }
+}

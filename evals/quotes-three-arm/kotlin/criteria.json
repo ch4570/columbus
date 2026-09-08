@@ -1,0 +1,34 @@
+{
+  "kotlin-bridges": [
+    "The ProxyHints.registerJdkProxy Kotlin extension maps each KClass to it.java, converts the mapped sequence to an array and spreads it into Java ProxyHints.registerJdkProxy(Class<?>...). The related JdkProxyHint.Builder.proxiedInterfaces extension performs the same conversion and calls Builder.proxiedInterfaces(Class<?>...). Neither delegates recursively to itself or directly to the TypeReference overload.",
+    "The conversions preserve supplied argument order and repeated entries; the extension expressions return the Java members' fluent results, namely the same ProxyHints instance and the same Builder instance respectively.",
+    "The Kotlin extension tests mock ProxyHints/Builder and verify KClass-to-Class forwarding (using String and Int examples). They establish routing, not successful real validation of those concrete/primitive classes; production interface validation must be read separately. Mentioning either those examples or their concrete/non-interface nature is sufficient when the mock limitation is explicit."
+  ],
+  "registration-lifecycle": [
+    "Java registerJdkProxy(Class<?>...) and registerJdkProxy(TypeReference...) each call the consumer overload with a lambda invoking the corresponding Builder.proxiedInterfaces overload. The Class registration does not first invoke ProxyHints.registerJdkProxy(TypeReference...).",
+    "The consumer overload creates a fresh Builder for each call, invokes the consumer, builds a JdkProxyHint, adds that completed hint to the registry and returns this ProxyHints instance. Building precedes insertion, including the immutable-list construction step.",
+    "With the stated consumer scope, a configuration or build exception propagates without inserting a hint for that registration; previously stored hints remain. There is no catch/recovery or partial-hint insertion. This is not a claim to roll back arbitrary callback side effects, and successful duplicate suppression still returns the same registry instance."
+  ],
+  "interface-validation": [
+    "The Class-based Builder overload calls toTypeReferences before addAll. That helper rejects any Class that is not an interface or is sealed, collects the invalid class names and throws IllegalArgumentException if any are present. This happens before that call appends anything, so a mixed valid/invalid batch is not partially appended; exact exception text is not required.",
+    "After validation, toTypeReferences calls TypeReference.listOf; listOf streams the Class array through TypeReference.of(Class), which delegates to ReflectionTypeReference.of. The mapping retains encounter order and repetitions rather than deduplicating or sorting the classes. Detailed canonical-name validation inside the factory is outside scope under the stated input assumptions.",
+    "The TypeReference Builder overload directly appends Arrays.asList(proxiedInterfaces), bypassing the Class interface/sealed check. TypeReference.of(String) uses the name-based SimpleTypeReference factory, not class loading, so a well-formed reference can be stored without proving the named class exists or is a non-sealed interface. Do not transfer Class-path validation to this route."
+  ],
+  "interface-storage": [
+    "Builder.proxiedInterfaces calls append to its existing LinkedList with addAll rather than replace it. Interface order and duplicate entries are retained both within one call and across repeated additions; empty typed vararg arrays append nothing.",
+    "No minimum interface count is checked by these registration/build methods. An untouched builder or empty typed input can produce and register a hint whose interface list is empty; this does not assert that a real proxy can or will be created.",
+    "JdkProxyHint construction uses List.copyOf on the builder list, and getProxiedInterfaces exposes that unmodifiable completed list. Later additions to the builder do not change an already-built hint's interface list. This is a list snapshot, not a required claim of deep-copying arbitrary TypeReference objects.",
+    "For the explicitly scoped Java misuse case, a non-null TypeReference array containing a null element is accepted into the builder list by Arrays.asList/addAll, but List.copyOf throws NullPointerException when the hint is built, before registry insertion. Do not claim the TypeReference append itself performs the Class validation or immediately rejects the element. Null arrays and null KClass/Class inputs are outside scope."
+  ],
+  "hint-state-identity": [
+    "A fresh builder starts with reachableType null and javaSerialization false; the completed hint exposes those values through getReachableType and hasJavaSerialization. Null reachability denotes no reachability condition, not a missing required interface. Evaluating conditions is outside scope.",
+    "onReachableType and withJavaSerialization assign their supplied metadata values, replacing earlier settings, and return the same Builder. Construction copies the current metadata fields into the completed hint, so later builder setter calls do not change those fields in the prior hint.",
+    "JdkProxyHint.equals compares the ordered proxiedInterfaces list, nullable reachableType via Objects.equals, and javaSerialization. Changing interface order or multiplicity, reachability metadata or serialization state can make otherwise similar hints unequal; equality is not just an unordered interface set.",
+    "JdkProxyHint.hashCode hashes only proxiedInterfaces. Different reachability or serialization metadata can therefore yield the same hash while equals remains false; a hash collision is not duplicate equality and does not justify merging those hints."
+  ],
+  "registry-deduplication": [
+    "ProxyHints stores completed hints in a LinkedHashSet and exposes its stream. Equal repeated registrations are suppressed, preserving the first unique insertion order without replacing/reordering the existing equal entry. The registry does not sort by interface name or TypeReference.compareTo.",
+    "The built-in ReflectionTypeReference and SimpleTypeReference implementations share AbstractTypeReference's canonical-name-based, case-sensitive equals and canonical-name hashCode. Thus Class-backed and correctly named references for the same type can compare equal and suppress a repeated hint when the ordered list and other hint metadata also match; reference object identity is not required.",
+    "Registry deduplication applies to whole completed hints, not to individual interface entries and not by union-merging different interface lists. Repeated entries inside a hint remain meaningful list content, and hints distinguished by interface order/multiplicity or reachability/serialization metadata remain separate despite overlap or hash collisions."
+  ]
+}
