@@ -245,9 +245,25 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
                 batch_text = run([*batch_command, '--format', 'text'])
                 if len(batch_text.encode('utf-8')) > 6000 or '1| def evidence_target()' not in batch_text:
                     raise VerificationError('Installed batch declaration text lost source or exceeded its budget')
+                quote_command = [*prefix, 'archive-quotes', '--input', artifact, '--repo', consumer,
+                                 '--range', './caller_probe.py', '1', '2',
+                                 '--range', 'caller_probe.py', '3', '5', '--budget-bytes', '2048']
+                quoted_text = run(quote_command)
+                quoted = json.loads(quoted_text)
+                expected_quotes = [dict(path='caller_probe.py', start_line=start, end_line=end,
+                                        source_hash=hashlib.sha256(original).hexdigest(), language='python',
+                                        quote='\n'.join(original.decode('utf-8').splitlines()[start - 1:end]))
+                                   for start, end in [(1, 2), (3, 5)]]
+                if (quoted.get('format') != 'columbus-quotes/v1' or quoted.get('quotes') != expected_quotes
+                        or quoted.get('semantic_complete') is not False
+                        or len(quoted_text.encode('utf-8')) > 2048):
+                    raise VerificationError('Installed exact quotes lost source/range identity or byte bounds')
+                run([*quote_command, '--range', 'caller_probe.py', '1', '9999'], expected=2)
+                run([*quote_command, '--pretty'], expected=2)
                 (consumer / 'caller_probe.py').write_bytes(original + b'# stale\n')
                 run(archive_command, expected=2)
                 run(batch_command, expected=2)
+                run(quote_command, expected=2)
                 if (consumer / '.columbus').exists():
                     raise VerificationError('Archive call context created a consumer index')
             try:
