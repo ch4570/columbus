@@ -1,0 +1,65 @@
+{
+  "condition": "baseline",
+  "review_basis": "Unchanged SOURCE-REVIEW.md, before Columbus completion. Actual quotes may supply omitted details; broad citation ranges alone may not. Related dispatch explanation is considered for copy/yield mode.",
+  "answer_sha256": "2da6364471a4ece73ea8a8148abbecf0d0116e18e5f12c3e2279b1e90ade0f93",
+  "passed": false,
+  "passed_findings": 6,
+  "total_findings": 11,
+  "findings": [
+    {
+      "id": "dispatch",
+      "passed": false,
+      "note": "Adapter, generator and unsent _next are correct. Missing response hooks before redirects, default allow_redirects=True, final-response rearrangement and final non-stream content consumption."
+    },
+    {
+      "id": "method_policy",
+      "passed": true,
+      "note": "Correct 303/302 except HEAD, 301 POST only, and unchanged 307/308."
+    },
+    {
+      "id": "body_retention",
+      "passed": false,
+      "note": "Correct status guard and entity-header purge independent of method changes, but required rebuild_method-before-purge ordering appears in neither prose nor actual quote."
+    },
+    {
+      "id": "body_position",
+      "passed": true,
+      "note": "Stream exclusions, tell position and OSError non-None sentinel with later explicit failure are covered."
+    },
+    {
+      "id": "body_rewind",
+      "passed": true,
+      "note": "Non-None position and header guard, integer seek, OSError translation and missing seek/sentinel failure are covered."
+    },
+    {
+      "id": "origin_auth_policy",
+      "passed": true,
+      "note": "Hostname stripping, standard same-host upgrade, equivalent default ports and other changes covered."
+    },
+    {
+      "id": "auth_rebuild",
+      "passed": true,
+      "note": "Actual quote supplies old/new URL comparison; prose and quote cover trust_env and netrc replacement."
+    },
+    {
+      "id": "proxy_selection",
+      "passed": false,
+      "note": "Copy, environment gate, fallback, precedence and bypass preservation are correct; None-to-empty behavior is missing from prose and actual quote. Broad cited range alone does not supply it."
+    },
+    {
+      "id": "proxy_auth",
+      "passed": true,
+      "note": "Resolved scheme lookup, existing header removal, KeyError credentials and conditional Basic recreation/HTTPS handling are covered."
+    },
+    {
+      "id": "cookies",
+      "passed": false,
+      "note": "Previous-request extraction, session merge and header preparation are correct; post-send extraction into session cookies is absent."
+    },
+    {
+      "id": "redirect_url",
+      "passed": false,
+      "note": "Copy and unsent yield_requests mode are supplied in dispatch; normalization, fallback exceptions, limit and close are covered. Refetching the redirect target after each send is not stated or quoted; general target-existence/termination language does not establish that step. Separate citation failure: initial previous_fragment marker lies outside the selected range."
+    }
+  ]
+}
