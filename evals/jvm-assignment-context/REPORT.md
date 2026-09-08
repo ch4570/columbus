@@ -1,0 +1,11 @@
+# Java assignment result context
+
+Issue #8 requires rejecting false call targets rather than relying on a heuristic label. On base 8c47f99, `String value; value=hit(1);` with `<T> T hit(T value)` was connected despite javac rejecting the invocation's incompatible result type. Declaration initializers and returns already carried expected types; ordinary assignments did not.
+
+The parser now reads the type of an identifier on the left of plain Java `=` when the call is its result expression (including parentheses and conditional result branches). It searches enclosing lexical blocks and method parameters, retaining trailing array dimensions and varargs dimensions. Completed sibling-block declarations are excluded. Conditional conditions and compound assignments do not inherit the assignment's result type. Field/member/array-element targets and inferred `var` typing are not newly resolved; full generic inference remains unsupported.
+
+The expanded compiler gate contains 84 cases: the prior 71 plus 13 assignment and control cases. The frozen base runtime emits six wrong edges in this corpus; the final implementation removes all six. Ordinary and candidate Java grammar environments pass all 84 expected outcomes, including the corpus's explicitly conservative unresolved valid cases. Raw compiler diagnostics, source hashes, versions and reference/edge traces are retained in before-final.json, after-final.json and candidate-final.json. The base analyzer hash was checked against git 8c47f99 and final analyzer hash against the tested source.
+
+Initial 81-case observations are retained as before/after/candidate.json. Those passed after the first edit but did not cover trailing-dimension parameters. A follow-up probe exposed that missing dimension handling; final code and the 84-case gate correct it. An earlier green bounded gate was not sufficient evidence for that syntax.
+
+Both full engine environments passed 235 tests, root suite passed 53, and fresh wheel/ZIP distribution verification passed. The candidate CI workflow now runs this expanded gate. Remote CI for this commit and full Spring graph before/after evaluation remain pending; these bounded results are not a repository-wide precision/coverage claim or a model token savings result.

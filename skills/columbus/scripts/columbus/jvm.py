@@ -264,6 +264,38 @@ class _Parser:
         for child in node.named_children:
             self.visit(child)
 
+    def assignment_type(self, assignment):
+        left = assignment.child_by_field_name("left")
+        if left is None or left.type != "identifier":
+            return ""
+        name = self.text(left)
+        ancestor = assignment.parent
+        while ancestor:
+            if ancestor.type == "block":
+                # Only declarations in an enclosing block can bind this name.
+                # The extractor's function bindings also include completed sibling blocks.
+                for declaration in reversed(ancestor.named_children):
+                    if declaration.start_byte >= assignment.start_byte or declaration.type != "local_variable_declaration":
+                        continue
+                    for variable in _children(declaration, {"variable_declarator"}):
+                        if self.text(variable.child_by_field_name("name")) == name:
+                            return (self.normalized(declaration.child_by_field_name("type"))
+                                    + self.normalized(variable.child_by_field_name("dimensions")))
+            if ancestor.type in FUNCTION_NODES:
+                parameters = ancestor.child_by_field_name("parameters")
+                for parameter in parameters.named_children if parameters else []:
+                    variable = _first(parameter, {"variable_declarator"})
+                    identifier = parameter.child_by_field_name("name") or (variable.child_by_field_name("name") if variable else None)
+                    if self.text(identifier) == name:
+                        return (self.normalized(parameter.child_by_field_name("type") or _first(parameter, TYPE_NODES))
+                                + self.normalized(parameter.child_by_field_name("dimensions"))
+                                + ("[]" if parameter.type == "spread_parameter" else ""))
+                return ""  # Field/inherited member lookup needs declaration-scope typing.
+            if ancestor.type in CLASS_NODES:
+                return ""
+            ancestor = ancestor.parent
+        return ""
+
     def invocation_context(self, node):
         parent = node.parent
         while parent:
@@ -274,6 +306,10 @@ class _Parser:
                 node, parent = parent, parent.parent
             else:
                 break
+        if (self.language == "java" and parent and parent.type == "assignment_expression"
+                and node == parent.child_by_field_name("right")
+                and self.text(parent.child_by_field_name("operator")) == "="):
+            return self.assignment_type(parent)
         if parent and parent.type == "variable_declarator" and parent.parent:
             return self.normalized(parent.parent.child_by_field_name("type"))
         if parent and parent.type == "return_statement":

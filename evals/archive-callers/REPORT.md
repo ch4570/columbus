@@ -17,3 +17,5 @@ The saved-graph entry point now uses archive-callers directly, retaining archive
 `verify_context.py /tmp/columbus-archive-force-bytes-trial OUTPUT` applies the documented 20-line radius and 12000-byte text budget with the task scope django/*. All six pages returned 46 sites across 37 owners in 17 files, exactly matching the independent frozen oracle. Every returned excerpt was checked against hash-verified source, including same-line call multiplicity. Page bytes were 11699, 11358, 9882, 11412, 11839 and 10067; offsets were 0, 6, 14, 22, 29, 36, then null. The complete verifier result equals the earlier exact-ID-neighbors context result. No archive changes or consumer SQLite were found. This verifies command behavior; it is not an independent model behavior or usage trial.
 
 Remote distribution run 34175816099 at 9dda7d0 had passed four Linux/macOS jobs while two Windows jobs were still running at the retained observation; no all-platform completion claim is made here.
+
+A later observation confirms run 34175816099 completed successfully in all six jobs; see platform-final.json.

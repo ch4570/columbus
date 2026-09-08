@@ -9,6 +9,27 @@ from columbus.jvm import parse_jvm, resolve_jvm
 
 
 class JVMTests(unittest.TestCase):
+    def test_assignment_context_uses_lexical_locals_and_parameters(self):
+        for body,context,resolved in [
+            ('void run() { String value; value=hit(1); }', 'String', False),
+            ('void run() { Integer value; value=hit(1); }', 'Integer', True),
+            ('void run(String value) { value=hit(1); }', 'String', False),
+            ('void run(boolean b) { String value; value=b ? hit(1) : null; }', 'String', False),
+            ('void run() { String value; value=hit(true) ? "a" : "b"; }', '', True),
+            ('void run() { String value=""; value+=hit(1); }', '', True),
+            ('void run() { { String value; } { Integer value; value=hit(1); } }', 'Integer', True),
+            ('void run(Integer value) { { String other; } value=hit(1); }', 'Integer', True),
+            ('void run() { Integer value[]; value=hit(1); }', 'Integer[]', False),
+            ('void run(Integer value[]) { value=hit(1); }', 'Integer[]', False),
+            ('void run(Integer... value) { value=hit(1); }', 'Integer[]', False),
+        ]:
+            with self.subTest(body=body):
+                file=self.parsed('C.java','class C { static <T> T hit(T v) { return v; } '+body+' }')
+                resolve_jvm([file])
+                call,=[r for r in file['references'] if r['member']=='hit']
+                self.assertEqual(call['expected_type'],context)
+                self.assertEqual(call['resolved'],resolved)
+
     def test_conditional_branches_inherit_result_context_but_condition_does_not(self):
         for body,context,resolved in [
             ('String s=b ? hit(1) : null;', 'String', False),
