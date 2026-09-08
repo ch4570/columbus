@@ -25,7 +25,7 @@ spec.loader.exec_module(evidence)
 class ArchiveEvidenceTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.temporary = tempfile.TemporaryDirectory()
+        cls.temporary = tempfile.TemporaryDirectory(prefix="columbus evidence's ")
         cls.addClassCleanup(cls.temporary.cleanup)
         cls.observation = Path(cls.temporary.name)
         cls.repository = cls.observation / 'repository'
@@ -181,8 +181,8 @@ class ArchiveEvidenceTests(unittest.TestCase):
                    replace_argument(self.repository, self.observation / 'elsewhere'),
                    'echo ' + shlex.quote(command), 'python -c ' + shlex.quote(command),
                    command + '; true', command + ' | cat', command + ' && echo offered',
-                   command + ' --input ' + str(self.archive),
-                   command + ' --input=' + str(self.archive),
+                   command + ' --input ' + shlex.quote(str(self.archive)),
+                   command + ' --input=' + shlex.quote(str(self.archive)),
                    command + ' --inp /tmp/other.jsonl.xz',
                    command + ' --rep /tmp/elsewhere',
                    hidden_input,
@@ -205,9 +205,9 @@ class ArchiveEvidenceTests(unittest.TestCase):
         changed['item']['command'] = shlex.join(remaining[:2] + repo_option + remaining[2:])
         self.assertTrue(self.useful(changed))
         changed = copy.deepcopy(event)
-        changed['item']['command'] = event['item']['command'].replace(str(self.repository), '.')
+        changed['item']['command'] = replace_argument(self.repository, '.')
         self.assertTrue(self.useful(changed))
-        changed['item']['command'] = event['item']['command'].replace(str(self.repository), '..')
+        changed['item']['command'] = replace_argument(self.repository, '..')
         self.assertEqual(self.receipts(changed), [])
         changed = copy.deepcopy(event)
         changed['item']['command'] = event['item']['command'].replace('--input ', '--input=', 1)
