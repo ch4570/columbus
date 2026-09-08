@@ -417,6 +417,7 @@ class _Parser:
             # Loop bindings are validated independently before resolving body calls.
             iterable = (node.child_by_field_name("value")
                         if self.language == "java" and node.type == "enhanced_for_statement" else None)
+            iterable_reference = len(self.references)
             if iterable is not None:
                 self.visit(iterable)
             previous = self.current
@@ -432,6 +433,10 @@ class _Parser:
                 self.bind(name, declared, reason="loop variable")
                 self.scopes[key]["loop_variable"] = name
                 self.scopes[key]["iterable_fact"] = self.argument_fact(iterable) if iterable else {}
+                if (iterable is not None and iterable.type == "method_invocation"
+                        and len(self.references) > iterable_reference):
+                    self.scopes[key]["iterable_fact"] = dict(
+                        kind="call", reference_index=iterable_reference)
             for child in node.named_children:
                 if child != iterable:
                     self.visit(child)

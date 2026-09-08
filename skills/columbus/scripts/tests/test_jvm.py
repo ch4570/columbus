@@ -9,6 +9,24 @@ from columbus.jvm import parse_jvm, resolve_jvm
 
 
 class JVMTests(unittest.TestCase):
+    def test_loop_iterable_links_exact_root_call(self):
+        parsed = parse_jvm('C.java', '''class C {
+            C[] items(int n) { return new C[0]; } int size() { return 0; }
+            void run() { for(C a : items(size())) {} for(C b : items(1)) {} }
+        }''')
+        loops = [s for s in parsed['_scopes'].values() if s['kind'] == 'array_loop']
+        calls = [r for r in parsed['references'] if r['kind'] == 'calls']
+        self.assertEqual([r['name'] for r in calls], ['items', 'size', 'items'])
+        indexes = [s['iterable_fact']['reference_index'] for s in loops]
+        self.assertEqual(len(set(indexes)), 2)
+        for scope, index in zip(loops, indexes):
+            reference = parsed['references'][index]
+            self.assertEqual(scope['iterable_fact']['kind'], 'call')
+            self.assertEqual(reference['name'], 'items')
+            self.assertEqual(reference['scope_id'], scope['parent'])
+        resolve_jvm([parsed])
+        self.assertTrue(all(parsed['references'][i]['resolved'] for i in indexes))
+
     def test_standard_collection_loop_identity(self):
         for container in ('java.util.List', 'java.util.Collection', 'java.util.Set', 'java.lang.Iterable'):
             for declared in ('Item', 'var'):
