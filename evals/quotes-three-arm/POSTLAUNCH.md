@@ -41,3 +41,49 @@ This test-only change does not change a runtime export, prompt, semantic clause,
 citation rule, recognizer, model setting, trial order or result. No model retry
 or extra repetition is authorized. PR #12 to main and any release remain gated
 on the separately stated actual-input-and-output, complete-quality requirements.
+
+PR #19 subsequently passed all 12 exact-head platform jobs at
+`e13dd40d120344d730bc366d33afa34861ea7cc6` and merged into the evaluation branch
+as `f955dd1d1ed92a28f1f765cda3dfccc19f592161` at 18:20:38 UTC. Both trees are
+`44acce7d2cd78380e38a0a7bbe9d269e7eeb2f4c`. The original live worktree remained
+at `d4384ad`; no launched input was updated. These are development merges only.
+
+## Supplemental post-run retention utility
+
+`retain.py` and its tests are new, non-frozen supplemental files. The utility
+cannot launch, retry or poll a model. Capture requires explicit owner
+confirmation that all original runner handles have terminated. Ordinary capture
+requires all 18 process/terminal/result records and all three group completion
+records, but does not require passing model outcomes. Explicit
+`--allow-incomplete REASON` preserves missing, malformed and unexpected trial
+evidence after a confirmed stopped partial cohort; absence of a file is never
+treated as proof of termination or zero usage.
+
+Capture runs beside the original 123-file snapshot and verifies its exact hash
+inventory, plus original observation integrity, before and after output writes.
+This later development tree contains the test-only newline fix and is therefore
+not a substitute for the original snapshot. A failing source/runtime preflight
+refuses capture rather than blessing changed source as the launched input.
+Use a new output directory outside the original observations. The tool never
+overwrites a destination; a publication failure leaves partial files and an
+`INCOMPLETE.json` marker. It has not been run against active model trials.
+
+Expected raw event logs are compressed losslessly with deterministic gzip;
+unexpected artifact paths are retained in a disjoint raw namespace so an extra
+`events.jsonl.gz` cannot collide with the compressed original. Every retained
+file binds original and stored bytes. Source ZIPs, archives, runtime exports,
+protocol and rubrics remain at the original commit's 123 hash-linked paths.
+Only explicitly selected semantic reviews and a collector report are included;
+missing reviews are listed, never synthesized. Original absolute paths are
+preserved, not silently remapped into a portable model-replay promise.
+
+`--verify DIRECTORY` checks retained files, decompressed event bytes, all 18
+slot-presence summaries and declared process/result fields without the original
+observations, installed engine dependencies or model access. The retention
+manifest digest must be externally anchored for authenticity. Successful byte
+retention is not semantic approval or cost acceptance.
+
+Fourteen synthetic, model-free tests pass. Independent review found and then
+rechecked malformed runner-record handling, compressed-name collisions and raw
+record/summary consistency. No original experiment input or grader was changed
+to address these supplemental-tool defects.
