@@ -1,0 +1,202 @@
+{
+  "saved_runtime_matches_current": true,
+  "runtime_sha256": {
+    "columbus/__init__.py": "87f632dcdb12b5a9b78e5961202c87910906399c90157131799707e5b35b375c",
+    "columbus/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "columbus/archive.py": "5a50389e0b10ce49449ee88bb4ecadfcaf3da7c9381495c14256666da6b2f991",
+    "columbus/bundle.py": "f73fe1c36c89211c823f6c94eae67efc054e8c69b835b3ef49371482e7dd7f00",
+    "columbus/cli.py": "5eed07a6da9dc61f5e885c1ecbff81d0667824a05d39b4c33b3b4d57824b14c4",
+    "columbus/discovery.py": "31b40e39531a3e903d43285ecff26315e79bbac27adc86943fc61c7d5ad8fee3",
+    "columbus/export.py": "258f6b2df72a08da837480c96db82c78eeec63007d8d1c48baed8aa36b445957",
+    "columbus/graph_views.py": "9e935520bb990c2066cfdb943c37477e78378b5ffd868e31735cc6a5e261f1c7",
+    "columbus/hooks.py": "07e7e50d250904d03158bd559b32869c2a83185c6a318587278681e1956fcb42",
+    "columbus/index.py": "01a2b6d9dc53a22142ea93bba1f42a5edb3a2406507191a0d62933673eaade06",
+    "columbus/jvm.py": "530465036c5a2fd6dda3cc12791e37854228079bc6b407732daff3278d00f5e4",
+    "columbus/language_profiles.py": "cda7c22cce6227d2627225110adafa641c7b09134b7c5d800ffcf1329092a1ce",
+    "columbus/languages.py": "606fe8469d2cafdfa58d9026b86e0d7debc5922e40e4eb600af4b57a4909539b",
+    "columbus/mcp_server.py": "8205f39755c51f1486fd66a1f9c993502fb2a614376510757cb4d1bdf29641c7",
+    "columbus/parser.py": "ceb486c98a1182d30f33fb9601a0faa864f4728008b83807b418995812b64c1b",
+    "columbus/polyglot.py": "fdaf6ff2253945b31eeca00f87175ea9179be9c7b404db5468403d4a269948ae",
+    "columbus/presentation.py": "6aee6094ad820118917d63430bf82d99c94f2c83ee31e97ab867ee019520c781",
+    "columbus/receipts.py": "11068a6fd2d78a8d22a86c102b199c395c5f001e50ed5ff010f6893ab9b13ca9",
+    "columbus/retrieval.py": "bdf731d03095efc705f6470a1c0721bb72117cd286a600ff5b0cae38f3d33dd5",
+    "columbus/sync_state.py": "f18f0fa4a6cc970de4f527356ac9af70c29a12111cc3c58e42ba7e267ed457d3",
+    "columbus/telemetry.py": "9f49124a606e3a30191c596c8bd40f7255d5fbbb93f5ba2a531940b7f63c32dc",
+    "columbus/tree.py": "2be73caa6fb142ef744d2e1d6812775ae7ad12502f72e5789fe02496a83426a1"
+  },
+  "database_sha256": "d21d01a9bb3e79f78dbb8f73c4b50df32e345032ab1f34c38505c12eb8d4ccb2",
+  "all_indexed_source_hashes_verified": 1166,
+  "source_hashes": {
+    "src/main/java/org/springframework/core/io/ClassPathResource.java": "c8157b437588b1860a7dbf2380752f721566a550a82f44aeb65fc4b426750e96",
+    "src/main/java/org/springframework/core/io/DefaultResourceLoader.java": "a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c",
+    "src/main/java/org/springframework/core/io/FileUrlResource.java": "8976287532732cce3d0f0aa67a7e752993438f95c0cccec867a900908bd07d38",
+    "src/main/java/org/springframework/core/io/ProtocolResolver.java": "19d36b8d00d20b5345122aa420f01ceea1f59d913c4a4010a3e9b93f60dfb579",
+    "src/main/java/org/springframework/core/io/UrlResource.java": "ea60891c29d7f85083aec952a8540839913d64e51af75d38cf155ad0221d4f3e",
+    "src/main/java/org/springframework/util/ClassUtils.java": "fe4d8db29b05cd4730fb1152bbec7d2e86aae612f4b260a95e6334326df1dd1b",
+    "src/main/java/org/springframework/util/ResourceUtils.java": "487bad25214de61816624e2a92a31409ad62863c3df72e1eb1e82d4073ae364d",
+    "src/main/java/org/springframework/util/StringUtils.java": "5e262ad37b676f032bb3f8958a5b842ea81e7b4f49f0b39af04ed92adda09d81"
+  },
+  "extracted_call_references": 78,
+  "reviewed_emitted_method_targets": 5,
+  "reviewed_emitted_constructed_classes": 7,
+  "reviewed_targets": [
+    [
+      107,
+      "ClassUtils.getDefaultClassLoader()",
+      "src/main/java/org/springframework/util/ClassUtils.java::org.springframework.util.ClassUtils.getDefaultClassLoader:method()"
+    ],
+    [
+      169,
+      "new ClassPathResource(location.substring(CLASSPATH_URL_PREFIX.length()), getClassLoader())",
+      "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource:class"
+    ],
+    [
+      172,
+      "new ClassPathAllResource(location.substring(CLASSPATH_ALL_URL_PREFIX.length()), getClassLoader())",
+      "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource:class"
+    ],
+    [
+      177,
+      "ResourceUtils.toURL(location)",
+      "src/main/java/org/springframework/util/ResourceUtils.java::org.springframework.util.ResourceUtils.toURL:method(String)"
+    ],
+    [
+      178,
+      "ResourceUtils.isFileURL(url)",
+      "src/main/java/org/springframework/util/ResourceUtils.java::org.springframework.util.ResourceUtils.isFileURL:method(URL)"
+    ],
+    [
+      178,
+      "new FileUrlResource(url)",
+      "src/main/java/org/springframework/core/io/FileUrlResource.java::org.springframework.core.io.FileUrlResource:class"
+    ],
+    [
+      178,
+      "new UrlResource(url)",
+      "src/main/java/org/springframework/core/io/UrlResource.java::org.springframework.core.io.UrlResource:class"
+    ],
+    [
+      199,
+      "new ClassPathContextResource(path, getClassLoader())",
+      "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathContextResource:class"
+    ],
+    [
+      282,
+      "StringUtils.applyRelativePath(getPath(), relativePath)",
+      "src/main/java/org/springframework/util/StringUtils.java::org.springframework.util.StringUtils.applyRelativePath:method(String,String)"
+    ],
+    [
+      283,
+      "new ClassPathAllResource(pathToUse, getClassLoader())",
+      "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource:class"
+    ],
+    [
+      310,
+      "StringUtils.applyRelativePath(getPath(), relativePath)",
+      "src/main/java/org/springframework/util/StringUtils.java::org.springframework.util.StringUtils.applyRelativePath:method(String,String)"
+    ],
+    [
+      311,
+      "new ClassPathContextResource(pathToUse, getClassLoader())",
+      "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathContextResource:class"
+    ]
+  ],
+  "unresolved_reasons": {
+    "overloaded, external, ambiguous or unknown declaration": 7,
+    "complex, this or super receiver unsupported": 6,
+    "lambda, loop, catch or anonymous scope unsupported": 7,
+    "receiver type external, ambiguous or unknown": 16,
+    "inherited candidate set and argument applicability required": 20,
+    "receiver type requires semantic analysis": 10
+  },
+  "source_reviewed_known_gaps": [
+    {
+      "reference": {
+        "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+        "scope_id": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)::opaque:5323",
+        "kind": "calls",
+        "name": "getProtocolResolvers",
+        "member": "getProtocolResolvers",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "argument_facts": [],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+        "line": 158,
+        "evidence": "getProtocolResolvers()",
+        "resolved": false,
+        "reason": "lambda, loop, catch or anonymous scope unsupported"
+      },
+      "source_reviewed_static_declaration": "DefaultResourceLoader.getProtocolResolvers()"
+    },
+    {
+      "reference": {
+        "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+        "scope_id": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)::opaque:5323",
+        "kind": "calls",
+        "name": "protocolResolver.resolve",
+        "member": "resolve",
+        "receiver": "protocolResolver",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "name",
+            "name": "location"
+          },
+          {}
+        ],
+        "expected_type": "Resource",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+        "line": 159,
+        "evidence": "protocolResolver.resolve(location, this)",
+        "resolved": false,
+        "reason": "lambda, loop, catch or anonymous scope unsupported"
+      },
+      "source_reviewed_static_declaration": "ProtocolResolver.resolve(String, ResourceLoader)"
+    },
+    {
+      "reference": {
+        "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+        "scope_id": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+        "kind": "calls",
+        "name": "getResourceByPath",
+        "member": "getResourceByPath",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "name",
+            "name": "location"
+          }
+        ],
+        "expected_type": "Resource",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+        "line": 166,
+        "evidence": "getResourceByPath(location)",
+        "resolved": false,
+        "reason": "inherited candidate set and argument applicability required"
+      },
+      "source_reviewed_static_declaration": "DefaultResourceLoader.getResourceByPath(String)"
+    }
+  ],
+  "constructor_overload_accuracy_claimed": false,
+  "runtime_dispatch_accuracy_claimed": false,
+  "corpus_precision_or_recall_claimed": false
+}
