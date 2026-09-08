@@ -1,14 +1,16 @@
 # Prelaunch checkpoint
 
-Status: incomplete preparation. No model has been launched. This document is
-not an approval to execute and must be completed before `prepare.py freeze`.
+Status: model-free preparation, original control capture/replay and pre-freeze
+native verification complete as of 2026-09-08 21:11 UTC. No model has been
+launched. Input-hash freeze, committed/pushed freeze proof, exact frozen-head CI
+and the launch disk guard remain required; this checkpoint does not waive them.
 
 The per-language `source.json` files are byte-identical retained historical
 provenance receipts: Java/Kotlin from `evals/quotes-three-arm`, JavaScript from
 `evals/overload-token-cohort`, at development commit `fac1a25fab18463959ba725fc288b1067f4b9861`.
 Their old task-specific review/relationship fields are historical metadata, not
 this cohort's rubric or accepted relationships. This cohort uses its own
-`cases.json`, `criteria.json`, `SOURCE-REVIEW.md` and eventual `relationships.json`.
+`cases.json`, `criteria.json`, `SOURCE-REVIEW.md` and `relationships.json`.
 The standalone Apache-2.0 license is also retained byte-identically; no old file
 is edited or regraded by these copies.
 
@@ -111,3 +113,35 @@ command could use that format. `CONTROL-CAPTURE.md` records the original in-memo
 capture version, offline profiling, receipt-parity checks and the explicit common
 pre/postflight dependency. All eligible candidates retain full original checks;
 the standalone recognizer is unchanged. This is not a model-token saving claim.
+
+## Completed model-free pre-freeze gate — 2026-09-08 21:11 UTC
+
+All three original capture processes exited successfully after completing their
+own original-version final replays; none was restarted or reloaded. The 303
+prescribed commands produced 300 successful exits and three intentional exit-2
+unsupported-control responses, with no unexpected command failure. Every attempt,
+raw stdout/stderr byte receipt and original recognition result is retained.
+
+| Language | Original commands | Original `controls.json` SHA256 |
+| --- | ---: | --- |
+| Java | 117 | `4ec7859f9886a9e262d456733dba929448b640337f4c44c8eb5958001fb9d45d` |
+| Kotlin | 51 | `5b1a3119af6bd8c32d4c16c6423f4a3b218692c29621bcc0b65d5125d7a004ca` |
+| JavaScript | 135 | `e1aeb6d7b41f27e5bc476af324a7bd5af4f8ec246b42de45242a05d2c04ec3b0` |
+
+All 303 records also passed a separate read-only replay under the prospective
+optimized adapter. That replay issued no replacement control commands and no
+model requests. `prepare.py freeze` must independently repeat the required
+inventory/environment/control checks; these completed checks do not bypass it.
+
+Head `ba7dc5716f45e396b736669d2b03308240976cb3` passed all 12 native checks
+in PR run 34277651883 and push run 34277649170: Linux, macOS and Windows, each
+on Python 3.11 and 3.14. The focused local Python 3.12 suite passed all 109 tests,
+including the portable real saved-packet parity test. The first head's failed
+native checks remain in the history above. No original failure is retried or
+recategorized as successful evidence.
+
+Disk availability was 294500 KiB at this checkpoint, above the unchanged 256 MiB
+freeze/launch floor but with limited headroom. The runner must check the floor
+again before every slot. Historical observation indexes are preservation targets,
+not cleanup candidates. No model-token result, runtime-feature savings, broad
+generalization or main-branch release is asserted by these model-free checks.
