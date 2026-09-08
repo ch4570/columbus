@@ -415,7 +415,16 @@ reference counts are archive facts, not a claim that semantic calls are known.
                 if len(data) != item['size'] or digest(data) != item['hash']:
                     raise ValueError('Stale source or mismatched archived size: ' + ascii(path)
                                      + '; regenerate the archive before reading source')
-                item['lines'] = code_lines(decode_source(path, data, language=item['language']), item['language'])
+                decoded = decode_source(path, data, language=item['language'])
+                # Legacy polyglot declarations/calls count LF, while the shared
+                # source reader treats bare CR as another physical newline.
+                # Do not attach valid stored coordinates to different text.
+                if (item['language'] not in {'python', 'java', 'kotlin'}
+                        and '\r' in decoded.replace('\r\n', '')):
+                    raise ValueError('Ambiguous archived line coordinates for bare-CR source: '
+                                     + ascii(path) + '; normalize line endings and regenerate the graph '
+                                     'before combining source and call sites')
+                item['lines'] = code_lines(decoded, item['language'])
             for node in nodes.values():
                 if node['path'] in selected_paths and node['end_line'] > len(files[node['path']]['lines']):
                     raise ValueError('Declaration range outside verified source')

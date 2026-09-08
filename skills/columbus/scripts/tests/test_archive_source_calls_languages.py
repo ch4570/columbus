@@ -179,7 +179,41 @@ class ArchiveSourceCallsLanguageTests(unittest.TestCase):
                   'export function tail() {\n'
                   '  return helper();\n'
                   '}\n')
-        self._exercise('entry.js', 'javascript', source.encode('utf-8'), 'heuristic')
+        for newline in ('\n', '\r\n'):
+            with self.subTest(newline=repr(newline)):
+                self._exercise('entry.js', 'javascript', source.replace('\n', newline).encode('utf-8'), 'heuristic')
+
+    def test_real_heuristic_bare_cr_coordinates_cannot_attach_to_different_source(self):
+        source = ('function helper() { return 1; }\r'
+                  'function run() {\r'
+                  '  return helper();\r}\r')
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            producer, consumer = root / 'producer', root / 'consumer'
+            producer.mkdir()
+            consumer.mkdir()
+            for directory in (producer, consumer):
+                (directory / 'entry.js').write_bytes(source.encode())
+            index = RepositoryIndex(producer / '.columbus/index.sqlite')
+            index.refresh(producer)
+            for codec in ('gzip', 'xz'):
+                artifact = root / ('graph.' + codec)
+                archive(index, artifact, compression=codec)
+                with artifact.open('rb') as stream:
+                    records = list(_validated_rows(stream))
+                owner = next(data for kind, data in records if kind == 'node' and data['name'] == 'run')
+                edges = [data for kind, data in records if kind == 'edge' and data['kind'] == 'calls'
+                         and data['source'] == owner['id']]
+                # Real legacy producer coordinates count only LF. Displaying
+                # normalized CR lines would instead show helper at that line.
+                self.assertEqual((owner['start_line'], owner['end_line']), (1, 1))
+                self.assertEqual([edge['line'] for edge in edges], [1])
+                self.assertEqual(code_lines(source, 'javascript')[0], 'function helper() { return 1; }')
+                for fmt in ('json', 'text'):
+                    with self.subTest(codec=codec, format=fmt), self.assertRaisesRegex(ValueError, 'bare-CR'):
+                        source_calls_archive(artifact, [owner['id']], consumer, output_format=fmt)
+            self.assertEqual([path.name for path in consumer.iterdir()], ['entry.js'])
+            self.assertEqual((consumer / 'entry.js').read_bytes(), source.encode())
 
 
 if __name__ == '__main__':
