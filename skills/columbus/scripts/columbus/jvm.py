@@ -528,10 +528,13 @@ class _Resolver:
             if name in scope["bindings"]:
                 bindings = scope["bindings"][name]
                 if (scope["kind"] == "array_loop" and len(bindings) == 1
-                        and bindings[0].get("reason") == "loop variable" and bindings[0].get("type") == "var"):
+                        and bindings[0].get("reason") == "loop variable"):
                     array = self.loop_element_binding(scope)
-                    if array:
-                        return [dict(bindings[0], type=array["element_type"])]
+                    if array and bindings[0].get("type") == "var":
+                        return [dict(bindings[0], type=array["element_type"],
+                                     type_scope=array.get("type_scope"))]
+                    if array and array.get("type_scope"):
+                        return [dict(bindings[0], type_scope=scope_id)]
                 return bindings
             scope_id = scope["parent"]
         return None
@@ -539,8 +542,25 @@ class _Resolver:
     def loop_element_binding(self, scope):
         fact = scope.get("iterable_fact", {})
         bindings = self.binding(scope["parent"], fact.get("name", "")) if fact.get("kind") == "name" else None
-        if not bindings or len(bindings) != 1 or bindings[0].get("reason") not in {"parameter", "loop variable"}:
+        type_scope = scope["parent"]
+        if fact.get("kind") == "call":
+            file = self.scope_files[scope["id"]]
+            index = fact.get("reference_index")
+            if not isinstance(index, int) or not 0 <= index < len(file["references"]):
+                return None
+            reference = file["references"][index]
+            if reference["scope_id"] != scope["parent"]:
+                return None
+            target_id, _ = self.resolve(file, reference)
+            target = self.symbols.get(target_id, {})
+            if target.get("language") != "java" or target.get("kind") != "method":
+                return None
+            type_scope = target_id
+            bindings = [dict(type=target.get("return_type", ""), reason="return", type_scope=type_scope)]
+        if not bindings or len(bindings) != 1 or bindings[0].get("reason") not in {"parameter", "loop variable", "return"}:
             return None
+        type_scope = bindings[0].get("type_scope") or type_scope
+        type_file = self.scope_files[type_scope]
         declared = bindings[0].get("type", "")
         if declared.endswith("[]"):
             element = declared[:-2]
@@ -548,14 +568,13 @@ class _Resolver:
             match = re.fullmatch(r"([\w.$]+)<([\w.$]+(?:\[\])*)>", declared)
             if not match:
                 return None
-            file = self.scope_files[scope["id"]]
-            identity = self.reference_type_name(file, scope["parent"], match[1])
+            identity = self.reference_type_name(type_file, type_scope, match[1])
             if identity not in {"java.lang.Iterable", "java.util.Collection", "java.util.List", "java.util.Set"}:
                 return None
             element = match[2]
-        if bindings[0]["reason"] == "parameter":
-            origin = self.scopes.get(scope["parent"], {})
-            while origin and fact["name"] not in origin["bindings"]:
+        if bindings[0]["reason"] in {"parameter", "return"}:
+            origin = self.scopes.get(type_scope, {})
+            while bindings[0]["reason"] == "parameter" and origin and fact["name"] not in origin["bindings"]:
                 origin = self.scopes.get(origin["parent"], {})
             for type_name in re.findall(r"[A-Za-z_$][\w.$]*", declared):
                 for binding in origin.get("type_bindings", {}).get(type_name.split('.')[0], []):
@@ -578,9 +597,11 @@ class _Resolver:
         own = scope["bindings"].get(name, [])
         if len(own) != 1:
             return "ambiguous loop variable"
-        element = self.reference_type_name(file, scope["parent"], array["element_type"])
+        type_scope = array.get("type_scope") or scope["parent"]
+        element = self.reference_type_name(self.scope_files[type_scope], type_scope, array["element_type"])
         declared_type = array["element_type"] if own[0]["type"] == "var" else own[0]["type"]
-        declared = self.reference_type_name(file, scope["id"], declared_type)
+        declared = (element if own[0]["type"] == "var" and array.get("type_scope") else
+                    self.reference_type_name(file, scope["id"], declared_type))
         if not element or not declared or element != declared:
             return "loop element assignment unsupported or incompatible"
         return None
@@ -729,7 +750,8 @@ class _Resolver:
             bindings = self.binding(ref["scope_id"], fact["name"])
             if bindings is None or len(bindings) != 1:
                 return None
-            return self.reference_type_name(file, ref["scope_id"], bindings[0].get("type", ""))
+            type_scope = bindings[0].get("type_scope") or ref["scope_id"]
+            return self.reference_type_name(self.scope_files[type_scope], type_scope, bindings[0].get("type", ""))
         if fact.get("kind") == "new":
             return self.reference_type_name(file, ref["scope_id"], fact["type"])
         if fact.get("kind") == "value_of":
@@ -944,10 +966,11 @@ class _Resolver:
                 # Generics and nullable syntax are not type resolution.
                 if any(char in type_name for char in "<>()[]?*"):
                     return None, "receiver type requires semantic analysis"
-                type_bindings = self.type_binding(scope_id, type_name.split(".")[0])
+                type_scope = bindings[0].get("type_scope") or scope_id
+                type_bindings = self.type_binding(type_scope, type_name.split(".")[0])
                 if type_bindings and any(b["reason"] == "type parameter" for b in type_bindings):
                     return None, "type parameter receiver: bound and applicability analysis required"
-                types = self.candidates(file, type_name, type_only=True, scope_id=scope_id)
+                types = self.candidates(self.scope_files[type_scope], type_name, type_only=True, scope_id=type_scope)
             else:
                 types = self.candidates(file, receiver, type_only=True, scope_id=scope_id)
                 type_receiver = file["language"] == "java"
@@ -1006,6 +1029,16 @@ class _Resolver:
                     continue
                 parameter = parameters[min(number, len(parameters) - 1)] if parameters else ""
                 expected = parameter.removesuffix("...") if varargs else parameter
+                facts = ref.get("argument_facts", [])
+                fact = facts[number] if number < len(facts) else {}
+                bindings = self.binding(scope_id, fact["name"]) if fact.get("kind") == "name" else None
+                if bindings and len(bindings) == 1 and bindings[0].get("type_scope"):
+                    actual_identity = self.argument_reference_type(file, ref, actual, fact)
+                    target_file = self.scope_files[target["id"]]
+                    expected_identity = self.reference_type_name(target_file, target["id"], expected)
+                    if (not actual_identity or not expected_identity or expected in _PRIMITIVE_WIDENING
+                            or not self.reference_assignable(actual_identity, expected_identity)):
+                        return None, "inferred loop argument conversion unsupported or incompatible"
                 # A lone null in the final position may denote the varargs array.
                 if varargs and actual == "null" and number == len(parameters) - 1 and count == len(parameters):
                     continue

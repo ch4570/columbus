@@ -9,7 +9,7 @@ import sys
 import importlib.metadata
 import columbus.jvm as jvm
 
-p=argparse.ArgumentParser();p.add_argument('--jdk',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--jdk',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--require-getters',action='store_true');a=p.parse_args()
 report={'scope':'Three compiler-backed cross-package getter cases; unresolved valid calls are gaps. No runtime dispatch proof.','analyzer_sha256':hashlib.sha256(Path(jvm.__file__).read_bytes()).hexdigest(),'cases':[]}
 version=subprocess.run([str(a.jdk/'javac'),'-version'],capture_output=True,text=True,check=True)
 report.update(compiler=(version.stdout+version.stderr).strip(),python=sys.version,versions={name:importlib.metadata.version(name) for name in ('tree-sitter','tree-sitter-java')})
@@ -30,6 +30,7 @@ for declared,valid in [('a.Item',True),('var',True),('Item',False)]:
   ref=next(r for f in parsed for r in f['references'] if r['kind']=='calls' and r['member']=='hit')
   expected='a/Item.java::a.Item.hit:method()' if valid else None
   assert not ref['resolved'] or ref.get('target')==expected,ref
+  if a.require_getters and valid:assert ref.get('target')==expected,ref
   report['cases'].append({'declared_loop_type':declared,'sources':sources,'source_sha256':{n:hashlib.sha256(s.encode()).hexdigest() for n,s in sources.items()},'javac_return_code':compile_result.returncode,'javac_stderr':compile_result.stderr,'javap':bytecode,'expected_static_target':expected,'actual':ref})
 a.output.write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
 print('Cross-package cases:',len(report['cases']),'resolved:',sum(c['actual']['resolved'] for c in report['cases']))

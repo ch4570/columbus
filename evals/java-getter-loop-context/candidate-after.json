@@ -1,0 +1,133 @@
+{
+  "scope": "Three compiler-backed cross-package getter cases; unresolved valid calls are gaps. No runtime dispatch proof.",
+  "analyzer_sha256": "5bcbefb98cbf8ef46d354813c5389336337a813e4fe986b27cf47a9665d20732",
+  "cases": [
+    {
+      "declared_loop_type": "a.Item",
+      "sources": {
+        "a/Item.java": "package a; public class Item { public void hit() {} }",
+        "a/Source.java": "package a; public class Source { public java.util.Collection<Item> items() { return null; } }",
+        "b/Item.java": "package b; public class Item { public void hit() {} }",
+        "b/C.java": "package b; public class C { void run(a.Source source) { for(a.Item item : source.items()) item.hit(); } }"
+      },
+      "source_sha256": {
+        "a/Item.java": "86a48c7d9cb7acea884a2d44fab62cb1e8e856846b16ca34a0ea6d691cc10056",
+        "a/Source.java": "f6a38e9e5cbcec454b4f13fb2c3f30462e8a503ce650bb0909a6dfa0c2e65480",
+        "b/Item.java": "e521c93e537d530b2ee97a909fed6a071e5e2d54f23935afc4e60e84e9b9c019",
+        "b/C.java": "6e7e66fa65231423e570d199a8fce32e568b8a5369b87fa6fb6067568113d0ec"
+      },
+      "javac_return_code": 0,
+      "javac_stderr": "",
+      "javap": "Compiled from \"C.java\"\npublic class b.C {\n  public b.C();\n    Code:\n       0: aload_0\n       1: invokespecial #1                  // Method java/lang/Object.\"<init>\":()V\n       4: return\n\n  void run(a.Source);\n    Code:\n       0: aload_1\n       1: invokevirtual #7                  // Method a/Source.items:()Ljava/util/Collection;\n       4: invokeinterface #13,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;\n       9: astore_2\n      10: aload_2\n      11: invokeinterface #19,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z\n      16: ifeq          36\n      19: aload_2\n      20: invokeinterface #25,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;\n      25: checkcast     #29                 // class a/Item\n      28: astore_3\n      29: aload_3\n      30: invokevirtual #31                 // Method a/Item.hit:()V\n      33: goto          10\n      36: return\n}\n",
+      "expected_static_target": "a/Item.java::a.Item.hit:method()",
+      "actual": {
+        "source": "b/C.java::b.C.run:method(a.Source)",
+        "scope_id": "b/C.java::b.C.run:method(a.Source)::array_loop:56",
+        "kind": "calls",
+        "name": "item.hit",
+        "member": "hit",
+        "receiver": "item",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "argument_facts": [],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "b/C.java",
+        "line": 1,
+        "evidence": "item.hit()",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "a/Item.java::a.Item.hit:method()",
+        "confidence": "heuristic"
+      }
+    },
+    {
+      "declared_loop_type": "var",
+      "sources": {
+        "a/Item.java": "package a; public class Item { public void hit() {} }",
+        "a/Source.java": "package a; public class Source { public java.util.Collection<Item> items() { return null; } }",
+        "b/Item.java": "package b; public class Item { public void hit() {} }",
+        "b/C.java": "package b; public class C { void run(a.Source source) { for(var item : source.items()) item.hit(); } }"
+      },
+      "source_sha256": {
+        "a/Item.java": "86a48c7d9cb7acea884a2d44fab62cb1e8e856846b16ca34a0ea6d691cc10056",
+        "a/Source.java": "f6a38e9e5cbcec454b4f13fb2c3f30462e8a503ce650bb0909a6dfa0c2e65480",
+        "b/Item.java": "e521c93e537d530b2ee97a909fed6a071e5e2d54f23935afc4e60e84e9b9c019",
+        "b/C.java": "17e7df03e82759988bec4d22cded661788a717de350cc0932f508ecee6975a89"
+      },
+      "javac_return_code": 0,
+      "javac_stderr": "",
+      "javap": "Compiled from \"C.java\"\npublic class b.C {\n  public b.C();\n    Code:\n       0: aload_0\n       1: invokespecial #1                  // Method java/lang/Object.\"<init>\":()V\n       4: return\n\n  void run(a.Source);\n    Code:\n       0: aload_1\n       1: invokevirtual #7                  // Method a/Source.items:()Ljava/util/Collection;\n       4: invokeinterface #13,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;\n       9: astore_2\n      10: aload_2\n      11: invokeinterface #19,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z\n      16: ifeq          36\n      19: aload_2\n      20: invokeinterface #25,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;\n      25: checkcast     #29                 // class a/Item\n      28: astore_3\n      29: aload_3\n      30: invokevirtual #31                 // Method a/Item.hit:()V\n      33: goto          10\n      36: return\n}\n",
+      "expected_static_target": "a/Item.java::a.Item.hit:method()",
+      "actual": {
+        "source": "b/C.java::b.C.run:method(a.Source)",
+        "scope_id": "b/C.java::b.C.run:method(a.Source)::array_loop:56",
+        "kind": "calls",
+        "name": "item.hit",
+        "member": "hit",
+        "receiver": "item",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "argument_facts": [],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "b/C.java",
+        "line": 1,
+        "evidence": "item.hit()",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "a/Item.java::a.Item.hit:method()",
+        "confidence": "heuristic"
+      }
+    },
+    {
+      "declared_loop_type": "Item",
+      "sources": {
+        "a/Item.java": "package a; public class Item { public void hit() {} }",
+        "a/Source.java": "package a; public class Source { public java.util.Collection<Item> items() { return null; } }",
+        "b/Item.java": "package b; public class Item { public void hit() {} }",
+        "b/C.java": "package b; public class C { void run(a.Source source) { for(Item item : source.items()) item.hit(); } }"
+      },
+      "source_sha256": {
+        "a/Item.java": "86a48c7d9cb7acea884a2d44fab62cb1e8e856846b16ca34a0ea6d691cc10056",
+        "a/Source.java": "f6a38e9e5cbcec454b4f13fb2c3f30462e8a503ce650bb0909a6dfa0c2e65480",
+        "b/Item.java": "e521c93e537d530b2ee97a909fed6a071e5e2d54f23935afc4e60e84e9b9c019",
+        "b/C.java": "9a75f380d25a212caab6ec25f09c0e9bef160c73b0fbd70cfabb1d7e7189a514"
+      },
+      "javac_return_code": 1,
+      "javac_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/tmpgnln0qdi/b/C.java:1: error: incompatible types: a.Item cannot be converted to b.Item\npackage b; public class C { void run(a.Source source) { for(Item item : source.items()) item.hit(); } }\n                                                                                    ^\n1 error\n",
+      "javap": null,
+      "expected_static_target": null,
+      "actual": {
+        "source": "b/C.java::b.C.run:method(a.Source)",
+        "scope_id": "b/C.java::b.C.run:method(a.Source)::array_loop:56",
+        "kind": "calls",
+        "name": "item.hit",
+        "member": "hit",
+        "receiver": "item",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "argument_facts": [],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "b/C.java",
+        "line": 1,
+        "evidence": "item.hit()",
+        "resolved": false,
+        "reason": "loop element assignment unsupported or incompatible"
+      }
+    }
+  ],
+  "compiler": "javac 17.0.20.1",
+  "python": "3.11.16 (main, Aug 14 2026, 15:24:25) [Clang 22.1.3 ]",
+  "versions": {
+    "tree-sitter": "0.26.0",
+    "tree-sitter-java": "0.23.5+columbus.1"
+  }
+}

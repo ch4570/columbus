@@ -9,6 +9,29 @@ from columbus.jvm import parse_jvm, resolve_jvm
 
 
 class JVMTests(unittest.TestCase):
+    def test_getter_loop_preserves_return_type_namespace(self):
+        for declared, parameter, expected in [('a.Item', 'a.Item', True), ('var', 'a.Item', True),
+                                               ('Item', 'a.Item', False), ('var', 'Item', False)]:
+            files = [parse_jvm('a/Item.java', 'package a; public class Item { public void hit() {} }'),
+                     parse_jvm('a/Source.java', 'package a; public class Source { '
+                               'public java.util.Collection<Item> items() { return null; } }'),
+                     parse_jvm('b/Item.java', 'package b; public class Item { public void hit() {} }'),
+                     parse_jvm('b/C.java', 'package b; class C { void accept(' + parameter +
+                               ' value) {} void run(a.Source source) { for(' + declared +
+                               ' item : source.items()) { item.hit(); accept(item); } } }')]
+            resolve_jvm(files)
+            calls = {r['member']: r for r in files[-1]['references'] if r['kind'] == 'calls'}
+            self.assertEqual(calls['accept']['resolved'], expected)
+            self.assertEqual(calls['hit'].get('target'),
+                             None if declared == 'Item' else 'a/Item.java::a.Item.hit:method()')
+        for getter in ['<T extends Item> T[] items() { return null; }',
+                       'Item[] items() { class Item { void hit() {} } return null; }',
+                       'java.util.List<? extends Item> items() { return null; }']:
+            parsed = parse_jvm('C.java', 'class Item { void hit() {} } class C { ' + getter +
+                               ' void run() { for(var item : items()) item.hit(); } }')
+            resolve_jvm([parsed])
+            self.assertFalse(next(r for r in parsed['references'] if r['member'] == 'hit')['resolved'])
+
     def test_loop_iterable_links_exact_root_call(self):
         parsed = parse_jvm('C.java', '''class C {
             C[] items(int n) { return new C[0]; } int size() { return 0; }
@@ -87,14 +110,13 @@ class JVMTests(unittest.TestCase):
         calls = {r['name']: r for r in parsed['references'] if r['kind'] == 'calls'}
         self.assertTrue(calls['items']['resolved'])
         self.assertEqual(calls['items']['target'], 'C.java::C.items:method()')
-        self.assertFalse(calls['item.hit']['resolved'])
-        self.assertIn('unsupported', calls['item.hit']['reason'])
-        # A nested loop's iterable still belongs to the unsupported outer body.
+        self.assertEqual(calls['item.hit'].get('target'), 'C.java::C.hit:method()')
+        # A nested iterable uses the validated outer loop scope.
         parsed = parse_jvm('C.java', source.replace('item.hit();',
             'for (C inner : items()) { inner.hit(); }'))
         resolve_jvm([parsed])
         items = [r for r in parsed['references'] if r['name'] == 'items']
-        self.assertEqual([r['resolved'] for r in items], [True, False])
+        self.assertEqual([r['resolved'] for r in items], [True, True])
 
     def test_local_method_requires_complete_absence_from_base_chain(self):
         cases = [

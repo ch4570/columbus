@@ -1,0 +1,60 @@
+{
+  "same_file_hashes": true,
+  "added": [
+    [
+      "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+      "src/main/java/org/springframework/core/io/ProtocolResolver.java::org.springframework.core.io.ProtocolResolver.resolve:method(String,ResourceLoader)",
+      "calls",
+      "heuristic",
+      "protocolResolver.resolve(location, this)",
+      "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+      159
+    ],
+    [
+      "src/main/java/org/springframework/core/type/filter/AbstractTypeHierarchyTraversingFilter.java::org.springframework.core.type.filter.AbstractTypeHierarchyTraversingFilter.match:method(MetadataReader,MetadataReaderFactory)",
+      "src/main/java/org/springframework/core/type/filter/AbstractTypeHierarchyTraversingFilter.java::org.springframework.core.type.filter.AbstractTypeHierarchyTraversingFilter.matchInterface:method(String)",
+      "calls",
+      "heuristic",
+      "matchInterface(ifc)",
+      "src/main/java/org/springframework/core/type/filter/AbstractTypeHierarchyTraversingFilter.java",
+      100
+    ],
+    [
+      "src/main/java/org/springframework/util/ReflectionUtils.java::org.springframework.util.ReflectionUtils.doWithFields:method(Class<?>,FieldCallback,FieldFilter)",
+      "src/main/java/org/springframework/util/ReflectionUtils.java::org.springframework.util.ReflectionUtils.FieldCallback.doWith:method(Field)",
+      "calls",
+      "heuristic",
+      "fc.doWith(field)",
+      "src/main/java/org/springframework/util/ReflectionUtils.java",
+      727
+    ],
+    [
+      "src/main/java/org/springframework/util/ReflectionUtils.java::org.springframework.util.ReflectionUtils.doWithFields:method(Class<?>,FieldCallback,FieldFilter)",
+      "src/main/java/org/springframework/util/ReflectionUtils.java::org.springframework.util.ReflectionUtils.FieldFilter.matches:method(Field)",
+      "calls",
+      "heuristic",
+      "ff.matches(field)",
+      "src/main/java/org/springframework/util/ReflectionUtils.java",
+      723
+    ],
+    [
+      "src/main/java/org/springframework/util/ReflectionUtils.java::org.springframework.util.ReflectionUtils.doWithLocalFields:method(Class<?>,FieldCallback)",
+      "src/main/java/org/springframework/util/ReflectionUtils.java::org.springframework.util.ReflectionUtils.FieldCallback.doWith:method(Field)",
+      "calls",
+      "heuristic",
+      "fc.doWith(field)",
+      "src/main/java/org/springframework/util/ReflectionUtils.java",
+      691
+    ],
+    [
+      "src/test/java/org/springframework/core/annotation/AnnotationTypeMappingsTests.java::org.springframework.core.annotation.AnnotationTypeMappingsTests.getMapping:method(AnnotationTypeMappings,Class<?extendsAnnotation>)",
+      "src/main/java/org/springframework/core/annotation/AnnotationTypeMapping.java::org.springframework.core.annotation.AnnotationTypeMapping.getAnnotationType:method()",
+      "calls",
+      "heuristic",
+      "candidate.getAnnotationType()",
+      "src/test/java/org/springframework/core/annotation/AnnotationTypeMappingsTests.java",
+      459
+    ]
+  ],
+  "removed": []
+}
