@@ -1,0 +1,27 @@
+{
+  "metadata_sha256": {
+    "manifest.json": "7ae7dc54dca2126911b0a687cacab9b1a2f71047ea2335738a16173e45d9446f",
+    "engine.json": "d71db3ef6065e30205f841f5f4b0781233704a2e0175c31eb21987b4b69ba2b2",
+    "cases.json": "ea096e55ca7e44813f0cd383bdc6068622812dbf98eaf88ca28ae8d2740d334d"
+  },
+  "prior_source_manifest_equal": true,
+  "prior_question_findings_rubric_equal_except_case_id": true,
+  "archive": {
+    "archive_sha256": "f315a1101ab14109424a60ce8c3b459f422808962fe74db5065462afacd6d3de",
+    "revision": "a4b909653b0632499799",
+    "counts": {
+      "files": 112,
+      "nodes": 883,
+      "scopes": 825,
+      "edges": 1188,
+      "references": 2674,
+      "imports": 471,
+      "diagnostics": 1
+    },
+    "verifier_sha256": "981d18f13648886ac4198caba36339f8d855d4f02bbea1f75ae26d0268326869",
+    "export_seconds": 0.194,
+    "bytes": 173816,
+    "codec": "xz"
+  },
+  "model_started": false
+}
