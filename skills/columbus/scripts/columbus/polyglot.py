@@ -443,6 +443,139 @@ def _braces(masked: str) -> dict[int, int]:
     return pairs
 
 
+def _js_export_bindings(masked, literals, symbols, spans, scopes, imports, dynamic_scope):
+    """Recognize a small, conservative subset of module export bindings.
+
+    Separate ``export default identifier;`` exports a value, not a general
+    live alias. We deliberately reject writes even after that statement, and
+    shadows in unrelated scopes, rather than infer evaluation order. This is
+    still lexical evidence: no re-exports, expression/receiver dispatch or
+    named function-expression bindings are inferred.
+    """
+    # Literals are not whitespace between syntax tokens. Their contents must
+    # stay masked, but their presence must prevent matching an export prefix.
+    chars = list(masked)
+    for literal in literals:
+        chars[literal["start"]] = "\0"
+    code = "".join(chars)
+    export_tokens = list(re.finditer(r"\bexport\b", code))
+    if not export_tokens:
+        return
+    positions = {span["name_start"] for span in spans} | {m.start() for m in export_tokens}
+    prefixes, empty_prefixes, stack, start, only_space, pattern_writes = {}, set(), [], 0, True, set()
+    assignment = re.compile(r"\s*(?:=(?!=|>)|(?:\*\*|&&|\|\||\?\?|>>>|>>|<<|[+*/%&|^~-])=|\+\+|--)")
+    loop_binding = re.compile(r"\s*(?:in|of)\b")
+    for offset, char in enumerate(code):
+        if offset in positions and not stack:
+            # Retain offsets, not repeated source-prefix copies (which can be
+            # quadratic on many unsupported export tokens in one statement).
+            prefixes[offset] = start
+            if only_space:
+                empty_prefixes.add(offset)
+        if not char.isspace():
+            only_space = False
+        if char in "({[":
+            stack.append((char, offset))
+        elif char in ")}]":
+            if not stack or stack[-1][0] != {")": "(", "}": "{", "]": "["}[char]:
+                return
+            _, begin = stack.pop()
+            previous = begin - 1
+            while previous >= 0 and code[previous].isspace():
+                previous -= 1
+            if (assignment.match(code, offset + 1)
+                    or loop_binding.match(code, offset + 1)
+                    or code[max(0, previous - 1):previous + 1] in {"++", "--"}):
+                pattern_writes.update(re.findall(IDENT, code[begin:offset]))
+            if not stack and char == "}":
+                start, only_space = offset + 1, True
+        elif char == ";" and not stack:
+            start, only_space = offset + 1, True
+    # Even parenthesized/aliased eval can hide exporter writes. Reject the
+    # lexical name conservatively; proving whether it is shadowed is outside
+    # this subset (as are escaped identifiers).
+    if stack or dynamic_scope or "\\" in code or re.search(r"\b(?:eval|with)\b", code):
+        return
+    templates = [literal["text"] for literal in literals
+                 if literal["text"].startswith("`") and "${" in literal["text"]]
+    # The shared masker intentionally omits executable template expressions.
+    # Do not let hidden writes or computed eval bypass the export guard.
+    if any(re.search(r"\b(?:eval|with)\b|\\", text) for text in templates):
+        return
+    blocked = pattern_writes | {name for scope in scopes.values() for name in scope["blocked"]}
+    for imported in imports:
+        blocked.update(imported.get("names", {}))
+        if imported.get("alias"):
+            blocked.add(imported["alias"])
+    blocked.update(re.findall(rf"(?:\+\+|--)\s*({IDENT})", code))
+    blocked.update(re.findall(rf"\bfor\s+await\s*\(\s*({IDENT})\s+(?:in|of)\b", code))
+    scope_blocked = blocked.copy()
+    writes = rf"(?<![\w$])(?P<name>{IDENT})\s*(?:=(?!=|>)|(?:\*\*|&&|\|\||\?\?|>>>|>>|<<|[+*/%&|^~-])=|\+\+|--)"
+    write_occurrences = defaultdict(list)
+    for match in re.finditer(writes, code):
+        write_occurrences[match.group("name")].append(match)
+        blocked.add(match.group("name"))
+    # Initializers belong to inline callable variable declarations, but later
+    # writes to the same name do not. Simple assignment guards above therefore
+    # exclude those declarations below, unless their initializer is the only
+    # write and the existing scope guards agree.
+    by_name = defaultdict(list)
+    by_id = {symbol["id"]: symbol for symbol in symbols}
+    for symbol in symbols:
+        if symbol["parent_id"] == f"{symbol['path']}::module":
+            by_name[symbol["name"]].append(symbol)
+    declarations = {}
+    inline_defaults = []
+    function_prefix = re.compile(r"\s*(?:(?P<export>export)\s+(?:(?P<default>default)\s+)?)?"
+                                 r"(?:async[ \t]+)?function\s*\*?\s*")
+    variable_prefix = re.compile(r"\s*export\s+(?:const|let|var)\s*")
+    for span in spans:
+        symbol = by_id[span["id"]]
+        if span["name_start"] not in prefixes:
+            continue
+        begin, end = prefixes[span["name_start"]], span["name_start"]
+        genuine = function_prefix.fullmatch(code, begin, end)
+        inline_variable = variable_prefix.fullmatch(code, begin, end)
+        if symbol["kind"] != "function" or len(by_name[symbol["name"]]) != 1:
+            continue
+        header = code[span["name_start"]:span["header_end"]]
+        # The shared body finder can mistake a TS return-type object for a
+        # function body. Only no annotation or a simple named/array return type
+        # is accepted here; complex valid return types are false negatives.
+        parameter_end = header.rfind(")")
+        return_type = header[parameter_end + 1:]
+        simple_type = rf"(?!(?:keyof|typeof|readonly|unique|infer|asserts)\b){IDENT}"
+        supported_return = parameter_end >= 0 and re.fullmatch(rf"\s*(?::\s*{simple_type}(?:\.{IDENT})*(?:\s*\[\s*\])*)?\s*", return_type)
+        if genuine and span["body"] is not None and supported_return:
+            declarations[symbol["name"]] = symbol
+            if genuine.group("default"):
+                inline_defaults.append(symbol)
+            elif genuine.group("export"):
+                symbol["exported"] = True
+        elif inline_variable:
+            # Preserve the existing explicit named arrow/function binding path.
+            symbol["exported"] = True
+            name = symbol["name"]
+            occurrences = write_occurrences[name]
+            if (len(occurrences) == 1 and occurrences[0].start("name") == span["name_start"]
+                    and name not in scope_blocked):
+                blocked.discard(name)
+    default_prefix = re.compile(r"export\s+(?:default\b|\{[^;{}]*(?:\bdefault\b|\0)|\*\s+as\s+(?:default\b|\0))")
+    defaults = [m for m in export_tokens if m.start() in empty_prefixes and default_prefix.match(code, m.start())]
+    if len(defaults) == 1:
+        match = re.compile(rf"export\s+default\s+({IDENT})\s*;").match(code, defaults[0].start())
+        if match and match.group(1) in declarations:
+            declarations[match.group(1)]["default_export"] = True
+        elif len(inline_defaults) == 1:
+            inline_defaults[0]["default_export"] = True
+    for symbol in symbols:
+        if not (symbol.get("exported") or symbol.get("default_export")):
+            continue
+        name = symbol["name"]
+        if name in blocked or any(re.search(rf"(?<![\w$]){re.escape(name)}(?![\w$])", text) for text in templates):
+            symbol["exported"] = symbol["default_export"] = False
+
+
 def parse_polyglot(path: str, source: str, module: str, language: str, config: dict | None = None) -> dict:
     config = config or {}
     fidelity = fidelity_for(language, config)
@@ -543,10 +676,10 @@ def parse_polyglot(path: str, source: str, module: str, language: str, config: d
                       kind=kind, parent_id=parent_id, start_line=line(candidate["name_start"]),
                       end_line=line(max(candidate["name_start"], candidate["end"] - 1)),
                       signature=signature, doc="", language=language, fidelity="heuristic", confidence="heuristic")
-        # Export flags are used only for explicit relative JS imports.
+        # JS export bindings are checked after lexical scopes/imports exist.
         declaration_line = source[line_starts[line(candidate["name_start"]) - 1]:candidate["name_start"]]
-        symbol["exported"] = bool(re.search(r"\bexport\b", declaration_line))
-        symbol["default_export"] = bool(re.search(r"\bexport\s+default\b", declaration_line))
+        symbol["exported"] = language not in {"javascript", "typescript"} and bool(re.search(r"\bexport\b", declaration_line))
+        symbol["default_export"] = language not in {"javascript", "typescript"} and bool(re.search(r"\bexport\s+default\b", declaration_line))
         symbols.append(symbol)
         spans.append(dict(candidate, id=key, qualname=qualname, kind=kind,
                           body_start=(candidate["body"] + 1) if candidate["body"] is not None else candidate["header_end"]))
@@ -607,6 +740,8 @@ def parse_polyglot(path: str, source: str, module: str, language: str, config: d
                                              resolved=False))
     if re.search(r"\b(?:eval|with)\s*\(", masked):
         result["dynamic_scope"] = True
+    if language in {"javascript", "typescript"}:
+        _js_export_bindings(masked, literals, symbols, spans, scopes, imports, result.get("dynamic_scope", False))
     return result
 
 
