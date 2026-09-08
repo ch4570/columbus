@@ -1,0 +1,41 @@
+{
+  "schema": "columbus.exploration-cases/v1",
+  "cases": [
+    {
+      "id": "java-classpath-resource-navigation",
+      "question": "Trace how Spring's default resource loader turns a location into a resource handle, then follow the classpath-backed implementation through path coordinates, URL lookup, stream access and relative-resource creation. Discover the dispatch and helper boundaries and explain the five requested mechanisms, including the stated edge cases. Use the unmodified default loader, except that registered protocol resolvers may return a resource or null; assume non-null ordinary path strings unless a null validation check is requested. Direct ClassPathResource construction with either a ClassLoader or a Class is also in scope. Identify the classpath*: and URL handle types at the routing boundary, but their multi-resource aggregation, URL connection internals and actual filesystem/network operations are outside scope. Do not cover caching, equality/hashCode, isReadable, pattern matching, subclass-specific loader overrides or JDK implementation internals. Do not execute the repository or assume resources exist. For each finding, cite one representative implementation mechanism in one contiguous range of at most 40 physical lines; explain other inspected branches in prose without stitching quotations.",
+      "findings": [
+        {
+          "id": "resource_location_routing",
+          "description": "Explain null-location validation and registered-resolver priority, registration order and first non-null result, followed by the leading-slash, classpath:, classpath*: and URL-or-path fallback branches. Name the resulting handle types, which protocols the file-URL classifier recognizes, the malformed-URL fallback, and the default path hook. Distinguish handle construction from checking existence or opening content. Cite the complete routing decision.",
+          "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+          "marker": "URL url = ResourceUtils.toURL(location);"
+        },
+        {
+          "id": "classpath_coordinates",
+          "description": "Explain ClassLoader-based versus Class-based constructor coordinates: null-path validation, path cleaning, leading-slash handling, class-package-relative versus absolute lookup, stored lookup context including null context arguments, and what getPath exposes. Explain explicit versus default classloader selection without claiming dynamic re-selection after a handle is constructed. Distinguish lexical cleaning from traversal protection. Cite one constructor and explain the other constructor/getters in prose.",
+          "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+          "marker": "this.absolutePath = absolutePath;"
+        },
+        {
+          "id": "classpath_url_lookup",
+          "description": "Follow class-, classloader- and system-based URL lookup and their path arguments. Explain the IllegalArgumentException fallback, how exists differs from getURL on missing resources, and why these APIs do not establish a successful subsequent stream open. Cite the shared URL resolver.",
+          "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+          "marker": "return ClassLoader.getSystemResource(this.absolutePath);"
+        },
+        {
+          "id": "classpath_stream_access",
+          "description": "Follow all three direct stream-lookup branches and their path arguments. Explain missing-resource exceptions versus a returned stream, whether getInputStream reuses the URL helper or its exception suppression, and whether this method closes the successful stream or caches the content. Cite the stream method.",
+          "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+          "marker": "is = ClassLoader.getSystemResourceAsStream(this.absolutePath);"
+        },
+        {
+          "id": "classpath_relative_handles",
+          "description": "Follow relative-resource creation into the path helper and back into construction. Explain replacement of the final path segment, no-separator and leading-slash-relative cases, constructor re-cleaning and preserved Class versus ClassLoader context. Compare the ordinary classpath handle with the default loader's context-relative subtype, including subtype preservation and getPathWithinContext. Do not infer resource existence or a filesystem security boundary from the resulting path. Cite the ordinary createRelative handoff; explain the helper and context subtype in prose.",
+          "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+          "marker": "String pathToUse = StringUtils.applyRelativePath(this.path, relativePath);"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "resource_location_routing": [
+    "getResource first asserts location is non-null. It asks registered ProtocolResolvers in iteration order with (location, this), returning the first non-null Resource before any built-in route; a null result allows the next resolver or built-in logic. Registration uses the loader's LinkedHashSet, preserving its normal registration order.",
+    "A leading slash uses getResourceByPath. Otherwise classpath: strips that prefix and constructs ClassPathResource with getClassLoader; classpath*: strips its own prefix and constructs ClassPathAllResource. The default getResourceByPath constructs ClassPathContextResource with the supplied path and loader; a leading slash is not by itself a filesystem-resource route.",
+    "Remaining locations are passed to ResourceUtils.toURL, then ResourceUtils.isFileURL selects FileUrlResource versus UrlResource. The classifier recognizes file, vfsfile and vfs protocols. A MalformedURLException causes fallback to getResourceByPath; the catch is not a blanket catch for all resolver/setup exceptions.",
+    "This routing creates/returns resource handles, not proof of resource existence and not a stream open. A custom resolver may override standard rules; the question's unmodified default path hook is classpath-based, not evidence that every ResourceLoader subclass behaves that way."
+  ],
+  "classpath_coordinates": [
+    "The ClassLoader constructor asserts a non-null path, applies StringUtils.cleanPath, removes one leading slash from that cleaned result, and stores it as both path and absolutePath. It stores the supplied loader or ClassUtils.getDefaultClassLoader and clears clazz; the one-argument constructor delegates to this form with a null loader.",
+    "The Class constructor also validates/cleans path but retains that cleaned path for Class-based lookup. Its absolutePath prepends the class's package resource path when clazz is non-null and the path has no leading slash, or removes a leading slash for an absolute path. It stores clazz and sets the classLoader field to null; with a null clazz it falls through to system lookup later rather than explicitly storing a newly selected default loader.",
+    "getPath returns absolutePath, which need not equal the stored class-relative path. getClassLoader exposes clazz.getClassLoader when a Class is present, otherwise the stored loader. DefaultResourceLoader.getClassLoader selects its explicit loader or ClassUtils.getDefaultClassLoader before constructing a handle; the constructed handle's stored context is not re-selected from the thread context on every read.",
+    "cleanPath performs lexical cleaning such as dot/parent-segment suppression and slash normalization. This is not a filesystem containment or path-traversal defense; normalization alone establishes neither existence nor secure access. No enumeration of the complete StringUtils algorithm is required."
+  ],
+  "classpath_url_lookup": [
+    "resolveURL uses clazz.getResource(path) when clazz is present, otherwise classLoader.getResource(absolutePath) when a loader is present, otherwise ClassLoader.getSystemResource(absolutePath). The class-relative path must not be substituted with absolutePath in the Class branch.",
+    "resolveURL catches IllegalArgumentException and returns null; it does not catch every possible failure. exists simply tests whether resolveURL returns non-null, while getURL calls it and throws FileNotFoundException on null or returns the URL otherwise.",
+    "URL resolution/exists does not open or retain an InputStream and cannot guarantee a later independent stream lookup will succeed. Missing URL lookup is a false result for exists but an exception for getURL, not a uniformly nullable public result."
+  ],
+  "classpath_stream_access": [
+    "getInputStream directly calls clazz.getResourceAsStream(path), classLoader.getResourceAsStream(absolutePath), or ClassLoader.getSystemResourceAsStream(absolutePath), in that priority order according to the stored context. It does not obtain a URL from resolveURL and then open that URL.",
+    "A null returned stream causes FileNotFoundException using the resource description; a non-null stream is returned to the caller. This method does not include resolveURL's IllegalArgumentException catch, so that URL-helper suppression must not be attributed to stream lookup.",
+    "The successful stream is not closed by getInputStream itself, and this method has no stream/content cache. Each invocation performs its own selected lookup; returning a handle earlier or observing exists is not a successful-read guarantee."
+  ],
+  "classpath_relative_handles": [
+    "Ordinary ClassPathResource.createRelative passes its stored path, not necessarily getPath/absolutePath, and relativePath to StringUtils.applyRelativePath, then constructs a new ClassPathResource preserving clazz when present or otherwise the stored classLoader.",
+    "applyRelativePath finds the last slash and keeps the base up to that slash, replacing its final segment with the relative argument. It inserts a slash only when the relative argument does not start with one; a leading slash in the relative argument does not automatically discard a nonempty base directory. With no slash in the base it returns relativePath directly.",
+    "The new constructor cleans the combined path again and retains the appropriate lookup context. Relative construction is lexical and does not check existence, open content or establish filesystem containment.",
+    "The default loader's ClassPathContextResource implements ContextResource: getPathWithinContext returns getPath. Its override applies the helper to getPath and constructs another ClassPathContextResource with getClassLoader, preserving the context subtype rather than returning only a plain ClassPathResource."
+  ]
+}

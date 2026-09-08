@@ -1,0 +1,45 @@
+{
+  "kind": "unavailable",
+  "condition": "control",
+  "arguments": [
+    "archive-source",
+    "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource.<init>:constructor(String,ClassLoader)",
+    "--call-sites",
+    "--format",
+    "json"
+  ],
+  "argv": [
+    "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+    "-B",
+    "/private/tmp/columbus-source-call-observations.Jf0Jla/observations/java/control/runtime/columbus.py",
+    "archive-source",
+    "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource.<init>:constructor(String,ClassLoader)",
+    "--call-sites",
+    "--format",
+    "json",
+    "--input",
+    "/private/tmp/columbus-source-call-observations.Jf0Jla/observations/java/control/graph.jsonl.xz",
+    "--repo",
+    "."
+  ],
+  "cwd": "/private/tmp/columbus-source-call-observations.Jf0Jla/observations/java/control/repository",
+  "timed_out": false,
+  "return_code": 2,
+  "stdout_base64": "",
+  "stderr_base64": "dXNhZ2U6IGNvbHVtYnVzIFstaF0gWy0tdmVyc2lvbl0gWy0tcmVwbyBSRVBPXSBbLS1kYiBEQl0gWy0tcHJldHR5XQogICAgICAgICAgICAgICAgWy0tdGVsZW1ldHJ5IFBBVEhdCiAgICAgICAgICAgICAgICB7ZG9jdG9yLGluaXQsYXJjaGl2ZS1zZWFyY2gsYXJjaGl2ZS1zb3VyY2UsYXJjaGl2ZS1xdW90ZXMsYXJjaGl2ZS1uZWlnaGJvcnMsYXJjaGl2ZS1jYWxsZXJzLGFyY2hpdmUsdHJlZSxob29rLWluc3RhbGwsaG9vay11cGRhdGUsc3luYyxpbmRleCxzdGF0dXMsc2VhcmNoLG1hcCxzeW1ib2wsY2FsbGVycyxuZWlnaGJvcnMsaW1wYWN0LGNvbnRleHQsZXhwbG9yZSxzdGF0cyxncmFwaCxleHBvcnQsc2VydmUsdGVsZW1ldHJ5fQogICAgICAgICAgICAgICAgLi4uCmNvbHVtYnVzOiBlcnJvcjogdW5yZWNvZ25pemVkIGFyZ3VtZW50czogLS1jYWxsLXNpdGVzCg==",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "994e2964bb7955fb68bee8ae75d71053227587247f46c1127571c6d837dd44e4",
+  "stdout": "",
+  "stderr": "usage: columbus [-h] [--version] [--repo REPO] [--db DB] [--pretty]\n                [--telemetry PATH]\n                {doctor,init,archive-search,archive-source,archive-quotes,archive-neighbors,archive-callers,archive,tree,hook-install,hook-update,sync,index,status,search,map,symbol,callers,neighbors,impact,context,explore,stats,graph,export,serve,telemetry}\n                ...\ncolumbus: error: unrecognized arguments: --call-sites\n",
+  "event": {
+    "type": "item.completed",
+    "item": {
+      "type": "command_execution",
+      "id": "control-116",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-source-call-observations.Jf0Jla/observations/java/control/runtime/columbus.py archive-source 'src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource.<init>:constructor(String,ClassLoader)' --call-sites --format json --input /private/tmp/columbus-source-call-observations.Jf0Jla/observations/java/control/graph.jsonl.xz --repo .",
+      "exit_code": 2,
+      "status": "completed",
+      "aggregated_output": ""
+    }
+  }
+}

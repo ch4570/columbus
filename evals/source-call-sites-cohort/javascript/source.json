@@ -1,0 +1,14 @@
+{
+  "repository": "https://github.com/axios/axios",
+  "commit": "e5a33366d75b65f88052b230b103731eb7dcb793",
+  "url": "https://codeload.github.com/axios/axios/zip/e5a33366d75b65f88052b230b103731eb7dcb793",
+  "sha256": "c53e20043fc22e23f2b8a47d12a68dac007a71c3f9ae652d3188ceb4ba2b2345",
+  "files": 242,
+  "zip_bytes": 746720,
+  "license": "LICENSE",
+  "license_sha256": "82761059eaedacb3356803aea8a170d8298609f91b14fc32ee1bfb40d690183c",
+  "omitted_gitlinks": [],
+  "requested_url": "https://codeload.github.com/axios/axios/zip/e5a33366d75b65f88052b230b103731eb7dcb793",
+  "resolved_url": "https://codeload.github.com/axios/axios/zip/e5a33366d75b65f88052b230b103731eb7dcb793",
+  "snapshot_scope": "complete superproject archive; not recursive checkout"
+}

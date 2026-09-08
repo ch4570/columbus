@@ -1,0 +1,154 @@
+{
+  "answer": {
+    "findings": [
+      {
+        "id": "uri_handoffs",
+        "path": "lib/core/Axios.js",
+        "start_line": 202,
+        "end_line": 202,
+        "quote": "    const fullPath = buildFullPath(config.baseURL, config.url, config.allowAbsoluteUrls);",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "uri_config_merge",
+        "path": "lib/core/mergeConfig.js",
+        "start_line": 68,
+        "end_line": 68,
+        "quote": "    url: valueFromConfig2,",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "uri_base_path",
+        "path": "lib/core/buildFullPath.js",
+        "start_line": 18,
+        "end_line": 18,
+        "quote": "  if (baseURL && (isRelativeUrl || allowAbsoluteUrls == false)) {",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "uri_serializer_selection",
+        "path": "lib/helpers/buildURL.js",
+        "start_line": 45,
+        "end_line": 45,
+        "quote": "  const serializeFn = options && options.serialize;",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "uri_parameter_materialization",
+        "path": "lib/helpers/toFormData.js",
+        "start_line": 167,
+        "end_line": 167,
+        "quote": "            indexes === true ? renderKey([key], index, dots) : (indexes === null ? key : key + '[]'),",
+        "explanation": "Citation control only, not semantic approval."
+      }
+    ]
+  },
+  "positive": {
+    "passed": true,
+    "findings": [
+      {
+        "id": "uri_handoffs",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "uri_config_merge",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "uri_base_path",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "uri_serializer_selection",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "uri_parameter_materialization",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "negative_answer": {
+    "findings": [
+      {
+        "id": "uri_handoffs",
+        "path": "lib/core/Axios.js",
+        "start_line": 202,
+        "end_line": 202,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "uri_config_merge",
+        "path": "lib/core/mergeConfig.js",
+        "start_line": 68,
+        "end_line": 68,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "uri_base_path",
+        "path": "lib/core/buildFullPath.js",
+        "start_line": 18,
+        "end_line": 18,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "uri_serializer_selection",
+        "path": "lib/helpers/buildURL.js",
+        "start_line": 45,
+        "end_line": 45,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "uri_parameter_materialization",
+        "path": "lib/helpers/toFormData.js",
+        "start_line": 167,
+        "end_line": 167,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      }
+    ]
+  },
+  "negative": {
+    "passed": false,
+    "findings": [
+      {
+        "id": "uri_handoffs",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "uri_config_merge",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "uri_base_path",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "uri_serializer_selection",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "uri_parameter_materialization",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  }
+}

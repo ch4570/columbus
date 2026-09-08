@@ -1,0 +1,304 @@
+{
+  "case": "kotlin-property-resolution-navigation",
+  "condition": "baseline",
+  "repeat": 1,
+  "return_code": 0,
+  "timed_out": false,
+  "finished_at": "2026-09-08T22:03:09.417871+00:00",
+  "elapsed_seconds": 371.0041992079932,
+  "usage": {
+    "input_tokens": 150174,
+    "cached_input_tokens": 115712,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 11117,
+    "reasoning_output_tokens": 7568,
+    "uncached_input_tokens": 34462
+  },
+  "preflight": {
+    "baseline": {
+      "passed": true,
+      "archive_sha256": "7a8d957112b48ec2710afb16263211638540d5489b25dc6f313d4dd6b2afbcea",
+      "revision": "3352a120ff0a3ffe0b24",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    },
+    "control": {
+      "passed": true,
+      "archive_sha256": "7a8d957112b48ec2710afb16263211638540d5489b25dc6f313d4dd6b2afbcea",
+      "revision": "3352a120ff0a3ffe0b24",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    },
+    "candidate": {
+      "passed": true,
+      "archive_sha256": "7a8d957112b48ec2710afb16263211638540d5489b25dc6f313d4dd6b2afbcea",
+      "revision": "3352a120ff0a3ffe0b24",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    }
+  },
+  "postflight": {
+    "baseline": {
+      "passed": true,
+      "archive_sha256": "7a8d957112b48ec2710afb16263211638540d5489b25dc6f313d4dd6b2afbcea",
+      "revision": "3352a120ff0a3ffe0b24",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    },
+    "control": {
+      "passed": true,
+      "archive_sha256": "7a8d957112b48ec2710afb16263211638540d5489b25dc6f313d4dd6b2afbcea",
+      "revision": "3352a120ff0a3ffe0b24",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    },
+    "candidate": {
+      "passed": true,
+      "archive_sha256": "7a8d957112b48ec2710afb16263211638540d5489b25dc6f313d4dd6b2afbcea",
+      "revision": "3352a120ff0a3ffe0b24",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    }
+  },
+  "events_sha256": "1b127e3b48b4f8c906e367c4cd978df8395e009dc9fe60871bac7bf4ccab0a08",
+  "commands": [
+    {
+      "command": "/bin/zsh -lc \"rg -n --glob '*.kt' --glob '*.java' \\\"operator fun.*get|inline fun <reified|PropertySourcesPropertyResolver|convertValueIfNecessary|resolveNestedPlaceholders|getRequiredProperty|getProperty\\\\(\\\" .\"",
+      "exit_code": 0,
+      "output_bytes": 44364,
+      "output_sha256": "af9931b8d2296366bd3b5a09471e99ca9f7d8ab9026c3d4bca43f154f9eb2bc9"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/kotlin/org/springframework/core/env/PropertyResolverExtensions.kt | sed -n '20,70p'\"",
+      "exit_code": 0,
+      "output_bytes": 1499,
+      "output_sha256": "66519e2722a03f353c4418b284d161ef59bcf9fde983c7db61a04442e1a4635e"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java | sed -n '35,105p'\"",
+      "exit_code": 0,
+      "output_bytes": 2680,
+      "output_sha256": "05801c5693fabf1598c9917757fc4b066974a5a0d7436d1b3c3ed7cb98d0173f"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/core/env/AbstractPropertyResolver.java | sed -n '205,315p'\"",
+      "exit_code": 0,
+      "output_bytes": 4590,
+      "output_sha256": "dc8ea3cd828e1c953ad90747b2067d23885f063dfb4bdd69ba5d7d701fbcc2d0"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/core/env/AbstractPropertyResolver.java | sed -n '55,130p'\"",
+      "exit_code": 0,
+      "output_bytes": 3149,
+      "output_sha256": "3137a8d12b47ed34eb4b7dc27fde2026b16c106fcd492ee123043002d4771ab6"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/core/env/AbstractPropertyResolver.java | sed -n '315,375p'\"",
+      "exit_code": 0,
+      "output_bytes": 3117,
+      "output_sha256": "912e9b62e9a17df0b54ca420cbee13964139e7485d0ace96b6b0facb087129b8"
+    },
+    {
+      "command": "/bin/zsh -lc 'rg -n \"class PropertyPlaceholderHelper|replacePlaceholders|parseStringValue|PlaceholderResolver|resolvePlaceholder\" src/main/java/org/springframework/util src/main/java/org/springframework/core/env'",
+      "exit_code": 0,
+      "output_bytes": 4962,
+      "output_sha256": "a2df93ebda64892cb2bc46a33f91993d1a3859f693ac133dbf7f7945635b2e98"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/util/PlaceholderParser.java | sed -n '300,345p'\"",
+      "exit_code": 0,
+      "output_bytes": 1751,
+      "output_sha256": "531bc701990654bae6a3c49536dd6d5c7f2321aee5b5a2b07187798a9cbbdb8f"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/util/PropertyPlaceholderHelper.java | sed -n '35,115p'\"",
+      "exit_code": 0,
+      "output_bytes": 3911,
+      "output_sha256": "171d8f9a05833b437fa7ce38d590c1b8317d8d140153b7f6b46a7d166e9cb73b"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/core/env/AbstractPropertyResolver.java | sed -n '124,205p'\"",
+      "exit_code": 0,
+      "output_bytes": 3078,
+      "output_sha256": "ba9c0e346368119d773a2d9c02eb5337874706d3fbf14b659007edcdeb60329a"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/util/PlaceholderParser.java | sed -n '105,145p'\"",
+      "exit_code": 0,
+      "output_bytes": 1896,
+      "output_sha256": "4bec2b2dcf2fe133588d3a90c56528e7a8d70e0f51b3880f2fbe8f4028427afe"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/util/PlaceholderParser.java | sed -n '410,455p'\"",
+      "exit_code": 0,
+      "output_bytes": 1765,
+      "output_sha256": "cfd8f6f31e9ab73da8543bedf5d247350842214b4cca1a8108e4f76bc4de1188"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/core/env/PropertySources.java | sed -n '20,100p'\"",
+      "exit_code": 0,
+      "output_bytes": 1204,
+      "output_sha256": "6601577a5a48e7294d068c16a975a448e14343b5f7a37f6252daad66e85cc7fc"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/core/env/MutablePropertySources.java | sed -n '50,85p'\"",
+      "exit_code": 0,
+      "output_bytes": 1130,
+      "output_sha256": "f4c01f825ed1d4040d428455f623a24e1e01a852fc2b2d94c494316b9a3e42ca"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/util/PlaceholderParser.java | sed -n '335,385p'\"",
+      "exit_code": 0,
+      "output_bytes": 1852,
+      "output_sha256": "96ca7134759ca2e2c03c632254cb611925283eeeb5cbc7cc89eebb5f3ee8e44d"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n \\\"class PlaceholderResolutionException\\\" src/main/java && nl -ba src/main/java/org/springframework/util/PlaceholderResolutionException.java | sed -n '25,55p'\"",
+      "exit_code": 0,
+      "output_bytes": 1413,
+      "output_sha256": "05c4a150566414c5e7e6b45cb5c2404aede487cd45e1b0958acf1284b1c80d91"
+    }
+  ],
+  "command_count": 16,
+  "command_output_bytes": 82361,
+  "failed_commands": 0,
+  "other_tool_types": [],
+  "runtime_warnings": [],
+  "turn_failed": false,
+  "answer": {
+    "findings": [
+      {
+        "id": "kotlin_lookup_handoffs",
+        "path": "src/main/kotlin/org/springframework/core/env/PropertyResolverExtensions.kt",
+        "start_line": 40,
+        "end_line": 61,
+        "quote": "inline fun <reified T : Any> PropertyResolver.getProperty(key: String) : T? =\n\t\tgetProperty(key, T::class.java)\n\n/**\n * Extension for [PropertyResolver.getProperty] providing a `getProperty<Foo>(...)`\n * variant returning a non-nullable `Foo` with a default value.\n *\n * @author John Burns\n * @since 6.1\n */\ninline fun <reified T : Any> PropertyResolver.getProperty(key: String, default: T) : T =\n\tgetProperty(key, T::class.java, default)\n\n/**\n * Extension for [PropertyResolver.getRequiredProperty] providing a\n * `getRequiredProperty<Foo>(...)` variant.\n *\n * @author Sebastien Deleuze\n * @since 5.1\n */\ninline fun <reified T: Any> PropertyResolver.getRequiredProperty(key: String) : T =\n\t\tgetRequiredProperty(key, T::class.java)",
+        "explanation": "The bracket extension immediately above this range is `operator fun PropertyResolver.get(key: String): String? = getProperty(key)`, so `resolver[key]` calls the Java one-argument overload and is nullable. The three generic forms are inline and reified with the non-null upper bound `T : Any`: nullable lookup returns `T?` and passes exactly `(key, T::class.java)`; default-valued lookup returns declared `T` and passes `(key, T::class.java, default)`; required lookup returns declared `T` and passes `(key, T::class.java)`. Reification supplies only an erased Java runtime `Class`; for a type such as `List<Foo>`, it passes the raw `List` class and preserves no `Foo` element-type token. These extensions implement no source search, conversion, fallback, or required check themselves. With a `PropertySourcesPropertyResolver`, ordinary and typed overloads dispatch to that class, while the default and required overloads are inherited from `AbstractPropertyResolver` and call its virtual lookup back into the subclass. The non-null Kotlin signatures mean successful returns are non-null under those Java wrappers, not that lookup must succeed: source, placeholder, or conversion failures can throw, and required lookup throws when its lookup result is null."
+      },
+      {
+        "id": "ordered_property_lookup",
+        "path": "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java",
+        "start_line": 73,
+        "end_line": 99,
+        "quote": "protected <T> @Nullable T getProperty(String key, Class<T> targetValueType, boolean resolveNestedPlaceholders) {\n\t\tif (this.propertySources != null) {\n\t\t\tfor (PropertySource<?> propertySource : this.propertySources) {\n\t\t\t\tif (logger.isTraceEnabled()) {\n\t\t\t\t\tlogger.trace(\"Searching for key '\" + key + \"' in PropertySource '\" +\n\t\t\t\t\t\t\tpropertySource.getName() + \"'\");\n\t\t\t\t}\n\t\t\t\tObject value = propertySource.getProperty(key);\n\t\t\t\tif (value != null) {\n\t\t\t\t\tif (resolveNestedPlaceholders) {\n\t\t\t\t\t\tif (value instanceof String string) {\n\t\t\t\t\t\t\tvalue = resolveNestedPlaceholders(string);\n\t\t\t\t\t\t}\n\t\t\t\t\t\telse if ((value instanceof CharSequence cs) && (String.class.equals(targetValueType) ||\n\t\t\t\t\t\t\t\tCharSequence.class.equals(targetValueType))) {\n\t\t\t\t\t\t\tvalue = resolveNestedPlaceholders(cs.toString());\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t\tlogKeyFound(key, propertySource, value);\n\t\t\t\t\treturn convertValueIfNecessary(value, targetValueType);\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\tif (logger.isTraceEnabled()) {\n\t\t\tlogger.trace(\"Could not find key '\" + key + \"' in any property source\");\n\t\t}\n\t\treturn null;\n\t}",
+        "explanation": "Ordinary lookup enters this loop as `(key, String.class, true)`, typed lookup as `(key, requestedClass, true)`, and raw-string lookup as `(key, String.class, false)`. Sources are queried in collection iteration order, so the earliest source returning a raw non-null value has precedence. A source-returned null permits the next source; a null `propertySources` collection, an empty collection, or all-null/no-match results return null. An empty string is non-null and therefore also wins. The first raw non-null value commits source selection before placeholder processing and conversion: the method reaches an immediate return and never considers a later source. Consequently, a conversion result of null becomes the lookup result rather than restarting selection. Exceptions from `PropertySource.getProperty`, nested processing, logging, or conversion propagate because there is no catch, likewise preventing later-source attempts. The resolver keeps no property-result cache: each lookup iterates and invokes the sources again, although an individual `PropertySource` may have its own behavior."
+      },
+      {
+        "id": "nested_placeholder_policy",
+        "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+        "start_line": 272,
+        "end_line": 287,
+        "quote": "protected String resolveNestedPlaceholders(String value) {\n\t\tif (value.isEmpty()) {\n\t\t\treturn value;\n\t\t}\n\t\treturn (this.ignoreUnresolvableNestedPlaceholders ?\n\t\t\t\tresolvePlaceholders(value) : resolveRequiredPlaceholders(value));\n\t}\n\n\tprivate PropertyPlaceholderHelper createPlaceholderHelper(boolean ignoreUnresolvablePlaceholders) {\n\t\treturn new PropertyPlaceholderHelper(this.placeholderPrefix, this.placeholderSuffix,\n\t\t\t\tthis.valueSeparator, this.escapeCharacter, ignoreUnresolvablePlaceholders);\n\t}\n\n\tprivate String doResolvePlaceholders(String text, PropertyPlaceholderHelper helper) {\n\t\treturn helper.replacePlaceholders(text, this::getPropertyAsRawString);\n\t}",
+        "explanation": "In the source loop, ordinary and typed lookups enable nested resolution. Every raw `String` is resolved regardless of requested target type. A non-String `CharSequence` is first converted to text and resolved only when the target is exactly `String.class` or `CharSequence.class`; targets such as `Object` or `StringBuilder` do not trigger that branch. Other values receive no placeholder processing. Resolution precedes conversion. Raw-string lookup disables this stage via `(key, String.class, false)`; “raw” therefore means no nested resolution, not no conversion to String. The helper receives that raw lookup as its callback, and its parser recursively processes placeholders found in returned replacement text without recursively invoking ordinary property lookup. An empty String is a valid selected value that shadows later sources; `resolveNestedPlaceholders` returns it unchanged without initializing a helper, after which normal target conversion may still occur. Nested lookup is strict by default because `ignoreUnresolvableNestedPlaceholders` starts false; setting it true selects permissive resolution that leaves unresolved placeholders intact. Independently, direct `resolvePlaceholders` is always permissive and direct `resolveRequiredPlaceholders` is always strict; strict unresolved resolution throws `PlaceholderResolutionException`, an `IllegalArgumentException`. Separate non-strict and strict helper fields are initialized lazily on first use. Those cached objects retain parser/policy setup, not property values: each callback and each later top-level lookup still traverses the property sources."
+      },
+      {
+        "id": "property_conversion_service",
+        "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+        "start_line": 298,
+        "end_line": 311,
+        "quote": "protected <T> @Nullable T convertValueIfNecessary(Object value, @Nullable Class<T> targetType) {\n\t\tif (targetType == null) {\n\t\t\treturn (T) value;\n\t\t}\n\t\tConversionService conversionServiceToUse = this.conversionService;\n\t\tif (conversionServiceToUse == null) {\n\t\t\t// Avoid initialization of shared DefaultConversionService if\n\t\t\t// no standard type conversion is needed in the first place...\n\t\t\tif (ClassUtils.isAssignableValue(targetType, value)) {\n\t\t\t\treturn (T) value;\n\t\t\t}\n\t\t\tconversionServiceToUse = DefaultConversionService.getSharedInstance();\n\t\t}\n\t\treturn conversionServiceToUse.convert(value, targetType);\n\t}",
+        "explanation": "A null target type returns the original value even if a service has been configured. For a non-null target with no resolver-specific service, an already-assignable value is returned unchanged; only a non-assignable value is sent to the shared `DefaultConversionService`. No `canConvert` assertion establishes that every value is convertible. If an explicit service has been set, the local assignability shortcut is skipped and every non-null-target value is delegated to that service, including already-assignable values. Its null result propagates as null, and any exception propagates without recovery. `getConversionService()` lazily creates an independent `DefaultConversionService`, rather than obtaining the shared singleton, using a volatile field and synchronized double-checked initialization. Calling that getter stores the independent service, so later lookups follow the configured-service branch and delegate even assignable values. `setConversionService` also stores a resolver-specific service but first rejects null with `Assert.notNull` (an `IllegalArgumentException` boundary)."
+      },
+      {
+        "id": "default_required_outcomes",
+        "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+        "start_line": 215,
+        "end_line": 242,
+        "quote": "public String getProperty(String key, String defaultValue) {\n\t\tString value = getProperty(key);\n\t\treturn (value != null ? value : defaultValue);\n\t}\n\n\t@Override\n\tpublic <T> T getProperty(String key, Class<T> targetType, T defaultValue) {\n\t\tT value = getProperty(key, targetType);\n\t\treturn (value != null ? value : defaultValue);\n\t}\n\n\t@Override\n\tpublic String getRequiredProperty(String key) throws IllegalStateException {\n\t\tString value = getProperty(key);\n\t\tif (value == null) {\n\t\t\tthrow new IllegalStateException(\"Required key '\" + key + \"' not found\");\n\t\t}\n\t\treturn value;\n\t}\n\n\t@Override\n\tpublic <T> T getRequiredProperty(String key, Class<T> valueType) throws IllegalStateException {\n\t\tT value = getProperty(key, valueType);\n\t\tif (value == null) {\n\t\t\tthrow new IllegalStateException(\"Required key '\" + key + \"' not found\");\n\t\t}\n\t\treturn value;\n\t}",
+        "explanation": "Both String and typed wrappers first perform the complete virtual lookup in `PropertySourcesPropertyResolver`, including source selection, nested placeholder processing, and conversion. Only after that call returns do default-valued methods substitute the supplied default for null, and required methods translate null into `IllegalStateException`. Thus null caused by no collection, no matching source, all source values being null, or a selected value's conversion returning null receives the same wrapper treatment. In particular, once a source returns a raw non-null value, the source loop immediately returns that value's conversion result; if a configured conversion service returns null, the default wrapper uses its fallback and the required wrapper throws—neither restarts the source loop because neither knows or revisits source selection. By contrast, exceptions from a source, strict placeholder processing, or conversion escape the inner lookup before these null checks execute: defaults are not used, and required lookup does not replace such failures with its missing-key exception."
+      }
+    ]
+  },
+  "quality": {
+    "passed": false,
+    "findings": [
+      {
+        "id": "kotlin_lookup_handoffs",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "ordered_property_lookup",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "nested_placeholder_policy",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "property_conversion_service",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "default_required_outcomes",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  }
+}

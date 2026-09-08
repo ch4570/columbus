@@ -1,0 +1,344 @@
+{
+  "java": {
+    "fixture": "/tmp/columbus-source-call-sites.x1RWXz/evals/quotes-three-arm/java/graph.jsonl.xz",
+    "fixture_sha256": "b624d888e8a35f55c6f43f3255c2b21878d56e75d1e764442e9571d1fa998b23",
+    "fixture_bytes": 3886556,
+    "revision": "cf482b13ebb638a175d9",
+    "counts": {
+      "files": 1166,
+      "nodes": 20811,
+      "scopes": 20647,
+      "edges": 32145,
+      "references": 68007,
+      "imports": 7723,
+      "diagnostics": 16
+    },
+    "producer_commit": "402940994ba519a3a02a521ccfed55b73d310dbf",
+    "candidate_commit": "382d92a780e933f43e267d12f41869c816eee3bb",
+    "analyzer_version": "columbus-1.1.0",
+    "analyzer_code": "031e485d2283806bd0a9",
+    "analyzer_dependencies": {
+      "python_ast": "3.12.14",
+      "tree-sitter": "0.26.0",
+      "tree-sitter-java": "0.23.5",
+      "tree-sitter-kotlin": "1.1.0"
+    },
+    "source_fixture": "/tmp/columbus-spring-navigation-source.zip",
+    "source_fixture_sha256": "68572527bfad750c2ab2c55dcbab1324568a4584d0d122cc3a4dfac8c139bd0c",
+    "source_files": 1166,
+    "source_bytes": 7120331,
+    "source_manifest_sha256": "53bd4243666ca2f8ad02a3f00b349dd565ac10f1df889e8041bc4c1b87753143",
+    "source_files_absent_from_graph": [],
+    "index": {
+      "files": 1166,
+      "symbols": 20811,
+      "edges": 32145,
+      "indexed_bytes": 7120331,
+      "revision": "cf482b13ebb638a175d9"
+    },
+    "historical_cold_index_seconds": 8.18254083400825,
+    "historical_cold_export_seconds": 3.9598633330024313,
+    "timing_status": "Historical producer measurements, not a fresh candidate index/export measurement and not a new zero-cost result.",
+    "provenance": {
+      "repository_at_review": "/tmp/columbus-source-call-sites.x1RWXz",
+      "frozen_commit": "d4384adc0207a19c59025adc1decc91ab2a20a52",
+      "dependency_sha256": {
+        "evals/quotes-three-arm/input-hashes.json": "85ac3b856197225df2234c118bde0bacf1382655a45945b5bf03406bbb9c83a8",
+        "evals/quotes-three-arm/environment.json": "00c36dced30ccf5bfeed03a723053fbda65adf87d9990edb9d3423b4d54c3569",
+        "evals/quotes-three-arm/prepare.py": "3ddfeb43fadef986e5583b1bd3b21d4f53d464c077366f8d549189c5f3fbdd3b",
+        "evals/quotes-three-arm/common.py": "08f576965d4e881a3664b740d6f8aae3dcdab5cd55e0ec730b67d3262dac3943",
+        "evals/exploration/observe_saved_callers.py": "9be45dea4385a70f16ce8bdb276710014c0555a2f20a30c17681b7c8e9a384e9",
+        "evals/quotes-three-arm/java/freeze.json": "25c7c746d525d6186d2d92e14446a536de71267313fbf4dc65a24dea64b6a12c",
+        "evals/quotes-three-arm/java/graph.jsonl.xz": "b624d888e8a35f55c6f43f3255c2b21878d56e75d1e764442e9571d1fa998b23"
+      },
+      "frozen_engine_selector": "quotes.engine",
+      "original_engine": {
+        "path": "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/java/quotes/engine.json",
+        "sha256": "fb0e90b8103ee58aa90325a6332fae78fad65263f119a06791182609d275a3fc"
+      },
+      "original_graph": "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/java/quotes/graph.jsonl.xz",
+      "runtime_inventory": {
+        "directory": "/tmp/columbus-source-call-sites.x1RWXz/evals/quotes-three-arm/runtimes/quotes",
+        "files": 37,
+        "sha256": "645d06068792e9d195e1ea0a5452eb17675867f8fba73ac56345d4bb5733881b",
+        "map_location": "evals/quotes-three-arm/java/freeze.json:quotes.engine.files"
+      },
+      "producer_chain": "Frozen prepare.py exports runtime from quotes commit, syncs and archives in the quotes observation, then copies the exact graph to other arms. Consumer control runtime 9c0d3c3 is not the producer.",
+      "all_runtime_bytes_match_producer_git_and_frozen_inventory": true,
+      "all_source_zip_bytes_match_frozen_source_manifest": true,
+      "all_archived_file_hashes_and_sizes_match_source_zip": true,
+      "actual_record_counts_match_footer_and_frozen_engine": true,
+      "decompressed_records_after_manifest_sha256": "abf99328da91f541d352a6fe4ff2efeb0644c3f9a8f7dece011ad08c953577b8"
+    },
+    "candidate_equivalence": {
+      "all_shared_runtime_files_identical_except": [
+        "SKILL.md",
+        "columbus/cli.py",
+        "references/agent-context.md",
+        "references/archive.md"
+      ],
+      "candidate_added_runtime_files": [
+        "columbus/source_calls.py"
+      ],
+      "analyzer_modules_byte_identical": [
+        "parser.py",
+        "discovery.py",
+        "language_profiles.py",
+        "polyglot.py",
+        "languages.py",
+        "index.py",
+        "jvm.py"
+      ],
+      "candidate_analyzer_code_recomputed_from_git": "031e485d2283806bd0a9",
+      "producer_archive_module_sha256": "81787d027feb45143c6cdd12adf9d45d47177adbcb29914e74c1110c694405e0",
+      "candidate_archive_module_sha256": "81787d027feb45143c6cdd12adf9d45d47177adbcb29914e74c1110c694405e0",
+      "archive_export_function": {
+        "path": "skills/columbus/scripts/columbus/archive.py",
+        "function": "archive",
+        "physical_lines": [
+          29,
+          88
+        ],
+        "bytes": 3563,
+        "sha256": "141606efc2b42aad2d4234468f869133133d0fdf665b4e95d3aea6a19272a2c9",
+        "encoding": "Exact Git blob bytes for ast.FunctionDef archive: splitlines(keepends=True)[lineno-1:end_lineno], including the final physical newline."
+      },
+      "limitation": "Original compressed bytes and revision are reused. This does not claim that a fresh index at a different root would reproduce the same revision or archive SHA256."
+    }
+  },
+  "kotlin": {
+    "fixture": "/tmp/columbus-source-call-sites.x1RWXz/evals/quotes-three-arm/kotlin/graph.jsonl.xz",
+    "fixture_sha256": "7a8d957112b48ec2710afb16263211638540d5489b25dc6f313d4dd6b2afbcea",
+    "fixture_bytes": 3886560,
+    "revision": "3352a120ff0a3ffe0b24",
+    "counts": {
+      "files": 1166,
+      "nodes": 20811,
+      "scopes": 20647,
+      "edges": 32145,
+      "references": 68007,
+      "imports": 7723,
+      "diagnostics": 16
+    },
+    "producer_commit": "402940994ba519a3a02a521ccfed55b73d310dbf",
+    "candidate_commit": "382d92a780e933f43e267d12f41869c816eee3bb",
+    "analyzer_version": "columbus-1.1.0",
+    "analyzer_code": "031e485d2283806bd0a9",
+    "analyzer_dependencies": {
+      "python_ast": "3.12.14",
+      "tree-sitter": "0.26.0",
+      "tree-sitter-java": "0.23.5",
+      "tree-sitter-kotlin": "1.1.0"
+    },
+    "source_fixture": "/tmp/columbus-spring-navigation-source.zip",
+    "source_fixture_sha256": "68572527bfad750c2ab2c55dcbab1324568a4584d0d122cc3a4dfac8c139bd0c",
+    "source_files": 1166,
+    "source_bytes": 7120331,
+    "source_manifest_sha256": "53bd4243666ca2f8ad02a3f00b349dd565ac10f1df889e8041bc4c1b87753143",
+    "source_files_absent_from_graph": [],
+    "index": {
+      "files": 1166,
+      "symbols": 20811,
+      "edges": 32145,
+      "indexed_bytes": 7120331,
+      "revision": "3352a120ff0a3ffe0b24"
+    },
+    "historical_cold_index_seconds": 7.943478917004541,
+    "historical_cold_export_seconds": 3.7136611249879934,
+    "timing_status": "Historical producer measurements, not a fresh candidate index/export measurement and not a new zero-cost result.",
+    "provenance": {
+      "repository_at_review": "/tmp/columbus-source-call-sites.x1RWXz",
+      "frozen_commit": "d4384adc0207a19c59025adc1decc91ab2a20a52",
+      "dependency_sha256": {
+        "evals/quotes-three-arm/input-hashes.json": "85ac3b856197225df2234c118bde0bacf1382655a45945b5bf03406bbb9c83a8",
+        "evals/quotes-three-arm/environment.json": "00c36dced30ccf5bfeed03a723053fbda65adf87d9990edb9d3423b4d54c3569",
+        "evals/quotes-three-arm/prepare.py": "3ddfeb43fadef986e5583b1bd3b21d4f53d464c077366f8d549189c5f3fbdd3b",
+        "evals/quotes-three-arm/common.py": "08f576965d4e881a3664b740d6f8aae3dcdab5cd55e0ec730b67d3262dac3943",
+        "evals/exploration/observe_saved_callers.py": "9be45dea4385a70f16ce8bdb276710014c0555a2f20a30c17681b7c8e9a384e9",
+        "evals/quotes-three-arm/kotlin/freeze.json": "edacef7c60e384bb6fc03c9ecc14893bd80727835620cbc9a4edff774661ca05",
+        "evals/quotes-three-arm/kotlin/graph.jsonl.xz": "7a8d957112b48ec2710afb16263211638540d5489b25dc6f313d4dd6b2afbcea"
+      },
+      "frozen_engine_selector": "quotes.engine",
+      "original_engine": {
+        "path": "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/engine.json",
+        "sha256": "0bb9a348c528720288c2f6e413bff6263bc9dc5131db28e4bca86acb38c1c799"
+      },
+      "original_graph": "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/graph.jsonl.xz",
+      "runtime_inventory": {
+        "directory": "/tmp/columbus-source-call-sites.x1RWXz/evals/quotes-three-arm/runtimes/quotes",
+        "files": 37,
+        "sha256": "645d06068792e9d195e1ea0a5452eb17675867f8fba73ac56345d4bb5733881b",
+        "map_location": "evals/quotes-three-arm/kotlin/freeze.json:quotes.engine.files"
+      },
+      "producer_chain": "Frozen prepare.py exports runtime from quotes commit, syncs and archives in the quotes observation, then copies the exact graph to other arms. Consumer control runtime 9c0d3c3 is not the producer.",
+      "all_runtime_bytes_match_producer_git_and_frozen_inventory": true,
+      "all_source_zip_bytes_match_frozen_source_manifest": true,
+      "all_archived_file_hashes_and_sizes_match_source_zip": true,
+      "actual_record_counts_match_footer_and_frozen_engine": true,
+      "decompressed_records_after_manifest_sha256": "abf99328da91f541d352a6fe4ff2efeb0644c3f9a8f7dece011ad08c953577b8"
+    },
+    "candidate_equivalence": {
+      "all_shared_runtime_files_identical_except": [
+        "SKILL.md",
+        "columbus/cli.py",
+        "references/agent-context.md",
+        "references/archive.md"
+      ],
+      "candidate_added_runtime_files": [
+        "columbus/source_calls.py"
+      ],
+      "analyzer_modules_byte_identical": [
+        "parser.py",
+        "discovery.py",
+        "language_profiles.py",
+        "polyglot.py",
+        "languages.py",
+        "index.py",
+        "jvm.py"
+      ],
+      "candidate_analyzer_code_recomputed_from_git": "031e485d2283806bd0a9",
+      "producer_archive_module_sha256": "81787d027feb45143c6cdd12adf9d45d47177adbcb29914e74c1110c694405e0",
+      "candidate_archive_module_sha256": "81787d027feb45143c6cdd12adf9d45d47177adbcb29914e74c1110c694405e0",
+      "archive_export_function": {
+        "path": "skills/columbus/scripts/columbus/archive.py",
+        "function": "archive",
+        "physical_lines": [
+          29,
+          88
+        ],
+        "bytes": 3563,
+        "sha256": "141606efc2b42aad2d4234468f869133133d0fdf665b4e95d3aea6a19272a2c9",
+        "encoding": "Exact Git blob bytes for ast.FunctionDef archive: splitlines(keepends=True)[lineno-1:end_lineno], including the final physical newline."
+      },
+      "limitation": "Original compressed bytes and revision are reused. This does not claim that a fresh index at a different root would reproduce the same revision or archive SHA256."
+    }
+  },
+  "javascript": {
+    "fixture": "/tmp/columbus-source-call-sites.x1RWXz/evals/overload-token-cohort/retained/javascript/graph.jsonl.xz",
+    "fixture_sha256": "9bdd1b2ca6ff306b3700d141bdeab1593f511e73046deaa89ff27c7b9e4b17c7",
+    "fixture_bytes": 219392,
+    "revision": "14898a983357327f60a7",
+    "counts": {
+      "files": 237,
+      "nodes": 778,
+      "scopes": 0,
+      "edges": 1270,
+      "references": 7258,
+      "imports": 390,
+      "diagnostics": 1
+    },
+    "producer_commit": "588f2db846fff7036eff95a0d917277d225ae734",
+    "candidate_commit": "382d92a780e933f43e267d12f41869c816eee3bb",
+    "analyzer_version": "columbus-1.1.0",
+    "analyzer_code": "6f9565d03255b71d9332",
+    "analyzer_dependencies": {
+      "python_ast": "3.12.14"
+    },
+    "source_fixture": "/tmp/columbus-source-call-sites.x1RWXz/evals/overload-token-cohort/javascript/source.zip",
+    "source_fixture_sha256": "c53e20043fc22e23f2b8a47d12a68dac007a71c3f9ae652d3188ceb4ba2b2345",
+    "source_files": 242,
+    "source_bytes": 2650116,
+    "source_manifest_sha256": "2fb9ed6b024ca3d98524260d42099c1579f4986faadebb81ab7915e84946c516",
+    "source_files_absent_from_graph": [
+      {
+        "path": ".gitignore",
+        "reason": "Discovery configuration, not an indexed source file."
+      },
+      {
+        "path": "package-lock.json",
+        "reason": "Historical diagnostic: excluded because file exceeds 1 MB (1825590 bytes)."
+      },
+      {
+        "path": "test/unit/adapters/axios.png",
+        "reason": "Binary-extension exclusion."
+      },
+      {
+        "path": "test/unit/adapters/cert.pem",
+        "reason": "Secret-extension exclusion."
+      },
+      {
+        "path": "test/unit/adapters/key.pem",
+        "reason": "Secret-extension exclusion."
+      }
+    ],
+    "index": {
+      "files": 237,
+      "symbols": 778,
+      "edges": 1270,
+      "indexed_bytes": 819985,
+      "revision": "14898a983357327f60a7"
+    },
+    "historical_cold_index_seconds": 1.14,
+    "historical_cold_export_seconds": 0.313,
+    "timing_status": "Historical producer measurements rounded to milliseconds by the old observer, not a fresh candidate measurement and not a new zero-cost result.",
+    "provenance": {
+      "repository_at_review": "/tmp/columbus-source-call-sites.x1RWXz",
+      "frozen_commit": "c4ee65c25d40c8085ee659df1da67df651c66b74",
+      "dependency_sha256": {
+        "evals/overload-token-cohort/input-hashes.json": "f6394e9832690454024cf21728f10cba5933623f12ae3858f52dfb842f49914c",
+        "evals/overload-token-cohort/environment.json": "6a93589acf7f57675ad9a3b6aaad9c244f8732280caf612458cc80b3d23c34e5",
+        "evals/overload-token-cohort/prepare.py": "acc9d4f317e6bf5b115972ca12c81ac14e615ae5e248d501c5aae5b46b808d3a",
+        "evals/overload-token-cohort/javascript/freeze.json": "d7eb55a05c47382af6c18fbc9d97b35518745de70d30bdc3e171a367a71b5631",
+        "evals/exploration/observe_saved_callers.py": "9be45dea4385a70f16ce8bdb276710014c0555a2f20a30c17681b7c8e9a384e9"
+      },
+      "postrun_retention_manifest": {
+        "path": "evals/overload-token-cohort/retained/RETENTION.json",
+        "sha256": "2bcd242876ec7d40d5e185b17a50d28141d9c9f35bfa55cd90961f9d567f7452"
+      },
+      "frozen_engine_selector": "engine",
+      "original_engine": {
+        "path": "/tmp/columbus-overload-token-javascript/engine.json",
+        "sha256": "4929bb8738d1944399d74e5128201782ed3974b6faa3726f4c07b1c63d42c752"
+      },
+      "original_graph": "/tmp/columbus-overload-token-javascript/graph.jsonl.xz",
+      "runtime_inventory": {
+        "directory": "/tmp/columbus-source-call-sites.x1RWXz/evals/overload-token-cohort/retained/runtime",
+        "files": 36,
+        "sha256": "8c83144956b31116d41a77ffc75b40fff2b691a6fa7d585c7b1d16863930f0ae",
+        "map_location": "evals/overload-token-cohort/javascript/freeze.json:engine.files"
+      },
+      "producer_chain": "Frozen prepare.py invokes observer.freeze_archive; the observer copies runtime, syncs, exports XZ and records hashes/times. Before the old cohort freeze, verify_runtime_commit binds every copied runtime byte to environment.runtime_commit 588f2db. Post-run RETENTION binds the exact copied graph to the original path.",
+      "all_runtime_bytes_match_producer_git_and_frozen_inventory": true,
+      "all_source_zip_bytes_match_frozen_source_manifest": true,
+      "all_archived_file_hashes_and_sizes_match_source_zip": true,
+      "actual_record_counts_match_footer_and_frozen_engine": true
+    },
+    "candidate_equivalence": {
+      "all_shared_runtime_files_identical_except": [
+        "SKILL.md",
+        "columbus/archive.py",
+        "columbus/cli.py",
+        "references/agent-context.md",
+        "references/archive.md"
+      ],
+      "candidate_added_runtime_files": [
+        "columbus/quotes.py",
+        "columbus/source_calls.py"
+      ],
+      "analyzer_modules_byte_identical": [
+        "parser.py",
+        "discovery.py",
+        "language_profiles.py",
+        "polyglot.py",
+        "languages.py",
+        "index.py"
+      ],
+      "candidate_analyzer_code_recomputed_from_git": "6f9565d03255b71d9332",
+      "producer_archive_module_sha256": "8334ca1301a6468533abb040024e1df040c8124c453976949c5fa8341fe8f2a6",
+      "candidate_archive_module_sha256": "81787d027feb45143c6cdd12adf9d45d47177adbcb29914e74c1110c694405e0",
+      "archive_module_delta": "Whole archive.py differs: only _overload_receiver_hint and source_archive_many ambiguity diagnostics changed. This is not whole-module equality. Archive export and validation/compression helpers are unchanged.",
+      "archive_export_function": {
+        "path": "skills/columbus/scripts/columbus/archive.py",
+        "function": "archive",
+        "physical_lines": [
+          29,
+          88
+        ],
+        "bytes": 3563,
+        "sha256": "141606efc2b42aad2d4234468f869133133d0fdf665b4e95d3aea6a19272a2c9",
+        "encoding": "Exact Git blob bytes for ast.FunctionDef archive: splitlines(keepends=True)[lineno-1:end_lineno], including the final physical newline."
+      },
+      "limitation": "Original compressed bytes and revision are reused. Complete source scope is 242 files, graph coverage is 237 historical indexed files with five explicitly recorded exclusions; no graph completeness or fresh-export byte-identity claim."
+    }
+  }
+}

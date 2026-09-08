@@ -1,0 +1,31 @@
+{
+  "pid": 12442,
+  "started_at": "2026-09-08T21:37:27.359522+00:00",
+  "schedule": [
+    [
+      "baseline",
+      1
+    ],
+    [
+      "control",
+      1
+    ],
+    [
+      "candidate",
+      1
+    ],
+    [
+      "candidate",
+      2
+    ],
+    [
+      "control",
+      2
+    ],
+    [
+      "baseline",
+      2
+    ]
+  ],
+  "input_hashes_sha256": "69f196d7db2fac0248805878f294966774346028dee725f439707702d60c2fa6"
+}
