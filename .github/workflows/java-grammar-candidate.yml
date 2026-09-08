@@ -62,7 +62,7 @@ jobs:
       - name: Compiler-backed type receivers and literal references
         run: python -c "import os, pathlib, subprocess, sys; env = dict(os.environ, PYTHONPATH=str(pathlib.Path('skills/columbus/scripts').resolve())); subprocess.run([sys.executable, 'evals/jvm-guardrails/verify_type_receivers.py', str(pathlib.Path(os.environ['JAVA_HOME']) / 'bin'), 'candidate-results/type-receivers.json'], env=env, check=True)"
       - name: Compiler-backed correlated generic arguments
-        run: python -c "import os, pathlib, subprocess, sys; env = dict(os.environ, PYTHONPATH=str(pathlib.Path('skills/columbus/scripts').resolve())); subprocess.run([sys.executable, 'evals/jvm-class-tokens/verify_varargs.py', str(pathlib.Path(os.environ['JAVA_HOME']) / 'bin'), 'candidate-results/generic-constraints.json'], env=env, check=True)"
+        run: python -c "import os, pathlib, subprocess, sys; env = dict(os.environ, PYTHONPATH=str(pathlib.Path('skills/columbus/scripts').resolve())); subprocess.run([sys.executable, 'evals/jvm-return-constraints/verify.py', str(pathlib.Path(os.environ['JAVA_HOME']) / 'bin'), 'candidate-results/generic-constraints.json'], env=env, check=True)"
       - name: Engine regression tests with candidate
         working-directory: skills/columbus/scripts
         run: python -m unittest discover -s tests -v

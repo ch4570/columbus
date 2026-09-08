@@ -9,6 +9,25 @@ from columbus.jvm import parse_jvm, resolve_jvm
 
 
 class JVMTests(unittest.TestCase):
+    def test_return_only_type_variables_retain_constraints(self):
+        for declaration,context,expected in [
+            ('static <T extends Number> T','String',False),
+            ('static <T extends Number> T','Number',False),
+            ('static <T> T','String',True),
+            ('static <T> T[]','String[]',True),
+            ('static <T> T[]','String',False),
+        ]:
+            with self.subTest(declaration=declaration,context=context):
+                file=self.parsed('C.java','class C { '+declaration+' hit() { return null; } void run() { '+context+' value=hit(); } }')
+                resolve_jvm([file])
+                call,=[r for r in file['references'] if r['member']=='hit']
+                self.assertEqual(call['resolved'],expected)
+        file=self.parsed('C.java','class C<T> { T hit() { return null; } void run() { String value=hit(); } }')
+        resolve_jvm([file])
+        call,=[r for r in file['references'] if r['member']=='hit']
+        self.assertFalse(call['resolved'])
+        self.assertIn('declaring-type substitution',call['reason'])
+
     def test_generic_varargs_array_uses_fixed_arity_before_result_context(self):
         for result,expected in [('String[]',True),('String[][]',False),('Object[]',True)]:
             file=self.parsed('C.java','class C { static <T> T[] hit(T... x) { return x; } void run() { '+result+' value=hit(new String[0]); } }')

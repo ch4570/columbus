@@ -597,19 +597,21 @@ class _Resolver:
 
     def generic_argument_check(self, file, ref, target, parameters):
         target_scope = self.scopes.get(target["id"], {})
+        returned = target.get("return_type", "")
+        constrained_types = [*parameters, returned]
         variables = {name: bindings for name, bindings in target_scope.get("type_bindings", {}).items()
                      if any(b.get("reason") == "type parameter" for b in bindings)}
         scope, shadowed = target_scope, set(variables)
         while scope:
             for name, bindings in scope.get("type_bindings", {}).items():
                 if name not in shadowed and any(b.get("reason") == "type parameter" for b in bindings):
-                    if any(re.search(r"\b" + re.escape(name) + r"\b", p) for p in parameters):
+                    if any(re.search(r"\b" + re.escape(name) + r"\b", p) for p in constrained_types):
                         return set(), "generic declaring-type substitution requires semantic analysis"
                 shadowed.add(name)
             scope = self.scopes.get(scope.get("parent"))
         if not variables:
             return set(), None
-        used = {v for v in variables if any(re.search(r"\b" + re.escape(v) + r"\b", p) for p in parameters)}
+        used = {v for v in variables if any(re.search(r"\b" + re.escape(v) + r"\b", p) for p in constrained_types)}
         if not used:
             return set(), None
         if ref.get("explicit_type_arguments") or any(len(variables[v]) != 1 or variables[v][0].get("declaration") != v for v in used):
@@ -661,7 +663,6 @@ class _Resolver:
             if variable not in anchors or self.reference_assignable(component, anchors[variable]):
                 values[array_vararg_index] = (variable, component)
         context = ref.get("expected_type", "")
-        returned = target.get("return_type", "")
         if context and context != "var":
             for variable in used:
                 if returned not in {variable, variable + "[]"}:
