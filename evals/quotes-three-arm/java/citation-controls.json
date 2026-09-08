@@ -1,0 +1,180 @@
+{
+  "answer": {
+    "findings": [
+      {
+        "id": "entry-generation",
+        "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+        "start_line": 107,
+        "end_line": 107,
+        "quote": "\t\t\tput(key, value);",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "read-recency",
+        "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+        "start_line": 445,
+        "end_line": 445,
+        "quote": "\t\t\t\tthis.evictionQueue.moveToBack(node);",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "drain-coordination",
+        "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+        "start_line": 147,
+        "end_line": 147,
+        "quote": "\t\t\t\tthis.writeOperations.drain();",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "insertion-eviction",
+        "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+        "start_line": 284,
+        "end_line": 284,
+        "quote": "\t\t\t\tmarkAsRemoved(node);",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "key-removal",
+        "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+        "start_line": 235,
+        "end_line": 235,
+        "quote": "\t\tprocessWrite(new RemovalTask(node));",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "clear-and-observation",
+        "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+        "start_line": 193,
+        "end_line": 193,
+        "quote": "\t\t\tthis.writeOperations.drainAll();",
+        "explanation": "Citation control only, not semantic approval."
+      }
+    ]
+  },
+  "positive": {
+    "passed": true,
+    "findings": [
+      {
+        "id": "entry-generation",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "read-recency",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "drain-coordination",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "insertion-eviction",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "key-removal",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "clear-and-observation",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "negative_answer": {
+    "findings": [
+      {
+        "id": "entry-generation",
+        "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+        "start_line": 107,
+        "end_line": 107,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "read-recency",
+        "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+        "start_line": 445,
+        "end_line": 445,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "drain-coordination",
+        "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+        "start_line": 147,
+        "end_line": 147,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "insertion-eviction",
+        "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+        "start_line": 284,
+        "end_line": 284,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "key-removal",
+        "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+        "start_line": 235,
+        "end_line": 235,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "clear-and-observation",
+        "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+        "start_line": 193,
+        "end_line": 193,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      }
+    ]
+  },
+  "negative": {
+    "passed": false,
+    "findings": [
+      {
+        "id": "entry-generation",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "read-recency",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "drain-coordination",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "insertion-eviction",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "key-removal",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "clear-and-observation",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  }
+}

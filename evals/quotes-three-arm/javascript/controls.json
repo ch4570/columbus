@@ -1,0 +1,1321 @@
+{
+  "passed": true,
+  "model_started": false,
+  "preflight": {
+    "baseline": {
+      "passed": true,
+      "archive_sha256": "e36126105e72f4a8399254b787bd80c329102e3d872120503721db8f9a943c0e",
+      "revision": "bcba2230bf65c920c9fb",
+      "source_files_verified": 213,
+      "indexed_source_files_verified": 211,
+      "counts": {
+        "files": 211,
+        "nodes": 424,
+        "scopes": 0,
+        "edges": 581,
+        "references": 11251,
+        "imports": 400,
+        "diagnostics": 0
+      },
+      "consumer_index_absent": true
+    },
+    "control": {
+      "passed": true,
+      "archive_sha256": "e36126105e72f4a8399254b787bd80c329102e3d872120503721db8f9a943c0e",
+      "revision": "bcba2230bf65c920c9fb",
+      "source_files_verified": 213,
+      "indexed_source_files_verified": 211,
+      "counts": {
+        "files": 211,
+        "nodes": 424,
+        "scopes": 0,
+        "edges": 581,
+        "references": 11251,
+        "imports": 400,
+        "diagnostics": 0
+      },
+      "consumer_index_absent": true
+    },
+    "quotes": {
+      "passed": true,
+      "archive_sha256": "e36126105e72f4a8399254b787bd80c329102e3d872120503721db8f9a943c0e",
+      "revision": "bcba2230bf65c920c9fb",
+      "source_files_verified": 213,
+      "indexed_source_files_verified": 211,
+      "counts": {
+        "files": 211,
+        "nodes": 424,
+        "scopes": 0,
+        "edges": 581,
+        "references": 11251,
+        "imports": 400,
+        "diagnostics": 0
+      },
+      "consumer_index_absent": true
+    }
+  },
+  "postflight": {
+    "baseline": {
+      "passed": true,
+      "archive_sha256": "e36126105e72f4a8399254b787bd80c329102e3d872120503721db8f9a943c0e",
+      "revision": "bcba2230bf65c920c9fb",
+      "source_files_verified": 213,
+      "indexed_source_files_verified": 211,
+      "counts": {
+        "files": 211,
+        "nodes": 424,
+        "scopes": 0,
+        "edges": 581,
+        "references": 11251,
+        "imports": 400,
+        "diagnostics": 0
+      },
+      "consumer_index_absent": true
+    },
+    "control": {
+      "passed": true,
+      "archive_sha256": "e36126105e72f4a8399254b787bd80c329102e3d872120503721db8f9a943c0e",
+      "revision": "bcba2230bf65c920c9fb",
+      "source_files_verified": 213,
+      "indexed_source_files_verified": 211,
+      "counts": {
+        "files": 211,
+        "nodes": 424,
+        "scopes": 0,
+        "edges": 581,
+        "references": 11251,
+        "imports": 400,
+        "diagnostics": 0
+      },
+      "consumer_index_absent": true
+    },
+    "quotes": {
+      "passed": true,
+      "archive_sha256": "e36126105e72f4a8399254b787bd80c329102e3d872120503721db8f9a943c0e",
+      "revision": "bcba2230bf65c920c9fb",
+      "source_files_verified": 213,
+      "indexed_source_files_verified": 211,
+      "counts": {
+        "files": 211,
+        "nodes": 424,
+        "scopes": 0,
+        "edges": 581,
+        "references": 11251,
+        "imports": 400,
+        "diagnostics": 0
+      },
+      "consumer_index_absent": true
+    }
+  },
+  "relationships": [
+    {
+      "condition": "control",
+      "format": "json",
+      "relationship_index": 0,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/runtime/columbus.py",
+        "archive-neighbors",
+        "lib/response.js::sendFile:function",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "json",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "{\"symbol_id\":\"lib/response.js::sendFile:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"lib/response.js::sendFile:function\",\"path\":\"lib/response.js\",\"name\":\"sendFile\",\"kind\":\"function\",\"start_line\":373,\"end_line\":415,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile:function\",\"path\":\"lib/response.js\",\"name\":\"sendfile\",\"kind\":\"function\",\"start_line\":921,\"end_line\":1009,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"}],\"edges\":[{\"source\":\"lib/response.js::sendFile:function\",\"target\":\"lib/response.js::sendfile:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"sendfile(res, file, opts, function (err) { if (done) return done(err); if (err && err.code === 'EISDI\",\"path\":\"lib/response.js\",\"line\":406}],\"matched_edges\":1,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"lib/response.js::sendFile:function\",\"path\":\"lib/response.js\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"start_line\":404,\"end_line\":408,\"call_lines\":[406],\"source\":\"\\n  // transfer\\n  sendfile(res, file, opts, function (err) {\\n    if (done) return done(err);\\n    if (err && err.code === 'EISDIR') return next();\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "756a25c9abda74ccadcb3138fa7a16eee2e01b74b03ba7e7d705f54ed60d9bc8",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "control-0-json",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/runtime/columbus.py archive-neighbors lib/response.js::sendFile:function --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format json --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "{\"symbol_id\":\"lib/response.js::sendFile:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"lib/response.js::sendFile:function\",\"path\":\"lib/response.js\",\"name\":\"sendFile\",\"kind\":\"function\",\"start_line\":373,\"end_line\":415,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile:function\",\"path\":\"lib/response.js\",\"name\":\"sendfile\",\"kind\":\"function\",\"start_line\":921,\"end_line\":1009,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"}],\"edges\":[{\"source\":\"lib/response.js::sendFile:function\",\"target\":\"lib/response.js::sendfile:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"sendfile(res, file, opts, function (err) { if (done) return done(err); if (err && err.code === 'EISDI\",\"path\":\"lib/response.js\",\"line\":406}],\"matched_edges\":1,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"lib/response.js::sendFile:function\",\"path\":\"lib/response.js\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"start_line\":404,\"end_line\":408,\"call_lines\":[406],\"source\":\"\\n  // transfer\\n  sendfile(res, file, opts, function (err) {\\n    if (done) return done(err);\\n    if (err && err.code === 'EISDIR') return next();\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "control-0-json",
+            "operation": "archive-neighbors",
+            "encoding": "json-v1",
+            "output_sha256": "756a25c9abda74ccadcb3138fa7a16eee2e01b74b03ba7e7d705f54ed60d9bc8",
+            "relationships": [
+              {
+                "source": "lib/response.js::sendFile:function",
+                "target": "lib/response.js::sendfile:function",
+                "path": "lib/response.js",
+                "line": 406
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "control",
+      "format": "text",
+      "relationship_index": 0,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/runtime/columbus.py",
+        "archive-neighbors",
+        "lib/response.js::sendFile:function",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "text",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"lib/response.js::sendFile:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":1,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"lib/response.js\",\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"lib/response.js::sendFile:function\",\"name\":\"sendFile\",\"kind\":\"function\",\"start_line\":373,\"end_line\":415,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[1,0,{\"id\":\"lib/response.js::sendfile:function\",\"name\":\"sendfile\",\"kind\":\"function\",\"start_line\":921,\"end_line\":1009,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[0,1,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"sendfile(res, file, opts, function (err) { if (done) return done(err); if (err && err.code === 'EISDI\",\"line\":406}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":0,\"file_number\":0,\"start_line\":404,\"end_line\":408,\"call_lines\":[406]}\n404| \n405|   // transfer\n406|   sendfile(res, file, opts, function (err) {\n407|     if (done) return done(err);\n408|     if (err && err.code === 'EISDIR') return next();\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "2ad1bf69ef7221de2ab71b89004981667ab5ee37580d981ce2c887da0c15b89f",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "control-0-text",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/runtime/columbus.py archive-neighbors lib/response.js::sendFile:function --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format text --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"lib/response.js::sendFile:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":1,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"lib/response.js\",\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"lib/response.js::sendFile:function\",\"name\":\"sendFile\",\"kind\":\"function\",\"start_line\":373,\"end_line\":415,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[1,0,{\"id\":\"lib/response.js::sendfile:function\",\"name\":\"sendfile\",\"kind\":\"function\",\"start_line\":921,\"end_line\":1009,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[0,1,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"sendfile(res, file, opts, function (err) { if (done) return done(err); if (err && err.code === 'EISDI\",\"line\":406}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":0,\"file_number\":0,\"start_line\":404,\"end_line\":408,\"call_lines\":[406]}\n404| \n405|   // transfer\n406|   sendfile(res, file, opts, function (err) {\n407|     if (done) return done(err);\n408|     if (err && err.code === 'EISDIR') return next();\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "control-0-text",
+            "operation": "archive-neighbors",
+            "encoding": "neighbors-table-text-v1",
+            "output_sha256": "2ad1bf69ef7221de2ab71b89004981667ab5ee37580d981ce2c887da0c15b89f",
+            "relationships": [
+              {
+                "source": "lib/response.js::sendFile:function",
+                "target": "lib/response.js::sendfile:function",
+                "path": "lib/response.js",
+                "line": 406
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "control",
+      "format": "json",
+      "relationship_index": 1,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/runtime/columbus.py",
+        "archive-neighbors",
+        "lib/response.js::sendfile.onfinish:function",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "json",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "{\"symbol_id\":\"lib/response.js::sendfile.onfinish:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"lib/response.js::sendfile.onaborted:function\",\"path\":\"lib/response.js\",\"name\":\"onaborted\",\"kind\":\"function\",\"start_line\":926,\"end_line\":933,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile.onerror:function\",\"path\":\"lib/response.js\",\"name\":\"onerror\",\"kind\":\"function\",\"start_line\":946,\"end_line\":950,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile.onfinish:function\",\"path\":\"lib/response.js\",\"name\":\"onfinish\",\"kind\":\"function\",\"start_line\":965,\"end_line\":980,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"}],\"edges\":[{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onaborted:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); if (err) return onerror(err); if (done) return; setImmediate(function () { if\",\"path\":\"lib/response.js\",\"line\":966},{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onaborted:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); return; } if (done) return; done = true; callback(); }); }\",\"path\":\"lib/response.js\",\"line\":972},{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onerror:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onerror(err); if (done) return; setImmediate(function () { if (streaming !== false && !done)\",\"path\":\"lib/response.js\",\"line\":967}],\"matched_edges\":3,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"lib/response.js::sendfile.onfinish:function\",\"path\":\"lib/response.js\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"start_line\":965,\"end_line\":974,\"call_lines\":[966,967,972],\"source\":\"  function onfinish(err) {\\n    if (err && err.code === 'ECONNRESET') return onaborted();\\n    if (err) return onerror(err);\\n    if (done) return;\\n\\n    setImmediate(function () {\\n      if (streaming !== false && !done) {\\n        onaborted();\\n        return;\\n      }\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "23c0679f473266bf01d9573a504db6bdc79fc1010a1cabbf889c34b94564d4d3",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "control-1-json",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/runtime/columbus.py archive-neighbors lib/response.js::sendfile.onfinish:function --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format json --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "{\"symbol_id\":\"lib/response.js::sendfile.onfinish:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"lib/response.js::sendfile.onaborted:function\",\"path\":\"lib/response.js\",\"name\":\"onaborted\",\"kind\":\"function\",\"start_line\":926,\"end_line\":933,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile.onerror:function\",\"path\":\"lib/response.js\",\"name\":\"onerror\",\"kind\":\"function\",\"start_line\":946,\"end_line\":950,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile.onfinish:function\",\"path\":\"lib/response.js\",\"name\":\"onfinish\",\"kind\":\"function\",\"start_line\":965,\"end_line\":980,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"}],\"edges\":[{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onaborted:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); if (err) return onerror(err); if (done) return; setImmediate(function () { if\",\"path\":\"lib/response.js\",\"line\":966},{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onaborted:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); return; } if (done) return; done = true; callback(); }); }\",\"path\":\"lib/response.js\",\"line\":972},{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onerror:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onerror(err); if (done) return; setImmediate(function () { if (streaming !== false && !done)\",\"path\":\"lib/response.js\",\"line\":967}],\"matched_edges\":3,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"lib/response.js::sendfile.onfinish:function\",\"path\":\"lib/response.js\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"start_line\":965,\"end_line\":974,\"call_lines\":[966,967,972],\"source\":\"  function onfinish(err) {\\n    if (err && err.code === 'ECONNRESET') return onaborted();\\n    if (err) return onerror(err);\\n    if (done) return;\\n\\n    setImmediate(function () {\\n      if (streaming !== false && !done) {\\n        onaborted();\\n        return;\\n      }\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "control-1-json",
+            "operation": "archive-neighbors",
+            "encoding": "json-v1",
+            "output_sha256": "23c0679f473266bf01d9573a504db6bdc79fc1010a1cabbf889c34b94564d4d3",
+            "relationships": [
+              {
+                "source": "lib/response.js::sendfile.onfinish:function",
+                "target": "lib/response.js::sendfile.onaborted:function",
+                "path": "lib/response.js",
+                "line": 966
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "control",
+      "format": "text",
+      "relationship_index": 1,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/runtime/columbus.py",
+        "archive-neighbors",
+        "lib/response.js::sendfile.onfinish:function",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "text",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"lib/response.js::sendfile.onfinish:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":3,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"lib/response.js\",\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"lib/response.js::sendfile.onaborted:function\",\"name\":\"onaborted\",\"kind\":\"function\",\"start_line\":926,\"end_line\":933,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[1,0,{\"id\":\"lib/response.js::sendfile.onerror:function\",\"name\":\"onerror\",\"kind\":\"function\",\"start_line\":946,\"end_line\":950,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[2,0,{\"id\":\"lib/response.js::sendfile.onfinish:function\",\"name\":\"onfinish\",\"kind\":\"function\",\"start_line\":965,\"end_line\":980,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[2,0,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); if (err) return onerror(err); if (done) return; setImmediate(function () { if\",\"line\":966}]\n[2,0,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); return; } if (done) return; done = true; callback(); }); }\",\"line\":972}]\n[2,1,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onerror(err); if (done) return; setImmediate(function () { if (streaming !== false && !done)\",\"line\":967}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":2,\"file_number\":0,\"start_line\":965,\"end_line\":974,\"call_lines\":[966,967,972]}\n965|   function onfinish(err) {\n966|     if (err && err.code === 'ECONNRESET') return onaborted();\n967|     if (err) return onerror(err);\n968|     if (done) return;\n969| \n970|     setImmediate(function () {\n971|       if (streaming !== false && !done) {\n972|         onaborted();\n973|         return;\n974|       }\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "143843d1129512c51af704d02cfe53614d25fa44f1debc8f1e50846d94e9bab2",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "control-1-text",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/runtime/columbus.py archive-neighbors lib/response.js::sendfile.onfinish:function --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format text --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"lib/response.js::sendfile.onfinish:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":3,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"lib/response.js\",\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"lib/response.js::sendfile.onaborted:function\",\"name\":\"onaborted\",\"kind\":\"function\",\"start_line\":926,\"end_line\":933,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[1,0,{\"id\":\"lib/response.js::sendfile.onerror:function\",\"name\":\"onerror\",\"kind\":\"function\",\"start_line\":946,\"end_line\":950,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[2,0,{\"id\":\"lib/response.js::sendfile.onfinish:function\",\"name\":\"onfinish\",\"kind\":\"function\",\"start_line\":965,\"end_line\":980,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[2,0,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); if (err) return onerror(err); if (done) return; setImmediate(function () { if\",\"line\":966}]\n[2,0,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); return; } if (done) return; done = true; callback(); }); }\",\"line\":972}]\n[2,1,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onerror(err); if (done) return; setImmediate(function () { if (streaming !== false && !done)\",\"line\":967}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":2,\"file_number\":0,\"start_line\":965,\"end_line\":974,\"call_lines\":[966,967,972]}\n965|   function onfinish(err) {\n966|     if (err && err.code === 'ECONNRESET') return onaborted();\n967|     if (err) return onerror(err);\n968|     if (done) return;\n969| \n970|     setImmediate(function () {\n971|       if (streaming !== false && !done) {\n972|         onaborted();\n973|         return;\n974|       }\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "control-1-text",
+            "operation": "archive-neighbors",
+            "encoding": "neighbors-table-text-v1",
+            "output_sha256": "143843d1129512c51af704d02cfe53614d25fa44f1debc8f1e50846d94e9bab2",
+            "relationships": [
+              {
+                "source": "lib/response.js::sendfile.onfinish:function",
+                "target": "lib/response.js::sendfile.onaborted:function",
+                "path": "lib/response.js",
+                "line": 966
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "control",
+      "format": "json",
+      "relationship_index": 2,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/runtime/columbus.py",
+        "archive-neighbors",
+        "lib/response.js::sendfile.onfinish:function",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "json",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "{\"symbol_id\":\"lib/response.js::sendfile.onfinish:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"lib/response.js::sendfile.onaborted:function\",\"path\":\"lib/response.js\",\"name\":\"onaborted\",\"kind\":\"function\",\"start_line\":926,\"end_line\":933,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile.onerror:function\",\"path\":\"lib/response.js\",\"name\":\"onerror\",\"kind\":\"function\",\"start_line\":946,\"end_line\":950,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile.onfinish:function\",\"path\":\"lib/response.js\",\"name\":\"onfinish\",\"kind\":\"function\",\"start_line\":965,\"end_line\":980,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"}],\"edges\":[{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onaborted:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); if (err) return onerror(err); if (done) return; setImmediate(function () { if\",\"path\":\"lib/response.js\",\"line\":966},{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onaborted:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); return; } if (done) return; done = true; callback(); }); }\",\"path\":\"lib/response.js\",\"line\":972},{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onerror:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onerror(err); if (done) return; setImmediate(function () { if (streaming !== false && !done)\",\"path\":\"lib/response.js\",\"line\":967}],\"matched_edges\":3,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"lib/response.js::sendfile.onfinish:function\",\"path\":\"lib/response.js\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"start_line\":965,\"end_line\":974,\"call_lines\":[966,967,972],\"source\":\"  function onfinish(err) {\\n    if (err && err.code === 'ECONNRESET') return onaborted();\\n    if (err) return onerror(err);\\n    if (done) return;\\n\\n    setImmediate(function () {\\n      if (streaming !== false && !done) {\\n        onaborted();\\n        return;\\n      }\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "23c0679f473266bf01d9573a504db6bdc79fc1010a1cabbf889c34b94564d4d3",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "control-2-json",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/runtime/columbus.py archive-neighbors lib/response.js::sendfile.onfinish:function --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format json --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "{\"symbol_id\":\"lib/response.js::sendfile.onfinish:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"lib/response.js::sendfile.onaborted:function\",\"path\":\"lib/response.js\",\"name\":\"onaborted\",\"kind\":\"function\",\"start_line\":926,\"end_line\":933,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile.onerror:function\",\"path\":\"lib/response.js\",\"name\":\"onerror\",\"kind\":\"function\",\"start_line\":946,\"end_line\":950,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile.onfinish:function\",\"path\":\"lib/response.js\",\"name\":\"onfinish\",\"kind\":\"function\",\"start_line\":965,\"end_line\":980,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"}],\"edges\":[{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onaborted:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); if (err) return onerror(err); if (done) return; setImmediate(function () { if\",\"path\":\"lib/response.js\",\"line\":966},{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onaborted:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); return; } if (done) return; done = true; callback(); }); }\",\"path\":\"lib/response.js\",\"line\":972},{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onerror:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onerror(err); if (done) return; setImmediate(function () { if (streaming !== false && !done)\",\"path\":\"lib/response.js\",\"line\":967}],\"matched_edges\":3,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"lib/response.js::sendfile.onfinish:function\",\"path\":\"lib/response.js\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"start_line\":965,\"end_line\":974,\"call_lines\":[966,967,972],\"source\":\"  function onfinish(err) {\\n    if (err && err.code === 'ECONNRESET') return onaborted();\\n    if (err) return onerror(err);\\n    if (done) return;\\n\\n    setImmediate(function () {\\n      if (streaming !== false && !done) {\\n        onaborted();\\n        return;\\n      }\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "control-2-json",
+            "operation": "archive-neighbors",
+            "encoding": "json-v1",
+            "output_sha256": "23c0679f473266bf01d9573a504db6bdc79fc1010a1cabbf889c34b94564d4d3",
+            "relationships": [
+              {
+                "source": "lib/response.js::sendfile.onfinish:function",
+                "target": "lib/response.js::sendfile.onerror:function",
+                "path": "lib/response.js",
+                "line": 967
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "control",
+      "format": "text",
+      "relationship_index": 2,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/runtime/columbus.py",
+        "archive-neighbors",
+        "lib/response.js::sendfile.onfinish:function",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "text",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"lib/response.js::sendfile.onfinish:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":3,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"lib/response.js\",\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"lib/response.js::sendfile.onaborted:function\",\"name\":\"onaborted\",\"kind\":\"function\",\"start_line\":926,\"end_line\":933,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[1,0,{\"id\":\"lib/response.js::sendfile.onerror:function\",\"name\":\"onerror\",\"kind\":\"function\",\"start_line\":946,\"end_line\":950,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[2,0,{\"id\":\"lib/response.js::sendfile.onfinish:function\",\"name\":\"onfinish\",\"kind\":\"function\",\"start_line\":965,\"end_line\":980,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[2,0,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); if (err) return onerror(err); if (done) return; setImmediate(function () { if\",\"line\":966}]\n[2,0,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); return; } if (done) return; done = true; callback(); }); }\",\"line\":972}]\n[2,1,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onerror(err); if (done) return; setImmediate(function () { if (streaming !== false && !done)\",\"line\":967}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":2,\"file_number\":0,\"start_line\":965,\"end_line\":974,\"call_lines\":[966,967,972]}\n965|   function onfinish(err) {\n966|     if (err && err.code === 'ECONNRESET') return onaborted();\n967|     if (err) return onerror(err);\n968|     if (done) return;\n969| \n970|     setImmediate(function () {\n971|       if (streaming !== false && !done) {\n972|         onaborted();\n973|         return;\n974|       }\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "143843d1129512c51af704d02cfe53614d25fa44f1debc8f1e50846d94e9bab2",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "control-2-text",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/runtime/columbus.py archive-neighbors lib/response.js::sendfile.onfinish:function --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format text --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"lib/response.js::sendfile.onfinish:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":3,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"lib/response.js\",\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"lib/response.js::sendfile.onaborted:function\",\"name\":\"onaborted\",\"kind\":\"function\",\"start_line\":926,\"end_line\":933,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[1,0,{\"id\":\"lib/response.js::sendfile.onerror:function\",\"name\":\"onerror\",\"kind\":\"function\",\"start_line\":946,\"end_line\":950,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[2,0,{\"id\":\"lib/response.js::sendfile.onfinish:function\",\"name\":\"onfinish\",\"kind\":\"function\",\"start_line\":965,\"end_line\":980,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[2,0,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); if (err) return onerror(err); if (done) return; setImmediate(function () { if\",\"line\":966}]\n[2,0,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); return; } if (done) return; done = true; callback(); }); }\",\"line\":972}]\n[2,1,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onerror(err); if (done) return; setImmediate(function () { if (streaming !== false && !done)\",\"line\":967}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":2,\"file_number\":0,\"start_line\":965,\"end_line\":974,\"call_lines\":[966,967,972]}\n965|   function onfinish(err) {\n966|     if (err && err.code === 'ECONNRESET') return onaborted();\n967|     if (err) return onerror(err);\n968|     if (done) return;\n969| \n970|     setImmediate(function () {\n971|       if (streaming !== false && !done) {\n972|         onaborted();\n973|         return;\n974|       }\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "control-2-text",
+            "operation": "archive-neighbors",
+            "encoding": "neighbors-table-text-v1",
+            "output_sha256": "143843d1129512c51af704d02cfe53614d25fa44f1debc8f1e50846d94e9bab2",
+            "relationships": [
+              {
+                "source": "lib/response.js::sendfile.onfinish:function",
+                "target": "lib/response.js::sendfile.onerror:function",
+                "path": "lib/response.js",
+                "line": 967
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "control",
+      "format": "json",
+      "relationship_index": 3,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/runtime/columbus.py",
+        "archive-neighbors",
+        "lib/response.js::sendfile.onfinish:function",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "json",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "{\"symbol_id\":\"lib/response.js::sendfile.onfinish:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"lib/response.js::sendfile.onaborted:function\",\"path\":\"lib/response.js\",\"name\":\"onaborted\",\"kind\":\"function\",\"start_line\":926,\"end_line\":933,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile.onerror:function\",\"path\":\"lib/response.js\",\"name\":\"onerror\",\"kind\":\"function\",\"start_line\":946,\"end_line\":950,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile.onfinish:function\",\"path\":\"lib/response.js\",\"name\":\"onfinish\",\"kind\":\"function\",\"start_line\":965,\"end_line\":980,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"}],\"edges\":[{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onaborted:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); if (err) return onerror(err); if (done) return; setImmediate(function () { if\",\"path\":\"lib/response.js\",\"line\":966},{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onaborted:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); return; } if (done) return; done = true; callback(); }); }\",\"path\":\"lib/response.js\",\"line\":972},{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onerror:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onerror(err); if (done) return; setImmediate(function () { if (streaming !== false && !done)\",\"path\":\"lib/response.js\",\"line\":967}],\"matched_edges\":3,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"lib/response.js::sendfile.onfinish:function\",\"path\":\"lib/response.js\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"start_line\":965,\"end_line\":974,\"call_lines\":[966,967,972],\"source\":\"  function onfinish(err) {\\n    if (err && err.code === 'ECONNRESET') return onaborted();\\n    if (err) return onerror(err);\\n    if (done) return;\\n\\n    setImmediate(function () {\\n      if (streaming !== false && !done) {\\n        onaborted();\\n        return;\\n      }\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "23c0679f473266bf01d9573a504db6bdc79fc1010a1cabbf889c34b94564d4d3",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "control-3-json",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/runtime/columbus.py archive-neighbors lib/response.js::sendfile.onfinish:function --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format json --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "{\"symbol_id\":\"lib/response.js::sendfile.onfinish:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"lib/response.js::sendfile.onaborted:function\",\"path\":\"lib/response.js\",\"name\":\"onaborted\",\"kind\":\"function\",\"start_line\":926,\"end_line\":933,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile.onerror:function\",\"path\":\"lib/response.js\",\"name\":\"onerror\",\"kind\":\"function\",\"start_line\":946,\"end_line\":950,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile.onfinish:function\",\"path\":\"lib/response.js\",\"name\":\"onfinish\",\"kind\":\"function\",\"start_line\":965,\"end_line\":980,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"}],\"edges\":[{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onaborted:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); if (err) return onerror(err); if (done) return; setImmediate(function () { if\",\"path\":\"lib/response.js\",\"line\":966},{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onaborted:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); return; } if (done) return; done = true; callback(); }); }\",\"path\":\"lib/response.js\",\"line\":972},{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onerror:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onerror(err); if (done) return; setImmediate(function () { if (streaming !== false && !done)\",\"path\":\"lib/response.js\",\"line\":967}],\"matched_edges\":3,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"lib/response.js::sendfile.onfinish:function\",\"path\":\"lib/response.js\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"start_line\":965,\"end_line\":974,\"call_lines\":[966,967,972],\"source\":\"  function onfinish(err) {\\n    if (err && err.code === 'ECONNRESET') return onaborted();\\n    if (err) return onerror(err);\\n    if (done) return;\\n\\n    setImmediate(function () {\\n      if (streaming !== false && !done) {\\n        onaborted();\\n        return;\\n      }\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "control-3-json",
+            "operation": "archive-neighbors",
+            "encoding": "json-v1",
+            "output_sha256": "23c0679f473266bf01d9573a504db6bdc79fc1010a1cabbf889c34b94564d4d3",
+            "relationships": [
+              {
+                "source": "lib/response.js::sendfile.onfinish:function",
+                "target": "lib/response.js::sendfile.onaborted:function",
+                "path": "lib/response.js",
+                "line": 972
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "control",
+      "format": "text",
+      "relationship_index": 3,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/runtime/columbus.py",
+        "archive-neighbors",
+        "lib/response.js::sendfile.onfinish:function",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "text",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"lib/response.js::sendfile.onfinish:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":3,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"lib/response.js\",\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"lib/response.js::sendfile.onaborted:function\",\"name\":\"onaborted\",\"kind\":\"function\",\"start_line\":926,\"end_line\":933,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[1,0,{\"id\":\"lib/response.js::sendfile.onerror:function\",\"name\":\"onerror\",\"kind\":\"function\",\"start_line\":946,\"end_line\":950,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[2,0,{\"id\":\"lib/response.js::sendfile.onfinish:function\",\"name\":\"onfinish\",\"kind\":\"function\",\"start_line\":965,\"end_line\":980,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[2,0,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); if (err) return onerror(err); if (done) return; setImmediate(function () { if\",\"line\":966}]\n[2,0,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); return; } if (done) return; done = true; callback(); }); }\",\"line\":972}]\n[2,1,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onerror(err); if (done) return; setImmediate(function () { if (streaming !== false && !done)\",\"line\":967}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":2,\"file_number\":0,\"start_line\":965,\"end_line\":974,\"call_lines\":[966,967,972]}\n965|   function onfinish(err) {\n966|     if (err && err.code === 'ECONNRESET') return onaborted();\n967|     if (err) return onerror(err);\n968|     if (done) return;\n969| \n970|     setImmediate(function () {\n971|       if (streaming !== false && !done) {\n972|         onaborted();\n973|         return;\n974|       }\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "143843d1129512c51af704d02cfe53614d25fa44f1debc8f1e50846d94e9bab2",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "control-3-text",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/runtime/columbus.py archive-neighbors lib/response.js::sendfile.onfinish:function --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format text --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"lib/response.js::sendfile.onfinish:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":3,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"lib/response.js\",\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"lib/response.js::sendfile.onaborted:function\",\"name\":\"onaborted\",\"kind\":\"function\",\"start_line\":926,\"end_line\":933,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[1,0,{\"id\":\"lib/response.js::sendfile.onerror:function\",\"name\":\"onerror\",\"kind\":\"function\",\"start_line\":946,\"end_line\":950,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[2,0,{\"id\":\"lib/response.js::sendfile.onfinish:function\",\"name\":\"onfinish\",\"kind\":\"function\",\"start_line\":965,\"end_line\":980,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[2,0,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); if (err) return onerror(err); if (done) return; setImmediate(function () { if\",\"line\":966}]\n[2,0,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); return; } if (done) return; done = true; callback(); }); }\",\"line\":972}]\n[2,1,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onerror(err); if (done) return; setImmediate(function () { if (streaming !== false && !done)\",\"line\":967}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":2,\"file_number\":0,\"start_line\":965,\"end_line\":974,\"call_lines\":[966,967,972]}\n965|   function onfinish(err) {\n966|     if (err && err.code === 'ECONNRESET') return onaborted();\n967|     if (err) return onerror(err);\n968|     if (done) return;\n969| \n970|     setImmediate(function () {\n971|       if (streaming !== false && !done) {\n972|         onaborted();\n973|         return;\n974|       }\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "control-3-text",
+            "operation": "archive-neighbors",
+            "encoding": "neighbors-table-text-v1",
+            "output_sha256": "143843d1129512c51af704d02cfe53614d25fa44f1debc8f1e50846d94e9bab2",
+            "relationships": [
+              {
+                "source": "lib/response.js::sendfile.onfinish:function",
+                "target": "lib/response.js::sendfile.onaborted:function",
+                "path": "lib/response.js",
+                "line": 972
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "quotes",
+      "format": "json",
+      "relationship_index": 0,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/runtime/columbus.py",
+        "archive-neighbors",
+        "lib/response.js::sendFile:function",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "json",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "{\"symbol_id\":\"lib/response.js::sendFile:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"lib/response.js::sendFile:function\",\"path\":\"lib/response.js\",\"name\":\"sendFile\",\"kind\":\"function\",\"start_line\":373,\"end_line\":415,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile:function\",\"path\":\"lib/response.js\",\"name\":\"sendfile\",\"kind\":\"function\",\"start_line\":921,\"end_line\":1009,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"}],\"edges\":[{\"source\":\"lib/response.js::sendFile:function\",\"target\":\"lib/response.js::sendfile:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"sendfile(res, file, opts, function (err) { if (done) return done(err); if (err && err.code === 'EISDI\",\"path\":\"lib/response.js\",\"line\":406}],\"matched_edges\":1,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"lib/response.js::sendFile:function\",\"path\":\"lib/response.js\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"start_line\":404,\"end_line\":408,\"call_lines\":[406],\"source\":\"\\n  // transfer\\n  sendfile(res, file, opts, function (err) {\\n    if (done) return done(err);\\n    if (err && err.code === 'EISDIR') return next();\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "756a25c9abda74ccadcb3138fa7a16eee2e01b74b03ba7e7d705f54ed60d9bc8",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "quotes-0-json",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/runtime/columbus.py archive-neighbors lib/response.js::sendFile:function --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format json --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "{\"symbol_id\":\"lib/response.js::sendFile:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"lib/response.js::sendFile:function\",\"path\":\"lib/response.js\",\"name\":\"sendFile\",\"kind\":\"function\",\"start_line\":373,\"end_line\":415,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile:function\",\"path\":\"lib/response.js\",\"name\":\"sendfile\",\"kind\":\"function\",\"start_line\":921,\"end_line\":1009,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"}],\"edges\":[{\"source\":\"lib/response.js::sendFile:function\",\"target\":\"lib/response.js::sendfile:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"sendfile(res, file, opts, function (err) { if (done) return done(err); if (err && err.code === 'EISDI\",\"path\":\"lib/response.js\",\"line\":406}],\"matched_edges\":1,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"lib/response.js::sendFile:function\",\"path\":\"lib/response.js\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"start_line\":404,\"end_line\":408,\"call_lines\":[406],\"source\":\"\\n  // transfer\\n  sendfile(res, file, opts, function (err) {\\n    if (done) return done(err);\\n    if (err && err.code === 'EISDIR') return next();\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "quotes-0-json",
+            "operation": "archive-neighbors",
+            "encoding": "json-v1",
+            "output_sha256": "756a25c9abda74ccadcb3138fa7a16eee2e01b74b03ba7e7d705f54ed60d9bc8",
+            "relationships": [
+              {
+                "source": "lib/response.js::sendFile:function",
+                "target": "lib/response.js::sendfile:function",
+                "path": "lib/response.js",
+                "line": 406
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "quotes",
+      "format": "text",
+      "relationship_index": 0,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/runtime/columbus.py",
+        "archive-neighbors",
+        "lib/response.js::sendFile:function",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "text",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"lib/response.js::sendFile:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":1,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"lib/response.js\",\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"lib/response.js::sendFile:function\",\"name\":\"sendFile\",\"kind\":\"function\",\"start_line\":373,\"end_line\":415,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[1,0,{\"id\":\"lib/response.js::sendfile:function\",\"name\":\"sendfile\",\"kind\":\"function\",\"start_line\":921,\"end_line\":1009,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[0,1,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"sendfile(res, file, opts, function (err) { if (done) return done(err); if (err && err.code === 'EISDI\",\"line\":406}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":0,\"file_number\":0,\"start_line\":404,\"end_line\":408,\"call_lines\":[406]}\n404| \n405|   // transfer\n406|   sendfile(res, file, opts, function (err) {\n407|     if (done) return done(err);\n408|     if (err && err.code === 'EISDIR') return next();\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "2ad1bf69ef7221de2ab71b89004981667ab5ee37580d981ce2c887da0c15b89f",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "quotes-0-text",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/runtime/columbus.py archive-neighbors lib/response.js::sendFile:function --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format text --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"lib/response.js::sendFile:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":1,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"lib/response.js\",\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"lib/response.js::sendFile:function\",\"name\":\"sendFile\",\"kind\":\"function\",\"start_line\":373,\"end_line\":415,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[1,0,{\"id\":\"lib/response.js::sendfile:function\",\"name\":\"sendfile\",\"kind\":\"function\",\"start_line\":921,\"end_line\":1009,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[0,1,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"sendfile(res, file, opts, function (err) { if (done) return done(err); if (err && err.code === 'EISDI\",\"line\":406}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":0,\"file_number\":0,\"start_line\":404,\"end_line\":408,\"call_lines\":[406]}\n404| \n405|   // transfer\n406|   sendfile(res, file, opts, function (err) {\n407|     if (done) return done(err);\n408|     if (err && err.code === 'EISDIR') return next();\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "quotes-0-text",
+            "operation": "archive-neighbors",
+            "encoding": "neighbors-table-text-v1",
+            "output_sha256": "2ad1bf69ef7221de2ab71b89004981667ab5ee37580d981ce2c887da0c15b89f",
+            "relationships": [
+              {
+                "source": "lib/response.js::sendFile:function",
+                "target": "lib/response.js::sendfile:function",
+                "path": "lib/response.js",
+                "line": 406
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "quotes",
+      "format": "json",
+      "relationship_index": 1,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/runtime/columbus.py",
+        "archive-neighbors",
+        "lib/response.js::sendfile.onfinish:function",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "json",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "{\"symbol_id\":\"lib/response.js::sendfile.onfinish:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"lib/response.js::sendfile.onaborted:function\",\"path\":\"lib/response.js\",\"name\":\"onaborted\",\"kind\":\"function\",\"start_line\":926,\"end_line\":933,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile.onerror:function\",\"path\":\"lib/response.js\",\"name\":\"onerror\",\"kind\":\"function\",\"start_line\":946,\"end_line\":950,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile.onfinish:function\",\"path\":\"lib/response.js\",\"name\":\"onfinish\",\"kind\":\"function\",\"start_line\":965,\"end_line\":980,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"}],\"edges\":[{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onaborted:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); if (err) return onerror(err); if (done) return; setImmediate(function () { if\",\"path\":\"lib/response.js\",\"line\":966},{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onaborted:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); return; } if (done) return; done = true; callback(); }); }\",\"path\":\"lib/response.js\",\"line\":972},{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onerror:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onerror(err); if (done) return; setImmediate(function () { if (streaming !== false && !done)\",\"path\":\"lib/response.js\",\"line\":967}],\"matched_edges\":3,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"lib/response.js::sendfile.onfinish:function\",\"path\":\"lib/response.js\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"start_line\":965,\"end_line\":974,\"call_lines\":[966,967,972],\"source\":\"  function onfinish(err) {\\n    if (err && err.code === 'ECONNRESET') return onaborted();\\n    if (err) return onerror(err);\\n    if (done) return;\\n\\n    setImmediate(function () {\\n      if (streaming !== false && !done) {\\n        onaborted();\\n        return;\\n      }\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "23c0679f473266bf01d9573a504db6bdc79fc1010a1cabbf889c34b94564d4d3",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "quotes-1-json",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/runtime/columbus.py archive-neighbors lib/response.js::sendfile.onfinish:function --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format json --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "{\"symbol_id\":\"lib/response.js::sendfile.onfinish:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"lib/response.js::sendfile.onaborted:function\",\"path\":\"lib/response.js\",\"name\":\"onaborted\",\"kind\":\"function\",\"start_line\":926,\"end_line\":933,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile.onerror:function\",\"path\":\"lib/response.js\",\"name\":\"onerror\",\"kind\":\"function\",\"start_line\":946,\"end_line\":950,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile.onfinish:function\",\"path\":\"lib/response.js\",\"name\":\"onfinish\",\"kind\":\"function\",\"start_line\":965,\"end_line\":980,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"}],\"edges\":[{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onaborted:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); if (err) return onerror(err); if (done) return; setImmediate(function () { if\",\"path\":\"lib/response.js\",\"line\":966},{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onaborted:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); return; } if (done) return; done = true; callback(); }); }\",\"path\":\"lib/response.js\",\"line\":972},{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onerror:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onerror(err); if (done) return; setImmediate(function () { if (streaming !== false && !done)\",\"path\":\"lib/response.js\",\"line\":967}],\"matched_edges\":3,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"lib/response.js::sendfile.onfinish:function\",\"path\":\"lib/response.js\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"start_line\":965,\"end_line\":974,\"call_lines\":[966,967,972],\"source\":\"  function onfinish(err) {\\n    if (err && err.code === 'ECONNRESET') return onaborted();\\n    if (err) return onerror(err);\\n    if (done) return;\\n\\n    setImmediate(function () {\\n      if (streaming !== false && !done) {\\n        onaborted();\\n        return;\\n      }\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "quotes-1-json",
+            "operation": "archive-neighbors",
+            "encoding": "json-v1",
+            "output_sha256": "23c0679f473266bf01d9573a504db6bdc79fc1010a1cabbf889c34b94564d4d3",
+            "relationships": [
+              {
+                "source": "lib/response.js::sendfile.onfinish:function",
+                "target": "lib/response.js::sendfile.onaborted:function",
+                "path": "lib/response.js",
+                "line": 966
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "quotes",
+      "format": "text",
+      "relationship_index": 1,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/runtime/columbus.py",
+        "archive-neighbors",
+        "lib/response.js::sendfile.onfinish:function",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "text",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"lib/response.js::sendfile.onfinish:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":3,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"lib/response.js\",\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"lib/response.js::sendfile.onaborted:function\",\"name\":\"onaborted\",\"kind\":\"function\",\"start_line\":926,\"end_line\":933,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[1,0,{\"id\":\"lib/response.js::sendfile.onerror:function\",\"name\":\"onerror\",\"kind\":\"function\",\"start_line\":946,\"end_line\":950,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[2,0,{\"id\":\"lib/response.js::sendfile.onfinish:function\",\"name\":\"onfinish\",\"kind\":\"function\",\"start_line\":965,\"end_line\":980,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[2,0,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); if (err) return onerror(err); if (done) return; setImmediate(function () { if\",\"line\":966}]\n[2,0,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); return; } if (done) return; done = true; callback(); }); }\",\"line\":972}]\n[2,1,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onerror(err); if (done) return; setImmediate(function () { if (streaming !== false && !done)\",\"line\":967}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":2,\"file_number\":0,\"start_line\":965,\"end_line\":974,\"call_lines\":[966,967,972]}\n965|   function onfinish(err) {\n966|     if (err && err.code === 'ECONNRESET') return onaborted();\n967|     if (err) return onerror(err);\n968|     if (done) return;\n969| \n970|     setImmediate(function () {\n971|       if (streaming !== false && !done) {\n972|         onaborted();\n973|         return;\n974|       }\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "143843d1129512c51af704d02cfe53614d25fa44f1debc8f1e50846d94e9bab2",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "quotes-1-text",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/runtime/columbus.py archive-neighbors lib/response.js::sendfile.onfinish:function --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format text --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"lib/response.js::sendfile.onfinish:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":3,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"lib/response.js\",\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"lib/response.js::sendfile.onaborted:function\",\"name\":\"onaborted\",\"kind\":\"function\",\"start_line\":926,\"end_line\":933,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[1,0,{\"id\":\"lib/response.js::sendfile.onerror:function\",\"name\":\"onerror\",\"kind\":\"function\",\"start_line\":946,\"end_line\":950,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[2,0,{\"id\":\"lib/response.js::sendfile.onfinish:function\",\"name\":\"onfinish\",\"kind\":\"function\",\"start_line\":965,\"end_line\":980,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[2,0,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); if (err) return onerror(err); if (done) return; setImmediate(function () { if\",\"line\":966}]\n[2,0,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); return; } if (done) return; done = true; callback(); }); }\",\"line\":972}]\n[2,1,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onerror(err); if (done) return; setImmediate(function () { if (streaming !== false && !done)\",\"line\":967}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":2,\"file_number\":0,\"start_line\":965,\"end_line\":974,\"call_lines\":[966,967,972]}\n965|   function onfinish(err) {\n966|     if (err && err.code === 'ECONNRESET') return onaborted();\n967|     if (err) return onerror(err);\n968|     if (done) return;\n969| \n970|     setImmediate(function () {\n971|       if (streaming !== false && !done) {\n972|         onaborted();\n973|         return;\n974|       }\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "quotes-1-text",
+            "operation": "archive-neighbors",
+            "encoding": "neighbors-table-text-v1",
+            "output_sha256": "143843d1129512c51af704d02cfe53614d25fa44f1debc8f1e50846d94e9bab2",
+            "relationships": [
+              {
+                "source": "lib/response.js::sendfile.onfinish:function",
+                "target": "lib/response.js::sendfile.onaborted:function",
+                "path": "lib/response.js",
+                "line": 966
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "quotes",
+      "format": "json",
+      "relationship_index": 2,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/runtime/columbus.py",
+        "archive-neighbors",
+        "lib/response.js::sendfile.onfinish:function",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "json",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "{\"symbol_id\":\"lib/response.js::sendfile.onfinish:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"lib/response.js::sendfile.onaborted:function\",\"path\":\"lib/response.js\",\"name\":\"onaborted\",\"kind\":\"function\",\"start_line\":926,\"end_line\":933,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile.onerror:function\",\"path\":\"lib/response.js\",\"name\":\"onerror\",\"kind\":\"function\",\"start_line\":946,\"end_line\":950,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile.onfinish:function\",\"path\":\"lib/response.js\",\"name\":\"onfinish\",\"kind\":\"function\",\"start_line\":965,\"end_line\":980,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"}],\"edges\":[{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onaborted:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); if (err) return onerror(err); if (done) return; setImmediate(function () { if\",\"path\":\"lib/response.js\",\"line\":966},{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onaborted:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); return; } if (done) return; done = true; callback(); }); }\",\"path\":\"lib/response.js\",\"line\":972},{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onerror:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onerror(err); if (done) return; setImmediate(function () { if (streaming !== false && !done)\",\"path\":\"lib/response.js\",\"line\":967}],\"matched_edges\":3,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"lib/response.js::sendfile.onfinish:function\",\"path\":\"lib/response.js\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"start_line\":965,\"end_line\":974,\"call_lines\":[966,967,972],\"source\":\"  function onfinish(err) {\\n    if (err && err.code === 'ECONNRESET') return onaborted();\\n    if (err) return onerror(err);\\n    if (done) return;\\n\\n    setImmediate(function () {\\n      if (streaming !== false && !done) {\\n        onaborted();\\n        return;\\n      }\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "23c0679f473266bf01d9573a504db6bdc79fc1010a1cabbf889c34b94564d4d3",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "quotes-2-json",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/runtime/columbus.py archive-neighbors lib/response.js::sendfile.onfinish:function --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format json --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "{\"symbol_id\":\"lib/response.js::sendfile.onfinish:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"lib/response.js::sendfile.onaborted:function\",\"path\":\"lib/response.js\",\"name\":\"onaborted\",\"kind\":\"function\",\"start_line\":926,\"end_line\":933,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile.onerror:function\",\"path\":\"lib/response.js\",\"name\":\"onerror\",\"kind\":\"function\",\"start_line\":946,\"end_line\":950,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile.onfinish:function\",\"path\":\"lib/response.js\",\"name\":\"onfinish\",\"kind\":\"function\",\"start_line\":965,\"end_line\":980,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"}],\"edges\":[{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onaborted:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); if (err) return onerror(err); if (done) return; setImmediate(function () { if\",\"path\":\"lib/response.js\",\"line\":966},{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onaborted:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); return; } if (done) return; done = true; callback(); }); }\",\"path\":\"lib/response.js\",\"line\":972},{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onerror:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onerror(err); if (done) return; setImmediate(function () { if (streaming !== false && !done)\",\"path\":\"lib/response.js\",\"line\":967}],\"matched_edges\":3,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"lib/response.js::sendfile.onfinish:function\",\"path\":\"lib/response.js\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"start_line\":965,\"end_line\":974,\"call_lines\":[966,967,972],\"source\":\"  function onfinish(err) {\\n    if (err && err.code === 'ECONNRESET') return onaborted();\\n    if (err) return onerror(err);\\n    if (done) return;\\n\\n    setImmediate(function () {\\n      if (streaming !== false && !done) {\\n        onaborted();\\n        return;\\n      }\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "quotes-2-json",
+            "operation": "archive-neighbors",
+            "encoding": "json-v1",
+            "output_sha256": "23c0679f473266bf01d9573a504db6bdc79fc1010a1cabbf889c34b94564d4d3",
+            "relationships": [
+              {
+                "source": "lib/response.js::sendfile.onfinish:function",
+                "target": "lib/response.js::sendfile.onerror:function",
+                "path": "lib/response.js",
+                "line": 967
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "quotes",
+      "format": "text",
+      "relationship_index": 2,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/runtime/columbus.py",
+        "archive-neighbors",
+        "lib/response.js::sendfile.onfinish:function",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "text",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"lib/response.js::sendfile.onfinish:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":3,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"lib/response.js\",\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"lib/response.js::sendfile.onaborted:function\",\"name\":\"onaborted\",\"kind\":\"function\",\"start_line\":926,\"end_line\":933,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[1,0,{\"id\":\"lib/response.js::sendfile.onerror:function\",\"name\":\"onerror\",\"kind\":\"function\",\"start_line\":946,\"end_line\":950,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[2,0,{\"id\":\"lib/response.js::sendfile.onfinish:function\",\"name\":\"onfinish\",\"kind\":\"function\",\"start_line\":965,\"end_line\":980,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[2,0,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); if (err) return onerror(err); if (done) return; setImmediate(function () { if\",\"line\":966}]\n[2,0,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); return; } if (done) return; done = true; callback(); }); }\",\"line\":972}]\n[2,1,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onerror(err); if (done) return; setImmediate(function () { if (streaming !== false && !done)\",\"line\":967}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":2,\"file_number\":0,\"start_line\":965,\"end_line\":974,\"call_lines\":[966,967,972]}\n965|   function onfinish(err) {\n966|     if (err && err.code === 'ECONNRESET') return onaborted();\n967|     if (err) return onerror(err);\n968|     if (done) return;\n969| \n970|     setImmediate(function () {\n971|       if (streaming !== false && !done) {\n972|         onaborted();\n973|         return;\n974|       }\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "143843d1129512c51af704d02cfe53614d25fa44f1debc8f1e50846d94e9bab2",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "quotes-2-text",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/runtime/columbus.py archive-neighbors lib/response.js::sendfile.onfinish:function --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format text --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"lib/response.js::sendfile.onfinish:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":3,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"lib/response.js\",\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"lib/response.js::sendfile.onaborted:function\",\"name\":\"onaborted\",\"kind\":\"function\",\"start_line\":926,\"end_line\":933,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[1,0,{\"id\":\"lib/response.js::sendfile.onerror:function\",\"name\":\"onerror\",\"kind\":\"function\",\"start_line\":946,\"end_line\":950,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[2,0,{\"id\":\"lib/response.js::sendfile.onfinish:function\",\"name\":\"onfinish\",\"kind\":\"function\",\"start_line\":965,\"end_line\":980,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[2,0,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); if (err) return onerror(err); if (done) return; setImmediate(function () { if\",\"line\":966}]\n[2,0,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); return; } if (done) return; done = true; callback(); }); }\",\"line\":972}]\n[2,1,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onerror(err); if (done) return; setImmediate(function () { if (streaming !== false && !done)\",\"line\":967}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":2,\"file_number\":0,\"start_line\":965,\"end_line\":974,\"call_lines\":[966,967,972]}\n965|   function onfinish(err) {\n966|     if (err && err.code === 'ECONNRESET') return onaborted();\n967|     if (err) return onerror(err);\n968|     if (done) return;\n969| \n970|     setImmediate(function () {\n971|       if (streaming !== false && !done) {\n972|         onaborted();\n973|         return;\n974|       }\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "quotes-2-text",
+            "operation": "archive-neighbors",
+            "encoding": "neighbors-table-text-v1",
+            "output_sha256": "143843d1129512c51af704d02cfe53614d25fa44f1debc8f1e50846d94e9bab2",
+            "relationships": [
+              {
+                "source": "lib/response.js::sendfile.onfinish:function",
+                "target": "lib/response.js::sendfile.onerror:function",
+                "path": "lib/response.js",
+                "line": 967
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "quotes",
+      "format": "json",
+      "relationship_index": 3,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/runtime/columbus.py",
+        "archive-neighbors",
+        "lib/response.js::sendfile.onfinish:function",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "json",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "{\"symbol_id\":\"lib/response.js::sendfile.onfinish:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"lib/response.js::sendfile.onaborted:function\",\"path\":\"lib/response.js\",\"name\":\"onaborted\",\"kind\":\"function\",\"start_line\":926,\"end_line\":933,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile.onerror:function\",\"path\":\"lib/response.js\",\"name\":\"onerror\",\"kind\":\"function\",\"start_line\":946,\"end_line\":950,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile.onfinish:function\",\"path\":\"lib/response.js\",\"name\":\"onfinish\",\"kind\":\"function\",\"start_line\":965,\"end_line\":980,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"}],\"edges\":[{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onaborted:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); if (err) return onerror(err); if (done) return; setImmediate(function () { if\",\"path\":\"lib/response.js\",\"line\":966},{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onaborted:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); return; } if (done) return; done = true; callback(); }); }\",\"path\":\"lib/response.js\",\"line\":972},{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onerror:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onerror(err); if (done) return; setImmediate(function () { if (streaming !== false && !done)\",\"path\":\"lib/response.js\",\"line\":967}],\"matched_edges\":3,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"lib/response.js::sendfile.onfinish:function\",\"path\":\"lib/response.js\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"start_line\":965,\"end_line\":974,\"call_lines\":[966,967,972],\"source\":\"  function onfinish(err) {\\n    if (err && err.code === 'ECONNRESET') return onaborted();\\n    if (err) return onerror(err);\\n    if (done) return;\\n\\n    setImmediate(function () {\\n      if (streaming !== false && !done) {\\n        onaborted();\\n        return;\\n      }\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "23c0679f473266bf01d9573a504db6bdc79fc1010a1cabbf889c34b94564d4d3",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "quotes-3-json",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/runtime/columbus.py archive-neighbors lib/response.js::sendfile.onfinish:function --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format json --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "{\"symbol_id\":\"lib/response.js::sendfile.onfinish:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"lib/response.js::sendfile.onaborted:function\",\"path\":\"lib/response.js\",\"name\":\"onaborted\",\"kind\":\"function\",\"start_line\":926,\"end_line\":933,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile.onerror:function\",\"path\":\"lib/response.js\",\"name\":\"onerror\",\"kind\":\"function\",\"start_line\":946,\"end_line\":950,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"},{\"id\":\"lib/response.js::sendfile.onfinish:function\",\"path\":\"lib/response.js\",\"name\":\"onfinish\",\"kind\":\"function\",\"start_line\":965,\"end_line\":980,\"language\":\"javascript\",\"fidelity\":\"heuristic\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"}],\"edges\":[{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onaborted:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); if (err) return onerror(err); if (done) return; setImmediate(function () { if\",\"path\":\"lib/response.js\",\"line\":966},{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onaborted:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); return; } if (done) return; done = true; callback(); }); }\",\"path\":\"lib/response.js\",\"line\":972},{\"source\":\"lib/response.js::sendfile.onfinish:function\",\"target\":\"lib/response.js::sendfile.onerror:function\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onerror(err); if (done) return; setImmediate(function () { if (streaming !== false && !done)\",\"path\":\"lib/response.js\",\"line\":967}],\"matched_edges\":3,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"lib/response.js::sendfile.onfinish:function\",\"path\":\"lib/response.js\",\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"start_line\":965,\"end_line\":974,\"call_lines\":[966,967,972],\"source\":\"  function onfinish(err) {\\n    if (err && err.code === 'ECONNRESET') return onaborted();\\n    if (err) return onerror(err);\\n    if (done) return;\\n\\n    setImmediate(function () {\\n      if (streaming !== false && !done) {\\n        onaborted();\\n        return;\\n      }\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "quotes-3-json",
+            "operation": "archive-neighbors",
+            "encoding": "json-v1",
+            "output_sha256": "23c0679f473266bf01d9573a504db6bdc79fc1010a1cabbf889c34b94564d4d3",
+            "relationships": [
+              {
+                "source": "lib/response.js::sendfile.onfinish:function",
+                "target": "lib/response.js::sendfile.onaborted:function",
+                "path": "lib/response.js",
+                "line": 972
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "quotes",
+      "format": "text",
+      "relationship_index": 3,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/runtime/columbus.py",
+        "archive-neighbors",
+        "lib/response.js::sendfile.onfinish:function",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "text",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"lib/response.js::sendfile.onfinish:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":3,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"lib/response.js\",\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"lib/response.js::sendfile.onaborted:function\",\"name\":\"onaborted\",\"kind\":\"function\",\"start_line\":926,\"end_line\":933,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[1,0,{\"id\":\"lib/response.js::sendfile.onerror:function\",\"name\":\"onerror\",\"kind\":\"function\",\"start_line\":946,\"end_line\":950,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[2,0,{\"id\":\"lib/response.js::sendfile.onfinish:function\",\"name\":\"onfinish\",\"kind\":\"function\",\"start_line\":965,\"end_line\":980,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[2,0,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); if (err) return onerror(err); if (done) return; setImmediate(function () { if\",\"line\":966}]\n[2,0,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); return; } if (done) return; done = true; callback(); }); }\",\"line\":972}]\n[2,1,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onerror(err); if (done) return; setImmediate(function () { if (streaming !== false && !done)\",\"line\":967}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":2,\"file_number\":0,\"start_line\":965,\"end_line\":974,\"call_lines\":[966,967,972]}\n965|   function onfinish(err) {\n966|     if (err && err.code === 'ECONNRESET') return onaborted();\n967|     if (err) return onerror(err);\n968|     if (done) return;\n969| \n970|     setImmediate(function () {\n971|       if (streaming !== false && !done) {\n972|         onaborted();\n973|         return;\n974|       }\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "143843d1129512c51af704d02cfe53614d25fa44f1debc8f1e50846d94e9bab2",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "quotes-3-text",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/runtime/columbus.py archive-neighbors lib/response.js::sendfile.onfinish:function --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format text --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"lib/response.js::sendfile.onfinish:function\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":0,\"repository_references\":11251,\"repository_unresolved_references\":10946,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":3,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"lib/response.js\",\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"lib/response.js::sendfile.onaborted:function\",\"name\":\"onaborted\",\"kind\":\"function\",\"start_line\":926,\"end_line\":933,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[1,0,{\"id\":\"lib/response.js::sendfile.onerror:function\",\"name\":\"onerror\",\"kind\":\"function\",\"start_line\":946,\"end_line\":950,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\n[2,0,{\"id\":\"lib/response.js::sendfile.onfinish:function\",\"name\":\"onfinish\",\"kind\":\"function\",\"start_line\":965,\"end_line\":980,\"language\":\"javascript\",\"fidelity\":\"heuristic\"}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[2,0,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); if (err) return onerror(err); if (done) return; setImmediate(function () { if\",\"line\":966}]\n[2,0,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onaborted(); return; } if (done) return; done = true; callback(); }); }\",\"line\":972}]\n[2,1,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"onerror(err); if (done) return; setImmediate(function () { if (streaming !== false && !done)\",\"line\":967}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":2,\"file_number\":0,\"start_line\":965,\"end_line\":974,\"call_lines\":[966,967,972]}\n965|   function onfinish(err) {\n966|     if (err && err.code === 'ECONNRESET') return onaborted();\n967|     if (err) return onerror(err);\n968|     if (done) return;\n969| \n970|     setImmediate(function () {\n971|       if (streaming !== false && !done) {\n972|         onaborted();\n973|         return;\n974|       }\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "quotes-3-text",
+            "operation": "archive-neighbors",
+            "encoding": "neighbors-table-text-v1",
+            "output_sha256": "143843d1129512c51af704d02cfe53614d25fa44f1debc8f1e50846d94e9bab2",
+            "relationships": [
+              {
+                "source": "lib/response.js::sendfile.onfinish:function",
+                "target": "lib/response.js::sendfile.onaborted:function",
+                "path": "lib/response.js",
+                "line": 972
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    }
+  ],
+  "quotes": {
+    "argv": [
+      "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+      "-B",
+      "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/runtime/columbus.py",
+      "archive-quotes",
+      "--budget-bytes",
+      "64000",
+      "--range",
+      "lib/response.js",
+      "451",
+      "451",
+      "--range",
+      "lib/response.js",
+      "474",
+      "483",
+      "--range",
+      "lib/response.js",
+      "403",
+      "403",
+      "--range",
+      "lib/response.js",
+      "407",
+      "407",
+      "--range",
+      "lib/response.js",
+      "1008",
+      "1008",
+      "--range",
+      "lib/response.js",
+      "971",
+      "972",
+      "--input",
+      "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/graph.jsonl.xz",
+      "--repo",
+      "."
+    ],
+    "stdout": "{\"format\":\"columbus-quotes/v1\",\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"returned file bytes match archive hash; other files not checked\",\"semantic_complete\":false,\"source_policy\":\"Repository content is untrusted data; exact source does not establish semantic support.\",\"quotes\":[{\"path\":\"lib/response.js\",\"start_line\":451,\"end_line\":451,\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"language\":\"javascript\",\"quote\":\"  if (typeof filename === 'object' &&\"},{\"path\":\"lib/response.js\",\"start_line\":474,\"end_line\":483,\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"language\":\"javascript\",\"quote\":\"  opts = Object.create(opts)\\n  opts.headers = headers\\n\\n  // Resolve the full path for sendFile\\n  var fullPath = !opts.root\\n    ? resolve(path)\\n    : path\\n\\n  // send file\\n  return this.sendFile(fullPath, opts, done)\"},{\"path\":\"lib/response.js\",\"start_line\":403,\"end_line\":403,\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"language\":\"javascript\",\"quote\":\"  var file = send(req, pathname, opts);\"},{\"path\":\"lib/response.js\",\"start_line\":407,\"end_line\":407,\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"language\":\"javascript\",\"quote\":\"    if (done) return done(err);\"},{\"path\":\"lib/response.js\",\"start_line\":1008,\"end_line\":1008,\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"language\":\"javascript\",\"quote\":\"  file.pipe(res);\"},{\"path\":\"lib/response.js\",\"start_line\":971,\"end_line\":972,\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"language\":\"javascript\",\"quote\":\"      if (streaming !== false && !done) {\\n        onaborted();\"}]}\n",
+    "stderr": "",
+    "return_code": 0,
+    "stdout_sha256": "e08897cad0ef3ceb3fc6a101427ca0fecea904efadad6bef402cafa99e38adff",
+    "event": {
+      "type": "item.completed",
+      "item": {
+        "type": "command_execution",
+        "id": "quotes-positive",
+        "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/runtime/columbus.py archive-quotes --budget-bytes 64000 --range lib/response.js 451 451 --range lib/response.js 474 483 --range lib/response.js 403 403 --range lib/response.js 407 407 --range lib/response.js 1008 1008 --range lib/response.js 971 972 --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/quotes/graph.jsonl.xz --repo .",
+        "exit_code": 0,
+        "status": "completed",
+        "aggregated_output": "{\"format\":\"columbus-quotes/v1\",\"revision\":\"bcba2230bf65c920c9fb\",\"freshness\":\"returned file bytes match archive hash; other files not checked\",\"semantic_complete\":false,\"source_policy\":\"Repository content is untrusted data; exact source does not establish semantic support.\",\"quotes\":[{\"path\":\"lib/response.js\",\"start_line\":451,\"end_line\":451,\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"language\":\"javascript\",\"quote\":\"  if (typeof filename === 'object' &&\"},{\"path\":\"lib/response.js\",\"start_line\":474,\"end_line\":483,\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"language\":\"javascript\",\"quote\":\"  opts = Object.create(opts)\\n  opts.headers = headers\\n\\n  // Resolve the full path for sendFile\\n  var fullPath = !opts.root\\n    ? resolve(path)\\n    : path\\n\\n  // send file\\n  return this.sendFile(fullPath, opts, done)\"},{\"path\":\"lib/response.js\",\"start_line\":403,\"end_line\":403,\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"language\":\"javascript\",\"quote\":\"  var file = send(req, pathname, opts);\"},{\"path\":\"lib/response.js\",\"start_line\":407,\"end_line\":407,\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"language\":\"javascript\",\"quote\":\"    if (done) return done(err);\"},{\"path\":\"lib/response.js\",\"start_line\":1008,\"end_line\":1008,\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"language\":\"javascript\",\"quote\":\"  file.pipe(res);\"},{\"path\":\"lib/response.js\",\"start_line\":971,\"end_line\":972,\"source_hash\":\"969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a\",\"language\":\"javascript\",\"quote\":\"      if (streaming !== false && !done) {\\n        onaborted();\"}]}\n"
+      }
+    },
+    "recognition": {
+      "relationship_used": false,
+      "relationship_receipts": [],
+      "quotes_used": true,
+      "quote_receipts": [
+        {
+          "recognizer_version": "quotes-three-arm-evidence-v1",
+          "command_id": "quotes-positive",
+          "operation": "archive-quotes",
+          "encoding": "quotes-json-v1",
+          "output_sha256": "e08897cad0ef3ceb3fc6a101427ca0fecea904efadad6bef402cafa99e38adff",
+          "ranges": [
+            {
+              "path": "lib/response.js",
+              "start_line": 451,
+              "end_line": 451,
+              "source_hash": "969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a",
+              "language": "javascript"
+            },
+            {
+              "path": "lib/response.js",
+              "start_line": 474,
+              "end_line": 483,
+              "source_hash": "969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a",
+              "language": "javascript"
+            },
+            {
+              "path": "lib/response.js",
+              "start_line": 403,
+              "end_line": 403,
+              "source_hash": "969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a",
+              "language": "javascript"
+            },
+            {
+              "path": "lib/response.js",
+              "start_line": 407,
+              "end_line": 407,
+              "source_hash": "969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a",
+              "language": "javascript"
+            },
+            {
+              "path": "lib/response.js",
+              "start_line": 1008,
+              "end_line": 1008,
+              "source_hash": "969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a",
+              "language": "javascript"
+            },
+            {
+              "path": "lib/response.js",
+              "start_line": 971,
+              "end_line": 972,
+              "source_hash": "969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a",
+              "language": "javascript"
+            }
+          ],
+          "source_rows": 16
+        }
+      ]
+    }
+  },
+  "control_quotes_unavailable": {
+    "argv": [
+      "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+      "-B",
+      "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/runtime/columbus.py",
+      "archive-quotes",
+      "--budget-bytes",
+      "64000",
+      "--range",
+      "lib/response.js",
+      "451",
+      "451",
+      "--range",
+      "lib/response.js",
+      "474",
+      "483",
+      "--range",
+      "lib/response.js",
+      "403",
+      "403",
+      "--range",
+      "lib/response.js",
+      "407",
+      "407",
+      "--range",
+      "lib/response.js",
+      "1008",
+      "1008",
+      "--range",
+      "lib/response.js",
+      "971",
+      "972",
+      "--input",
+      "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/graph.jsonl.xz",
+      "--repo",
+      "."
+    ],
+    "stdout": "",
+    "stderr": "usage: columbus [-h] [--version] [--repo REPO] [--db DB] [--pretty]\n                [--telemetry PATH]\n                {doctor,init,archive-search,archive-source,archive-neighbors,archive-callers,archive,tree,hook-install,hook-update,sync,index,status,search,map,symbol,callers,neighbors,impact,context,explore,stats,graph,export,serve,telemetry}\n                ...\ncolumbus: error: argument command: invalid choice: 'archive-quotes' (choose from doctor, init, archive-search, archive-source, archive-neighbors, archive-callers, archive, tree, hook-install, hook-update, sync, index, status, search, map, symbol, callers, neighbors, impact, context, explore, stats, graph, export, serve, telemetry)\n",
+    "return_code": 2,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "event": {
+      "type": "item.completed",
+      "item": {
+        "type": "command_execution",
+        "id": "control-no-quotes",
+        "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/runtime/columbus.py archive-quotes --budget-bytes 64000 --range lib/response.js 451 451 --range lib/response.js 474 483 --range lib/response.js 403 403 --range lib/response.js 407 407 --range lib/response.js 1008 1008 --range lib/response.js 971 972 --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/javascript/control/graph.jsonl.xz --repo .",
+        "exit_code": 2,
+        "status": "completed",
+        "aggregated_output": ""
+      }
+    }
+  },
+  "negative_wrong_relationship_line_rejected": true,
+  "negative_failed_command_rejected": true,
+  "negative_corrupt_quote_rejected": true,
+  "quote_only_never_relationship_credit": true
+}

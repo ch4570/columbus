@@ -1,0 +1,1321 @@
+{
+  "passed": true,
+  "model_started": false,
+  "preflight": {
+    "baseline": {
+      "passed": true,
+      "archive_sha256": "7a8d957112b48ec2710afb16263211638540d5489b25dc6f313d4dd6b2afbcea",
+      "revision": "3352a120ff0a3ffe0b24",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    },
+    "control": {
+      "passed": true,
+      "archive_sha256": "7a8d957112b48ec2710afb16263211638540d5489b25dc6f313d4dd6b2afbcea",
+      "revision": "3352a120ff0a3ffe0b24",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    },
+    "quotes": {
+      "passed": true,
+      "archive_sha256": "7a8d957112b48ec2710afb16263211638540d5489b25dc6f313d4dd6b2afbcea",
+      "revision": "3352a120ff0a3ffe0b24",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    }
+  },
+  "postflight": {
+    "baseline": {
+      "passed": true,
+      "archive_sha256": "7a8d957112b48ec2710afb16263211638540d5489b25dc6f313d4dd6b2afbcea",
+      "revision": "3352a120ff0a3ffe0b24",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    },
+    "control": {
+      "passed": true,
+      "archive_sha256": "7a8d957112b48ec2710afb16263211638540d5489b25dc6f313d4dd6b2afbcea",
+      "revision": "3352a120ff0a3ffe0b24",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    },
+    "quotes": {
+      "passed": true,
+      "archive_sha256": "7a8d957112b48ec2710afb16263211638540d5489b25dc6f313d4dd6b2afbcea",
+      "revision": "3352a120ff0a3ffe0b24",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    }
+  },
+  "relationships": [
+    {
+      "condition": "control",
+      "format": "json",
+      "relationship_index": 0,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/runtime/columbus.py",
+        "archive-neighbors",
+        "src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "json",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "{\"symbol_id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"build\",\"kind\":\"method\",\"start_line\":164,\"end_line\":166,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"},{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"Builder\",\"kind\":\"class\",\"start_line\":107,\"end_line\":178,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"},{\"id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"name\":\"registerJdkProxy\",\"kind\":\"method\",\"start_line\":48,\"end_line\":53,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\"}],\"edges\":[{\"source\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"target\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"builder.build()\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"line\":51},{\"source\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"target\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"new JdkProxyHint.Builder()\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"line\":49}],\"matched_edges\":2,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"source_hash\":\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\",\"start_line\":48,\"end_line\":53,\"call_lines\":[49,51],\"source\":\"\\tpublic ProxyHints registerJdkProxy(Consumer<JdkProxyHint.Builder> jdkProxyHint) {\\n\\t\\tJdkProxyHint.Builder builder = new JdkProxyHint.Builder();\\n\\t\\tjdkProxyHint.accept(builder);\\n\\t\\tthis.jdkProxies.add(builder.build());\\n\\t\\treturn this;\\n\\t}\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "879d0c908b9a7b6f84f96be7f136895a63285ffd2fc1a48121e7a3de24c1db35",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "control-0-json",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/runtime/columbus.py archive-neighbors 'src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)' --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format json --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "{\"symbol_id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"build\",\"kind\":\"method\",\"start_line\":164,\"end_line\":166,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"},{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"Builder\",\"kind\":\"class\",\"start_line\":107,\"end_line\":178,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"},{\"id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"name\":\"registerJdkProxy\",\"kind\":\"method\",\"start_line\":48,\"end_line\":53,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\"}],\"edges\":[{\"source\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"target\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"builder.build()\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"line\":51},{\"source\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"target\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"new JdkProxyHint.Builder()\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"line\":49}],\"matched_edges\":2,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"source_hash\":\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\",\"start_line\":48,\"end_line\":53,\"call_lines\":[49,51],\"source\":\"\\tpublic ProxyHints registerJdkProxy(Consumer<JdkProxyHint.Builder> jdkProxyHint) {\\n\\t\\tJdkProxyHint.Builder builder = new JdkProxyHint.Builder();\\n\\t\\tjdkProxyHint.accept(builder);\\n\\t\\tthis.jdkProxies.add(builder.build());\\n\\t\\treturn this;\\n\\t}\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "control-0-json",
+            "operation": "archive-neighbors",
+            "encoding": "json-v1",
+            "output_sha256": "879d0c908b9a7b6f84f96be7f136895a63285ffd2fc1a48121e7a3de24c1db35",
+            "relationships": [
+              {
+                "source": "src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)",
+                "target": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class",
+                "path": "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+                "line": 49
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "control",
+      "format": "text",
+      "relationship_index": 0,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/runtime/columbus.py",
+        "archive-neighbors",
+        "src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "text",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":2,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"]\n[1,\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"name\":\"build\",\"kind\":\"method\",\"start_line\":164,\"end_line\":166,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\n[1,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class\",\"name\":\"Builder\",\"kind\":\"class\",\"start_line\":107,\"end_line\":178,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\n[2,1,{\"id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"name\":\"registerJdkProxy\",\"kind\":\"method\",\"start_line\":48,\"end_line\":53,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[2,0,1,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"builder.build()\",\"line\":51}]\n[2,1,1,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"new JdkProxyHint.Builder()\",\"line\":49}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":2,\"file_number\":1,\"start_line\":48,\"end_line\":53,\"call_lines\":[49,51]}\n48| \\tpublic ProxyHints registerJdkProxy(Consumer<JdkProxyHint.Builder> jdkProxyHint) {\n49| \\t\\tJdkProxyHint.Builder builder = new JdkProxyHint.Builder();\n50| \\t\\tjdkProxyHint.accept(builder);\n51| \\t\\tthis.jdkProxies.add(builder.build());\n52| \\t\\treturn this;\n53| \\t}\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "06a43e7145d7cc23aa46e5404dcb62c15065ac7f6ae7d6c7fcf816955abfbdcf",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "control-0-text",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/runtime/columbus.py archive-neighbors 'src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)' --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format text --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":2,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"]\n[1,\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"name\":\"build\",\"kind\":\"method\",\"start_line\":164,\"end_line\":166,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\n[1,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class\",\"name\":\"Builder\",\"kind\":\"class\",\"start_line\":107,\"end_line\":178,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\n[2,1,{\"id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"name\":\"registerJdkProxy\",\"kind\":\"method\",\"start_line\":48,\"end_line\":53,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[2,0,1,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"builder.build()\",\"line\":51}]\n[2,1,1,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"new JdkProxyHint.Builder()\",\"line\":49}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":2,\"file_number\":1,\"start_line\":48,\"end_line\":53,\"call_lines\":[49,51]}\n48| \\tpublic ProxyHints registerJdkProxy(Consumer<JdkProxyHint.Builder> jdkProxyHint) {\n49| \\t\\tJdkProxyHint.Builder builder = new JdkProxyHint.Builder();\n50| \\t\\tjdkProxyHint.accept(builder);\n51| \\t\\tthis.jdkProxies.add(builder.build());\n52| \\t\\treturn this;\n53| \\t}\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "control-0-text",
+            "operation": "archive-neighbors",
+            "encoding": "neighbors-table-text-v1",
+            "output_sha256": "06a43e7145d7cc23aa46e5404dcb62c15065ac7f6ae7d6c7fcf816955abfbdcf",
+            "relationships": [
+              {
+                "source": "src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)",
+                "target": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class",
+                "path": "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+                "line": 49
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "control",
+      "format": "json",
+      "relationship_index": 1,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/runtime/columbus.py",
+        "archive-neighbors",
+        "src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "json",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "{\"symbol_id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"build\",\"kind\":\"method\",\"start_line\":164,\"end_line\":166,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"},{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"Builder\",\"kind\":\"class\",\"start_line\":107,\"end_line\":178,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"},{\"id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"name\":\"registerJdkProxy\",\"kind\":\"method\",\"start_line\":48,\"end_line\":53,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\"}],\"edges\":[{\"source\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"target\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"builder.build()\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"line\":51},{\"source\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"target\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"new JdkProxyHint.Builder()\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"line\":49}],\"matched_edges\":2,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"source_hash\":\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\",\"start_line\":48,\"end_line\":53,\"call_lines\":[49,51],\"source\":\"\\tpublic ProxyHints registerJdkProxy(Consumer<JdkProxyHint.Builder> jdkProxyHint) {\\n\\t\\tJdkProxyHint.Builder builder = new JdkProxyHint.Builder();\\n\\t\\tjdkProxyHint.accept(builder);\\n\\t\\tthis.jdkProxies.add(builder.build());\\n\\t\\treturn this;\\n\\t}\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "879d0c908b9a7b6f84f96be7f136895a63285ffd2fc1a48121e7a3de24c1db35",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "control-1-json",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/runtime/columbus.py archive-neighbors 'src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)' --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format json --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "{\"symbol_id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"build\",\"kind\":\"method\",\"start_line\":164,\"end_line\":166,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"},{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"Builder\",\"kind\":\"class\",\"start_line\":107,\"end_line\":178,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"},{\"id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"name\":\"registerJdkProxy\",\"kind\":\"method\",\"start_line\":48,\"end_line\":53,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\"}],\"edges\":[{\"source\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"target\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"builder.build()\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"line\":51},{\"source\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"target\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"new JdkProxyHint.Builder()\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"line\":49}],\"matched_edges\":2,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"source_hash\":\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\",\"start_line\":48,\"end_line\":53,\"call_lines\":[49,51],\"source\":\"\\tpublic ProxyHints registerJdkProxy(Consumer<JdkProxyHint.Builder> jdkProxyHint) {\\n\\t\\tJdkProxyHint.Builder builder = new JdkProxyHint.Builder();\\n\\t\\tjdkProxyHint.accept(builder);\\n\\t\\tthis.jdkProxies.add(builder.build());\\n\\t\\treturn this;\\n\\t}\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "control-1-json",
+            "operation": "archive-neighbors",
+            "encoding": "json-v1",
+            "output_sha256": "879d0c908b9a7b6f84f96be7f136895a63285ffd2fc1a48121e7a3de24c1db35",
+            "relationships": [
+              {
+                "source": "src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)",
+                "target": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()",
+                "path": "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+                "line": 51
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "control",
+      "format": "text",
+      "relationship_index": 1,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/runtime/columbus.py",
+        "archive-neighbors",
+        "src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "text",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":2,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"]\n[1,\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"name\":\"build\",\"kind\":\"method\",\"start_line\":164,\"end_line\":166,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\n[1,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class\",\"name\":\"Builder\",\"kind\":\"class\",\"start_line\":107,\"end_line\":178,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\n[2,1,{\"id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"name\":\"registerJdkProxy\",\"kind\":\"method\",\"start_line\":48,\"end_line\":53,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[2,0,1,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"builder.build()\",\"line\":51}]\n[2,1,1,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"new JdkProxyHint.Builder()\",\"line\":49}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":2,\"file_number\":1,\"start_line\":48,\"end_line\":53,\"call_lines\":[49,51]}\n48| \\tpublic ProxyHints registerJdkProxy(Consumer<JdkProxyHint.Builder> jdkProxyHint) {\n49| \\t\\tJdkProxyHint.Builder builder = new JdkProxyHint.Builder();\n50| \\t\\tjdkProxyHint.accept(builder);\n51| \\t\\tthis.jdkProxies.add(builder.build());\n52| \\t\\treturn this;\n53| \\t}\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "06a43e7145d7cc23aa46e5404dcb62c15065ac7f6ae7d6c7fcf816955abfbdcf",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "control-1-text",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/runtime/columbus.py archive-neighbors 'src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)' --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format text --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":2,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"]\n[1,\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"name\":\"build\",\"kind\":\"method\",\"start_line\":164,\"end_line\":166,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\n[1,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class\",\"name\":\"Builder\",\"kind\":\"class\",\"start_line\":107,\"end_line\":178,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\n[2,1,{\"id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"name\":\"registerJdkProxy\",\"kind\":\"method\",\"start_line\":48,\"end_line\":53,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[2,0,1,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"builder.build()\",\"line\":51}]\n[2,1,1,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"new JdkProxyHint.Builder()\",\"line\":49}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":2,\"file_number\":1,\"start_line\":48,\"end_line\":53,\"call_lines\":[49,51]}\n48| \\tpublic ProxyHints registerJdkProxy(Consumer<JdkProxyHint.Builder> jdkProxyHint) {\n49| \\t\\tJdkProxyHint.Builder builder = new JdkProxyHint.Builder();\n50| \\t\\tjdkProxyHint.accept(builder);\n51| \\t\\tthis.jdkProxies.add(builder.build());\n52| \\t\\treturn this;\n53| \\t}\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "control-1-text",
+            "operation": "archive-neighbors",
+            "encoding": "neighbors-table-text-v1",
+            "output_sha256": "06a43e7145d7cc23aa46e5404dcb62c15065ac7f6ae7d6c7fcf816955abfbdcf",
+            "relationships": [
+              {
+                "source": "src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)",
+                "target": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()",
+                "path": "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+                "line": 51
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "control",
+      "format": "json",
+      "relationship_index": 2,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/runtime/columbus.py",
+        "archive-neighbors",
+        "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "json",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "{\"symbol_id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"proxiedInterfaces\",\"kind\":\"method\",\"start_line\":134,\"end_line\":137,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"},{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.toTypeReferences:method(Class<?>...)\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"toTypeReferences\",\"kind\":\"method\",\"start_line\":168,\"end_line\":177,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"}],\"edges\":[{\"source\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)\",\"target\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.toTypeReferences:method(Class<?>...)\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"toTypeReferences(proxiedInterfaces)\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"line\":135}],\"matched_edges\":1,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\",\"start_line\":134,\"end_line\":137,\"call_lines\":[135],\"source\":\"\\t\\tpublic Builder proxiedInterfaces(Class<?>... proxiedInterfaces) {\\n\\t\\t\\tthis.proxiedInterfaces.addAll(toTypeReferences(proxiedInterfaces));\\n\\t\\t\\treturn this;\\n\\t\\t}\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "f60efc6c214fee701dd796c481a74e8b88f60b83cae73016c4df9a1475fa0ae7",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "control-2-json",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/runtime/columbus.py archive-neighbors 'src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)' --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format json --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "{\"symbol_id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"proxiedInterfaces\",\"kind\":\"method\",\"start_line\":134,\"end_line\":137,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"},{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.toTypeReferences:method(Class<?>...)\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"toTypeReferences\",\"kind\":\"method\",\"start_line\":168,\"end_line\":177,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"}],\"edges\":[{\"source\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)\",\"target\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.toTypeReferences:method(Class<?>...)\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"toTypeReferences(proxiedInterfaces)\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"line\":135}],\"matched_edges\":1,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\",\"start_line\":134,\"end_line\":137,\"call_lines\":[135],\"source\":\"\\t\\tpublic Builder proxiedInterfaces(Class<?>... proxiedInterfaces) {\\n\\t\\t\\tthis.proxiedInterfaces.addAll(toTypeReferences(proxiedInterfaces));\\n\\t\\t\\treturn this;\\n\\t\\t}\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "control-2-json",
+            "operation": "archive-neighbors",
+            "encoding": "json-v1",
+            "output_sha256": "f60efc6c214fee701dd796c481a74e8b88f60b83cae73016c4df9a1475fa0ae7",
+            "relationships": [
+              {
+                "source": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)",
+                "target": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.toTypeReferences:method(Class<?>...)",
+                "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+                "line": 135
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "control",
+      "format": "text",
+      "relationship_index": 2,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/runtime/columbus.py",
+        "archive-neighbors",
+        "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "text",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":1,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)\",\"name\":\"proxiedInterfaces\",\"kind\":\"method\",\"start_line\":134,\"end_line\":137,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\n[1,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.toTypeReferences:method(Class<?>...)\",\"name\":\"toTypeReferences\",\"kind\":\"method\",\"start_line\":168,\"end_line\":177,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[0,1,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"toTypeReferences(proxiedInterfaces)\",\"line\":135}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":0,\"file_number\":0,\"start_line\":134,\"end_line\":137,\"call_lines\":[135]}\n134| \\t\\tpublic Builder proxiedInterfaces(Class<?>... proxiedInterfaces) {\n135| \\t\\t\\tthis.proxiedInterfaces.addAll(toTypeReferences(proxiedInterfaces));\n136| \\t\\t\\treturn this;\n137| \\t\\t}\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "432cff6a482833b1fac5a157648bc432ab49c27f69e0eb262effee5e489c7f1e",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "control-2-text",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/runtime/columbus.py archive-neighbors 'src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)' --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format text --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":1,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)\",\"name\":\"proxiedInterfaces\",\"kind\":\"method\",\"start_line\":134,\"end_line\":137,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\n[1,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.toTypeReferences:method(Class<?>...)\",\"name\":\"toTypeReferences\",\"kind\":\"method\",\"start_line\":168,\"end_line\":177,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[0,1,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"toTypeReferences(proxiedInterfaces)\",\"line\":135}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":0,\"file_number\":0,\"start_line\":134,\"end_line\":137,\"call_lines\":[135]}\n134| \\t\\tpublic Builder proxiedInterfaces(Class<?>... proxiedInterfaces) {\n135| \\t\\t\\tthis.proxiedInterfaces.addAll(toTypeReferences(proxiedInterfaces));\n136| \\t\\t\\treturn this;\n137| \\t\\t}\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "control-2-text",
+            "operation": "archive-neighbors",
+            "encoding": "neighbors-table-text-v1",
+            "output_sha256": "432cff6a482833b1fac5a157648bc432ab49c27f69e0eb262effee5e489c7f1e",
+            "relationships": [
+              {
+                "source": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)",
+                "target": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.toTypeReferences:method(Class<?>...)",
+                "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+                "line": 135
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "control",
+      "format": "json",
+      "relationship_index": 3,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/runtime/columbus.py",
+        "archive-neighbors",
+        "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "json",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "{\"symbol_id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"build\",\"kind\":\"method\",\"start_line\":164,\"end_line\":166,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"},{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint:class\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"JdkProxyHint\",\"kind\":\"class\",\"start_line\":34,\"end_line\":180,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"}],\"edges\":[{\"source\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"target\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint:class\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"new JdkProxyHint(this)\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"line\":165}],\"matched_edges\":1,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\",\"start_line\":164,\"end_line\":166,\"call_lines\":[165],\"source\":\"\\t\\tJdkProxyHint build() {\\n\\t\\t\\treturn new JdkProxyHint(this);\\n\\t\\t}\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "ec06a0271c6ea2a883aab9f0faec584566eafbab929cceebdffb8c5a55d2c4d3",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "control-3-json",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/runtime/columbus.py archive-neighbors 'src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()' --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format json --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "{\"symbol_id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"build\",\"kind\":\"method\",\"start_line\":164,\"end_line\":166,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"},{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint:class\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"JdkProxyHint\",\"kind\":\"class\",\"start_line\":34,\"end_line\":180,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"}],\"edges\":[{\"source\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"target\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint:class\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"new JdkProxyHint(this)\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"line\":165}],\"matched_edges\":1,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\",\"start_line\":164,\"end_line\":166,\"call_lines\":[165],\"source\":\"\\t\\tJdkProxyHint build() {\\n\\t\\t\\treturn new JdkProxyHint(this);\\n\\t\\t}\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "control-3-json",
+            "operation": "archive-neighbors",
+            "encoding": "json-v1",
+            "output_sha256": "ec06a0271c6ea2a883aab9f0faec584566eafbab929cceebdffb8c5a55d2c4d3",
+            "relationships": [
+              {
+                "source": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()",
+                "target": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint:class",
+                "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+                "line": 165
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "control",
+      "format": "text",
+      "relationship_index": 3,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/runtime/columbus.py",
+        "archive-neighbors",
+        "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "text",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":1,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"name\":\"build\",\"kind\":\"method\",\"start_line\":164,\"end_line\":166,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\n[1,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint:class\",\"name\":\"JdkProxyHint\",\"kind\":\"class\",\"start_line\":34,\"end_line\":180,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[0,1,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"new JdkProxyHint(this)\",\"line\":165}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":0,\"file_number\":0,\"start_line\":164,\"end_line\":166,\"call_lines\":[165]}\n164| \\t\\tJdkProxyHint build() {\n165| \\t\\t\\treturn new JdkProxyHint(this);\n166| \\t\\t}\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "230d3d5e8fdc193335f73bdbb42d7c2f58211fd86221bb01f4cf4a59e9022195",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "control-3-text",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/runtime/columbus.py archive-neighbors 'src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()' --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format text --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":1,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"name\":\"build\",\"kind\":\"method\",\"start_line\":164,\"end_line\":166,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\n[1,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint:class\",\"name\":\"JdkProxyHint\",\"kind\":\"class\",\"start_line\":34,\"end_line\":180,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[0,1,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"new JdkProxyHint(this)\",\"line\":165}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":0,\"file_number\":0,\"start_line\":164,\"end_line\":166,\"call_lines\":[165]}\n164| \\t\\tJdkProxyHint build() {\n165| \\t\\t\\treturn new JdkProxyHint(this);\n166| \\t\\t}\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "control-3-text",
+            "operation": "archive-neighbors",
+            "encoding": "neighbors-table-text-v1",
+            "output_sha256": "230d3d5e8fdc193335f73bdbb42d7c2f58211fd86221bb01f4cf4a59e9022195",
+            "relationships": [
+              {
+                "source": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()",
+                "target": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint:class",
+                "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+                "line": 165
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "quotes",
+      "format": "json",
+      "relationship_index": 0,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/runtime/columbus.py",
+        "archive-neighbors",
+        "src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "json",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "{\"symbol_id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"build\",\"kind\":\"method\",\"start_line\":164,\"end_line\":166,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"},{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"Builder\",\"kind\":\"class\",\"start_line\":107,\"end_line\":178,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"},{\"id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"name\":\"registerJdkProxy\",\"kind\":\"method\",\"start_line\":48,\"end_line\":53,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\"}],\"edges\":[{\"source\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"target\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"builder.build()\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"line\":51},{\"source\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"target\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"new JdkProxyHint.Builder()\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"line\":49}],\"matched_edges\":2,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"source_hash\":\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\",\"start_line\":48,\"end_line\":53,\"call_lines\":[49,51],\"source\":\"\\tpublic ProxyHints registerJdkProxy(Consumer<JdkProxyHint.Builder> jdkProxyHint) {\\n\\t\\tJdkProxyHint.Builder builder = new JdkProxyHint.Builder();\\n\\t\\tjdkProxyHint.accept(builder);\\n\\t\\tthis.jdkProxies.add(builder.build());\\n\\t\\treturn this;\\n\\t}\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "879d0c908b9a7b6f84f96be7f136895a63285ffd2fc1a48121e7a3de24c1db35",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "quotes-0-json",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/runtime/columbus.py archive-neighbors 'src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)' --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format json --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "{\"symbol_id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"build\",\"kind\":\"method\",\"start_line\":164,\"end_line\":166,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"},{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"Builder\",\"kind\":\"class\",\"start_line\":107,\"end_line\":178,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"},{\"id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"name\":\"registerJdkProxy\",\"kind\":\"method\",\"start_line\":48,\"end_line\":53,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\"}],\"edges\":[{\"source\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"target\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"builder.build()\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"line\":51},{\"source\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"target\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"new JdkProxyHint.Builder()\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"line\":49}],\"matched_edges\":2,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"source_hash\":\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\",\"start_line\":48,\"end_line\":53,\"call_lines\":[49,51],\"source\":\"\\tpublic ProxyHints registerJdkProxy(Consumer<JdkProxyHint.Builder> jdkProxyHint) {\\n\\t\\tJdkProxyHint.Builder builder = new JdkProxyHint.Builder();\\n\\t\\tjdkProxyHint.accept(builder);\\n\\t\\tthis.jdkProxies.add(builder.build());\\n\\t\\treturn this;\\n\\t}\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "quotes-0-json",
+            "operation": "archive-neighbors",
+            "encoding": "json-v1",
+            "output_sha256": "879d0c908b9a7b6f84f96be7f136895a63285ffd2fc1a48121e7a3de24c1db35",
+            "relationships": [
+              {
+                "source": "src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)",
+                "target": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class",
+                "path": "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+                "line": 49
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "quotes",
+      "format": "text",
+      "relationship_index": 0,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/runtime/columbus.py",
+        "archive-neighbors",
+        "src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "text",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":2,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"]\n[1,\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"name\":\"build\",\"kind\":\"method\",\"start_line\":164,\"end_line\":166,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\n[1,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class\",\"name\":\"Builder\",\"kind\":\"class\",\"start_line\":107,\"end_line\":178,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\n[2,1,{\"id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"name\":\"registerJdkProxy\",\"kind\":\"method\",\"start_line\":48,\"end_line\":53,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[2,0,1,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"builder.build()\",\"line\":51}]\n[2,1,1,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"new JdkProxyHint.Builder()\",\"line\":49}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":2,\"file_number\":1,\"start_line\":48,\"end_line\":53,\"call_lines\":[49,51]}\n48| \\tpublic ProxyHints registerJdkProxy(Consumer<JdkProxyHint.Builder> jdkProxyHint) {\n49| \\t\\tJdkProxyHint.Builder builder = new JdkProxyHint.Builder();\n50| \\t\\tjdkProxyHint.accept(builder);\n51| \\t\\tthis.jdkProxies.add(builder.build());\n52| \\t\\treturn this;\n53| \\t}\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "06a43e7145d7cc23aa46e5404dcb62c15065ac7f6ae7d6c7fcf816955abfbdcf",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "quotes-0-text",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/runtime/columbus.py archive-neighbors 'src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)' --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format text --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":2,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"]\n[1,\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"name\":\"build\",\"kind\":\"method\",\"start_line\":164,\"end_line\":166,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\n[1,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class\",\"name\":\"Builder\",\"kind\":\"class\",\"start_line\":107,\"end_line\":178,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\n[2,1,{\"id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"name\":\"registerJdkProxy\",\"kind\":\"method\",\"start_line\":48,\"end_line\":53,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[2,0,1,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"builder.build()\",\"line\":51}]\n[2,1,1,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"new JdkProxyHint.Builder()\",\"line\":49}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":2,\"file_number\":1,\"start_line\":48,\"end_line\":53,\"call_lines\":[49,51]}\n48| \\tpublic ProxyHints registerJdkProxy(Consumer<JdkProxyHint.Builder> jdkProxyHint) {\n49| \\t\\tJdkProxyHint.Builder builder = new JdkProxyHint.Builder();\n50| \\t\\tjdkProxyHint.accept(builder);\n51| \\t\\tthis.jdkProxies.add(builder.build());\n52| \\t\\treturn this;\n53| \\t}\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "quotes-0-text",
+            "operation": "archive-neighbors",
+            "encoding": "neighbors-table-text-v1",
+            "output_sha256": "06a43e7145d7cc23aa46e5404dcb62c15065ac7f6ae7d6c7fcf816955abfbdcf",
+            "relationships": [
+              {
+                "source": "src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)",
+                "target": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class",
+                "path": "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+                "line": 49
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "quotes",
+      "format": "json",
+      "relationship_index": 1,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/runtime/columbus.py",
+        "archive-neighbors",
+        "src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "json",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "{\"symbol_id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"build\",\"kind\":\"method\",\"start_line\":164,\"end_line\":166,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"},{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"Builder\",\"kind\":\"class\",\"start_line\":107,\"end_line\":178,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"},{\"id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"name\":\"registerJdkProxy\",\"kind\":\"method\",\"start_line\":48,\"end_line\":53,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\"}],\"edges\":[{\"source\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"target\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"builder.build()\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"line\":51},{\"source\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"target\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"new JdkProxyHint.Builder()\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"line\":49}],\"matched_edges\":2,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"source_hash\":\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\",\"start_line\":48,\"end_line\":53,\"call_lines\":[49,51],\"source\":\"\\tpublic ProxyHints registerJdkProxy(Consumer<JdkProxyHint.Builder> jdkProxyHint) {\\n\\t\\tJdkProxyHint.Builder builder = new JdkProxyHint.Builder();\\n\\t\\tjdkProxyHint.accept(builder);\\n\\t\\tthis.jdkProxies.add(builder.build());\\n\\t\\treturn this;\\n\\t}\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "879d0c908b9a7b6f84f96be7f136895a63285ffd2fc1a48121e7a3de24c1db35",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "quotes-1-json",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/runtime/columbus.py archive-neighbors 'src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)' --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format json --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "{\"symbol_id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"build\",\"kind\":\"method\",\"start_line\":164,\"end_line\":166,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"},{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"Builder\",\"kind\":\"class\",\"start_line\":107,\"end_line\":178,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"},{\"id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"name\":\"registerJdkProxy\",\"kind\":\"method\",\"start_line\":48,\"end_line\":53,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\"}],\"edges\":[{\"source\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"target\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"builder.build()\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"line\":51},{\"source\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"target\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"new JdkProxyHint.Builder()\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"line\":49}],\"matched_edges\":2,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"source_hash\":\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\",\"start_line\":48,\"end_line\":53,\"call_lines\":[49,51],\"source\":\"\\tpublic ProxyHints registerJdkProxy(Consumer<JdkProxyHint.Builder> jdkProxyHint) {\\n\\t\\tJdkProxyHint.Builder builder = new JdkProxyHint.Builder();\\n\\t\\tjdkProxyHint.accept(builder);\\n\\t\\tthis.jdkProxies.add(builder.build());\\n\\t\\treturn this;\\n\\t}\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "quotes-1-json",
+            "operation": "archive-neighbors",
+            "encoding": "json-v1",
+            "output_sha256": "879d0c908b9a7b6f84f96be7f136895a63285ffd2fc1a48121e7a3de24c1db35",
+            "relationships": [
+              {
+                "source": "src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)",
+                "target": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()",
+                "path": "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+                "line": 51
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "quotes",
+      "format": "text",
+      "relationship_index": 1,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/runtime/columbus.py",
+        "archive-neighbors",
+        "src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "text",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":2,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"]\n[1,\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"name\":\"build\",\"kind\":\"method\",\"start_line\":164,\"end_line\":166,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\n[1,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class\",\"name\":\"Builder\",\"kind\":\"class\",\"start_line\":107,\"end_line\":178,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\n[2,1,{\"id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"name\":\"registerJdkProxy\",\"kind\":\"method\",\"start_line\":48,\"end_line\":53,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[2,0,1,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"builder.build()\",\"line\":51}]\n[2,1,1,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"new JdkProxyHint.Builder()\",\"line\":49}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":2,\"file_number\":1,\"start_line\":48,\"end_line\":53,\"call_lines\":[49,51]}\n48| \\tpublic ProxyHints registerJdkProxy(Consumer<JdkProxyHint.Builder> jdkProxyHint) {\n49| \\t\\tJdkProxyHint.Builder builder = new JdkProxyHint.Builder();\n50| \\t\\tjdkProxyHint.accept(builder);\n51| \\t\\tthis.jdkProxies.add(builder.build());\n52| \\t\\treturn this;\n53| \\t}\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "06a43e7145d7cc23aa46e5404dcb62c15065ac7f6ae7d6c7fcf816955abfbdcf",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "quotes-1-text",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/runtime/columbus.py archive-neighbors 'src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)' --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format text --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":2,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"]\n[1,\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"name\":\"build\",\"kind\":\"method\",\"start_line\":164,\"end_line\":166,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\n[1,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class\",\"name\":\"Builder\",\"kind\":\"class\",\"start_line\":107,\"end_line\":178,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\n[2,1,{\"id\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)\",\"name\":\"registerJdkProxy\",\"kind\":\"method\",\"start_line\":48,\"end_line\":53,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[2,0,1,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"builder.build()\",\"line\":51}]\n[2,1,1,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"new JdkProxyHint.Builder()\",\"line\":49}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":2,\"file_number\":1,\"start_line\":48,\"end_line\":53,\"call_lines\":[49,51]}\n48| \\tpublic ProxyHints registerJdkProxy(Consumer<JdkProxyHint.Builder> jdkProxyHint) {\n49| \\t\\tJdkProxyHint.Builder builder = new JdkProxyHint.Builder();\n50| \\t\\tjdkProxyHint.accept(builder);\n51| \\t\\tthis.jdkProxies.add(builder.build());\n52| \\t\\treturn this;\n53| \\t}\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "quotes-1-text",
+            "operation": "archive-neighbors",
+            "encoding": "neighbors-table-text-v1",
+            "output_sha256": "06a43e7145d7cc23aa46e5404dcb62c15065ac7f6ae7d6c7fcf816955abfbdcf",
+            "relationships": [
+              {
+                "source": "src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)",
+                "target": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()",
+                "path": "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+                "line": 51
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "quotes",
+      "format": "json",
+      "relationship_index": 2,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/runtime/columbus.py",
+        "archive-neighbors",
+        "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "json",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "{\"symbol_id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"proxiedInterfaces\",\"kind\":\"method\",\"start_line\":134,\"end_line\":137,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"},{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.toTypeReferences:method(Class<?>...)\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"toTypeReferences\",\"kind\":\"method\",\"start_line\":168,\"end_line\":177,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"}],\"edges\":[{\"source\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)\",\"target\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.toTypeReferences:method(Class<?>...)\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"toTypeReferences(proxiedInterfaces)\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"line\":135}],\"matched_edges\":1,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\",\"start_line\":134,\"end_line\":137,\"call_lines\":[135],\"source\":\"\\t\\tpublic Builder proxiedInterfaces(Class<?>... proxiedInterfaces) {\\n\\t\\t\\tthis.proxiedInterfaces.addAll(toTypeReferences(proxiedInterfaces));\\n\\t\\t\\treturn this;\\n\\t\\t}\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "f60efc6c214fee701dd796c481a74e8b88f60b83cae73016c4df9a1475fa0ae7",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "quotes-2-json",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/runtime/columbus.py archive-neighbors 'src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)' --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format json --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "{\"symbol_id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"proxiedInterfaces\",\"kind\":\"method\",\"start_line\":134,\"end_line\":137,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"},{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.toTypeReferences:method(Class<?>...)\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"toTypeReferences\",\"kind\":\"method\",\"start_line\":168,\"end_line\":177,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"}],\"edges\":[{\"source\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)\",\"target\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.toTypeReferences:method(Class<?>...)\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"toTypeReferences(proxiedInterfaces)\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"line\":135}],\"matched_edges\":1,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\",\"start_line\":134,\"end_line\":137,\"call_lines\":[135],\"source\":\"\\t\\tpublic Builder proxiedInterfaces(Class<?>... proxiedInterfaces) {\\n\\t\\t\\tthis.proxiedInterfaces.addAll(toTypeReferences(proxiedInterfaces));\\n\\t\\t\\treturn this;\\n\\t\\t}\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "quotes-2-json",
+            "operation": "archive-neighbors",
+            "encoding": "json-v1",
+            "output_sha256": "f60efc6c214fee701dd796c481a74e8b88f60b83cae73016c4df9a1475fa0ae7",
+            "relationships": [
+              {
+                "source": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)",
+                "target": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.toTypeReferences:method(Class<?>...)",
+                "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+                "line": 135
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "quotes",
+      "format": "text",
+      "relationship_index": 2,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/runtime/columbus.py",
+        "archive-neighbors",
+        "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "text",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":1,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)\",\"name\":\"proxiedInterfaces\",\"kind\":\"method\",\"start_line\":134,\"end_line\":137,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\n[1,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.toTypeReferences:method(Class<?>...)\",\"name\":\"toTypeReferences\",\"kind\":\"method\",\"start_line\":168,\"end_line\":177,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[0,1,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"toTypeReferences(proxiedInterfaces)\",\"line\":135}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":0,\"file_number\":0,\"start_line\":134,\"end_line\":137,\"call_lines\":[135]}\n134| \\t\\tpublic Builder proxiedInterfaces(Class<?>... proxiedInterfaces) {\n135| \\t\\t\\tthis.proxiedInterfaces.addAll(toTypeReferences(proxiedInterfaces));\n136| \\t\\t\\treturn this;\n137| \\t\\t}\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "432cff6a482833b1fac5a157648bc432ab49c27f69e0eb262effee5e489c7f1e",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "quotes-2-text",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/runtime/columbus.py archive-neighbors 'src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)' --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format text --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":1,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)\",\"name\":\"proxiedInterfaces\",\"kind\":\"method\",\"start_line\":134,\"end_line\":137,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\n[1,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.toTypeReferences:method(Class<?>...)\",\"name\":\"toTypeReferences\",\"kind\":\"method\",\"start_line\":168,\"end_line\":177,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[0,1,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"toTypeReferences(proxiedInterfaces)\",\"line\":135}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":0,\"file_number\":0,\"start_line\":134,\"end_line\":137,\"call_lines\":[135]}\n134| \\t\\tpublic Builder proxiedInterfaces(Class<?>... proxiedInterfaces) {\n135| \\t\\t\\tthis.proxiedInterfaces.addAll(toTypeReferences(proxiedInterfaces));\n136| \\t\\t\\treturn this;\n137| \\t\\t}\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "quotes-2-text",
+            "operation": "archive-neighbors",
+            "encoding": "neighbors-table-text-v1",
+            "output_sha256": "432cff6a482833b1fac5a157648bc432ab49c27f69e0eb262effee5e489c7f1e",
+            "relationships": [
+              {
+                "source": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)",
+                "target": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.toTypeReferences:method(Class<?>...)",
+                "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+                "line": 135
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "quotes",
+      "format": "json",
+      "relationship_index": 3,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/runtime/columbus.py",
+        "archive-neighbors",
+        "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "json",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "{\"symbol_id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"build\",\"kind\":\"method\",\"start_line\":164,\"end_line\":166,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"},{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint:class\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"JdkProxyHint\",\"kind\":\"class\",\"start_line\":34,\"end_line\":180,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"}],\"edges\":[{\"source\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"target\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint:class\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"new JdkProxyHint(this)\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"line\":165}],\"matched_edges\":1,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\",\"start_line\":164,\"end_line\":166,\"call_lines\":[165],\"source\":\"\\t\\tJdkProxyHint build() {\\n\\t\\t\\treturn new JdkProxyHint(this);\\n\\t\\t}\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "ec06a0271c6ea2a883aab9f0faec584566eafbab929cceebdffb8c5a55d2c4d3",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "quotes-3-json",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/runtime/columbus.py archive-neighbors 'src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()' --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format json --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "{\"symbol_id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"nodes\":[{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"build\",\"kind\":\"method\",\"start_line\":164,\"end_line\":166,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"},{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint:class\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"name\":\"JdkProxyHint\",\"kind\":\"class\",\"start_line\":34,\"end_line\":180,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"}],\"edges\":[{\"source\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"target\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint:class\",\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"new JdkProxyHint(this)\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"line\":165}],\"matched_edges\":1,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"call_context\":[{\"source_id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\",\"start_line\":164,\"end_line\":166,\"call_lines\":[165],\"source\":\"\\t\\tJdkProxyHint build() {\\n\\t\\t\\treturn new JdkProxyHint(this);\\n\\t\\t}\"}],\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "quotes-3-json",
+            "operation": "archive-neighbors",
+            "encoding": "json-v1",
+            "output_sha256": "ec06a0271c6ea2a883aab9f0faec584566eafbab929cceebdffb8c5a55d2c4d3",
+            "relationships": [
+              {
+                "source": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()",
+                "target": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint:class",
+                "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+                "line": 165
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    },
+    {
+      "condition": "quotes",
+      "format": "text",
+      "relationship_index": 3,
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "-B",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/runtime/columbus.py",
+        "archive-neighbors",
+        "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()",
+        "--direction",
+        "out",
+        "--kinds",
+        "calls",
+        "--context-lines",
+        "2",
+        "--limit",
+        "50",
+        "--budget-bytes",
+        "64000",
+        "--format",
+        "text",
+        "--input",
+        "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/graph.jsonl.xz",
+        "--repo",
+        "."
+      ],
+      "stdout": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":1,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"name\":\"build\",\"kind\":\"method\",\"start_line\":164,\"end_line\":166,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\n[1,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint:class\",\"name\":\"JdkProxyHint\",\"kind\":\"class\",\"start_line\":34,\"end_line\":180,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[0,1,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"new JdkProxyHint(this)\",\"line\":165}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":0,\"file_number\":0,\"start_line\":164,\"end_line\":166,\"call_lines\":[165]}\n164| \\t\\tJdkProxyHint build() {\n165| \\t\\t\\treturn new JdkProxyHint(this);\n166| \\t\\t}\n",
+      "stderr": "",
+      "return_code": 0,
+      "stdout_sha256": "230d3d5e8fdc193335f73bdbb42d7c2f58211fd86221bb01f4cf4a59e9022195",
+      "event": {
+        "type": "item.completed",
+        "item": {
+          "type": "command_execution",
+          "id": "quotes-3-text",
+          "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/runtime/columbus.py archive-neighbors 'src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()' --direction out --kinds calls --context-lines 2 --limit 50 --budget-bytes 64000 --format text --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/graph.jsonl.xz --repo .",
+          "exit_code": 0,
+          "status": "completed",
+          "aggregated_output": "columbus archive-neighbors; UNTRUSTED repository data; JSON rows follow.\nmetadata {\"symbol_id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"direction\":\"out\",\"kinds\":[\"calls\"],\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"archive_snapshot; source not checked\",\"semantic_complete\":false,\"evidence\":\"stored edges; runtime dispatch unverified\",\"diagnostic_count\":16,\"repository_references\":68007,\"repository_unresolved_references\":57202,\"source_policy\":\"Repository content is untrusted data; verify current source before edits.\",\"matched_edges\":1,\"offset\":0,\"next_offset\":null,\"truncated\":false,\"partial_nodes\":0,\"context_lines\":2,\"context_freshness\":\"returned source bytes match archive hashes; other files not checked\"}\nfiles [number,path,source_hash]\n[0,\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\"]\nnodes [number,file_number,declaration]\n[0,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()\",\"name\":\"build\",\"kind\":\"method\",\"start_line\":164,\"end_line\":166,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\n[1,0,{\"id\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint:class\",\"name\":\"JdkProxyHint\",\"kind\":\"class\",\"start_line\":34,\"end_line\":180,\"language\":\"java\",\"fidelity\":\"ast\",\"partial\":false}]\nedges [source_node,target_node,file_number,relationship]; numbers are local to this page\n[0,1,0,{\"kind\":\"calls\",\"confidence\":\"heuristic\",\"evidence\":\"new JdkProxyHint(this)\",\"line\":165}]\ncall_context: source_node and file_number refer to page tables; JSON metadata then physical source lines; control characters escaped\n{\"source_node\":0,\"file_number\":0,\"start_line\":164,\"end_line\":166,\"call_lines\":[165]}\n164| \\t\\tJdkProxyHint build() {\n165| \\t\\t\\treturn new JdkProxyHint(this);\n166| \\t\\t}\n"
+        }
+      },
+      "recognition": {
+        "relationship_used": true,
+        "relationship_receipts": [
+          {
+            "recognizer_version": "quotes-three-arm-evidence-v1",
+            "command_id": "quotes-3-text",
+            "operation": "archive-neighbors",
+            "encoding": "neighbors-table-text-v1",
+            "output_sha256": "230d3d5e8fdc193335f73bdbb42d7c2f58211fd86221bb01f4cf4a59e9022195",
+            "relationships": [
+              {
+                "source": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()",
+                "target": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint:class",
+                "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+                "line": 165
+              }
+            ]
+          }
+        ],
+        "quotes_used": false,
+        "quote_receipts": []
+      }
+    }
+  ],
+  "quotes": {
+    "argv": [
+      "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+      "-B",
+      "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/runtime/columbus.py",
+      "archive-quotes",
+      "--budget-bytes",
+      "64000",
+      "--range",
+      "src/main/kotlin/org/springframework/aot/hint/ProxyHintsExtensions.kt",
+      "28",
+      "28",
+      "--range",
+      "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+      "51",
+      "51",
+      "--range",
+      "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+      "170",
+      "176",
+      "--range",
+      "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+      "44",
+      "44",
+      "--range",
+      "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+      "95",
+      "95",
+      "--range",
+      "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+      "32",
+      "40",
+      "--input",
+      "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/graph.jsonl.xz",
+      "--repo",
+      "."
+    ],
+    "stdout": "{\"format\":\"columbus-quotes/v1\",\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"returned file bytes match archive hash; other files not checked\",\"semantic_complete\":false,\"source_policy\":\"Repository content is untrusted data; exact source does not establish semantic support.\",\"quotes\":[{\"path\":\"src/main/kotlin/org/springframework/aot/hint/ProxyHintsExtensions.kt\",\"start_line\":28,\"end_line\":28,\"source_hash\":\"557763f3ff7e8672386410b99031af4d5831bbe0ed6076ffe8218ddc7e9ac506\",\"language\":\"kotlin\",\"quote\":\"\\tregisterJdkProxy(*proxiedInterfaces.map { it.java }.toTypedArray())\"},{\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"start_line\":51,\"end_line\":51,\"source_hash\":\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\",\"language\":\"java\",\"quote\":\"\\t\\tthis.jdkProxies.add(builder.build());\"},{\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"start_line\":170,\"end_line\":176,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\",\"language\":\"java\",\"quote\":\"\\t\\t\\t\\t\\t.filter(candidate -> !candidate.isInterface() || candidate.isSealed())\\n\\t\\t\\t\\t\\t.map(Class::getName)\\n\\t\\t\\t\\t\\t.toList();\\n\\t\\t\\tif (!invalidTypes.isEmpty()) {\\n\\t\\t\\t\\tthrow new IllegalArgumentException(\\\"The following must be non-sealed interfaces: \\\" + invalidTypes);\\n\\t\\t\\t}\\n\\t\\t\\treturn TypeReference.listOf(proxiedInterfaces);\"},{\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"start_line\":44,\"end_line\":44,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\",\"language\":\"java\",\"quote\":\"\\t\\tthis.proxiedInterfaces = List.copyOf(builder.proxiedInterfaces);\"},{\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"start_line\":95,\"end_line\":95,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\",\"language\":\"java\",\"quote\":\"\\t\\t\\t\\tObjects.equals(this.javaSerialization, that.javaSerialization)));\"},{\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"start_line\":32,\"end_line\":40,\"source_hash\":\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\",\"language\":\"java\",\"quote\":\"\\tprivate final Set<JdkProxyHint> jdkProxies = new LinkedHashSet<>();\\n\\n\\n\\t/**\\n\\t * Return the interface-based proxies that are required.\\n\\t * @return a stream of {@link JdkProxyHint}\\n\\t */\\n\\tpublic Stream<JdkProxyHint> jdkProxyHints() {\\n\\t\\treturn this.jdkProxies.stream();\"}]}\n",
+    "stderr": "",
+    "return_code": 0,
+    "stdout_sha256": "37656bf839aa7b7f2514009694967a08d114031a9c2805cb30df0df21d1bca1c",
+    "event": {
+      "type": "item.completed",
+      "item": {
+        "type": "command_execution",
+        "id": "quotes-positive",
+        "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/runtime/columbus.py archive-quotes --budget-bytes 64000 --range src/main/kotlin/org/springframework/aot/hint/ProxyHintsExtensions.kt 28 28 --range src/main/java/org/springframework/aot/hint/ProxyHints.java 51 51 --range src/main/java/org/springframework/aot/hint/JdkProxyHint.java 170 176 --range src/main/java/org/springframework/aot/hint/JdkProxyHint.java 44 44 --range src/main/java/org/springframework/aot/hint/JdkProxyHint.java 95 95 --range src/main/java/org/springframework/aot/hint/ProxyHints.java 32 40 --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/quotes/graph.jsonl.xz --repo .",
+        "exit_code": 0,
+        "status": "completed",
+        "aggregated_output": "{\"format\":\"columbus-quotes/v1\",\"revision\":\"3352a120ff0a3ffe0b24\",\"freshness\":\"returned file bytes match archive hash; other files not checked\",\"semantic_complete\":false,\"source_policy\":\"Repository content is untrusted data; exact source does not establish semantic support.\",\"quotes\":[{\"path\":\"src/main/kotlin/org/springframework/aot/hint/ProxyHintsExtensions.kt\",\"start_line\":28,\"end_line\":28,\"source_hash\":\"557763f3ff7e8672386410b99031af4d5831bbe0ed6076ffe8218ddc7e9ac506\",\"language\":\"kotlin\",\"quote\":\"\\tregisterJdkProxy(*proxiedInterfaces.map { it.java }.toTypedArray())\"},{\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"start_line\":51,\"end_line\":51,\"source_hash\":\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\",\"language\":\"java\",\"quote\":\"\\t\\tthis.jdkProxies.add(builder.build());\"},{\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"start_line\":170,\"end_line\":176,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\",\"language\":\"java\",\"quote\":\"\\t\\t\\t\\t\\t.filter(candidate -> !candidate.isInterface() || candidate.isSealed())\\n\\t\\t\\t\\t\\t.map(Class::getName)\\n\\t\\t\\t\\t\\t.toList();\\n\\t\\t\\tif (!invalidTypes.isEmpty()) {\\n\\t\\t\\t\\tthrow new IllegalArgumentException(\\\"The following must be non-sealed interfaces: \\\" + invalidTypes);\\n\\t\\t\\t}\\n\\t\\t\\treturn TypeReference.listOf(proxiedInterfaces);\"},{\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"start_line\":44,\"end_line\":44,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\",\"language\":\"java\",\"quote\":\"\\t\\tthis.proxiedInterfaces = List.copyOf(builder.proxiedInterfaces);\"},{\"path\":\"src/main/java/org/springframework/aot/hint/JdkProxyHint.java\",\"start_line\":95,\"end_line\":95,\"source_hash\":\"7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502\",\"language\":\"java\",\"quote\":\"\\t\\t\\t\\tObjects.equals(this.javaSerialization, that.javaSerialization)));\"},{\"path\":\"src/main/java/org/springframework/aot/hint/ProxyHints.java\",\"start_line\":32,\"end_line\":40,\"source_hash\":\"159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412\",\"language\":\"java\",\"quote\":\"\\tprivate final Set<JdkProxyHint> jdkProxies = new LinkedHashSet<>();\\n\\n\\n\\t/**\\n\\t * Return the interface-based proxies that are required.\\n\\t * @return a stream of {@link JdkProxyHint}\\n\\t */\\n\\tpublic Stream<JdkProxyHint> jdkProxyHints() {\\n\\t\\treturn this.jdkProxies.stream();\"}]}\n"
+      }
+    },
+    "recognition": {
+      "relationship_used": false,
+      "relationship_receipts": [],
+      "quotes_used": true,
+      "quote_receipts": [
+        {
+          "recognizer_version": "quotes-three-arm-evidence-v1",
+          "command_id": "quotes-positive",
+          "operation": "archive-quotes",
+          "encoding": "quotes-json-v1",
+          "output_sha256": "37656bf839aa7b7f2514009694967a08d114031a9c2805cb30df0df21d1bca1c",
+          "ranges": [
+            {
+              "path": "src/main/kotlin/org/springframework/aot/hint/ProxyHintsExtensions.kt",
+              "start_line": 28,
+              "end_line": 28,
+              "source_hash": "557763f3ff7e8672386410b99031af4d5831bbe0ed6076ffe8218ddc7e9ac506",
+              "language": "kotlin"
+            },
+            {
+              "path": "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+              "start_line": 51,
+              "end_line": 51,
+              "source_hash": "159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412",
+              "language": "java"
+            },
+            {
+              "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+              "start_line": 170,
+              "end_line": 176,
+              "source_hash": "7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502",
+              "language": "java"
+            },
+            {
+              "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+              "start_line": 44,
+              "end_line": 44,
+              "source_hash": "7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502",
+              "language": "java"
+            },
+            {
+              "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+              "start_line": 95,
+              "end_line": 95,
+              "source_hash": "7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502",
+              "language": "java"
+            },
+            {
+              "path": "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+              "start_line": 32,
+              "end_line": 40,
+              "source_hash": "159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412",
+              "language": "java"
+            }
+          ],
+          "source_rows": 20
+        }
+      ]
+    }
+  },
+  "control_quotes_unavailable": {
+    "argv": [
+      "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+      "-B",
+      "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/runtime/columbus.py",
+      "archive-quotes",
+      "--budget-bytes",
+      "64000",
+      "--range",
+      "src/main/kotlin/org/springframework/aot/hint/ProxyHintsExtensions.kt",
+      "28",
+      "28",
+      "--range",
+      "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+      "51",
+      "51",
+      "--range",
+      "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+      "170",
+      "176",
+      "--range",
+      "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+      "44",
+      "44",
+      "--range",
+      "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+      "95",
+      "95",
+      "--range",
+      "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+      "32",
+      "40",
+      "--input",
+      "/private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/graph.jsonl.xz",
+      "--repo",
+      "."
+    ],
+    "stdout": "",
+    "stderr": "usage: columbus [-h] [--version] [--repo REPO] [--db DB] [--pretty]\n                [--telemetry PATH]\n                {doctor,init,archive-search,archive-source,archive-neighbors,archive-callers,archive,tree,hook-install,hook-update,sync,index,status,search,map,symbol,callers,neighbors,impact,context,explore,stats,graph,export,serve,telemetry}\n                ...\ncolumbus: error: argument command: invalid choice: 'archive-quotes' (choose from doctor, init, archive-search, archive-source, archive-neighbors, archive-callers, archive, tree, hook-install, hook-update, sync, index, status, search, map, symbol, callers, neighbors, impact, context, explore, stats, graph, export, serve, telemetry)\n",
+    "return_code": 2,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "event": {
+      "type": "item.completed",
+      "item": {
+        "type": "command_execution",
+        "id": "control-no-quotes",
+        "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/runtime/columbus.py archive-quotes --budget-bytes 64000 --range src/main/kotlin/org/springframework/aot/hint/ProxyHintsExtensions.kt 28 28 --range src/main/java/org/springframework/aot/hint/ProxyHints.java 51 51 --range src/main/java/org/springframework/aot/hint/JdkProxyHint.java 170 176 --range src/main/java/org/springframework/aot/hint/JdkProxyHint.java 44 44 --range src/main/java/org/springframework/aot/hint/JdkProxyHint.java 95 95 --range src/main/java/org/springframework/aot/hint/ProxyHints.java 32 40 --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/kotlin/control/graph.jsonl.xz --repo .",
+        "exit_code": 2,
+        "status": "completed",
+        "aggregated_output": ""
+      }
+    }
+  },
+  "negative_wrong_relationship_line_rejected": true,
+  "negative_failed_command_rejected": true,
+  "negative_corrupt_quote_rejected": true,
+  "quote_only_never_relationship_credit": true
+}

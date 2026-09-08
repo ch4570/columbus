@@ -1,0 +1,371 @@
+{
+  "case": "java-concurrent-lru-cache-lifecycle",
+  "condition": "quotes",
+  "repeat": 1,
+  "return_code": 0,
+  "timed_out": false,
+  "finished_at": "2026-09-08T18:30:43.586199+00:00",
+  "elapsed_seconds": 547.9555084590102,
+  "usage": {
+    "input_tokens": 372639,
+    "cached_input_tokens": 303232,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 15831,
+    "reasoning_output_tokens": 10166,
+    "uncached_input_tokens": 69407
+  },
+  "commands": [
+    {
+      "command": "/bin/zsh -lc \"sed -n '1,240p' /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/java/quotes/runtime/SKILL.md\"",
+      "exit_code": 0,
+      "output_bytes": 5633,
+      "output_sha256": "368fb4899e5a483fd3caa4c0b7274f976d51cef5ce4fe36db985643da59123e3"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n --glob '*.java' \\\"class ConcurrentLruCache|ConcurrentLruCache\\\" . | head -80\"",
+      "exit_code": 0,
+      "output_bytes": 1773,
+      "output_sha256": "faf538af6526cad6f61801265d504f7868bbb7716adc687cda66f9b8f7832809"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/java/quotes/runtime/columbus.py archive-search ConcurrentLruCache --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/java/quotes/graph.jsonl.xz --format text --path 'src/main/java/org/springframework/util/ConcurrentLruCache.java' --language java --budget-bytes 10000\"",
+      "exit_code": 0,
+      "output_bytes": 2831,
+      "output_sha256": "94e4ea4a92e18b86b70a41a0e5819786147b0e74c97893fc02cbb6938d516332"
+    },
+    {
+      "command": "/bin/zsh -lc 'rg -n \"''^('\"\\\\t(public|private|protected|static|final|abstract)|\\\\t\\\\t(public|private|protected)|\\\\t(enum|class|interface)|\\\\t@)\\\" src/main/java/org/springframework/util/ConcurrentLruCache.java\"",
+      "exit_code": 0,
+      "output_bytes": 3308,
+      "output_sha256": "d64e85c779d9ab4cf43b9e7e97ecc54aee6dfdb7c2733191d8201b1059adf5e7"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/java/quotes/runtime/columbus.py archive-source 'ConcurrentLruCache.<init>' ConcurrentLruCache.get ConcurrentLruCache.put ConcurrentLruCache.processRead ConcurrentLruCache.processWrite ConcurrentLruCache.drainOperations ConcurrentLruCache.clear ConcurrentLruCache.remove ConcurrentLruCache.markForRemoval ConcurrentLruCache.markAsRemoved --overloads --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/java/quotes/graph.jsonl.xz --repo . --format text --limit 200 --budget-bytes 30000\"",
+      "exit_code": 0,
+      "output_bytes": 7813,
+      "output_sha256": "340eb115fb92183bedb54184dd206df51cbdf49a4fe27b4da16abb7a7d0e7a07"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/java/quotes/runtime/columbus.py archive-source ConcurrentLruCache.capacity ConcurrentLruCache.sizeLimit ConcurrentLruCache.size ConcurrentLruCache.contains ConcurrentLruCache.AddTask.run ConcurrentLruCache.AddTask.evictEntries ConcurrentLruCache.RemovalTask.run ConcurrentLruCache.ReadOperations.getBufferIndex ConcurrentLruCache.ReadOperations.recordRead ConcurrentLruCache.ReadOperations.shouldDrainBuffers ConcurrentLruCache.ReadOperations.drain ConcurrentLruCache.ReadOperations.clear ConcurrentLruCache.ReadOperations.drainReadBuffer ConcurrentLruCache.WriteOperations.add ConcurrentLruCache.WriteOperations.drain ConcurrentLruCache.WriteOperations.drainAll --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/java/quotes/graph.jsonl.xz --repo . --format text --limit 300 --budget-bytes 40000'",
+      "exit_code": 2,
+      "output_bytes": 180,
+      "output_sha256": "54e8c6199923db0bb1b9d57f282b3a6cf74705d3cd139f67b679cf269db64338"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/java/quotes/runtime/columbus.py archive-search 'shouldDrainBuffers' --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/java/quotes/graph.jsonl.xz --format text --path 'src/main/java/org/springframework/util/ConcurrentLruCache.java' --language java --budget-bytes 6000\"",
+      "exit_code": 0,
+      "output_bytes": 2577,
+      "output_sha256": "1f6f480dd12913f1d67c34e868c04da1929e2b09cdebff079af9a3c4bdcec396"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/java/quotes/runtime/columbus.py archive-search 'capacity' --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/java/quotes/graph.jsonl.xz --format text --path 'src/main/java/org/springframework/util/ConcurrentLruCache.java' --language java --budget-bytes 6000\"",
+      "exit_code": 0,
+      "output_bytes": 1352,
+      "output_sha256": "757fe0cffa5d092afd42b03ec5124f842928d82124f1e544b5f6a16437e0c0ec"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/java/quotes/runtime/columbus.py archive-search 'recordRead' --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/java/quotes/graph.jsonl.xz --format text --path 'src/main/java/org/springframework/util/ConcurrentLruCache.java' --language java --budget-bytes 6000\"",
+      "exit_code": 0,
+      "output_bytes": 963,
+      "output_sha256": "bdc7241ab5107c5d0d0e4a94d423960df7db5b47a9b1308c9bc2cba65be3421f"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/java/quotes/runtime/columbus.py archive-search 'evictEntries' --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/java/quotes/graph.jsonl.xz --format text --path 'src/main/java/org/springframework/util/ConcurrentLruCache.java' --language java --budget-bytes 6000\"",
+      "exit_code": 0,
+      "output_bytes": 945,
+      "output_sha256": "2006a164b938c125da4e15101073a485afb4d9e0a8b03b234a3f4cb1d4bd369a"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/java/quotes/runtime/columbus.py archive-search 'drainAll' --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/java/quotes/graph.jsonl.xz --format text --path 'src/main/java/org/springframework/util/ConcurrentLruCache.java' --language java --budget-bytes 6000\"",
+      "exit_code": 0,
+      "output_bytes": 936,
+      "output_sha256": "14649a774abbc4f7e6cd6891cb1543424ea459b823c8fd709b206feba574740a"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/java/quotes/runtime/columbus.py archive-search 'drainReadBuffer' --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/java/quotes/graph.jsonl.xz --format text --path 'src/main/java/org/springframework/util/ConcurrentLruCache.java' --language java --budget-bytes 6000\"",
+      "exit_code": 0,
+      "output_bytes": 982,
+      "output_sha256": "e3cb12aa68738abf7d524c8dfa8499bea26e3cad75b85e947315fd137fdd6a72"
+    },
+    {
+      "command": "/bin/zsh -lc \"sed -n '258,351p' src/main/java/org/springframework/util/ConcurrentLruCache.java\"",
+      "exit_code": 0,
+      "output_bytes": 1784,
+      "output_sha256": "6e9239717eacfc1e11ccb76bdf2e2f1bf595f67cb4db1261cddaf6692158d5cf"
+    },
+    {
+      "command": "/bin/zsh -lc \"sed -n '35,92p' src/main/java/org/springframework/util/ConcurrentLruCache.java\"",
+      "exit_code": 0,
+      "output_bytes": 2136,
+      "output_sha256": "b38b9f04c0e938395cbf2a3d417348a087c96e66390dd1e0c6b945560c097f60"
+    },
+    {
+      "command": "/bin/zsh -lc \"sed -n '156,212p' src/main/java/org/springframework/util/ConcurrentLruCache.java\"",
+      "exit_code": 0,
+      "output_bytes": 1278,
+      "output_sha256": "3b6f9fe7b21f440106761a73f786d7e8a678eee97510ec91c6e0a221f416f441"
+    },
+    {
+      "command": "/bin/zsh -lc \"sed -n '219,254p' src/main/java/org/springframework/util/ConcurrentLruCache.java\"",
+      "exit_code": 0,
+      "output_bytes": 962,
+      "output_sha256": "f982f6566001608497d7e71a83ad56504c5c2f94d1217fd9ce9e3b2c29b60c32"
+    },
+    {
+      "command": "/bin/zsh -lc \"sed -n '519,598p' src/main/java/org/springframework/util/ConcurrentLruCache.java\"",
+      "exit_code": 0,
+      "output_bytes": 1360,
+      "output_sha256": "81b69a04bdea1a4fc84e5b3d9c87585b83571b882f6d43891f75ee221b2ee14c"
+    },
+    {
+      "command": "/bin/zsh -lc \"sed -n '353,449p' src/main/java/org/springframework/util/ConcurrentLruCache.java\"",
+      "exit_code": 0,
+      "output_bytes": 3150,
+      "output_sha256": "5eee4e24965897aba8cef2e276f58a8820afaf9587d697e236cc352026aa9674"
+    },
+    {
+      "command": "/bin/zsh -lc \"sed -n '454,516p' src/main/java/org/springframework/util/ConcurrentLruCache.java\"",
+      "exit_code": 0,
+      "output_bytes": 1180,
+      "output_sha256": "f0965dc9dd39a07676ca065c20ffe520a77c5b406ec5836a84cd919949754b8f"
+    },
+    {
+      "command": "/bin/zsh -lc \"sed -n '1,240p' src/test/java/org/springframework/util/ConcurrentLruCacheTests.java\"",
+      "exit_code": 0,
+      "output_bytes": 3939,
+      "output_sha256": "60ed16448d89f9c998d48ad554f2c033b0a97ca08260fa81309ced239d10b54a"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n --glob '*ConcurrentLruCache*' --glob '*.java' \\\"(negative|null|throw|remove\\\\(|clear\\\\(|capacity\\\\(|sizeLimit|zeroCapacity|evict|concurrent|race)\\\" src/test src/main/java/org/springframework/util/ConcurrentLruCache.java\"",
+      "exit_code": 0,
+      "output_bytes": 362843,
+      "output_sha256": "5fc7804301fa7845bdbcc6510c5b17a1824481bf6064ed007c362782e95cb7b4"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/personal/columbus/.venv/bin/python -B /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/java/quotes/runtime/columbus.py archive-quotes --range src/main/java/org/springframework/util/ConcurrentLruCache.java 100 125 --range src/main/java/org/springframework/util/ConcurrentLruCache.java 435 449 --range src/main/java/org/springframework/util/ConcurrentLruCache.java 128 154 --range src/main/java/org/springframework/util/ConcurrentLruCache.java 269 286 --range src/main/java/org/springframework/util/ConcurrentLruCache.java 229 254 --range src/main/java/org/springframework/util/ConcurrentLruCache.java 184 198 --input /private/tmp/columbus-three-arm-observations.DJ4jA2/observations/java/quotes/graph.jsonl.xz --repo .'",
+      "exit_code": 0,
+      "output_bytes": 5436,
+      "output_sha256": "0616523b09dd55876c3f88a433b0d1af41a0755e94f396ebaffcd6484f688583"
+    },
+    {
+      "command": "/bin/zsh -lc 'rg -n \"static void (isTrue|notNull)\" src/main/java/org/springframework/util/Assert.java'",
+      "exit_code": 0,
+      "output_bytes": 324,
+      "output_sha256": "b7d47a28575438ddd7e328d338edf2da74943b093792ef422cbcbd669b3e736d"
+    },
+    {
+      "command": "/bin/zsh -lc \"sed -n '108,120p;175,185p' src/main/java/org/springframework/util/Assert.java\"",
+      "exit_code": 0,
+      "output_bytes": 872,
+      "output_sha256": "7365843080eccdb0c729b1a98a7d932b3a3f832204177f44a987eaecccadf422"
+    },
+    {
+      "command": "/bin/zsh -lc 'rg -n \"void (zeroCapacity|getAndSize|removeAndSize|clearAndSize)\" src/test/java/org/springframework/util/ConcurrentLruCacheTests.java'",
+      "exit_code": 0,
+      "output_bytes": 103,
+      "output_sha256": "b968ef820286d9890d410d2b55ea2308f5e6f4fc2ec56ebdd4c3a48a7c3ff792"
+    }
+  ],
+  "command_count": 25,
+  "command_output_bytes": 414660,
+  "failed_commands": 1,
+  "other_tool_types": [],
+  "runtime_warnings": [],
+  "turn_failed": false,
+  "answer": {
+    "findings": [
+      {
+        "id": "entry-generation",
+        "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+        "start_line": 100,
+        "end_line": 125,
+        "quote": "\tpublic V get(K key) {\n\t\tif (this.capacity == 0) {\n\t\t\treturn this.generator.apply(key);\n\t\t}\n\t\tNode<K, V> node = this.cache.get(key);\n\t\tif (node == null) {\n\t\t\tV value = this.generator.apply(key);\n\t\t\tput(key, value);\n\t\t\treturn value;\n\t\t}\n\t\tprocessRead(node);\n\t\treturn node.getValue();\n\t}\n\n\tprivate void put(K key, V value) {\n\t\tAssert.notNull(key, \"key must not be null\");\n\t\tAssert.notNull(value, \"value must not be null\");\n\t\tCacheEntry<V> cacheEntry = new CacheEntry<>(value, CacheEntryState.ACTIVE);\n\t\tNode<K, V> node = new Node<>(key, cacheEntry);\n\t\tNode<K, V> prior = this.cache.putIfAbsent(node.key, node);\n\t\tif (prior == null) {\n\t\t\tprocessWrite(new AddTask(node));\n\t\t}\n\t\telse {\n\t\t\tprocessRead(prior);\n\t\t}",
+        "explanation": "The public constructor delegates with concurrencyLevel 16. The private constructor rejects a negative capacity through Assert.isTrue (IllegalArgumentException), stores the fixed capacity, and creates a ConcurrentHashMap with initial capacity 16, load factor 0.75, and concurrency-level hint 16; that hint is not a generation limit. At capacity zero, get directly invokes the generator and bypasses the map, null checks, read/write buffers, accounting, and eviction. Consequently a null generator result is returned as null and nothing is cached. At positive capacity, a map hit records a read and returns the node's retained value. A miss invokes the generator before insertion and without the eviction lock. A thrown generator failure is not caught and this caller performs no insertion; a null result reaches Assert.notNull(value) and is rejected with IllegalArgumentException before putIfAbsent. There is no single-flight or per-key generation lock: competing misses can all generate concurrently. putIfAbsent selects one generated node as the cached node and queues its AddTask. Every loser records a read against the returned prior—that is, the winning cached node—but get still returns that loser's own locally generated value. Thus callers may return different generated values while only the winner's value is retained."
+      },
+      {
+        "id": "read-recency",
+        "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+        "start_line": 435,
+        "end_line": 449,
+        "quote": "\t\tprivate void drainReadBuffer(int bufferIndex) {\n\t\t\tfinal long writeCount = this.recordedCount.get(bufferIndex);\n\t\t\tfor (int i = 0; i < MAX_DRAIN_COUNT; i++) {\n\t\t\t\tfinal int index = (int) (this.readCount[bufferIndex] & BUFFER_INDEX_MASK);\n\t\t\t\tfinal AtomicReferenceArray<@Nullable Node<K, V>> buffer = this.buffers[bufferIndex];\n\t\t\t\tfinal Node<K, V> node = buffer.get(index);\n\t\t\t\tif (node == null) {\n\t\t\t\t\tbreak;\n\t\t\t\t}\n\t\t\t\tbuffer.lazySet(index, null);\n\t\t\t\tthis.evictionQueue.moveToBack(node);\n\t\t\t\tthis.readCount[bufferIndex]++;\n\t\t\t}\n\t\t\tthis.processedCount.lazySet(bufferIndex, writeCount);\n\t\t}",
+        "explanation": "processRead records both ordinary map hits and competing-miss losers' reads of the winning node. ReadOperations has four 128-slot ring buffers; the low two bits of the current thread ID select a buffer, so buffers are shared rather than dedicated per thread. recordRead advances that buffer's recorded count with a lazySet and stores the node at oldCount & 127. It computes oldCount - processedCount and reports the read as delayable while that pre-recording gap is below 32; at 32 or more, an IDLE status attempts maintenance. Recording itself does not touch the LRU queue. A drain visits all four buffers, beginning at a position derived from the draining thread ID. For each buffer, the quoted helper captures recordedCount, processes at most 64 slots from readCount & 127, stops at the first null, clears each consumed slot, calls moveToBack, and advances readCount. It then lazy-sets processedCount to the captured recorded count even if it stopped early or hit the 64-item limit. moveToBack actually reorders only when the node is currently linked in the eviction queue and is not already last; an unlinked/not-yet-added/removed node or the current tail is ignored. It does not test entry state separately. Because recording is deferred, threads can share and race on a buffer, the bounded ring can wrap, buffers are drained in separate batches, and cross-buffer reads have no single global event order, this is approximate recency—not one synchronous globally ordered LRU move for every read. Queue mutations themselves are serialized by the eviction lock when draining occurs."
+      },
+      {
+        "id": "drain-coordination",
+        "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+        "start_line": 128,
+        "end_line": 154,
+        "quote": "\tprivate void processRead(Node<K, V> node) {\n\t\tboolean drainRequested = this.readOperations.recordRead(node);\n\t\tDrainStatus status = this.drainStatus.get();\n\t\tif (status.shouldDrainBuffers(drainRequested)) {\n\t\t\tdrainOperations();\n\t\t}\n\t}\n\n\tprivate void processWrite(Runnable task) {\n\t\tthis.writeOperations.add(task);\n\t\tthis.drainStatus.lazySet(DrainStatus.REQUIRED);\n\t\tdrainOperations();\n\t}\n\n\tprivate void drainOperations() {\n\t\tif (this.evictionLock.tryLock()) {\n\t\t\ttry {\n\t\t\t\tthis.drainStatus.lazySet(DrainStatus.PROCESSING);\n\t\t\t\tthis.readOperations.drain();\n\t\t\t\tthis.writeOperations.drain();\n\t\t\t}\n\t\t\tfinally {\n\t\t\t\tthis.drainStatus.compareAndSet(DrainStatus.PROCESSING, DrainStatus.IDLE);\n\t\t\t\tthis.evictionLock.unlock();\n\t\t\t}\n\t\t}\n\t}",
+        "explanation": "A write first enters a ConcurrentLinkedQueue, sets status REQUIRED, and asks the same caller to drain. There is no executor or background maintenance worker. Reads also request caller-driven maintenance according to three status decisions: IDLE drains only when recordRead says the backlog is no longer delayable; REQUIRED always attempts a drain; PROCESSING declines because another drain is underway. The local name drainRequested is misleading—the enum treats that boolean as delayable. Normal maintenance uses tryLock, so failure returns immediately without removing queued work, changing the map, or waiting; a writer's REQUIRED status remains available to prompt a later caller. After acquiring the lock, the drainer marks PROCESSING, drains recency buffers first, and then polls and runs at most 16 write tasks. The finally block attempts PROCESSING-to-IDLE and always unlocks. If a concurrent writer changed PROCESSING back to REQUIRED while the lock was held, the compareAndSet fails and preserves REQUIRED for a future attempt. The lock serializes LRU queue mutation, write-task accounting, and capacity enforcement, but it does not wrap generator execution, backing-map get/putIfAbsent/remove operations, or lock-free read recording. Generation can therefore be concurrent, while ordering and enforcement happen one lock holder at a time and may remain pending after a failed acquisition or a 16-task drain."
+      },
+      {
+        "id": "insertion-eviction",
+        "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+        "start_line": 269,
+        "end_line": 286,
+        "quote": "\t\tpublic void run() {\n\t\t\tcurrentSize.lazySet(currentSize.get() + 1);\n\t\t\tif (this.node.get().isActive()) {\n\t\t\t\tevictionQueue.add(this.node);\n\t\t\t\tevictEntries();\n\t\t\t}\n\t\t}\n\n\t\tprivate void evictEntries() {\n\t\t\twhile (currentSize.get() > capacity) {\n\t\t\t\tNode<K, V> node = evictionQueue.poll();\n\t\t\t\tif (node == null) {\n\t\t\t\t\treturn;\n\t\t\t\t}\n\t\t\t\tcache.remove(node.key, node);\n\t\t\t\tmarkAsRemoved(node);\n\t\t\t}\n\t\t}",
+        "explanation": "A successful putIfAbsent changes the public backing map before processWrite enqueues the AddTask, so map membership and size can become visible before queue/accounting maintenance. When eventually run under the eviction lock, AddTask increments internal currentSize unconditionally—even if concurrent removal has already made its node PENDING_REMOVAL or REMOVED. Only an ACTIVE node is linked at the queue back and allowed to trigger eviction. Eviction repeatedly polls the queue's oldest entry while internal currentSize exceeds capacity; an empty queue terminates the loop even if accounting remains above capacity. cache.remove(key, node) is identity-conditional, so an old queued node cannot remove a newer mapping for the same key. The polled node is then passed to markAsRemoved regardless of whether that map removal succeeded. markAsRemoved CAS-loops to a REMOVED CacheEntry containing the same value and lazy-decrements currentSize after success; it does not erase the value or have an already-removed early exit. currentSize is private maintenance accounting, whereas public size() reads cache.size(). Because map insertion precedes a possibly delayed task, normal drains handle only 16 write tasks, and recency is buffered, the public map can temporarily exceed capacity and eviction can reflect delayed approximate LRU order. Capacity enforcement and queue ordering are serialized under the lock, but neither is an instantaneous strict map-size or exact per-read LRU guarantee."
+      },
+      {
+        "id": "key-removal",
+        "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+        "start_line": 229,
+        "end_line": 254,
+        "quote": "\tpublic boolean remove(K key) {\n\t\tNode<K, V> node = this.cache.remove(key);\n\t\tif (node == null) {\n\t\t\treturn false;\n\t\t}\n\t\tmarkForRemoval(node);\n\t\tprocessWrite(new RemovalTask(node));\n\t\treturn true;\n\t}\n\n\t/**\n\t * Transition the node from the {@code active} state to the {@code pending removal} state,\n\t * if the transition is valid.\n\t */\n\tprivate void markForRemoval(Node<K, V> node) {\n\t\twhile (true) {\n\t\t\tCacheEntry<V> current = node.get();\n\t\t\tif (!current.isActive()) {\n\t\t\t\treturn;\n\t\t\t}\n\t\t\tCacheEntry<V> pendingRemoval = new CacheEntry<>(current.value, CacheEntryState.PENDING_REMOVAL);\n\t\t\tif (node.compareAndSet(current, pendingRemoval)) {\n\t\t\t\treturn;\n\t\t\t}\n\t\t}\n\t}",
+        "explanation": "remove first performs an immediate backing-map removal. An absent key returns false and queues nothing; a present key is no longer visible through contains() or size() before maintenance and returns true. markForRemoval repeatedly reads the node, returns immediately if it is already non-ACTIVE, or CASes ACTIVE to PENDING_REMOVAL while retaining the value; a failed CAS retries. It then queues a RemovalTask and opportunistically drains. That task, when run under the eviction lock, unlinks the node if it is still in the eviction queue and invokes markAsRemoved, which retains the value, sets REMOVED by CAS, and decrements internal accounting. Thus public map visibility changes immediately while queue membership, final state, and currentSize cleanup may be deferred if tryLock fails or the task lies beyond a drain's limit. Removal does not coordinate with or cancel a retrieval that already obtained the old node: such a get can still record that node and return its retained value even though the map no longer contains it."
+      },
+      {
+        "id": "clear-and-observation",
+        "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+        "start_line": 184,
+        "end_line": 198,
+        "quote": "\tpublic void clear() {\n\t\tthis.evictionLock.lock();\n\t\ttry {\n\t\t\tNode<K, V> node;\n\t\t\twhile ((node = this.evictionQueue.poll()) != null) {\n\t\t\t\tthis.cache.remove(node.key, node);\n\t\t\t\tmarkAsRemoved(node);\n\t\t\t}\n\t\t\tthis.readOperations.clear();\n\t\t\tthis.writeOperations.drainAll();\n\t\t}\n\t\tfinally {\n\t\t\tthis.evictionLock.unlock();\n\t\t}\n\t}",
+        "explanation": "Unlike ordinary maintenance, clear blocks on the eviction lock and always releases it in finally. It polls every currently linked queue node, identity-conditionally removes that node from the map, and marks it REMOVED with accounting cleanup. It then nulls all slots in all four read buffers; ReadOperations.clear does not reset recordedCount, readCount, or processedCount. Finally it drains queued write tasks without the normal 16-task bound, polling until the write queue is observed empty. It never calls cache.clear(). Therefore an ACTIVE map node inserted before its AddTask has linked it is not found by the initial queue walk, and drainAll can subsequently execute that queued addition and link it after the removal phase. Concurrent putIfAbsent/map changes can also occur while clear holds the lock, and tasks can arrive after drainAll observes an empty queue. The lock excludes other lock-protected drain/queue work, not generation or backing-map operations, so clear is not an unconditional atomic-empty operation under concurrency. Public size() observes cache.size(), contains(key) observes cache.containsKey(key), capacity() returns the immutable configured bound, and deprecated sizeLimit() returns the same field; none reports currentSize or queue state. ConcurrentHashMap observations can therefore differ from deferred accounting. ConcurrentLruCacheTests supplies sequential corroboration through zeroCapacity (line 35), getAndSize insertion/eviction (line 58), removeAndSize (line 76), and clearAndSize (line 94); those uncontended tests show the expected settled outcomes but are not evidence of atomicity or other concurrent guarantees."
+      }
+    ]
+  },
+  "quality": {
+    "passed": true,
+    "findings": [
+      {
+        "id": "entry-generation",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "read-recency",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "drain-coordination",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "insertion-eviction",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "key-removal",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "clear-and-observation",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "preflight": {
+    "baseline": {
+      "passed": true,
+      "archive_sha256": "b624d888e8a35f55c6f43f3255c2b21878d56e75d1e764442e9571d1fa998b23",
+      "revision": "cf482b13ebb638a175d9",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    },
+    "control": {
+      "passed": true,
+      "archive_sha256": "b624d888e8a35f55c6f43f3255c2b21878d56e75d1e764442e9571d1fa998b23",
+      "revision": "cf482b13ebb638a175d9",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    },
+    "quotes": {
+      "passed": true,
+      "archive_sha256": "b624d888e8a35f55c6f43f3255c2b21878d56e75d1e764442e9571d1fa998b23",
+      "revision": "cf482b13ebb638a175d9",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    }
+  },
+  "postflight": {
+    "baseline": {
+      "passed": true,
+      "archive_sha256": "b624d888e8a35f55c6f43f3255c2b21878d56e75d1e764442e9571d1fa998b23",
+      "revision": "cf482b13ebb638a175d9",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    },
+    "control": {
+      "passed": true,
+      "archive_sha256": "b624d888e8a35f55c6f43f3255c2b21878d56e75d1e764442e9571d1fa998b23",
+      "revision": "cf482b13ebb638a175d9",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    },
+    "quotes": {
+      "passed": true,
+      "archive_sha256": "b624d888e8a35f55c6f43f3255c2b21878d56e75d1e764442e9571d1fa998b23",
+      "revision": "cf482b13ebb638a175d9",
+      "source_files_verified": 1166,
+      "indexed_source_files_verified": 1166,
+      "counts": {
+        "files": 1166,
+        "nodes": 20811,
+        "scopes": 20647,
+        "edges": 32145,
+        "references": 68007,
+        "imports": 7723,
+        "diagnostics": 16
+      },
+      "consumer_index_absent": true
+    }
+  },
+  "events_sha256": "9b368d0e94f6223948fc16ac7e006ccf88d02e45f43905457de693969bf43926"
+}

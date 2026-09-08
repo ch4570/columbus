@@ -1,0 +1,31 @@
+{
+  "pid": 23620,
+  "started_at": "2026-09-08T18:01:14.613070+00:00",
+  "schedule": [
+    [
+      "baseline",
+      1
+    ],
+    [
+      "control",
+      1
+    ],
+    [
+      "quotes",
+      1
+    ],
+    [
+      "quotes",
+      2
+    ],
+    [
+      "control",
+      2
+    ],
+    [
+      "baseline",
+      2
+    ]
+  ],
+  "input_hashes_sha256": "85ac3b856197225df2234c118bde0bacf1382655a45945b5bf03406bbb9c83a8"
+}
