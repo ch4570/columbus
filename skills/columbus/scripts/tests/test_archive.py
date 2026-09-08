@@ -624,3 +624,103 @@ class ArchiveTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'damaged cache'):
                     archive(index, output)
             self.assertEqual(set(root.iterdir()), before)
+
+    def test_search_filters_precede_ranking_counts_and_rendered_budget(self):
+        from columbus.presentation import render
+        with tempfile.TemporaryDirectory() as consumer:
+            artifacts = [Path(consumer) / codec for codec in ('gzip', 'xz')]
+            with tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                (root / 'src').mkdir()
+                (root / 'tests').mkdir()
+                (root / 'src/a.py').write_text('def target(): pass\n' + ''.join(
+                    f'def target_{number}(): pass\n' for number in range(15)), encoding='utf-8')
+                (root / 'src/b.py').write_text('def target(): pass\n', encoding='utf-8')
+                (root / 'src/app.js').write_text('function target() { return 1; }\n', encoding='utf-8')
+                (root / 'tests/example.py').write_text('def target(): pass\n', encoding='utf-8')
+                index = RepositoryIndex(root / '.columbus/index.sqlite')
+                index.refresh(root)
+                for artifact, codec in zip(artifacts, ('gzip', 'xz')):
+                    archive(index, artifact, compression=codec)
+            self.assertFalse(root.exists())
+            for artifact in artifacts:
+                with self.subTest(codec=artifact.name):
+                    complete = search_archive(artifact, 'target', limit=50, budget_bytes=64000,
+                                              path='src/*', language='python')
+                    self.assertEqual(complete['matched_nodes'], 17)
+                    self.assertFalse(complete['truncated'])
+                    self.assertEqual({item['path'] for item in complete['items']}, {'src/a.py', 'src/b.py'})
+                    self.assertTrue(all(item['language'] == 'python' for item in complete['items']))
+                    self.assertEqual(complete['path_filter'], 'src/*')
+                    self.assertEqual(complete['language_filter'], 'python')
+                    limited = search_archive(artifact, 'target', limit=1, path='src/*', language='python')
+                    self.assertEqual(limited['matched_nodes'], 17)
+                    self.assertEqual(limited['items'], complete['items'][:1])
+                    self.assertTrue(limited['truncated'])
+                    for fmt in ('json', 'text'):
+                        packet = search_archive(artifact, 'target', limit=50, budget_bytes=2048,
+                                                output_format=fmt, path='src/*', language='python')
+                        output = render(packet, fmt, 'archive-search') + ('\n' if fmt == 'json' else '')
+                        self.assertLessEqual(len(output.encode('utf-8')), 2048)
+                        self.assertEqual(packet['matched_nodes'], 17)
+                        self.assertEqual(packet['items'], complete['items'][:len(packet['items'])])
+                        self.assertTrue(packet['items'])
+                        self.assertTrue(packet['truncated'])
+                    one = search_archive(artifact, 'target', path='src/[!a]*.py', language='python')
+                    self.assertEqual([item['path'] for item in one['items']], ['src/b.py'])
+                    self.assertEqual(one['matched_nodes'], 1)
+                    self.assertFalse(one['truncated'])
+                    script = search_archive(artifact, 'target', language='javascript')
+                    self.assertEqual([item['path'] for item in script['items']], ['src/app.js'])
+                    self.assertEqual(script['matched_nodes'], 1)
+                    for query in ('target', 'src/a.py::target:function'):
+                        for filters in ({'path': 'SRC/*'}, {'language': 'Python'},
+                                        {'path': 'src/a.py', 'language': 'javascript'}):
+                            empty = search_archive(artifact, query, **filters)
+                            self.assertEqual(empty['items'], [])
+                            self.assertEqual(empty['matched_nodes'], 0)
+                            self.assertFalse(empty['truncated'])
+                    exact = search_archive(artifact, 'src/a.py::target:function', path='src/a.py', language='python')
+                    self.assertEqual([item['id'] for item in exact['items']], ['src/a.py::target:function'])
+                    unfiltered = search_archive(artifact, 'target')
+                    self.assertNotIn('path_filter', unfiltered)
+                    self.assertNotIn('language_filter', unfiltered)
+            self.assertEqual(set(Path(consumer).iterdir()), set(artifacts))
+
+    def test_search_filter_cli_validation_and_complete_archive_validation(self):
+        import io
+        from contextlib import redirect_stdout
+        from columbus.cli import main
+        from columbus.presentation import render
+        for keyword, invalid in [('path', ['', 1, True, 'x' * 2049, 'bad\0path']),
+                                 ('language', ['', 1, True, 'x' * 65, 'bad\0language'])]:
+            for value in invalid:
+                with self.subTest(keyword=keyword, value=value):
+                    with self.assertRaisesRegex(ValueError, keyword):
+                        search_archive('unused', 'target', **{keyword: value})
+        with tempfile.TemporaryDirectory() as directory, tempfile.TemporaryDirectory() as consumer:
+            root = Path(directory)
+            (root / 'src').mkdir()
+            (root / 'src/app.js').write_text('function target() { return 1; }\n', encoding='utf-8')
+            index = RepositoryIndex(root / '.columbus/index.sqlite')
+            index.refresh(root)
+            for codec, opener in [('gzip', gzip.open), ('xz', lzma.open)]:
+                artifact = Path(consumer) / codec
+                archive(index, artifact, compression=codec)
+                for fmt in ('json', 'text'):
+                    expected = search_archive(artifact, 'target', path='src/*', language='javascript', output_format=fmt)
+                    output = io.StringIO()
+                    with redirect_stdout(output):
+                        status = main(['archive-search', 'target', '--input', str(artifact), '--repo', consumer,
+                                       '--path', 'src/*', '--language', 'javascript', '--format', fmt])
+                    self.assertEqual(status, 0)
+                    self.assertEqual(output.getvalue(), render(expected, fmt, 'archive-search') + ('\n' if fmt == 'json' else ''))
+                with opener(artifact, 'rt', encoding='utf-8') as stream:
+                    rows = stream.readlines()
+                broken = Path(consumer) / ('incomplete.' + codec)
+                with opener(broken, 'wt', encoding='utf-8') as stream:
+                    stream.writelines(rows[:-1])
+                for path in ('src/*', 'absent/*'):
+                    with self.assertRaisesRegex(ValueError, 'Incomplete'):
+                        search_archive(broken, 'target', limit=1, path=path, language='javascript')
+            self.assertFalse((Path(consumer) / '.columbus').exists())

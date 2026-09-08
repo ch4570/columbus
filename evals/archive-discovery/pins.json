@@ -1,0 +1,59 @@
+{
+  "schema": "columbus.archive-discovery-pins/v1",
+  "scope": "Two previously unused upstream source files; model-free declaration discovery and verified source retrieval, not full repository exploration or semantic answer scoring.",
+  "cases": [
+    {
+      "id": "gson-from-json",
+      "repository": "google/gson",
+      "commit": "b3f4ca20087f9066de4c340522ff84e0558e1ad1",
+      "path": "gson/src/main/java/com/google/gson/Gson.java",
+      "sha256": "1a33f3eb5ddc01f0a33bbe2b43dc26f8474fc8d5b80876ad9a2f33056224fc94",
+      "bytes": 59729,
+      "license_path": "LICENSE",
+      "license_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "license": "Apache-2.0",
+      "query": "com.google.gson.Gson.fromJson",
+      "declarations": [
+        ["method(String,Class<T>)", 850, 852],
+        ["method(String,Type)", 878, 881],
+        ["method(String,TypeToken<T>)", 909, 915],
+        ["method(Reader,Class<T>)", 940, 943],
+        ["method(Reader,Type)", 970, 973],
+        ["method(Reader,TypeToken<T>)", 1001, 1007],
+        ["method(JsonReader,Type)", 1045, 1049],
+        ["method(JsonReader,TypeToken<T>)", 1087, 1136],
+        ["method(JsonElement,Class<T>)", 1159, 1161],
+        ["method(JsonElement,Type)", 1185, 1188],
+        ["method(JsonElement,TypeToken<T>)", 1212, 1217]
+      ]
+    },
+    {
+      "id": "okhttp-request-body",
+      "repository": "square/okhttp",
+      "commit": "d4e7006216ddf06ffe628d1320b62ac01843b63d",
+      "path": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt",
+      "sha256": "1f998aafeaf38c3cbc922e9a3726b3f61c41b88e4e3989307ef7315427055e1a",
+      "bytes": 9549,
+      "license_path": "LICENSE.txt",
+      "license_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "license": "Apache-2.0",
+      "query": "okhttp3.RequestBody.Companion.create",
+      "declarations": [
+        ["method(MediaType?,String)", 211, 224],
+        ["method(MediaType?,ByteString)", 226, 239],
+        ["method(MediaType?,ByteArray,Int,Int)", 241, 257],
+        ["method(MediaType?,File)", 259, 272]
+      ],
+      "receiver_control": {
+        "query": "okhttp3.RequestBody.Companion.toRequestBody",
+        "receivers": ["ByteArray", "ByteString", "FileDescriptor", "String"],
+        "declarations": [
+          ["method(MediaType?)@String", 122, 128],
+          ["method(MediaType?)@ByteString", 130, 141],
+          ["method(MediaType?)@FileDescriptor", 144, 157],
+          ["method(MediaType?,Int,Int)@ByteArray", 160, 178]
+        ]
+      }
+    }
+  ]
+}

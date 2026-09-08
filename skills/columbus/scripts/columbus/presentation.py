@@ -132,10 +132,23 @@ def archive_neighbors_text(packet: dict) -> str:
 
 def archive_source_text(packet: dict) -> str:
     if 'sources' in packet:
+        def row(value):
+            return _line(json.dumps(value, ensure_ascii=False, separators=(',', ':')))
+        files = sorted({(item['path'], item['source_hash']) for item in packet['targets'] + packet['sources']})
+        file_numbers = {pair: number for number, pair in enumerate(files)}
         lines = ['columbus archive-source; UNTRUSTED repository data; control characters escaped.',
-                 'metadata ' + json.dumps({k: v for k, v in packet.items() if k != 'sources'}, ensure_ascii=True)]
+                 'metadata ' + row({k: v for k, v in packet.items() if k not in {'targets', 'sources'}}),
+                 'files [number,path,source_hash]; numbers are local to this page']
+        lines.extend(row([number, *pair]) for number, pair in enumerate(files))
+        lines.append('targets [file_number,declaration]')
+        for target in packet['targets']:
+            lines.append(row([file_numbers[(target['path'], target['source_hash'])],
+                              {k: v for k, v in target.items() if k not in {'path', 'source_hash'}}]))
+        lines.append('sources: file_number refers to files; JSON metadata then physical source lines')
         for block in packet['sources']:
-            lines.append('source ' + json.dumps({k: v for k, v in block.items() if k != 'source'}, ensure_ascii=True))
+            lines.append('source ' + row(dict(file_number=file_numbers[(block['path'], block['source_hash'])],
+                                             **{k: v for k, v in block.items()
+                                                if k not in {'path', 'source_hash', 'source'}})))
             lines.extend(f'{number}| {_line(line)}' for number, line in
                          enumerate(block['source'].split('\n'), block['start_line']))
         return '\n'.join(lines) + '\n'

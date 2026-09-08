@@ -1,0 +1,730 @@
+{
+  "schema": "columbus.archive-discovery/v1",
+  "model_trial": false,
+  "model_usage": null,
+  "answer_semantics_measured": false,
+  "scope": "Two previously unused upstream source files; model-free declaration discovery and verified source retrieval, not full repository exploration or semantic answer scoring.",
+  "acceptance": "Exact source parity and required controls; no model-token acceptance claim",
+  "comparison": "Two scripted command sequences using the same current runtime",
+  "python_version": "3.12.14",
+  "parser_versions": {
+    "tree-sitter": "0.26.0",
+    "tree-sitter-java": "0.23.5",
+    "tree-sitter-kotlin": "1.1.0"
+  },
+  "input_hashes": {
+    "evals/archive-discovery/pins.json": "7e154ef310bbb0a3f8da34c558f79f6b23ac278ddd5a75c22ff3cd6e1e0601bb",
+    "evals/archive-discovery/verify.py": "91766bfdf86a4cc88d387cdab11cfb80a86c5d7d177a35f748144ff731398061",
+    "skills/columbus/scripts/columbus/__init__.py": "f9364e1616a62a901f09b577f93dfc241d1446bfcdcbc420ac70c63f9c39b396",
+    "skills/columbus/scripts/columbus/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "skills/columbus/scripts/columbus/archive.py": "8334ca1301a6468533abb040024e1df040c8124c453976949c5fa8341fe8f2a6",
+    "skills/columbus/scripts/columbus/bundle.py": "f73fe1c36c89211c823f6c94eae67efc054e8c69b835b3ef49371482e7dd7f00",
+    "skills/columbus/scripts/columbus/cli.py": "92df67e1fddd4a03d60b34db012ec4c40f897aada277cb47e4aaf6097841fa16",
+    "skills/columbus/scripts/columbus/discovery.py": "31b40e39531a3e903d43285ecff26315e79bbac27adc86943fc61c7d5ad8fee3",
+    "skills/columbus/scripts/columbus/export.py": "258f6b2df72a08da837480c96db82c78eeec63007d8d1c48baed8aa36b445957",
+    "skills/columbus/scripts/columbus/graph_views.py": "9e935520bb990c2066cfdb943c37477e78378b5ffd868e31735cc6a5e261f1c7",
+    "skills/columbus/scripts/columbus/hooks.py": "07e7e50d250904d03158bd559b32869c2a83185c6a318587278681e1956fcb42",
+    "skills/columbus/scripts/columbus/index.py": "01a2b6d9dc53a22142ea93bba1f42a5edb3a2406507191a0d62933673eaade06",
+    "skills/columbus/scripts/columbus/jvm.py": "7014b2d5a6894a5e9c734b6a6c2089ce667a897c295a61e1f23c46419c61bd8b",
+    "skills/columbus/scripts/columbus/language_profiles.py": "cda7c22cce6227d2627225110adafa641c7b09134b7c5d800ffcf1329092a1ce",
+    "skills/columbus/scripts/columbus/languages.py": "606fe8469d2cafdfa58d9026b86e0d7debc5922e40e4eb600af4b57a4909539b",
+    "skills/columbus/scripts/columbus/mcp_server.py": "8205f39755c51f1486fd66a1f9c993502fb2a614376510757cb4d1bdf29641c7",
+    "skills/columbus/scripts/columbus/parser.py": "c3a58b7ccdfa58ec6a44e6c71659816af5e91699e255fa7e90fe50746b9f178a",
+    "skills/columbus/scripts/columbus/polyglot.py": "6a9e43a09b48cfaad807aa279a712aea00c810a5204f9e1e63e2f4c57fc0848b",
+    "skills/columbus/scripts/columbus/presentation.py": "3cdfaa97897634018f89fed46a18b83cf3f431578dedcc6de8d058b16a9c7637",
+    "skills/columbus/scripts/columbus/receipts.py": "11068a6fd2d78a8d22a86c102b199c395c5f001e50ed5ff010f6893ab9b13ca9",
+    "skills/columbus/scripts/columbus/retrieval.py": "bdf731d03095efc705f6470a1c0721bb72117cd286a600ff5b0cae38f3d33dd5",
+    "skills/columbus/scripts/columbus/sync_state.py": "f18f0fa4a6cc970de4f527356ac9af70c29a12111cc3c58e42ba7e267ed457d3",
+    "skills/columbus/scripts/columbus/telemetry.py": "9f49124a606e3a30191c596c8bd40f7255d5fbbb93f5ba2a531940b7f63c32dc",
+    "skills/columbus/scripts/columbus/tree.py": "2be73caa6fb142ef744d2e1d6812775ae7ad12502f72e5789fe02496a83426a1",
+    "skills/columbus/scripts/columbus.py": "0b791210f2796253cc24b13d193c0cef0c602de6f1e9d1dcadd560b23c8db067",
+    "skills/columbus/scripts/install.py": "e2447308b9e283dd70574c6291f9e159f6e6d0b0b1a4fa0bbcd9745044ee10c7",
+    "skills/columbus/scripts/tests/test_agent_context.py": "6be9d5e990ad64b7fcfccd2e272dbf0611dac5be43f18db3a5d2a1ed49255073",
+    "skills/columbus/scripts/tests/test_archive.py": "7dd4e048e2f09cb35045e6b3262f5b4f73c7098663a07ce8b854abaaab7be01c",
+    "skills/columbus/scripts/tests/test_archive_overloads.py": "bd1a2711658900260ccf40a65fac18720851718682bcadee245c326510cd2de0",
+    "skills/columbus/scripts/tests/test_archive_source.py": "09ef263959d11d46c15416cd3823ac3afecec1132fd516902ca10a7c3964c1c4",
+    "skills/columbus/scripts/tests/test_archive_source_text.py": "9290b22331ee7d2f7b6939f07bf7997eee1800d9309641eaf01745951da0b4fb",
+    "skills/columbus/scripts/tests/test_callers.py": "352b06c56f388ef78247558391c40a15746c134cc14441b4b3fb8819c3252013",
+    "skills/columbus/scripts/tests/test_columbus.py": "b9d4723932c70c5efd1e1e750bfaba5385f2637ebe78b28a977583620a56ad4e",
+    "skills/columbus/scripts/tests/test_doctor.py": "0723510a59771877e95c3619d68d9377605966d82c89e04894bbab791912b959",
+    "skills/columbus/scripts/tests/test_explicit_root.py": "a74c2d242b644216dcc19d516013f5126752565aac92547c960297f5c34fe9d8",
+    "skills/columbus/scripts/tests/test_export.py": "10daceff2f699007bd5440bc8732956ceecb952dde154c83a719bffbac7b294a",
+    "skills/columbus/scripts/tests/test_index.py": "b714c9a434b16b6ab1fca12019f0aa362876fe3a90791c5e7ea76365fcbcfe5d",
+    "skills/columbus/scripts/tests/test_install.py": "0933927164665987d150c34af0668449f6cff319410d6ad4ec0a1d8730f513d2",
+    "skills/columbus/scripts/tests/test_jvm.py": "17bbd5b3ebd7b56830102e5179224b45d06dac7cea3615307524bab964be8678",
+    "skills/columbus/scripts/tests/test_mcp.py": "bad850f2384a0144fc977b8f726dfab50f3fce61e694be0497450e8263858530",
+    "skills/columbus/scripts/tests/test_parser.py": "99e0eecd7ea296b89b68532c2f811ff2026314c6d67616c93cc672c86fe831c9",
+    "skills/columbus/scripts/tests/test_polyglot.py": "3131b857e76a9ee706ab85c7441621e4ea358e85773e0609f372ec204106645f",
+    "skills/columbus/scripts/tests/test_portable_ast.py": "6480034f056e85f085b2e98fa48f5a7b49a18a88b9137717c31e4c157c1e3019",
+    "skills/columbus/scripts/tests/test_receiver_candidates.py": "43b50a7317a6bbbfdb37c3849caf9ee068910afa7682c32dc152f77dc80d18d2",
+    "skills/columbus/scripts/tests/test_sessions.py": "6970ec0d6341226463df0bc5a5b77aa6c63024d91ca32019847c10c0c175a8bd",
+    "skills/columbus/scripts/tests/test_sync.py": "ad151a2cf116a4476c986a37b71f9febdcbb60d9a59c6f409428536e6436f62c",
+    "skills/columbus/scripts/tests/test_sync_state.py": "ffa355f948b7d14457daa9623e7f33e5e57a6c2acaeb4d4a25c484998bb38ab3",
+    "skills/columbus/scripts/tests/test_token_economy.py": "281890cdb1f861c902433a812d6f38bb81d6fa3422affcda36fee526dbbcb404"
+  },
+  "command_log": [
+    {
+      "case": "gson-from-json",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-search com.google.gson.Gson.fromJson --input graph.jsonl.xz --format text --limit 50 --budget-bytes 32000",
+      "command_bytes": 240,
+      "exit_code": 0,
+      "stdout_bytes": 5826,
+      "stderr_bytes": 0,
+      "stdout_sha256": "c3b4755c64ea09ad03bc53a01fad94a9757709435a5bc00e7291328d5dd67bcf",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "gson-from-json",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(JsonElement,Class<T>)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(JsonElement,Type)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(JsonElement,TypeToken<T>)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(JsonReader,Type)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(JsonReader,TypeToken<T>)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(Reader,Class<T>)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(Reader,Type)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(Reader,TypeToken<T>)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(String,Class<T>)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(String,Type)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(String,TypeToken<T>)' --input graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 32000",
+      "command_bytes": 1365,
+      "exit_code": 0,
+      "stdout_bytes": 8031,
+      "stderr_bytes": 0,
+      "stdout_sha256": "46350b50db18ecf15d9d46bfa8fcf6b784dde809cceac6a4f79cba3f2ca0a05e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "gson-from-json",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source com.google.gson.Gson.fromJson --input graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 32000 --overloads",
+      "command_bytes": 262,
+      "exit_code": 0,
+      "stdout_bytes": 8122,
+      "stderr_bytes": 0,
+      "stdout_sha256": "29ef3f64ccdc06e601c47cb8e3cba9a1a74ea621231e870362efc43fd0b565de",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "gson-from-json",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-search com.google.gson.Gson.fromJson --input graph.jsonl.xz --format json --limit 50 --budget-bytes 32000",
+      "command_bytes": 240,
+      "exit_code": 0,
+      "stdout_bytes": 5744,
+      "stderr_bytes": 0,
+      "stdout_sha256": "9e338f51bbce7c3722c9d0f67e28d6199fbaa253bca364aa3183dca42f61b6a6",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "gson-from-json",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(JsonElement,Class<T>)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(JsonElement,Type)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(JsonElement,TypeToken<T>)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(JsonReader,Type)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(JsonReader,TypeToken<T>)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(Reader,Class<T>)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(Reader,Type)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(Reader,TypeToken<T>)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(String,Class<T>)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(String,Type)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(String,TypeToken<T>)' --input graph.jsonl.xz --repo . --format json --limit 400 --budget-bytes 32000",
+      "command_bytes": 1365,
+      "exit_code": 0,
+      "stdout_bytes": 10020,
+      "stderr_bytes": 0,
+      "stdout_sha256": "98d03ce801141be37c725d08db5157f03e61d31a9c4f46ae188449227778db88",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "gson-from-json",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source com.google.gson.Gson.fromJson --input graph.jsonl.xz --repo . --format json --limit 400 --budget-bytes 32000 --overloads",
+      "command_bytes": 262,
+      "exit_code": 0,
+      "stdout_bytes": 10111,
+      "stderr_bytes": 0,
+      "stdout_sha256": "2688684908bda899ff1c063ef8b1399ee32527a1e37df83d27982d4d982ff643",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "gson-from-json",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source com.google.gson.Gson.fromJson --input graph.jsonl.xz --repo .",
+      "command_bytes": 203,
+      "exit_code": 2,
+      "stdout_bytes": 0,
+      "stderr_bytes": 81,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "9f7aa2e0750de5643d92b96774eef89f1cc864d57b2ee89770258fccf49038ec"
+    },
+    {
+      "case": "gson-from-json",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(String,Class<T>)' --input graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 32000 --overloads",
+      "command_bytes": 334,
+      "exit_code": 0,
+      "stdout_bytes": 1106,
+      "stderr_bytes": 0,
+      "stdout_sha256": "e47c4e0ba58b0e456cc5ae84fd1f8b7f28a6db01487421d19751fe8d47e0a5f6",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "gson-from-json",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source com.google.gson.Gson.fromJson --input graph.jsonl.xz --repo . --format text --limit 17 --budget-bytes 32000 --overloads",
+      "command_bytes": 261,
+      "exit_code": 0,
+      "stdout_bytes": 3995,
+      "stderr_bytes": 0,
+      "stdout_sha256": "e1e938719a4f7f03024112292ba1a01eb47a3238775fb5597a40f3afd1c42af2",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "gson-from-json",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source com.google.gson.Gson.fromJson --input graph.jsonl.xz --repo . --format text --limit 17 --budget-bytes 32000 --overloads --offset 17",
+      "command_bytes": 273,
+      "exit_code": 0,
+      "stdout_bytes": 4016,
+      "stderr_bytes": 0,
+      "stdout_sha256": "ef3034f5cc0c49553ea6af6bcf93ce4371619cee9484fc5bd81991884cd0b848",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "gson-from-json",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source com.google.gson.Gson.fromJson --input graph.jsonl.xz --repo . --format text --limit 17 --budget-bytes 32000 --overloads --offset 34",
+      "command_bytes": 273,
+      "exit_code": 0,
+      "stdout_bytes": 3786,
+      "stderr_bytes": 0,
+      "stdout_sha256": "da83f3be57de6ba422c74eee0588a5f68fc4a6bbb66647d59e982f9438734960",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "gson-from-json",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source com.google.gson.Gson.fromJson --input graph.jsonl.xz --repo . --format text --limit 17 --budget-bytes 32000 --overloads --offset 51",
+      "command_bytes": 273,
+      "exit_code": 0,
+      "stdout_bytes": 3806,
+      "stderr_bytes": 0,
+      "stdout_sha256": "ac4e7f7ef408e3f8eb488e158cd4d918f79dc505305f8b2cc97443728e87e5b3",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "gson-from-json",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source com.google.gson.Gson.fromJson --input graph.jsonl.xz --repo . --format text --limit 17 --budget-bytes 32000 --overloads --offset 68",
+      "command_bytes": 273,
+      "exit_code": 0,
+      "stdout_bytes": 3820,
+      "stderr_bytes": 0,
+      "stdout_sha256": "496284d0c3229aa6026cb220f32667741c38c57bf643ab736e963e396b501304",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "gson-from-json",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source com.google.gson.Gson.fromJson --input graph.jsonl.xz --repo . --format text --limit 17 --budget-bytes 32000 --overloads --offset 85",
+      "command_bytes": 273,
+      "exit_code": 0,
+      "stdout_bytes": 3667,
+      "stderr_bytes": 0,
+      "stdout_sha256": "f497b5fcb7ade69fc5650e6ae1d79c8bb122f451f96a99666b0a11369dab4e72",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "okhttp-request-body",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-search okhttp3.RequestBody.Companion.create --input graph.jsonl.xz --format text --limit 50 --budget-bytes 32000",
+      "command_bytes": 247,
+      "exit_code": 0,
+      "stdout_bytes": 3039,
+      "stderr_bytes": 0,
+      "stdout_sha256": "f0c79f347054d09bed3fbadd0e230b168cd4d059c0f2802ca70048c303561400",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "okhttp-request-body",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source 'okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt::okhttp3.RequestBody.Companion.create:method(MediaType?,ByteArray,Int,Int)' 'okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt::okhttp3.RequestBody.Companion.create:method(MediaType?,ByteString)' 'okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt::okhttp3.RequestBody.Companion.create:method(MediaType?,File)' 'okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt::okhttp3.RequestBody.Companion.create:method(MediaType?,String)' --input graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 32000",
+      "command_bytes": 729,
+      "exit_code": 0,
+      "stdout_bytes": 4071,
+      "stderr_bytes": 0,
+      "stdout_sha256": "1bfa73617173695a122bb8c4a2f15bf906f6173c8c65a3eb886c85e2e463db3c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "okhttp-request-body",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source okhttp3.RequestBody.Companion.create --input graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 32000 --overloads",
+      "command_bytes": 269,
+      "exit_code": 0,
+      "stdout_bytes": 4162,
+      "stderr_bytes": 0,
+      "stdout_sha256": "7387f70ff7fa22fa01068e262d590ea8a51a7b74709e8bfb626e284161a234f8",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "okhttp-request-body",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-search okhttp3.RequestBody.Companion.create --input graph.jsonl.xz --format json --limit 50 --budget-bytes 32000",
+      "command_bytes": 247,
+      "exit_code": 0,
+      "stdout_bytes": 2957,
+      "stderr_bytes": 0,
+      "stdout_sha256": "c0e9349d0ad335c86a35e1c935b3ad68744f71cf485187264ead66a8c9186199",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "okhttp-request-body",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source 'okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt::okhttp3.RequestBody.Companion.create:method(MediaType?,ByteArray,Int,Int)' 'okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt::okhttp3.RequestBody.Companion.create:method(MediaType?,ByteString)' 'okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt::okhttp3.RequestBody.Companion.create:method(MediaType?,File)' 'okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt::okhttp3.RequestBody.Companion.create:method(MediaType?,String)' --input graph.jsonl.xz --repo . --format json --limit 400 --budget-bytes 32000",
+      "command_bytes": 729,
+      "exit_code": 0,
+      "stdout_bytes": 4602,
+      "stderr_bytes": 0,
+      "stdout_sha256": "7eba7b52e8fc3098048085c2d3b3c6891ca37dac1cc98240bc5dcef67eecd6ef",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "okhttp-request-body",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source okhttp3.RequestBody.Companion.create --input graph.jsonl.xz --repo . --format json --limit 400 --budget-bytes 32000 --overloads",
+      "command_bytes": 269,
+      "exit_code": 0,
+      "stdout_bytes": 4693,
+      "stderr_bytes": 0,
+      "stdout_sha256": "ad64fc5d105ac2b9c98bf7480d7a2aadf676cda5051ef957e6044ad835e7f24a",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "okhttp-request-body",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source okhttp3.RequestBody.Companion.create --input graph.jsonl.xz --repo .",
+      "command_bytes": 210,
+      "exit_code": 2,
+      "stdout_bytes": 0,
+      "stderr_bytes": 81,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "9f7aa2e0750de5643d92b96774eef89f1cc864d57b2ee89770258fccf49038ec"
+    },
+    {
+      "case": "okhttp-request-body",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source 'okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt::okhttp3.RequestBody.Companion.create:method(MediaType?,String)' --input graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 32000 --overloads",
+      "command_bytes": 356,
+      "exit_code": 0,
+      "stdout_bytes": 1535,
+      "stderr_bytes": 0,
+      "stdout_sha256": "80752086422e5c16b4cc69e41dbd8a56d77e1745c1b80773c3b894801fb978dc",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "okhttp-request-body",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source okhttp3.RequestBody.Companion.create --input graph.jsonl.xz --repo . --format text --limit 17 --budget-bytes 32000 --overloads",
+      "command_bytes": 268,
+      "exit_code": 0,
+      "stdout_bytes": 2414,
+      "stderr_bytes": 0,
+      "stdout_sha256": "cbb3487af842ba82b86b8272df9fb7093ff3c33ef6cb479a5db2a45d1e4551e4",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "okhttp-request-body",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source okhttp3.RequestBody.Companion.create --input graph.jsonl.xz --repo . --format text --limit 17 --budget-bytes 32000 --overloads --offset 17",
+      "command_bytes": 280,
+      "exit_code": 0,
+      "stdout_bytes": 2353,
+      "stderr_bytes": 0,
+      "stdout_sha256": "5cfbd2756323a95316b0e471b00e220771bbd812a625b328497aff44c7754fcd",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "okhttp-request-body",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source okhttp3.RequestBody.Companion.create --input graph.jsonl.xz --repo . --format text --limit 17 --budget-bytes 32000 --overloads --offset 34",
+      "command_bytes": 280,
+      "exit_code": 0,
+      "stdout_bytes": 2446,
+      "stderr_bytes": 0,
+      "stdout_sha256": "f98e8ca5b66514bb7410f9ac021c3dc63af9e0e6cef455781098c0aeedede2ce",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "okhttp-request-body",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source okhttp3.RequestBody.Companion.create --input graph.jsonl.xz --repo . --format text --limit 17 --budget-bytes 32000 --overloads --offset 51",
+      "command_bytes": 280,
+      "exit_code": 0,
+      "stdout_bytes": 1955,
+      "stderr_bytes": 0,
+      "stdout_sha256": "706a13e01915b6031a5f5731f3fe06f9e69c2f32839d46ce7ed0e16d8c252efb",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "okhttp-request-body",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source okhttp3.RequestBody.Companion.toRequestBody --overloads --input graph.jsonl.xz --repo .",
+      "command_bytes": 229,
+      "exit_code": 2,
+      "stdout_bytes": 0,
+      "stderr_bytes": 140,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "d9cebd4b2cc0fc94a288ae55ed8b106ede64001efedb3a7f94cf557a048bc414"
+    },
+    {
+      "case": "okhttp-request-body",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source 'okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt::okhttp3.RequestBody.Companion.toRequestBody:method(MediaType?)@String' --input graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 32000 --overloads",
+      "command_bytes": 363,
+      "exit_code": 0,
+      "stdout_bytes": 1320,
+      "stderr_bytes": 0,
+      "stdout_sha256": "2aff7843b6c9a54161a2e3de15ff1824e64896a2476cda370f2856a3cbdba876",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "okhttp-request-body",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source 'okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt::okhttp3.RequestBody.Companion.toRequestBody:method(MediaType?)@ByteString' --input graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 32000 --overloads",
+      "command_bytes": 367,
+      "exit_code": 0,
+      "stdout_bytes": 1420,
+      "stderr_bytes": 0,
+      "stdout_sha256": "be1caa2ef45d00d86a847c1a617de0117c5e28fb7dad6b231d7ad495ff03b838",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "okhttp-request-body",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source 'okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt::okhttp3.RequestBody.Companion.toRequestBody:method(MediaType?)@FileDescriptor' --input graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 32000 --overloads",
+      "command_bytes": 371,
+      "exit_code": 0,
+      "stdout_bytes": 1503,
+      "stderr_bytes": 0,
+      "stdout_sha256": "0d5b2cb070570f8bff073663b278f30d721042e8382392a94758187059abd183",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "okhttp-request-body",
+      "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source 'okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt::okhttp3.RequestBody.Companion.toRequestBody:method(MediaType?,Int,Int)@ByteArray' --input graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 32000 --overloads",
+      "command_bytes": 374,
+      "exit_code": 0,
+      "stdout_bytes": 1659,
+      "stderr_bytes": 0,
+      "stdout_sha256": "751fce0d18b4b50ffc2ede824f42b4b27ed4208fa282822c7bf9dc223478b795",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "cases": [
+    {
+      "id": "gson-from-json",
+      "repository": "google/gson",
+      "commit": "b3f4ca20087f9066de4c340522ff84e0558e1ad1",
+      "source": {
+        "url": "https://raw.githubusercontent.com/google/gson/b3f4ca20087f9066de4c340522ff84e0558e1ad1/gson/src/main/java/com/google/gson/Gson.java",
+        "sha256": "1a33f3eb5ddc01f0a33bbe2b43dc26f8474fc8d5b80876ad9a2f33056224fc94",
+        "bytes": 59729
+      },
+      "license": {
+        "url": "https://raw.githubusercontent.com/google/gson/b3f4ca20087f9066de4c340522ff84e0558e1ad1/LICENSE",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+        "bytes": 11358
+      },
+      "archive_sha256": "eed4e7cb6a87fb96b8a4e4dfdf7f6ea9148ce75e82e2a140f6cd6ef42f811c94",
+      "indexed_files": 2,
+      "declarations": 11,
+      "physical_source_lines": 97,
+      "source_rows_sha256": "70d6e97095267d49f6f0b58f6fc7605025c62dadf43e63c05c4a94df4c5cbd7c",
+      "workflows": {
+        "text": {
+          "baseline": {
+            "command_count": 2,
+            "command_bytes": 1605,
+            "response_bytes": 13857,
+            "failed_commands": 0,
+            "commands": [
+              {
+                "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-search com.google.gson.Gson.fromJson --input graph.jsonl.xz --format text --limit 50 --budget-bytes 32000",
+                "command_bytes": 240,
+                "exit_code": 0,
+                "stdout_bytes": 5826,
+                "stderr_bytes": 0,
+                "stdout_sha256": "c3b4755c64ea09ad03bc53a01fad94a9757709435a5bc00e7291328d5dd67bcf",
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              {
+                "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(JsonElement,Class<T>)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(JsonElement,Type)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(JsonElement,TypeToken<T>)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(JsonReader,Type)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(JsonReader,TypeToken<T>)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(Reader,Class<T>)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(Reader,Type)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(Reader,TypeToken<T>)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(String,Class<T>)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(String,Type)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(String,TypeToken<T>)' --input graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 32000",
+                "command_bytes": 1365,
+                "exit_code": 0,
+                "stdout_bytes": 8031,
+                "stderr_bytes": 0,
+                "stdout_sha256": "46350b50db18ecf15d9d46bfa8fcf6b784dde809cceac6a4f79cba3f2ca0a05e",
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            ]
+          },
+          "overloads": {
+            "command_count": 1,
+            "command_bytes": 262,
+            "response_bytes": 8122,
+            "failed_commands": 0,
+            "commands": [
+              {
+                "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source com.google.gson.Gson.fromJson --input graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 32000 --overloads",
+                "command_bytes": 262,
+                "exit_code": 0,
+                "stdout_bytes": 8122,
+                "stderr_bytes": 0,
+                "stdout_sha256": "29ef3f64ccdc06e601c47cb8e3cba9a1a74ea621231e870362efc43fd0b565de",
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            ]
+          },
+          "exact_target_parity": true,
+          "source_hash_parity": true,
+          "physical_source_parity": true,
+          "command_bytes_change": -1343,
+          "response_bytes_change": -5735
+        },
+        "json": {
+          "baseline": {
+            "command_count": 2,
+            "command_bytes": 1605,
+            "response_bytes": 15764,
+            "failed_commands": 0,
+            "commands": [
+              {
+                "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-search com.google.gson.Gson.fromJson --input graph.jsonl.xz --format json --limit 50 --budget-bytes 32000",
+                "command_bytes": 240,
+                "exit_code": 0,
+                "stdout_bytes": 5744,
+                "stderr_bytes": 0,
+                "stdout_sha256": "9e338f51bbce7c3722c9d0f67e28d6199fbaa253bca364aa3183dca42f61b6a6",
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              {
+                "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(JsonElement,Class<T>)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(JsonElement,Type)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(JsonElement,TypeToken<T>)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(JsonReader,Type)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(JsonReader,TypeToken<T>)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(Reader,Class<T>)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(Reader,Type)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(Reader,TypeToken<T>)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(String,Class<T>)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(String,Type)' 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(String,TypeToken<T>)' --input graph.jsonl.xz --repo . --format json --limit 400 --budget-bytes 32000",
+                "command_bytes": 1365,
+                "exit_code": 0,
+                "stdout_bytes": 10020,
+                "stderr_bytes": 0,
+                "stdout_sha256": "98d03ce801141be37c725d08db5157f03e61d31a9c4f46ae188449227778db88",
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            ]
+          },
+          "overloads": {
+            "command_count": 1,
+            "command_bytes": 262,
+            "response_bytes": 10111,
+            "failed_commands": 0,
+            "commands": [
+              {
+                "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source com.google.gson.Gson.fromJson --input graph.jsonl.xz --repo . --format json --limit 400 --budget-bytes 32000 --overloads",
+                "command_bytes": 262,
+                "exit_code": 0,
+                "stdout_bytes": 10111,
+                "stderr_bytes": 0,
+                "stdout_sha256": "2688684908bda899ff1c063ef8b1399ee32527a1e37df83d27982d4d982ff643",
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            ]
+          },
+          "exact_target_parity": true,
+          "source_hash_parity": true,
+          "physical_source_parity": true,
+          "command_bytes_change": -1343,
+          "response_bytes_change": -5653
+        }
+      },
+      "controls": {
+        "unflagged_ambiguity": {
+          "passed": true,
+          "expected": "nonzero ambiguous-or-absent failure with no source output",
+          "observed_error": "columbus: Declaration is ambiguous or absent; use archive-search and an exact ID",
+          "receipt": {
+            "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source com.google.gson.Gson.fromJson --input graph.jsonl.xz --repo .",
+            "command_bytes": 203,
+            "exit_code": 2,
+            "stdout_bytes": 0,
+            "stderr_bytes": 81,
+            "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stderr_sha256": "9f7aa2e0750de5643d92b96774eef89f1cc864d57b2ee89770258fccf49038ec"
+          }
+        },
+        "exact_id_stays_single": {
+          "passed": true,
+          "declaration_id": "gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(String,Class<T>)",
+          "commands": [
+            {
+              "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source 'gson/src/main/java/com/google/gson/Gson.java::com.google.gson.Gson.fromJson:method(String,Class<T>)' --input graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 32000 --overloads",
+              "command_bytes": 334,
+              "exit_code": 0,
+              "stdout_bytes": 1106,
+              "stderr_bytes": 0,
+              "stdout_sha256": "e47c4e0ba58b0e456cc5ae84fd1f8b7f28a6db01487421d19751fe8d47e0a5f6",
+              "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ]
+        },
+        "grouped_pagination": {
+          "passed": true,
+          "pages": 6,
+          "physical_source_lines": 97
+        }
+      },
+      "source_unchanged": true,
+      "archive_unchanged": true,
+      "license_unchanged": true,
+      "passed": true
+    },
+    {
+      "id": "okhttp-request-body",
+      "repository": "square/okhttp",
+      "commit": "d4e7006216ddf06ffe628d1320b62ac01843b63d",
+      "source": {
+        "url": "https://raw.githubusercontent.com/square/okhttp/d4e7006216ddf06ffe628d1320b62ac01843b63d/okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt",
+        "sha256": "1f998aafeaf38c3cbc922e9a3726b3f61c41b88e4e3989307ef7315427055e1a",
+        "bytes": 9549
+      },
+      "license": {
+        "url": "https://raw.githubusercontent.com/square/okhttp/d4e7006216ddf06ffe628d1320b62ac01843b63d/LICENSE.txt",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+        "bytes": 11358
+      },
+      "archive_sha256": "38c29ed4151fc6cddccaed79b7e67569afbd850dced7716b7ac8c53ff10c5ae8",
+      "indexed_files": 2,
+      "declarations": 4,
+      "physical_source_lines": 59,
+      "source_rows_sha256": "5863181924d6b8273fc266486e736e0a0aa7b24c0cef7af9f41a3b853f5ee453",
+      "workflows": {
+        "text": {
+          "baseline": {
+            "command_count": 2,
+            "command_bytes": 976,
+            "response_bytes": 7110,
+            "failed_commands": 0,
+            "commands": [
+              {
+                "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-search okhttp3.RequestBody.Companion.create --input graph.jsonl.xz --format text --limit 50 --budget-bytes 32000",
+                "command_bytes": 247,
+                "exit_code": 0,
+                "stdout_bytes": 3039,
+                "stderr_bytes": 0,
+                "stdout_sha256": "f0c79f347054d09bed3fbadd0e230b168cd4d059c0f2802ca70048c303561400",
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              {
+                "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source 'okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt::okhttp3.RequestBody.Companion.create:method(MediaType?,ByteArray,Int,Int)' 'okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt::okhttp3.RequestBody.Companion.create:method(MediaType?,ByteString)' 'okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt::okhttp3.RequestBody.Companion.create:method(MediaType?,File)' 'okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt::okhttp3.RequestBody.Companion.create:method(MediaType?,String)' --input graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 32000",
+                "command_bytes": 729,
+                "exit_code": 0,
+                "stdout_bytes": 4071,
+                "stderr_bytes": 0,
+                "stdout_sha256": "1bfa73617173695a122bb8c4a2f15bf906f6173c8c65a3eb886c85e2e463db3c",
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            ]
+          },
+          "overloads": {
+            "command_count": 1,
+            "command_bytes": 269,
+            "response_bytes": 4162,
+            "failed_commands": 0,
+            "commands": [
+              {
+                "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source okhttp3.RequestBody.Companion.create --input graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 32000 --overloads",
+                "command_bytes": 269,
+                "exit_code": 0,
+                "stdout_bytes": 4162,
+                "stderr_bytes": 0,
+                "stdout_sha256": "7387f70ff7fa22fa01068e262d590ea8a51a7b74709e8bfb626e284161a234f8",
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            ]
+          },
+          "exact_target_parity": true,
+          "source_hash_parity": true,
+          "physical_source_parity": true,
+          "command_bytes_change": -707,
+          "response_bytes_change": -2948
+        },
+        "json": {
+          "baseline": {
+            "command_count": 2,
+            "command_bytes": 976,
+            "response_bytes": 7559,
+            "failed_commands": 0,
+            "commands": [
+              {
+                "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-search okhttp3.RequestBody.Companion.create --input graph.jsonl.xz --format json --limit 50 --budget-bytes 32000",
+                "command_bytes": 247,
+                "exit_code": 0,
+                "stdout_bytes": 2957,
+                "stderr_bytes": 0,
+                "stdout_sha256": "c0e9349d0ad335c86a35e1c935b3ad68744f71cf485187264ead66a8c9186199",
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              {
+                "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source 'okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt::okhttp3.RequestBody.Companion.create:method(MediaType?,ByteArray,Int,Int)' 'okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt::okhttp3.RequestBody.Companion.create:method(MediaType?,ByteString)' 'okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt::okhttp3.RequestBody.Companion.create:method(MediaType?,File)' 'okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt::okhttp3.RequestBody.Companion.create:method(MediaType?,String)' --input graph.jsonl.xz --repo . --format json --limit 400 --budget-bytes 32000",
+                "command_bytes": 729,
+                "exit_code": 0,
+                "stdout_bytes": 4602,
+                "stderr_bytes": 0,
+                "stdout_sha256": "7eba7b52e8fc3098048085c2d3b3c6891ca37dac1cc98240bc5dcef67eecd6ef",
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            ]
+          },
+          "overloads": {
+            "command_count": 1,
+            "command_bytes": 269,
+            "response_bytes": 4693,
+            "failed_commands": 0,
+            "commands": [
+              {
+                "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source okhttp3.RequestBody.Companion.create --input graph.jsonl.xz --repo . --format json --limit 400 --budget-bytes 32000 --overloads",
+                "command_bytes": 269,
+                "exit_code": 0,
+                "stdout_bytes": 4693,
+                "stderr_bytes": 0,
+                "stdout_sha256": "ad64fc5d105ac2b9c98bf7480d7a2aadf676cda5051ef957e6044ad835e7f24a",
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            ]
+          },
+          "exact_target_parity": true,
+          "source_hash_parity": true,
+          "physical_source_parity": true,
+          "command_bytes_change": -707,
+          "response_bytes_change": -2866
+        }
+      },
+      "controls": {
+        "unflagged_ambiguity": {
+          "passed": true,
+          "expected": "nonzero ambiguous-or-absent failure with no source output",
+          "observed_error": "columbus: Declaration is ambiguous or absent; use archive-search and an exact ID",
+          "receipt": {
+            "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source okhttp3.RequestBody.Companion.create --input graph.jsonl.xz --repo .",
+            "command_bytes": 210,
+            "exit_code": 2,
+            "stdout_bytes": 0,
+            "stderr_bytes": 81,
+            "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stderr_sha256": "9f7aa2e0750de5643d92b96774eef89f1cc864d57b2ee89770258fccf49038ec"
+          }
+        },
+        "exact_id_stays_single": {
+          "passed": true,
+          "declaration_id": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt::okhttp3.RequestBody.Companion.create:method(MediaType?,String)",
+          "commands": [
+            {
+              "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source 'okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt::okhttp3.RequestBody.Companion.create:method(MediaType?,String)' --input graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 32000 --overloads",
+              "command_bytes": 356,
+              "exit_code": 0,
+              "stdout_bytes": 1535,
+              "stderr_bytes": 0,
+              "stdout_sha256": "80752086422e5c16b4cc69e41dbd8a56d77e1745c1b80773c3b894801fb978dc",
+              "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ]
+        },
+        "grouped_pagination": {
+          "passed": true,
+          "pages": 4,
+          "physical_source_lines": 59
+        },
+        "different_receivers_rejected": {
+          "passed": true,
+          "expected": "nonzero ambiguous-or-absent failure with no source output",
+          "observed_error": "columbus: Declaration is ambiguous or absent for queries: 'okhttp3.RequestBody.Companion.toRequestBody'; use archive-search and an exact ID",
+          "receipt": {
+            "command": "/Users/rex/Desktop/personal/columbus/.venv/bin/python /Users/rex/Desktop/personal/columbus/skills/columbus/scripts/columbus.py archive-source okhttp3.RequestBody.Companion.toRequestBody --overloads --input graph.jsonl.xz --repo .",
+            "command_bytes": 229,
+            "exit_code": 2,
+            "stdout_bytes": 0,
+            "stderr_bytes": 140,
+            "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stderr_sha256": "d9cebd4b2cc0fc94a288ae55ed8b106ede64001efedb3a7f94cf557a048bc414"
+          },
+          "receivers": [
+            "ByteArray",
+            "ByteString",
+            "FileDescriptor",
+            "String"
+          ]
+        },
+        "receiver_exact_ids_readable": {
+          "passed": true,
+          "declarations": 4
+        }
+      },
+      "source_unchanged": true,
+      "archive_unchanged": true,
+      "license_unchanged": true,
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "passed": true,
+  "inputs_unchanged": true
+}

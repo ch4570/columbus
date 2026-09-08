@@ -102,6 +102,8 @@ def main(argv=None) -> int:
         _common(command, subcommand=True)
         if name == 'archive-source':
             command.add_argument('symbol_id', nargs='+', help='One declaration, or 2–16 unique declarations in one page')
+            command.add_argument('--overloads', action='store_true',
+                                 help='Include a same-owner Java/Kotlin overload group for each name')
             command.add_argument('--input', required=True)
             command.add_argument('--format', choices=['json', 'text'], default='json')
             command.add_argument('--offset', type=int, default=0)
@@ -109,6 +111,8 @@ def main(argv=None) -> int:
             command.add_argument('--budget-bytes', type=int, default=12000)
         if name == 'archive-search':
             command.add_argument('--format', choices=['json', 'text'], default='json')
+            command.add_argument('--path', help='Case-sensitive glob on declaration paths, before ranking/counting')
+            command.add_argument('--language', help='Exact detected language name, e.g. python or javascript')
             command.add_argument('query')
             command.add_argument('--input', required=True)
             command.add_argument('--limit', type=int, default=5)
@@ -289,17 +293,18 @@ def main(argv=None) -> int:
             if args.pretty:
                 raise ValueError('archive-source rejects pretty output to preserve its byte budget')
             from .archive import source_archive, source_archive_many
-            if len(args.symbol_id) == 1:
+            if len(args.symbol_id) == 1 and not args.overloads:
                 result = source_archive(args.input, args.symbol_id[0], root, args.limit, args.budget_bytes, args.offset,
                                         output_format=args.format)
             else:
                 result = source_archive_many(args.input, args.symbol_id, root, args.limit, args.budget_bytes, args.offset,
-                                             output_format=args.format)
+                                             output_format=args.format, overloads=args.overloads)
         elif args.command == 'archive-search':
             if args.pretty:
                 raise ValueError('archive-search rejects pretty output to preserve its byte budget')
             from .archive import search_archive
-            result = search_archive(args.input, args.query, args.limit, args.budget_bytes, output_format=args.format)
+            result = search_archive(args.input, args.query, args.limit, args.budget_bytes,
+                                    output_format=args.format, path=args.path, language=args.language)
         elif args.command == 'archive-callers':
             if args.pretty:
                 raise ValueError('archive-callers rejects pretty output to preserve its byte budget')
