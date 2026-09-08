@@ -1,0 +1,12 @@
+{
+  "accepted_quality_preserving_savings": false,
+  "baseline_semantic_passed": 6,
+  "columbus_semantic_passed": 8,
+  "baseline_citation_passed": 10,
+  "columbus_citation_passed": 1,
+  "percent_change": {
+    "input_tokens": 91.54372347975779,
+    "output_tokens": 27.947783849423203,
+    "uncached_input_tokens": 70.23335535360388
+  }
+}

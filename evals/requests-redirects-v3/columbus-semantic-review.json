@@ -1,0 +1,65 @@
+{
+  "condition": "columbus",
+  "review_basis": "Unchanged SOURCE-REVIEW.md. Semantics assessed from prose and source-correct quoted fragments; reconstructed/noncontiguous quotations remain citation failures. Cross-finding dispatch supplies copy/yield mode.",
+  "answer_sha256": "94d25cfc693e53bb41394e2c8e16a475f8979fe16623f78b24e36d7bccb5df4e",
+  "passed": false,
+  "passed_findings": 8,
+  "total_findings": 11,
+  "findings": [
+    {
+      "id": "dispatch",
+      "passed": false,
+      "note": "Correct adapter, controlled generator hops, final response/history and unsent _next. Missing response-hook ordering, default allow_redirects=True and final non-stream content consumption."
+    },
+    {
+      "id": "method_policy",
+      "passed": true,
+      "note": "Correct status/method rules including HEAD and 307/308."
+    },
+    {
+      "id": "body_retention",
+      "passed": false,
+      "note": "Correct status-based purge independent of method changes. Required rebuild_method-before-purge ordering is absent."
+    },
+    {
+      "id": "body_position",
+      "passed": true,
+      "note": "Correct stream exclusions, tell position, OSError sentinel and failure purpose."
+    },
+    {
+      "id": "body_rewind",
+      "passed": true,
+      "note": "Correct position/header guards, integer seek, OSError and sentinel/missing seek failures."
+    },
+    {
+      "id": "origin_auth_policy",
+      "passed": true,
+      "note": "Correct hostname, standard upgrade, equivalent default ports and other scheme/port changes."
+    },
+    {
+      "id": "auth_rebuild",
+      "passed": true,
+      "note": "Correct old/new URL policy and independent trust_env/netrc replacement."
+    },
+    {
+      "id": "proxy_selection",
+      "passed": false,
+      "note": "Environment/bypass, fallback and precedence are correct, but None-to-empty mapping behavior is missing. Quoted proxy_keys are a reconstructed expression rather than verbatim code and combined with another function; citation failure is separate."
+    },
+    {
+      "id": "proxy_auth",
+      "passed": true,
+      "note": "Correct resolved scheme lookup, old header removal and conditional Basic/HTTPS handling. Quoted KeyError fragment supplies missing-key handling, though omitted intervening comments invalidate the contiguous citation."
+    },
+    {
+      "id": "cookies",
+      "passed": true,
+      "note": "Correct previous-request extraction, merge/header preparation and session extraction from sent hop responses for later iterations."
+    },
+    {
+      "id": "redirect_url",
+      "passed": true,
+      "note": "Copy/yield mode are supplied in dispatch. Correct refreshed target, fallback exception types in quoted fragment, limit/close, fragment and URL normalization. Noncontiguous quote is a separate citation failure."
+    }
+  ]
+}

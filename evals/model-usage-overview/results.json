@@ -1,5 +1,5 @@
 {
-  "scope": "Ten recent completed comparisons including two explicit force_bytes repeats and a repeated Requests task; not the entire experiment history, not a population estimate. Missing usage remains null. Semantic judgments remain in each source report.",
+  "scope": "Eleven recent completed comparisons including two explicit force_bytes repeats and a repeated Requests task; not the entire experiment history, not a population estimate. Missing usage remains null. Semantic judgments remain in each source report.",
   "comparisons": [
     {
       "case": "django-callers",
@@ -369,6 +369,44 @@
             "output_tokens": 15733,
             "reasoning_output_tokens": 10024,
             "uncached_input_tokens": 45621
+          },
+          "automatic_quality_passed": false
+        }
+      }
+    },
+    {
+      "case": "requests-redirects-v3",
+      "results_sha256": "07f304f5ae2b0e917174bd0fa6a6b117280a4bcc116d1fe3c50513d7303eae53",
+      "conditions": {
+        "baseline": {
+          "elapsed_seconds": 581.382,
+          "timed_out": false,
+          "return_code": 0,
+          "command_count": 22,
+          "command_output_bytes": 101570,
+          "usage": {
+            "input_tokens": 463561,
+            "cached_input_tokens": 407552,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 16470,
+            "reasoning_output_tokens": 11866,
+            "uncached_input_tokens": 56009
+          },
+          "automatic_quality_passed": false
+        },
+        "columbus": {
+          "elapsed_seconds": 879.795,
+          "timed_out": false,
+          "return_code": 0,
+          "command_count": 31,
+          "command_output_bytes": 104162,
+          "usage": {
+            "input_tokens": 887922,
+            "cached_input_tokens": 792576,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 21073,
+            "reasoning_output_tokens": 15039,
+            "uncached_input_tokens": 95346
           },
           "automatic_quality_passed": false
         }
