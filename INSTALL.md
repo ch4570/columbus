@@ -2,7 +2,7 @@
 
 [Overview](README.md) · [한국어 소개](README.ko.md) · [CLI usage](docs/usage.md)
 
-**Columbus 1.1.0** is distributed through GitHub Releases. The commands below install that exact version; no PyPI package with the same name is assumed.
+**Columbus 1.1.0 is an unreleased candidate.** Its mandatory [actual-token gate failed](evals/multilang-token-batch/ANALYSIS.md), so no 1.1.0 release assets are published. Use [checkout or local-wheel installation](#from-a-checkout-or-local-wheel) to inspect the candidate, or consult [published releases](https://github.com/ch4570/columbus/releases). The version-pinned release-download examples below are reserved for publication; no PyPI package with the same name is assumed.
 
 Install a CLI once for use across repositories, or install a ZIP bundle with a dedicated runtime in one project. Neither approach requires the target project to use Python.
 
@@ -25,7 +25,7 @@ The ordinary v1.1.0 artifacts use upstream `tree-sitter-java==0.23.5`. The separ
 
 ### Recommended: one command with uv or pipx
 
-Install the pinned GitHub release with whichever tool you already use:
+After 1.1.0 is published, install the pinned GitHub release with whichever tool you already use:
 
 ```sh
 uv tool install https://github.com/ch4570/columbus/releases/download/v1.1.0/columbus-1.1.0-py3-none-any.whl

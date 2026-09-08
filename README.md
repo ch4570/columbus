@@ -4,7 +4,9 @@
 
 **Navigate your codebase. Bring back the context you need.**
 
-[한국어](README.ko.md) · [Download 1.1.0](https://github.com/ch4570/columbus/releases/tag/v1.1.0) · [Benchmarks](docs/benchmarks/README.md) · [Installation](INSTALL.md) · [Validation](VALIDATION.md)
+[한국어](README.ko.md) · [Published releases](https://github.com/ch4570/columbus/releases) · [Benchmarks](docs/benchmarks/README.md) · [Installation](INSTALL.md) · [Validation](VALIDATION.md)
+
+**1.1.0 is an unreleased candidate.** The mandatory [actual-token gate failed](evals/multilang-token-batch/ANALYSIS.md), so its release assets are unavailable. To try this checkout, use the local installation below; release-download examples apply after publication.
 
 [Real spring-core evaluation: three navigation fixes, measured indexing costs, and unresolved graph limits.](evals/spring-core/README.md)
 
@@ -14,7 +16,7 @@ Columbus gives coding agents a local map of a repository. Find an entry point, f
 
 No LLM or API key is needed to index a repository. Columbus does not build or execute the project. Python, Java, and Kotlin use ASTs; 43 profiles use declaration heuristics; other UTF-8 text stays searchable as files. [Language coverage](docs/languages.md).
 
-Columbus 1.1 includes parent-first AST JSONL trees (`columbus tree --label NAME`), portable agent-skill installation, and explicit pre-commit refresh integration. [AST processing and repository workflow](docs/portable-ast-workflow.md).
+The Columbus 1.1 candidate includes parent-first AST JSONL trees (`columbus tree --label NAME`), portable agent-skill installation, and explicit pre-commit refresh integration. [AST processing and repository workflow](docs/portable-ast-workflow.md).
 
 Keep a complete gzip/XZ graph in Git and query stored relationships without SQLite or project source. With a matching checkout, read bounded declaration source verified against the archive's hashes. [Versioned graph workflow](docs/portable-graph-workflow.md).
 
@@ -22,10 +24,10 @@ The ordinary distribution uses upstream Java grammar `0.23.5`; the experimental 
 
 ## Set sail in three commands
 
-Requires **Python 3.11+** and [uv](https://docs.astral.sh/uv/getting-started/installation/). Run the last two commands inside the project you want to explore.
+Requires **Python 3.11+** and [uv](https://docs.astral.sh/uv/getting-started/installation/). Run the install command from this Columbus checkout, then run the last two commands inside the project you want to explore.
 
 ```sh
-uv tool install https://github.com/ch4570/columbus/releases/download/v1.1.0/columbus-1.1.0-py3-none-any.whl
+uv tool install .
 columbus explore
 columbus explore checkout
 ```
@@ -37,7 +39,7 @@ columbus explore checkout
 <details>
 <summary>Only have Python?</summary>
 
-Download the standalone installer, then run it:
+After 1.1.0 is published, download the standalone installer and run it:
 
 ```sh
 curl -fL https://github.com/ch4570/columbus/releases/download/v1.1.0/get-columbus.py -o get-columbus.py

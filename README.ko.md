@@ -4,7 +4,9 @@
 
 **코드의 지도를 펼치고, 필요한 맥락만 가져옵니다.**
 
-[English](README.md) · [1.1.0 다운로드](https://github.com/ch4570/columbus/releases/tag/v1.1.0) · [벤치마크](docs/benchmarks/README.md) · [설치](INSTALL.md) · [검증 기록](VALIDATION.md)
+[English](README.md) · [게시된 릴리즈](https://github.com/ch4570/columbus/releases) · [벤치마크](docs/benchmarks/README.md) · [설치](INSTALL.md) · [검증 기록](VALIDATION.md)
+
+**1.1.0은 아직 배포하지 않은 후보입니다.** 필수 [실제 토큰 절감 평가](evals/multilang-token-batch/ANALYSIS.md)에 실패해 릴리즈 파일을 게시하지 않았습니다. 현재 체크아웃은 아래 로컬 설치 명령으로 확인할 수 있으며, 릴리즈 다운로드 예시는 게시 이후에 사용할 수 있습니다.
 
 [실제 spring-core 검증: 탐색 결함 3개 수정, 색인 비용과 미해결 그래프 한계.](evals/spring-core/README.md)
 
@@ -14,7 +16,7 @@ Columbus는 코딩 에이전트가 저장소를 탐색하는 로컬 코드 지�
 
 색인에 LLM이나 API 키가 필요하지 않으며 대상 프로젝트를 빌드하거나 실행하지 않습니다. Python·Java·Kotlin은 AST, 43개 프로필은 선언 추출 휴리스틱을 사용합니다. 나머지 UTF-8 텍스트도 파일 단위로 검색합니다. 언어 감지와 분석 정확도는 다릅니다. [지원 범위](docs/languages.md).
 
-Columbus 1.1에는 부모 관계를 보존하는 AST JSONL 트리(`columbus tree --label NAME`), 다른 레포에 설치하는 에이전트 스킬, pre-commit 갱신 기능이 포함되어 있습니다. [AST 처리·레포 설치·훅 사용법](docs/portable-ast-workflow.md).
+Columbus 1.1 후보에는 부모 관계를 보존하는 AST JSONL 트리(`columbus tree --label NAME`), 다른 레포에 설치하는 에이전트 스킬, pre-commit 갱신 기능이 포함되어 있습니다. [AST 처리·레포 설치·훅 사용법](docs/portable-ast-workflow.md).
 
 gzip/XZ 압축 그래프를 Git에 보관하고 원본 소스·SQLite 없이 저장된 관계를 조회할 수 있습니다. 같은 소스 체크아웃이 있으면 그래프의 해시를 검증해 필요한 선언 본문도 제한된 크기로 읽습니다. [레포에 그래프 보관하기](docs/portable-graph-workflow.md).
 
@@ -22,10 +24,10 @@ gzip/XZ 압축 그래프를 Git에 보관하고 원본 소스·SQLite 없이 저
 
 ## 세 명령으로 출발하기
 
-**Python 3.11 이상**과 [uv](https://docs.astral.sh/uv/getting-started/installation/)가 필요합니다. 설치한 뒤 탐색할 프로젝트 디렉터리에서 실행하세요.
+**Python 3.11 이상**과 [uv](https://docs.astral.sh/uv/getting-started/installation/)가 필요합니다. 설치 명령은 이 Columbus 체크아웃에서 실행하고, 나머지 두 명령은 탐색할 프로젝트 디렉터리에서 실행하세요.
 
 ```sh
-uv tool install https://github.com/ch4570/columbus/releases/download/v1.1.0/columbus-1.1.0-py3-none-any.whl
+uv tool install .
 columbus explore
 columbus explore checkout
 ```
@@ -37,7 +39,7 @@ columbus explore checkout
 <details>
 <summary>Python만 설치되어 있다면</summary>
 
-설치기를 파일로 내려받고 실행합니다.
+1.1.0이 게시된 뒤 설치기를 파일로 내려받고 실행합니다.
 
 ```sh
 curl -fL https://github.com/ch4570/columbus/releases/download/v1.1.0/get-columbus.py -o get-columbus.py
