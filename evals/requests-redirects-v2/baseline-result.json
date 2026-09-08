@@ -1,0 +1,322 @@
+{
+  "schema": "columbus.exploration-observation/v1",
+  "case": "requests-redirects-v2",
+  "condition": "baseline",
+  "repeat": 1,
+  "model_requested": "gpt-5.6-sol",
+  "effort_requested": "xhigh",
+  "evidence_mode": "saved_archive",
+  "elapsed_seconds": 488.875,
+  "return_code": 0,
+  "timed_out": false,
+  "source_unchanged": true,
+  "usage": {
+    "input_tokens": 423075,
+    "cached_input_tokens": 354560,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 13998,
+    "reasoning_output_tokens": 9614,
+    "uncached_input_tokens": 68515
+  },
+  "commands": [
+    {
+      "command": "/bin/zsh -lc 'rg -n \"resolve_redirects|rebuild_method|rebuild_auth|rebuild_proxies|should_strip_auth|_body_position|rewind_body|extract_cookies_to_jar|TooManyRedirects|allow_redirects\" .'",
+      "exit_code": 0,
+      "output_bytes": 9118,
+      "output_sha256": "ce18554366b1ceaf2be83d70c633bc13896a0a264c26460abd734299dadbc004"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/requests/sessions.py | sed -n '120,179p'; nl -ba src/requests/sessions.py | sed -n '180,219p'; nl -ba src/requests/sessions.py | sed -n '220,279p'; nl -ba src/requests/sessions.py | sed -n '280,359p'; nl -ba src/requests/sessions.py | sed -n '670,749p'; nl -ba src/requests/models.py | sed -n '500,549p'; nl -ba src/requests/utils.py | sed -n '1060,1090p'\"",
+      "exit_code": 0,
+      "output_bytes": 17805,
+      "output_sha256": "8909024fe18cb2ec6997de0a6582a2c141f2b857c61e6b0193c17e5939240b8b"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n 'def resolve_proxies|def select_proxy|def get_environ_proxies|def should_bypass_proxies|merge_environment_settings|proxies.setdefault' src/requests\"",
+      "exit_code": 0,
+      "output_bytes": 612,
+      "output_sha256": "f0152073774225e64aa0919d9803ea69b074ac5984beeb94f3c1f73508faaf73"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/requests/utils.py | sed -n '825,889p'\"",
+      "exit_code": 0,
+      "output_bytes": 2330,
+      "output_sha256": "477c71e0d4bf6687fcdf38647dbc038743d7f13b366e8bcdda4cbfe61534a624"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/requests/utils.py | sed -n '890,939p'\"",
+      "exit_code": 0,
+      "output_bytes": 1508,
+      "output_sha256": "44ed7ab8acdfc93ab2b01dbda33e9dc88265c29c0e651737d7ab152bd4236c9e"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/requests/sessions.py | sed -n '750,810p'\"",
+      "exit_code": 0,
+      "output_bytes": 2611,
+      "output_sha256": "523fcbb11307bd380c91a0952f99ae5eebebdc988f4a629ef4ec10f100c5fb08"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/requests/models.py | sed -n '330,400p'\"",
+      "exit_code": 0,
+      "output_bytes": 2709,
+      "output_sha256": "b5f720afdbb37816279fff729b6a7f785af9aa56ef3622691db69b01c8b094a2"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/requests/sessions.py | sed -n '80,126p'\"",
+      "exit_code": 0,
+      "output_bytes": 2355,
+      "output_sha256": "a50590bdcefccf7b73b83c821130e9e6287dea5ffc0191064bd0ea74c9ab7e39"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n 'temporary_redirect|permanent_redirect|see_other|found =|moved =' src/requests/status_codes.py src/requests; nl -ba src/requests/status_codes.py | sed -n '30,75p'; nl -ba src/requests/cookies.py | sed -n '115,145p'; nl -ba src/requests/models.py | sed -n '610,650p'\"",
+      "exit_code": 0,
+      "output_bytes": 6103,
+      "output_sha256": "21910bb3bdd9e8a65b280bf4867530ed81f2d5c1d171d01627532637e41e8ac4"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n 'DEFAULT_PORTS' src/requests; nl -ba src/requests/sessions.py | sed -n '1,60p'; nl -ba src/requests/sessions.py | sed -n '500,595p'; nl -ba src/requests/adapters.py | sed -n '585,645p'\"",
+      "exit_code": 0,
+      "output_bytes": 9377,
+      "output_sha256": "4b10bb781d331f74b7ef7142916ffffdb8e76ece41fd860db4c9705f9e2eade3"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/requests/sessions.py | sed -n '55,90p'; nl -ba src/requests/utils.py | sed -n '745,827p'; nl -ba src/requests/adapters.py | sed -n '190,245p'; rg -n 'select_proxy\\\\(' src/requests\"",
+      "exit_code": 0,
+      "output_bytes": 7255,
+      "output_sha256": "3d6578b2ef19a59a679ef385abbbec1991bc382c72c7d4ea985fe27e324a418a"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/requests/models.py | sed -n '60,82p'; nl -ba src/requests/models.py | sed -n '760,789p'; nl -ba src/requests/models.py | sed -n '430,500p'; nl -ba src/requests/adapters.py | sed -n '430,505p'\"",
+      "exit_code": 0,
+      "output_bytes": 8476,
+      "output_sha256": "cfe04eb33ef7d52a1745ace545ca40633bfebba1babc2179d184e66f23c3db1c"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/requests/models.py | sed -n '517,565p'; nl -ba src/requests/sessions.py | sed -n '173,219p'; nl -ba src/requests/sessions.py | sed -n '248,281p'; nl -ba src/requests/utils.py | sed -n '854,878p'\"",
+      "exit_code": 0,
+      "output_bytes": 7027,
+      "output_sha256": "aef69d17d614b4b67bdc494b198119d1345492614d4276108959387e4ae5af27"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/requests/sessions.py | sed -n '390,460p'; rg -n 'mount\\\\(' src/requests/sessions.py\"",
+      "exit_code": 0,
+      "output_bytes": 3556,
+      "output_sha256": "64b1d8fe59b0ce163aa93a589e7935c7710394688c50fe82147f27082862f0f3"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n 'def merge_cookies|def _copy_cookie_jar' src/requests/cookies.py; nl -ba src/requests/cookies.py | sed -n '335,375p'; nl -ba src/requests/cookies.py | sed -n '425,460p'\"",
+      "exit_code": 0,
+      "output_bytes": 3281,
+      "output_sha256": "d5a10742b912182e1a4dd0f034dfc51e33934458e95283ab739e054683204ace"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/requests/cookies.py | sed -n '535,566p'; nl -ba src/requests/sessions.py | sed -n '457,500p'\"",
+      "exit_code": 0,
+      "output_bytes": 3027,
+      "output_sha256": "5507fecc89c8c47cf42ed6ba3a6f3d1b9f37ee96b7bc0c52981483bec2f68d8f"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba tests/test_requests.py | sed -n '2580,2650p'; nl -ba tests/test_requests.py | sed -n '640,690p'; rg -n 'rebuild_proxies|resolve_proxies|NO_PROXY|no_proxy' tests/test_requests.py tests/test_utils.py\"",
+      "exit_code": 0,
+      "output_bytes": 7128,
+      "output_sha256": "c7e1b9f732523998c8aa1fbdcf584ca96545c44a530a259e691a4e95d2fe46a7"
+    }
+  ],
+  "command_count": 17,
+  "command_output_bytes": 94278,
+  "failed_commands": 0,
+  "other_tool_types": [],
+  "runtime_warnings": [],
+  "turn_failed": false,
+  "quality": {
+    "passed": false,
+    "findings": [
+      {
+        "id": "dispatch",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "method_policy",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "body_retention",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "body_position",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "body_rewind",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "origin_auth_policy",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "auth_rebuild",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "proxy_selection",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "proxy_auth",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "cookies",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "redirect_url",
+        "passed": false,
+        "reason": "required mechanism absent from citation"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "index_preflight": null,
+  "archive_preflight": {
+    "passed": true,
+    "archive_sha256": "65422f45e880ac587c66bc5c23e0d917cda24f8b6ace8158771ff092ad2bd270",
+    "revision": "23d1f0347e082dcfd3d3",
+    "source_files_verified": 132,
+    "indexed_source_files_verified": 112,
+    "counts": {
+      "files": 112,
+      "nodes": 883,
+      "scopes": 825,
+      "edges": 1188,
+      "references": 2674,
+      "imports": 471,
+      "diagnostics": 1
+    },
+    "consumer_index_absent": true
+  },
+  "archive_postflight": {
+    "passed": true,
+    "archive_sha256": "65422f45e880ac587c66bc5c23e0d917cda24f8b6ace8158771ff092ad2bd270",
+    "revision": "23d1f0347e082dcfd3d3",
+    "source_files_verified": 132,
+    "indexed_source_files_verified": 112,
+    "counts": {
+      "files": 112,
+      "nodes": 883,
+      "scopes": 825,
+      "edges": 1188,
+      "references": 2674,
+      "imports": 471,
+      "diagnostics": 1
+    },
+    "consumer_index_absent": true
+  },
+  "answer": {
+    "findings": [
+      {
+        "id": "dispatch",
+        "path": "src/requests/sessions.py",
+        "start_line": 702,
+        "end_line": 741,
+        "quote": "r = adapter.send(request, **kwargs)",
+        "explanation": "Source-level flow: Session.send dispatches the incoming PreparedRequest through the adapter selected for its URL. With allow_redirects=True it exhausts resolve_redirects; that generator copies and rebuilds the request for each hop, then calls self.send with allow_redirects=False, so each redirected URL is adapter-dispatched without recursively owning the chain. With following disabled, the response is returned without sending the redirect target, but one rebuilt target request is obtained through resolve_redirects(..., yield_requests=True) and stored in r._next. This is a static trace only: because nothing was executed, the concrete runtime adapter, Session overrides, and hook behavior are not proven."
+      },
+      {
+        "id": "method_policy",
+        "path": "src/requests/sessions.py",
+        "start_line": 333,
+        "end_line": 353,
+        "quote": "if response.status_code == codes.see_other and method != \"HEAD\":\n    method = \"GET\"",
+        "explanation": "A 303 changes every method except HEAD to GET; a 302 likewise changes every non-HEAD method to GET; a 301 changes only POST to GET. HEAD, non-POST methods on 301, and all methods on 307 or 308 remain unchanged."
+      },
+      {
+        "id": "body_retention",
+        "path": "src/requests/sessions.py",
+        "start_line": 221,
+        "end_line": 232,
+        "quote": "if resp.status_code not in (\n    codes.temporary_redirect,\n    codes.permanent_redirect,\n):\n    purged_headers = (\"Content-Length\", \"Content-Type\", \"Transfer-Encoding\")\n    for header in purged_headers:\n        prepared_request.headers.pop(header, None)\n    prepared_request.body = None",
+        "explanation": "Because the redirected PreparedRequest starts as a copy, 307 and 308 preserve its body object and copied entity headers. For the other automatically followed statuses—301, 302, and 303—the body is set to None and Content-Length, Content-Type, and Transfer-Encoding are removed. Other headers survive this step, subject to the later cookie, origin-auth, and proxy-auth rebuilding."
+      },
+      {
+        "id": "body_position",
+        "path": "src/requests/models.py",
+        "start_line": 517,
+        "end_line": 551,
+        "quote": "if getattr(body, \"tell\", None) is not None:\n    # Record the current file position before reading.\n    # This will allow us to rewind a file in the event\n    # of a redirect.\n    try:\n        self._body_position = body.tell()\n    except OSError:\n        self._body_position = object()",
+        "explanation": "Preparation treats an iterable as streaming unless it is a string, list, tuple, or Mapping. Before the first send, a streaming body with tell records its current position. An OSError from tell stores a unique non-None sentinel so redirect handling attempts a rewind and reports failure instead of silently resending. A truthy discovered length produces Content-Length; otherwise the stream is marked Transfer-Encoding: chunked. PreparedRequest.copy carries both the body reference and this saved position into redirects."
+      },
+      {
+        "id": "body_rewind",
+        "path": "src/requests/utils.py",
+        "start_line": 1071,
+        "end_line": 1086,
+        "quote": "if body_seek is not None and isinstance(\n    prepared_request._body_position, integer_types\n):\n    try:\n        body_seek(prepared_request._body_position)\n    except OSError:\n        raise UnrewindableBodyError(\n            \"An error occurred when rewinding request body for redirect.\"\n        )",
+        "explanation": "The redirect loop calls rewind_body only when _body_position is non-None and the retained request has Content-Length or Transfer-Encoding—normally a body-preserving 307/308. Rewind seeks to the recorded integer position. An OSError from seek becomes UnrewindableBodyError with the specific rewinding message; a missing seek method or non-integer position, including the failed-tell sentinel, raises UnrewindableBodyError(\"Unable to rewind request body for redirect.\"). A stream with no recorded position is resent as-is without a rewind attempt."
+      },
+      {
+        "id": "origin_auth_policy",
+        "path": "src/requests/sessions.py",
+        "start_line": 127,
+        "end_line": 157,
+        "quote": "if old_parsed.hostname != new_parsed.hostname:\n    return True",
+        "explanation": "Authorization is stripped whenever the parsed hostname changes. On the same host, the compatibility exception retains it for standard-port HTTP-to-HTTPS upgrades (old port 80 or implicit, new port 443 or implicit). With an unchanged scheme, explicit default and implicit ports are treated as equivalent. Otherwise a scheme change or port change strips authorization; therefore HTTPS-to-HTTP, nonstandard scheme changes, and changed non-equivalent ports do not retain it."
+      },
+      {
+        "id": "auth_rebuild",
+        "path": "src/requests/sessions.py",
+        "start_line": 282,
+        "end_line": 300,
+        "quote": "if \"Authorization\" in headers and self.should_strip_auth(\n    response.request.url, url\n):\n    del headers[\"Authorization\"]\n\n# .netrc might have more auth for us on our new host.\nnew_auth = get_netrc_auth(url) if self.trust_env else None\nif new_auth is not None:\n    prepared_request.prepare_auth(new_auth)",
+        "explanation": "rebuild_auth compares the prior response request URL with the redirected URL and deletes an existing Authorization header when the origin policy requires it. Independently, when trust_env is enabled, it looks up netrc credentials for the new URL and prepares that authentication if found; this can add a replacement after stripping or overwrite authorization retained for the same origin."
+      },
+      {
+        "id": "proxy_selection",
+        "path": "src/requests/utils.py",
+        "start_line": 839,
+        "end_line": 878,
+        "quote": "proxies = proxies if proxies is not None else {}\nurl = request.url\nscheme = urlparse(url).scheme\nno_proxy = proxies.get(\"no_proxy\")\nnew_proxies = proxies.copy()\n\nif trust_env and not should_bypass_proxies(url, no_proxy=no_proxy):\n    environ_proxies = get_environ_proxies(url, no_proxy=no_proxy)\n\n    proxy = environ_proxies.get(scheme, environ_proxies.get(\"all\"))\n\n    if proxy:\n        new_proxies.setdefault(scheme, proxy)",
+        "explanation": "Each redirect reevaluates the copied/current proxy mapping for its new URL. If trust_env is true and no_proxy does not bypass that URL, the environment's scheme proxy, falling back to environment all, is inserted only when the mapping lacks that scheme key. Thus an existing scheme-specific setting wins. Final lookup priority is scheme://hostname, scheme, all://hostname, then all; consequently an environment-added scheme entry can outrank an explicit all/all-host fallback, while an explicit scheme-host entry still wins. In this snapshot, a no_proxy match prevents adding environment proxies but does not remove already-present explicit/current proxy keys."
+      },
+      {
+        "id": "proxy_auth",
+        "path": "src/requests/sessions.py",
+        "start_line": 314,
+        "end_line": 331,
+        "quote": "if \"Proxy-Authorization\" in headers:\n    del headers[\"Proxy-Authorization\"]\n\ntry:\n    username, password = get_auth_from_url(new_proxies[scheme])\nexcept KeyError:\n    username, password = None, None",
+        "explanation": "Every redirect first removes the copied Proxy-Authorization header. It then examines only the rebuilt mapping's exact target-scheme proxy URL. When that URL supplies both username and password and the destination scheme is not HTTPS, Requests creates a Basic Proxy-Authorization header. It deliberately does not add this header for HTTPS destinations because the standard urllib3 adapter handles proxy authentication for tunnels and attaching it to the request could leak credentials."
+      },
+      {
+        "id": "cookies",
+        "path": "src/requests/sessions.py",
+        "start_line": 234,
+        "end_line": 242,
+        "quote": "headers.pop(\"Cookie\", None)\n\n# Extract any cookies sent on the response to the cookiejar\n# in the new request. Because we've mutated our copied prepared\n# request, use the old one that we haven't yet touched.\nextract_cookies_to_jar(prepared_request._cookies, req, resp.raw)\nmerge_cookies(prepared_request._cookies, self.cookies)\nprepared_request.prepare_cookies(prepared_request._cookies)",
+        "explanation": "The copied request's serialized Cookie header is removed so it can be generated again for the redirected URL. Response cookies are extracted into the copied request's cookie jar using the unmodified previous request as cookie-policy context; the session jar is then merged in, and prepare_cookies emits a newly applicable Cookie header. After a redirected response is sent, its cookies are also extracted into the session jar for subsequent hops."
+      },
+      {
+        "id": "redirect_url",
+        "path": "src/requests/sessions.py",
+        "start_line": 178,
+        "end_line": 217,
+        "quote": "try:\n    resp.content  # Consume socket so it can be released\nexcept (ChunkedEncodingError, ContentDecodingError, RuntimeError):\n    resp.raw.read(decode_content=False)\n\nif len(resp.history) >= self.max_redirects:\n    raise TooManyRedirects(\n        f\"Exceeded {self.max_redirects} redirects.\", response=resp\n    )\n\n# Release the connection back into the pool.\nresp.close()",
+        "explanation": "A redirect target is accepted only from a redirect response with Location; Location is reinterpreted from the underlying Latin-1 header decoding as UTF-8. Before constructing the next hop, Requests consumes response content, falling back to an undecoded raw read on listed errors, checks the history limit, and then explicitly closes the response; the limit exception carries that response and occurs before the explicit close. Scheme-relative targets inherit the response scheme, absent fragments inherit the preceding fragment, new fragments become the value inherited by later hops, relative targets are requoted and joined to resp.url, and absolute targets are requoted before assignment. In normal following mode, each new response supplies the next target; a missing target terminates the while loop, while reaching max_redirects raises TooManyRedirects."
+      }
+    ]
+  },
+  "prompt_bytes": 1848,
+  "events_sha256": "438d619ca164956c3d27dc1fc495ab1dca38c7faa9d859beed22fd8fba03cbe8"
+}
