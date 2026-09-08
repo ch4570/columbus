@@ -113,7 +113,7 @@ def stable(path, root):
     flags = os.O_RDONLY | getattr(os, 'O_NOFOLLOW', 0) | getattr(os, 'O_NONBLOCK', 0)
     with os.fdopen(os.open(path, flags), 'rb') as stream:
         opened = os.fstat(stream.fileno())
-        raw = stream.read(MAX_FILE + 1)
+        raw = stream.read(before.st_size + 1)
         after = os.fstat(stream.fileno())
     require(not path.is_symlink() and len(raw) <= MAX_FILE and len(raw) == after.st_size
             and unchanged_stats(before, opened, after, path.stat(), windows=sys.platform == 'win32'),
