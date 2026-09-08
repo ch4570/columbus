@@ -13,6 +13,32 @@ from columbus.index import RepositoryIndex
 
 
 class ArchiveTests(unittest.TestCase):
+    def test_archive_callers_rejects_replacement_between_validated_passes(self):
+        import os
+        from columbus import archive as archive_module
+        original = archive_module._neighbors_archive
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'calls.py').write_text('def target(): pass\ndef caller(): target()\n')
+            index = RepositoryIndex(root / '.columbus/index.sqlite')
+            index.refresh(root)
+            for codec in ('gzip', 'xz'):
+                artifact = root / codec
+                archive(index, artifact, codec)
+                before = artifact.stat()
+                replacement = root / ('replacement-' + codec)
+                replacement.write_bytes(artifact.read_bytes())
+                os.utime(replacement, ns=(before.st_atime_ns, before.st_mtime_ns))
+                self.assertEqual(replacement.stat().st_size, before.st_size)
+                self.assertEqual(replacement.stat().st_mtime_ns, before.st_mtime_ns)
+                def replace_then_read(*args, **kwargs):
+                    os.replace(replacement, artifact)
+                    return original(*args, **kwargs)
+                with patch.object(archive_module, '_neighbors_archive', side_effect=replace_then_read):
+                    with self.assertRaisesRegex(ValueError, 'Archive changed'):
+                        callers_archive(artifact, 'target')
+                self.assertEqual(len(callers_archive(artifact, 'target')['edges']), 1)
+
     def test_archive_callers_two_passes_and_unordered_fallback(self):
         from columbus.archive import _validated_rows
         with tempfile.TemporaryDirectory() as directory:
@@ -39,6 +65,17 @@ class ArchiveTests(unittest.TestCase):
                 with patch('columbus.archive._validated_rows', wraps=_validated_rows) as scan:
                     self.assertEqual(callers_archive(other, 'target', limit=1, offset=1), expected)
                     self.assertEqual(scan.call_count, 3)
+                # A late same-name declaration must not be hidden by early edges.
+                for row in reordered:
+                    if row['record'] == 'node' and row['data'].get('name') == 'first':
+                        row['data']['name'] = 'target'
+                with opener(other, 'wt') as stream:
+                    stream.write(''.join(json.dumps(row) + '\n' for row in reordered))
+                with self.assertRaisesRegex(ValueError, 'ambiguous'):
+                    callers_archive(other, 'target')
+                # Exact IDs retain precedence even when an early name is ambiguous.
+                expected_id = neighbors_archive(other, target, 'in', ['calls'], limit=1, offset=1)
+                self.assertEqual(callers_archive(other, target, limit=1, offset=1), expected_id)
                 broken = root / ('incomplete-' + codec)
                 with opener(broken, 'wt') as stream:
                     stream.write(''.join(json.dumps(row) + '\n' for row in rows[:-1]))

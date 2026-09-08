@@ -16,3 +16,11 @@ Both decrease by about one third. All twelve returned packets have the same full
 The documented 12000-byte/radius-20 context traversal also produces exactly the earlier six-page verifier result, including source hashes/excerpts, 37 owners and same-line multiplicity. Source-free gzip/XZ fixtures verify two passes for exporter order, three for reordered records, exact pagination, and rejection of a missing end record despite an edge limit of one. Existing ambiguity, stale-source, scope and byte-budget checks pass.
 
 Ordinary and candidate parser engine suites each passed 236 tests; root suite passed 53. Fresh wheel/ZIP distribution validation passed. Results and runtime hashes are retained here. No new model trial was run, previous frozen inputs remain unchanged, and the semantic-quality/remaining issue requirements are not declared complete.
+
+## Snapshot and late-declaration controls
+
+Additional gzip/XZ checks replace the archive after the resolution/edge scan and before the endpoint scan. The replacement has identical contents, size and modification time, so it specifically tests rejecting a changed file identity rather than merely finding a length difference or corrupt data. The query rejects the replacement; a fresh query against the stable replacement succeeds. This is conservative snapshot identity validation, not a claim that identical replacement bytes contain different graph facts.
+
+A valid archive reordered to put nodes after edges also gains a late same-name declaration. Name-based callers reject the ambiguity after consuming the archive; an exact-ID query still equals incoming neighbors. These controls complement the existing fallback/pass-count and incomplete-tail checks.
+
+Both engine environments passed 237 tests. No production code changed in this follow-up, so the previously measured timings and source-context equality were not remeasured. Hosted run 34178929158 for the implementation commit was still in progress when checked; local tests do not stand in for its pending platform conclusions.
