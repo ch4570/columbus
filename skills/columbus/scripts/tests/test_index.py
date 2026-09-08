@@ -48,13 +48,14 @@ class IndexTests(unittest.TestCase):
 
     def test_relink_reuses_identical_cache_but_updates_unchanged_callers(self):
         import sqlite3
+        from contextlib import closing
         import zlib
         from columbus.index import decode_parse
         self.write('lib.py', 'def hit(): return 1\n')
         self.write('caller.py', 'from lib import hit\ndef run(): return hit()\n')
         self.write('other.py', 'def independent(): return "' + 'unchanged' * 50 + '"\n')
         self.index.refresh(self.root)
-        with sqlite3.connect(self.index.db) as conn:
+        with closing(sqlite3.connect(self.index.db)) as conn, conn:
             row = conn.execute("SELECT parsed FROM files WHERE path='other.py'").fetchone()[0]
             # A valid alternate compression makes recompression observable.
             preserved = zlib.compress(zlib.decompress(row), level=0)
@@ -62,7 +63,7 @@ class IndexTests(unittest.TestCase):
             caller_before = conn.execute("SELECT parsed FROM files WHERE path='caller.py'").fetchone()[0]
         self.write('lib.py', 'def renamed(): return 1\n')
         self.index.refresh(self.root)
-        with sqlite3.connect(self.index.db) as conn:
+        with closing(sqlite3.connect(self.index.db)) as conn, conn:
             blobs = dict(conn.execute('SELECT path,parsed FROM files'))
         self.assertEqual(blobs['other.py'], preserved)
         self.assertNotEqual(blobs['caller.py'], caller_before)
@@ -70,7 +71,7 @@ class IndexTests(unittest.TestCase):
         self.assertTrue(all(not r['resolved'] for r in caller['references'] if r['kind'] == 'calls'))
         clean = RepositoryIndex(Path(self.temp.name) / 'clean-cache.sqlite')
         clean.refresh(self.root)
-        with sqlite3.connect(clean.db) as conn:
+        with closing(sqlite3.connect(clean.db)) as conn:
             clean_facts = {p: decode_parse(b) for p, b in conn.execute('SELECT path,parsed FROM files')}
         self.assertEqual({p: decode_parse(b) for p, b in blobs.items()}, clean_facts)
         self.assertEqual(self.index.graph(), clean.graph())
