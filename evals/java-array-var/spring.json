@@ -1,0 +1,9 @@
+{
+  "source_hashes_equal": true,
+  "files": 1166,
+  "symbols": 20811,
+  "edges": 33004,
+  "added_edges": [],
+  "removed_edges": [],
+  "scope": "Same fixed Spring corpus; edge equality is not compiler precision."
+}

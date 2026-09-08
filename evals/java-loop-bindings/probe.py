@@ -10,7 +10,7 @@ import importlib.metadata
 import columbus.jvm as jvm
 from columbus.jvm import parse_jvm, resolve_jvm
 
-p=argparse.ArgumentParser();p.add_argument('--jdk',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--require-array-bindings',action='store_true');a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--jdk',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--require-array-bindings',action='store_true');p.add_argument('--var-controls',action='store_true');a=p.parse_args()
 base='class Item { void hit() {} } class Wrong { void hit() {} Item[] values() { return new Item[0]; } } '
 cases=[
  ('explicit_array',base+'class C { void run(Item[] values) { for(Item item : values) item.hit(); } }',True,['Item']),
@@ -24,9 +24,17 @@ cases=[
  ('local_name_conflict',base+'class C { void run(Item[] values) { Item item=null; for(Item item : values) item.hit(); } }',False,[None]),
  ('wrong_argument',base+'class C { void run(Item[] values) { for(Item item : values) item.hit(1); } }',False,[None]),
 ]
-report={'scope':'Ten isolated loop cases with manually specified declaration owners; no runtime-dispatch assertion. Missing targets count as gaps, not correct resolution.','cases':[]}
+if a.var_controls:
+ cases += [
+  ('nested_var',base+'class C { void run(Item[][] values) { for(var row : values) for(var item : row) item.hit(); } }',True,['Item']),
+  ('var_body_type_shadow',base+'class C { void run(Item[] values) { for(var item : values) { class Item { void hit() {} } item.hit(); } } }',True,['Item']),
+  ('parameter_body_type_shadow',base+'class C { void run(Item[] values) { class Item { void hit() {} } for(Item item : values) item.hit(); } }',False,[None]),
+  ('var_generic_shadow',base+'class T { void hit() {} } class C<T extends Item> { void run(T[] values) { for(var item : values) item.hit(); } }',True,['Item']),
+ ]
+report={'scope':'Isolated loop cases with manually specified declaration owners; no runtime-dispatch assertion. Missing targets count as gaps, not correct resolution.','cases':[]}
 version=subprocess.run([str(a.jdk/'javac'),'-version'],capture_output=True,text=True,check=True)
 report.update(compiler=(version.stdout+version.stderr).strip(), python=sys.version, analyzer_sha256=hashlib.sha256(Path(jvm.__file__).read_bytes()).hexdigest(), versions={name:importlib.metadata.version(name) for name in ('tree-sitter','tree-sitter-java')})
+report['additional_var_controls']=a.var_controls
 for name,source,valid,owners in cases:
  with tempfile.TemporaryDirectory() as d:
   root=Path(d);(root/'C.java').write_text(source,encoding='utf-8')
@@ -44,6 +52,8 @@ for name,source,valid,owners in cases:
    assert not ref['resolved'] or ref['target']==expected,(name,ref,expected)
    rows.append({'expected_static_target':expected,'actual':ref,'resolved_expected_target':bool(expected and ref.get('target')==expected)})
   if a.require_array_bindings and name in {'explicit_array','field_shadow_and_restore','nested'}:
+   assert all(r['resolved_expected_target'] for r in rows),(name,rows)
+  if a.var_controls and name in {'var_inference','nested_var'}:
    assert all(r['resolved_expected_target'] for r in rows),(name,rows)
   report['cases'].append({'name':name,'source':source,'source_sha256':hashlib.sha256(source.encode()).hexdigest(),'javac_return_code':compilation.returncode,'javac_stderr':compilation.stderr,'javap':bytecode,'calls':rows})
 report['expected_valid_calls']=sum(x['expected_static_target'] is not None for c in report['cases'] for x in c['calls'])

@@ -19,7 +19,12 @@ class JVMTests(unittest.TestCase):
             ('void run(Wrong[] values) { for(Item item : values) item.hit(); }', [None]),
             ('void run(Item[] values) { Item item=null; for(Item item : values) item.hit(); }', [None]),
             ('void run(Item[] values) { for(Item item : values) {} item.hit(); }', [None]),
-            ('void run(Item[] values) { for(var item : values) item.hit(); }', [None]),
+            ('void run(Item[] values) { for(var item : values) item.hit(); }', ['C.java::Item.hit:method()']),
+            ('void run(Item[][] values) { for(var row : values) for(var item : row) item.hit(); }',
+             ['C.java::Item.hit:method()']),
+            ('<T extends Item> void run(T[] values) { for(var item : values) item.hit(); }', [None]),
+            ('void run(Item[] values) { for(var item : values) { class Item { void hit() {} } item.hit(); } }', [None]),
+            ('void run(Item[] values) { class Item { void hit() {} } for(Item item : values) item.hit(); }', [None]),
             ('void run() { for(Item item : values) item.hit(); Item[] values=null; }', [None]),
             ('Item[] values; static void run() { for(Item item : values) item.hit(); }', [None]),
         ]

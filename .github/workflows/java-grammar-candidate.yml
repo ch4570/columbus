@@ -71,7 +71,7 @@ jobs:
       - name: Compiler-backed enhanced-for iterable scope
         run: python -c "import os, pathlib, subprocess, sys; env = dict(os.environ, PYTHONPATH=str(pathlib.Path('skills/columbus/scripts').resolve())); subprocess.run([sys.executable, 'evals/java-iterable-scope/verify.py', '--jdk', str(pathlib.Path(os.environ['JAVA_HOME']) / 'bin'), '--output', 'candidate-results/iterable-scope.json'], env=env, check=True)"
       - name: Compiler-backed array loop bindings
-        run: python -c "import os, pathlib, subprocess, sys; env = dict(os.environ, PYTHONPATH=str(pathlib.Path('skills/columbus/scripts').resolve())); subprocess.run([sys.executable, 'evals/java-loop-bindings/probe.py', '--jdk', str(pathlib.Path(os.environ['JAVA_HOME']) / 'bin'), '--output', 'candidate-results/loop-bindings.json', '--require-array-bindings'], env=env, check=True)"
+        run: python -c "import os, pathlib, subprocess, sys; env = dict(os.environ, PYTHONPATH=str(pathlib.Path('skills/columbus/scripts').resolve())); subprocess.run([sys.executable, 'evals/java-loop-bindings/probe.py', '--jdk', str(pathlib.Path(os.environ['JAVA_HOME']) / 'bin'), '--output', 'candidate-results/loop-bindings.json', '--require-array-bindings', '--var-controls'], env=env, check=True)"
       - name: Engine regression tests with candidate
         working-directory: skills/columbus/scripts
         run: python -m unittest discover -s tests -v

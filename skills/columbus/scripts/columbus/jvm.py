@@ -520,8 +520,32 @@ class _Resolver:
             if scope["kind"] == "opaque":
                 return [dict(type="", reason="unsupported scope")]
             if name in scope["bindings"]:
-                return scope["bindings"][name]
+                bindings = scope["bindings"][name]
+                if (scope["kind"] == "array_loop" and len(bindings) == 1
+                        and bindings[0].get("reason") == "loop variable" and bindings[0].get("type") == "var"):
+                    array = self.loop_array_binding(scope)
+                    if array:
+                        return [dict(bindings[0], type=array["type"][:-2])]
+                return bindings
             scope_id = scope["parent"]
+        return None
+
+    def loop_array_binding(self, scope):
+        fact = scope.get("iterable_fact", {})
+        bindings = self.binding(scope["parent"], fact.get("name", "")) if fact.get("kind") == "name" else None
+        if (bindings and len(bindings) == 1
+                and bindings[0].get("reason") in {"parameter", "loop variable"}
+                and bindings[0].get("type", "").endswith("[]")):
+            if bindings[0]["reason"] == "parameter":
+                origin = self.scopes.get(scope["parent"], {})
+                while origin and fact["name"] not in origin["bindings"]:
+                    origin = self.scopes.get(origin["parent"], {})
+                root_type = bindings[0]["type"].split('[', 1)[0].split('.')[0]
+                for binding in origin.get("type_bindings", {}).get(root_type, []):
+                    target = self.symbols.get(binding.get("target"), {})
+                    if target.get("parent_id") == origin.get("id"):
+                        return None  # A body-local class cannot type a formal parameter.
+            return bindings[0]
         return None
 
     def array_loop_reason(self, file, scope):
@@ -532,17 +556,15 @@ class _Resolver:
             if name in outer["bindings"]:
                 return "loop variable conflicts with an enclosing local"
             outer = self.scopes.get(outer["parent"], {})
-        fact = scope.get("iterable_fact", {})
-        bindings = self.binding(scope["parent"], fact.get("name", "")) if fact.get("kind") == "name" else None
-        if (not bindings or len(bindings) != 1
-                or bindings[0].get("reason") not in {"parameter", "loop variable"}
-                or not bindings[0].get("type", "").endswith("[]")):
+        array = self.loop_array_binding(scope)
+        if array is None:
             return "loop iterable element type unsupported"
         own = scope["bindings"].get(name, [])
         if len(own) != 1:
             return "ambiguous loop variable"
-        element = self.reference_type_name(file, scope["parent"], bindings[0]["type"][:-2])
-        declared = self.reference_type_name(file, scope["id"], own[0]["type"])
+        element = self.reference_type_name(file, scope["parent"], array["type"][:-2])
+        declared_type = array["type"][:-2] if own[0]["type"] == "var" else own[0]["type"]
+        declared = self.reference_type_name(file, scope["id"], declared_type)
         if not element or not declared or element != declared:
             return "loop element assignment unsupported or incompatible"
         return None

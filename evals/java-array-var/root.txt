@@ -1,0 +1,25 @@
+.........[columbus] Install pinned dependencies
+[columbus] Install pinned dependencies
+[columbus] Install pinned dependencies
+..........................[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests g0_8vgef/managed installation/versions/1.0.0
+.[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests g6jj2lpv/managed installation/versions/1.0.0
+[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests g6jj2lpv/managed installation/versions/1.0.0
+.[columbus] Download https://github.com/ch4570/columbus/releases/download/v1.0.0/SHA256SUMS.txt
+[columbus] Download https://github.com/ch4570/columbus/releases/download/v1.0.0/columbus-1.0.0-py3-none-any.whl
+..[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests 3fmgudhq/managed installation/versions/0.4.0
+[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests 3fmgudhq/managed installation/versions/1.0.0
+[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests 3fmgudhq/managed installation/versions/1.0.0
+.[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests gyqbnu_c/managed installation/versions/1.0.0
+.[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests yrnjyyde/managed installation/versions/1.0.0
+.[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests myu2_cym/managed installation/versions/1.0.0
+.[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests 4voqdrhw/managed installation/versions/1.0.0
+.[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests v39syo42/managed installation/versions/1.0.0
+..[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests 0c37o251/managed installation/versions/1.0.0
+.[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests li2_csyp/managed installation/versions/1.0.0
+..[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests 5cvi881y/managed installation/versions/1.0.0
+...[columbus] Create isolated environment: /private/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus release tests nf6bdcmm/사용자 %data%! with spaces/versions/1.0.0
+.
+----------------------------------------------------------------------
+Ran 53 tests in 5.874s
+
+OK
