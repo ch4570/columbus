@@ -1,0 +1,52 @@
+{
+  "schema": "columbus.exploration-cases/v1",
+  "cases": [
+    {
+      "id": "javascript-express-download-transfer",
+      "question": "Trace how Express download and sendFile requests travel from their public overloads to the private transfer helper and back through completion/error routing. Discover the entry points, actual handoffs, event handlers and deferred-finish behavior; distinguish the public sendFile method from the lowercase private helper. Explain the six requested mechanisms, including all stated edge cases, without treating a source quote as proof of a graph relationship. Assume ordinary mutable plain options/header objects with data properties, supported download overloads, and absent or callable non-throwing callbacks. Response header operations do not throw. Invalid missing/empty, non-string and relative sendFile paths are in scope; exotic objects, unsupported download argument combinations and callback exceptions are not. Stay within this repository's code: imported send, on-finished, content-disposition and Node library internals are outside scope. Do not infer filesystem containment, HTTP status generation, cache/range/MIME behavior or particular network event timing from these handoffs. Do not run the repository. For each finding, cite one representative implementation mechanism in a single contiguous range of at most 40 physical lines; explain other inspected branches in prose without stitching quotations.",
+      "findings": [
+        {
+          "id": "download_arguments",
+          "description": "Explain initial filename/options/fourth-callback handling, second- versus third-position callback normalization, and exactly when a second-position object is treated as options while retaining the normalized callback. Identify the ultimate public sendFile handoff with its computed path, derived options and callback rather than a separate transfer. Cite the argument-normalization branches.",
+          "path": "lib/response.js",
+          "marker": "if (typeof filename === 'object' &&"
+        },
+        {
+          "id": "download_options",
+          "description": "Explain attachment naming from the basename of the alternate name or original path (including empty-name fallback, without changing the source file); own-header enumeration and case-insensitive Content-Disposition protection; prototype-based option inheritance, the no-options prototype, fresh headers and original-object mutation boundaries; and truthy-root-dependent resolution versus preserving the original path, without claiming containment. Cite the derived options and final delegation.",
+          "path": "lib/response.js",
+          "marker": "opts = Object.create(opts)",
+          "call_lines": [483]
+        },
+        {
+          "id": "sendfile_setup",
+          "description": "Explain the required/type/absolute-or-truthy-root checks and their synchronous timing, options defaults and second-position callback normalization, direct options-object identity, URI encoding, app-controlled etag override and its direct-versus-download mutation consequence. Identify creation of the imported send stream and the subsequent handoff to the distinct private transfer helper. Cite stream setup.",
+          "path": "lib/response.js",
+          "marker": "var file = send(req, pathname, opts);",
+          "call_lines": [403]
+        },
+        {
+          "id": "callback_routing",
+          "description": "Explain supplied-callback precedence for success and every transfer error, and caller responsibility rather than an automatic response or headersSent check. Without that callback, distinguish directory, abort, write, other-error and successful completion routing. Also explain whether synchronous setup exceptions are converted to completion callbacks or reach the helper. Cite the public completion closure.",
+          "path": "lib/response.js",
+          "marker": "if (done) return done(err);",
+          "call_lines": [407]
+        },
+        {
+          "id": "transfer_events",
+          "description": "Explain all five file-event registrations, response-finish registration and their ordering before piping. Explain the per-transfer completion guard, repeated or reentrant terminal events, synthetic directory/abort errors versus original errors and successful end. Explain optional headers-event timing, enumeration at that event, setHeader forwarding, failures before headers and why later failures do not imply rollback. Cite the listener wiring and pipe boundary; the representative quote need not include every handler body.",
+          "path": "lib/response.js",
+          "marker": "file.pipe(res);",
+          "call_lines": [1008]
+        },
+        {
+          "id": "finish_race",
+          "description": "Explain the initial streaming state and file/stream transitions; finish-time connection-reset conversion, other-error forwarding and already-completed behavior; the deferred non-error check using the latest state; undefined/true versus false outcomes; and an intervening terminal event's effect on duplicate callbacks. Cite the deferred finish branches rather than assuming finish always means success.",
+          "path": "lib/response.js",
+          "marker": "if (streaming !== false && !done) {",
+          "call_lines": [972, 978]
+        }
+      ]
+    }
+  ]
+}

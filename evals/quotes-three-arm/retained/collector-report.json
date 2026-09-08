@@ -1,0 +1,1756 @@
+{
+  "schema": "columbus.quotes-three-arm-results/v1",
+  "primary_accepted": false,
+  "secondary_accepted": false,
+  "experiment_accepted": false,
+  "all_18_full_quality_and_utility": false,
+  "errors": [],
+  "orders": {
+    "java": {
+      "passed": true,
+      "missing_process_slots": [],
+      "runner_terminal_present": true,
+      "note": "An absent terminal record does not establish that a process stopped."
+    },
+    "kotlin": {
+      "passed": true,
+      "missing_process_slots": [],
+      "runner_terminal_present": true,
+      "note": "An absent terminal record does not establish that a process stopped."
+    },
+    "javascript": {
+      "passed": true,
+      "missing_process_slots": [],
+      "runner_terminal_present": true,
+      "note": "An absent terminal record does not establish that a process stopped."
+    }
+  },
+  "primary_pairs": [
+    {
+      "language": "java",
+      "repeat": 1,
+      "accepted": false,
+      "reasons": [
+        "baseline: citation_passed",
+        "baseline: semantic_passed",
+        "quotes: semantic_passed",
+        "quotes: reviewed graph relationship absent",
+        "input_tokens: quotes must be strictly lower"
+      ],
+      "quotes_minus_baseline": {
+        "input_tokens": 259969,
+        "output_tokens": -3420
+      }
+    },
+    {
+      "language": "java",
+      "repeat": 2,
+      "accepted": false,
+      "reasons": [
+        "baseline: citation_passed",
+        "baseline: semantic_passed",
+        "quotes: semantic_passed",
+        "quotes: reviewed graph relationship absent",
+        "input_tokens: quotes must be strictly lower",
+        "output_tokens: quotes must be strictly lower"
+      ],
+      "quotes_minus_baseline": {
+        "input_tokens": 189591,
+        "output_tokens": 967
+      }
+    },
+    {
+      "language": "kotlin",
+      "repeat": 1,
+      "accepted": false,
+      "reasons": [
+        "baseline: semantic_passed",
+        "quotes: terminal_passed",
+        "quotes: citation_passed",
+        "quotes: semantic_passed",
+        "quotes: reviewed graph relationship absent",
+        "input_tokens: quotes must be strictly lower",
+        "output_tokens: quotes must be strictly lower"
+      ],
+      "quotes_minus_baseline": {
+        "input_tokens": 628033,
+        "output_tokens": 7755
+      }
+    },
+    {
+      "language": "kotlin",
+      "repeat": 2,
+      "accepted": false,
+      "reasons": [
+        "baseline: semantic_passed",
+        "quotes: semantic_passed",
+        "quotes: reviewed graph relationship absent",
+        "input_tokens: quotes must be strictly lower",
+        "output_tokens: quotes must be strictly lower"
+      ],
+      "quotes_minus_baseline": {
+        "input_tokens": 220963,
+        "output_tokens": 4756
+      }
+    },
+    {
+      "language": "javascript",
+      "repeat": 1,
+      "accepted": false,
+      "reasons": [
+        "input_tokens: quotes must be strictly lower",
+        "output_tokens: quotes must be strictly lower"
+      ],
+      "quotes_minus_baseline": {
+        "input_tokens": 23585,
+        "output_tokens": 3999
+      }
+    },
+    {
+      "language": "javascript",
+      "repeat": 2,
+      "accepted": false,
+      "reasons": [
+        "input_tokens: quotes must be strictly lower",
+        "output_tokens: quotes must be strictly lower"
+      ],
+      "quotes_minus_baseline": {
+        "input_tokens": 74868,
+        "output_tokens": 2810
+      }
+    }
+  ],
+  "secondary_pairs": [
+    {
+      "language": "java",
+      "repeat": 1,
+      "accepted": false,
+      "reasons": [
+        "control: semantic_passed",
+        "control: reviewed graph relationship absent",
+        "quotes: semantic_passed",
+        "quotes: reviewed graph relationship absent",
+        "input_tokens: quotes must be strictly lower",
+        "output_tokens: quotes must be strictly lower"
+      ],
+      "quotes_minus_control": {
+        "input_tokens": 178456,
+        "output_tokens": 24
+      }
+    },
+    {
+      "language": "java",
+      "repeat": 2,
+      "accepted": false,
+      "reasons": [
+        "control: semantic_passed",
+        "control: reviewed graph relationship absent",
+        "quotes: semantic_passed",
+        "quotes: reviewed graph relationship absent",
+        "input_tokens: quotes must be strictly lower",
+        "output_tokens: quotes must be strictly lower"
+      ],
+      "quotes_minus_control": {
+        "input_tokens": 73017,
+        "output_tokens": 1266
+      }
+    },
+    {
+      "language": "kotlin",
+      "repeat": 1,
+      "accepted": false,
+      "reasons": [
+        "control: semantic_passed",
+        "control: reviewed graph relationship absent",
+        "quotes: terminal_passed",
+        "quotes: citation_passed",
+        "quotes: semantic_passed",
+        "quotes: reviewed graph relationship absent",
+        "input_tokens: quotes must be strictly lower",
+        "output_tokens: quotes must be strictly lower"
+      ],
+      "quotes_minus_control": {
+        "input_tokens": 544483,
+        "output_tokens": 7354
+      }
+    },
+    {
+      "language": "kotlin",
+      "repeat": 2,
+      "accepted": false,
+      "reasons": [
+        "control: citation_passed",
+        "control: semantic_passed",
+        "control: reviewed graph relationship absent",
+        "quotes: semantic_passed",
+        "quotes: reviewed graph relationship absent",
+        "input_tokens: quotes must be strictly lower",
+        "output_tokens: quotes must be strictly lower"
+      ],
+      "quotes_minus_control": {
+        "input_tokens": 161458,
+        "output_tokens": 4214
+      }
+    },
+    {
+      "language": "javascript",
+      "repeat": 1,
+      "accepted": false,
+      "reasons": [
+        "control: citation_passed"
+      ],
+      "quotes_minus_control": {
+        "input_tokens": -63187,
+        "output_tokens": -2761
+      }
+    },
+    {
+      "language": "javascript",
+      "repeat": 2,
+      "accepted": false,
+      "reasons": [
+        "control: citation_passed",
+        "input_tokens: quotes must be strictly lower"
+      ],
+      "quotes_minus_control": {
+        "input_tokens": 8422,
+        "output_tokens": -1029
+      }
+    }
+  ],
+  "trials": {
+    "java/baseline/1": {
+      "trial": "java-concurrent-lru-cache-lifecycle-baseline-1",
+      "language": "java",
+      "condition": "baseline",
+      "repeat": 1,
+      "artifact_sha256": {
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result.json": "d93f2b25a679265c7c0040e854027675089e9dae1aaaacc79635bfd15b758a6b",
+        "prompt.txt": "602abf67ec5286fecec0d3935917774a835775089561692240fe24612b09f07d",
+        "events.jsonl": "6caeb1e63eca38c452d7655da7298f48287ce8474cba06cbcfca7ae7b8ed9f28",
+        "terminal.json": "45f8df2f581d260c921908c0d335bb19a65fe71f689bae2ce92470aa66b585a1",
+        "process.json": "9cb9e71ffc51997ad94884dc6d97f8950166d36e292473bc93a0a0c7d694eb4e",
+        "invocation.json": "f16d8b4d83391b342f8f5cb01fddc6022d8b74b18b5611e83ee5dee1d40a7447",
+        "answer.json": "d78b77eac40ce9bca8b530f2c2901229a9bfde8a9741c05dd827dde4f115af2e"
+      },
+      "verified": true,
+      "pending": false,
+      "terminal_evidence_present": true,
+      "terminal_passed": true,
+      "execution_review": {
+        "passed": true,
+        "pending": false,
+        "reason": "Audited all six completed command executions and their shell command strings, statuses and repository-source outputs. item_1 uses rg over repository Java files for class discovery; incidental benchmark/test matches are discovery, not execution or analysis of unrelated implementations. item_2 searches member declarations and test assertions. item_3 reads cache lines 40–310; item_4 reads 309–580; item_5 finishes cache lines 565–598 and reads the relevant test class; item_6 reads Assert.isTrue/notNull with rg context. These are ordinary rg/nl/sed reads through the shell wrapper, with no source execution, builds/tests/benchmarks, writes/redirections, web/delegation, graph/runtime/index use, parent-directory/private-oracle access or additional tool types. The broad class reads are relevant to the requested complete lifecycle and separated nested helpers. All six commands completed successfully. Full raw event bytes were hashed, but turn.completed usage records and result.json were not displayed or used for this blinded review."
+      },
+      "completed_turns": 1,
+      "disallowed_item_types": [],
+      "citation_passed": false,
+      "semantic_passed": false,
+      "semantic": {
+        "passed": false,
+        "pending": false,
+        "reasons": [
+          "entry-generation: semantic check failed",
+          "entry-generation: semantic check failed",
+          "drain-coordination: semantic check failed",
+          "drain-coordination: semantic check failed",
+          "insertion-eviction: semantic check failed",
+          "insertion-eviction: semantic check failed",
+          "clear-and-observation: semantic check failed",
+          "clear-and-observation: semantic check failed"
+        ]
+      },
+      "relationship_used": false,
+      "relationship_receipts": [],
+      "quotes_used": false,
+      "quote_receipts": [],
+      "usage": {
+        "input_tokens": 112670,
+        "cached_input_tokens": 76800,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 19251,
+        "reasoning_output_tokens": 14918,
+        "uncached_input_tokens": 35870
+      },
+      "command_count": 6,
+      "command_output_bytes": 31461,
+      "failed_commands": 0,
+      "started_at": "2026-09-08T18:01:21.943586+00:00",
+      "terminal": {
+        "return_code": 0,
+        "timed_out": false,
+        "finished_at": "2026-09-08T18:12:15.225935+00:00",
+        "elapsed_seconds": 653.3319773749972
+      },
+      "semantic_review_sha256": "be6d01c070d3221691a40a6f7214185d1ccee667435c94d794af51b5cbe7af04"
+    },
+    "java/baseline/2": {
+      "trial": "java-concurrent-lru-cache-lifecycle-baseline-2",
+      "language": "java",
+      "condition": "baseline",
+      "repeat": 2,
+      "artifact_sha256": {
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result.json": "ce7566c8ec5a69fa0b1cc9daa9c45ac4785fc13060cd5491467030690cf50fa6",
+        "prompt.txt": "602abf67ec5286fecec0d3935917774a835775089561692240fe24612b09f07d",
+        "events.jsonl": "6423f73a4abca3a8b2c6d062eb7f9fc0bc20db7fa322c1ade17d15a8ac4c69b9",
+        "terminal.json": "ee5a767b0614e6414f8601d817088f16315396dc8727610049870e85ba2f2596",
+        "process.json": "f2334e1b975796ac10a53db69c712406351e5e85d31cbd9e7b23384ab0dc4f16",
+        "invocation.json": "9797b8522669181993043fc94a0d9d3c45617dceec0290d8224601262c8745c8",
+        "answer.json": "3266dd179be4a7a0eb12652b0ce00d980fadccb8cb598e2d094745c929a73b7b"
+      },
+      "verified": true,
+      "pending": false,
+      "terminal_evidence_present": true,
+      "terminal_passed": true,
+      "execution_review": {
+        "passed": true,
+        "pending": false,
+        "reason": "Audited all five completed shell command executions, including each component joined by &&: repository-only rg discovery/search, wc line counts, and bounded nl/sed reads of ConcurrentLruCache, its tests and Assert. All commands exit successfully. No command invokes a graph/runtime/index, writes files, runs upstream code/tests/builds, installs/synchronizes, delegates, uses the web or reads private catalogs/rubrics/other trials. The implementation's source ranges collectively cover the lifecycle under review; this is source inspection, not execution. Observed item types are command_execution and agent_message only. Full event bytes were hashed while turn.completed usage was excluded from displayed review material; result.json and actual usage totals were not inspected. Five final quotes match their ranges exactly. The key-removal quote is the actual contiguous 26-line source at 229–254, but the answer declares 229–253: its final method-closing brace lies one physical line outside that range, so that citation fails despite correct removal prose. All ranges are otherwise below 40 lines, and source/test/assertion-helper hashes match the frozen review. This citation defect and the three semantic omissions are separate from the passing execution audit."
+      },
+      "completed_turns": 1,
+      "disallowed_item_types": [],
+      "citation_passed": false,
+      "semantic_passed": false,
+      "semantic": {
+        "passed": false,
+        "pending": false,
+        "reasons": [
+          "entry-generation: semantic check failed",
+          "entry-generation: semantic check failed",
+          "drain-coordination: semantic check failed",
+          "drain-coordination: semantic check failed",
+          "insertion-eviction: semantic check failed",
+          "insertion-eviction: semantic check failed"
+        ]
+      },
+      "relationship_used": false,
+      "relationship_receipts": [],
+      "quotes_used": false,
+      "quote_receipts": [],
+      "usage": {
+        "input_tokens": 104721,
+        "cached_input_tokens": 69376,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 14415,
+        "reasoning_output_tokens": 10587,
+        "uncached_input_tokens": 35345
+      },
+      "command_count": 5,
+      "command_output_bytes": 39448,
+      "failed_commands": 0,
+      "started_at": "2026-09-08T18:48:04.547641+00:00",
+      "terminal": {
+        "return_code": 0,
+        "timed_out": false,
+        "finished_at": "2026-09-08T18:55:57.397920+00:00",
+        "elapsed_seconds": 472.8635483329999
+      },
+      "semantic_review_sha256": "55934ae5381cb823d6256106e4410c8e64af5ee8b2ac5b7a78e5fb2b35b2f39c"
+    },
+    "java/control/1": {
+      "trial": "java-concurrent-lru-cache-lifecycle-control-1",
+      "language": "java",
+      "condition": "control",
+      "repeat": 1,
+      "artifact_sha256": {
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result.json": "553a47e998187fd5eeda4aec191b6c94ed8066a3fddf53860fcf213eaee71bc8",
+        "prompt.txt": "4a59e1badc4ebb96543576ede725f6ded839027f55a110accc75b1057f806ef4",
+        "events.jsonl": "b8bc2fe610da86f7a20016fbb65bdfff147f638ee83b5cc76dcf3612453ed181",
+        "terminal.json": "ed08c8fbfe5e1cf57f4e7078c03960f941a586eba005b34e34e9f38917a5ce27",
+        "process.json": "c42ccd756fab51411f74c4c219cd9b029e3d0abb52830061ea85379b59ad81ab",
+        "invocation.json": "2b0383e5444cf4046cb059f9ea11c6bb74e2bb153f516b5006fae59045d55fd2",
+        "answer.json": "95aa9c58605cce7bf81098574842bcbe96dc6dd820c4a71053185bb4aaa07401"
+      },
+      "verified": true,
+      "pending": false,
+      "terminal_evidence_present": true,
+      "terminal_passed": true,
+      "execution_review": {
+        "passed": true,
+        "pending": false,
+        "reason": "Audited all 13 command executions; the started and completed command-ID sets match and every command completed successfully. item_1 reads the explicitly supplied runtime SKILL.md fully. items_2 and_4 perform repository rg discovery/member/test searches. items_6 through_10 and_13 use nl/sed for relevant cache/test implementation ranges, and items_11/_12 inspect Assert with rg/nl/sed. items_3/_5 invoke only the supplied frozen archive-search/archive-source commands, both using the exact absolute /Users/rex/Desktop/personal/columbus/.venv/bin/python -B plus the offered absolute runtime shim and graph path; source retrieval includes --repo . and bounded options. No source execution, tests/builds/benchmarks, web/delegation, writes, sync/index creation, private oracle or other-arm access appears. Ordinary searches returning incidental benchmark declarations are discovery, not running those files. The basic archive operations are covered directly by the supplied skill; additional references are optional for operations not used. Search/declaration retrieval is not a claim of useful relationship-edge delivery, which is a separate gate. Full raw events were hashed while usage records and result.json were excluded from this blinded review."
+      },
+      "completed_turns": 1,
+      "disallowed_item_types": [],
+      "citation_passed": true,
+      "semantic_passed": false,
+      "semantic": {
+        "passed": false,
+        "pending": false,
+        "reasons": [
+          "entry-generation: semantic check failed",
+          "entry-generation: semantic check failed",
+          "insertion-eviction: semantic check failed",
+          "insertion-eviction: semantic check failed",
+          "insertion-eviction: semantic check failed",
+          "clear-and-observation: semantic check failed",
+          "clear-and-observation: semantic check failed"
+        ]
+      },
+      "relationship_used": false,
+      "relationship_receipts": [],
+      "quotes_used": false,
+      "quote_receipts": [],
+      "usage": {
+        "input_tokens": 194183,
+        "cached_input_tokens": 142976,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 15807,
+        "reasoning_output_tokens": 10928,
+        "uncached_input_tokens": 51207
+      },
+      "command_count": 13,
+      "command_output_bytes": 51994,
+      "failed_commands": 0,
+      "started_at": "2026-09-08T18:12:26.011008+00:00",
+      "terminal": {
+        "return_code": 0,
+        "timed_out": false,
+        "finished_at": "2026-09-08T18:21:24.866421+00:00",
+        "elapsed_seconds": 538.8694789579895
+      },
+      "semantic_review_sha256": "b51c667ab335dd0d0a9012cac0cd7cac61bdf07fb994ce15c4cf407609aad71c"
+    },
+    "java/control/2": {
+      "trial": "java-concurrent-lru-cache-lifecycle-control-2",
+      "language": "java",
+      "condition": "control",
+      "repeat": 2,
+      "artifact_sha256": {
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result.json": "6d81373bc1e6cf008f03077703e8446c493753b03fee5df5ab9cff96a3736d5f",
+        "prompt.txt": "4a59e1badc4ebb96543576ede725f6ded839027f55a110accc75b1057f806ef4",
+        "events.jsonl": "c88cdc53c1b81445dc70ec8a17b3d6e7878a2d8fd7f05b08afe38e24b34c286b",
+        "terminal.json": "70de7a1ad002c916246ef8de4f51e0d335463ac0563266a0da578281ba992ce1",
+        "process.json": "150cfaf1ced4ae725326fc01436318afc81b38f11adf6151782fa59eb17d2ea6",
+        "invocation.json": "6833d66f17494fe242eb4d88a9f5b278c47203902a96ca676560ace6bc0710ca",
+        "answer.json": "b0efac108511578718ff261bf3efa0c90864f3bf364995391878e68b885e62d4"
+      },
+      "verified": true,
+      "pending": false,
+      "terminal_evidence_present": true,
+      "terminal_passed": true,
+      "execution_review": {
+        "passed": true,
+        "pending": false,
+        "reason": "Audited all ten completed command executions: one bounded read of the explicitly supplied SKILL.md, five ordinary repository-only rg or nl/sed invocations (two join read-only rg commands with &&), one archive-search call and three archive-source calls, including a bounded offset continuation. All four Columbus calls use the exact supplied absolute Python interpreter with -B, runtime shim and saved graph; source calls use --repo . and repository-derived declarations. All commands exit successfully. No command writes files, invokes archive-quotes, executes upstream code/tests/builds, installs/synchronizes, delegates, uses the web or reads private catalogs/rubrics/other trials. Observed item types are command_execution and agent_message only. Full event bytes were hashed while turn.completed usage was omitted from displayed review material; result.json and usage totals were not inspected. All six final quotes independently match exact decoded contiguous source ranges of 15–27 physical lines, and implementation/test/assertion-helper hashes match the frozen source review. Source/search delivery is not treated here as graph-relationship evidence or proof of semantic completeness; the full clause judgments remain separate above."
+      },
+      "completed_turns": 1,
+      "disallowed_item_types": [],
+      "citation_passed": true,
+      "semantic_passed": false,
+      "semantic": {
+        "passed": false,
+        "pending": false,
+        "reasons": [
+          "insertion-eviction: semantic check failed",
+          "insertion-eviction: semantic check failed"
+        ]
+      },
+      "relationship_used": false,
+      "relationship_receipts": [],
+      "quotes_used": false,
+      "quote_receipts": [],
+      "usage": {
+        "input_tokens": 221295,
+        "cached_input_tokens": 165376,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 14116,
+        "reasoning_output_tokens": 9303,
+        "uncached_input_tokens": 55919
+      },
+      "command_count": 10,
+      "command_output_bytes": 52942,
+      "failed_commands": 0,
+      "started_at": "2026-09-08T18:40:00.524891+00:00",
+      "terminal": {
+        "return_code": 0,
+        "timed_out": false,
+        "finished_at": "2026-09-08T18:47:53.852075+00:00",
+        "elapsed_seconds": 473.3403929169872
+      },
+      "semantic_review_sha256": "786d03fa8443759d7c0a5f10b5b843300abdbf7336a48290a4382959cd8d2761"
+    },
+    "java/quotes/1": {
+      "trial": "java-concurrent-lru-cache-lifecycle-quotes-1",
+      "language": "java",
+      "condition": "quotes",
+      "repeat": 1,
+      "artifact_sha256": {
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result.json": "c25bab433763f8bf3e8d362acee804c1a2b834d8b65f37dbb9f70655399c2b9d",
+        "prompt.txt": "7624ca2cfb6ea1e9495de1d41558b5eef8605683e656feea808543afb1d1d683",
+        "events.jsonl": "9b368d0e94f6223948fc16ac7e006ccf88d02e45f43905457de693969bf43926",
+        "terminal.json": "b2423918e0d51bb10d32f7579a6147108712cbbd9a3ef0380c1f97ed82fc20bf",
+        "process.json": "831fee1723f14879f5e0ecf56c1e48e32e4f2033700a5658ff0bc18a318ef99f",
+        "invocation.json": "f2b77cafa584ec3afaa1c55c3d9ec38832e2cf5a8dad89b66275d0ac02106692",
+        "answer.json": "123c24eec5c632cdd67e252edb25e5fcba3f90e78437ed89eb4888fad7d93d6a"
+      },
+      "verified": true,
+      "pending": false,
+      "terminal_evidence_present": true,
+      "terminal_passed": true,
+      "execution_review": {
+        "passed": true,
+        "pending": false,
+        "reason": "Audited all 25 completed command executions: one bounded read of the explicitly supplied SKILL.md; fourteen ordinary repository-only rg/sed reads or searches, with a head pipe for discovery; seven archive-search calls; two archive-source calls; and one archive-quotes batch. All ten Columbus invocations use the exact supplied absolute Python interpreter with -B, the supplied runtime shim and saved graph; source-reading operations use --repo . and repository-relative targets. The second archive-source call exits 2 because two queried declarations are ambiguous or absent; this read-only lookup failure is not a protocol violation. The six-range archive-quotes command succeeds, but quote extraction is not credited here as graph-relationship evidence or proof of semantic completeness. No command writes files, executes upstream code/tests/builds, installs or synchronizes anything, delegates, accesses the web, or reads private catalogs/rubrics/other trials. Event item types are command_execution and agent_message only. The full event bytes were hashed while turn.completed usage was excluded from displayed review material; result.json and usage totals were not inspected. All six final citation ranges were independently compared with the pinned implementation and contain exact decoded contiguous source quotes of 15–27 physical lines. Source and rubric hashes match the frozen review; semantic omissions are evaluated separately above."
+      },
+      "completed_turns": 1,
+      "disallowed_item_types": [],
+      "citation_passed": true,
+      "semantic_passed": false,
+      "semantic": {
+        "passed": false,
+        "pending": false,
+        "reasons": [
+          "entry-generation: semantic check failed",
+          "entry-generation: semantic check failed",
+          "drain-coordination: semantic check failed",
+          "drain-coordination: semantic check failed",
+          "insertion-eviction: semantic check failed",
+          "insertion-eviction: semantic check failed",
+          "clear-and-observation: semantic check failed",
+          "clear-and-observation: semantic check failed"
+        ]
+      },
+      "relationship_used": false,
+      "relationship_receipts": [],
+      "quotes_used": true,
+      "quote_receipts": [
+        {
+          "recognizer_version": "quotes-three-arm-evidence-v1",
+          "command_id": "item_22",
+          "operation": "archive-quotes",
+          "encoding": "quotes-json-v1",
+          "output_sha256": "0616523b09dd55876c3f88a433b0d1af41a0755e94f396ebaffcd6484f688583",
+          "ranges": [
+            {
+              "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+              "start_line": 100,
+              "end_line": 125,
+              "source_hash": "58ee866e0b18b50749eb36579a81dae974518aa02a495fbbf99a0de92ad47e9a",
+              "language": "java"
+            },
+            {
+              "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+              "start_line": 435,
+              "end_line": 449,
+              "source_hash": "58ee866e0b18b50749eb36579a81dae974518aa02a495fbbf99a0de92ad47e9a",
+              "language": "java"
+            },
+            {
+              "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+              "start_line": 128,
+              "end_line": 154,
+              "source_hash": "58ee866e0b18b50749eb36579a81dae974518aa02a495fbbf99a0de92ad47e9a",
+              "language": "java"
+            },
+            {
+              "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+              "start_line": 269,
+              "end_line": 286,
+              "source_hash": "58ee866e0b18b50749eb36579a81dae974518aa02a495fbbf99a0de92ad47e9a",
+              "language": "java"
+            },
+            {
+              "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+              "start_line": 229,
+              "end_line": 254,
+              "source_hash": "58ee866e0b18b50749eb36579a81dae974518aa02a495fbbf99a0de92ad47e9a",
+              "language": "java"
+            },
+            {
+              "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+              "start_line": 184,
+              "end_line": 198,
+              "source_hash": "58ee866e0b18b50749eb36579a81dae974518aa02a495fbbf99a0de92ad47e9a",
+              "language": "java"
+            }
+          ],
+          "source_rows": 127
+        }
+      ],
+      "usage": {
+        "input_tokens": 372639,
+        "cached_input_tokens": 303232,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 15831,
+        "reasoning_output_tokens": 10166,
+        "uncached_input_tokens": 69407
+      },
+      "command_count": 25,
+      "command_output_bytes": 414660,
+      "failed_commands": 1,
+      "started_at": "2026-09-08T18:21:35.645881+00:00",
+      "terminal": {
+        "return_code": 0,
+        "timed_out": false,
+        "finished_at": "2026-09-08T18:30:43.586199+00:00",
+        "elapsed_seconds": 547.9555084590102
+      },
+      "semantic_review_sha256": "803af0f748c309b12dc999d6b40b136f548853f83bb44f93f32addc690863744"
+    },
+    "java/quotes/2": {
+      "trial": "java-concurrent-lru-cache-lifecycle-quotes-2",
+      "language": "java",
+      "condition": "quotes",
+      "repeat": 2,
+      "artifact_sha256": {
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result.json": "00d0e3ddda2c03b488e0a5ecddb15e5b8098451b778a9891a42ebf8a8b6ef1af",
+        "prompt.txt": "7624ca2cfb6ea1e9495de1d41558b5eef8605683e656feea808543afb1d1d683",
+        "events.jsonl": "7f2a22a621cf718c0d6894590ee54ec667d81d44997353ff7c6d4401fb932268",
+        "terminal.json": "683c893e0d28a15db6973f9b94e24e89888e17c2b7c5475ee2b8b05ec65589d2",
+        "process.json": "5677b61259c3b916c2cdaa893a4249526e956213fbd57c9a37ead3a0fc04b8b6",
+        "invocation.json": "6319eaa2d667456f75345732cd591b4c571d7be97524d4b037935b2228b30f88",
+        "answer.json": "e70a85a6f4a0abc43888668ad06d3a5bd1a73ce17b883877be1dbb336e342c23"
+      },
+      "verified": true,
+      "pending": false,
+      "terminal_evidence_present": true,
+      "terminal_passed": true,
+      "execution_review": {
+        "passed": true,
+        "pending": false,
+        "reason": "Audited all 18 completed command executions: one bounded read of the explicitly supplied SKILL.md, five ordinary repository-only rg or nl/sed invocations (one contains two read-only rg commands joined by &&), eight archive-search calls, three archive-source calls and one archive-quotes batch. All twelve Columbus calls use the exact supplied absolute Python interpreter with -B, runtime shim and saved graph; source-reading calls include --repo . and repository-relative targets. One archive-source call exits 2 because the capacity declaration is ambiguous or absent; this allowed read-only lookup failure is not a protocol violation. No command modifies files, executes upstream code/tests/builds, installs/synchronizes, delegates, uses the web or reads private catalogs/rubrics/other trials. The observed item types are command_execution and agent_message only. The full events were hashed while turn.completed usage was excluded from displayed review material; result.json and actual usage totals were not inspected. All six citation ranges independently match exact decoded contiguous source quotes of 15–27 physical lines, and the implementation/tests/assertion-helper hashes match the frozen source review. Successful quote extraction is not treated as graph-relationship evidence or proof of complete semantic coverage; the clause judgments above are separate."
+      },
+      "completed_turns": 1,
+      "disallowed_item_types": [],
+      "citation_passed": true,
+      "semantic_passed": false,
+      "semantic": {
+        "passed": false,
+        "pending": false,
+        "reasons": [
+          "entry-generation: semantic check failed",
+          "entry-generation: semantic check failed",
+          "entry-generation: semantic check failed",
+          "drain-coordination: semantic check failed",
+          "drain-coordination: semantic check failed",
+          "insertion-eviction: semantic check failed",
+          "insertion-eviction: semantic check failed",
+          "insertion-eviction: semantic check failed"
+        ]
+      },
+      "relationship_used": false,
+      "relationship_receipts": [],
+      "quotes_used": true,
+      "quote_receipts": [
+        {
+          "recognizer_version": "quotes-three-arm-evidence-v1",
+          "command_id": "item_18",
+          "operation": "archive-quotes",
+          "encoding": "quotes-json-v1",
+          "output_sha256": "f450557c97aaa9b2665bd293e621ddb98a5800d7153ac0d7352d66c14e58e5f1",
+          "ranges": [
+            {
+              "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+              "start_line": 100,
+              "end_line": 126,
+              "source_hash": "58ee866e0b18b50749eb36579a81dae974518aa02a495fbbf99a0de92ad47e9a",
+              "language": "java"
+            },
+            {
+              "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+              "start_line": 435,
+              "end_line": 449,
+              "source_hash": "58ee866e0b18b50749eb36579a81dae974518aa02a495fbbf99a0de92ad47e9a",
+              "language": "java"
+            },
+            {
+              "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+              "start_line": 128,
+              "end_line": 154,
+              "source_hash": "58ee866e0b18b50749eb36579a81dae974518aa02a495fbbf99a0de92ad47e9a",
+              "language": "java"
+            },
+            {
+              "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+              "start_line": 268,
+              "end_line": 286,
+              "source_hash": "58ee866e0b18b50749eb36579a81dae974518aa02a495fbbf99a0de92ad47e9a",
+              "language": "java"
+            },
+            {
+              "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+              "start_line": 229,
+              "end_line": 254,
+              "source_hash": "58ee866e0b18b50749eb36579a81dae974518aa02a495fbbf99a0de92ad47e9a",
+              "language": "java"
+            },
+            {
+              "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+              "start_line": 184,
+              "end_line": 198,
+              "source_hash": "58ee866e0b18b50749eb36579a81dae974518aa02a495fbbf99a0de92ad47e9a",
+              "language": "java"
+            }
+          ],
+          "source_rows": 129
+        }
+      ],
+      "usage": {
+        "input_tokens": 294312,
+        "cached_input_tokens": 232960,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 15382,
+        "reasoning_output_tokens": 9962,
+        "uncached_input_tokens": 61352
+      },
+      "command_count": 18,
+      "command_output_bytes": 66683,
+      "failed_commands": 1,
+      "started_at": "2026-09-08T18:30:53.996742+00:00",
+      "terminal": {
+        "return_code": 0,
+        "timed_out": false,
+        "finished_at": "2026-09-08T18:39:45.379090+00:00",
+        "elapsed_seconds": 531.3974821659795
+      },
+      "semantic_review_sha256": "5389eff25624e337ecf71e623618772921c76ab3375d4b4819f26c2d12915e40"
+    },
+    "kotlin/baseline/1": {
+      "trial": "kotlin-proxy-hint-registration-baseline-1",
+      "language": "kotlin",
+      "condition": "baseline",
+      "repeat": 1,
+      "artifact_sha256": {
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result.json": "e2e9e1c05d0769cc3eed39f62dae47cf15153f83f030f660f6a5681338d1fccb",
+        "prompt.txt": "53f6c68c988adf92472657eacc36174c4ab462c9197fef24e486a9a549fc08ed",
+        "events.jsonl": "d81c04541005498a90148bffe8fcb2cbeb0d010909e5b95383c11063f35b330a",
+        "terminal.json": "8c21dfc1501081b94d14a702fcb61dfe999334b83b5166f7587b7c48fe58a721",
+        "process.json": "961f5f168c2682b0c01fff29c37698343a1f6245d01d48f5d1c08420adf2a577",
+        "invocation.json": "c8b0521e678fc4beb957a8d4115c71e6e875dc6dfd03f123b23ac063191f9e85",
+        "answer.json": "7bb13b5254fd5ed5bf0fe193e30e941127d132cdf50d09cc7c16d1b7497a569e"
+      },
+      "verified": true,
+      "pending": false,
+      "terminal_evidence_present": true,
+      "terminal_passed": true,
+      "execution_review": {
+        "passed": true,
+        "pending": false,
+        "reason": "Reviewed all 13 started/completed command pairs, item_0 through item_12, against the baseline prompt; all completed successfully. item_0 searches repository Java/Kotlin source; item_1 and item_2 read the relevant hint/registry implementations; item_3 reads both Kotlin extension tests; item_4 reads both Kotlin bridges; item_5 searches TypeReference implementation/equality declarations; item_6 and item_7 read relevant Java tests; item_8 reads AbstractTypeReference; item_9 reads TypeReference; item_10 reads ReflectionTypeReference and SimpleTypeReference; item_11 searches relevant test source with bounded head output; item_12 rereads a bounded SimpleTypeReference range. Every command is an ordinary rg/nl/sed/head source read within the repository. Semicolon batching, pipes and stderr redirection to /dev/null do not modify source. No code-graph tool/saved index, runtime outside the offered baseline tools, upstream code/test/build execution, filesystem write, web/delegation event, sibling trial or private-oracle access was observed. Full raw events were hashed while turn.completed usage data, result.json and other-arm answers were excluded from inspection."
+      },
+      "completed_turns": 1,
+      "disallowed_item_types": [],
+      "citation_passed": true,
+      "semantic_passed": false,
+      "semantic": {
+        "passed": false,
+        "pending": false,
+        "reasons": [
+          "interface-validation: semantic check failed",
+          "interface-validation: semantic check failed",
+          "hint-state-identity: semantic check failed",
+          "hint-state-identity: semantic check failed",
+          "registry-deduplication: semantic check failed",
+          "registry-deduplication: semantic check failed"
+        ]
+      },
+      "relationship_used": false,
+      "relationship_receipts": [],
+      "quotes_used": false,
+      "quote_receipts": [],
+      "usage": {
+        "input_tokens": 106812,
+        "cached_input_tokens": 62464,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 9075,
+        "reasoning_output_tokens": 6115,
+        "uncached_input_tokens": 44348
+      },
+      "command_count": 13,
+      "command_output_bytes": 86916,
+      "failed_commands": 0,
+      "started_at": "2026-09-08T18:16:58.048697+00:00",
+      "terminal": {
+        "return_code": 0,
+        "timed_out": false,
+        "finished_at": "2026-09-08T18:22:01.019746+00:00",
+        "elapsed_seconds": 302.983647999994
+      },
+      "semantic_review_sha256": "529d674863ef4c99d1cf41a22ea87c1ee65da1812b4b760d2055fe82291e1340"
+    },
+    "kotlin/baseline/2": {
+      "trial": "kotlin-proxy-hint-registration-baseline-2",
+      "language": "kotlin",
+      "condition": "baseline",
+      "repeat": 2,
+      "artifact_sha256": {
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result.json": "c3e4e87d49721038df290641db283e26d43e2e4c4718679ab5bdc6a597a6946b",
+        "prompt.txt": "53f6c68c988adf92472657eacc36174c4ab462c9197fef24e486a9a549fc08ed",
+        "events.jsonl": "d4f9cbf493633382861bc6ff9fa3bc14ff127ad60182a4f960c6d66963d58214",
+        "terminal.json": "7a26e2ee004ea8d2fc392c63edd169dd46e8690a2bb8f949440b11ae52cf8d46",
+        "process.json": "69a73a04c6d602e32eb4dac0ba352c7a37e8baf4676956b83d972b5d1e4f9376",
+        "invocation.json": "dfaabbe3074ed161bc908095b44c9902447f8d9134ccf31c3f32040d1bc4d4d1",
+        "answer.json": "09434e903d2ec88d65eb51aac5a2b9616832190302cce6005f26fe819f78f640"
+      },
+      "verified": true,
+      "pending": false,
+      "terminal_evidence_present": true,
+      "terminal_passed": true,
+      "execution_review": {
+        "passed": true,
+        "pending": false,
+        "reason": "Reviewed all 12 started/completed command pairs, item_1 through item_12, against the baseline ordinary-source-only prompt. item_1 searches repository Java/Kotlin source; item_2 reads the two relevant Java hint/registry tests; item_3 and item_4 read ProxyHints and JdkProxyHint; item_5 and item_6 read the two Kotlin tests and bridges; item_7 searches relevant TypeReference source/tests; item_8 reads TypeReferenceTests; item_9 searches relevant Java hint tests; item_10 reads ReflectionTypeReference/SimpleTypeReference; item_11 reads TypeReference/AbstractTypeReference. These are ordinary bounded rg/nl/sed source reads, including permitted semicolon batching and pipes. item_12 performs local git status --short and a one-entry git log scoped to JdkProxyHint.java: status reports only the module's untracked source entries, while log fails because the local branch has no commits. Those are repository metadata diagnostics, not upstream execution or access to sibling/private evidence. No code-graph tool/saved index, source/index write command, repository code/test/build execution, web/delegation event, sibling trial, private case/rubric/answer or harness access was observed. The failed history lookup is not a protocol violation. Full raw events were hashed while turn.completed usage data, result.json and other-arm answers were excluded from inspection."
+      },
+      "completed_turns": 1,
+      "disallowed_item_types": [],
+      "citation_passed": true,
+      "semantic_passed": false,
+      "semantic": {
+        "passed": false,
+        "pending": false,
+        "reasons": [
+          "interface-validation: semantic check failed",
+          "interface-validation: semantic check failed",
+          "interface-validation: semantic check failed",
+          "hint-state-identity: semantic check failed",
+          "hint-state-identity: semantic check failed",
+          "registry-deduplication: semantic check failed",
+          "registry-deduplication: semantic check failed"
+        ]
+      },
+      "relationship_used": false,
+      "relationship_receipts": [],
+      "quotes_used": false,
+      "quote_receipts": [],
+      "usage": {
+        "input_tokens": 90996,
+        "cached_input_tokens": 36480,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 8785,
+        "reasoning_output_tokens": 6041,
+        "uncached_input_tokens": 54516
+      },
+      "command_count": 12,
+      "command_output_bytes": 108112,
+      "failed_commands": 1,
+      "started_at": "2026-09-08T18:22:11.482741+00:00",
+      "terminal": {
+        "return_code": 0,
+        "timed_out": false,
+        "finished_at": "2026-09-08T18:27:04.896994+00:00",
+        "elapsed_seconds": 293.4262528340041
+      },
+      "semantic_review_sha256": "5bdc070d3f345f2ab01aacbb862770e0588356b511142eb17547ecd44d8827aa"
+    },
+    "kotlin/control/1": {
+      "trial": "kotlin-proxy-hint-registration-control-1",
+      "language": "kotlin",
+      "condition": "control",
+      "repeat": 1,
+      "artifact_sha256": {
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result.json": "4efae0556b153e4005c4380ea3272c1b4db046df8068ec70a4344a7078e52d67",
+        "prompt.txt": "ce320788ba0e18bfa407b37cef56516bdfc23c68094d3a7a7353b73359927672",
+        "events.jsonl": "b8a1ab1d21f575cc08255fd21d7e2264258112b513ef462744a2bf429e1c76fc",
+        "terminal.json": "5c99d518418a18671d20a2b911d73e52ead2305bcb12d0985c7e25d990be8d45",
+        "process.json": "f6ba8a13ffba51efe458e33171c28f1029f14f197c76e1b06f3a3275628da6a5",
+        "invocation.json": "5b1eca6dccca9e385647e4a28ad00d8084a12be9004aacfe07ea9d1b4658c332",
+        "answer.json": "a5edc12d7ca8db36dc7033481f3a8af17ff809f1707b03a21c16f3de3ccd2e37"
+      },
+      "verified": true,
+      "pending": false,
+      "terminal_evidence_present": true,
+      "terminal_passed": true,
+      "execution_review": {
+        "passed": true,
+        "pending": false,
+        "reason": "Reviewed every started/completed command pair, item_1 through item_8, against prompt.txt; all eight have terminal command records. item_1 reads only the explicitly offered runtime SKILL.md. item_2 searches the repository. item_3 attempts an offered frozen-runtime archive-source read and fails with exit 2 on ambiguous TypeReference; item_4 searches that same offered archive; item_5 performs another read-only archive-source retrieval. item_6 reads TypeReference and searches relevant repository production/test source. item_7 reads the two Kotlin bridges/tests and three TypeReference implementations using nl/sed. item_8 reads relevant Java tests and registration/hint/helper source using nl/sed. Shell batching, pipelines and the shared Python executable are confined to the permitted source reads or explicit runtime wrapper. No command executes Spring code/tests/builds, writes source or an index, uses the web, delegates, or accesses sibling trials/private cases, criteria, answers or harness files. No other external-tool/delegation event appeared. The failed retrieval is not a protocol violation. Full raw events bytes were hashed while turn.completed usage data and other-arm answers/results were excluded from inspection."
+      },
+      "completed_turns": 1,
+      "disallowed_item_types": [],
+      "citation_passed": true,
+      "semantic_passed": false,
+      "semantic": {
+        "passed": false,
+        "pending": false,
+        "reasons": [
+          "interface-validation: semantic check failed",
+          "interface-validation: semantic check failed",
+          "interface-storage: semantic check failed",
+          "interface-storage: semantic check failed",
+          "hint-state-identity: semantic check failed",
+          "hint-state-identity: semantic check failed",
+          "registry-deduplication: semantic check failed",
+          "registry-deduplication: semantic check failed"
+        ]
+      },
+      "relationship_used": false,
+      "relationship_receipts": [],
+      "quotes_used": false,
+      "quote_receipts": [],
+      "usage": {
+        "input_tokens": 190362,
+        "cached_input_tokens": 146944,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 9476,
+        "reasoning_output_tokens": 6201,
+        "uncached_input_tokens": 43418
+      },
+      "command_count": 8,
+      "command_output_bytes": 112165,
+      "failed_commands": 1,
+      "started_at": "2026-09-08T18:01:21.715546+00:00",
+      "terminal": {
+        "return_code": 0,
+        "timed_out": false,
+        "finished_at": "2026-09-08T18:06:50.855937+00:00",
+        "elapsed_seconds": 329.1440475000127
+      },
+      "semantic_review_sha256": "157f59aaa0767a5fd6a9c8e73067a7847fec41fa7c1301854a2b03a915a1c754"
+    },
+    "kotlin/control/2": {
+      "trial": "kotlin-proxy-hint-registration-control-2",
+      "language": "kotlin",
+      "condition": "control",
+      "repeat": 2,
+      "artifact_sha256": {
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result.json": "14344897177fb4fb9ebe0a6f52337e2fa6a9407af0dd55c8accedf56cd7b9dc5",
+        "prompt.txt": "ce320788ba0e18bfa407b37cef56516bdfc23c68094d3a7a7353b73359927672",
+        "events.jsonl": "05903103b6e9d3b83e6fd3808e64abe5375578cfb8a85eb75911acb10d17bb5d",
+        "terminal.json": "c0f105f7f4fb1412d5abccfe0ae73d523dc029d0571c78a3655b14ee80cf05ef",
+        "process.json": "8f4995f2dc0798a07e36bbe4bf559ae1fcc8eae54fdc7ad65f0b4b83544b4cbd",
+        "invocation.json": "f16842a10845b6f7cc3349f92d5ef6ff466169cdce3a884072232b7a6b37aae3",
+        "answer.json": "c3bd03f056b01854d90fcb3a09fdae3cce64f3e476bd4924abcdba223c5c33df"
+      },
+      "verified": true,
+      "pending": false,
+      "terminal_evidence_present": true,
+      "terminal_passed": true,
+      "execution_review": {
+        "passed": true,
+        "pending": false,
+        "reason": "Reviewed all six started/completed command pairs, item_1 through item_6, against the frozen prompt; all six completed successfully. item_1 reads only the offered runtime SKILL.md. item_2 performs a bounded repository Java/Kotlin search. item_3 invokes the offered absolute frozen wrapper and archive using exactly the supplied absolute .venv Python -B prefix, retrieving a bounded related-declaration batch with --repo . and no sync/index operation. item_4 reads the registry, both Kotlin bridges/tests and searches TypeReference declarations. item_5 reads TypeReference, its three built-in implementation/base classes and relevant Java hint tests. item_6 rereads bounded numbered bridge, registry, hint and helper ranges for citation preparation. These are permitted rg/sed/nl/head reads and shell batching confined to repository or explicitly offered runtime/archive evidence. No source/index write, upstream code/test/build execution, installation/synchronization, web/delegation event, sibling trial/private case/rubric/answer or harness access was observed. Full raw events were hashed while turn.completed usage, result.json and other-arm answers were excluded from inspection."
+      },
+      "completed_turns": 1,
+      "disallowed_item_types": [],
+      "citation_passed": false,
+      "semantic_passed": false,
+      "semantic": {
+        "passed": false,
+        "pending": false,
+        "reasons": [
+          "interface-validation: semantic check failed",
+          "interface-validation: semantic check failed",
+          "hint-state-identity: semantic check failed",
+          "hint-state-identity: semantic check failed",
+          "registry-deduplication: semantic check failed",
+          "registry-deduplication: semantic check failed"
+        ]
+      },
+      "relationship_used": false,
+      "relationship_receipts": [],
+      "quotes_used": false,
+      "quote_receipts": [],
+      "usage": {
+        "input_tokens": 150501,
+        "cached_input_tokens": 115072,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 9327,
+        "reasoning_output_tokens": 6305,
+        "uncached_input_tokens": 35429
+      },
+      "command_count": 6,
+      "command_output_bytes": 84292,
+      "failed_commands": 0,
+      "started_at": "2026-09-08T18:35:05.618295+00:00",
+      "terminal": {
+        "return_code": 0,
+        "timed_out": false,
+        "finished_at": "2026-09-08T18:40:21.574114+00:00",
+        "elapsed_seconds": 315.9694230000023
+      },
+      "semantic_review_sha256": "c56bba633a06c85717e6f366d990753d6088d54aad169aaba5e96bc801a6fba4"
+    },
+    "kotlin/quotes/1": {
+      "trial": "kotlin-proxy-hint-registration-quotes-1",
+      "language": "kotlin",
+      "condition": "quotes",
+      "repeat": 1,
+      "artifact_sha256": {
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result.json": "5a5fd700745180a4302daac620478926ade1394bdb790310273afa5db74a1e5e",
+        "prompt.txt": "a377a8d048e48d5f94701cfb27506611ad571bb6ade60f7d6f002f794b184b1a",
+        "events.jsonl": "ad7a867de6df52802c5c5d6b60aa2379035f7a97839b514595b5f583d7ba34a2",
+        "terminal.json": "38dab979e879d131ef7ec887658f54194c04de16e3b39babe8ddf1278f5fe50c",
+        "process.json": "c235077aa791485d3a81ece90e0e44377813e46c668eb2d60434fcf58910511d",
+        "invocation.json": "44c2628d8e65a84102afcc4ca055efdd8f8ea7976cf1dbfc8d34fd7cbfb1b60a",
+        "answer.json": "aae3b16a04b48874b7d035a8759c7ae96d685991ce9917939bc8e5185300fc29"
+      },
+      "verified": true,
+      "pending": false,
+      "terminal_evidence_present": true,
+      "terminal_passed": false,
+      "execution_review": {
+        "passed": false,
+        "pending": false,
+        "reason": "Reviewed all 19 started/completed command pairs, item_0 through item_18, against the frozen prompt. Full prompt compliance fails because item_3, item_4, item_7, item_14 and item_15 invoke the offered absolute runtime wrapper using python3 without -B, rather than the explicitly required supplied absolute .venv Python -B wrapper prefix. This is a scoped interpreter/prefix instruction deviation, not evidence of an actual write or execution of Spring code. All inspected targets otherwise remain within the repository or offered runtime/archive: item_0 reads SKILL.md; item_1 searches source; item_2 inspects the offered wrapper; item_3 fails the archive-source line-limit check and item_4 succeeds with a bounded limit; item_5 and item_6 search relevant source; item_7 reads type-reference declarations; item_8 reads relevant Java/Kotlin tests and bridges; item_9 and item_13 read/search package nullness declarations; item_10 reads bridge/test ranges; item_11 has two mistyped repository paths alongside successful bounded reads, corrected by item_12; item_14 fails the quote budget check and item_15 succeeds with an increased bounded budget; item_16 and item_17 inspect relevant tests; item_18 rereads bounded citation ranges. Pipelines, batched source reads and stderr redirection to /dev/null do not modify source. No source/index write, upstream code/test/build execution, web/delegation event, or sibling/private-oracle access was observed. Full raw events were hashed while turn.completed usage and result.json/other-arm answers were excluded from inspection."
+      },
+      "completed_turns": 1,
+      "disallowed_item_types": [],
+      "citation_passed": false,
+      "semantic_passed": false,
+      "semantic": {
+        "passed": false,
+        "pending": false,
+        "reasons": [
+          "kotlin-bridges: semantic check failed",
+          "registration-lifecycle: semantic check failed",
+          "interface-validation: semantic check failed",
+          "interface-validation: semantic check failed",
+          "interface-validation: semantic check failed",
+          "interface-storage: semantic check failed",
+          "hint-state-identity: semantic check failed",
+          "hint-state-identity: semantic check failed",
+          "registry-deduplication: semantic check failed"
+        ]
+      },
+      "relationship_used": false,
+      "relationship_receipts": [],
+      "quotes_used": true,
+      "quote_receipts": [
+        {
+          "recognizer_version": "quotes-three-arm-evidence-v1",
+          "command_id": "item_15",
+          "operation": "archive-quotes",
+          "encoding": "quotes-json-v1",
+          "output_sha256": "bbc64bdaae588a7815bd51f5da1de03fff09f03b6ad5f41783c74c1db2e2ec60",
+          "ranges": [
+            {
+              "path": "src/main/kotlin/org/springframework/aot/hint/ProxyHintsExtensions.kt",
+              "start_line": 21,
+              "end_line": 28,
+              "source_hash": "557763f3ff7e8672386410b99031af4d5831bbe0ed6076ffe8218ddc7e9ac506",
+              "language": "kotlin"
+            },
+            {
+              "path": "src/main/kotlin/org/springframework/aot/hint/JdkProxyHintExtensions.kt",
+              "start_line": 21,
+              "end_line": 28,
+              "source_hash": "1fe4ece8a2e848b39b50a7f6506b7a1093535b3697c3026fbeeb9a2394f9d62c",
+              "language": "kotlin"
+            },
+            {
+              "path": "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+              "start_line": 43,
+              "end_line": 79,
+              "source_hash": "159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412",
+              "language": "java"
+            },
+            {
+              "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+              "start_line": 119,
+              "end_line": 158,
+              "source_hash": "7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502",
+              "language": "java"
+            },
+            {
+              "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+              "start_line": 43,
+              "end_line": 64,
+              "source_hash": "7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502",
+              "language": "java"
+            },
+            {
+              "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+              "start_line": 81,
+              "end_line": 117,
+              "source_hash": "7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502",
+              "language": "java"
+            },
+            {
+              "path": "src/main/java/org/springframework/aot/hint/AbstractTypeReference.java",
+              "start_line": 80,
+              "end_line": 94,
+              "source_hash": "3fa19e601701d3d6e116049c87e27eb30d8b2c23b56f5bf98979cf70d52a2da1",
+              "language": "java"
+            },
+            {
+              "path": "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+              "start_line": 30,
+              "end_line": 52,
+              "source_hash": "159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412",
+              "language": "java"
+            }
+          ],
+          "source_rows": 190
+        }
+      ],
+      "usage": {
+        "input_tokens": 734845,
+        "cached_input_tokens": 670976,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 16830,
+        "reasoning_output_tokens": 10454,
+        "uncached_input_tokens": 63869
+      },
+      "command_count": 19,
+      "command_output_bytes": 123347,
+      "failed_commands": 2,
+      "started_at": "2026-09-08T18:07:01.426745+00:00",
+      "terminal": {
+        "return_code": 0,
+        "timed_out": false,
+        "finished_at": "2026-09-08T18:16:47.595514+00:00",
+        "elapsed_seconds": 586.2261990830011
+      },
+      "semantic_review_sha256": "f2f3ebffb5b83fc0a4ea5641f0861cecf2921e9c5039cf89672ef09756e62a4d"
+    },
+    "kotlin/quotes/2": {
+      "trial": "kotlin-proxy-hint-registration-quotes-2",
+      "language": "kotlin",
+      "condition": "quotes",
+      "repeat": 2,
+      "artifact_sha256": {
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result.json": "deea03a375a84737d709e0f101514bc85fc324c1fd2060e68e7516715a295b0c",
+        "prompt.txt": "a377a8d048e48d5f94701cfb27506611ad571bb6ade60f7d6f002f794b184b1a",
+        "events.jsonl": "227c11af90e85b224d1dbedfc05b06a70956e9c91a60fa1bc1fc7aace8cd1875",
+        "terminal.json": "04c5efe8c4fb95abda8837945d2abc4b6d1fb6d3a92a9d735df7e9891a5c2aa2",
+        "process.json": "c9f9c7614fe84977e13cf474ceddbed68446ace319ed915a215c392935a3fc06",
+        "invocation.json": "0798ec48486ba11b06e7a117ff319ce7cd1d90f8dd70be031aee0ddf6f7066d9",
+        "answer.json": "573ca399ccb4783038995cd720c6856bf0515655700a33a6fdc755700cac756f"
+      },
+      "verified": true,
+      "pending": false,
+      "terminal_evidence_present": true,
+      "terminal_passed": true,
+      "execution_review": {
+        "passed": true,
+        "pending": false,
+        "reason": "Reviewed every started/completed command pair, item_1 through item_23, against the frozen prompt and supplied runtime guidance. item_1 reads the offered SKILL.md; item_2 searches repository Java/Kotlin source. item_3 attempts a read-only archive-source batch and fails on an ambiguous/absent Builder declaration; item_4 through item_7 perform offered-archive searches. item_8 and item_9 read Kotlin bridges; item_10 reads ProxyHints; item_11 and item_12 read Kotlin tests; item_13 reads JdkProxyHint; item_14 and item_15 read the two concrete TypeReference implementations; item_16 and item_17 read relevant Java tests; item_18 and item_19 read AbstractTypeReference and TypeReference; item_20 searches relevant production/test metadata behavior. item_21 reads offered archive callers with source context. item_22 and item_23 retrieve bounded exact source quotes, with the latter including the closing hashCode line. Every Columbus invocation uses the supplied absolute .venv Python -B and absolute frozen wrapper/archive paths, and source reads use the scoped repository. Ordinary nl/sed/rg/head pipelines are permitted read-only navigation. No source/index write, sync/install/index creation, upstream code/test/build execution, web/delegation event, sibling trial/private case/rubric/answer or harness access was observed. The failed declaration lookup is a retrieval failure, not a protocol violation. Full raw events were hashed while turn.completed usage, result.json and other-arm answers were excluded from inspection."
+      },
+      "completed_turns": 1,
+      "disallowed_item_types": [],
+      "citation_passed": true,
+      "semantic_passed": false,
+      "semantic": {
+        "passed": false,
+        "pending": false,
+        "reasons": [
+          "hint-state-identity: semantic check failed",
+          "hint-state-identity: semantic check failed",
+          "registry-deduplication: semantic check failed",
+          "registry-deduplication: semantic check failed"
+        ]
+      },
+      "relationship_used": false,
+      "relationship_receipts": [],
+      "quotes_used": true,
+      "quote_receipts": [
+        {
+          "recognizer_version": "quotes-three-arm-evidence-v1",
+          "command_id": "item_22",
+          "operation": "archive-quotes",
+          "encoding": "quotes-json-v1",
+          "output_sha256": "2052861e531515f8727c66584486ce26082032f0064ba8528b28e1c58f1f6701",
+          "ranges": [
+            {
+              "path": "src/main/kotlin/org/springframework/aot/hint/ProxyHintsExtensions.kt",
+              "start_line": 27,
+              "end_line": 28,
+              "source_hash": "557763f3ff7e8672386410b99031af4d5831bbe0ed6076ffe8218ddc7e9ac506",
+              "language": "kotlin"
+            },
+            {
+              "path": "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+              "start_line": 48,
+              "end_line": 53,
+              "source_hash": "159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412",
+              "language": "java"
+            },
+            {
+              "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+              "start_line": 168,
+              "end_line": 177,
+              "source_hash": "7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502",
+              "language": "java"
+            },
+            {
+              "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+              "start_line": 43,
+              "end_line": 47,
+              "source_hash": "7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502",
+              "language": "java"
+            },
+            {
+              "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+              "start_line": 90,
+              "end_line": 100,
+              "source_hash": "7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502",
+              "language": "java"
+            },
+            {
+              "path": "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+              "start_line": 30,
+              "end_line": 41,
+              "source_hash": "159e9d3d3324a775bd1d2ea8c55f34f2a1406458eb6d3e7c097af8e158272412",
+              "language": "java"
+            }
+          ],
+          "source_rows": 46
+        },
+        {
+          "recognizer_version": "quotes-three-arm-evidence-v1",
+          "command_id": "item_23",
+          "operation": "archive-quotes",
+          "encoding": "quotes-json-v1",
+          "output_sha256": "90d8d79bf03c05219863ce4ac4c1343a1e9af3c8579ab9db78c07184ad9fd59b",
+          "ranges": [
+            {
+              "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+              "start_line": 90,
+              "end_line": 101,
+              "source_hash": "7475347331e29f4340b192d044bd4d144f6a1901c59d343330cc5d48004ed502",
+              "language": "java"
+            }
+          ],
+          "source_rows": 12
+        }
+      ],
+      "usage": {
+        "input_tokens": 311959,
+        "cached_input_tokens": 268928,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 13541,
+        "reasoning_output_tokens": 9428,
+        "uncached_input_tokens": 43031
+      },
+      "command_count": 23,
+      "command_output_bytes": 93598,
+      "failed_commands": 1,
+      "started_at": "2026-09-08T18:27:15.148692+00:00",
+      "terminal": {
+        "return_code": 0,
+        "timed_out": false,
+        "finished_at": "2026-09-08T18:34:55.127838+00:00",
+        "elapsed_seconds": 459.9921062089852
+      },
+      "semantic_review_sha256": "c9cdff0e3a6c4547ca816f1b4ee9fe3ed4d9fcd82a01cacf51cc9b21feee15a5"
+    },
+    "javascript/baseline/1": {
+      "trial": "javascript-express-download-transfer-baseline-1",
+      "language": "javascript",
+      "condition": "baseline",
+      "repeat": 1,
+      "artifact_sha256": {
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result.json": "c7f4f15f8a867bdc2e55ff603819d85253c0f01b90aa5d41adabeece6732eaa3",
+        "prompt.txt": "d7d9f235e11d8ae037e39fdfba0dce6154db44ba5ced40f5482517d323e7eccb",
+        "events.jsonl": "eb59256f9f0a0930b0cdf5d24accc86a64b941370379858cd9a443056dfa7954",
+        "terminal.json": "936d5f71cf49fe8e010b485389dc7c33c3dd14e67d735cb2a1771dc100f79975",
+        "process.json": "54eb4cad801c59db68403f19be7f215d580c4bce1c9a601a62e59dca36ddec59",
+        "invocation.json": "d17c9e0b340a05588a9708f813475e982c0da0a9493aaa4aec3941ee267cc106",
+        "answer.json": "d6bdcca98c87c3c3a835dfd4f5a31604df49f53ceb5dab0885d5b45699069f0e"
+      },
+      "verified": true,
+      "pending": false,
+      "terminal_evidence_present": true,
+      "terminal_passed": true,
+      "execution_review": {
+        "passed": true,
+        "pending": false,
+        "reason": "Audited every actual command in the complete hash-bound event stream. All five command executions completed with exit code zero, with no unfinished command or other tool execution: repository-wide rg discovery, two numbered bounded lib/response.js reads through nl and sed, a combined bounded import read and local rg search, and a repository JavaScript rg search for lowercase sendfile definitions or assignments. The combined command contains only read-only nl/sed and rg operations. Every command is restricted to the supplied repository; none uses a graph, saved index, runtime, skill, private oracle, sibling experiment, or earlier answer. No command writes files, runs repository code/tests/builds, uses the web, or delegates. Review inspection omitted turn.completed usage and internal reasoning; the events hash covers the complete raw file."
+      },
+      "completed_turns": 1,
+      "disallowed_item_types": [],
+      "citation_passed": true,
+      "semantic_passed": true,
+      "semantic": {
+        "passed": true,
+        "pending": false,
+        "reasons": []
+      },
+      "relationship_used": false,
+      "relationship_receipts": [],
+      "quotes_used": false,
+      "quote_receipts": [],
+      "usage": {
+        "input_tokens": 66092,
+        "cached_input_tokens": 31360,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 7072,
+        "reasoning_output_tokens": 3903,
+        "uncached_input_tokens": 34732
+      },
+      "command_count": 5,
+      "command_output_bytes": 17991,
+      "failed_commands": 0,
+      "started_at": "2026-09-08T18:07:24.416423+00:00",
+      "terminal": {
+        "return_code": 0,
+        "timed_out": false,
+        "finished_at": "2026-09-08T18:14:57.866789+00:00",
+        "elapsed_seconds": 453.5001761659805
+      },
+      "semantic_review_sha256": "dfed8cdb311385bdf8b3955c9332d8a16670095e56c95607a0a0adf99f396323"
+    },
+    "javascript/baseline/2": {
+      "trial": "javascript-express-download-transfer-baseline-2",
+      "language": "javascript",
+      "condition": "baseline",
+      "repeat": 2,
+      "artifact_sha256": {
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result.json": "7085ec965b7509a488eeb779bf6198679e3e6e08cae292322fef1b040a7216f2",
+        "prompt.txt": "d7d9f235e11d8ae037e39fdfba0dce6154db44ba5ced40f5482517d323e7eccb",
+        "events.jsonl": "7946ec704785563e11583fbbe63e13910cc2436c0141187bce395f5e7e31225b",
+        "terminal.json": "05ec0a6224b5bb99b04ed23e17f0c7496967272da3bf139c751a890c6794ad98",
+        "process.json": "abbb3cf8b11c4ddcf517337407e1239e208c233669feea637c22f751fd1d07b4",
+        "invocation.json": "f2ab12bc6689c663ac2d7783d591cb800128dfbffb430c4dd459a3b46b730bde",
+        "answer.json": "d203ebfc666ac1667b4e45570ccbd5867359db30afbf936e6dfd16741e04b6fb"
+      },
+      "verified": true,
+      "pending": false,
+      "terminal_evidence_present": true,
+      "terminal_passed": true,
+      "execution_review": {
+        "passed": true,
+        "pending": false,
+        "reason": "Audited every actual command and completion in the complete hash-bound event stream. All four command executions complete successfully with exit code zero: one repository-wide rg search excluding node_modules and three numbered bounded lib/response.js reads using nl piped to sed for the private helper, public methods, and imports. Every command is an ordinary read-only repository operation. No command remains unfinished and no other tool is executed. There is no code-graph, saved-index, runtime or skill use; no private-oracle, sibling-experiment or previous-answer access; and no file/index modification, upstream code/test/build execution, installation, web access or delegation. Review inspection omitted turn.completed usage and internal reasoning and did not read this trial's result summary; the events hash covers the complete raw file."
+      },
+      "completed_turns": 1,
+      "disallowed_item_types": [],
+      "citation_passed": true,
+      "semantic_passed": true,
+      "semantic": {
+        "passed": true,
+        "pending": false,
+        "reasons": []
+      },
+      "relationship_used": false,
+      "relationship_receipts": [],
+      "quotes_used": false,
+      "quote_receipts": [],
+      "usage": {
+        "input_tokens": 40488,
+        "cached_input_tokens": 23296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 9375,
+        "reasoning_output_tokens": 6403,
+        "uncached_input_tokens": 17192
+      },
+      "command_count": 4,
+      "command_output_bytes": 22510,
+      "failed_commands": 0,
+      "started_at": "2026-09-08T18:30:09.666668+00:00",
+      "terminal": {
+        "return_code": 0,
+        "timed_out": false,
+        "finished_at": "2026-09-08T18:35:17.215514+00:00",
+        "elapsed_seconds": 307.55340924998745
+      },
+      "semantic_review_sha256": "b64946ce0ae37814089b4520f5511c5ea50b02c231cbb2bf1ba96cfe90792db0"
+    },
+    "javascript/control/1": {
+      "trial": "javascript-express-download-transfer-control-1",
+      "language": "javascript",
+      "condition": "control",
+      "repeat": 1,
+      "artifact_sha256": {
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result.json": "fae9c3c472049c4fe437a81817b3bba20d86f9cbdde22a30b1e3f4544b6d6ddd",
+        "prompt.txt": "7bd92d4877e710714be4f3528b5c7468bb77b5f6060c235877e27a8e067c3159",
+        "events.jsonl": "487f56b418a613c50e3cd0a81c7aae8cf3d125fecb5493446d1131dd6d732929",
+        "terminal.json": "166cff60956ee121d548ede4f9f4a074b171be7e0c8e6da61e694411100af76d",
+        "process.json": "9b30d92232cbaa814cbcaa1c03fc5050f760f23358b4a5c316c0d8ce4b175a6f",
+        "invocation.json": "0b3d5418a32fa418bc61c8f471594352e2b6041a81e259074080d9e6359c039f",
+        "answer.json": "481d5d19282f6dbfcd3b90f0ff617f8c5bf359b0d5a7b7e67c1c328142fcc0bf"
+      },
+      "verified": true,
+      "pending": false,
+      "terminal_evidence_present": true,
+      "terminal_passed": true,
+      "execution_review": {
+        "passed": true,
+        "pending": false,
+        "reason": "Audited all ten actual command executions and their completions in the full hash-bound event stream. They consist of reading the explicitly supplied runtime SKILL.md, repository rg discovery bounded by head, a batch of three bounded repository sed reads, three archive-search calls, two archive-callers calls, and two archive-source calls. Every one of the seven runtime invocations uses the exact supplied absolute /Users/rex/Desktop/personal/columbus/.venv/bin/python -B prefix followed by the supplied control runtime/columbus.py, with the supplied archive and repository where needed. Nine commands exit zero. The shorthand archive-source call exits 2 with an ambiguous-or-absent declaration diagnostic for download and sendFile; the subsequent search and exact-ID source call recover successfully. This read-only lookup error is not an execution-permission violation or evidence of a write. No command remains unfinished and no other tool is executed. The public-method callers query returns no edges, while the private-helper query returns the source-supported public sendFile-to-sendfile edge. No command modifies files or an index, executes upstream code/tests/builds, installs or synchronizes, accesses private or sibling-trial artifacts, uses the web, or delegates. Review inspection omitted turn.completed usage and internal reasoning; the hash covers the entire raw events file."
+      },
+      "completed_turns": 1,
+      "disallowed_item_types": [],
+      "citation_passed": false,
+      "semantic_passed": true,
+      "semantic": {
+        "passed": true,
+        "pending": false,
+        "reasons": []
+      },
+      "relationship_used": true,
+      "relationship_receipts": [
+        {
+          "recognizer_version": "quotes-three-arm-evidence-v1",
+          "command_id": "item_4",
+          "operation": "archive-callers",
+          "encoding": "neighbors-table-text-v1",
+          "output_sha256": "677feedce59eab7b08481dfd8fc74baa72e9d470e542e87d04a1f833106bb1a1",
+          "relationships": [
+            {
+              "source": "lib/response.js::sendFile:function",
+              "target": "lib/response.js::sendfile:function",
+              "path": "lib/response.js",
+              "line": 406
+            }
+          ]
+        }
+      ],
+      "quotes_used": false,
+      "quote_receipts": [],
+      "usage": {
+        "input_tokens": 152864,
+        "cached_input_tokens": 115968,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 13832,
+        "reasoning_output_tokens": 9553,
+        "uncached_input_tokens": 36896
+      },
+      "command_count": 10,
+      "command_output_bytes": 34664,
+      "failed_commands": 1,
+      "started_at": "2026-09-08T18:14:59.265843+00:00",
+      "terminal": {
+        "return_code": 0,
+        "timed_out": false,
+        "finished_at": "2026-09-08T18:22:45.210490+00:00",
+        "elapsed_seconds": 465.9507467499934
+      },
+      "semantic_review_sha256": "a725950ea7d722acf959004d821db48c8e864c8bd770b9cb1e3682249bab2324"
+    },
+    "javascript/control/2": {
+      "trial": "javascript-express-download-transfer-control-2",
+      "language": "javascript",
+      "condition": "control",
+      "repeat": 2,
+      "artifact_sha256": {
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result.json": "be385bfca12b85b6aef477d22a6cc2883480b5ec49ca54d7aa180655aa229d2d",
+        "prompt.txt": "7bd92d4877e710714be4f3528b5c7468bb77b5f6060c235877e27a8e067c3159",
+        "events.jsonl": "b5540a7b8af37c2b80a2c3da8e13cfb2a997064c2f8ce16c6632f733279f027b",
+        "terminal.json": "71f532f20d795796228b5d904a65fbaf211aa7fc4034910b786275588b9e6138",
+        "process.json": "5342ddea2c77c4e5f2054349a018004d6363013deacc5681f5fcda3b819e5e27",
+        "invocation.json": "2f53d3d5182d070a4032f2f3a3cda61d48d30d87033c01aad90f6a9a5a5131e4",
+        "answer.json": "65343a1a659a82685276093df789d12265d58e8367b31ec54b64acbe1ad4b0c2"
+      },
+      "verified": true,
+      "pending": false,
+      "terminal_evidence_present": true,
+      "terminal_passed": true,
+      "execution_review": {
+        "passed": true,
+        "pending": false,
+        "reason": "Audited every actual command and completion in the full hash-bound event stream. All seven command executions finish successfully with exit code zero: a bounded read of the supplied SKILL.md plus a depth-limited file listing confined to its supplied runtime directory, repository JavaScript rg discovery, one archive-search, one exact-ID batched archive-source, two bounded repository sed reads in one command, and two archive-callers probes. All four runtime invocations use the exact supplied absolute /Users/rex/Desktop/personal/columbus/.venv/bin/python -B prefix followed by the supplied control runtime/columbus.py, with the supplied archive and repository for source context. The private-helper callers receipt contains the actual public sendFile-to-sendfile edge; the public-method callers receipt returns zero edges and is not treated as positive relationship evidence. No command is unfinished and no other tool is executed. Commands neither modify files or an index nor run upstream code/tests/builds, synchronize or install, access private or sibling-trial artifacts, use the web, or delegate. The runtime file listing is explicitly within offered tool files, not private-oracle access. Review inspection omitted turn.completed usage and internal reasoning and did not read this trial's result summary; the events hash covers the complete raw file."
+      },
+      "completed_turns": 1,
+      "disallowed_item_types": [],
+      "citation_passed": false,
+      "semantic_passed": true,
+      "semantic": {
+        "passed": true,
+        "pending": false,
+        "reasons": []
+      },
+      "relationship_used": true,
+      "relationship_receipts": [
+        {
+          "recognizer_version": "quotes-three-arm-evidence-v1",
+          "command_id": "item_5",
+          "operation": "archive-callers",
+          "encoding": "neighbors-table-text-v1",
+          "output_sha256": "d5ab7152df719ab45eb4043e7992d004cb092078d35bbcc87889f9450a3be32d",
+          "relationships": [
+            {
+              "source": "lib/response.js::sendFile:function",
+              "target": "lib/response.js::sendfile:function",
+              "path": "lib/response.js",
+              "line": 406
+            }
+          ]
+        }
+      ],
+      "quotes_used": false,
+      "quote_receipts": [],
+      "usage": {
+        "input_tokens": 106934,
+        "cached_input_tokens": 86016,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 13214,
+        "reasoning_output_tokens": 9581,
+        "uncached_input_tokens": 20918
+      },
+      "command_count": 7,
+      "command_output_bytes": 32935,
+      "failed_commands": 0,
+      "started_at": "2026-09-08T18:22:46.558936+00:00",
+      "terminal": {
+        "return_code": 0,
+        "timed_out": false,
+        "finished_at": "2026-09-08T18:30:08.349973+00:00",
+        "elapsed_seconds": 441.7968027500028
+      },
+      "semantic_review_sha256": "ee4efa5bb6751e2babed207da1fe23e011eaf38f5aa167916866e69cf8a36d8e"
+    },
+    "javascript/quotes/1": {
+      "trial": "javascript-express-download-transfer-quotes-1",
+      "language": "javascript",
+      "condition": "quotes",
+      "repeat": 1,
+      "artifact_sha256": {
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result.json": "9f72a4affab52bb1346b89ca6a1585f9e62d177e4208f583f75ae9dee125c9bb",
+        "prompt.txt": "ddd2a69169e3c0047c5085e6e08e1ee7c8197872df7185d953edf5ebeb76bd8e",
+        "events.jsonl": "d35780ee1796ad7155f09e8197fa8e61cb1cf85b777cb87b4d97f75887cd7f66",
+        "terminal.json": "888e7156c1c02d61415d6251712a1020151825bfefe2678e518e67c198afd50e",
+        "process.json": "c42d17345ab4e3045fd9d61102b80cd2e5dbb58531f0532fcf86017ef676503d",
+        "invocation.json": "aaff2b506626d337a2e3a34b520ac3275727acc288cd62322da0de1e0b98a603",
+        "answer.json": "4d5cbb1d4406a6b516a2538be1bb991dfd2d40b2d03fadccc4381cc3f4d864ff"
+      },
+      "verified": true,
+      "pending": false,
+      "terminal_evidence_present": true,
+      "terminal_passed": true,
+      "execution_review": {
+        "passed": true,
+        "pending": false,
+        "reason": "Audited every actual command in the full hash-bound event stream: all ten command executions completed with exit code zero, with no unfinished command or other tool execution. They read the explicitly supplied runtime SKILL.md, listed or searched the allowed repository with rg, read repository source with sed, and invoked the explicitly supplied frozen runtime with Python -B for two archive-search commands, one archive-source command, two archive-callers commands, and one archive-quotes command against the supplied archive and repository. The public-method callers query returning no edges is not counted as useful evidence or treated as an execution failure. No command wrote files, generated or changed an index, ran upstream code/tests/builds, used web access or delegation, or accessed private case/rubric/oracle material, other trials, or result summaries. Review inspection omitted turn.completed usage and internal reasoning; the events hash covers the complete raw file."
+      },
+      "completed_turns": 1,
+      "disallowed_item_types": [],
+      "citation_passed": true,
+      "semantic_passed": true,
+      "semantic": {
+        "passed": true,
+        "pending": false,
+        "reasons": []
+      },
+      "relationship_used": true,
+      "relationship_receipts": [
+        {
+          "recognizer_version": "quotes-three-arm-evidence-v1",
+          "command_id": "item_8",
+          "operation": "archive-callers",
+          "encoding": "neighbors-table-text-v1",
+          "output_sha256": "5dee41b49d84ddf13ea807c83f896f8b071795115953640fbd0a9fcf36099940",
+          "relationships": [
+            {
+              "source": "lib/response.js::sendFile:function",
+              "target": "lib/response.js::sendfile:function",
+              "path": "lib/response.js",
+              "line": 406
+            }
+          ]
+        }
+      ],
+      "quotes_used": true,
+      "quote_receipts": [
+        {
+          "recognizer_version": "quotes-three-arm-evidence-v1",
+          "command_id": "item_10",
+          "operation": "archive-quotes",
+          "encoding": "quotes-json-v1",
+          "output_sha256": "c3f2cf8aee1069361e4f86382965e895141648e9a4bdec894d467d34202a0189",
+          "ranges": [
+            {
+              "path": "lib/response.js",
+              "start_line": 435,
+              "end_line": 455,
+              "source_hash": "969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a",
+              "language": "javascript"
+            },
+            {
+              "path": "lib/response.js",
+              "start_line": 457,
+              "end_line": 484,
+              "source_hash": "969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a",
+              "language": "javascript"
+            },
+            {
+              "path": "lib/response.js",
+              "start_line": 373,
+              "end_line": 406,
+              "source_hash": "969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a",
+              "language": "javascript"
+            },
+            {
+              "path": "lib/response.js",
+              "start_line": 405,
+              "end_line": 414,
+              "source_hash": "969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a",
+              "language": "javascript"
+            },
+            {
+              "path": "lib/response.js",
+              "start_line": 987,
+              "end_line": 1008,
+              "source_hash": "969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a",
+              "language": "javascript"
+            },
+            {
+              "path": "lib/response.js",
+              "start_line": 959,
+              "end_line": 985,
+              "source_hash": "969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a",
+              "language": "javascript"
+            }
+          ],
+          "source_rows": 142
+        }
+      ],
+      "usage": {
+        "input_tokens": 89677,
+        "cached_input_tokens": 61184,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 11071,
+        "reasoning_output_tokens": 7672,
+        "uncached_input_tokens": 28493
+      },
+      "command_count": 10,
+      "command_output_bytes": 50653,
+      "failed_commands": 0,
+      "started_at": "2026-09-08T18:01:11.916959+00:00",
+      "terminal": {
+        "return_code": 0,
+        "timed_out": false,
+        "finished_at": "2026-09-08T18:07:23.050323+00:00",
+        "elapsed_seconds": 371.1332029160112
+      },
+      "semantic_review_sha256": "f65b7dcab2757f838827845acdbf863fc36b022e9ba096756d85dd78e0ec6d80"
+    },
+    "javascript/quotes/2": {
+      "trial": "javascript-express-download-transfer-quotes-2",
+      "language": "javascript",
+      "condition": "quotes",
+      "repeat": 2,
+      "artifact_sha256": {
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result.json": "c2aa2601faabcc08e83d6238da517a6563a7f8c40cf3e8ae3b9e371b6e25743c",
+        "prompt.txt": "ddd2a69169e3c0047c5085e6e08e1ee7c8197872df7185d953edf5ebeb76bd8e",
+        "events.jsonl": "5b38eff3fabc8d690fd92708657e2bfbff45437e320f34249213d684977b8728",
+        "terminal.json": "5a79c59f0ba2c3f40c98d66fd8defe9f9c5d6cab46069ccb3e2345349be1e39b",
+        "process.json": "7a56972c1bb84e087a5e031712ee327f5b326a8c825a5af310ba571e0fea1ed7",
+        "invocation.json": "9762173a736454c4e9ad1b07a6155017a7691255f8e8ec988c745f6ac7ec8467",
+        "answer.json": "173cbef82ee145ae4105b9676529032f984d25ab75aeea9d183759df1283e48a"
+      },
+      "verified": true,
+      "pending": false,
+      "terminal_evidence_present": true,
+      "terminal_passed": true,
+      "execution_review": {
+        "passed": true,
+        "pending": false,
+        "reason": "Audited every actual command and completion in the full hash-bound event stream. All nine command executions finish successfully with exit code zero: a line count and bounded read of the explicitly supplied SKILL.md, repository rg discovery excluding node_modules, three archive-search calls, two archive-callers probes, one exact-ID batched archive-source call, and one six-range archive-quotes call. All seven runtime invocations use the exact supplied absolute /Users/rex/Desktop/personal/columbus/.venv/bin/python -B prefix followed by the supplied quotes runtime/columbus.py, with the supplied archive and repository where source is requested. The private-helper callers receipt contains the actual public sendFile-to-sendfile edge; the public-method callers probe returns zero edges, which is not positive relationship evidence. All six final path/range/quote tuples match both the frozen source and the quote response, without replacing semantic review with extraction adoption. No command is unfinished and no other tool executes. There are no writes or index changes, upstream code/test/build executions, installations or synchronization, private or sibling-trial artifact access, web calls, or delegation. Review inspection omitted turn.completed usage and internal reasoning and did not read this trial's result summary; the events hash covers the complete raw file."
+      },
+      "completed_turns": 1,
+      "disallowed_item_types": [],
+      "citation_passed": true,
+      "semantic_passed": true,
+      "semantic": {
+        "passed": true,
+        "pending": false,
+        "reasons": []
+      },
+      "relationship_used": true,
+      "relationship_receipts": [
+        {
+          "recognizer_version": "quotes-three-arm-evidence-v1",
+          "command_id": "item_7",
+          "operation": "archive-callers",
+          "encoding": "neighbors-table-text-v1",
+          "output_sha256": "74c9e09158dfc7f7e06fe261b1d1fed9c367e0688afab0e3265d4a556e7584b0",
+          "relationships": [
+            {
+              "source": "lib/response.js::sendFile:function",
+              "target": "lib/response.js::sendfile:function",
+              "path": "lib/response.js",
+              "line": 406
+            }
+          ]
+        }
+      ],
+      "quotes_used": true,
+      "quote_receipts": [
+        {
+          "recognizer_version": "quotes-three-arm-evidence-v1",
+          "command_id": "item_9",
+          "operation": "archive-quotes",
+          "encoding": "quotes-json-v1",
+          "output_sha256": "f2ecfc93becacbd0fd2926eedf71c486b5a08c1cc4d101db7a38e092bb5f0f7d",
+          "ranges": [
+            {
+              "path": "lib/response.js",
+              "start_line": 435,
+              "end_line": 455,
+              "source_hash": "969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a",
+              "language": "javascript"
+            },
+            {
+              "path": "lib/response.js",
+              "start_line": 457,
+              "end_line": 484,
+              "source_hash": "969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a",
+              "language": "javascript"
+            },
+            {
+              "path": "lib/response.js",
+              "start_line": 373,
+              "end_line": 406,
+              "source_hash": "969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a",
+              "language": "javascript"
+            },
+            {
+              "path": "lib/response.js",
+              "start_line": 406,
+              "end_line": 415,
+              "source_hash": "969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a",
+              "language": "javascript"
+            },
+            {
+              "path": "lib/response.js",
+              "start_line": 987,
+              "end_line": 1008,
+              "source_hash": "969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a",
+              "language": "javascript"
+            },
+            {
+              "path": "lib/response.js",
+              "start_line": 959,
+              "end_line": 985,
+              "source_hash": "969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a",
+              "language": "javascript"
+            }
+          ],
+          "source_rows": 142
+        }
+      ],
+      "usage": {
+        "input_tokens": 115356,
+        "cached_input_tokens": 77184,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 12185,
+        "reasoning_output_tokens": 8106,
+        "uncached_input_tokens": 38172
+      },
+      "command_count": 9,
+      "command_output_bytes": 37935,
+      "failed_commands": 0,
+      "started_at": "2026-09-08T18:35:18.512886+00:00",
+      "terminal": {
+        "return_code": 0,
+        "timed_out": false,
+        "finished_at": "2026-09-08T18:42:03.856662+00:00",
+        "elapsed_seconds": 405.34937270902446
+      },
+      "semantic_review_sha256": "d0af0ae861e6c308ce4bdd63086520c8713956a8e791a99805a7798b0d6d4b6a"
+    }
+  },
+  "input_hashes_sha256": "85ac3b856197225df2234c118bde0bacf1382655a45945b5bf03406bbb9c83a8",
+  "frozen_inputs_verified": 123,
+  "note": "All 18 scheduled executions are reported. Quote adoption is optional and not graph relationship evidence. Serialized bytes are descriptive, not actual tokens. Missing artifacts never authorize retries or prove termination."
+}

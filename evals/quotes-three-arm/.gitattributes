@@ -1,0 +1,2 @@
+# Retained evidence is byte-exact, including any original line endings.
+retained/** -text

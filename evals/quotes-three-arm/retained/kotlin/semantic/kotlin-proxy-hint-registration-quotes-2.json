@@ -1,0 +1,153 @@
+{
+  "answer_sha256": "573ca399ccb4783038995cd720c6856bf0515655700a33a6fdc755700cac756f",
+  "rubric_sha256": "a1e13a97cf68a69e236d7254e6e88b018f364b55973972fbec4c426775f386b3",
+  "findings": [
+    {
+      "id": "kotlin-bridges",
+      "passed": true,
+      "reason": "Both Kotlin-to-Class handoffs, argument preservation, fluent return identities and the limited mocked-test evidence are correctly described.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The exact ProxyHints extension quote and prose establish map to it.java, array construction and spreading into registerJdkProxy(Class<?>...). The related Builder extension is described as identical conversion into proxiedInterfaces(Class<?>...), without recursive extension or direct TypeReference dispatch. Both Kotlin files confirm this at lines 27-28."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The explanation expressly preserves encounter order and repeated arguments without sorting/deduplication and returns the same successful ProxyHints and Builder receivers from the Java members."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The answer identifies the two mocked Java Class-varargs members, receiver-return stubs and ordered String/Int Class verification, then limits those examples to conversion and overload handoff. It correctly says real validation/storage does not run and the example concrete/primitive classes fail actual interface validation. This agrees with both tests at lines 31-37."
+        }
+      ]
+    },
+    {
+      "id": "registration-lifecycle",
+      "passed": true,
+      "reason": "The answer traces both Java varargs forms through the fresh-builder consumer workflow and correctly handles scoped exceptions, insertion timing and successful duplicate returns.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The prose explicitly says both Class<?>... and TypeReference... registration overloads return a consumer invocation whose lambda chooses the corresponding Builder.proxiedInterfaces overload. This matches ProxyHints.java 62-65 and 76-79 without an intermediate Class-to-TypeReference registration hop."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The complete consumer quote and explanation establish fresh builder, synchronous callback, build, completed-hint set insertion and same-registry return. The shared constructor quote supplies List.copyOf within build, which must complete before Set.add is invoked."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The answer correctly skips later build/insertion after callback failure and skips insertion after build failure, with exceptions propagated and no recovery layer. It preserves existing hints and adds no partial/new hint under the supplied callback scope. It separately treats duplicate suppression as successful normal return of the receiver."
+        }
+      ]
+    },
+    {
+      "id": "interface-validation",
+      "passed": true,
+      "reason": "Validation timing and failure type, the complete Class factory chain, and direct/name-backed reference storage are correctly explained using shared findings.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The exact helper quote and prose identify the non-interface/sealed predicate, invalid Class.getName collection, IllegalArgumentException and full validation before addAll, preventing partial appending of an invalid mixed batch. The additional annotation wording is conditional on failing isInterface, not an unqualified claim that every annotation type is rejected; the operative quoted predicate is correct."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The explanation explicitly follows TypeReference.listOf through ordered TypeReference.of(Class) mapping to ReflectionTypeReference.of. Shared bridge and storage explanations retain repeated arguments without deduplication, consistent with TypeReference.java 73-75 and 94-96 and ReflectionTypeReference.java 45-49."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The validation explanation explicitly appends Arrays.asList on the TypeReference route without interface, sealedness, availability or resolution checks and permits unavailable named types and concrete-class references. Shared registry prose identifies TypeReference.of(String) creating SimpleTypeReference, establishing the name-factory branch rather than a Class load/validation branch. Together the explanations support the required direct reference storage behavior under the built-in, well-formed-name scope."
+        }
+      ]
+    },
+    {
+      "id": "interface-storage",
+      "passed": true,
+      "reason": "Ordered repeated additions, empty registered hints, exposed immutable snapshots and the delayed null-element failure are all covered correctly.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The explanation identifies LinkedList/addAll, append rather than replace, preservation of call and array order including mixed Class/TypeReference additions, retained repetitions, and explicitly empty typed arrays adding nothing."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The answer expressly permits a consumer making no additions to build and register an empty-interface hint. This matches the absence of a minimum-count guard in the scoped hint-storage methods without promising real proxy creation."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The constructor quote supplies List.copyOf, and prose describes an immutable structural snapshot exposed by getProxiedInterfaces, unaffected by later builder additions. The structural qualifier avoids an unsupported deep-copy guarantee for arbitrary reference objects."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The answer explicitly accepts the scoped null TypeReference element through Arrays.asList/LinkedList.addAll and a normally returning builder method, then delays NullPointerException until List.copyOf during build before registry insertion. It correctly leaves no new stored hint."
+        }
+      ]
+    },
+    {
+      "id": "hint-state-identity",
+      "passed": false,
+      "reason": "Defaults, fluent setters, metadata snapshotting and equality/hash collisions are correct, but completed metadata getter exposure and the no-condition meaning of null reachability are omitted.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": false,
+          "reason": "The answer states Java's default reachableType null and javaSerialization false on a fresh Builder. It does not explain their completed-hint exposure through getReachableType/hasJavaSerialization at JdkProxyHint.java 76-88, or that null reachability means no reachability condition/always applicable as ConditionalHint.java 32-37 documents. No submitted quote contains either omitted part of this default-state clause."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The metadata prose explicitly describes fluent assignments and repeated setters overwriting prior values. Shared storage prose and the constructor quote copy both current fields and isolate completed hints from subsequent builder setters."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The complete equals quote compares the ordered interface list and Objects.equals reachability/serialization fields. Shared registry prose explains changed order and repetitions as well as changed metadata, rather than unordered interface-set identity."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The exact hashCode quote hashes only proxiedInterfaces. The explanation correctly states that unequal metadata variants can collide while equal hints retain equal hashes, and that the set can keep unequal variants after equality comparison."
+        }
+      ]
+    },
+    {
+      "id": "registry-deduplication",
+      "passed": false,
+      "reason": "Whole-hint order, duplicate suppression and cross-representation canonical-name identity are correct, but the required case-sensitive TypeReference equality is not established.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The complete LinkedHashSet field/stream quote and prose explicitly preserve first-unique insertion order, suppress later equal hints without replacement or movement, and reject sorting/normalization as the registry mechanism."
+        },
+        {
+          "criterion_index": 1,
+          "passed": false,
+          "reason": "The answer correctly names both built-in factory branches, ReflectionTypeReference and SimpleTypeReference inheriting AbstractTypeReference canonical-name equality/hash behavior, and otherwise-identical hints deduplicating across representations. However, it gives neither case sensitivity nor the String.equals mechanism at AbstractTypeReference.java 85-94. Generic canonical-name-based equality does not distinguish that required behavior from the separate compareToIgnoreCase at 80-83, and no submitted quote supplies the TypeReference equality implementation."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The explanation explicitly applies equality to whole hints, retains repeated sequences, distinguishes reordering, added repetitions and changed metadata, and stores [A] separately from [A, B] rather than merging interface lists. Identical repeated sequences with identical metadata still deduplicate."
+        }
+      ]
+    }
+  ],
+  "execution_review": {
+    "events_sha256": "227c11af90e85b224d1dbedfc05b06a70956e9c91a60fa1bc1fc7aace8cd1875",
+    "passed": true,
+    "reason": "Reviewed every started/completed command pair, item_1 through item_23, against the frozen prompt and supplied runtime guidance. item_1 reads the offered SKILL.md; item_2 searches repository Java/Kotlin source. item_3 attempts a read-only archive-source batch and fails on an ambiguous/absent Builder declaration; item_4 through item_7 perform offered-archive searches. item_8 and item_9 read Kotlin bridges; item_10 reads ProxyHints; item_11 and item_12 read Kotlin tests; item_13 reads JdkProxyHint; item_14 and item_15 read the two concrete TypeReference implementations; item_16 and item_17 read relevant Java tests; item_18 and item_19 read AbstractTypeReference and TypeReference; item_20 searches relevant production/test metadata behavior. item_21 reads offered archive callers with source context. item_22 and item_23 retrieve bounded exact source quotes, with the latter including the closing hashCode line. Every Columbus invocation uses the supplied absolute .venv Python -B and absolute frozen wrapper/archive paths, and source reads use the scoped repository. Ordinary nl/sed/rg/head pipelines are permitted read-only navigation. No source/index write, sync/install/index creation, upstream code/test/build execution, web/delegation event, sibling trial/private case/rubric/answer or harness access was observed. The failed declaration lookup is a retrieval failure, not a protocol violation. Full raw events were hashed while turn.completed usage, result.json and other-arm answers were excluded from inspection."
+  }
+}

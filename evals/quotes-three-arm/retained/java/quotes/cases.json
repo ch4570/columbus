@@ -1,0 +1,53 @@
+{
+  "schema": "columbus.exploration-cases/v1",
+  "cases": [
+    {
+      "id": "java-concurrent-lru-cache-lifecycle",
+      "question": "Find Spring's bounded concurrent least-recently-used cache in this checkout and trace its complete entry lifecycle through the public operations and internal helpers. Explain construction and capacity validation; zero-capacity, hit, miss and competing-miss behavior; generator failure or null results; how accesses become recency updates; write buffering, drain triggers, locking and drain limits; insertion, eviction and entry-state accounting; explicit removal; and clearing and public observations. Distinguish immediate map changes from deferred queue/accounting work, and state the concurrency limits of generation, LRU ordering, capacity enforcement and clearing. Assume non-null keys and a non-null generator function, but the generator may return null or throw; its own side effects or reentrancy are outside scope. Consult relevant existing tests as corroboration without treating sequential tests as a concurrency proof. Do not execute the project, tests or benchmarks, or analyze other cache implementations or callers. Discover the relevant source locations yourself. For each requested finding, provide one representative contiguous source quote of at most 40 physical lines and explain every requested behavior, synthesizing additional inspected source in prose when needed. Evidence boundary: read repository source with the tools allowed for your condition; only explicitly supplied runtime instructions and saved graph artifacts are additional allowed inputs. Do not inspect parent-directory catalogs, rubrics, controls, other trial artifacts or private experiment files.",
+      "findings": [
+        {
+          "id": "entry-generation",
+          "description": "Explain construction's capacity validation and concurrent backing map; the zero-capacity bypass, including a null generator result; hit versus miss routing; generation outside the eviction lock; competing put-if-absent misses, which node gets read tracking, and which generated value each caller returns; and positive-capacity null-result rejection and uncaught generator failures. Use the retrieval and insertion handoff as the representative citation.",
+          "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+          "marker": "put(key, value);",
+          "call_lines": [107]
+        },
+        {
+          "id": "read-recency",
+          "description": "Explain read recording for hits and losing insertions, the thread-selected bounded ring buffers, pending-read delayability threshold, and the distinction between recording and reordering. Explain how a drain visits buffers, its per-buffer bound and stop condition, cleared slots and processed counters, and when a node is moved to the queue back versus ignored. Include why buffering does not promise one synchronous globally ordered LRU update per read. Use the per-buffer recency-drain helper as the representative citation.",
+          "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+          "marker": "this.evictionQueue.moveToBack(node);",
+          "call_lines": [445]
+        },
+        {
+          "id": "drain-coordination",
+          "description": "Explain write-task enqueueing and drain requests, the three drain-status decisions for reads, nonblocking lock acquisition and what happens when it fails, read-before-write draining and the normal write-task bound, and finally-block status/unlock behavior including a concurrent REQUIRED request. Distinguish caller-driven maintenance from a background worker and from locking generation or every map operation. Use the read/write scheduling and lock-protected drain sequence as the representative citation.",
+          "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+          "marker": "this.writeOperations.drain();",
+          "call_lines": [147]
+        },
+        {
+          "id": "insertion-eviction",
+          "description": "Explain map insertion before the deferred addition task; the addition task's size accounting even for a no-longer-active node, active-node queue insertion and eviction; oldest-queued polling while accounting exceeds capacity, the empty-queue exit and identity-conditional map removal; and the removed-state CAS retaining the value and decrementing accounting. Distinguish internal accounting from public map size and explain why buffered maintenance is not an instantaneous strict size/LRU guarantee. Use the addition task and eviction loop as the representative citation.",
+          "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+          "marker": "markAsRemoved(node);",
+          "call_lines": [284]
+        },
+        {
+          "id": "key-removal",
+          "description": "Explain immediate map removal and the absent/present return values; the conditional ACTIVE-to-PENDING_REMOVAL CAS with retry and already-inactive exit; and queued removal work that unlinks queue membership and marks the node REMOVED with accounting cleanup. Distinguish immediate visibility from deferred maintenance and avoid claiming that removal cancels a retrieval already holding the old node. Use public removal and its state-transition helper as the representative citation.",
+          "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+          "marker": "processWrite(new RemovalTask(node));",
+          "call_lines": [235]
+        },
+        {
+          "id": "clear-and-observation",
+          "description": "Explain clear's blocking lock and finally unlock, queue polling with identity-conditional map removal and removed-state accounting, then read-buffer slot clearing without counter reset and unbounded draining of queued write tasks. Explain that it does not directly clear the backing map and why concurrent map changes or queued additions prevent an unconditional atomic-empty guarantee. State what size, contains, capacity and the deprecated capacity alias observe, and distinguish the existing sequential zero-capacity, insertion/eviction, removal and clear tests from a concurrency proof. Use the clear operation as the representative citation.",
+          "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+          "marker": "this.writeOperations.drainAll();",
+          "call_lines": [193]
+        }
+      ]
+    }
+  ]
+}
