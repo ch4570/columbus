@@ -1,0 +1,16 @@
+{
+  "accepted_quality_preserving_savings": false,
+  "reason": "Both citation and semantic gates fail; Columbus total input and output increase.",
+  "usage_percent_change": {
+    "input_tokens": 32.37676534893341,
+    "cached_input_tokens": 45.09025270758122,
+    "uncached_input_tokens": -33.41458074874115,
+    "output_tokens": 12.394627803972003,
+    "reasoning_output_tokens": 4.2646141044310415
+  },
+  "semantic_passed_findings": {
+    "baseline": 9,
+    "columbus": 8
+  },
+  "scope": "Known Requests repeat; not an independent repository sample or replacement for prior failures."
+}

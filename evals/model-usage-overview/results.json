@@ -1,5 +1,5 @@
 {
-  "scope": "Nine recent completed comparisons including two explicit force_bytes repeats and one Requests task; not the entire experiment history, not a population estimate. Missing usage remains null. Semantic judgments remain in each source report.",
+  "scope": "Ten recent completed comparisons including two explicit force_bytes repeats and a repeated Requests task; not the entire experiment history, not a population estimate. Missing usage remains null. Semantic judgments remain in each source report.",
   "comparisons": [
     {
       "case": "django-callers",
@@ -331,6 +331,44 @@
             "output_tokens": 16987,
             "reasoning_output_tokens": 11879,
             "uncached_input_tokens": 49449
+          },
+          "automatic_quality_passed": false
+        }
+      }
+    },
+    {
+      "case": "requests-redirects-v2",
+      "results_sha256": "810b8bda6a71871dde17e752ccdc29db191babdbb1bb28bfd713729b70cc4a50",
+      "conditions": {
+        "baseline": {
+          "elapsed_seconds": 488.875,
+          "timed_out": false,
+          "return_code": 0,
+          "command_count": 17,
+          "command_output_bytes": 94278,
+          "usage": {
+            "input_tokens": 423075,
+            "cached_input_tokens": 354560,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 13998,
+            "reasoning_output_tokens": 9614,
+            "uncached_input_tokens": 68515
+          },
+          "automatic_quality_passed": false
+        },
+        "columbus": {
+          "elapsed_seconds": 545.198,
+          "timed_out": false,
+          "return_code": 0,
+          "command_count": 38,
+          "command_output_bytes": 88441,
+          "usage": {
+            "input_tokens": 560053,
+            "cached_input_tokens": 514432,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 15733,
+            "reasoning_output_tokens": 10024,
+            "uncached_input_tokens": 45621
           },
           "automatic_quality_passed": false
         }
