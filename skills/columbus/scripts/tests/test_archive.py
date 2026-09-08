@@ -13,6 +13,38 @@ from columbus.index import RepositoryIndex
 
 
 class ArchiveTests(unittest.TestCase):
+    def test_archive_callers_two_passes_and_unordered_fallback(self):
+        from columbus.archive import _validated_rows
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'calls.py').write_text('def target(): pass\ndef first(): target()\ndef second(): target()\n')
+            index = RepositoryIndex(root / '.columbus/index.sqlite')
+            index.refresh(root)
+            target = 'calls.py::target:function'
+            for codec, opener in [('gzip', gzip.open), ('xz', lzma.open)]:
+                artifact = root / codec
+                archive(index, artifact, codec)
+                expected = neighbors_archive(artifact, target, 'in', ['calls'], limit=1, offset=1)
+                with patch('columbus.archive._validated_rows', wraps=_validated_rows) as scan:
+                    self.assertEqual(callers_archive(artifact, 'target', limit=1, offset=1), expected)
+                    self.assertEqual(scan.call_count, 2)
+                with opener(artifact, 'rt') as stream:
+                    rows = [json.loads(line) for line in stream]
+                # Valid older/third-party archives need not follow exporter order.
+                reordered = ([rows[0]] + [r for r in rows[1:-1] if r['record'] != 'node']
+                             + [r for r in rows[1:-1] if r['record'] == 'node'] + [rows[-1]])
+                other = root / ('unordered-' + codec)
+                with opener(other, 'wt') as stream:
+                    stream.write(''.join(json.dumps(row) + '\n' for row in reordered))
+                with patch('columbus.archive._validated_rows', wraps=_validated_rows) as scan:
+                    self.assertEqual(callers_archive(other, 'target', limit=1, offset=1), expected)
+                    self.assertEqual(scan.call_count, 3)
+                broken = root / ('incomplete-' + codec)
+                with opener(broken, 'wt') as stream:
+                    stream.write(''.join(json.dumps(row) + '\n' for row in rows[:-1]))
+                with self.assertRaisesRegex(ValueError, 'Incomplete'):
+                    callers_archive(broken, target, limit=1)
+
     def test_archive_callers_exact_resolution_and_source_free_parity(self):
         from columbus.cli import main
         from contextlib import redirect_stdout

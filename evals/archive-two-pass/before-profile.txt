@@ -1,0 +1,26 @@
+         15928594 function calls (15928581 primitive calls) in 7.426 seconds
+
+   Ordered by: cumulative time
+   List reduced from 213 to 18 due to restriction <18>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.133    0.133    7.426    7.426 /Users/rex/Desktop/columbus/skills/columbus/scripts/columbus/archive.py:198(callers_archive)
+  1176486    0.896    0.000    6.992    0.000 /Users/rex/Desktop/columbus/skills/columbus/scripts/columbus/archive.py:168(_validated_rows)
+        1    0.270    0.270    4.945    4.945 /Users/rex/Desktop/columbus/skills/columbus/scripts/columbus/archive.py:238(neighbors_archive)
+  1176483    0.569    0.000    3.937    0.000 /Users/rex/.local/share/uv/python/cpython-3.11.16-macos-aarch64-none/lib/python3.11/json/__init__.py:299(loads)
+  1176483    0.889    0.000    3.219    0.000 /Users/rex/.local/share/uv/python/cpython-3.11.16-macos-aarch64-none/lib/python3.11/json/decoder.py:332(decode)
+    74475    0.030    0.000    1.996    0.000 /Users/rex/.local/share/uv/python/cpython-3.11.16-macos-aarch64-none/lib/python3.11/lzma.py:202(read1)
+    74475    0.036    0.000    1.907    0.000 {method 'read1' of '_io.BufferedReader' objects}
+  1176483    1.875    0.000    1.875    0.000 /Users/rex/.local/share/uv/python/cpython-3.11.16-macos-aarch64-none/lib/python3.11/json/decoder.py:343(raw_decode)
+    74475    0.103    0.000    1.872    0.000 /Users/rex/.local/share/uv/python/cpython-3.11.16-macos-aarch64-none/lib/python3.11/_compression.py:66(readinto)
+    74475    0.047    0.000    1.741    0.000 /Users/rex/.local/share/uv/python/cpython-3.11.16-macos-aarch64-none/lib/python3.11/_compression.py:72(read)
+    74472    1.680    0.000    1.680    0.000 {method 'decompress' of '_lzma.LZMADecompressor' objects}
+  2380922    0.292    0.000    0.292    0.000 {method 'match' of 're.Pattern' objects}
+  2352966    0.111    0.000    0.111    0.000 {method 'end' of 're.Match' objects}
+  1250991    0.098    0.000    0.098    0.000 /Users/rex/.local/share/uv/python/cpython-3.11.16-macos-aarch64-none/lib/python3.11/lzma.py:158(closed)
+  1176485    0.094    0.000    0.094    0.000 {method 'startswith' of 'str' objects}
+1474468/1474465    0.073    0.000    0.073    0.000 {built-in method builtins.len}
+    74475    0.029    0.000    0.070    0.000 <frozen codecs>:319(decode)
+    74475    0.017    0.000    0.059    0.000 /Users/rex/.local/share/uv/python/cpython-3.11.16-macos-aarch64-none/lib/python3.11/_compression.py:16(_check_can_read)
+
+

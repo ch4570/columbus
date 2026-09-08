@@ -195,51 +195,7 @@ def _validated_rows(raw):
         raise ValueError('Incomplete archive or record count mismatch')
 
 
-def callers_archive(source: str | Path, query: str, limit: int = 50, budget_bytes: int = 6000,
-                    offset: int = 0, *, output_format: str = 'json', repo: str | Path | None = None,
-                    context_lines: int | None = None, path: str | None = None) -> dict:
-    """Resolve one exact stored declaration, then return bounded incoming calls."""
-    if not isinstance(query, str) or not 1 <= len(query) <= 2048:
-        raise ValueError('An exact declaration name or ID of 1–2048 characters is required')
-    source = Path(source)
-    def stamp():
-        stat = source.stat()
-        return stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns
-    before = stamp()
-    selected, count, exact_id = None, 0, None
-    try:
-        with source.open('rb') as raw:
-            for kind, data in _validated_rows(raw):
-                if kind != 'node':
-                    continue
-                canonical = ''
-                if data.get('language') == 'python' and data.get('module'):
-                    canonical = (data['module'] if data.get('kind') == 'module'
-                                 else data['module'] + '.' + data.get('qualname', data['name']))
-                if query == data['id']:
-                    exact_id = data['id']
-                if query in (data['id'], data['name'], data.get('qualname'), canonical):
-                    selected = data['id']
-                    count += 1
-        if stamp() != before:
-            raise ValueError('Archive changed during query; retry')
-        if exact_id is None and count != 1:
-            raise ValueError('Declaration is ambiguous or absent; use archive-search and an exact ID')
-        result = neighbors_archive(source, exact_id or selected, 'in', ['calls'], limit, budget_bytes,
-                                   offset, output_format=output_format, repo=repo,
-                                   context_lines=context_lines, path=path)
-        if stamp() != before:
-            raise ValueError('Archive changed during query; retry')
-        return result
-    except (KeyError, TypeError, AttributeError, EOFError, lzma.LZMAError) as exc:
-        raise ValueError('Malformed or incomplete graph archive') from exc
-
-
-def neighbors_archive(source: str | Path, symbol_id: str, direction: str = 'out',
-                      kinds: list[str] | None = None, limit: int = 50, budget_bytes: int = 6000, offset: int = 0,
-                      *, output_format: str = 'json', repo: str | Path | None = None,
-                      context_lines: int | None = None, path: str | None = None) -> dict:
-    """Two streaming passes; bounded stored one-hop evidence, never runtime reachability."""
+def _neighbor_options(symbol_id, direction, kinds, limit, budget_bytes, offset, output_format, repo, context_lines, path):
     if output_format not in {'json', 'text'}:
         raise ValueError('output_format must be json or text')
     if path is not None and (not isinstance(path, str) or not 1 <= len(path) <= 2048 or '\0' in path):
@@ -255,13 +211,95 @@ def neighbors_archive(source: str | Path, symbol_id: str, direction: str = 'out'
         raise ValueError('direction in/out/both, limit 1–50 and budget 2048–64000 required')
     if kinds is not None and (not kinds or any(not isinstance(k, str) or not 1 <= len(k) <= 64 for k in kinds)):
         raise ValueError('kinds must contain nonempty edge kinds')
+
+
+def callers_archive(source: str | Path, query: str, limit: int = 50, budget_bytes: int = 6000,
+                    offset: int = 0, *, output_format: str = 'json', repo: str | Path | None = None,
+                    context_lines: int | None = None, path: str | None = None) -> dict:
+    """Resolve one exact stored declaration, then return bounded incoming calls."""
+    if not isinstance(query, str) or not 1 <= len(query) <= 2048:
+        raise ValueError('An exact declaration name or ID of 1–2048 characters is required')
+    _neighbor_options(query, 'in', ['calls'], limit, budget_bytes, offset, output_format, repo, context_lines, path)
+    source = Path(source)
+    def stamp():
+        stat = source.stat()
+        return stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns
+    before = stamp()
+    selected, count, exact_id = None, 0, None
+    edge_phase, ordered = False, True
+    edges, matched, diagnostics, references, unresolved = [], 0, 0, 0, 0
+    try:
+        with source.open('rb') as raw:
+            for kind, data in _validated_rows(raw):
+                if kind == 'manifest':
+                    manifest = data
+                elif kind == 'diagnostic':
+                    diagnostics += 1
+                elif kind == 'reference':
+                    references += 1
+                    unresolved += not data.get('resolved', False)
+                elif kind == 'edge':
+                    edge_phase = True
+                    target = exact_id or (selected if count == 1 else None)
+                    if (target is not None and data['kind'] == 'calls' and data['target'] == target
+                            and (path is None or fnmatchcase(data['path'], path))):
+                        matched += 1
+                        if matched > offset and len(edges) < limit:
+                            edges.append(data)
+                if kind != 'node':
+                    continue
+                if edge_phase:
+                    ordered = False
+                canonical = ''
+                if data.get('language') == 'python' and data.get('module'):
+                    canonical = (data['module'] if data.get('kind') == 'module'
+                                 else data['module'] + '.' + data.get('qualname', data['name']))
+                if query == data['id']:
+                    exact_id = data['id']
+                if query in (data['id'], data['name'], data.get('qualname'), canonical):
+                    selected = data['id']
+                    count += 1
+        if stamp() != before:
+            raise ValueError('Archive changed during query; retry')
+        if exact_id is None and count != 1:
+            raise ValueError('Declaration is ambiguous or absent; use archive-search and an exact ID')
+        # Exported archives place all nodes before edges. Arbitrary valid record
+        # order remains supported by falling back to the complete edge scan.
+        initial = (manifest, edges, matched, diagnostics, references, unresolved) if ordered else None
+        result = _neighbors_archive(source, exact_id or selected, 'in', ['calls'], limit, budget_bytes,
+                                    offset, output_format=output_format, repo=repo,
+                                    context_lines=context_lines, path=path, _initial_scan=initial)
+        if stamp() != before:
+            raise ValueError('Archive changed during query; retry')
+        return result
+    except (KeyError, TypeError, AttributeError, EOFError, lzma.LZMAError) as exc:
+        raise ValueError('Malformed or incomplete graph archive') from exc
+
+
+def neighbors_archive(source: str | Path, symbol_id: str, direction: str = 'out',
+                      kinds: list[str] | None = None, limit: int = 50, budget_bytes: int = 6000, offset: int = 0,
+                      *, output_format: str = 'json', repo: str | Path | None = None,
+                      context_lines: int | None = None, path: str | None = None) -> dict:
+    return _neighbors_archive(source, symbol_id, direction, kinds, limit, budget_bytes, offset,
+                              output_format=output_format, repo=repo, context_lines=context_lines, path=path)
+
+
+def _neighbors_archive(source: str | Path, symbol_id: str, direction: str = 'out',
+                      kinds: list[str] | None = None, limit: int = 50, budget_bytes: int = 6000, offset: int = 0,
+                      *, output_format: str = 'json', repo: str | Path | None = None,
+                      context_lines: int | None = None, path: str | None = None, _initial_scan=None) -> dict:
+    """Two streaming passes; bounded stored one-hop evidence, never runtime reachability."""
+    _neighbor_options(symbol_id, direction, kinds, limit, budget_bytes, offset, output_format, repo, context_lines, path)
     selected, nodes, hashes = [], {}, {}
     matched, diagnostics, target_exists = 0, 0, False
     references = unresolved = 0
     try:
         with Path(source).open('rb') as raw:
             before = os.fstat(raw.fileno())
-            for kind, data in _validated_rows(raw):
+            if _initial_scan is not None:
+                manifest, selected, matched, diagnostics, references, unresolved = _initial_scan
+                target_exists = True
+            for kind, data in (() if _initial_scan is not None else _validated_rows(raw)):
                 if kind == 'manifest':
                     manifest = data
                 elif kind == 'node' and data['id'] == symbol_id:
