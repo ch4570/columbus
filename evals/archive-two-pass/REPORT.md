@@ -24,3 +24,5 @@ Additional gzip/XZ checks replace the archive after the resolution/edge scan and
 A valid archive reordered to put nodes after edges also gains a late same-name declaration. Name-based callers reject the ambiguity after consuming the archive; an exact-ID query still equals incoming neighbors. These controls complement the existing fallback/pass-count and incomplete-tail checks.
 
 Both engine environments passed 237 tests. No production code changed in this follow-up, so the previously measured timings and source-context equality were not remeasured. Hosted run 34178929158 for the implementation commit was still in progress when checked; local tests do not stand in for its pending platform conclusions.
+
+Remote implementation run 34178929158 at 2fb7b8d and follow-up snapshot-test run 34179127554 at 5825237 both completed successfully in all six platform jobs. platform-final.json and snapshot-platform-final.json retain the exact conclusions.

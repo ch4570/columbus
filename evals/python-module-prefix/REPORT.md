@@ -17,3 +17,5 @@ The single edit observation improves about 14.4%; unchanged latency and database
 Both engine parser environments passed 238 tests; root suite passed 53. The optimization retains global relinking and full cache rewriting. It addresses one measured cost from issue #6, not complete incremental linking, JVM coverage or the unresolved semantic-quality/model-token goal. No new model trial was run.
 
 Fresh wheel and ZIP distribution verification also passed; see distribution.txt.
+
+Remote run 34179671415 at 279416c completed successfully in all six platform jobs; platform-final.json retains the result.
