@@ -125,10 +125,12 @@ def main(argv=None) -> int:
             command.add_argument('--format', choices=['json', 'text'], default='json')
             command.add_argument('--path', help='Case-sensitive glob on declaration paths, before ranking/counting')
             command.add_argument('--language', help='Exact detected language name, e.g. python or javascript')
-            command.add_argument('query')
+            command.add_argument('query', nargs='+',
+                                 help='One search, or 2–16 distinct literal queries in one archive scan')
             command.add_argument('--input', required=True)
-            command.add_argument('--limit', type=int, default=5)
-            command.add_argument('--budget-bytes', type=int, default=6000)
+            command.add_argument('--limit', type=int, default=5, help='Maximum declarations per query (1–50)')
+            command.add_argument('--budget-bytes', type=int, default=6000,
+                                 help='2048–64000 total bytes; a multi-query batch must fit completely or errors')
         if name in {'archive-neighbors', 'archive-callers'}:
             command.add_argument('--path', help='Case-sensitive glob on edge paths, before counting/pagination')
             command.add_argument('--format', choices=['json', 'text'], default='json')
@@ -222,8 +224,10 @@ def main(argv=None) -> int:
     started = time.perf_counter()
     try:
         source_call_sites = args.command == 'archive-source' and args.call_sites
-        read_only_archive = args.command == 'archive-quotes' or source_call_sites
-        archive_label = 'archive-source --call-sites' if source_call_sites else args.command
+        search_batch = args.command == 'archive-search' and len(args.query) > 1
+        read_only_archive = args.command == 'archive-quotes' or source_call_sites or search_batch
+        archive_label = ('archive-source --call-sites' if source_call_sites else
+                         'archive-search batch' if search_batch else args.command)
         if read_only_archive and args.telemetry is not None:
             raise ValueError(archive_label + ' does not support --telemetry')
         if args.command == 'explore':
@@ -310,6 +314,15 @@ def main(argv=None) -> int:
                                           args.offset, output_format=args.format, overloads=args.overloads)
             sys.stdout.write(source_calls_text(result) if args.format == 'text' else source_calls_json(result))
             return 0
+        if search_batch:
+            if args.pretty:
+                raise ValueError('archive-search rejects pretty output to preserve its byte budget')
+            from .archive import search_archive_many
+            from .presentation import archive_search_many_output
+            result = search_archive_many(args.input, args.query, args.limit, args.budget_bytes,
+                                         output_format=args.format, path=args.path, language=args.language)
+            sys.stdout.write(archive_search_many_output(result, args.format))
+            return 0
         index = RepositoryIndex(db or root / '.columbus/index-v1.sqlite')
         if args.command == 'tree':
             from .tree import records
@@ -341,7 +354,7 @@ def main(argv=None) -> int:
             if args.pretty:
                 raise ValueError('archive-search rejects pretty output to preserve its byte budget')
             from .archive import search_archive
-            result = search_archive(args.input, args.query, args.limit, args.budget_bytes,
+            result = search_archive(args.input, args.query[0], args.limit, args.budget_bytes,
                                     output_format=args.format, path=args.path, language=args.language)
         elif args.command == 'archive-callers':
             if args.pretty:
@@ -435,6 +448,7 @@ def main(argv=None) -> int:
         # Source readers can include an untrusted path in their diagnostics.
         message = (json.dumps(str(exc), ensure_ascii=True)[1:-1]
                    if args.command == 'archive-quotes' or (args.command == 'archive-source' and args.call_sites)
+                   or (args.command == 'archive-search' and len(args.query) > 1)
                    else str(exc))
         print(f'columbus: {message}', file=sys.stderr)
         return 2

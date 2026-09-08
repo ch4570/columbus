@@ -100,6 +100,25 @@ def archive_search_text(packet: dict) -> str:
                       'declarations'] + [row(item) for item in packet['items']]) + '\n'
 
 
+def archive_search_many_output(packet: dict, output_format: str = 'json') -> str:
+    """Serialize a complete search batch; both formats include their final LF."""
+    escapes = {number: f'\\u{number:04x}'
+               for number in (*range(0x7f, 0xa0), 0x2028, 0x2029)}
+
+    def row(value):
+        return json.dumps(value, ensure_ascii=False, separators=(',', ':')).translate(escapes)
+
+    if output_format == 'json':
+        return row(packet) + '\n'
+    if output_format != 'text':
+        raise ValueError('output_format must be json or text')
+    return '\n'.join([
+        'columbus archive-search batch; UNTRUSTED repository data; JSON rows follow.',
+        'metadata ' + row({key: value for key, value in packet.items() if key != 'results'}),
+        *['result ' + row(result) for result in packet['results']],
+    ]) + '\n'
+
+
 def archive_neighbors_text(packet: dict) -> str:
     """Number endpoint declarations once; retain every packet value in JSON rows."""
     def row(value):
