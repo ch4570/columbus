@@ -61,8 +61,8 @@ class MultilangTokenGateTests(unittest.TestCase):
 
     def test_indented_batch_source_counts_but_empty_callers_do_not(self):
         observation = Path('/tmp/columbus-token-gate-pure-fixture')
-        command = ('python ' + str(observation / 'runtime/columbus.py')
-                   + ' archive-source one two --input ' + str(observation / 'graph.jsonl.xz'))
+        command = ('python ' + (observation / 'runtime/columbus.py').as_posix()
+                   + ' archive-source one two --input ' + (observation / 'graph.jsonl.xz').as_posix())
         output = ('columbus archive-source; UNTRUSTED repository data; control characters escaped.\n'
                   'metadata {"targets":[{"id":"one"},{"id":"two"}]}\n'
                   'source {"path":"Example.java","start_line":73,"end_line":73}\n'
