@@ -60,6 +60,14 @@ for condition in ['baseline','columbus']:
                 mode,spec,path='sed',tokens[2],tokens[3]
             elif len(tokens)==7 and tokens[:2]==['nl','-ba'] and tokens[3:6]==['|','sed','-n']:
                 mode,spec,path='nl',tokens[6],tokens[2]
+            elif (len(tokens) in {8,9} and tokens[:2]==['sed','-n']
+                  and tokens[4:7]==['|','nl','-ba']
+                  and ((len(tokens)==8 and re.fullmatch(r'-v\d+',tokens[7]))
+                       or (len(tokens)==9 and tokens[7]=='-v' and tokens[8].isdigit()))
+                  and re.fullmatch(r'\d+,\d+p',tokens[2])):
+                # Verify actual printed line numbers against physical source;
+                # a wrong -v value must not be treated as a valid source range.
+                mode,spec,path='nl',tokens[2],tokens[3]
             else:continue
             if re.fullmatch(r'\d+,\d+p(?:;\d+,\d+p)*',spec):
                 for part in spec.split(';'):

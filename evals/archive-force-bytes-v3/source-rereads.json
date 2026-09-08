@@ -1,0 +1,1537 @@
+{
+  "scope": "Verified bounded django/ source reads only; excludes rg, help, skill text, metadata and model tokens.",
+  "conditions": {
+    "baseline": {
+      "verified_ranges": 40,
+      "unique_lines": 1472,
+      "source_bytes_returned": 59550,
+      "repeated_source_bytes": 6421,
+      "empty_ranges": [],
+      "unverified_ranges": [],
+      "reads": [
+        {
+          "command_id": "item_3",
+          "path": "django/core/signing.py",
+          "start": 85,
+          "end": 115,
+          "mode": "nl",
+          "bytes": 824,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_4",
+          "path": "django/utils/encoding.py",
+          "start": 65,
+          "end": 180,
+          "mode": "nl",
+          "bytes": 4240,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_5",
+          "path": "django/utils/crypto.py",
+          "start": 1,
+          "end": 77,
+          "mode": "nl",
+          "bytes": 2662,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_6",
+          "path": "django/contrib/auth/forms.py",
+          "start": 460,
+          "end": 505,
+          "mode": "nl",
+          "bytes": 1710,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_7",
+          "path": "django/core/mail/message.py",
+          "start": 375,
+          "end": 420,
+          "mode": "nl",
+          "bytes": 1988,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_8",
+          "path": "django/db/backends/oracle/operations.py",
+          "start": 235,
+          "end": 270,
+          "mode": "nl",
+          "bytes": 1480,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_9",
+          "path": "django/db/backends/oracle/base.py",
+          "start": 415,
+          "end": 465,
+          "mode": "nl",
+          "bytes": 2227,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_10",
+          "path": "django/test/client.py",
+          "start": 270,
+          "end": 305,
+          "mode": "nl",
+          "bytes": 1318,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_11",
+          "path": "django/test/client.py",
+          "start": 90,
+          "end": 125,
+          "mode": "nl",
+          "bytes": 1200,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_12",
+          "path": "django/test/client.py",
+          "start": 625,
+          "end": 660,
+          "mode": "nl",
+          "bytes": 1030,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_13",
+          "path": "django/test/client.py",
+          "start": 325,
+          "end": 355,
+          "mode": "nl",
+          "bytes": 858,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_14",
+          "path": "django/test/client.py",
+          "start": 420,
+          "end": 460,
+          "mode": "nl",
+          "bytes": 1492,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_15",
+          "path": "django/test/client.py",
+          "start": 725,
+          "end": 760,
+          "mode": "nl",
+          "bytes": 1186,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_17",
+          "path": "django/test/client.py",
+          "start": 647,
+          "end": 673,
+          "mode": "nl",
+          "bytes": 1038,
+          "repeated_bytes": 518,
+          "repeated_lines": 14
+        },
+        {
+          "command_id": "item_20",
+          "path": "django/test/client.py",
+          "start": 340,
+          "end": 369,
+          "mode": "nl",
+          "bytes": 949,
+          "repeated_bytes": 566,
+          "repeated_lines": 16
+        },
+        {
+          "command_id": "item_18",
+          "path": "django/test/client.py",
+          "start": 747,
+          "end": 784,
+          "mode": "nl",
+          "bytes": 1533,
+          "repeated_bytes": 539,
+          "repeated_lines": 14
+        },
+        {
+          "command_id": "item_19",
+          "path": "django/test/client.py",
+          "start": 286,
+          "end": 337,
+          "mode": "nl",
+          "bytes": 1776,
+          "repeated_bytes": 1062,
+          "repeated_lines": 33
+        },
+        {
+          "command_id": "item_30",
+          "path": "django/contrib/gis/gdal/driver.py",
+          "start": 30,
+          "end": 60,
+          "mode": "nl",
+          "bytes": 1112,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_32",
+          "path": "django/contrib/gis/gdal/feature.py",
+          "start": 100,
+          "end": 120,
+          "mode": "nl",
+          "bytes": 775,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_31",
+          "path": "django/contrib/gis/gdal/datasource.py",
+          "start": 50,
+          "end": 105,
+          "mode": "nl",
+          "bytes": 2254,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_34",
+          "path": "django/contrib/gis/gdal/layer.py",
+          "start": 220,
+          "end": 234,
+          "mode": "nl",
+          "bytes": 686,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_33",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start": 295,
+          "end": 350,
+          "mode": "nl",
+          "bytes": 1784,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_35",
+          "path": "django/contrib/gis/gdal/geometries.py",
+          "start": 140,
+          "end": 180,
+          "mode": "nl",
+          "bytes": 1215,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_36",
+          "path": "django/contrib/gis/geos/prototypes/io.py",
+          "start": 240,
+          "end": 260,
+          "mode": "nl",
+          "bytes": 812,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_37",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start": 140,
+          "end": 175,
+          "mode": "nl",
+          "bytes": 1291,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_38",
+          "path": "django/contrib/gis/gdal/datasource.py",
+          "start": 93,
+          "end": 115,
+          "mode": "nl",
+          "bytes": 907,
+          "repeated_bytes": 626,
+          "repeated_lines": 13
+        },
+        {
+          "command_id": "item_39",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start": 150,
+          "end": 180,
+          "mode": "nl",
+          "bytes": 1214,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_40",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start": 80,
+          "end": 135,
+          "mode": "nl",
+          "bytes": 2366,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_41",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start": 270,
+          "end": 295,
+          "mode": "nl",
+          "bytes": 881,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_42",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start": 210,
+          "end": 230,
+          "mode": "nl",
+          "bytes": 674,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_43",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start": 425,
+          "end": 515,
+          "mode": "nl",
+          "bytes": 3151,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_44",
+          "path": "django/contrib/gis/geos/geometry.py",
+          "start": 725,
+          "end": 775,
+          "mode": "nl",
+          "bytes": 2065,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_45",
+          "path": "django/contrib/gis/geos/geometry.py",
+          "start": 115,
+          "end": 155,
+          "mode": "nl",
+          "bytes": 1379,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_46",
+          "path": "django/contrib/gis/geos/geometry.py",
+          "start": 338,
+          "end": 365,
+          "mode": "nl",
+          "bytes": 1059,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_47",
+          "path": "django/contrib/gis/geos/geometry.py",
+          "start": 752,
+          "end": 793,
+          "mode": "nl",
+          "bytes": 1870,
+          "repeated_bytes": 1130,
+          "repeated_lines": 24
+        },
+        {
+          "command_id": "item_51",
+          "path": "django/utils/encoding.py",
+          "start": 155,
+          "end": 196,
+          "mode": "nl",
+          "bytes": 1431,
+          "repeated_bytes": 945,
+          "repeated_lines": 26
+        },
+        {
+          "command_id": "item_53",
+          "path": "django/core/signing.py",
+          "start": 126,
+          "end": 145,
+          "mode": "nl",
+          "bytes": 595,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_54",
+          "path": "django/contrib/auth/forms.py",
+          "start": 404,
+          "end": 460,
+          "mode": "nl",
+          "bytes": 1956,
+          "repeated_bytes": 1,
+          "repeated_lines": 1
+        },
+        {
+          "command_id": "item_55",
+          "path": "django/contrib/gis/gdal/driver.py",
+          "start": 35,
+          "end": 70,
+          "mode": "nl",
+          "bytes": 1322,
+          "repeated_bytes": 1034,
+          "repeated_lines": 26
+        },
+        {
+          "command_id": "item_56",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start": 232,
+          "end": 262,
+          "mode": "nl",
+          "bytes": 1240,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        }
+      ],
+      "events_sha256": "a3712caf466db34a6bdb246ea44616e33db1380ae255fb77ffcc7566038319b4"
+    },
+    "columbus": {
+      "verified_ranges": 111,
+      "unique_lines": 1376,
+      "source_bytes_returned": 105317,
+      "repeated_source_bytes": 54842,
+      "empty_ranges": [],
+      "unverified_ranges": [],
+      "reads": [
+        {
+          "command_id": "item_1",
+          "path": "django/contrib/auth/forms.py",
+          "start": 475,
+          "end": 499,
+          "mode": "archive-context",
+          "bytes": 1017,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_1",
+          "path": "django/contrib/gis/gdal/datasource.py",
+          "start": 93,
+          "end": 109,
+          "mode": "archive-context",
+          "bytes": 754,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_1",
+          "path": "django/contrib/gis/gdal/datasource.py",
+          "start": 56,
+          "end": 80,
+          "mode": "archive-context",
+          "bytes": 1068,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_1",
+          "path": "django/contrib/gis/gdal/driver.py",
+          "start": 39,
+          "end": 63,
+          "mode": "archive-context",
+          "bytes": 988,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_1",
+          "path": "django/contrib/gis/gdal/feature.py",
+          "start": 115,
+          "end": 120,
+          "mode": "archive-context",
+          "bytes": 267,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_1",
+          "path": "django/contrib/gis/gdal/geometries.py",
+          "start": 175,
+          "end": 176,
+          "mode": "archive-context",
+          "bytes": 94,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_1",
+          "path": "django/contrib/gis/gdal/geometries.py",
+          "start": 171,
+          "end": 172,
+          "mode": "archive-context",
+          "bytes": 107,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_1",
+          "path": "django/contrib/gis/gdal/layer.py",
+          "start": 226,
+          "end": 234,
+          "mode": "archive-context",
+          "bytes": 495,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_1",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start": 218,
+          "end": 222,
+          "mode": "archive-context",
+          "bytes": 211,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_1",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start": 89,
+          "end": 141,
+          "mode": "archive-context",
+          "bytes": 2469,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_1",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start": 157,
+          "end": 181,
+          "mode": "archive-context",
+          "bytes": 1047,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_1",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start": 494,
+          "end": 513,
+          "mode": "archive-context",
+          "bytes": 654,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_1",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start": 277,
+          "end": 291,
+          "mode": "archive-context",
+          "bytes": 559,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_1",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start": 147,
+          "end": 154,
+          "mode": "archive-context",
+          "bytes": 383,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_1",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start": 162,
+          "end": 166,
+          "mode": "archive-context",
+          "bytes": 220,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_1",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start": 156,
+          "end": 160,
+          "mode": "archive-context",
+          "bytes": 220,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_1",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start": 307,
+          "end": 309,
+          "mode": "archive-context",
+          "bytes": 182,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_1",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start": 311,
+          "end": 313,
+          "mode": "archive-context",
+          "bytes": 159,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_1",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start": 341,
+          "end": 343,
+          "mode": "archive-context",
+          "bytes": 176,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_2",
+          "path": "django/contrib/gis/geos/geometry.py",
+          "start": 748,
+          "end": 775,
+          "mode": "archive-context",
+          "bytes": 1319,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_2",
+          "path": "django/contrib/gis/geos/geometry.py",
+          "start": 127,
+          "end": 140,
+          "mode": "archive-context",
+          "bytes": 499,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_2",
+          "path": "django/contrib/gis/geos/geometry.py",
+          "start": 350,
+          "end": 357,
+          "mode": "archive-context",
+          "bytes": 416,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_2",
+          "path": "django/contrib/gis/geos/prototypes/io.py",
+          "start": 249,
+          "end": 253,
+          "mode": "archive-context",
+          "bytes": 301,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_2",
+          "path": "django/core/mail/message.py",
+          "start": 390,
+          "end": 410,
+          "mode": "archive-context",
+          "bytes": 1065,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_2",
+          "path": "django/core/signing.py",
+          "start": 104,
+          "end": 106,
+          "mode": "archive-context",
+          "bytes": 127,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_2",
+          "path": "django/db/backends/oracle/base.py",
+          "start": 437,
+          "end": 461,
+          "mode": "archive-context",
+          "bytes": 1284,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_2",
+          "path": "django/db/backends/oracle/operations.py",
+          "start": 256,
+          "end": 259,
+          "mode": "archive-context",
+          "bytes": 183,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_2",
+          "path": "django/test/client.py",
+          "start": 735,
+          "end": 759,
+          "mode": "archive-context",
+          "bytes": 777,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_2",
+          "path": "django/test/client.py",
+          "start": 112,
+          "end": 117,
+          "mode": "archive-context",
+          "bytes": 242,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_2",
+          "path": "django/test/client.py",
+          "start": 438,
+          "end": 448,
+          "mode": "archive-context",
+          "bytes": 474,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_2",
+          "path": "django/test/client.py",
+          "start": 635,
+          "end": 659,
+          "mode": "archive-context",
+          "bytes": 810,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_2",
+          "path": "django/test/client.py",
+          "start": 341,
+          "end": 342,
+          "mode": "archive-context",
+          "bytes": 77,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_2",
+          "path": "django/test/client.py",
+          "start": 288,
+          "end": 289,
+          "mode": "archive-context",
+          "bytes": 77,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_2",
+          "path": "django/utils/crypto.py",
+          "start": 65,
+          "end": 67,
+          "mode": "archive-context",
+          "bytes": 180,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_2",
+          "path": "django/utils/crypto.py",
+          "start": 70,
+          "end": 77,
+          "mode": "archive-context",
+          "bytes": 342,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_2",
+          "path": "django/utils/crypto.py",
+          "start": 19,
+          "end": 45,
+          "mode": "archive-context",
+          "bytes": 1288,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_2",
+          "path": "django/utils/encoding.py",
+          "start": 75,
+          "end": 84,
+          "mode": "archive-context",
+          "bytes": 409,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_2",
+          "path": "django/utils/encoding.py",
+          "start": 155,
+          "end": 179,
+          "mode": "archive-context",
+          "bytes": 918,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_5",
+          "path": "django/utils/encoding.py",
+          "start": 70,
+          "end": 112,
+          "mode": "sed",
+          "bytes": 1435,
+          "repeated_bytes": 409,
+          "repeated_lines": 10
+        },
+        {
+          "command_id": "item_5",
+          "path": "django/utils/encoding.py",
+          "start": 155,
+          "end": 190,
+          "mode": "sed",
+          "bytes": 1213,
+          "repeated_bytes": 918,
+          "repeated_lines": 25
+        },
+        {
+          "command_id": "item_6",
+          "path": "django/db/backends/oracle/base.py",
+          "start": 420,
+          "end": 463,
+          "mode": "nl",
+          "bytes": 1996,
+          "repeated_bytes": 1284,
+          "repeated_lines": 25
+        },
+        {
+          "command_id": "item_6",
+          "path": "django/contrib/gis/gdal/driver.py",
+          "start": 30,
+          "end": 70,
+          "mode": "nl",
+          "bytes": 1400,
+          "repeated_bytes": 988,
+          "repeated_lines": 25
+        },
+        {
+          "command_id": "item_6",
+          "path": "django/contrib/gis/gdal/datasource.py",
+          "start": 54,
+          "end": 112,
+          "mode": "nl",
+          "bytes": 2329,
+          "repeated_bytes": 1822,
+          "repeated_lines": 42
+        },
+        {
+          "command_id": "item_6",
+          "path": "django/contrib/gis/gdal/geometries.py",
+          "start": 160,
+          "end": 180,
+          "mode": "nl",
+          "bytes": 620,
+          "repeated_bytes": 201,
+          "repeated_lines": 4
+        },
+        {
+          "command_id": "item_7",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start": 80,
+          "end": 218,
+          "mode": "nl",
+          "bytes": 5754,
+          "repeated_bytes": 3539,
+          "repeated_lines": 79
+        },
+        {
+          "command_id": "item_7",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start": 218,
+          "end": 295,
+          "mode": "nl",
+          "bytes": 2919,
+          "repeated_bytes": 770,
+          "repeated_lines": 20
+        },
+        {
+          "command_id": "item_7",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start": 480,
+          "end": 518,
+          "mode": "nl",
+          "bytes": 1060,
+          "repeated_bytes": 654,
+          "repeated_lines": 20
+        },
+        {
+          "command_id": "item_8",
+          "path": "django/contrib/gis/geos/geometry.py",
+          "start": 118,
+          "end": 150,
+          "mode": "nl",
+          "bytes": 1058,
+          "repeated_bytes": 499,
+          "repeated_lines": 14
+        },
+        {
+          "command_id": "item_8",
+          "path": "django/contrib/gis/geos/geometry.py",
+          "start": 344,
+          "end": 360,
+          "mode": "nl",
+          "bytes": 698,
+          "repeated_bytes": 416,
+          "repeated_lines": 8
+        },
+        {
+          "command_id": "item_8",
+          "path": "django/contrib/gis/geos/geometry.py",
+          "start": 730,
+          "end": 793,
+          "mode": "nl",
+          "bytes": 2676,
+          "repeated_bytes": 1319,
+          "repeated_lines": 28
+        },
+        {
+          "command_id": "item_8",
+          "path": "django/contrib/gis/geos/prototypes/io.py",
+          "start": 230,
+          "end": 258,
+          "mode": "nl",
+          "bytes": 1245,
+          "repeated_bytes": 301,
+          "repeated_lines": 5
+        },
+        {
+          "command_id": "item_9",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start": 140,
+          "end": 170,
+          "mode": "nl",
+          "bytes": 1159,
+          "repeated_bytes": 823,
+          "repeated_lines": 18
+        },
+        {
+          "command_id": "item_9",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start": 300,
+          "end": 348,
+          "mode": "nl",
+          "bytes": 1623,
+          "repeated_bytes": 517,
+          "repeated_lines": 9
+        },
+        {
+          "command_id": "item_9",
+          "path": "django/contrib/gis/gdal/feature.py",
+          "start": 108,
+          "end": 120,
+          "mode": "nl",
+          "bytes": 538,
+          "repeated_bytes": 267,
+          "repeated_lines": 6
+        },
+        {
+          "command_id": "item_9",
+          "path": "django/contrib/gis/gdal/layer.py",
+          "start": 220,
+          "end": 234,
+          "mode": "nl",
+          "bytes": 686,
+          "repeated_bytes": 495,
+          "repeated_lines": 9
+        },
+        {
+          "command_id": "item_10",
+          "path": "django/core/mail/message.py",
+          "start": 375,
+          "end": 412,
+          "mode": "nl",
+          "bytes": 1722,
+          "repeated_bytes": 1065,
+          "repeated_lines": 21
+        },
+        {
+          "command_id": "item_10",
+          "path": "django/core/signing.py",
+          "start": 98,
+          "end": 110,
+          "mode": "nl",
+          "bytes": 410,
+          "repeated_bytes": 127,
+          "repeated_lines": 3
+        },
+        {
+          "command_id": "item_10",
+          "path": "django/db/backends/oracle/operations.py",
+          "start": 250,
+          "end": 263,
+          "mode": "nl",
+          "bytes": 487,
+          "repeated_bytes": 183,
+          "repeated_lines": 4
+        },
+        {
+          "command_id": "item_10",
+          "path": "django/contrib/auth/forms.py",
+          "start": 461,
+          "end": 505,
+          "mode": "nl",
+          "bytes": 1709,
+          "repeated_bytes": 1017,
+          "repeated_lines": 25
+        },
+        {
+          "command_id": "item_11",
+          "path": "django/contrib/auth/forms.py",
+          "start": 445,
+          "end": 493,
+          "mode": "nl",
+          "bytes": 1744,
+          "repeated_bytes": 1261,
+          "repeated_lines": 33
+        },
+        {
+          "command_id": "item_11",
+          "path": "django/test/client.py",
+          "start": 100,
+          "end": 120,
+          "mode": "nl",
+          "bytes": 705,
+          "repeated_bytes": 242,
+          "repeated_lines": 6
+        },
+        {
+          "command_id": "item_11",
+          "path": "django/test/client.py",
+          "start": 270,
+          "end": 352,
+          "mode": "nl",
+          "bytes": 2851,
+          "repeated_bytes": 154,
+          "repeated_lines": 4
+        },
+        {
+          "command_id": "item_11",
+          "path": "django/test/client.py",
+          "start": 430,
+          "end": 452,
+          "mode": "nl",
+          "bytes": 816,
+          "repeated_bytes": 474,
+          "repeated_lines": 11
+        },
+        {
+          "command_id": "item_12",
+          "path": "django/test/client.py",
+          "start": 340,
+          "end": 390,
+          "mode": "nl",
+          "bytes": 1477,
+          "repeated_bytes": 527,
+          "repeated_lines": 13
+        },
+        {
+          "command_id": "item_12",
+          "path": "django/test/client.py",
+          "start": 625,
+          "end": 675,
+          "mode": "nl",
+          "bytes": 1601,
+          "repeated_bytes": 810,
+          "repeated_lines": 25
+        },
+        {
+          "command_id": "item_12",
+          "path": "django/test/client.py",
+          "start": 725,
+          "end": 785,
+          "mode": "nl",
+          "bytes": 2199,
+          "repeated_bytes": 777,
+          "repeated_lines": 25
+        },
+        {
+          "command_id": "item_13",
+          "path": "django/utils/crypto.py",
+          "start": 1,
+          "end": 77,
+          "mode": "nl",
+          "bytes": 2662,
+          "repeated_bytes": 1810,
+          "repeated_lines": 38
+        },
+        {
+          "command_id": "item_13",
+          "path": "django/utils/encoding.py",
+          "start": 75,
+          "end": 106,
+          "mode": "nl",
+          "bytes": 1088,
+          "repeated_bytes": 1088,
+          "repeated_lines": 32
+        },
+        {
+          "command_id": "item_13",
+          "path": "django/utils/encoding.py",
+          "start": 155,
+          "end": 190,
+          "mode": "nl",
+          "bytes": 1213,
+          "repeated_bytes": 1213,
+          "repeated_lines": 36
+        },
+        {
+          "command_id": "item_15",
+          "path": "django/contrib/gis/gdal/geometries.py",
+          "start": 80,
+          "end": 115,
+          "mode": "nl",
+          "bytes": 1712,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_15",
+          "path": "django/contrib/gis/gdal/geometries.py",
+          "start": 165,
+          "end": 178,
+          "mode": "nl",
+          "bytes": 434,
+          "repeated_bytes": 434,
+          "repeated_lines": 14
+        },
+        {
+          "command_id": "item_15",
+          "path": "django/contrib/gis/gdal/feature.py",
+          "start": 112,
+          "end": 120,
+          "mode": "nl",
+          "bytes": 357,
+          "repeated_bytes": 357,
+          "repeated_lines": 9
+        },
+        {
+          "command_id": "item_16",
+          "path": "django/contrib/gis/gdal/geometries.py",
+          "start": 150,
+          "end": 178,
+          "mode": "nl",
+          "bytes": 832,
+          "repeated_bytes": 573,
+          "repeated_lines": 19
+        },
+        {
+          "command_id": "item_16",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start": 15,
+          "end": 35,
+          "mode": "nl",
+          "bytes": 834,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_16",
+          "path": "django/contrib/gis/gdal/datasource.py",
+          "start": 38,
+          "end": 47,
+          "mode": "nl",
+          "bytes": 379,
+          "repeated_bytes": 0,
+          "repeated_lines": 0
+        },
+        {
+          "command_id": "item_17",
+          "path": "django/test/client.py",
+          "start": 80,
+          "end": 118,
+          "mode": "nl",
+          "bytes": 1262,
+          "repeated_bytes": 657,
+          "repeated_lines": 19
+        },
+        {
+          "command_id": "item_17",
+          "path": "django/test/client.py",
+          "start": 670,
+          "end": 735,
+          "mode": "nl",
+          "bytes": 2218,
+          "repeated_bytes": 513,
+          "repeated_lines": 17
+        },
+        {
+          "command_id": "item_18",
+          "path": "django/contrib/auth/forms.py",
+          "start": 477,
+          "end": 505,
+          "mode": "sed",
+          "bytes": 1190,
+          "repeated_bytes": 1190,
+          "repeated_lines": 29
+        },
+        {
+          "command_id": "item_19",
+          "path": "django/contrib/gis/gdal/datasource.py",
+          "start": 56,
+          "end": 91,
+          "mode": "sed",
+          "bytes": 1482,
+          "repeated_bytes": 1482,
+          "repeated_lines": 36
+        },
+        {
+          "command_id": "item_20",
+          "path": "django/contrib/gis/gdal/datasource.py",
+          "start": 93,
+          "end": 110,
+          "mode": "sed",
+          "bytes": 788,
+          "repeated_bytes": 788,
+          "repeated_lines": 18
+        },
+        {
+          "command_id": "item_21",
+          "path": "django/contrib/gis/gdal/driver.py",
+          "start": 35,
+          "end": 67,
+          "mode": "sed",
+          "bytes": 1273,
+          "repeated_bytes": 1273,
+          "repeated_lines": 33
+        },
+        {
+          "command_id": "item_22",
+          "path": "django/contrib/gis/gdal/feature.py",
+          "start": 115,
+          "end": 120,
+          "mode": "sed",
+          "bytes": 267,
+          "repeated_bytes": 267,
+          "repeated_lines": 6
+        },
+        {
+          "command_id": "item_23",
+          "path": "django/contrib/gis/gdal/geometries.py",
+          "start": 170,
+          "end": 176,
+          "mode": "sed",
+          "bytes": 237,
+          "repeated_bytes": 237,
+          "repeated_lines": 7
+        },
+        {
+          "command_id": "item_24",
+          "path": "django/contrib/gis/gdal/layer.py",
+          "start": 226,
+          "end": 234,
+          "mode": "sed",
+          "bytes": 495,
+          "repeated_bytes": 495,
+          "repeated_lines": 9
+        },
+        {
+          "command_id": "item_25",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start": 91,
+          "end": 130,
+          "mode": "sed",
+          "bytes": 1924,
+          "repeated_bytes": 1924,
+          "repeated_lines": 40
+        },
+        {
+          "command_id": "item_26",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start": 218,
+          "end": 222,
+          "mode": "sed",
+          "bytes": 211,
+          "repeated_bytes": 211,
+          "repeated_lines": 5
+        },
+        {
+          "command_id": "item_27",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start": 277,
+          "end": 291,
+          "mode": "sed",
+          "bytes": 559,
+          "repeated_bytes": 559,
+          "repeated_lines": 15
+        },
+        {
+          "command_id": "item_28",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "start": 494,
+          "end": 513,
+          "mode": "sed",
+          "bytes": 654,
+          "repeated_bytes": 654,
+          "repeated_lines": 20
+        },
+        {
+          "command_id": "item_29",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start": 147,
+          "end": 154,
+          "mode": "sed",
+          "bytes": 383,
+          "repeated_bytes": 383,
+          "repeated_lines": 8
+        },
+        {
+          "command_id": "item_30",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start": 156,
+          "end": 160,
+          "mode": "sed",
+          "bytes": 220,
+          "repeated_bytes": 220,
+          "repeated_lines": 5
+        },
+        {
+          "command_id": "item_31",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start": 162,
+          "end": 166,
+          "mode": "sed",
+          "bytes": 220,
+          "repeated_bytes": 220,
+          "repeated_lines": 5
+        },
+        {
+          "command_id": "item_32",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start": 307,
+          "end": 313,
+          "mode": "sed",
+          "bytes": 342,
+          "repeated_bytes": 342,
+          "repeated_lines": 7
+        },
+        {
+          "command_id": "item_33",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "start": 340,
+          "end": 343,
+          "mode": "sed",
+          "bytes": 190,
+          "repeated_bytes": 190,
+          "repeated_lines": 4
+        },
+        {
+          "command_id": "item_34",
+          "path": "django/contrib/gis/geos/geometry.py",
+          "start": 126,
+          "end": 141,
+          "mode": "sed",
+          "bytes": 585,
+          "repeated_bytes": 585,
+          "repeated_lines": 16
+        },
+        {
+          "command_id": "item_35",
+          "path": "django/contrib/gis/geos/geometry.py",
+          "start": 350,
+          "end": 357,
+          "mode": "sed",
+          "bytes": 416,
+          "repeated_bytes": 416,
+          "repeated_lines": 8
+        },
+        {
+          "command_id": "item_36",
+          "path": "django/contrib/gis/geos/geometry.py",
+          "start": 751,
+          "end": 787,
+          "mode": "sed",
+          "bytes": 1721,
+          "repeated_bytes": 1721,
+          "repeated_lines": 37
+        },
+        {
+          "command_id": "item_37",
+          "path": "django/contrib/gis/geos/prototypes/io.py",
+          "start": 249,
+          "end": 253,
+          "mode": "sed",
+          "bytes": 301,
+          "repeated_bytes": 301,
+          "repeated_lines": 5
+        },
+        {
+          "command_id": "item_38",
+          "path": "django/core/mail/message.py",
+          "start": 382,
+          "end": 410,
+          "mode": "sed",
+          "bytes": 1398,
+          "repeated_bytes": 1398,
+          "repeated_lines": 29
+        },
+        {
+          "command_id": "item_39",
+          "path": "django/core/signing.py",
+          "start": 104,
+          "end": 106,
+          "mode": "sed",
+          "bytes": 127,
+          "repeated_bytes": 127,
+          "repeated_lines": 3
+        },
+        {
+          "command_id": "item_40",
+          "path": "django/db/backends/oracle/base.py",
+          "start": 420,
+          "end": 459,
+          "mode": "sed",
+          "bytes": 1945,
+          "repeated_bytes": 1945,
+          "repeated_lines": 40
+        },
+        {
+          "command_id": "item_41",
+          "path": "django/db/backends/oracle/operations.py",
+          "start": 256,
+          "end": 259,
+          "mode": "sed",
+          "bytes": 183,
+          "repeated_bytes": 183,
+          "repeated_lines": 4
+        },
+        {
+          "command_id": "item_42",
+          "path": "django/test/client.py",
+          "start": 112,
+          "end": 117,
+          "mode": "sed",
+          "bytes": 242,
+          "repeated_bytes": 242,
+          "repeated_lines": 6
+        },
+        {
+          "command_id": "item_43",
+          "path": "django/test/client.py",
+          "start": 286,
+          "end": 319,
+          "mode": "sed",
+          "bytes": 1348,
+          "repeated_bytes": 1348,
+          "repeated_lines": 34
+        },
+        {
+          "command_id": "item_44",
+          "path": "django/test/client.py",
+          "start": 340,
+          "end": 367,
+          "mode": "sed",
+          "bytes": 947,
+          "repeated_bytes": 947,
+          "repeated_lines": 28
+        },
+        {
+          "command_id": "item_45",
+          "path": "django/test/client.py",
+          "start": 438,
+          "end": 448,
+          "mode": "sed",
+          "bytes": 474,
+          "repeated_bytes": 474,
+          "repeated_lines": 11
+        },
+        {
+          "command_id": "item_46",
+          "path": "django/test/client.py",
+          "start": 645,
+          "end": 671,
+          "mode": "sed",
+          "bytes": 1144,
+          "repeated_bytes": 1144,
+          "repeated_lines": 27
+        },
+        {
+          "command_id": "item_47",
+          "path": "django/test/client.py",
+          "start": 745,
+          "end": 782,
+          "mode": "sed",
+          "bytes": 1640,
+          "repeated_bytes": 1640,
+          "repeated_lines": 38
+        },
+        {
+          "command_id": "item_48",
+          "path": "django/utils/crypto.py",
+          "start": 19,
+          "end": 45,
+          "mode": "sed",
+          "bytes": 1288,
+          "repeated_bytes": 1288,
+          "repeated_lines": 27
+        },
+        {
+          "command_id": "item_49",
+          "path": "django/utils/crypto.py",
+          "start": 65,
+          "end": 77,
+          "mode": "sed",
+          "bytes": 524,
+          "repeated_bytes": 524,
+          "repeated_lines": 13
+        },
+        {
+          "command_id": "item_50",
+          "path": "django/utils/encoding.py",
+          "start": 75,
+          "end": 84,
+          "mode": "sed",
+          "bytes": 409,
+          "repeated_bytes": 409,
+          "repeated_lines": 10
+        },
+        {
+          "command_id": "item_51",
+          "path": "django/utils/encoding.py",
+          "start": 155,
+          "end": 188,
+          "mode": "sed",
+          "bytes": 1211,
+          "repeated_bytes": 1211,
+          "repeated_lines": 34
+        }
+      ],
+      "events_sha256": "8309e82d29bcbd822c8c5336908cc3c5f4890d35f9b6d0cde293725e54b266fc"
+    }
+  }
+}

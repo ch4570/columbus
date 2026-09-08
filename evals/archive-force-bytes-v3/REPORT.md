@@ -26,3 +26,16 @@ The first complete actual archive-callers chain contains two pages with radius 1
 The revised skill told the agent to look up named flag definitions. Nevertheless, neither condition's completed tool outputs contains the exact source text VSI_DELETE_BUFFER_ON_READ = False, and both answers assert deletion. flag-evidence.json records complete event hashes and this exact-string audit; absence does not rule out equivalent clues and does not expose model attention. This experiment does not validate the guidance as a reliable fix. It tests the combined frozen configuration, including archive/runtime changes, so it cannot isolate causal effects of one sentence.
 
 The frozen graph is 8592884 bytes and covers 5465 indexed files. Preparation cost and complete caller/context controls are retained separately in freeze.json and the frozen verification receipts. Compact storage and complete caller delivery remain useful functional results, but this third observation still fails the actual quality-preserving token objective. No model process remains active for this pair; no release or issue closure follows.
+
+## Verified repeated source reads
+
+The retained trace audit now recognizes both `nl -ba FILE | sed -n RANGE` and `sed -n RANGE FILE | nl -ba -vSTART`. This matters because the third baseline uses the latter form: the prior recognizer counted zero baseline ranges, which meant unsupported syntax, not zero source reading. Every accepted range still checks actual printed numbers and content against hashed physical source. A regression test accepts both joined/separate `-v` forms and rejects incorrect printed numbers. Replaying v2 yields exactly its prior saved measurement.
+
+| Verified source measure | Baseline | Columbus |
+| --- | ---: | ---: |
+| Ranges | 40 | 111 |
+| Unique physical lines | 1472 | 1376 |
+| Returned source bytes | 59550 | 105317 |
+| Repeated source bytes | 6421 | 54842 |
+
+There are no unverified recognized ranges or empty ranges. The scope excludes rg results, unsupported command forms, instructions, metadata and model tokens; these numbers are not all tool output. Columbus includes 38 archive context ranges (21858 source bytes, no repetition), 37 numbered ranges (54473 bytes, 27177 repeated), and 36 plain sed ranges (28986 bytes, 27665 repeated). Most plain sed reads occur late in the command sequence. Their large overlap is consistent with re-fetching source for answer quotations, but the audit does not establish the model's intent. It identifies a concrete reuse problem despite successful caller enumeration. Not every repeated byte is avoidable, and no exact token savings is inferred from source-byte overlap.
