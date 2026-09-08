@@ -23,3 +23,5 @@ This source-corpus comparison found no additional lost or gained edges from the 
 At the retained observation, exact-commit ordinary run 34176266780 and candidate run 34176266809 are both in progress. Their final platform conclusions remain pending.
 
 Follow-up: ordinary distribution run 34176266780 completed successfully in all six jobs at 7bb9066; platform-final.json retains the result. Candidate run 34176266809 remained in progress at that observation.
+
+Final candidate follow-up: run 34176266809 at 7bb9066 completed successfully in all 13 grammar/compiler/aggregate/distribution jobs across the platform matrix. candidate-final-platform.json retains the exact revision and job conclusions. This closes the pending platform checks for the 84-case assignment gate; it does not establish general JVM completeness or model savings.
