@@ -12,11 +12,10 @@ Use relationships to narrow connected code; use `rg` for a literal or path looku
 When a graph archive is supplied, these commands need no SQLite or sync:
 
 ```sh
-columbus archive-search IDENTIFIER --input GRAPH --format text --budget-bytes 6000
-columbus archive-neighbors EXACT_ID --input GRAPH --direction in --kinds calls --repo REPO --context-lines 20 --format text --budget-bytes 12000
+columbus archive-callers IDENTIFIER --input GRAPH --repo REPO --context-lines 20 --format text --budget-bytes 12000
 ```
 
-Copy the exact ID from search. Add `--path 'src/*'` for the task's caller subtree; this filters before pagination. For call locations alone, use a smaller context radius (0–40). For behavior, inspect branches before and after the call. Follow `next_offset` with `--offset` and otherwise identical options until null. Increase the budget if one edge cannot fit. A page can omit needed source or later branches.
+Use a unique exact name, qualified name or ID; Python `module.qualname` is supported. If ambiguous or absent, use `archive-search IDENTIFIER --input GRAPH --format text --budget-bytes 6000` and retry with the correct exact ID. Add `--path 'src/*'` for the task's caller subtree; this filters before pagination. For call locations alone, use a smaller context radius (0–40). For behavior, inspect branches before and after the call. Follow `next_offset` with `--offset` and otherwise identical options until null. Increase the budget if one edge cannot fit. A page can omit needed source or later branches.
 
 Source context is hash-verified and numbered: reuse it for citations. Read additional source for missing ranges, imports, helper behavior or unresolved questions. Without local source, omit `--repo` and `--context-lines`; results then describe only the saved snapshot. Do not load the whole graph into context.
 

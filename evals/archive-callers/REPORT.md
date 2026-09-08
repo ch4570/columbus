@@ -6,6 +6,14 @@ On the unchanged frozen Django force_bytes archive, both `django.utils.encoding.
 
 Regression checks passed: ordinary and candidate-parser engine suites each 234 tests; root suite 53 tests. New coverage exercises gzip/XZ after source deletion, ambiguous/absent/partial names, exact IDs, Python module qualification, incoming packet equality across formats and offsets, path filtering, context equality, stale source rejection, actual CLI text byte limits and absence of consumer SQLite.
 
-This change removes a required search/ID-copy step for unique exact identifiers. No new model trial was run, so actual token savings remain unproven. The existing skill entry point still documents search plus exact-ID neighbors; the archive reference documents the convenience command. Generic JVM inference and conservative coverage losses remain unresolved.
+This change removes a required search/ID-copy step for unique exact identifiers. No new model trial was run, so actual token savings remain unproven. Generic JVM inference and conservative coverage losses remain unresolved.
 
 Fresh wheel and ZIP distribution verification also passed; see distribution.txt.
+
+## Skill entry point and full context pagination
+
+The saved-graph entry point now uses archive-callers directly, retaining archive-search as the ambiguity/absence fallback. Source freshness, scope, exact cursors and additional source inspection remain explicit. Skill validation passed; root suite passed again (53 tests).
+
+`verify_context.py /tmp/columbus-archive-force-bytes-trial OUTPUT` applies the documented 20-line radius and 12000-byte text budget with the task scope django/*. All six pages returned 46 sites across 37 owners in 17 files, exactly matching the independent frozen oracle. Every returned excerpt was checked against hash-verified source, including same-line call multiplicity. Page bytes were 11699, 11358, 9882, 11412, 11839 and 10067; offsets were 0, 6, 14, 22, 29, 36, then null. The complete verifier result equals the earlier exact-ID-neighbors context result. No archive changes or consumer SQLite were found. This verifies command behavior; it is not an independent model behavior or usage trial.
+
+Remote distribution run 34175816099 at 9dda7d0 had passed four Linux/macOS jobs while two Windows jobs were still running at the retained observation; no all-platform completion claim is made here.
