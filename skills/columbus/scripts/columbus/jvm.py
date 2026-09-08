@@ -321,6 +321,8 @@ class _Parser:
         return ""
 
     def argument_fact(self, node):
+        if self.language == "java" and node.type == "this":
+            return {"kind": "this"}
         if node.type == 'array_creation_expression':
             dimensions = sum(1 if c.type == 'dimensions_expr' else
                              sum(part.type == '[' for part in c.children)
@@ -739,7 +741,28 @@ class _Resolver:
             return expected in {"java.lang.Comparable", "java.io.Serializable"} or (expected == "java.lang.Number" and actual not in {"java.lang.Boolean", "java.lang.Character"})
         return False
 
+    def instance_assignable(self, owner, expected, visiting=frozenset()):
+        """Prove a this conversion along explicit, non-generic source bases."""
+        if not expected or owner in visiting or self.symbols.get(owner, {}).get("partial"):
+            return False
+        if expected in {"source:" + owner, "java.lang.Object"}:
+            return True
+        for file, ref in self.base_references.get(owner, []):
+            bases = self.candidates(file, ref["member"], type_only=True, scope_id=ref["scope_id"])
+            if len(bases) != 1 or bases[0].get("language") != "java":
+                continue
+            base = bases[0]
+            if self.java_access_reason(file, ref["scope_id"], base):
+                continue
+            if self.instance_assignable(base["id"], expected, visiting | {owner}):
+                return True
+        return False
+
     def argument_reference_type(self, file, ref, literal, fact):
+        if fact.get("kind") == "this":
+            owner = self.owner(ref["scope_id"])
+            return ("source:" + owner if owner and not ref.get("static_context")
+                    and self.implicit_instance(ref["scope_id"], owner) else None)
         if literal == "null":
             return "null"
         if literal == "reference_literal":
@@ -1031,6 +1054,13 @@ class _Resolver:
                 expected = parameter.removesuffix("...") if varargs else parameter
                 facts = ref.get("argument_facts", [])
                 fact = facts[number] if number < len(facts) else {}
+                if fact.get("kind") == "this":
+                    expected_identity = self.reference_type_name(self.scope_files[target["id"]], target["id"], expected)
+                    owner = self.owner(scope_id)
+                    if (ref.get("static_context") or not owner or not self.implicit_instance(scope_id, owner)
+                            or expected in _PRIMITIVE_WIDENING
+                            or not self.instance_assignable(owner, expected_identity)):
+                        return None, "this argument conversion unsupported or incompatible"
                 bindings = self.binding(scope_id, fact["name"]) if fact.get("kind") == "name" else None
                 if bindings and len(bindings) == 1 and bindings[0].get("type_scope"):
                     actual_identity = self.argument_reference_type(file, ref, actual, fact)

@@ -1,0 +1,51 @@
+{
+  "same_file_hashes": true,
+  "added": [],
+  "removed": [
+    [
+      "src/main/java/org/springframework/cglib/core/EmitUtils.java::org.springframework.cglib.core.EmitUtils.append_string.processElement:function(Type)",
+      "src/main/java/org/springframework/cglib/core/EmitUtils.java::org.springframework.cglib.core.EmitUtils.append_string_helper:method(CodeEmitter,Type,ArrayDelimiters,CustomizerRegistry,ProcessArrayCallback)",
+      "calls",
+      "heuristic",
+      "append_string_helper(e, type, d, registry, this)",
+      "src/main/java/org/springframework/cglib/core/EmitUtils.java",
+      614
+    ],
+    [
+      "src/main/java/org/springframework/cglib/core/EmitUtils.java::org.springframework.cglib.core.EmitUtils.not_equals.processElement:function(Type)",
+      "src/main/java/org/springframework/cglib/core/EmitUtils.java::org.springframework.cglib.core.EmitUtils.not_equals_helper:method(CodeEmitter,Type,Label,CustomizerRegistry,ProcessArrayCallback)",
+      "calls",
+      "heuristic",
+      "not_equals_helper(e, type, notEquals, registry, this)",
+      "src/main/java/org/springframework/cglib/core/EmitUtils.java",
+      509
+    ],
+    [
+      "src/main/java/org/springframework/cglib/transform/impl/UndeclaredThrowableTransformer.java::org.springframework.cglib.transform.impl.UndeclaredThrowableTransformer.begin_method.visitMaxs:function(int,int)",
+      "src/main/java/org/springframework/cglib/core/EmitUtils.java::org.springframework.cglib.core.EmitUtils.wrap_undeclared_throwable:method(CodeEmitter,Block,Type[],Type)",
+      "calls",
+      "heuristic",
+      "EmitUtils.wrap_undeclared_throwable(this, handler, exceptions, wrapper)",
+      "src/main/java/org/springframework/cglib/transform/impl/UndeclaredThrowableTransformer.java",
+      73
+    ],
+    [
+      "src/main/java/org/springframework/core/NestedCheckedException.java::org.springframework.core.NestedCheckedException.getRootCause:method()",
+      "src/main/java/org/springframework/core/NestedExceptionUtils.java::org.springframework.core.NestedExceptionUtils.getRootCause:method(Throwable)",
+      "calls",
+      "heuristic",
+      "NestedExceptionUtils.getRootCause(this)",
+      "src/main/java/org/springframework/core/NestedCheckedException.java",
+      64
+    ],
+    [
+      "src/main/java/org/springframework/core/NestedRuntimeException.java::org.springframework.core.NestedRuntimeException.getRootCause:method()",
+      "src/main/java/org/springframework/core/NestedExceptionUtils.java::org.springframework.core.NestedExceptionUtils.getRootCause:method(Throwable)",
+      "calls",
+      "heuristic",
+      "NestedExceptionUtils.getRootCause(this)",
+      "src/main/java/org/springframework/core/NestedRuntimeException.java",
+      65
+    ]
+  ]
+}

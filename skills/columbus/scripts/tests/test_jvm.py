@@ -9,6 +9,25 @@ from columbus.jvm import parse_jvm, resolve_jvm
 
 
 class JVMTests(unittest.TestCase):
+    def test_this_argument_requires_instance_assignment(self):
+        for base, parameter, static, expected in [
+            ('implements API', 'C', '', True),
+            ('implements API', 'API', '', True),
+            ('extends Base', 'API', '', True),
+            ('implements API', 'Other', '', False),
+            ('implements API', 'C', 'static ', False),
+            ('implements API', 'Object', '', True),
+            ('implements API', 'C[]', '', False),
+            ('extends Missing', 'API', '', False),
+        ]:
+            with self.subTest(base=base, parameter=parameter, static=static):
+                parsed = parse_jvm('C.java', 'interface API {} class Base implements API {} '
+                    'class Other {} class Item { void hit(' + parameter + ' x) {} }' +
+                    ' class C ' + base + ' { ' + static + 'void run(Item item) { item.hit(this); } }')
+                resolve_jvm([parsed])
+                call, = [r for r in parsed['references'] if r['member'] == 'hit']
+                self.assertEqual(call['resolved'], expected)
+
     def test_getter_loop_preserves_return_type_namespace(self):
         for declared, parameter, expected in [('a.Item', 'a.Item', True), ('var', 'a.Item', True),
                                                ('Item', 'a.Item', False), ('var', 'Item', False)]:

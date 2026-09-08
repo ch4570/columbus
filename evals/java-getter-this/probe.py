@@ -41,3 +41,4 @@ a.output.write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
 print('Cases:', len(results), 'false edges:', report['false_edges'])
 if a.require_no_false:
     assert report['false_edges'] == 0
+    assert all(r['actual'].get('target') == r['expected_target'] for r in results)

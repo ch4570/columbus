@@ -14,6 +14,7 @@ on:
       - 'evals/java-collection-loops/*.py'
       - 'evals/java-collection-loops/cases.json'
       - 'evals/java-getter-loop-context/*.py'
+      - 'evals/java-getter-this/*.py'
 
 permissions:
   contents: read
@@ -79,6 +80,8 @@ jobs:
         run: python -c "import os, pathlib, subprocess, sys; env = dict(os.environ, PYTHONPATH=str(pathlib.Path('skills/columbus/scripts').resolve())); subprocess.run([sys.executable, 'evals/java-collection-loops/probe.py', '--jdk', str(pathlib.Path(os.environ['JAVA_HOME']) / 'bin'), '--output', 'candidate-results/collection-loops.json', '--require-parameters'], env=env, check=True)"
       - name: Compiler-backed getter return namespaces
         run: python -c "import os, pathlib, subprocess, sys; env = dict(os.environ, PYTHONPATH=str(pathlib.Path('skills/columbus/scripts').resolve())); subprocess.run([sys.executable, 'evals/java-getter-loop-context/probe.py', '--jdk', str(pathlib.Path(os.environ['JAVA_HOME']) / 'bin'), '--output', 'candidate-results/getter-loops.json', '--require-getters'], env=env, check=True)"
+      - name: Compiler-backed this argument conversions
+        run: python -c "import os, pathlib, subprocess, sys; env = dict(os.environ, PYTHONPATH=str(pathlib.Path('skills/columbus/scripts').resolve())); subprocess.run([sys.executable, 'evals/java-getter-this/probe.py', '--jdk', str(pathlib.Path(os.environ['JAVA_HOME']) / 'bin'), '--output', 'candidate-results/this-arguments.json', '--require-no-false'], env=env, check=True)"
       - name: Engine regression tests with candidate
         working-directory: skills/columbus/scripts
         run: python -m unittest discover -s tests -v
