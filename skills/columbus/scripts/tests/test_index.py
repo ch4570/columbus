@@ -26,6 +26,44 @@ class IndexTests(unittest.TestCase):
         self.write("orders.py", "from payments import refund_payment\ndef cancel_order():\n    return refund_payment(10)\n")
         return self.index.refresh(self.root)
 
+    def test_java_base_absence_is_recomputed_after_ancestor_changes(self):
+        from contextlib import closing
+        import sqlite3
+        from columbus.index import decode_parse
+
+        self.write('Base.java', 'class Base {}')
+        self.write('Middle.java', 'class Middle extends Base {}')
+        self.write('C.java', 'class C extends Middle { void hit(String s) {} void run() { hit("x"); } }')
+
+        def snapshot(index):
+            with closing(sqlite3.connect(index.db)) as conn:
+                return {path: decode_parse(data) for path, data in conn.execute('SELECT path,parsed FROM files')}
+
+        initial = None
+        for number, (base, expected) in enumerate([
+            ('class Base {}', True),
+            ('class Base { void hit(int n) {} }', False),
+            ('class Base { void broken( }', False),
+            (None, False),
+            ('class Base {}', True),
+        ]):
+            with self.subTest(base=base):
+                if base is None:
+                    (self.root / 'Base.java').unlink()
+                else:
+                    self.write('Base.java', base)
+                self.index.refresh(self.root)
+                facts = snapshot(self.index)
+                call, = [r for r in facts['C.java']['references'] if r['kind'] == 'calls']
+                self.assertEqual(call['resolved'], expected)
+                fresh = RepositoryIndex(Path(self.temp.name) / ('fresh-%d.sqlite' % number))
+                fresh.refresh(self.root)
+                self.assertEqual(facts, snapshot(fresh))
+                self.assertEqual(self.index.graph(), fresh.graph())
+                if number == 0:
+                    initial = facts
+        self.assertEqual(facts, initial)
+
     def test_exact_id_context_survives_long_path_and_noisy_overloads(self):
         path = 'src/main/java/org/example/resource/navigation/DefaultResourceLoader.java'
         self.write(path, 'package org.example.resource.navigation; class DefaultResourceLoader {\n'
