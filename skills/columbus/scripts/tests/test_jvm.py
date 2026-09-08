@@ -9,6 +9,26 @@ from columbus.jvm import parse_jvm, resolve_jvm
 
 
 class JVMTests(unittest.TestCase):
+    def test_standard_collection_loop_identity(self):
+        for container in ('java.util.List', 'java.util.Collection', 'java.util.Set', 'java.lang.Iterable'):
+            for declared in ('Item', 'var'):
+                source = ('class Item { void hit() {} } class C { void run(' + container +
+                          '<Item> values) { for(' + declared + ' item : values) item.hit(); } }')
+                parsed = parse_jvm('C.java', source)
+                resolve_jvm([parsed])
+                call = next(r for r in parsed['references'] if r['member'] == 'hit')
+                self.assertEqual(call.get('target'), 'C.java::Item.hit:method()')
+        for prefix, container, body in [
+            ('class List<T> {} ', 'List<Item>', 'for(Item item : values) item.hit();'),
+            ('', 'java.util.List<? extends Item>', 'for(Item item : values) item.hit();'),
+            ('', 'java.util.List<String>', 'for(Item item : values) item.hit();'),
+            ('', 'java.util.List<Item>', 'class Item { void hit() {} } for(var item : values) item.hit();'),
+        ]:
+            parsed = parse_jvm('C.java', prefix + 'class Item { void hit() {} } class C { void run(' +
+                               container + ' values) { ' + body + ' } }')
+            resolve_jvm([parsed])
+            self.assertTrue(all(not r['resolved'] for r in parsed['references'] if r['member'] == 'hit'))
+
     def test_array_loop_bindings_preserve_scope_and_reject_conflicts(self):
         prefix = 'class Item { void hit() {} } class Wrong { void hit() {} } '
         cases = [

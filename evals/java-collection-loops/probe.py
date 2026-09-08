@@ -10,7 +10,7 @@ import importlib.metadata
 import columbus.jvm as jvm
 from columbus.jvm import parse_jvm, resolve_jvm
 
-p=argparse.ArgumentParser();p.add_argument('--jdk',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--jdk',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--require-parameters',action='store_true');a=p.parse_args()
 cases=json.loads(Path(__file__).with_name('cases.json').read_text())
 report={'scope':'Isolated collection loop cases with manually specified declaration owners; no runtime-dispatch assertion. Missing targets count as gaps, not correct resolution.','cases':[]}
 version=subprocess.run([str(a.jdk/'javac'),'-version'],capture_output=True,text=True,check=True)
@@ -31,6 +31,8 @@ for name,source,valid,owners in cases:
    expected=f'C.java::{owner}.hit:method()' if owner else None
    assert not ref['resolved'] or ref['target']==expected,(name,ref,expected)
    rows.append({'expected_static_target':expected,'actual':ref,'resolved_expected_target':bool(expected and ref.get('target')==expected)})
+  if a.require_parameters and name in {'list_parameter','list_var'}:
+   assert all(r['resolved_expected_target'] for r in rows),(name,rows)
   report['cases'].append({'name':name,'source':source,'source_sha256':hashlib.sha256(source.encode()).hexdigest(),'javac_return_code':compilation.returncode,'javac_stderr':compilation.stderr,'javap':bytecode,'calls':rows})
 report['expected_valid_calls']=sum(x['expected_static_target'] is not None for c in report['cases'] for x in c['calls'])
 report['resolved_expected_calls']=sum(x['resolved_expected_target'] for c in report['cases'] for x in c['calls'])
