@@ -10,6 +10,8 @@ The baseline is pinned to commit `7f4bb077c38eb5b64b8ef06448d36a2f1c399c98`, the
 
 The candidate is a frozen working-tree snapshot based on that same commit, **not a committed candidate revision**. Its package manifest digest is `b658b994085ee816ad58509581725455100993b7a2ddc5f7c56741b69f360ddc`. The observation records the six modified runtime files and confirms that their copied bytes did not change during freezing. Later working-tree changes are not part of this observation. A final candidate commit can be checked with the committed replay command below; retain this original record.
 
+A separate [committed replay](committed.json) pins candidate `a5e001a1eb8cd402b8b1fb515609fbcd9461bd4f`, package manifest digest `cc32062c844c20d557e5c3f75714df160c6bf91f231308b02eccba2224a63181`. All eight conditions pass with exactly the same coverage, calls and response-byte totals shown below. This commit also includes the later stale-source fail-fast and saved-response association checks. The original working-tree record remains unchanged.
+
 Each condition runs in a separate Python process with its own frozen package and temporary repository/index. The fixture contains either 30 or 175 independent Python files, each defining `target()` and returning a distinct `TARGET_NNN` string. The index contains two nodes per file: the declaration and its module. Both conditions receive identical source bytes and repeatedly request `context("target", budget_bytes=2048)` with the same saved receipt, separately for JSON and text.
 
 The harness verifies every returned source hash and character-offset slice against the fixture. It rejects repeated source coordinates and accounts for every non-newline source character; trailing/isolated newlines are excluded from completion because snippet receipts intentionally omit them. Actual newline characters that are returned still participate in the no-overlap check. Source files must remain unchanged. A separate fresh-receipt CLI probe confirms that the first `context --snapshot --receipt ...` response exactly equals the API-rendered response for each condition and format.
@@ -35,6 +37,12 @@ For 175 declarations, the candidate produces one empty but advancing continuatio
 
 The candidate sends more bytes and performs more calls because it completes source coverage that the baseline misses. This is **not an equal-coverage cost-reduction comparison**. Context calls are API invocations, not measured model rounds or shell-command counts. No model ran, and the check does not measure answer quality, semantic graph accuracy, or actual token consumption. Index preparation time is recorded separately and is not included in payload totals.
 
+Search now scans all matching candidates to rank pages instead of discarding later matches. This fix does not claim CPU acceleration: up to 12 empty pages per context call can multiply scan cost. Narrow scopes when appropriate.
+
+## Functional validation
+
+[Local validation](validation.json) records 290 engine tests (including real MCP cursor roundtrips), 58 root tests, 29 exploration-harness tests, three continuous-session audit tests and 21/21 multilingual contracts. Skill frontmatter, compilation and dependency checks pass. The clean ordinary-parser wheel and relocated ZIP each retrieve all 50 search IDs and all 25 source files from a separate Unicode fixture with no repeated spans and 2,048-byte responses; standalone installation and existing archive/hash/budget/native-hook checks also pass. Artifact hashes and runtime/skill correspondence are retained. This is local functional evidence, not hosted final-commit checks, a model experiment, or release authorization.
+
 ## Reproduce
 
 From the repository root, use Python 3.11+ with the project's normal dependencies. The harness creates and cleans temporary engine copies, Git roots, indexes, receipts and CLI probes. It does not modify the checkout's runtime or overwrite an existing observation file.
@@ -49,7 +57,7 @@ From the repository root, use Python 3.11+ with the project's normal dependencie
 
 # Replay a final committed candidate, preserving the old baseline pin.
 .venv/bin/python evals/context-continuation/observe.py --large \
-  --candidate-ref FINAL_CANDIDATE_COMMIT \
+  --candidate-ref a5e001a1eb8cd402b8b1fb515609fbcd9461bd4f \
   --output /tmp/context-continuation-committed-new.json
 ```
 

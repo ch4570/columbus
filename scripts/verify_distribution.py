@@ -63,7 +63,7 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
                 raise VerificationError(f"Command failed ({result.returncode}, expected {expected}): {command}\n{result.stdout}\n{result.stderr}")
             return result.stdout
 
-        grammar_checks = []
+        grammar_checks, continuation_checks = [], []
 
         def verify_java_runtime(interpreter, label):
             if expected_java_version is None:
@@ -257,6 +257,72 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
                 source.write_bytes(original)
                 run([*prefix, 'sync', '--repo', target, '--summary'])
 
+        def verify_continuation(prefix: list, label: str) -> None:
+            # Keep this larger fixture separate from the fixed polyglot inventory.
+            target = root / (label + ' continuation repository')
+            target.mkdir()
+            bodies = {f'entry_{number:03}.py': f'def continuation_target():\n    return "{number} 한글"\n'
+                      for number in range(25)}
+            for name, body in bodies.items():
+                (target / name).write_text(body, encoding='utf-8', newline='\n')
+            run([*prefix, 'sync', '--repo', target, '--summary'])
+            search = [*prefix, 'search', 'continuation_target', '--repo', target, '--snapshot']
+            complete = json.loads(run([*search, '--limit', '50']))
+            first = json.loads(run([*search, '--limit', '20']))
+            if len(first['hits']) != 20 or not first['truncated'] or not first['next_cursor']:
+                raise VerificationError('Installed search did not expose its next lexical page')
+            second = json.loads(run([*search, '--limit', '50', '--cursor', first['next_cursor']]))
+            identifiers = [item['id'] for page in (first, second) for item in page['hits']]
+            expected = {name + '::continuation_target:function' for name in bodies}
+            if (len(identifiers) != len(set(identifiers)) or not expected <= set(identifiers)
+                    or identifiers != [item['id'] for item in complete['hits']] or complete['truncated']
+                    or second['truncated'] or second['next_cursor'] is not None):
+                raise VerificationError('Installed search continuation skipped or repeated declarations')
+            run([*prefix, 'search', 'different_query', '--repo', target, '--snapshot',
+                 '--cursor', first['next_cursor']], expected=2)
+            run([*search, '--path', 'entry_00*.py', '--cursor', first['next_cursor']], expected=2)
+            spans = {name: set() for name in bodies}
+            receipt_path = target / '.columbus/sessions/continuation-probe/receipt.json'
+            previous = None
+            for page_number in range(75):
+                output = run([*prefix, 'explore', 'continuation_target', '--repo', target,
+                              '--snapshot', '--session', 'continuation-probe', '--format', 'json',
+                              '--budget-bytes', '2048'])
+                packet = json.loads(output)
+                if packet['used_bytes'] != len(output.encode('utf-8')) or packet['used_bytes'] > 2048:
+                    raise VerificationError('Installed continued session exceeded its measured UTF-8 budget')
+                for item in packet['items']:
+                    name = item['path']
+                    start, end = item['source_start_offset'], item['source_end_offset']
+                    if (name not in bodies or not 0 <= start < end <= len(bodies[name])
+                            or bodies[name][start:end] != item['source']
+                            or item['source_hash'] != hashlib.sha256(bodies[name].encode('utf-8')).hexdigest()):
+                        raise VerificationError('Installed continued session lost source/hash/offset evidence')
+                    delivered = set(range(start, end))
+                    if spans[name] & delivered:
+                        raise VerificationError('Installed continued session repeated source spans')
+                    spans[name].update(delivered)
+                saved = json.loads(receipt_path.read_text(encoding='utf-8'))
+                if (saved['schema'] != 'columbus.context-receipt/v2'
+                        or bool(saved['continuations']) != packet['receipt']['has_more']):
+                    raise VerificationError('Installed session did not persist its continuation state')
+                if not packet['receipt']['has_more']:
+                    break
+                if not packet['items'] and saved['continuations'] == previous:
+                    raise VerificationError('Installed continued session returned an empty nonadvancing page')
+                previous = saved['continuations']
+            else:
+                raise VerificationError('Installed session did not exhaust its bounded fixture')
+            for name, body in bodies.items():
+                required = {offset for offset, character in enumerate(body) if character != '\n'}
+                if not required <= spans[name]:
+                    raise VerificationError('Installed session omitted source after the first lexical page')
+            continuation_checks.append({'installation': label, 'files': len(bodies), 'search_pages': 2,
+                                        'search_declarations': len(identifiers),
+                                        'session_pages': page_number + 1, 'query_and_filter_cursor_scope': True,
+                                        'source_spans_unique': True, 'source_coverage_complete': True,
+                                        'utf8_budget_bytes': 2048})
+
         def verify_hook(prefix: list, target: Path) -> None:
             run(['git', 'init', '-q', target])
             for key, value in [('user.name', 'Fixture'), ('user.email', 'fixture@example.invalid'),
@@ -363,6 +429,7 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
             raise VerificationError("Unchanged installed index was reparsed or rehashed")
         verify_graph_archive([cli], repo, "settle_payment", "wheel archive")
         verify_callers([cli], repo)
+        verify_continuation([cli], 'wheel')
         planned = json.loads(run([cli, "--repo", repo, "init", "--plan"]))
         if (repo / ".agents").exists():
             raise VerificationError("init --plan changed the repository")
@@ -432,8 +499,10 @@ print(json.dumps({'version': actual, 'annotation_cases': 4}))
             verify_hook([local_python, '-E', '-s', local_entrypoint], bootstrap_repo)
             verify_graph_archive([local_python, '-E', '-s', local_entrypoint], bootstrap_repo, 'visible_hook', 'bootstrap archive')
             verify_callers([local_python, '-E', '-s', local_entrypoint], bootstrap_repo)
+            verify_continuation([local_python, '-E', '-s', local_entrypoint], 'relocated ZIP')
         return {"status": "passed", "version": version, "wheel": str(wheel),
                 "java_candidate_checks": grammar_checks, "bundled_java_default": bundled_java_default,
+                "continuation_checks": continuation_checks,
                 "clean_venv": True, "unrelated_cwd": True, "paths_with_spaces": True,
                 "global_search": True, "skill_reinstall": repeated["status"],
                 "polyglot_and_fallback": True, "budgeted_context": True, "graph_formats": 4,
