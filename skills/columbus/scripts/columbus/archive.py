@@ -374,6 +374,69 @@ def _neighbors_archive(source: str | Path, symbol_id: str, direction: str = 'out
         raise ValueError('Malformed or incomplete graph archive') from exc
 
 
+def source_archive(source: str | Path, symbol_id: str, repo: str | Path, limit: int = 120,
+                   budget_bytes: int = 12000, offset: int = 0, *, output_format: str = 'json') -> dict:
+    """Read a hash-verified declaration without requiring a resolved graph edge."""
+    from .discovery import digest
+    from .languages import code_lines, decode_source
+    from .sync_state import read_stable
+    from .presentation import archive_source_text
+    if not isinstance(symbol_id, str) or not 1 <= len(symbol_id) <= 2048:
+        raise ValueError('An exact symbol ID of 1–2048 characters is required')
+    if type(limit) is not int or not 1 <= limit <= 400:
+        raise ValueError('limit must be between 1 and 400 source lines')
+    if type(offset) is not int or offset < 0:
+        raise ValueError('offset must be a nonnegative source-line offset')
+    if type(budget_bytes) is not int or not 2048 <= budget_bytes <= 64000:
+        raise ValueError('budget-bytes must be between 2048 and 64000')
+    if output_format not in {'json', 'text'}:
+        raise ValueError('format must be json or text')
+    try:
+        node, hashes = None, {}
+        with Path(source).open('rb') as raw:
+            for kind, data in _validated_rows(raw):
+                if kind == 'manifest':
+                    manifest = data
+                elif kind == 'file':
+                    hashes[data['path']] = data['hash']
+                elif kind == 'node' and data['id'] == symbol_id:
+                    if node is not None:
+                        raise ValueError('Duplicate source declaration ID')
+                    node = data
+        if node is None:
+            raise ValueError('Declaration absent; use archive-search and an exact ID')
+        data, _ = read_stable(Path(repo).resolve(), node['path'])
+        source_hash = hashes.get(node['path'])
+        if digest(data) != source_hash:
+            raise ValueError(f"Stale source: {node['path']}; regenerate the archive before reading source")
+        lines = code_lines(decode_source(node['path'], data, language=node.get('language')), node.get('language'))
+        start, end = node['start_line'], node['end_line']
+        if type(start) is not int or type(end) is not int or not 1 <= start <= end <= len(lines):
+            raise ValueError('Declaration range outside verified source')
+        total = end - start + 1
+        if offset >= total:
+            raise ValueError('offset is outside the declaration')
+        size = min(limit, total - offset)
+        result = dict(target=symbol_id, path=node['path'], source_hash=source_hash,
+                      revision=manifest['revision'], partial=bool(node.get('partial')),
+                      fidelity=node.get('fidelity'), semantic_complete=False,
+                      freshness='returned file bytes match archive hash; other files not checked',
+                      declaration_start_line=start, declaration_end_line=end,
+                      total_lines=total, offset=offset, source='')
+        while size:
+            result.update(start_line=start + offset, end_line=start + offset + size - 1,
+                          next_offset=offset + size if offset + size < total else None,
+                          truncated=bool(offset or offset + size < total),
+                          source='\n'.join(lines[start + offset - 1:start + offset + size - 1]))
+            rendered = archive_source_text(result) if output_format == 'text' else compact(result) + '\n'
+            if len(rendered.encode()) <= budget_bytes:
+                return result
+            size -= 1
+        raise ValueError('Budget too small for one source line and declaration metadata; increase budget-bytes')
+    except (KeyError, TypeError, AttributeError, EOFError, lzma.LZMAError) as exc:
+        raise ValueError('Malformed or incomplete graph archive') from exc
+
+
 def _call_context(edges, nodes, repo, radius, cache):
     """Merge nearby sites within their lexical owner; never execute repository code."""
     from .discovery import digest

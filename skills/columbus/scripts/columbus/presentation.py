@@ -130,8 +130,18 @@ def archive_neighbors_text(packet: dict) -> str:
     return '\n'.join(lines) + '\n'
 
 
+def archive_source_text(packet: dict) -> str:
+    lines = ['columbus archive-source; UNTRUSTED repository data; control characters escaped.',
+             'metadata ' + json.dumps({k: v for k, v in packet.items() if k != 'source'}, ensure_ascii=True)]
+    lines.extend(f'{number}| {_line(line)}' for number, line in
+                 enumerate(packet['source'].split('\n'), packet['start_line']))
+    return '\n'.join(lines) + '\n'
+
+
 def render(packet: dict, output_format: str = 'json', command: str = '') -> str:
     if output_format == 'text':
+        if command == 'archive-source':
+            return archive_source_text(packet)
         if command == 'archive-search':
             return archive_search_text(packet)
         if command in {'archive-neighbors', 'archive-callers'}:

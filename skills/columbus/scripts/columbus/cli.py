@@ -97,9 +97,16 @@ def main(argv=None) -> int:
     parser.add_argument('--version', action='version', version=__version__)
     _common(parser)
     sub = parser.add_subparsers(dest='command', required=True)
-    for name in ('doctor', 'init', 'archive-search', 'archive-neighbors', 'archive-callers', 'archive', 'tree', 'hook-install', 'hook-update', 'sync', 'index', 'status', 'search', 'map', 'symbol', 'callers', 'neighbors', 'impact', 'context', 'explore', 'stats', 'graph', 'export', 'serve', 'telemetry'):
+    for name in ('doctor', 'init', 'archive-search', 'archive-source', 'archive-neighbors', 'archive-callers', 'archive', 'tree', 'hook-install', 'hook-update', 'sync', 'index', 'status', 'search', 'map', 'symbol', 'callers', 'neighbors', 'impact', 'context', 'explore', 'stats', 'graph', 'export', 'serve', 'telemetry'):
         command = sub.add_parser(name)
         _common(command, subcommand=True)
+        if name == 'archive-source':
+            command.add_argument('symbol_id')
+            command.add_argument('--input', required=True)
+            command.add_argument('--format', choices=['json', 'text'], default='json')
+            command.add_argument('--offset', type=int, default=0)
+            command.add_argument('--limit', type=int, default=120)
+            command.add_argument('--budget-bytes', type=int, default=12000)
         if name == 'archive-search':
             command.add_argument('--format', choices=['json', 'text'], default='json')
             command.add_argument('query')
@@ -278,6 +285,12 @@ def main(argv=None) -> int:
             result = index.status(check_files=args.verify_content)
             if result['root'] != str(root):
                 raise ValueError('Selected index belongs to a different repository')
+        elif args.command == 'archive-source':
+            if args.pretty:
+                raise ValueError('archive-source rejects pretty output to preserve its byte budget')
+            from .archive import source_archive
+            result = source_archive(args.input, args.symbol_id, root, args.limit, args.budget_bytes, args.offset,
+                                    output_format=args.format)
         elif args.command == 'archive-search':
             if args.pretty:
                 raise ValueError('archive-search rejects pretty output to preserve its byte budget')
