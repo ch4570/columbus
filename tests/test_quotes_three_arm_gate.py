@@ -79,7 +79,7 @@ class QuotesThreeArmGateTests(unittest.TestCase):
         trial.mkdir(parents=True, exist_ok=True)
         (trial / 'stderr.log').write_bytes(b'')
         prompt = common.prompt(self.case, arm, output)
-        (trial / 'prompt.txt').write_text(prompt, encoding='utf-8')
+        (trial / 'prompt.txt').write_bytes(prompt.encode('utf-8'))
         write(trial / 'invocation.json', {'argv': common.argv(output, trial), 'model_requested': 'gpt-5.6-sol',
             'effort_requested': 'xhigh', 'timeout_seconds': 1200, 'prompt_bytes': len(prompt.encode()),
             'harness_sha256': gate.sha(self.here / 'run.py'), 'common_sha256': gate.sha(self.here / 'common.py'),
@@ -162,6 +162,22 @@ class QuotesThreeArmGateTests(unittest.TestCase):
         self.assertEqual(result['artifact_sha256']['events.jsonl'], gate.sha(trial / 'events.jsonl'))
         (trial / 'prompt.txt').write_text('Changed prompt')
         self.assertFalse(self.collected()['verified'])
+
+    def test_fixture_prompt_is_exact_utf8_lf_and_crlf_tampering_is_rejected(self):
+        self.case['question'] += ' — café 😀'
+        trial, _ = self.fixture()
+        expected = common.prompt(self.case, 'quotes', common.observation('java', 'quotes')).encode('utf-8')
+        self.assertEqual((trial / 'prompt.txt').read_bytes(), expected)
+        self.assertNotIn(b'\r', expected)
+        self.assertGreater(expected.count(b'\n'), 0)
+        self.assertEqual(gate.read(trial / 'invocation.json')['prompt_bytes'], len(expected))
+        self.assertTrue(self.collected()['verified'])
+        changed = expected.replace(b'\n', b'\r\n')
+        self.assertNotEqual(changed, expected)
+        (trial / 'prompt.txt').write_bytes(changed)
+        result = self.collected()
+        self.assertFalse(result['verified'])
+        self.assertEqual(result['reason'], 'Frozen prompt differs')
 
     def test_raw_event_hash_and_invocation_timeout_cannot_be_rewritten_unnoticed(self):
         trial, _ = self.fixture()
