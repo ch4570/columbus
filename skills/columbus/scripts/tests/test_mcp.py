@@ -88,6 +88,17 @@ class MCPIntegrationTests(unittest.TestCase):
                 self.assertGreater(len(hits), 0)
                 symbol_id = hits[0]["id"]
 
+                page = await session.call_tool('find_symbols', {'query': 'calculate_total', 'limit': 1})
+                cursor = page.structured_content['next_cursor']
+                self.assertIsNotNone(cursor)
+                next_page = await session.call_tool('find_symbols', {
+                    'query': 'calculate_total', 'limit': 1, 'cursor': cursor})
+                self.assertFalse(next_page.is_error)
+                self.assertNotEqual(page.structured_content['hits'][0]['id'],
+                                    next_page.structured_content['hits'][0]['id'])
+                wrong_scope = await session.call_tool('find_symbols', {'query': 'checkout', 'cursor': cursor})
+                self.assertTrue(wrong_scope.is_error)
+
                 source = await session.call_tool(
                     "read_symbol", {"symbol_id": symbol_id, "max_lines": 20}
                 )

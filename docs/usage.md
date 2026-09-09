@@ -29,6 +29,8 @@ columbus context checkout --mode signatures --format text --budget-tokens 1500
 
 An unfiltered map ranks declarations using incoming non-containment relationships. A query uses exact-name and lexical search. These are retrieval signals, not a semantic proof of relevance. Inspect the returned paths and signatures before choosing a symbol.
 
+Search returns `next_cursor` when another page exists. Pass that value with `search QUERY --cursor CURSOR` and the same filters; changing the index revision requires restarting. Page size can change. Context receipts manage their own continuation: repeat the same snippet query while `receipt.has_more` is true. Partial source is retained, and exhausted retrieval does not imply complete semantic coverage.
+
 | Query | Returns | Source-body reads after synchronization |
 | --- | --- | --- |
 | `explore` | Small repository map in text | None |
