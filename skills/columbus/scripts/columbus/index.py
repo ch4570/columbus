@@ -596,7 +596,19 @@ class RepositoryIndex:
             return result
 
     def neighbors(self, symbol_id: str, direction: str = "both", hops: int = 1,
-                  limit: int = 50, kinds: list[str] | None = None) -> dict:
+                  limit: int = 50, kinds: list[str] | None = None, *, budget_bytes: int = 12000,
+                  budget_tokens: int | None = None, output_format: str = 'json') -> dict:
+        from .graph_views import bounded_neighbors
+        from .retrieval import limits
+        budget = limits(budget_bytes, budget_tokens)
+        if output_format not in {'json', 'text'}:
+            raise ValueError('output_format must be json or text')
+        graph = self._neighbors(symbol_id, direction, hops, limit, kinds)
+        return bounded_neighbors(graph, budget, budget_tokens, output_format)
+
+    def _neighbors(self, symbol_id: str, direction: str = "both", hops: int = 1,
+                   limit: int = 50, kinds: list[str] | None = None) -> dict:
+        """Internal count-bounded traversal; public responses apply their own byte budget."""
         if direction not in {"in", "out", "both"} or not 1 <= hops <= 3 or not 1 <= limit <= 200:
             raise ValueError("direction=in/out/both, hops=1–3, limit=1–200 required")
         if kinds is not None and (not kinds or any(k not in {"contains", "calls", "imports", "inherits"} for k in kinds)):

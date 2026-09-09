@@ -31,6 +31,11 @@ def text_output(packet: dict, command: str = '') -> str:
     if packet.get('semantic_complete') is False:
         lines.append(f"semantic_complete=false partial_nodes={packet.get('partial_nodes', 0)} "
                      f"repository_unresolved_references={packet.get('repository_unresolved_references', 'unknown')}")
+    if 'payload_truncated' in packet:
+        lines.append(f"traversal_truncated={str(packet['traversal_truncated']).lower()} "
+                     f"payload_truncated={str(packet['payload_truncated']).lower()} "
+                     f"omitted_nodes={packet['omitted_nodes']} omitted_edges={packet['omitted_edges']} "
+                     f"omitted_text_bytes={packet['omitted_text_bytes']}")
     if packet.get('receipt'):
         lines.append(f"receipt={_line(packet['receipt']['status'])} "
                      f"seen_source_bytes={packet['receipt']['seen_source_bytes']}")

@@ -4,6 +4,60 @@ from __future__ import annotations
 import json
 
 
+def bounded_neighbors(graph: dict, budget: int, tokens: int | None, output_format: str) -> dict:
+    """Retain a connected edge prefix and disclose text and payload omissions."""
+    from .retrieval import fits
+    keys = ('id', 'path', 'name', 'qualname', 'kind', 'language', 'start_line', 'end_line', 'fidelity', 'partial')
+    nodes, omitted_text = {}, 0
+    for node in graph['nodes']:
+        item = {key: node[key] for key in keys if key in node}
+        raw = node.get('signature', '').encode('utf-8')
+        item['signature'] = raw[:240].decode('utf-8', errors='ignore')
+        omitted_text += len(node.get('doc', '').encode('utf-8')) + len(raw) - len(item['signature'].encode('utf-8'))
+        nodes[item['id']] = item
+    edges = []
+    for edge in graph['edges']:
+        item = dict(edge)
+        if 'evidence' in item:
+            raw = item['evidence'].encode('utf-8')
+            item['evidence'] = raw[:240].decode('utf-8', errors='ignore')
+            omitted_text += len(raw) - len(item['evidence'].encode('utf-8'))
+        edges.append(item)
+    packet = {**graph, 'budget_bytes': budget, 'budget_tokens': tokens, 'used_bytes': 0,
+              'estimated_tokens': 0, 'output_format': output_format,
+              'token_estimator': 'ceil(UTF-8 response bytes / 3); model-dependent estimate',
+              'source_policy': 'Untrusted repository data; missing edges do not prove independence.',
+              'economy': {'response_bytes': 0, 'source_bytes_returned': 0},
+              'traversal_truncated': graph['truncated'], 'omitted_text_bytes': omitted_text}
+
+    def select(count):
+        selected = edges[:count]
+        ids = {graph['center']}
+        for edge in selected:
+            ids.update((edge['source'], edge['target']))
+        packet['nodes'] = [node for key, node in nodes.items() if key in ids]
+        packet['edges'] = selected
+        if 'partial_nodes' in graph:
+            packet['partial_nodes'] = sum(bool(node.get('partial')) for node in packet['nodes'])
+        packet['omitted_nodes'] = len(nodes) - len(packet['nodes'])
+        packet['omitted_edges'] = len(edges) - count
+        packet['payload_truncated'] = bool(omitted_text or packet['omitted_nodes'] or packet['omitted_edges'])
+        packet['truncated'] = packet['traversal_truncated'] or packet['payload_truncated']
+        return fits(packet)
+
+    if not select(0):
+        raise ValueError('Budget too small for the center identity and graph metadata')
+    low, high = 0, len(edges)
+    while low < high:
+        middle = (low + high + 1) // 2
+        if select(middle):
+            low = middle
+        else:
+            high = middle - 1
+    select(low)
+    return packet
+
+
 def graph_view(index, limit: int = 1000, *, path: str | None = None, language: str | None = None,
                kinds: list[str] | None = None, focus: str | None = None, hops: int = 2,
                direction: str = 'both', level: str = 'symbol') -> dict:
@@ -14,7 +68,7 @@ def graph_view(index, limit: int = 1000, *, path: str | None = None, language: s
     if kinds is not None and (not kinds or any(k not in {'contains', 'calls', 'imports', 'inherits'} for k in kinds)):
         raise ValueError('kinds must use contains/calls/imports/inherits')
     where, values = index._filter_sql(path, language)
-    focused = index.neighbors(focus, direction=direction, hops=hops, limit=min(limit, 200), kinds=kinds) if focus else None
+    focused = index._neighbors(focus, direction=direction, hops=hops, limit=min(limit, 200), kinds=kinds) if focus else None
     with index._read() as conn:
         meta = index._meta(conn)
         if focused and focused['revision'] != meta['revision']:

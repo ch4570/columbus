@@ -19,6 +19,8 @@ skills: [columbus]
 
 ## Source receipts and observation
 
+`neighbors`/`impact` and their MCP tools bound complete core JSON/text to 12,000 bytes by default, with the same 2048–64000 byte / 700–21000 estimated-token options. Navigation nodes omit full docstrings; signatures and edge evidence use at most 240 UTF-8 bytes. Inspect `omitted_text_bytes`, `omitted_nodes`, `omitted_edges`, `traversal_truncated` and `payload_truncated`. A retained edge always has both endpoint IDs. These public response budgets do not change the internal traversal used by focused exports or context candidate selection. MCP envelopes add transport bytes.
+
 The CLI shortcut `explore [QUERY]` selects text output and a 2,000 estimated-token default; an explicit byte/token budget replaces that default. With no query it returns a map. `explore QUERY --session TASK_NAME` or `context QUERY --session TASK_NAME` selects `.columbus/sessions/TASK_NAME/receipt.json` and `queries.jsonl`. `stats TASK_NAME` reads the log without synchronizing or requiring an index. Names must be safe single path segments; session directories cannot traverse symlinks. A session cannot be combined with caller-specified receipt/telemetry paths or used for maps/signatures. Choose a fresh name after context loss or an agent change.
 
 `context --receipt PATH` is a CLI snippets-only feature. It stores repository identity, revision, raw-file hash, normalized decoded-view hash, and half-open character ranges actually delivered. Reusing a receipt skips already delivered ranges across overlapping symbol IDs and continues unread parts of truncated symbols/lines. If bytes or decoding change, the affected spans are not reused. Legacy raw-only receipts safely re-emit source before upgrading.
