@@ -4,6 +4,8 @@ Load only the topic required by the task.
 
 | Topic | Read when |
 | --- | --- |
+| [Operations](operations.md) | Requested AST tree, hook, install, graph export or MCP setup |
+| [Workflow economics](workflow-economics.md) | Designing the task contract or evaluating token/cost tradeoffs |
 | [Polyglot](polyglot.md) | Language fidelity, custom extensions, fallback and exclusions |
 | [Agent context](agent-context.md) | Token estimates, progressive retrieval and repeated evidence |
 | [Index sync](index-sync.md) | Incremental freshness and branch/worktree changes |
