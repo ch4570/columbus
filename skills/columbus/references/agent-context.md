@@ -23,6 +23,10 @@ The CLI shortcut `explore [QUERY]` selects text output and a 2,000 estimated-tok
 
 `context --receipt PATH` is a CLI snippets-only feature. It stores repository identity, revision, raw-file hash, normalized decoded-view hash, and half-open character ranges actually delivered. Reusing a receipt skips already delivered ranges across overlapping symbol IDs and continues unread parts of truncated symbols/lines. If bytes or decoding change, the affected spans are not reused. Legacy raw-only receipts safely re-emit source before upgrading.
 
+Receipt v2 adds query/filter/exclusion-scoped discovery cursors. Repeat while `receipt.has_more` is true; each call scans at most 12 pages of 20 lexical matches plus bounded nearby candidates. Partial source keeps its page eligible. Empty pages can advance discovery; stale-only or unfit pages fail with an actionable error. Cursors are saved only with the exact delivered response. Revision changes restart discovery; old source hashes are still checked. Version 1 receipts upgrade while retaining their spans. Exhaustion is a retrieval state, not semantic completeness.
+
+`search` and MCP `find_symbols` return `next_cursor`; pass it as `--cursor` or the tool's `cursor` argument with the same query and filters. A cursor from another revision, repository or scope is rejected. Page size may change. The cap limits returned candidates, not all database ranking work.
+
 Receipts do not restore agent memory. Use a fresh file after a new task, agent handoff without the old source, or context loss. Use separate receipts for concurrent callers. Place files under `.columbus/` to keep them out of the source index. Existing invalid/unrelated files are preserved.
 
 `--telemetry PATH` records only command, format, revision, timing, output/source byte counts, estimated tokens and result counters. It contains no query, file paths, or source text. `telemetry PATH --format text` summarizes the JSONL log. For actual model accounting, observe provider/runtime input, cached input subset, and output separately; never add cached input to total input again.

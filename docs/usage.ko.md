@@ -125,6 +125,10 @@ columbus context checkout --exclude-id 'EXACT_SYMBOL_ID' --format text
 
 이 옵션은 정확히 같은 ID만 제외합니다. 잘린 심볼을 제외하면 아직 읽지 않은 나머지 코드도 제외하며, 다른 ID의 겹치는 코드는 제외하지 않습니다. 색인 `revision`이 바뀌면 호출 측 제외 목록을 비우세요.
 
+## 검색 결과 이어 읽기
+
+`search` 응답의 `next_cursor`가 있으면 같은 검색어·필터에 `--cursor CURSOR`를 전달합니다. 페이지 크기는 바꿀 수 있지만 인덱스 revision이 바뀌면 검색을 다시 시작해야 합니다. Context receipt는 내부에서 이어 읽기 위치를 관리합니다. `receipt.has_more`가 참인 동안 같은 snippet 조회를 반복하면 첫 20개 이후의 후보와 부분적으로 읽은 소스도 조회합니다. 조회 소진은 의미 분석이 완전하다는 뜻이 아닙니다.
+
 ## 그래프 내보내기
 
 ```sh

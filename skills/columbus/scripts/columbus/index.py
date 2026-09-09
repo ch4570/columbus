@@ -4,8 +4,11 @@ from __future__ import annotations
 from collections import deque
 from contextlib import contextmanager
 from datetime import datetime, timezone
+import base64
+import binascii
 import json
 import fnmatch
+import math
 from pathlib import Path
 import re
 import sqlite3
@@ -36,6 +39,52 @@ CREATE VIRTUAL TABLE IF NOT EXISTS symbol_fts USING fts5(id UNINDEXED, name, pat
 
 def compact(value) -> str:
     return json.dumps(value, ensure_ascii=False, separators=(",", ":"))
+
+
+def _search_cursor_position(after) -> None:
+    if after is None:
+        return
+    if (not isinstance(after, list) or len(after) != 4
+            or any(type(value) is not int or value not in (0, 1) for value in after[:2])):
+        raise ValueError('Invalid search cursor position')
+    try:
+        finite = type(after[2]) in (int, float) and math.isfinite(after[2])
+    except OverflowError:
+        finite = False
+    if (not finite or after[2] > 0 or (after[0] == 0 and after[2] != 0)
+            or not isinstance(after[3], str) or not 1 <= len(after[3]) <= 4096 or '\0' in after[3]):
+        raise ValueError('Invalid search cursor position')
+
+
+def _search_cursor_encode(binding: str, after) -> str:
+    _search_cursor_position(after)
+    token = base64.urlsafe_b64encode(compact({'version': 1, 'binding': binding, 'after': after}).encode('utf-8')).decode('ascii').rstrip('=')
+    if len(token) > 32768:
+        raise ValueError('Search cursor exceeds its size limit')
+    return token
+
+
+def _search_cursor_decode(cursor: str, binding: str):
+    if not isinstance(cursor, str) or not 1 <= len(cursor) <= 32768 or not re.fullmatch(r'[A-Za-z0-9_-]+', cursor):
+        raise ValueError('Invalid search cursor encoding or size')
+    def unique_fields(pairs):
+        value = dict(pairs)
+        if len(value) != len(pairs):
+            raise ValueError('Duplicate search cursor fields')
+        return value
+    try:
+        value = json.loads(base64.b64decode(cursor + '=' * (-len(cursor) % 4), altchars=b'-_', validate=True),
+                           object_pairs_hook=unique_fields)
+    except (ValueError, UnicodeError, binascii.Error, RecursionError) as exc:
+        raise ValueError('Invalid search cursor encoding') from exc
+    if (not isinstance(value, dict) or set(value) != {'version', 'binding', 'after'}
+            or type(value['version']) is not int or value['version'] != 1
+            or not isinstance(value['binding'], str) or not re.fullmatch(r'[0-9a-f]{64}', value['binding'])):
+        raise ValueError('Invalid search cursor fields')
+    if value['binding'] != binding:
+        raise ValueError('Search cursor belongs to another revision, repository, query or filter scope; restart search')
+    _search_cursor_position(value['after'])
+    return value['after']
 
 
 def byte_size(value) -> int:
@@ -360,54 +409,88 @@ class RepositoryIndex:
         return ' AND '.join(clauses), values
 
     def search(self, query: str, limit: int = 10, *, path: str | None = None,
-               language: str | None = None) -> dict:
-        if not 1 <= len(query) <= 512 or not 1 <= limit <= 50:
+               language: str | None = None, cursor: str | None = None,
+               cursor_scope: str | None = None) -> dict:
+        if not isinstance(query, str) or not 1 <= len(query) <= 512 or type(limit) is not int or not 1 <= limit <= 50:
             raise ValueError("query must have 1–512 characters; limit must be 1–50")
+        if cursor_scope is not None and (not isinstance(cursor_scope, str)
+                or not re.fullmatch(r'[0-9a-f]{1,64}', cursor_scope)):
+            raise ValueError('cursor_scope must be a lowercase hexadecimal hash of at most 64 characters')
+        if path is not None and not isinstance(path, str):
+            raise ValueError('path must be a nonempty glob of at most 1024 characters')
+        if language is not None and not isinstance(language, str):
+            raise ValueError('language must contain 1–64 characters')
         words = terms(query)[:12]
         if not words:
             raise ValueError("Query must contain a letter or number")
         expression = " OR ".join('"' + word.replace('"', '""') + '"' for word in words)
         where, values = self._filter_sql(path, language)
         with self._read() as conn:
-            # IDs copied from search must not be reinterpreted as path keywords.
-            # Keep filters authoritative, even for an existing exact ID.
-            identified = conn.execute("SELECT s.data FROM symbols s WHERE s.id=? AND " + where,
-                                      [query, *values]).fetchone()
+            meta = self._meta(conn)
+            binding = digest(compact({'root': meta['root'], 'revision': meta['revision'],
+                                      'query': query, 'path': path, 'language': language,
+                                      'ranking': 'exact-module-score-id/v1', 'scope': cursor_scope}).encode('utf-8'))
+            after = _search_cursor_decode(cursor, binding) if cursor is not None else None
+            result = {'query': query, 'revision': meta['revision'], 'freshness': 'index_snapshot',
+                      'hits': [], 'candidate_limit': limit, 'truncated': False,
+                      'cursor': _search_cursor_encode(binding, after), 'next_cursor': None}
+            # An existing exact ID never becomes a keyword query when filtered out.
+            identified = conn.execute("SELECT s.data,(" + where + ") AS included FROM symbols s WHERE s.id=?",
+                                      [*values, query]).fetchone()
             if identified:
+                if after is not None:
+                    raise ValueError('An exact symbol ID has no search continuation')
+                if not identified['included']:
+                    return result
                 symbol = json.loads(identified["data"])
                 symbol["doc"] = symbol.get("doc", "")[:400]
                 symbol["signature"] = symbol.get("signature", "")[:800]
                 symbol["retrieval"] = {"bm25": 0, "exact_name": False, "exact_id": True}
-                meta = self._meta(conn)
-                return {"query": query, "revision": meta["revision"], "freshness": "index_snapshot",
-                        "hits": [symbol], "candidate_limit": 150, "truncated": False}
-            rows = conn.execute("""SELECT s.data, bm25(symbol_fts,0,8,3,1) AS rank
+                result['hits'] = [symbol]
+                return result
+            # Matching and cursor order must use the same Unicode case folding.
+            conn.create_function('columbus_lower', 1, str.lower, deterministic=True)
+            exact = '(columbus_lower(s.name)=:query OR columbus_lower(s.qualname)=:query)'
+            filters = ['1=1']
+            if path is not None:
+                filters.append('s.path GLOB :path')
+            if language is not None:
+                filters.append("json_extract(s.data,'$.language')=:language")
+            filtered = ' AND '.join(filters)
+            order = 'no_exact,is_module,score,id'
+            continuation = ('(' + order + ') > (:exact,:module,:score,:id)' if after is not None else '1=1')
+            # Limit full symbol materialization after ordering scalar keys.
+            sql = f'''WITH candidates AS (
+                SELECT s.id,0 AS no_exact,s.kind='module' AS is_module,0 AS score
+                FROM symbols s WHERE {exact} AND {filtered}
+                UNION ALL
+                SELECT s.id,1,s.kind='module',bm25(symbol_fts,0,8,3,1)
                 FROM symbol_fts JOIN symbols s ON s.id=symbol_fts.id
-                WHERE symbol_fts MATCH ? AND """ + where + " ORDER BY rank LIMIT 150", [expression, *values]).fetchall()
-            exact_rows = conn.execute("""SELECT s.data, 0 AS rank FROM symbols s
-                WHERE (name=? COLLATE NOCASE OR qualname=? COLLATE NOCASE)
-                AND """ + where + " ORDER BY id LIMIT 51", [query, query, *values]).fetchall()
-            hits = []
-            seen = set()
-            for row in [*exact_rows, *rows]:
+                WHERE symbol_fts MATCH :expression AND NOT {exact} AND {filtered}
+            ), page AS (
+                SELECT * FROM candidates WHERE {continuation} ORDER BY {order} LIMIT :take
+            ) SELECT page.*,s.data FROM page JOIN symbols s ON s.id=page.id
+              ORDER BY page.no_exact,page.is_module,page.score,page.id'''
+            params = dict(query=query.lower(), expression=expression, path=path, language=language, take=limit + 1)
+            if after is not None:
+                params.update(zip(('exact', 'module', 'score', 'id'), after))
+            rows = conn.execute(sql, params).fetchall()
+            for row in rows[:limit]:
                 symbol = json.loads(row["data"])
-                if symbol["id"] in seen:
-                    continue
-                seen.add(symbol["id"])
                 symbol["doc"] = symbol.get("doc", "")[:400]
                 symbol["signature"] = symbol.get("signature", "")[:800]
-                exact = symbol["name"].lower() == query.lower() or symbol["qualname"].lower() == query.lower()
-                symbol["retrieval"] = {"bm25": row["rank"], "exact_name": exact}
-                hits.append(symbol)
-            hits.sort(key=lambda s: (not s["retrieval"]["exact_name"], s["kind"] == "module", s["retrieval"]["bm25"], s["id"]))
-            meta = self._meta(conn)
-            return {"query": query, "revision": meta["revision"], "freshness": "index_snapshot",
-                    "hits": hits[:limit], "candidate_limit": 150,
-                    "truncated": len(hits) > limit or len(rows) == 150 or len(exact_rows) == 51}
+                symbol['retrieval'] = {'bm25': row['score'], 'exact_name': not row['no_exact']}
+                result['hits'].append(symbol)
+            result['truncated'] = len(rows) > limit
+            if result['truncated']:
+                last = rows[limit - 1]
+                result['next_cursor'] = _search_cursor_encode(binding, [last[key] for key in order.split(',')])
+            return result
 
     @staticmethod
     def _source(conn, symbol: dict, max_lines: int, query: str | None = None,
-                exclude_spans: list[list[int]] | None = None, receipt_file: dict | None = None) -> dict:
+                exclude_spans: list[list[int]] | None = None, receipt_file: dict | None = None,
+                *, include_unread: bool = False) -> dict:
         meta = RepositoryIndex._meta(conn)
         record = conn.execute("SELECT hash FROM files WHERE path=?", (symbol["path"],)).fetchone()
         try:
@@ -488,6 +571,16 @@ class RepositoryIndex:
                        "source_start_offset": source_start, "source_end_offset": source_end,
                        "seen_source_bytes": seen_bytes,
                        "freshness": "source_hash_verified", "revision": meta["revision"]})
+        if include_unread:
+            unread = []
+            for a, b in available:
+                while a < b and text[a] == '\n':
+                    a += 1
+                while a < b and text[b - 1] == '\n':
+                    b -= 1
+                if a < b:
+                    unread.append((a, b))
+            result['_unread_ranges'] = unread
         return result
 
     def symbol(self, symbol_id: str, max_lines: int = 80) -> dict:

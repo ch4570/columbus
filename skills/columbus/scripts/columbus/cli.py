@@ -137,6 +137,7 @@ def main(argv=None) -> int:
             command.add_argument('--language', help='Detected language name, e.g. python or typescript')
         if name == 'search':
             command.add_argument('--limit', type=int, default=10)
+            command.add_argument('--cursor', help='Continue this query/filter on the same indexed revision')
         if name in {'symbol', 'neighbors', 'impact'}:
             command.add_argument('symbol_id')
         if name == 'symbol':
@@ -256,7 +257,7 @@ def main(argv=None) -> int:
             elif index.status()['root'] != str(root):
                 raise ValueError('Selected index belongs to a different repository')
             if args.command == 'search':
-                result = index.search(args.query, args.limit, path=args.path, language=args.language)
+                result = index.search(args.query, args.limit, path=args.path, language=args.language, cursor=args.cursor)
             elif args.command == 'symbol':
                 result = index.symbol(args.symbol_id, args.max_lines)
             elif args.command in {'neighbors', 'impact'}:

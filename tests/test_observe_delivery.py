@@ -12,6 +12,14 @@ spec.loader.exec_module(observe_delivery)
 
 
 class DeliveryFixtureTests(unittest.TestCase):
+    def test_repeated_receipts_measure_complete_delivery_beyond_the_first_page(self):
+        result = observe_delivery.observe_receipt_coverage(50)
+        self.assertEqual({'json', 'text'}, {row['format'] for row in result['results']})
+        for row in result['results']:
+            self.assertEqual(50, row['complete_files'])
+            self.assertEqual(0, row['duplicate_spans'])
+            self.assertGreater(row['response_bytes'], 0)
+
     def test_current_and_preview_cache_files_never_enter_fixture_provenance(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

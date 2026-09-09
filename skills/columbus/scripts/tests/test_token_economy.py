@@ -135,9 +135,8 @@ class TokenEconomyTests(unittest.TestCase):
         before = {item['source_hash'] for item in first['items']}
         source = self.root / '정산.py'
         source.write_text(source.read_text(encoding='utf-8') + '\ndef refund_new(): return "NEW_SOURCE"\n', encoding='utf-8', newline='\n')
-        stale = self.next_context()
-        self.assertGreater(stale['stale_candidates'], 0)
-        self.assertEqual(stale['items'], [])
+        with self.assertRaisesRegex(ValueError, 'Stale source prevents receipt continuation'):
+            self.next_context()
         self.index.refresh(self.root)
         changed = self.next_context()
         self.assertEqual(changed['receipt']['status'], 'revision_changed_hash_checked')
@@ -273,6 +272,35 @@ class TokenEconomyTests(unittest.TestCase):
         self.assertTrue(packet['items'])
         self.assertEqual(byte_size(packet), packet['used_bytes'])
         self.assertLessEqual(byte_size(packet), 2048)
+
+    def test_receipt_reaches_matches_beyond_first_20(self):
+        for number in range(50):
+            (self.root / f'entry_{number:02}.py').write_text(f'def needle(): return "BODY_{number:02}"\n')
+        self.index.refresh(self.root)
+        for fmt in ('json', 'text'):
+            self.receipt_path = self.root / '.columbus' / (fmt + '-pages.json')
+            paths, spans = set(), {}
+            for _ in range(60):
+                packet = self.next_context('needle', budget=6000, output_format=fmt)
+                for item in packet['items']:
+                    current = set(range(item['source_start_offset'], item['source_end_offset']))
+                    self.assertFalse(current & spans.setdefault(item['path'], set()))
+                    spans[item['path']].update(current)
+                    if 'BODY_' in item['source']:
+                        paths.add(item['path'])
+                if not packet['items'] and not packet.get('receipt', {}).get('has_more'):
+                    break
+            self.assertEqual({f'entry_{number:02}.py' for number in range(50)}, paths)
+
+    def test_exclusions_refill_matches_beyond_first_20(self):
+        for number in range(25):
+            (self.root / f'entry_{number:02}.py').write_text(f'def needle(): return {number}\n')
+        self.index.refresh(self.root)
+        excluded = [item['id'] for item in self.index.search('needle', limit=20)['hits']]
+        packet = self.index.context('needle', exclude_ids=excluded, budget_bytes=64000)
+        returned = {item['id'] for item in packet['items']}
+        self.assertTrue({f'entry_{number:02}.py::needle:function' for number in range(20, 25)} <= returned)
+        self.assertFalse(returned.intersection(excluded))
 
 
 if __name__ == '__main__':
