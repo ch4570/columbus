@@ -1,5 +1,7 @@
 # Read-only agent exploration observations
 
+For the new tool × explicit-policy experiment, see the [four-arm protocol](factorial-README.md). The historical paired study below remains unchanged and is not a measurement of the current workflow.
+
 This harness compares ordinary `rg` plus bounded source reads with the same tools plus a prebuilt Columbus index. It runs real, independently started Codex CLI sessions. It never assumes that fewer response bytes mean fewer model tokens.
 
 The [Korean report](../../docs/token-efficiency.md) explains the findings. The 2026-09-07 cohort contains all six controlled trials, including regressions and citation failures. The one pair passing both citation checks used **34.0% more cumulative input tokens** with RepoAtlas. No general token or billing savings were established.
