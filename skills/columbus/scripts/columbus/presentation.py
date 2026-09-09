@@ -7,6 +7,7 @@ import json
 def _line(value) -> str:
     """Keep source labels on one line and neutralize terminal control characters."""
     escapes = {number: f'\\u{number:04x}' for number in range(32)}
+    escapes.update({number: f'\\u{number:04x}' for number in (0x85, 0x2028, 0x2029)})
     escapes.update({9: '\\t', 10: '\\n', 13: '\\r', 127: '\\u007f'})
     return str(value).translate(escapes)
 
@@ -48,7 +49,7 @@ def text_output(packet: dict, command: str = '') -> str:
             if item.get('source_start_column', 1) > 1:
                 lines.append(f"start_column={item['source_start_column']}")
             lines.extend(f"{number}| {_line(line)}" for number, line in
-                         enumerate(item['source'].splitlines(), item.get('start_line', 1)))
+                         enumerate(item['source'].split('\n') if item['source'] else [], item.get('start_line', 1)))
         elif item.get('signature'):
             lines.append('  ' + _line(item['signature']))
     if 'edges' in packet:
