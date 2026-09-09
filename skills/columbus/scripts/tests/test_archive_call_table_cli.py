@@ -38,17 +38,16 @@ class CallTableCliTests(unittest.TestCase):
         render.assert_called_once_with(packet, call_table=True)
         self.assertEqual([item.name for item in self.repo.iterdir()], ['.columbus.json'])
 
-    def test_requires_both_source_calls_and_text_before_any_reader(self):
+    def test_requires_source_calls_before_any_reader(self):
         for options in (('--call-table',), ('--call-table', '--format', 'text'),
-                        ('--call-table', '--call-sites'),
-                        ('--call-sites', '--call-table', '--format', 'json')):
+                        ('--call-table', '--format', 'json')):
             with self.subTest(options=options), \
                     patch('columbus.cli.RepositoryIndex', side_effect=AssertionError('index opened')), \
                     patch('columbus.source_calls.source_calls_archive') as query, \
                     patch('columbus.archive.source_archive_many') as legacy:
                 code, output, error = self.invoke(*options)
             self.assertEqual((code, output), (2, ''))
-            self.assertIn('--call-table requires --call-sites --format text', error)
+            self.assertIn('--call-table requires --call-sites', error)
             query.assert_not_called()
             legacy.assert_not_called()
 

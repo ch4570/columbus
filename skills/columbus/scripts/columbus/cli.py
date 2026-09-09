@@ -114,7 +114,7 @@ def main(argv=None) -> int:
             command.add_argument('--call-sites', action='store_true',
                                  help='Include every stored call on the returned source page; shares its line cursor and byte budget, not runtime completeness')
             command.add_argument('--call-table', action='store_true',
-                                 help='Share call endpoint/file metadata in page-local tables; requires --call-sites --format text')
+                                 help='Share call endpoint/file metadata in page-local tables; requires --call-sites (JSON or text)')
             command.add_argument('--overloads', action='store_true',
                                  help='Include Java/Kotlin overloads with the same owner and receiver; '
                                       'batch exact IDs from archive-search for different receivers')
@@ -225,9 +225,11 @@ def main(argv=None) -> int:
     args = parser.parse_args(argv)
     started = time.perf_counter()
     try:
-        if (args.command == 'archive-source' and args.call_table
-                and (not args.call_sites or args.format != 'text')):
-            raise ValueError('--call-table requires --call-sites --format text')
+        if args.command == 'archive-source' and args.call_table:
+            if not args.call_sites:
+                raise ValueError('--call-table requires --call-sites')
+            if args.pretty and args.format == 'json':
+                raise ValueError('archive-source --call-sites rejects --pretty to preserve its byte budget')
         source_call_sites = args.command == 'archive-source' and args.call_sites
         search_batch = args.command == 'archive-search' and len(args.query) > 1
         read_only_archive = args.command == 'archive-quotes' or source_call_sites or search_batch
@@ -320,7 +322,7 @@ def main(argv=None) -> int:
                                           args.offset, output_format=args.format, overloads=args.overloads,
                                           **call_options)
             sys.stdout.write(source_calls_text(result, **call_options)
-                             if args.format == 'text' else source_calls_json(result))
+                             if args.format == 'text' else source_calls_json(result, **call_options))
             return 0
         if search_batch:
             if args.pretty:

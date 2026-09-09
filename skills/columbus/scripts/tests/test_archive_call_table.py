@@ -410,8 +410,10 @@ class ArchiveCallTableTests(unittest.TestCase):
                     api.source_calls_text(full, call_table=bad)
                 with self.assertRaises(ValueError):
                     api.source_calls_archive(archive, ['outer'], root, call_table=bad)
-            with self.assertRaisesRegex(ValueError, 'requires text'):
-                api.source_calls_archive(archive, ['outer'], root, call_table=True)
+            json_packet = api.source_calls_archive(archive, ['outer'], root, call_table=True)
+            self.assertEqual(json_packet, full)
+            self.assertEqual(json.loads(api.source_calls_json(json_packet, call_table=True))['call_sites']['format'],
+                             'columbus-call-table-json/v1')
 
 
 if __name__ == '__main__':

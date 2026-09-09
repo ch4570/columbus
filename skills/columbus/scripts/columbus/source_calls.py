@@ -36,8 +36,16 @@ _TEXT_ESCAPES = {number: f'\\u{number:04x}'
                  for number in (*range(0x7f, 0xa0), 0x2028, 0x2029)}
 
 
-def source_calls_json(packet: dict) -> str:
+def source_calls_json(packet: dict, *, call_table: bool = False) -> str:
     """Serialize one faithful JSON packet with terminal/line controls escaped."""
+    if type(call_table) is not bool:
+        raise ValueError('call_table must be a boolean')
+    if call_table:
+        if not isinstance(packet, dict) or not isinstance(packet.get('call_sites'), dict):
+            raise ValueError('Malformed JSON call-table packet')
+        value = {**packet, 'call_sites': _call_table_json(packet['call_sites'])}
+        return (json.dumps(value, ensure_ascii=False, separators=(',', ':'), allow_nan=False)
+                + '\n').translate(_TEXT_ESCAPES)
     return (compact(packet) + '\n').translate(_TEXT_ESCAPES)
 
 
@@ -78,6 +86,41 @@ def _table_relationship(edge):
 
 def _table_bytes(value, *, row=False):
     return len((compact(value) + ('\n' if row else '')).translate(_TEXT_ESCAPES).encode('utf-8'))
+
+
+def _call_table_json(calls):
+    """Factor only call identities; source strings and the input stay unchanged."""
+    try:
+        if any(key in calls for key in ('format', 'index_scope', 'files')):
+            raise ValueError('Reserved JSON call-table metadata key')
+        nodes, edges = calls['nodes'], calls['edges']
+        if not isinstance(nodes, list) or not isinstance(edges, list):
+            raise ValueError('JSON call-table nodes and edges must be lists')
+        identities = {}
+        for number, node in enumerate(nodes):
+            if any(not isinstance(node[key], str) or not node[key] for key in ('id', 'path', 'source_hash')):
+                raise ValueError('Invalid JSON call-table endpoint identity')
+            if node['id'] in identities:
+                raise ValueError('Duplicate call-table endpoint identity')
+            identities[node['id']] = number
+        files = sorted({(node['path'], node['source_hash']) for node in nodes})
+        file_numbers = {identity: number for number, identity in enumerate(files)}
+        relationships = []
+        for edge in edges:
+            if edge['source'] not in identities or edge['target'] not in identities:
+                raise ValueError('Call-table edge refers to a missing endpoint')
+            owner = nodes[identities[edge['source']]]
+            if edge['path'] != owner['path']:
+                raise ValueError('Call-table edge path differs from its source endpoint')
+            relationships.append([identities[edge['source']], identities[edge['target']],
+                                  file_numbers[(owner['path'], owner['source_hash'])], _table_relationship(edge)])
+        return {**{key: value for key, value in calls.items() if key not in {'nodes', 'edges'}},
+                'format': 'columbus-call-table-json/v1', 'index_scope': 'this packet',
+                'files': [list(pair) for pair in files],
+                'nodes': [[file_numbers[(node['path'], node['source_hash'])], _table_declaration(node)]
+                          for node in nodes], 'edges': relationships}
+    except (KeyError, TypeError, AttributeError) as exc:
+        raise ValueError('Malformed JSON call-table packet') from exc
 
 
 def _call_table_rows(calls):
@@ -269,7 +312,7 @@ def _line_bins(spans, offset, size):
     return bins
 
 
-def _collect_calls(snapshot, bins, budget, *, call_table=False):
+def _collect_calls(snapshot, bins, budget, *, call_table=False, table_format='text'):
     if call_table:
         for item in bins:
             item.update(identities={}, call_files=set())
@@ -309,7 +352,7 @@ def _collect_calls(snapshot, bins, budget, *, call_table=False):
         if call_table:
             identities = item['identities']
             new_ids = {edge['source'], edge['target']} - identities.keys()
-            item['cost'] += (_table_bytes([0, 0, 0, _table_relationship(edge)], row=True)
+            item['cost'] += (_table_bytes([0, 0, 0, _table_relationship(edge)], row=table_format == 'text')
                              + sum(_table_bytes(identity) for identity in new_ids))
         else:
             item['cost'] += _bytes(edge)
@@ -391,7 +434,7 @@ def _hydrate(snapshot, chosen, bins, cap, selected_paths, budget):
     return {key: value for key, value in nodes.items() if key in retained}, cap
 
 
-def _hydrate_table(snapshot, chosen, bins, cap, selected_paths, budget):
+def _hydrate_table(snapshot, chosen, bins, cap, selected_paths, budget, *, table_format='text'):
     """Replace ID-only charges with actual indexed node/shared-file bounds.
 
 Every retained line pays for all its edge rows, unique endpoint rows, and
@@ -399,6 +442,8 @@ unique file rows with index zero. This is a lower bound for any emitted page
 containing that line, even when other lines share its endpoint/file tables.
 The initial identity ledger remains through EOF for exact duplicate checks;
 orphan edge payloads, descriptors and referring-position sets are released.
+JSON uses implicit row positions and excludes LF/separator/envelope bytes from
+its lower bound; text keeps its existing explicit row numbers and LF charges.
 """
     needed = {identity: identity for identity in chosen}
     positions = {}
@@ -428,8 +473,12 @@ orphan edge payloads, descriptors and referring-position sets are released.
         node.update(source_hash='0' * 64,
                     source_status=('selected_file_hash_verified' if node['path'] in selected_paths
                                    else 'archive_only'))
-        node_cost = _table_bytes([0, 0, _table_declaration(node)], row=True)
-        file_cost = _table_bytes([0, node['path'], node['source_hash']], row=True)
+        if table_format == 'json':
+            node_cost = _table_bytes([0, _table_declaration(node)])
+            file_cost = _table_bytes([node['path'], node['source_hash']])
+        else:
+            node_cost = _table_bytes([0, 0, _table_declaration(node)], row=True)
+            file_cost = _table_bytes([0, node['path'], node['source_hash']], row=True)
         # Replace, rather than add to, the ID-only collection charge. Shared
         # files are paid once per line, not once per endpoint in the same file.
         increments = {index: node_cost - _table_bytes(identity)
@@ -529,8 +578,6 @@ reference counts are archive facts, not a claim that semantic calls are known.
         raise ValueError('overloads must be a boolean')
     if type(call_table) is not bool:
         raise ValueError('call_table must be a boolean')
-    if call_table and output_format != 'text':
-        raise ValueError('call_table requires text output')
     if (not isinstance(queries, (list, tuple)) or not 1 <= len(queries) <= 16
             or any(not isinstance(query, str) or not 1 <= len(query) <= 2048 for query in queries)
             or len(set(queries)) != len(queries)):
@@ -556,8 +603,9 @@ reference counts are archive facts, not a claim that semantic calls are known.
                 raise ValueError('offset is outside the selected declarations')
             bins = _line_bins(spans, offset, min(limit, total - offset))
             if call_table:
-                cap = _collect_calls(snapshot, bins, budget_bytes, call_table=True)
-                nodes, cap = _hydrate_table(snapshot, chosen, bins, cap, selected_paths, budget_bytes)
+                table_options = {'table_format': 'json'} if output_format == 'json' else {}
+                cap = _collect_calls(snapshot, bins, budget_bytes, call_table=True, **table_options)
+                nodes, cap = _hydrate_table(snapshot, chosen, bins, cap, selected_paths, budget_bytes, **table_options)
             else:
                 cap = _collect_calls(snapshot, bins, budget_bytes)
                 nodes, cap = _hydrate(snapshot, chosen, bins, cap, selected_paths, budget_bytes)
@@ -619,8 +667,11 @@ reference counts are archive facts, not a claim that semantic calls are known.
                                   resolved_call_reference_count=sum(item['resolved'] for item in retained_bins),
                                   unresolved_call_reference_count=sum(item['unresolved'] for item in retained_bins),
                                   nodes=[nodes[identity] for identity in sorted(needed)], edges=edges))
-                rendered = (source_calls_text(result, call_table=True) if call_table else
-                            source_calls_text(result) if output_format == 'text' else source_calls_json(result))
+                if call_table:
+                    rendered = (source_calls_json(result, call_table=True) if output_format == 'json'
+                                else source_calls_text(result, call_table=True))
+                else:
+                    rendered = source_calls_text(result) if output_format == 'text' else source_calls_json(result)
                 if len(rendered.encode('utf-8')) <= budget_bytes:
                     snapshot.check()
                     return result
