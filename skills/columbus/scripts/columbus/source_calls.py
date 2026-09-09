@@ -41,19 +41,24 @@ def source_calls_json(packet: dict) -> str:
     return (compact(packet) + '\n').translate(_TEXT_ESCAPES)
 
 
-def source_calls_text(packet: dict) -> str:
+def source_calls_text(packet: dict, *, call_table: bool = False) -> str:
     """Render each source line once and exact endpoint/edge JSON records.
 
-Full-ID graph records (not shortened endpoint indexes) deliberately preserve
-the serialized lower bounds used by the streaming line-flood guard.
+The default full-ID records preserve the legacy streaming lower bounds. The
+opt-in table representation has its own identity-sharing bounds below.
 """
+    if type(call_table) is not bool:
+        raise ValueError('call_table must be a boolean')
     source = {key: value for key, value in packet.items() if key != 'call_sites'}
     calls = packet['call_sites']
     rows = [archive_source_text(source).rstrip('\n')]
     rows.append('call_sites ' + compact({key: value for key, value in calls.items()
                                          if key not in {'nodes', 'edges'}}))
-    rows.extend('call_node ' + compact(node) for node in calls['nodes'])
-    rows.extend('call_edge ' + compact(edge) for edge in calls['edges'])
+    if call_table:
+        rows.extend(_call_table_rows(calls))
+    else:
+        rows.extend('call_node ' + compact(node) for node in calls['nodes'])
+        rows.extend('call_edge ' + compact(edge) for edge in calls['edges'])
     # compact already escapes C0 in graph data; archive_source_text escapes C0
     # in numbered source. Escape remaining terminal/Unicode line controls too.
     return ('\n'.join(rows) + '\n').translate(_TEXT_ESCAPES)
@@ -61,6 +66,61 @@ the serialized lower bounds used by the streaming line-flood guard.
 
 def _bytes(value: dict) -> int:
     return len(compact(value).encode('utf-8'))
+
+
+def _table_declaration(node):
+    return {key: value for key, value in node.items() if key not in {'path', 'source_hash'}}
+
+
+def _table_relationship(edge):
+    return {key: value for key, value in edge.items() if key not in {'source', 'target', 'path'}}
+
+
+def _table_bytes(value, *, row=False):
+    return len((compact(value) + ('\n' if row else '')).translate(_TEXT_ESCAPES).encode('utf-8'))
+
+
+def _call_table_rows(calls):
+    """Lossless call rows; indexes are local to this packet, not source files.
+
+Node and edge order are preserved, including duplicate edge records. Only
+file identities are sorted. Return escaped rows without their terminating LF.
+"""
+    nodes = calls['nodes']
+    identities = {}
+    for number, node in enumerate(nodes):
+        if node['id'] in identities:
+            raise ValueError('Duplicate call-table endpoint identity')
+        identities[node['id']] = number
+    files = sorted({(node['path'], node['source_hash']) for node in nodes})
+    file_numbers = {identity: number for number, identity in enumerate(files)}
+    rows = ['call_tables ' + compact(dict(format='columbus-call-table/v1', index_scope='this packet')),
+            'call_files [number,path,source_hash]']
+    rows.extend(compact([number, path, source_hash])
+                for number, (path, source_hash) in enumerate(files))
+    rows.append('call_nodes [number,call_file_number,declaration]')
+    rows.extend(compact([number, file_numbers[(node['path'], node['source_hash'])],
+                         _table_declaration(node)]) for number, node in enumerate(nodes))
+    rows.append('call_edges [source_call_node,target_call_node,call_file_number,relationship]')
+    for edge in calls['edges']:
+        if edge['source'] not in identities or edge['target'] not in identities:
+            raise ValueError('Call-table edge refers to a missing endpoint')
+        owner = nodes[identities[edge['source']]]
+        if edge['path'] != owner['path']:
+            raise ValueError('Call-table edge path differs from its source endpoint')
+        rows.append(compact([identities[edge['source']], identities[edge['target']],
+                             file_numbers[(owner['path'], owner['source_hash'])],
+                             _table_relationship(edge)]))
+    return [row.translate(_TEXT_ESCAPES) for row in rows]
+
+
+def _prune_table_bins(bins, cap):
+    """Drop payloads, not coordinates/counts needed to finish archive validation."""
+    for item in bins[cap:]:
+        item['edges'].clear()
+        item['identities'].clear()
+        item['call_files'].clear()
+        item['cost'] = 0
 
 
 def _portable_path(path):
@@ -209,7 +269,10 @@ def _line_bins(spans, offset, size):
     return bins
 
 
-def _collect_calls(snapshot, bins, budget):
+def _collect_calls(snapshot, bins, budget, *, call_table=False):
+    if call_table:
+        for item in bins:
+            item.update(identities={}, call_files=set())
     lookup = {(item['path'], item['line']): item for item in bins}
     paths = {item['path'] for item in bins}
     for kind, data in snapshot.rows():
@@ -243,15 +306,33 @@ def _collect_calls(snapshot, bins, budget):
             raise ValueError('Invalid stored call edge endpoints, confidence or evidence')
         if item['overflow']:
             continue
-        item['cost'] += _bytes(edge)
+        if call_table:
+            identities = item['identities']
+            new_ids = {edge['source'], edge['target']} - identities.keys()
+            item['cost'] += (_table_bytes([0, 0, 0, _table_relationship(edge)], row=True)
+                             + sum(_table_bytes(identity) for identity in new_ids))
+        else:
+            item['cost'] += _bytes(edge)
         if item['cost'] > budget:
             item['overflow'] = True
             item['edges'].clear()
+            if call_table:
+                item['identities'].clear()
         else:
+            if call_table:
+                # Sharing dict keys alone would leave independently decoded,
+                # arbitrarily long IDs retained in every duplicate edge value.
+                for key in ('source', 'target'):
+                    identity = edge[key]
+                    edge[key] = identities.setdefault(identity, identity)
+                edge['path'] = item['path']
             item['edges'].append(edge)
     # Flooding is decided only after complete validation and independently of
     # archive record order. The cursor never skips the overflowing source line.
-    return next((index for index, item in enumerate(bins) if item['overflow']), len(bins))
+    cap = next((index for index, item in enumerate(bins) if item['overflow']), len(bins))
+    if call_table:
+        _prune_table_bins(bins, cap)
+    return cap
 
 
 def _hydrate(snapshot, chosen, bins, cap, selected_paths, budget):
@@ -298,6 +379,84 @@ def _hydrate(snapshot, chosen, bins, cap, selected_paths, budget):
         raise ValueError('Selected declaration endpoint metadata exceeds bounded capacity')
     retained = set(chosen) | {edge[key] for item in bins[:cap] for edge in item['edges']
                               for key in ('source', 'target')}
+    if not retained <= seen or not retained <= nodes.keys():
+        raise ValueError('Archive edge refers to a missing declaration endpoint')
+    for item in bins[:cap]:
+        for edge in item['edges']:
+            owner = nodes[edge['source']]
+            if owner['path'] != edge['path']:
+                raise ValueError('Call path differs from its source declaration')
+            if not owner['start_line'] <= edge['line'] <= owner['end_line']:
+                raise ValueError('Call site outside its archived source declaration')
+    return {key: value for key, value in nodes.items() if key in retained}, cap
+
+
+def _hydrate_table(snapshot, chosen, bins, cap, selected_paths, budget):
+    """Replace ID-only charges with actual indexed node/shared-file bounds.
+
+Every retained line pays for all its edge rows, unique endpoint rows, and
+unique file rows with index zero. This is a lower bound for any emitted page
+containing that line, even when other lines share its endpoint/file tables.
+The initial identity ledger remains through EOF for exact duplicate checks;
+orphan edge payloads, descriptors and referring-position sets are released.
+"""
+    needed = {identity: identity for identity in chosen}
+    positions = {}
+    for index, item in enumerate(bins[:cap]):
+        for identity in item['identities']:
+            canonical = needed.setdefault(identity, identity)
+            positions.setdefault(canonical, set()).add(index)
+        item['identities'] = {needed[identity]: needed[identity] for identity in item['identities']}
+        for edge in item['edges']:
+            for key in ('source', 'target'):
+                edge[key] = needed[edge[key]]
+    paths = {path: path for path in selected_paths}
+    seen, nodes = set(), {}
+    for kind, data in snapshot.rows():
+        if kind != 'node' or data.get('id') not in needed:
+            continue
+        identity = needed[data['id']]
+        if identity in seen:
+            raise ValueError('Duplicate archived declaration endpoint')
+        seen.add(identity)
+        node = _node(data)
+        relevant = positions.get(identity, set())
+        if not relevant and identity not in chosen:
+            continue
+        if identity in chosen and node != chosen[identity]:
+            raise ValueError('Archive declaration changed between passes')
+        node.update(source_hash='0' * 64,
+                    source_status=('selected_file_hash_verified' if node['path'] in selected_paths
+                                   else 'archive_only'))
+        node_cost = _table_bytes([0, 0, _table_declaration(node)], row=True)
+        file_cost = _table_bytes([0, node['path'], node['source_hash']], row=True)
+        # Replace, rather than add to, the ID-only collection charge. Shared
+        # files are paid once per line, not once per endpoint in the same file.
+        increments = {index: node_cost - _table_bytes(identity)
+                      + (0 if node['path'] in bins[index]['call_files'] else file_cost)
+                      for index in relevant}
+        failed = [index for index, cost in increments.items() if bins[index]['cost'] + cost > budget]
+        if failed:
+            cap = min(cap, min(failed))
+            _prune_table_bins(bins, cap)
+            positions = {key: earlier for key, indexes in positions.items()
+                         if (earlier := {index for index in indexes if index < cap})}
+            nodes = {key: value for key, value in nodes.items() if key in chosen or key in positions}
+            paths = {path: path for path in set(selected_paths) | {node['path'] for node in nodes.values()}}
+            relevant = positions.get(identity, set())
+        if relevant or identity in chosen:
+            # Selected projections already have _select's independent 64-KiB
+            # capacity bound (plus these fixed fields). A raw hydrated dict's
+            # 64-KiB serialized size is NOT a valid indexed-output lower bound.
+            # Unselected descriptors are retained only while their full table
+            # row and unique file cost fit at least one referring line.
+            node['id'] = identity
+            node['path'] = paths.setdefault(node['path'], node['path'])
+            nodes[identity] = node
+            for index in relevant:
+                bins[index]['cost'] += increments[index]
+                bins[index]['call_files'].add(node['path'])
+    retained = set(chosen) | {identity for item in bins[:cap] for identity in item['identities']}
     if not retained <= seen or not retained <= nodes.keys():
         raise ValueError('Archive edge refers to a missing declaration endpoint')
     for item in bins[:cap]:
@@ -358,7 +517,8 @@ def _page_sources(bins, files):
 
 def source_calls_archive(source: str | Path, queries: list[str], repo: str | Path,
                          limit: int = 120, budget_bytes: int = 12000, offset: int = 0,
-                         *, output_format: str = 'json', overloads: bool = False) -> dict:
+                         *, output_format: str = 'json', overloads: bool = False,
+                         call_table: bool = False) -> dict:
     """Page a declaration union and all stored calls on each returned line.
 
 Only the source-page suffix can be removed to fit the shared rendered budget.
@@ -367,6 +527,10 @@ reference counts are archive facts, not a claim that semantic calls are known.
 """
     if type(overloads) is not bool:
         raise ValueError('overloads must be a boolean')
+    if type(call_table) is not bool:
+        raise ValueError('call_table must be a boolean')
+    if call_table and output_format != 'text':
+        raise ValueError('call_table requires text output')
     if (not isinstance(queries, (list, tuple)) or not 1 <= len(queries) <= 16
             or any(not isinstance(query, str) or not 1 <= len(query) <= 2048 for query in queries)
             or len(set(queries)) != len(queries)):
@@ -391,8 +555,12 @@ reference counts are archive facts, not a claim that semantic calls are known.
             if offset >= total:
                 raise ValueError('offset is outside the selected declarations')
             bins = _line_bins(spans, offset, min(limit, total - offset))
-            cap = _collect_calls(snapshot, bins, budget_bytes)
-            nodes, cap = _hydrate(snapshot, chosen, bins, cap, selected_paths, budget_bytes)
+            if call_table:
+                cap = _collect_calls(snapshot, bins, budget_bytes, call_table=True)
+                nodes, cap = _hydrate_table(snapshot, chosen, bins, cap, selected_paths, budget_bytes)
+            else:
+                cap = _collect_calls(snapshot, bins, budget_bytes)
+                nodes, cap = _hydrate(snapshot, chosen, bins, cap, selected_paths, budget_bytes)
             files = _files(snapshot, set(selected_paths) | {node['path'] for node in nodes.values()})
             for node in nodes.values():
                 item = files[node['path']]
@@ -451,11 +619,16 @@ reference counts are archive facts, not a claim that semantic calls are known.
                                   resolved_call_reference_count=sum(item['resolved'] for item in retained_bins),
                                   unresolved_call_reference_count=sum(item['unresolved'] for item in retained_bins),
                                   nodes=[nodes[identity] for identity in sorted(needed)], edges=edges))
-                rendered = source_calls_text(result) if output_format == 'text' else source_calls_json(result)
+                rendered = (source_calls_text(result, call_table=True) if call_table else
+                            source_calls_text(result) if output_format == 'text' else source_calls_json(result))
                 if len(rendered.encode('utf-8')) <= budget_bytes:
                     snapshot.check()
                     return result
                 cap -= 1
+                if call_table:
+                    _prune_table_bins(bins, cap)
+                    active = set(chosen) | {identity for item in bins[:cap] for identity in item['identities']}
+                    nodes = {key: value for key, value in nodes.items() if key in active}
             raise ValueError('Budget too small for the next source line and all its stored calls; increase budget-bytes')
     except (KeyError, TypeError, AttributeError, EOFError, lzma.LZMAError, zlib.error,
             json.JSONDecodeError, UnicodeError) as exc:
