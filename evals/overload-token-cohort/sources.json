@@ -1,0 +1,41 @@
+{
+  "java": {
+    "repository": "https://github.com/google/gson",
+    "commit": "b3f4ca20087f9066de4c340522ff84e0558e1ad1",
+    "url": "https://codeload.github.com/google/gson/zip/b3f4ca20087f9066de4c340522ff84e0558e1ad1",
+    "sha256": "0980ae32fae04e0cdd1c9637b19881e4dbfcda358d77c182e34326daedf49e4e",
+    "files": 313,
+    "zip_bytes": 783863,
+    "license": "LICENSE",
+    "license_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "omitted_gitlinks": []
+  },
+  "kotlin": {
+    "repository": "https://github.com/square/okhttp",
+    "resolved_repository": "https://github.com/lysine-dev/okhttp",
+    "commit": "d4e7006216ddf06ffe628d1320b62ac01843b63d",
+    "url": "https://codeload.github.com/square/okhttp/zip/d4e7006216ddf06ffe628d1320b62ac01843b63d",
+    "sha256": "0d15e84d42a532c9ba5df19024ecc3bd64792e63c72264c068f30455c60a87e4",
+    "files": 844,
+    "zip_bytes": 2931580,
+    "license": "LICENSE.txt",
+    "license_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "omitted_gitlinks": [{
+      "path": "okhttp-hpacktests/src/test/resources/hpack-test-case",
+      "repository": "https://github.com/http2jp/hpack-test-case.git",
+      "commit": "8a1406e7d14bfcb6c046021f13cc15cfb162726d",
+      "reason": "Unrelated HPACK test data is outside the RequestBody task; this is a complete superproject snapshot, not a recursive checkout."
+    }]
+  },
+  "javascript": {
+    "repository": "https://github.com/axios/axios",
+    "commit": "e5a33366d75b65f88052b230b103731eb7dcb793",
+    "url": "https://codeload.github.com/axios/axios/zip/e5a33366d75b65f88052b230b103731eb7dcb793",
+    "sha256": "c53e20043fc22e23f2b8a47d12a68dac007a71c3f9ae652d3188ceb4ba2b2345",
+    "files": 242,
+    "zip_bytes": 746720,
+    "license": "LICENSE",
+    "license_sha256": "82761059eaedacb3356803aea8a170d8298609f91b14fc32ee1bfb40d690183c",
+    "omitted_gitlinks": []
+  }
+}

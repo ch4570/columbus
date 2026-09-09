@@ -1,0 +1,29 @@
+{
+  "pages": [
+    {
+      "offset": 0,
+      "next_offset": 2,
+      "bytes": 3013,
+      "edges": 2,
+      "revision": "6971d5a4da9c78b0be01"
+    },
+    {
+      "offset": 2,
+      "next_offset": 4,
+      "bytes": 2756,
+      "edges": 2,
+      "revision": "6971d5a4da9c78b0be01"
+    },
+    {
+      "offset": 4,
+      "next_offset": null,
+      "bytes": 2796,
+      "edges": 2,
+      "revision": "6971d5a4da9c78b0be01"
+    }
+  ],
+  "edge_count": 6,
+  "exact_edges_equal": true,
+  "no_consumer_files": true,
+  "artifact_sha256_unchanged": "0514c96a21425e20c1828d2ed29f389dbb5dcc9b5cc57ba79f2881b62aaddd75"
+}

@@ -1,0 +1,81 @@
+{
+  "source_run": 34145182638,
+  "columbus_commit": "acbb893",
+  "selection": "One Python 3.11 abi3 build per OS; cross-Python compatibility of this combined artifact remains to be tested on hosted runners.",
+  "wheels": [
+    {
+      "platform": "ubuntu-latest",
+      "python_build": "3.11",
+      "filename": "tree_sitter_java-0.23.5+columbus.1-cp39-abi3-linux_x86_64.whl",
+      "sha256": "30c40fd00646eaf5ed164cb42bca8015391161eae6111d4ed2852be2eb6758cb",
+      "provenance": {
+        "upstream_revision": "6018d681d319aada6d9fe1b8a8d17f9f4d6c758e",
+        "package_version": "0.23.5+columbus.1",
+        "generator": "tree-sitter-cli@0.27.0",
+        "abi": 14,
+        "files_sha256": {
+          "grammar.js": "966a10920d11ba6566736d8a1c80c15b8e349bc12945e709456d5852c8717035",
+          "src/parser.c": "64aece257d41d4c27848125dac05e619b2e0164388330cd657411b741ace6ff7",
+          "src/node-types.json": "d314dd68cc4c0f5638f4173ed6cc9931f7ca69a6583c6d97caf4349111fb1989",
+          "pyproject.toml": "e571ab02bb3ae6efbaf16b73dca68fe18f0f1aff15dc32de56bd9d55bd3988d1",
+          "setup.py": "42e55e6fa7bf687e684f29a893ba151dd2a01533a3bca9467f1a095cf4e310df",
+          "bindings/python/tree_sitter_java/binding.c": "f62d846c352e0cc50b1c261f01b94583d5ef3b04a9c62a8ce60d60359a6ea33b",
+          "LICENSE": "52ed137b039cd9c46409bc22e89938af911c95b157feae2d040b51e6084369a7"
+        },
+        "patch_sha256": "701ad2f492a934051b721206cdfc4903b2a83a89023ec406d4cb700ecbd60b4c"
+      }
+    },
+    {
+      "platform": "macos-latest",
+      "python_build": "3.11",
+      "filename": "tree_sitter_java-0.23.5+columbus.1-cp39-abi3-macosx_10_9_universal2.whl",
+      "sha256": "344681a284cded941ae0b0117e9011e6408ae71333364466797cc41bb747693b",
+      "provenance": {
+        "upstream_revision": "6018d681d319aada6d9fe1b8a8d17f9f4d6c758e",
+        "package_version": "0.23.5+columbus.1",
+        "generator": "tree-sitter-cli@0.27.0",
+        "abi": 14,
+        "files_sha256": {
+          "grammar.js": "966a10920d11ba6566736d8a1c80c15b8e349bc12945e709456d5852c8717035",
+          "src/parser.c": "64aece257d41d4c27848125dac05e619b2e0164388330cd657411b741ace6ff7",
+          "src/node-types.json": "d314dd68cc4c0f5638f4173ed6cc9931f7ca69a6583c6d97caf4349111fb1989",
+          "pyproject.toml": "e571ab02bb3ae6efbaf16b73dca68fe18f0f1aff15dc32de56bd9d55bd3988d1",
+          "setup.py": "42e55e6fa7bf687e684f29a893ba151dd2a01533a3bca9467f1a095cf4e310df",
+          "bindings/python/tree_sitter_java/binding.c": "f62d846c352e0cc50b1c261f01b94583d5ef3b04a9c62a8ce60d60359a6ea33b",
+          "LICENSE": "52ed137b039cd9c46409bc22e89938af911c95b157feae2d040b51e6084369a7"
+        },
+        "patch_sha256": "701ad2f492a934051b721206cdfc4903b2a83a89023ec406d4cb700ecbd60b4c"
+      }
+    },
+    {
+      "platform": "windows-latest",
+      "python_build": "3.11",
+      "filename": "tree_sitter_java-0.23.5+columbus.1-cp39-abi3-win_amd64.whl",
+      "sha256": "20238f613571e6bc3dd4c3e18b63fa3af7587250e82ce74752bc064698395696",
+      "provenance": {
+        "upstream_revision": "6018d681d319aada6d9fe1b8a8d17f9f4d6c758e",
+        "package_version": "0.23.5+columbus.1",
+        "generator": "tree-sitter-cli@0.27.0",
+        "abi": 14,
+        "files_sha256": {
+          "grammar.js": "966a10920d11ba6566736d8a1c80c15b8e349bc12945e709456d5852c8717035",
+          "src/parser.c": "64aece257d41d4c27848125dac05e619b2e0164388330cd657411b741ace6ff7",
+          "src/node-types.json": "d314dd68cc4c0f5638f4173ed6cc9931f7ca69a6583c6d97caf4349111fb1989",
+          "pyproject.toml": "e17ec32922f74159b78de389f3a209a26f3bbd14a1cf0f09a2a6ba26de5b50e8",
+          "setup.py": "42e55e6fa7bf687e684f29a893ba151dd2a01533a3bca9467f1a095cf4e310df",
+          "bindings/python/tree_sitter_java/binding.c": "f62d846c352e0cc50b1c261f01b94583d5ef3b04a9c62a8ce60d60359a6ea33b",
+          "LICENSE": "52ed137b039cd9c46409bc22e89938af911c95b157feae2d040b51e6084369a7"
+        },
+        "patch_sha256": "701ad2f492a934051b721206cdfc4903b2a83a89023ec406d4cb700ecbd60b4c"
+      }
+    }
+  ],
+  "bundle": {
+    "artifact": "/private/tmp/columbus-java-aggregate-bundle/columbus-1.0.0.zip",
+    "sha256": "35b538b3fde598558308970d8f2bbced9df61a04221b42c4c735f2a0ac279514",
+    "checksum": "/private/tmp/columbus-java-aggregate-bundle/columbus-1.0.0.zip.sha256",
+    "version": "1.0.0",
+    "files": 440,
+    "bytes": 6046110
+  }
+}

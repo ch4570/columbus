@@ -1,0 +1,137 @@
+{
+  "baseline": {
+    "semantic_passed": true,
+    "citation_passed": false,
+    "overall_passed": false,
+    "findings": [
+      {
+        "id": "StaticNode.render",
+        "semantic_passed": true,
+        "note": "Reviewed values, branches, early returns, same-line multiplicity and higher-order distinction against SOURCE-REVIEW.md."
+      },
+      {
+        "id": "format_html",
+        "semantic_passed": true,
+        "note": "Reviewed values, branches, early returns, same-line multiplicity and higher-order distinction against SOURCE-REVIEW.md."
+      },
+      {
+        "id": "format_html_join",
+        "semantic_passed": true,
+        "note": "Reviewed values, branches, early returns, same-line multiplicity and higher-order distinction against SOURCE-REVIEW.md."
+      },
+      {
+        "id": "URLNode.render",
+        "semantic_passed": true,
+        "note": "Reviewed values, branches, early returns, same-line multiplicity and higher-order distinction against SOURCE-REVIEW.md."
+      },
+      {
+        "id": "render_value_in_context",
+        "semantic_passed": true,
+        "note": "Reviewed values, branches, early returns, same-line multiplicity and higher-order distinction against SOURCE-REVIEW.md."
+      },
+      {
+        "id": "escape_filter",
+        "semantic_passed": true,
+        "note": "Reviewed values, branches, early returns, same-line multiplicity and higher-order distinction against SOURCE-REVIEW.md."
+      },
+      {
+        "id": "escapeseq",
+        "semantic_passed": true,
+        "note": "Reviewed values, branches, early returns, same-line multiplicity and higher-order distinction against SOURCE-REVIEW.md."
+      },
+      {
+        "id": "join",
+        "semantic_passed": true,
+        "note": "Reviewed values, branches, early returns, same-line multiplicity and higher-order distinction against SOURCE-REVIEW.md."
+      },
+      {
+        "id": "SimpleNode.render",
+        "semantic_passed": true,
+        "note": "Reviewed values, branches, early returns, same-line multiplicity and higher-order distinction against SOURCE-REVIEW.md."
+      },
+      {
+        "id": "Template.render",
+        "semantic_passed": true,
+        "note": "Reviewed values, branches, early returns, same-line multiplicity and higher-order distinction against SOURCE-REVIEW.md."
+      },
+      {
+        "id": "AdminField.label_tag",
+        "semantic_passed": true,
+        "note": "Reviewed values, branches, early returns, same-line multiplicity and higher-order distinction against SOURCE-REVIEW.md."
+      },
+      {
+        "id": "AdminReadonlyField.contents",
+        "semantic_passed": true,
+        "note": "Reviewed values, branches, early returns, same-line multiplicity and higher-order distinction against SOURCE-REVIEW.md."
+      }
+    ],
+    "citation_failure": "format_html_join quotes through line 171 but declares end_line 170; do not repair or regrade the model answer."
+  },
+  "columbus": {
+    "semantic_passed": true,
+    "citation_passed": true,
+    "overall_passed": true,
+    "findings": [
+      {
+        "id": "AdminField.label_tag",
+        "semantic_passed": true,
+        "note": "Reviewed values, branches, early returns, same-line multiplicity and higher-order distinction against SOURCE-REVIEW.md."
+      },
+      {
+        "id": "AdminReadonlyField.contents",
+        "semantic_passed": true,
+        "note": "Reviewed values, branches, early returns, same-line multiplicity and higher-order distinction against SOURCE-REVIEW.md."
+      },
+      {
+        "id": "Template.render",
+        "semantic_passed": true,
+        "note": "Reviewed values, branches, early returns, same-line multiplicity and higher-order distinction against SOURCE-REVIEW.md."
+      },
+      {
+        "id": "render_value_in_context",
+        "semantic_passed": true,
+        "note": "Reviewed values, branches, early returns, same-line multiplicity and higher-order distinction against SOURCE-REVIEW.md."
+      },
+      {
+        "id": "escape_filter",
+        "semantic_passed": true,
+        "note": "Reviewed values, branches, early returns, same-line multiplicity and higher-order distinction against SOURCE-REVIEW.md."
+      },
+      {
+        "id": "escapeseq",
+        "semantic_passed": true,
+        "note": "Reviewed values, branches, early returns, same-line multiplicity and higher-order distinction against SOURCE-REVIEW.md."
+      },
+      {
+        "id": "join",
+        "semantic_passed": true,
+        "note": "Reviewed values, branches, early returns, same-line multiplicity and higher-order distinction against SOURCE-REVIEW.md."
+      },
+      {
+        "id": "URLNode.render",
+        "semantic_passed": true,
+        "note": "Reviewed values, branches, early returns, same-line multiplicity and higher-order distinction against SOURCE-REVIEW.md."
+      },
+      {
+        "id": "SimpleNode.render",
+        "semantic_passed": true,
+        "note": "Reviewed values, branches, early returns, same-line multiplicity and higher-order distinction against SOURCE-REVIEW.md."
+      },
+      {
+        "id": "StaticNode.render",
+        "semantic_passed": true,
+        "note": "Reviewed values, branches, early returns, same-line multiplicity and higher-order distinction against SOURCE-REVIEW.md."
+      },
+      {
+        "id": "format_html",
+        "semantic_passed": true,
+        "note": "Reviewed values, branches, early returns, same-line multiplicity and higher-order distinction against SOURCE-REVIEW.md."
+      },
+      {
+        "id": "format_html_join",
+        "semantic_passed": true,
+        "note": "Reviewed values, branches, early returns, same-line multiplicity and higher-order distinction against SOURCE-REVIEW.md."
+      }
+    ]
+  }
+}

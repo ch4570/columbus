@@ -1,0 +1,356 @@
+[
+  {
+    "artifact": "java-candidate-macos-latest-py3.11",
+    "provenance": {
+      "upstream_revision": "6018d681d319aada6d9fe1b8a8d17f9f4d6c758e",
+      "package_version": "0.23.5+columbus.1",
+      "generator": "tree-sitter-cli@0.27.0",
+      "abi": 14,
+      "files_sha256": {
+        "grammar.js": "966a10920d11ba6566736d8a1c80c15b8e349bc12945e709456d5852c8717035",
+        "src/parser.c": "64aece257d41d4c27848125dac05e619b2e0164388330cd657411b741ace6ff7",
+        "src/node-types.json": "d314dd68cc4c0f5638f4173ed6cc9931f7ca69a6583c6d97caf4349111fb1989",
+        "pyproject.toml": "e571ab02bb3ae6efbaf16b73dca68fe18f0f1aff15dc32de56bd9d55bd3988d1",
+        "setup.py": "42e55e6fa7bf687e684f29a893ba151dd2a01533a3bca9467f1a095cf4e310df",
+        "bindings/python/tree_sitter_java/binding.c": "f62d846c352e0cc50b1c261f01b94583d5ef3b04a9c62a8ce60d60359a6ea33b",
+        "LICENSE": "52ed137b039cd9c46409bc22e89938af911c95b157feae2d040b51e6084369a7"
+      },
+      "patch_sha256": "701ad2f492a934051b721206cdfc4903b2a83a89023ec406d4cb700ecbd60b4c"
+    },
+    "runtime": {
+      "python": "3.11.9 (v3.11.9:de54cf5be3, Apr  2 2024, 07:12:50) [Clang 13.0.0 (clang-1300.0.29.30)]",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "package_version": "0.23.5+columbus.1",
+      "module_path": "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/tree_sitter_java",
+      "binary_sha256": {
+        "_binding.abi3.so": "b1e226f798f1665ba355a93d1c06392a6205c9ddfde328fdae808e67a538981a"
+      },
+      "fixtures": {
+        "primitive": {
+          "partial": false,
+          "annotations": [
+            "@A"
+          ]
+        },
+        "array": {
+          "partial": false,
+          "annotations": [
+            "@A",
+            "@B"
+          ]
+        },
+        "generic": {
+          "partial": false,
+          "annotations": [
+            "@A",
+            "@B"
+          ]
+        },
+        "invalid_after_ellipsis": {
+          "partial": true,
+          "annotations": []
+        }
+      }
+    },
+    "wheel": {
+      "name": "tree_sitter_java-0.23.5+columbus.1-cp39-abi3-macosx_10_9_universal2.whl",
+      "bytes": 117243,
+      "sha256": "6c914b9c66a4f59979023427019307e20adfbcd206f5da0eb33967b22e1916cc"
+    }
+  },
+  {
+    "artifact": "java-candidate-macos-latest-py3.14",
+    "provenance": {
+      "upstream_revision": "6018d681d319aada6d9fe1b8a8d17f9f4d6c758e",
+      "package_version": "0.23.5+columbus.1",
+      "generator": "tree-sitter-cli@0.27.0",
+      "abi": 14,
+      "files_sha256": {
+        "grammar.js": "966a10920d11ba6566736d8a1c80c15b8e349bc12945e709456d5852c8717035",
+        "src/parser.c": "64aece257d41d4c27848125dac05e619b2e0164388330cd657411b741ace6ff7",
+        "src/node-types.json": "d314dd68cc4c0f5638f4173ed6cc9931f7ca69a6583c6d97caf4349111fb1989",
+        "pyproject.toml": "e571ab02bb3ae6efbaf16b73dca68fe18f0f1aff15dc32de56bd9d55bd3988d1",
+        "setup.py": "42e55e6fa7bf687e684f29a893ba151dd2a01533a3bca9467f1a095cf4e310df",
+        "bindings/python/tree_sitter_java/binding.c": "f62d846c352e0cc50b1c261f01b94583d5ef3b04a9c62a8ce60d60359a6ea33b",
+        "LICENSE": "52ed137b039cd9c46409bc22e89938af911c95b157feae2d040b51e6084369a7"
+      },
+      "patch_sha256": "701ad2f492a934051b721206cdfc4903b2a83a89023ec406d4cb700ecbd60b4c"
+    },
+    "runtime": {
+      "python": "3.14.7 (v3.14.7:823f0323ee6, Aug  5 2026, 07:07:01) [Clang 21.0.0 (clang-2100.1.1.101)]",
+      "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+      "package_version": "0.23.5+columbus.1",
+      "module_path": "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/tree_sitter_java",
+      "binary_sha256": {
+        "_binding.abi3.so": "9e7c620bf76eaf85a82da89ddb4006615058b3bfd92220ac55375f67c0b09cc6"
+      },
+      "fixtures": {
+        "primitive": {
+          "partial": false,
+          "annotations": [
+            "@A"
+          ]
+        },
+        "array": {
+          "partial": false,
+          "annotations": [
+            "@A",
+            "@B"
+          ]
+        },
+        "generic": {
+          "partial": false,
+          "annotations": [
+            "@A",
+            "@B"
+          ]
+        },
+        "invalid_after_ellipsis": {
+          "partial": true,
+          "annotations": []
+        }
+      }
+    },
+    "wheel": {
+      "name": "tree_sitter_java-0.23.5+columbus.1-cp39-abi3-macosx_10_15_universal2.whl",
+      "bytes": 117273,
+      "sha256": "e16bb9ed39e257f87406817a76d69aaa8a59f25462893bd381d5e64f6cdb7da2"
+    }
+  },
+  {
+    "artifact": "java-candidate-ubuntu-latest-py3.11",
+    "provenance": {
+      "upstream_revision": "6018d681d319aada6d9fe1b8a8d17f9f4d6c758e",
+      "package_version": "0.23.5+columbus.1",
+      "generator": "tree-sitter-cli@0.27.0",
+      "abi": 14,
+      "files_sha256": {
+        "grammar.js": "966a10920d11ba6566736d8a1c80c15b8e349bc12945e709456d5852c8717035",
+        "src/parser.c": "64aece257d41d4c27848125dac05e619b2e0164388330cd657411b741ace6ff7",
+        "src/node-types.json": "d314dd68cc4c0f5638f4173ed6cc9931f7ca69a6583c6d97caf4349111fb1989",
+        "pyproject.toml": "e571ab02bb3ae6efbaf16b73dca68fe18f0f1aff15dc32de56bd9d55bd3988d1",
+        "setup.py": "42e55e6fa7bf687e684f29a893ba151dd2a01533a3bca9467f1a095cf4e310df",
+        "bindings/python/tree_sitter_java/binding.c": "f62d846c352e0cc50b1c261f01b94583d5ef3b04a9c62a8ce60d60359a6ea33b",
+        "LICENSE": "52ed137b039cd9c46409bc22e89938af911c95b157feae2d040b51e6084369a7"
+      },
+      "patch_sha256": "701ad2f492a934051b721206cdfc4903b2a83a89023ec406d4cb700ecbd60b4c"
+    },
+    "runtime": {
+      "python": "3.11.16 (main, Aug 13 2026, 02:46:14) [GCC 13.3.0]",
+      "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+      "package_version": "0.23.5+columbus.1",
+      "module_path": "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/tree_sitter_java",
+      "binary_sha256": {
+        "_binding.abi3.so": "fcad1a4c2749357caf939eb95c24e15ed2d4f6a27f235cec548bb08142e8ea70"
+      },
+      "fixtures": {
+        "primitive": {
+          "partial": false,
+          "annotations": [
+            "@A"
+          ]
+        },
+        "array": {
+          "partial": false,
+          "annotations": [
+            "@A",
+            "@B"
+          ]
+        },
+        "generic": {
+          "partial": false,
+          "annotations": [
+            "@A",
+            "@B"
+          ]
+        },
+        "invalid_after_ellipsis": {
+          "partial": true,
+          "annotations": []
+        }
+      }
+    },
+    "wheel": {
+      "name": "tree_sitter_java-0.23.5+columbus.1-cp39-abi3-linux_x86_64.whl",
+      "bytes": 83157,
+      "sha256": "84d073520dc49f65d7b738580bf86a63a07ff867169d60d7f23aa474fab44721"
+    }
+  },
+  {
+    "artifact": "java-candidate-ubuntu-latest-py3.14",
+    "provenance": {
+      "upstream_revision": "6018d681d319aada6d9fe1b8a8d17f9f4d6c758e",
+      "package_version": "0.23.5+columbus.1",
+      "generator": "tree-sitter-cli@0.27.0",
+      "abi": 14,
+      "files_sha256": {
+        "grammar.js": "966a10920d11ba6566736d8a1c80c15b8e349bc12945e709456d5852c8717035",
+        "src/parser.c": "64aece257d41d4c27848125dac05e619b2e0164388330cd657411b741ace6ff7",
+        "src/node-types.json": "d314dd68cc4c0f5638f4173ed6cc9931f7ca69a6583c6d97caf4349111fb1989",
+        "pyproject.toml": "e571ab02bb3ae6efbaf16b73dca68fe18f0f1aff15dc32de56bd9d55bd3988d1",
+        "setup.py": "42e55e6fa7bf687e684f29a893ba151dd2a01533a3bca9467f1a095cf4e310df",
+        "bindings/python/tree_sitter_java/binding.c": "f62d846c352e0cc50b1c261f01b94583d5ef3b04a9c62a8ce60d60359a6ea33b",
+        "LICENSE": "52ed137b039cd9c46409bc22e89938af911c95b157feae2d040b51e6084369a7"
+      },
+      "patch_sha256": "701ad2f492a934051b721206cdfc4903b2a83a89023ec406d4cb700ecbd60b4c"
+    },
+    "runtime": {
+      "python": "3.14.7 (main, Aug  6 2026, 02:19:46) [GCC 13.3.0]",
+      "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+      "package_version": "0.23.5+columbus.1",
+      "module_path": "/opt/hostedtoolcache/Python/3.14.7/x64/lib/python3.14/site-packages/tree_sitter_java",
+      "binary_sha256": {
+        "_binding.abi3.so": "1a63fb36c5df848a57e9dc7f389424fbe3774960b00fa01f48a0ba10c9da6670"
+      },
+      "fixtures": {
+        "primitive": {
+          "partial": false,
+          "annotations": [
+            "@A"
+          ]
+        },
+        "array": {
+          "partial": false,
+          "annotations": [
+            "@A",
+            "@B"
+          ]
+        },
+        "generic": {
+          "partial": false,
+          "annotations": [
+            "@A",
+            "@B"
+          ]
+        },
+        "invalid_after_ellipsis": {
+          "partial": true,
+          "annotations": []
+        }
+      }
+    },
+    "wheel": {
+      "name": "tree_sitter_java-0.23.5+columbus.1-cp39-abi3-linux_x86_64.whl",
+      "bytes": 83299,
+      "sha256": "52613fffc2ec0e8d7e7e8ec8e16e70b4e046414280eee5d81781666504362c7b"
+    }
+  },
+  {
+    "artifact": "java-candidate-windows-latest-py3.11",
+    "provenance": {
+      "upstream_revision": "6018d681d319aada6d9fe1b8a8d17f9f4d6c758e",
+      "package_version": "0.23.5+columbus.1",
+      "generator": "tree-sitter-cli@0.27.0",
+      "abi": 14,
+      "files_sha256": {
+        "grammar.js": "966a10920d11ba6566736d8a1c80c15b8e349bc12945e709456d5852c8717035",
+        "src/parser.c": "64aece257d41d4c27848125dac05e619b2e0164388330cd657411b741ace6ff7",
+        "src/node-types.json": "d314dd68cc4c0f5638f4173ed6cc9931f7ca69a6583c6d97caf4349111fb1989",
+        "pyproject.toml": "e17ec32922f74159b78de389f3a209a26f3bbd14a1cf0f09a2a6ba26de5b50e8",
+        "setup.py": "42e55e6fa7bf687e684f29a893ba151dd2a01533a3bca9467f1a095cf4e310df",
+        "bindings/python/tree_sitter_java/binding.c": "f62d846c352e0cc50b1c261f01b94583d5ef3b04a9c62a8ce60d60359a6ea33b",
+        "LICENSE": "52ed137b039cd9c46409bc22e89938af911c95b157feae2d040b51e6084369a7"
+      },
+      "patch_sha256": "701ad2f492a934051b721206cdfc4903b2a83a89023ec406d4cb700ecbd60b4c"
+    },
+    "runtime": {
+      "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+      "platform": "Windows-10-10.0.26100-SP0",
+      "package_version": "0.23.5+columbus.1",
+      "module_path": "C:\\hostedtoolcache\\windows\\Python\\3.11.9\\x64\\Lib\\site-packages\\tree_sitter_java",
+      "binary_sha256": {
+        "_binding.pyd": "68f76317522bec359e1eb7ca2712c40f629b93254e4ec1b869ddce49fee4ed3c"
+      },
+      "fixtures": {
+        "primitive": {
+          "partial": false,
+          "annotations": [
+            "@A"
+          ]
+        },
+        "array": {
+          "partial": false,
+          "annotations": [
+            "@A",
+            "@B"
+          ]
+        },
+        "generic": {
+          "partial": false,
+          "annotations": [
+            "@A",
+            "@B"
+          ]
+        },
+        "invalid_after_ellipsis": {
+          "partial": true,
+          "annotations": []
+        }
+      }
+    },
+    "wheel": {
+      "name": "tree_sitter_java-0.23.5+columbus.1-cp39-abi3-win_amd64.whl",
+      "bytes": 60785,
+      "sha256": "273553e23e34baf26b950644f1c5cf5dad81376f16d8130e39ba874a0749a99c"
+    }
+  },
+  {
+    "artifact": "java-candidate-windows-latest-py3.14",
+    "provenance": {
+      "upstream_revision": "6018d681d319aada6d9fe1b8a8d17f9f4d6c758e",
+      "package_version": "0.23.5+columbus.1",
+      "generator": "tree-sitter-cli@0.27.0",
+      "abi": 14,
+      "files_sha256": {
+        "grammar.js": "966a10920d11ba6566736d8a1c80c15b8e349bc12945e709456d5852c8717035",
+        "src/parser.c": "64aece257d41d4c27848125dac05e619b2e0164388330cd657411b741ace6ff7",
+        "src/node-types.json": "d314dd68cc4c0f5638f4173ed6cc9931f7ca69a6583c6d97caf4349111fb1989",
+        "pyproject.toml": "e17ec32922f74159b78de389f3a209a26f3bbd14a1cf0f09a2a6ba26de5b50e8",
+        "setup.py": "42e55e6fa7bf687e684f29a893ba151dd2a01533a3bca9467f1a095cf4e310df",
+        "bindings/python/tree_sitter_java/binding.c": "f62d846c352e0cc50b1c261f01b94583d5ef3b04a9c62a8ce60d60359a6ea33b",
+        "LICENSE": "52ed137b039cd9c46409bc22e89938af911c95b157feae2d040b51e6084369a7"
+      },
+      "patch_sha256": "701ad2f492a934051b721206cdfc4903b2a83a89023ec406d4cb700ecbd60b4c"
+    },
+    "runtime": {
+      "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+      "platform": "Windows-2025Server-10.0.26100-SP0",
+      "package_version": "0.23.5+columbus.1",
+      "module_path": "C:\\hostedtoolcache\\windows\\Python\\3.14.7\\x64\\Lib\\site-packages\\tree_sitter_java",
+      "binary_sha256": {
+        "_binding.pyd": "10ae1bf6743678ee16759ea03dd19dcbd545f40008772221473080a657fa6b8d"
+      },
+      "fixtures": {
+        "primitive": {
+          "partial": false,
+          "annotations": [
+            "@A"
+          ]
+        },
+        "array": {
+          "partial": false,
+          "annotations": [
+            "@A",
+            "@B"
+          ]
+        },
+        "generic": {
+          "partial": false,
+          "annotations": [
+            "@A",
+            "@B"
+          ]
+        },
+        "invalid_after_ellipsis": {
+          "partial": true,
+          "annotations": []
+        }
+      }
+    },
+    "wheel": {
+      "name": "tree_sitter_java-0.23.5+columbus.1-cp39-abi3-win_amd64.whl",
+      "bytes": 62889,
+      "sha256": "d6dced5a991e016880c0353617b67e1266a4edb9b2ff8205d6a52428ce752e40"
+    }
+  }
+]

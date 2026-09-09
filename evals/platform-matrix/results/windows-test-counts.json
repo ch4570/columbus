@@ -1,0 +1,18 @@
+{
+  "distribution (windows-latest, 3.14)": [
+    "2026-09-07T15:12:07.6088878Z test_python_314_interpreter_alias_can_resume_only_when_it_targets_the_current_python (test_release_installer.ReleaseInstallerTests.test_python_314_interpreter_alias_can_resume_only_when_it_targets_the_current_python) ... skipped 'Python 3.14 creates this interpreter alias on POSIX'",
+    "2026-09-07T15:12:07.7013995Z Ran 49 tests in 4.721s",
+    "2026-09-07T15:12:07.7014325Z OK (skipped=1)",
+    "2026-09-07T15:13:05.6001532Z Ran 190 tests in 56.591s",
+    "2026-09-07T15:13:11.4152795Z test_published_engine_recreates_the_recorded_nonempty_index (test_observe.ObservationTests.test_published_engine_recreates_the_recorded_nonempty_index) ... skipped 'The immutable RepoAtlas 0.4 archive cannot replay on Windows/Python 3.14: its preserved stat/fstat ctime handling rejects stable files. Replay it on Windows/Python 3.11, Linux, or macOS. Current Columbus remains supported.'",
+    "2026-09-07T15:13:11.6071904Z Ran 13 tests in 5.328s",
+    "2026-09-07T15:13:11.6072220Z OK (skipped=1)"
+  ],
+  "distribution (windows-latest, 3.11)": [
+    "2026-09-07T15:12:05.1566418Z test_python_314_interpreter_alias_can_resume_only_when_it_targets_the_current_python (test_release_installer.ReleaseInstallerTests.test_python_314_interpreter_alias_can_resume_only_when_it_targets_the_current_python) ... skipped 'Python 3.14 creates this interpreter alias on POSIX'",
+    "2026-09-07T15:12:05.2671894Z Ran 49 tests in 6.071s",
+    "2026-09-07T15:12:05.2672696Z OK (skipped=1)",
+    "2026-09-07T15:13:06.2485589Z Ran 190 tests in 59.968s",
+    "2026-09-07T15:13:40.1158921Z Ran 13 tests in 33.249s"
+  ]
+}

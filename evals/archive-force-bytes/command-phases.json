@@ -1,0 +1,144 @@
+{
+  "source_results_sha256": "dbd60070fb0525e889e8aae776fb661916c77205c60e90b5bab215fc05dde958",
+  "scope": "Whole completed commands grouped by explicit archive or instruction command strings; mixed commands stay whole. Other commands are not automatically redundant. No actual-token attribution or counterfactual savings.",
+  "conditions": {
+    "baseline": {
+      "other_commands": {
+        "commands": 34,
+        "output_bytes": 139993,
+        "command_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33
+        ]
+      }
+    },
+    "columbus": {
+      "instructions_and_runtime_listing": {
+        "commands": 2,
+        "output_bytes": 13624,
+        "command_indices": [
+          0,
+          1
+        ]
+      },
+      "other_commands": {
+        "commands": 62,
+        "output_bytes": 151463,
+        "command_indices": [
+          2,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          65,
+          66,
+          67,
+          68,
+          69
+        ]
+      },
+      "archive_search": {
+        "commands": 4,
+        "output_bytes": 5358,
+        "command_indices": [
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      "archive_neighbors": {
+        "commands": 2,
+        "output_bytes": 76722,
+        "command_indices": [
+          7,
+          64
+        ]
+      }
+    }
+  }
+}

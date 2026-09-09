@@ -1,0 +1,577 @@
+{
+  "baseline": {
+    "schema": "columbus.exploration-observation/v1",
+    "case": "django-html-callers",
+    "condition": "baseline",
+    "repeat": 1,
+    "model_requested": "gpt-5.6-sol",
+    "effort_requested": "xhigh",
+    "elapsed_seconds": 229.436,
+    "return_code": 0,
+    "timed_out": false,
+    "source_unchanged": true,
+    "usage": {
+      "input_tokens": 52873,
+      "cached_input_tokens": 33536,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 6901,
+      "reasoning_output_tokens": 3837,
+      "uncached_input_tokens": 19337
+    },
+    "commands": [
+      {
+        "command": "/bin/zsh -lc \"rg -n --glob '*.py' 'conditional_escape' django | head -n 250\"",
+        "exit_code": 0,
+        "output_bytes": 2140,
+        "output_sha256": "a560aeb510b1df28b85ddc269ce84a7a93ce1aaa844a9023c6885e3c14281a3b"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/template/defaultfilters.py | sed -n '660,705p'\"",
+        "exit_code": 0,
+        "output_bytes": 1685,
+        "output_sha256": "6decf147e8df34ccba1b03cc3335127fc03c5c5f77a6457227f05cd2521236aa"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/template/defaulttags.py | sed -n '455,500p'\"",
+        "exit_code": 0,
+        "output_bytes": 1805,
+        "output_sha256": "7e7a520e8f0e47c732aff6485cdb7569ac2c890c5fce9b28a9ed728b465fc62b"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/template/library.py | sed -n '300,340p'\"",
+        "exit_code": 0,
+        "output_bytes": 1701,
+        "output_sha256": "9b4018ccc1ad13ff04eb75925e58868ebaa0fb911b742e1e94cd40c39e66ff29"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/template/defaultfilters.py | sed -n '430,480p'\"",
+        "exit_code": 0,
+        "output_bytes": 1641,
+        "output_sha256": "d7f8f47aa229b9d69c56bc3113087dd91b84e012dad9eaaddd6b771a4aad9975"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/utils/html.py | sed -n '105,172p'\"",
+        "exit_code": 0,
+        "output_bytes": 2898,
+        "output_sha256": "3e30895b9ae2f41010bca521286ffa9c40a1a5d2fc390dbce18f2bbace8cc27d"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/templatetags/static.py | sed -n '90,125p'\"",
+        "exit_code": 0,
+        "output_bytes": 1244,
+        "output_sha256": "2cdf20d9bc8a33e6fcbb82a892bb5321ae5f01877b93260353c680194492ab3b"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/template/defaultfilters.py | sed -n '585,625p'\"",
+        "exit_code": 0,
+        "output_bytes": 1400,
+        "output_sha256": "8a6d85cfbaca9acc8ae9fc44cb2dd144a829d30f127ce802829a80756e28818e"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/admin/helpers.py | sed -n '150,190p'\"",
+        "exit_code": 0,
+        "output_bytes": 1744,
+        "output_sha256": "e5c37dc5abb10e6f39a51971ba4a0b0a61bd51712e2c2e3dcc5516754e79bdb0"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/admin/helpers.py | sed -n '275,312p'\"",
+        "exit_code": 0,
+        "output_bytes": 1875,
+        "output_sha256": "295848a9ce48f3ea22e6f09c7c3259866432739e37beec1b2ac9870e9b30e404"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/template/base.py | sed -n '1035,1068p'\"",
+        "exit_code": 0,
+        "output_bytes": 1239,
+        "output_sha256": "f6b79cb3f0fe5b014e288b4db933bf9486e573143293594539648bbc3418680e"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/template/backends/dummy.py | sed -n '20,55p'\"",
+        "exit_code": 0,
+        "output_bytes": 1389,
+        "output_sha256": "5022da05dbf567d26cd0d59dafeaa390ee812c86d2823653479dd74c14ed43fb"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/template/defaultfilters.py | sed -n '684,735p'\"",
+        "exit_code": 0,
+        "output_bytes": 1891,
+        "output_sha256": "4b56538c35542ccad4be0a25384dcb2df550bbc3552b059b72a9408a43aa06b6"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/template/defaulttags.py | sed -n '420,492p'\"",
+        "exit_code": 0,
+        "output_bytes": 2790,
+        "output_sha256": "da8988efe891ea32b27391308430fe695db4859f2ee96e56913c000bc3866cec"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/admin/helpers.py | sed -n '225,306p'\"",
+        "exit_code": 0,
+        "output_bytes": 3589,
+        "output_sha256": "ea696f0488c86eb6ce9cb79dcf487da90c136ea6ee412be8620e6402202b6115"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/admin/helpers.py | sed -n '170,202p'\"",
+        "exit_code": 0,
+        "output_bytes": 1473,
+        "output_sha256": "a7881c07fb4a381639c2ba311888e7f99292a7a9d7b3fd801c861a60e0baf4b9"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n --glob '*.py' '(from django\\\\.utils\\\\.html import|django\\\\.utils\\\\.html)' django | head -n 220\"",
+        "exit_code": 0,
+        "output_bytes": 2120,
+        "output_sha256": "90e8e5f695582f7150b59187697681203094bca83dcbc39e828be38570c49540"
+      }
+    ],
+    "command_count": 17,
+    "command_output_bytes": 32624,
+    "failed_commands": 0,
+    "other_tool_types": [],
+    "runtime_warnings": [],
+    "turn_failed": false,
+    "quality": {
+      "passed": false,
+      "findings": [
+        {
+          "id": "AdminField.label_tag",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "AdminReadonlyField.contents",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "Template.render",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "render_value_in_context",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "escape_filter",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "escapeseq",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "join",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "URLNode.render",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "SimpleNode.render",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "StaticNode.render",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "format_html",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "format_html_join",
+          "passed": false,
+          "reason": "quote not verbatim within cited lines"
+        },
+        {
+          "id": "__exact_caller_set__",
+          "passed": true,
+          "reason": "no extra callers"
+        }
+      ],
+      "grader_version": "caller-enumeration-1",
+      "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+    },
+    "index_preflight": null,
+    "answer": {
+      "findings": [
+        {
+          "id": "StaticNode.render",
+          "path": "django/templatetags/static.py",
+          "start_line": 115,
+          "end_line": 122,
+          "quote": "    def render(self, context):\n        url = self.url(context)\n        if context.autoescape:\n            url = conditional_escape(url)\n        if self.varname is None:\n            return url\n        context[self.varname] = url\n        return \"\"",
+          "explanation": "Directly conditionally escapes the resolved static URL only when context.autoescape is true. It then either returns the URL when no target variable was requested or stores it in the context and returns an empty string. With autoescape disabled, this lexical call site is not reached."
+        },
+        {
+          "id": "format_html",
+          "path": "django/utils/html.py",
+          "start_line": 135,
+          "end_line": 145,
+          "quote": "    if not (args or kwargs):\n        # RemovedInDjango60Warning: when the deprecation ends, replace with:\n        # raise TypeError(\"args or kwargs must be provided.\")\n        warnings.warn(\n            \"Calling format_html() without passing args or kwargs is deprecated.\",\n            RemovedInDjango60Warning,\n            stacklevel=2,\n        )\n    args_safe = map(conditional_escape, args)\n    kwargs_safe = {k: conditional_escape(v) for (k, v) in kwargs.items()}\n    return mark_safe(format_string.format(*args_safe, **kwargs_safe))",
+          "explanation": "The dictionary-comprehension call directly escapes every keyword argument value before formatting. The positional path is higher-order rather than a direct call expression: conditional_escape is passed to map and invoked as positional values are consumed. Calling with no arguments only emits a warning and produces no runtime conditional_escape invocation because both collections are empty."
+        },
+        {
+          "id": "format_html_join",
+          "path": "django/utils/html.py",
+          "start_line": 162,
+          "end_line": 170,
+          "quote": "    return mark_safe(\n        conditional_escape(sep).join(\n            (\n                format_html(format_string, **args)\n                if isinstance(args, Mapping)\n                else format_html(format_string, *args)\n            )\n            for args in args_generator\n        )\n    )",
+          "explanation": "Directly escapes sep before using it to join the generated HTML fragments, including when the generator yields no fragments. Escaping of each generated argument set occurs transitively through format_html and is not another direct call in this caller. There is no conditional branch or early return around the direct separator call."
+        },
+        {
+          "id": "URLNode.render",
+          "path": "django/template/defaulttags.py",
+          "start_line": 476,
+          "end_line": 491,
+          "quote": "        # Try to look up the URL. If it fails, raise NoReverseMatch unless the\n        # {% url ... as var %} construct is used, in which case return nothing.\n        url = \"\"\n        try:\n            url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)\n        except NoReverseMatch:\n            if self.asvar is None:\n                raise\n\n        if self.asvar:\n            context[self.asvar] = url\n            return \"\"\n        else:\n            if context.autoescape:\n                url = conditional_escape(url)\n            return url",
+          "explanation": "Directly escapes the reversed URL only on the non-as-variable path and only when context.autoescape is true. A truthy asvar stores the unescaped URL and returns early. A reverse failure is re-raised when asvar is None, so the call is then unreachable; otherwise processing continues with the initially empty URL."
+        },
+        {
+          "id": "render_value_in_context",
+          "path": "django/template/base.py",
+          "start_line": 1056,
+          "end_line": 1063,
+          "quote": "    value = template_localtime(value, use_tz=context.use_tz)\n    value = localize(value, use_l10n=context.use_l10n)\n    if context.autoescape:\n        if not issubclass(type(value), str):\n            value = str(value)\n        return conditional_escape(value)\n    else:\n        return str(value)",
+          "explanation": "After time-zone conversion and localization, directly conditionally escapes value when autoescaping is enabled, first converting non-string types to str. With autoescape disabled it returns str(value) from the alternate branch without reaching the target call."
+        },
+        {
+          "id": "escape_filter",
+          "path": "django/template/defaultfilters.py",
+          "start_line": 452,
+          "end_line": 456,
+          "quote": "@register.filter(\"escape\", is_safe=True)\n@stringfilter\ndef escape_filter(value):\n    \"\"\"Mark the value as a string that should be auto-escaped.\"\"\"\n    return conditional_escape(value)",
+          "explanation": "Directly conditionally escapes the filter value whenever the function body runs, immediately returning the result. There is no source-level branch or early return around the call."
+        },
+        {
+          "id": "escapeseq",
+          "path": "django/template/defaultfilters.py",
+          "start_line": 459,
+          "end_line": 466,
+          "quote": "@register.filter(is_safe=True)\ndef escapeseq(value):\n    \"\"\"\n    An \"escape\" filter for sequences. Mark each element in the sequence,\n    individually, as a string that should be auto-escaped. Return a list with\n    the results.\n    \"\"\"\n    return [conditional_escape(obj) for obj in value]",
+          "explanation": "Directly conditionally escapes each object produced by value and returns the resulting list. The lexical call site executes once per element at runtime and therefore is never invoked for an empty iterable."
+        },
+        {
+          "id": "join",
+          "path": "django/template/defaultfilters.py",
+          "start_line": 606,
+          "end_line": 616,
+          "quote": "@register.filter(is_safe=True, needs_autoescape=True)\ndef join(value, arg, autoescape=True):\n    \"\"\"Join a list with a string, like Python's ``str.join(list)``.\"\"\"\n    try:\n        if autoescape:\n            data = conditional_escape(arg).join([conditional_escape(v) for v in value])\n        else:\n            data = arg.join(value)\n    except TypeError:  # Fail silently if arg isn't iterable.\n        return value\n    return mark_safe(data)",
+          "explanation": "Contains two direct call sites on the autoescape branch: it escapes the separator arg and separately escapes every element v before joining. With autoescape false, neither call is reached. An empty value still causes the separator call but no element calls; a TypeError during escaping or joining returns the original value early."
+        },
+        {
+          "id": "SimpleNode.render",
+          "path": "django/template/library.py",
+          "start_line": 322,
+          "end_line": 330,
+          "quote": "    def render(self, context):\n        resolved_args, resolved_kwargs = self.get_resolved_arguments(context)\n        output = self.func(*resolved_args, **resolved_kwargs)\n        if self.target_var is not None:\n            context[self.target_var] = output\n            return \"\"\n        if context.autoescape:\n            output = conditional_escape(output)\n        return output",
+          "explanation": "Directly conditionally escapes the simple-tag function's output only when no target variable is configured and context.autoescape is true. A non-None target_var stores the raw output and returns early, making the call unreachable on that path."
+        },
+        {
+          "id": "Template.render",
+          "path": "django/template/backends/dummy.py",
+          "start_line": 43,
+          "end_line": 51,
+          "quote": "    def render(self, context=None, request=None):\n        if context is None:\n            context = {}\n        else:\n            context = {k: conditional_escape(v) for k, v in context.items()}\n        if request is not None:\n            context[\"csrf_input\"] = csrf_input_lazy(request)\n            context[\"csrf_token\"] = csrf_token_lazy(request)\n        return self.safe_substitute(context)",
+          "explanation": "When a context mapping is explicitly supplied, directly conditionally escapes each existing value while rebuilding the mapping. Passing None skips the comprehension, and an empty mapping produces zero runtime calls. Request-derived CSRF entries are added afterward and therefore are not escaped by this call site."
+        },
+        {
+          "id": "AdminField.label_tag",
+          "path": "django/contrib/admin/helpers.py",
+          "start_line": 177,
+          "end_line": 194,
+          "quote": "    def label_tag(self):\n        classes = []\n        contents = conditional_escape(self.field.label)\n        if self.is_checkbox:\n            classes.append(\"vCheckboxLabel\")\n\n        if self.field.field.required:\n            classes.append(\"required\")\n        if not self.is_first:\n            classes.append(\"inline\")\n        attrs = {\"class\": \" \".join(classes)} if classes else {}\n        # checkboxes should not have a label suffix as the checkbox appears\n        # to the left of the label.\n        return self.field.label_tag(\n            contents=mark_safe(contents),\n            attrs=attrs,\n            label_suffix=\"\" if self.is_checkbox else None,\n        )",
+          "explanation": "Directly conditionally escapes the bound field's label before computing checkbox, required, and inline presentation attributes. The escaped result is marked safe and supplied as the label contents. No source-level condition or early return bypasses the call."
+        },
+        {
+          "id": "AdminReadonlyField.contents",
+          "path": "django/contrib/admin/helpers.py",
+          "start_line": 275,
+          "end_line": 304,
+          "quote": "            f, attr, value = lookup_field(field, obj, model_admin)\n        except (AttributeError, ValueError, ObjectDoesNotExist):\n            result_repr = self.empty_value_display\n        else:\n            if field in self.form.fields:\n                widget = self.form[field].field.widget\n                # This isn't elegant but suffices for contrib.auth's\n                # ReadOnlyPasswordHashWidget.\n                if getattr(widget, \"read_only\", False):\n                    return widget.render(field, value)\n            if f is None:\n                if getattr(attr, \"boolean\", False):\n                    result_repr = _boolean_icon(value)\n                else:\n                    if hasattr(value, \"__html__\"):\n                        result_repr = value\n                    else:\n                        result_repr = linebreaksbr(value)\n            else:\n                if isinstance(f.remote_field, ManyToManyRel) and value is not None:\n                    result_repr = \", \".join(map(str, value.all()))\n                elif (\n                    isinstance(f.remote_field, (ForeignObjectRel, OneToOneField))\n                    and value is not None\n                ):\n                    result_repr = self.get_admin_url(f.remote_field, value)\n                else:\n                    result_repr = display_for_field(value, f, self.empty_value_display)\n                result_repr = linebreaksbr(result_repr)\n        return conditional_escape(result_repr)",
+          "explanation": "Directly conditionally escapes the final read-only representation, whether it came from the empty-value fallback, a boolean icon, an HTML-capable value, line-broken plain content, a many-to-many listing, an admin link, or display_for_field. A form widget marked read_only returns widget.render() early and bypasses this call. Safe representations implementing __html__ are preserved by conditional_escape rather than escaped again."
+        }
+      ]
+    },
+    "prompt_bytes": 1612,
+    "events_sha256": "cd3dc878f162a0f168e80b85a5132f2f11a3537eb9a7058cb0e9701a3fe0732e"
+  },
+  "columbus": {
+    "schema": "columbus.exploration-observation/v1",
+    "case": "django-html-callers",
+    "condition": "columbus",
+    "repeat": 1,
+    "model_requested": "gpt-5.6-sol",
+    "effort_requested": "xhigh",
+    "elapsed_seconds": 309.382,
+    "return_code": 0,
+    "timed_out": false,
+    "source_unchanged": true,
+    "usage": {
+      "input_tokens": 171833,
+      "cached_input_tokens": 146688,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 9128,
+      "reasoning_output_tokens": 5343,
+      "uncached_input_tokens": 25145
+    },
+    "commands": [
+      {
+        "command": "/bin/zsh -lc \"sed -n '1,240p' /private/tmp/columbus-django-html-frozen/runtime/SKILL.md\"",
+        "exit_code": 0,
+        "output_bytes": 4678,
+        "output_sha256": "4d9e5b15d13cc47290edaec96b3d86aa184929c455e898346b133b5da9ac309e"
+      },
+      {
+        "command": "/bin/zsh -lc \"/Users/rex/Desktop/columbus/.venv/bin/python /private/tmp/columbus-django-html-frozen/runtime/columbus.py callers django.utils.html.conditional_escape --repo . --snapshot --path 'django/*' --format text --budget-bytes 12000 --context-lines 20\"",
+        "exit_code": 2,
+        "output_bytes": 84,
+        "output_sha256": "c948da9fd36326d54dc4c6d921068635470c713fa08c05499da4c0432da4b9fc"
+      },
+      {
+        "command": "/bin/zsh -lc '/Users/rex/Desktop/columbus/.venv/bin/python /private/tmp/columbus-django-html-frozen/runtime/columbus.py search conditional_escape --repo . --snapshot --format text --limit 20'",
+        "exit_code": 0,
+        "output_bytes": 3483,
+        "output_sha256": "3fe4beb8dc9548f6163fdcac3f018fdbbcefe53a731f6163eadf953387f9a58d"
+      },
+      {
+        "command": "/bin/zsh -lc \"/Users/rex/Desktop/columbus/.venv/bin/python /private/tmp/columbus-django-html-frozen/runtime/columbus.py callers 'django/utils/html.py::conditional_escape:function' --repo . --snapshot --path 'django/*' --format text --budget-bytes 20000 --context-lines 20\"",
+        "exit_code": 0,
+        "output_bytes": 0,
+        "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n --glob '*.py' 'conditional_escape' django\"",
+        "exit_code": 0,
+        "output_bytes": 2140,
+        "output_sha256": "15b33af54ebc22f1d06352be0c5e1e51949fc7c1659f11886f1eadeff07f93b0"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n --glob '*.py' '(\\\\.conditional_escape\\\\s*\\\\(|conditional_escape\\\\s*\\\\()' django\"",
+        "exit_code": 0,
+        "output_bytes": 1268,
+        "output_sha256": "31cc35eac024e43366974688f5a08c45c8a3cce51eac446672ed71f5d19bae4a"
+      },
+      {
+        "command": "/bin/zsh -lc \"sed -n '160,310p' django/contrib/admin/helpers.py\nsed -n '440,475p' django/template/defaultfilters.py\nsed -n '590,700p' django/template/defaultfilters.py\nsed -n '450,500p' django/template/defaulttags.py\nsed -n '110,175p' django/utils/html.py\"",
+        "exit_code": 0,
+        "output_bytes": 13131,
+        "output_sha256": "da789bf18a1339315b78fb0e694c35050978e0cfdf89bde2e72519e8df49bb29"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/admin/helpers.py | sed -n '177,194p'\nnl -ba django/contrib/admin/helpers.py | sed -n '266,304p'\nnl -ba django/template/backends/dummy.py | sed -n '43,51p'\nnl -ba django/template/base.py | sed -n '1050,1063p'\nnl -ba django/template/defaultfilters.py | sed -n '454,466p'\nnl -ba django/template/defaultfilters.py | sed -n '607,616p'\"",
+        "exit_code": 0,
+        "output_bytes": 4893,
+        "output_sha256": "e9ab2e792195afc20852ddfb9b12c22a45f1a154f0ddbcc5a3488404f195a90b"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/template/defaulttags.py | sed -n '463,491p'\nnl -ba django/template/library.py | sed -n '322,330p'\nnl -ba django/templatetags/static.py | sed -n '115,122p'\nnl -ba django/utils/html.py | sed -n '129,145p'\nnl -ba django/utils/html.py | sed -n '148,171p'\"",
+        "exit_code": 0,
+        "output_bytes": 4023,
+        "output_sha256": "9ab42e7057a705692d540aeb70617f9d8c2753552654eaa444b69235fcf72143"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/template/defaultfilters.py | sed -n '450,467p'\nnl -ba django/template/defaultfilters.py | sed -n '680,695p'\nnl -ba django/utils/html.py | sed -n '114,126p'\"",
+        "exit_code": 0,
+        "output_bytes": 1548,
+        "output_sha256": "5fdbff1c935d20994119f1e1ba032c0caa5777a3e173122db4dee21bc6e279c0"
+      }
+    ],
+    "command_count": 10,
+    "command_output_bytes": 35248,
+    "failed_commands": 1,
+    "other_tool_types": [],
+    "runtime_warnings": [],
+    "turn_failed": false,
+    "quality": {
+      "passed": true,
+      "findings": [
+        {
+          "id": "AdminField.label_tag",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "AdminReadonlyField.contents",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "Template.render",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "render_value_in_context",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "escape_filter",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "escapeseq",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "join",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "URLNode.render",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "SimpleNode.render",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "StaticNode.render",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "format_html",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "format_html_join",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "__exact_caller_set__",
+          "passed": true,
+          "reason": "no extra callers"
+        }
+      ],
+      "grader_version": "caller-enumeration-1",
+      "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+    },
+    "index_preflight": {
+      "passed": true,
+      "files": 5465,
+      "symbols": 46630,
+      "edges": 86828,
+      "indexed_bytes": 35218163,
+      "revision": "c5f8fa062e8cdc5a8c49"
+    },
+    "answer": {
+      "findings": [
+        {
+          "id": "AdminField.label_tag",
+          "path": "django/contrib/admin/helpers.py",
+          "start_line": 177,
+          "end_line": 194,
+          "quote": "    def label_tag(self):\n        classes = []\n        contents = conditional_escape(self.field.label)\n        if self.is_checkbox:\n            classes.append(\"vCheckboxLabel\")\n\n        if self.field.field.required:\n            classes.append(\"required\")\n        if not self.is_first:\n            classes.append(\"inline\")\n        attrs = {\"class\": \" \".join(classes)} if classes else {}\n        # checkboxes should not have a label suffix as the checkbox appears\n        # to the left of the label.\n        return self.field.label_tag(\n            contents=mark_safe(contents),\n            attrs=attrs,\n            label_suffix=\"\" if self.is_checkbox else None,\n        )",
+          "explanation": "The direct call conditionally escapes the bound field\u2019s label before it is marked safe and supplied as the label contents. Lexically and at runtime this call is unconditional once the method body begins; the checkbox, required-field, and first-field conditions only affect classes and the label suffix, and there is no earlier return."
+        },
+        {
+          "id": "AdminReadonlyField.contents",
+          "path": "django/contrib/admin/helpers.py",
+          "start_line": 275,
+          "end_line": 304,
+          "quote": "            f, attr, value = lookup_field(field, obj, model_admin)\n        except (AttributeError, ValueError, ObjectDoesNotExist):\n            result_repr = self.empty_value_display\n        else:\n            if field in self.form.fields:\n                widget = self.form[field].field.widget\n                # This isn't elegant but suffices for contrib.auth's\n                # ReadOnlyPasswordHashWidget.\n                if getattr(widget, \"read_only\", False):\n                    return widget.render(field, value)\n            if f is None:\n                if getattr(attr, \"boolean\", False):\n                    result_repr = _boolean_icon(value)\n                else:\n                    if hasattr(value, \"__html__\"):\n                        result_repr = value\n                    else:\n                        result_repr = linebreaksbr(value)\n            else:\n                if isinstance(f.remote_field, ManyToManyRel) and value is not None:\n                    result_repr = \", \".join(map(str, value.all()))\n                elif (\n                    isinstance(f.remote_field, (ForeignObjectRel, OneToOneField))\n                    and value is not None\n                ):\n                    result_repr = self.get_admin_url(f.remote_field, value)\n                else:\n                    result_repr = display_for_field(value, f, self.empty_value_display)\n                result_repr = linebreaksbr(result_repr)\n        return conditional_escape(result_repr)",
+          "explanation": "The final direct call conditionally escapes the selected read-only representation: the empty-value fallback, a Boolean icon, an HTML-capable value or line-broken value, a many-to-many list, a related-object admin link, or the normal field display. The call is present lexically but is not reached when a form widget has read_only set, because that branch returns widget.render() early. All other shown branches fall through to the call; values implementing __html__ remain protected by conditional_escape\u2019s safe-value convention."
+        },
+        {
+          "id": "Template.render",
+          "path": "django/template/backends/dummy.py",
+          "start_line": 43,
+          "end_line": 51,
+          "quote": "    def render(self, context=None, request=None):\n        if context is None:\n            context = {}\n        else:\n            context = {k: conditional_escape(v) for k, v in context.items()}\n        if request is not None:\n            context[\"csrf_input\"] = csrf_input_lazy(request)\n            context[\"csrf_token\"] = csrf_token_lazy(request)\n        return self.safe_substitute(context)",
+          "explanation": "The direct call in the dictionary comprehension conditionally escapes every value in a supplied context while preserving its keys. At runtime it is skipped when context is None and runs zero times for an empty context. CSRF values are added afterward and therefore are not processed by this call. There is no early return."
+        },
+        {
+          "id": "render_value_in_context",
+          "path": "django/template/base.py",
+          "start_line": 1050,
+          "end_line": 1063,
+          "quote": "def render_value_in_context(value, context):\n    \"\"\"\n    Convert any value to a string to become part of a rendered template. This\n    means escaping, if required, and conversion to a string. If value is a\n    string, it's expected to already be translated.\n    \"\"\"\n    value = template_localtime(value, use_tz=context.use_tz)\n    value = localize(value, use_l10n=context.use_l10n)\n    if context.autoescape:\n        if not issubclass(type(value), str):\n            value = str(value)\n        return conditional_escape(value)\n    else:\n        return str(value)",
+          "explanation": "The direct call escapes the value after timezone conversion and localization, converting non-string values to strings first. It is reachable only when context.autoescape is true and returns immediately. With autoescape disabled, the alternate early return performs only str(value), so the lexical call is not executed."
+        },
+        {
+          "id": "escape_filter",
+          "path": "django/template/defaultfilters.py",
+          "start_line": 452,
+          "end_line": 456,
+          "quote": "@register.filter(\"escape\", is_safe=True)\n@stringfilter\ndef escape_filter(value):\n    \"\"\"Mark the value as a string that should be auto-escaped.\"\"\"\n    return conditional_escape(value)",
+          "explanation": "The function directly returns the conditionally escaped filter value; @stringfilter supplies the string-oriented wrapper behavior. The call is unconditional whenever this lexical function body executes, with no branch or earlier return."
+        },
+        {
+          "id": "escapeseq",
+          "path": "django/template/defaultfilters.py",
+          "start_line": 459,
+          "end_line": 466,
+          "quote": "@register.filter(is_safe=True)\ndef escapeseq(value):\n    \"\"\"\n    An \"escape\" filter for sequences. Mark each element in the sequence,\n    individually, as a string that should be auto-escaped. Return a list with\n    the results.\n    \"\"\"\n    return [conditional_escape(obj) for obj in value]",
+          "explanation": "The single direct call site conditionally escapes each element yielded by value and returns the results as a list. There is no conditional branch or early return, although at runtime an empty iterable causes the comprehension to invoke the call zero times."
+        },
+        {
+          "id": "join",
+          "path": "django/template/defaultfilters.py",
+          "start_line": 607,
+          "end_line": 616,
+          "quote": "def join(value, arg, autoescape=True):\n    \"\"\"Join a list with a string, like Python's ``str.join(list)``.\"\"\"\n    try:\n        if autoescape:\n            data = conditional_escape(arg).join([conditional_escape(v) for v in value])\n        else:\n            data = arg.join(value)\n    except TypeError:  # Fail silently if arg isn't iterable.\n        return value\n    return mark_safe(data)",
+          "explanation": "This caller has two direct lexical call sites: when autoescape is true, it conditionally escapes the separator arg once and each element v before joining. With autoescape false, neither call site is reached. If a TypeError occurs, the function returns the original value early; otherwise it marks the joined result safe. For an empty iterable, the separator call still runs but the element call runs zero times."
+        },
+        {
+          "id": "URLNode.render",
+          "path": "django/template/defaulttags.py",
+          "start_line": 476,
+          "end_line": 491,
+          "quote": "        # Try to look up the URL. If it fails, raise NoReverseMatch unless the\n        # {% url ... as var %} construct is used, in which case return nothing.\n        url = \"\"\n        try:\n            url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)\n        except NoReverseMatch:\n            if self.asvar is None:\n                raise\n\n        if self.asvar:\n            context[self.asvar] = url\n            return \"\"\n        else:\n            if context.autoescape:\n                url = conditional_escape(url)\n            return url",
+          "explanation": "The direct call conditionally escapes the reversed URL only on the output-producing path when context.autoescape is true. A truthy asvar stores the URL and returns an empty string before the call. A failed reverse is re-raised when asvar is None; otherwise url remains empty and follows the asvar logic. With autoescaping disabled, the method returns the URL without executing the lexical call."
+        },
+        {
+          "id": "SimpleNode.render",
+          "path": "django/template/library.py",
+          "start_line": 322,
+          "end_line": 330,
+          "quote": "    def render(self, context):\n        resolved_args, resolved_kwargs = self.get_resolved_arguments(context)\n        output = self.func(*resolved_args, **resolved_kwargs)\n        if self.target_var is not None:\n            context[self.target_var] = output\n            return \"\"\n        if context.autoescape:\n            output = conditional_escape(output)\n        return output",
+          "explanation": "The direct call conditionally escapes the wrapped tag function\u2019s output. It is reached only when no target variable is configured and context.autoescape is true. Configuring target_var stores the unescaped output and returns an empty string early; with autoescaping disabled, the output is returned without this call."
+        },
+        {
+          "id": "StaticNode.render",
+          "path": "django/templatetags/static.py",
+          "start_line": 115,
+          "end_line": 122,
+          "quote": "    def render(self, context):\n        url = self.url(context)\n        if context.autoescape:\n            url = conditional_escape(url)\n        if self.varname is None:\n            return url\n        context[self.varname] = url\n        return \"\"",
+          "explanation": "The direct call conditionally escapes the generated static URL whenever context.autoescape is true. Unlike URLNode.render, this happens before the output-variable branch, so an assigned value is also escaped. With autoescaping disabled the call is not reached; afterward the method either returns the URL or stores it and returns an empty string."
+        },
+        {
+          "id": "format_html",
+          "path": "django/utils/html.py",
+          "start_line": 135,
+          "end_line": 145,
+          "quote": "    if not (args or kwargs):\n        # RemovedInDjango60Warning: when the deprecation ends, replace with:\n        # raise TypeError(\"args or kwargs must be provided.\")\n        warnings.warn(\n            \"Calling format_html() without passing args or kwargs is deprecated.\",\n            RemovedInDjango60Warning,\n            stacklevel=2,\n        )\n    args_safe = map(conditional_escape, args)\n    kwargs_safe = {k: conditional_escape(v) for (k, v) in kwargs.items()}\n    return mark_safe(format_string.format(*args_safe, **kwargs_safe))",
+          "explanation": "The qualifying direct call is the dictionary-comprehension call that conditionally escapes each keyword argument value. Its dynamic invocation count is therefore one per keyword argument, possibly zero. The positional path is distinct higher-order use: conditional_escape is passed as the callable to map rather than appearing as the callee of a Call expression; consuming args_safe applies it to each positional argument. With no arguments, the warning does not return early, but neither path dynamically invokes conditional_escape. The formatted result is marked safe."
+        },
+        {
+          "id": "format_html_join",
+          "path": "django/utils/html.py",
+          "start_line": 162,
+          "end_line": 171,
+          "quote": "    return mark_safe(\n        conditional_escape(sep).join(\n            (\n                format_html(format_string, **args)\n                if isinstance(args, Mapping)\n                else format_html(format_string, *args)\n            )\n            for args in args_generator\n        )\n    )",
+          "explanation": "The direct call conditionally escapes sep before using it to join the generated fragments; it executes once when this return expression is evaluated, even if args_generator is empty. The Mapping condition only selects whether each row is passed to format_html as keyword or positional arguments. Any escaping performed by those format_html calls is transitive rather than another direct call in this lexical caller. There is no early return, and the joined result is marked safe."
+        }
+      ]
+    },
+    "prompt_bytes": 2150,
+    "events_sha256": "079044bc750570995632893e27edcf90fbf1a984ed35f9cb200a7c5c9e029f34"
+  }
+}

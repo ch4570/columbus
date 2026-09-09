@@ -1,0 +1,245 @@
+{
+  "scope": "Verified physical source delivery and exact flag-definition occurrence; no claim about model attention or equivalent unrecognized evidence.",
+  "conditions": {
+    "baseline": {
+      "events_sha256": "3ab1dd5cf25c6be53560e236e6e8165c4978fd0879ea6a97f069bc33e073f1f7",
+      "evidence": [
+        {
+          "evidence": "uid_override",
+          "path": "django/contrib/auth/forms.py",
+          "start_line": 497,
+          "end_line": 497,
+          "source_sha256": "4ec2a254441375b6fab822731a5fb7d60b109399754a91cb080909ca7ce7b6a7",
+          "source": "            }",
+          "all_lines_in_verified_reads": true,
+          "read_witnesses": [
+            {
+              "command_id": "item_15",
+              "path": "django/contrib/auth/forms.py",
+              "start": 455,
+              "end": 505,
+              "mode": "nl",
+              "bytes": 1880,
+              "repeated_bytes": 0,
+              "repeated_lines": 0
+            }
+          ]
+        },
+        {
+          "evidence": "delivery_catch",
+          "path": "django/contrib/auth/forms.py",
+          "start_line": 433,
+          "end_line": 438,
+          "source_sha256": "4ec2a254441375b6fab822731a5fb7d60b109399754a91cb080909ca7ce7b6a7",
+          "source": "        try:\n            email_message.send()\n        except Exception:\n            logger.exception(\n                \"Failed to send password reset email to %s\", context[\"user\"].pk\n            )",
+          "all_lines_in_verified_reads": false,
+          "read_witnesses": []
+        },
+        {
+          "evidence": "oracle_preprocessing",
+          "path": "django/db/backends/oracle/base.py",
+          "start_line": 423,
+          "end_line": 438,
+          "source_sha256": "a8c068b614bcfba52b766098d11062b7e7389c977099e44027797c658b96be75",
+          "source": "        if settings.USE_TZ and (\n            isinstance(param, datetime.datetime)\n            and not isinstance(param, Oracle_datetime)\n        ):\n            param = Oracle_datetime.from_datetime(param)\n\n        string_size = 0\n        has_boolean_data_type = (\n            cursor.database.features.supports_boolean_expr_in_select_clause\n        )\n        if not has_boolean_data_type:\n            # Oracle < 23c doesn't recognize True and False correctly.\n            if param is True:\n                param = 1\n            elif param is False:\n                param = 0",
+          "all_lines_in_verified_reads": true,
+          "read_witnesses": [
+            {
+              "command_id": "item_4",
+              "path": "django/db/backends/oracle/base.py",
+              "start": 420,
+              "end": 462,
+              "mode": "nl",
+              "bytes": 1995,
+              "repeated_bytes": 0,
+              "repeated_lines": 0
+            },
+            {
+              "command_id": "item_21",
+              "path": "django/db/backends/oracle/base.py",
+              "start": 390,
+              "end": 425,
+              "mode": "nl",
+              "bytes": 1327,
+              "repeated_bytes": 332,
+              "repeated_lines": 6
+            }
+          ]
+        },
+        {
+          "evidence": "request_override",
+          "path": "django/test/client.py",
+          "start_line": 667,
+          "end_line": 667,
+          "source_sha256": "822196b11aec0ad9e53c70f90295483b4cc2fd5b2e60c2d3c9af3fdf42aa9d2c",
+          "source": "        # If QUERY_STRING is absent or empty, we want to extract it from the URL.",
+          "all_lines_in_verified_reads": true,
+          "read_witnesses": [
+            {
+              "command_id": "item_3",
+              "path": "django/test/client.py",
+              "start": 625,
+              "end": 760,
+              "mode": "nl",
+              "bytes": 4492,
+              "repeated_bytes": 0,
+              "repeated_lines": 0
+            }
+          ]
+        },
+        {
+          "evidence": "multipart_none_rejection",
+          "path": "django/test/client.py",
+          "start_line": 299,
+          "end_line": 303,
+          "source_sha256": "822196b11aec0ad9e53c70f90295483b4cc2fd5b2e60c2d3c9af3fdf42aa9d2c",
+          "source": "        if value is None:\n            raise TypeError(\n                \"Cannot encode None for key '%s' as POST data. Did you mean \"\n                \"to pass an empty string or omit the value?\" % key\n            )",
+          "all_lines_in_verified_reads": true,
+          "read_witnesses": [
+            {
+              "command_id": "item_2",
+              "path": "django/test/client.py",
+              "start": 270,
+              "end": 355,
+              "mode": "nl",
+              "bytes": 2890,
+              "repeated_bytes": 0,
+              "repeated_lines": 0
+            }
+          ]
+        },
+        {
+          "evidence": "vsi_delete_flag",
+          "path": "django/contrib/gis/gdal/raster/const.py",
+          "start_line": 105,
+          "end_line": 105,
+          "source_sha256": "0bfb2f05cfb1d39d8a2688c7d6dde90f5376f5debb850c7237cae6f2ed35e35a",
+          "source": "VSI_DELETE_BUFFER_ON_READ = False",
+          "all_lines_in_verified_reads": false,
+          "read_witnesses": [],
+          "exact_definition_in_any_command_output": []
+        }
+      ]
+    },
+    "columbus": {
+      "events_sha256": "92efef8b4c6c54bba7e624c2a3bfc36ab32d11f088b50ddf98b9befb503dcd20",
+      "evidence": [
+        {
+          "evidence": "uid_override",
+          "path": "django/contrib/auth/forms.py",
+          "start_line": 497,
+          "end_line": 497,
+          "source_sha256": "4ec2a254441375b6fab822731a5fb7d60b109399754a91cb080909ca7ce7b6a7",
+          "source": "            }",
+          "all_lines_in_verified_reads": true,
+          "read_witnesses": [
+            {
+              "command_id": "item_4",
+              "path": "django/contrib/auth/forms.py",
+              "start": 450,
+              "end": 510,
+              "mode": "sed",
+              "bytes": 2147,
+              "repeated_bytes": 788,
+              "repeated_lines": 17
+            }
+          ]
+        },
+        {
+          "evidence": "delivery_catch",
+          "path": "django/contrib/auth/forms.py",
+          "start_line": 433,
+          "end_line": 438,
+          "source_sha256": "4ec2a254441375b6fab822731a5fb7d60b109399754a91cb080909ca7ce7b6a7",
+          "source": "        try:\n            email_message.send()\n        except Exception:\n            logger.exception(\n                \"Failed to send password reset email to %s\", context[\"user\"].pk\n            )",
+          "all_lines_in_verified_reads": false,
+          "read_witnesses": []
+        },
+        {
+          "evidence": "oracle_preprocessing",
+          "path": "django/db/backends/oracle/base.py",
+          "start_line": 423,
+          "end_line": 438,
+          "source_sha256": "a8c068b614bcfba52b766098d11062b7e7389c977099e44027797c658b96be75",
+          "source": "        if settings.USE_TZ and (\n            isinstance(param, datetime.datetime)\n            and not isinstance(param, Oracle_datetime)\n        ):\n            param = Oracle_datetime.from_datetime(param)\n\n        string_size = 0\n        has_boolean_data_type = (\n            cursor.database.features.supports_boolean_expr_in_select_clause\n        )\n        if not has_boolean_data_type:\n            # Oracle < 23c doesn't recognize True and False correctly.\n            if param is True:\n                param = 1\n            elif param is False:\n                param = 0",
+          "all_lines_in_verified_reads": true,
+          "read_witnesses": [
+            {
+              "command_id": "item_6",
+              "path": "django/db/backends/oracle/base.py",
+              "start": 400,
+              "end": 465,
+              "mode": "sed",
+              "bytes": 2761,
+              "repeated_bytes": 952,
+              "repeated_lines": 17
+            }
+          ]
+        },
+        {
+          "evidence": "request_override",
+          "path": "django/test/client.py",
+          "start_line": 667,
+          "end_line": 667,
+          "source_sha256": "822196b11aec0ad9e53c70f90295483b4cc2fd5b2e60c2d3c9af3fdf42aa9d2c",
+          "source": "        # If QUERY_STRING is absent or empty, we want to extract it from the URL.",
+          "all_lines_in_verified_reads": true,
+          "read_witnesses": [
+            {
+              "command_id": "item_7",
+              "path": "django/test/client.py",
+              "start": 620,
+              "end": 680,
+              "mode": "sed",
+              "bytes": 1926,
+              "repeated_bytes": 539,
+              "repeated_lines": 17
+            }
+          ]
+        },
+        {
+          "evidence": "multipart_none_rejection",
+          "path": "django/test/client.py",
+          "start_line": 299,
+          "end_line": 303,
+          "source_sha256": "822196b11aec0ad9e53c70f90295483b4cc2fd5b2e60c2d3c9af3fdf42aa9d2c",
+          "source": "        if value is None:\n            raise TypeError(\n                \"Cannot encode None for key '%s' as POST data. Did you mean \"\n                \"to pass an empty string or omit the value?\" % key\n            )",
+          "all_lines_in_verified_reads": true,
+          "read_witnesses": [
+            {
+              "command_id": "item_7",
+              "path": "django/test/client.py",
+              "start": 260,
+              "end": 360,
+              "mode": "sed",
+              "bytes": 3432,
+              "repeated_bytes": 154,
+              "repeated_lines": 4
+            },
+            {
+              "command_id": "item_10",
+              "path": "django/test/client.py",
+              "start": 280,
+              "end": 350,
+              "mode": "nl",
+              "bytes": 2531,
+              "repeated_bytes": 2531,
+              "repeated_lines": 71
+            }
+          ]
+        },
+        {
+          "evidence": "vsi_delete_flag",
+          "path": "django/contrib/gis/gdal/raster/const.py",
+          "start_line": 105,
+          "end_line": 105,
+          "source_sha256": "0bfb2f05cfb1d39d8a2688c7d6dde90f5376f5debb850c7237cae6f2ed35e35a",
+          "source": "VSI_DELETE_BUFFER_ON_READ = False",
+          "all_lines_in_verified_reads": false,
+          "read_witnesses": [],
+          "exact_definition_in_any_command_output": []
+        }
+      ]
+    }
+  }
+}

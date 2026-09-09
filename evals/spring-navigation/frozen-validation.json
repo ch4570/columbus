@@ -1,0 +1,16 @@
+{
+  "source_manifest_equal": true,
+  "runtime_manifest_equal": true,
+  "positive_citation_control": true,
+  "negative_citation_controls": 8,
+  "index": {
+    "passed": true,
+    "files": 1166,
+    "symbols": 20811,
+    "edges": 31408,
+    "indexed_bytes": 7120331,
+    "revision": "6d8e93e4fb66e48252ed"
+  },
+  "semantic_grading": "Manual review against all PLAN.md criteria remains mandatory for both answers.",
+  "model_trial_started": false
+}

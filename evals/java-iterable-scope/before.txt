@@ -1,0 +1,13 @@
+.....F................................
+======================================================================
+FAIL: test_enhanced_for_iterable_uses_enclosing_scope (test_jvm.JVMTests.test_enhanced_for_iterable_uses_enclosing_scope)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/rex/Desktop/columbus/skills/columbus/scripts/tests/test_jvm.py", line 23, in test_enhanced_for_iterable_uses_enclosing_scope
+    self.assertTrue(calls['items']['resolved'])
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 38 tests in 0.154s
+
+FAILED (failures=1)

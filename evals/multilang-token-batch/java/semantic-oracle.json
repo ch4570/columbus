@@ -1,0 +1,326 @@
+{
+  "java-property-resolution": {
+    "source-selection": {
+      "must_state": [
+        "Lookup traverses the supplied PropertySources in its iteration order; do not invent a universal environment/source priority order.",
+        "A null PropertySources collection or no non-null source value returns null. Null results from individual sources are skipped.",
+        "The first non-null raw value is processed and its converted result returned immediately. A conversion returning null still ends this search; later sources are not tried.",
+        "Placeholder/conversion exceptions propagate; there is no catch-and-fallback to a lower-priority source. The lookup does not cache resolved property values, so later calls query the current sources again."
+      ],
+      "reviewed_ranges": [
+        {
+          "path": "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java",
+          "start_line": 73,
+          "end_line": 100
+        }
+      ],
+      "declaration_targets": [
+        "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java::org.springframework.core.env.PropertySourcesPropertyResolver.getProperty:method(String,Class<T>,boolean)"
+      ]
+    },
+    "nested-value-processing": {
+      "must_state": [
+        "Ordinary String and typed getProperty overloads pass resolveNestedPlaceholders=true; getPropertyAsRawString passes false and requests String conversion.",
+        "With resolution enabled, any String value is resolved before conversion. A non-String CharSequence is converted to a string and resolved only when the requested target is String or CharSequence; do not apply that branch to every target type or every object.",
+        "When resolution is disabled or no eligible string-like branch applies, the raw value goes straight to later conversion. The sequence is source selection, eligible nested resolution, then conversion.",
+        "Placeholder helper lookup uses this::getPropertyAsRawString. Raw means nested-placeholder expansion is disabled here; it does not mean type conversion is disabled."
+      ],
+      "reviewed_ranges": [
+        {
+          "path": "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java",
+          "start_line": 58,
+          "end_line": 100
+        },
+        {
+          "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+          "start_line": 280,
+          "end_line": 287
+        }
+      ],
+      "declaration_targets": [
+        "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.createPlaceholderHelper:method(boolean)",
+        "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders:method(String,PropertyPlaceholderHelper)",
+        "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java::org.springframework.core.env.PropertySourcesPropertyResolver.getProperty:method(String)",
+        "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java::org.springframework.core.env.PropertySourcesPropertyResolver.getProperty:method(String,Class<T>)",
+        "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java::org.springframework.core.env.PropertySourcesPropertyResolver.getProperty:method(String,Class<T>,boolean)",
+        "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java::org.springframework.core.env.PropertySourcesPropertyResolver.getPropertyAsRawString:method(String)"
+      ]
+    },
+    "placeholder-policy": {
+      "must_state": [
+        "ignoreUnresolvableNestedPlaceholders initially equals false. Empty nested values return unchanged; otherwise false selects resolveRequiredPlaceholders and true selects resolvePlaceholders.",
+        "Explicit resolvePlaceholders and resolveRequiredPlaceholders choose their own non-strict/strict helpers regardless of the nested flag. Helpers are created lazily with ignore=true/false respectively; these are not cached property results.",
+        "An unresolved placeholder is retained in placeholder form under the non-strict policy; strict resolution throws PlaceholderResolutionException, an IllegalArgumentException subtype. Do not confuse this with getRequiredProperty absence, which throws IllegalStateException.",
+        "Ignoring unresolvable placeholders is not a promise to suppress every error: circular placeholder references still throw. No placeholder or conversion exceptions are swallowed by the resolver lookup.",
+        "Detailed escape/default-expression grammar is outside the task; do not substitute an imagined complete placeholder algorithm for these reviewed boundaries."
+      ],
+      "reviewed_ranges": [
+        {
+          "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+          "start_line": 90,
+          "end_line": 102
+        },
+        {
+          "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+          "start_line": 172,
+          "end_line": 184
+        },
+        {
+          "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+          "start_line": 244,
+          "end_line": 287
+        },
+        {
+          "path": "src/main/java/org/springframework/util/PlaceholderParser.java",
+          "start_line": 341,
+          "end_line": 365
+        },
+        {
+          "path": "src/main/java/org/springframework/util/PlaceholderResolutionException.java",
+          "start_line": 30,
+          "end_line": 36
+        }
+      ],
+      "declaration_targets": [
+        "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.createPlaceholderHelper:method(boolean)",
+        "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders:method(String,PropertyPlaceholderHelper)",
+        "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.resolveNestedPlaceholders:method(String)",
+        "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.resolvePlaceholders:method(String)",
+        "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders:method(String)",
+        "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.setIgnoreUnresolvableNestedPlaceholders:method(boolean)",
+        "src/main/java/org/springframework/util/PlaceholderParser.java::org.springframework.util.PlaceholderParser.PartResolutionContext.flagPlaceholderAsVisited:method(String)",
+        "src/main/java/org/springframework/util/PlaceholderParser.java::org.springframework.util.PlaceholderParser.PartResolutionContext.handleUnresolvablePlaceholder:method(String,String)",
+        "src/main/java/org/springframework/util/PlaceholderParser.java::org.springframework.util.PlaceholderParser.PartResolutionContext.parse:method(String)",
+        "src/main/java/org/springframework/util/PlaceholderParser.java::org.springframework.util.PlaceholderParser.PartResolutionContext.toPlaceholderText:method(String)"
+      ]
+    },
+    "conversion-policy": {
+      "must_state": [
+        "A null requested target type returns the value directly.",
+        "If a conversion service is already configured, its convert method is used. The assignable-value shortcut is only in the no-configured-service branch; do not claim custom conversion is always bypassed for assignable values.",
+        "With no configured service, an assignable value is returned directly; otherwise DefaultConversionService.getSharedInstance() supplies conversion. This fallback does not store that shared instance into the resolver field.",
+        "getConversionService() instead initializes and stores a separate DefaultConversionService with synchronization/rechecking; subsequent property conversions see that configured service. setConversionService rejects null with IllegalArgumentException and replaces the field for non-null input.",
+        "Conversion output, including null, is returned as-is. Conversion failures propagate rather than being translated into missing-property fallback or trying another source. Do not promise that every target conversion succeeds."
+      ],
+      "reviewed_ranges": [
+        {
+          "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+          "start_line": 107,
+          "end_line": 128
+        },
+        {
+          "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+          "start_line": 297,
+          "end_line": 312
+        },
+        {
+          "path": "src/main/java/org/springframework/util/Assert.java",
+          "start_line": 173,
+          "end_line": 184
+        }
+      ],
+      "declaration_targets": [
+        "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.convertValueIfNecessary:method(Object,Class<T>)",
+        "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.getConversionService:method()",
+        "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.setConversionService:method(ConfigurableConversionService)",
+        "src/main/java/org/springframework/util/Assert.java::org.springframework.util.Assert.notNull:method(Object,String)"
+      ]
+    },
+    "missing-default-required": {
+      "must_state": [
+        "Ordinary nullable retrieval returns its lookup/conversion result. String and typed default overloads return the default only when that result is null; an empty string is not absence.",
+        "Both required overloads perform lookup and throw IllegalStateException with the missing key when the result is null; otherwise they return the value.",
+        "Because conversion may return null, a default or required-missing outcome can occur even after a non-null raw source value was found. This does not restart source iteration.",
+        "Placeholder and conversion exceptions occur during delegated lookup and propagate through default/required overloads; these overloads do not catch them and substitute a default. The separate validateRequiredProperties aggregation API is outside this task."
+      ],
+      "reviewed_ranges": [
+        {
+          "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+          "start_line": 214,
+          "end_line": 242
+        },
+        {
+          "path": "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java",
+          "start_line": 73,
+          "end_line": 100
+        }
+      ],
+      "declaration_targets": [
+        "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.getProperty:method(String,Class<T>,T)",
+        "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.getProperty:method(String,String)",
+        "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.getRequiredProperty:method(String)",
+        "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.getRequiredProperty:method(String,Class<T>)",
+        "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java::org.springframework.core.env.PropertySourcesPropertyResolver.getProperty:method(String,Class<T>,boolean)"
+      ]
+    }
+  },
+  "kotlin-reflection-hint-state": {
+    "kotlin-delegation": {
+      "must_state": [
+        "getTypeHint<T>() passes the reified T::class.java to Java getTypeHint(Class<?>). It is a lookup, not automatic registration.",
+        "The callback registration extension passes T::class.java and typeHint::invoke to the Java Class/Consumer overload. The Kotlin callback is noinline; it is adapted and passed through rather than invoked before Java registration.",
+        "The category overload passes T::class.java and spreads *memberCategories to the Java Class/varargs overload. It does not package all categories as one category or invoke the callback overload with the caller callback.",
+        "Registration delegates return the same ReflectionHints instance on normal completion. These extensions add syntax convenience; they do not prove runtime reflective reachability or execute reflected members."
+      ],
+      "reviewed_ranges": [
+        {
+          "path": "src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt",
+          "start_line": 26,
+          "end_line": 47
+        },
+        {
+          "path": "src/main/java/org/springframework/aot/hint/ReflectionHints.java",
+          "start_line": 76,
+          "end_line": 143
+        }
+      ],
+      "declaration_targets": [
+        "src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.getTypeHint:method(Class<?>)",
+        "src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.getTypeHint:method(TypeReference)",
+        "src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.registerType:method(Class<?>,Consumer<TypeHint.Builder>)",
+        "src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.registerType:method(Class<?>,MemberCategory...)",
+        "src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.registerType:method(TypeReference,Consumer<TypeHint.Builder>)",
+        "src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.registerType:method(TypeReference,MemberCategory...)",
+        "src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt::org.springframework.aot.hint.getTypeHint:function()@ReflectionHints",
+        "src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt::org.springframework.aot.hint.registerType:function((TypeHint.Builder)->Unit)@ReflectionHints",
+        "src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt::org.springframework.aot.hint.registerType:function(MemberCategory)@ReflectionHints"
+      ]
+    },
+    "registration-class-guards": {
+      "must_state": [
+        "Both Class-based registerType overloads reject a null Class with IllegalArgumentException via Assert.notNull.",
+        "A non-null Class with no canonical name is skipped: no TypeReference is created, no builder is registered and the consumer is not invoked; normal return is still this.",
+        "A Class with a canonical name is converted through TypeReference.of and delegated to its TypeReference overload. Do not generalize the skip policy to the lookup path or claim every class always registers.",
+        "No concurrency, type-loading or native-image execution guarantee follows from these guards."
+      ],
+      "reviewed_ranges": [
+        {
+          "path": "src/main/java/org/springframework/aot/hint/ReflectionHints.java",
+          "start_line": 122,
+          "end_line": 143
+        },
+        {
+          "path": "src/main/java/org/springframework/util/Assert.java",
+          "start_line": 173,
+          "end_line": 184
+        }
+      ],
+      "declaration_targets": [
+        "src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.registerType:method(Class<?>,Consumer<TypeHint.Builder>)",
+        "src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.registerType:method(Class<?>,MemberCategory...)",
+        "src/main/java/org/springframework/util/Assert.java::org.springframework.util.Assert.notNull:method(Object,String)"
+      ]
+    },
+    "registration-state-errors": {
+      "must_state": [
+        "The TypeReference registration path uses computeIfAbsent to keep one builder per type key and then invokes the consumer on that builder for every registration; repeated calls do not replace the builder.",
+        "The category path creates a consumer using TypeHint.builtWith, which calls Builder.withMembers. withMembers adds to a HashSet, so categories accumulate and duplicate categories collapse rather than replacing prior categories or promising insertion order.",
+        "Callbacks run synchronously after the builder has been obtained/stored. Callback exceptions propagate; there is no rollback or removal. A newly stored builder and any mutations made before throwing can remain observable. Do not claim transactional registration or that every thrown callback necessarily changed a category.",
+        "The task assumes non-null category arrays/elements and a non-null callback; hostile null misuse of those arguments and constructor/method/field metadata registration are outside scope."
+      ],
+      "reviewed_ranges": [
+        {
+          "path": "src/main/java/org/springframework/aot/hint/ReflectionHints.java",
+          "start_line": 98,
+          "end_line": 113
+        },
+        {
+          "path": "src/main/java/org/springframework/aot/hint/TypeHint.java",
+          "start_line": 140,
+          "end_line": 148
+        },
+        {
+          "path": "src/main/java/org/springframework/aot/hint/TypeHint.java",
+          "start_line": 154,
+          "end_line": 172
+        },
+        {
+          "path": "src/main/java/org/springframework/aot/hint/TypeHint.java",
+          "start_line": 267,
+          "end_line": 275
+        }
+      ],
+      "declaration_targets": [
+        "src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.registerType:method(TypeReference,Consumer<TypeHint.Builder>)",
+        "src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.registerType:method(TypeReference,MemberCategory...)",
+        "src/main/java/org/springframework/aot/hint/TypeHint.java::org.springframework.aot.hint.TypeHint.Builder.<init>:constructor(TypeReference)",
+        "src/main/java/org/springframework/aot/hint/TypeHint.java::org.springframework.aot.hint.TypeHint.Builder.withMembers:method(MemberCategory...)",
+        "src/main/java/org/springframework/aot/hint/TypeHint.java::org.springframework.aot.hint.TypeHint.builtWith:method(MemberCategory...)"
+      ]
+    },
+    "lookup-absence-errors": {
+      "must_state": [
+        "The class lookup first calls TypeReference.of(Class), then performs a map lookup. An absent valid type yields null and does not create/register a builder.",
+        "TypeReference.of(Class) delegates to ReflectionTypeReference.of, which rejects a null Class or null canonical name with IllegalArgumentException. Lookup does not share class-registration’s silent skip for a noncanonical class.",
+        "If a builder exists, the result is built from its current state. A missing stored hint is not evidence that the class cannot load or that reflection is forbidden at runtime."
+      ],
+      "reviewed_ranges": [
+        {
+          "path": "src/main/java/org/springframework/aot/hint/ReflectionHints.java",
+          "start_line": 76,
+          "end_line": 88
+        },
+        {
+          "path": "src/main/java/org/springframework/aot/hint/TypeReference.java",
+          "start_line": 67,
+          "end_line": 75
+        },
+        {
+          "path": "src/main/java/org/springframework/aot/hint/ReflectionTypeReference.java",
+          "start_line": 45,
+          "end_line": 49
+        },
+        {
+          "path": "src/main/java/org/springframework/util/Assert.java",
+          "start_line": 173,
+          "end_line": 184
+        }
+      ],
+      "declaration_targets": [
+        "src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.getTypeHint:method(Class<?>)",
+        "src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.getTypeHint:method(TypeReference)",
+        "src/main/java/org/springframework/aot/hint/ReflectionTypeReference.java::org.springframework.aot.hint.ReflectionTypeReference.of:method(Class<?>)",
+        "src/main/java/org/springframework/aot/hint/TypeReference.java::org.springframework.aot.hint.TypeReference.of:method(Class<?>)",
+        "src/main/java/org/springframework/util/Assert.java::org.springframework.util.Assert.notNull:method(Object,String)"
+      ]
+    },
+    "category-snapshots": {
+      "must_state": [
+        "Builder.build constructs a new TypeHint, and its constructor copies the builder category set with Set.copyOf. A returned category set is an immutable snapshot, not the live mutable builder HashSet.",
+        "After more categories are registered for the same builder, a later getTypeHint builds a new result with current accumulated categories; an earlier TypeHint/category set is not retroactively updated.",
+        "getMemberCategories returns that copied set. This is a category-snapshot statement, not a guarantee that arbitrary callback-owned objects are deeply copied or that registrations are thread-safe.",
+        "Do not claim that merely creating or reading hints performs reflective operations or proves runtime dispatch."
+      ],
+      "reviewed_ranges": [
+        {
+          "path": "src/main/java/org/springframework/aot/hint/ReflectionHints.java",
+          "start_line": 76,
+          "end_line": 79
+        },
+        {
+          "path": "src/main/java/org/springframework/aot/hint/TypeHint.java",
+          "start_line": 59,
+          "end_line": 67
+        },
+        {
+          "path": "src/main/java/org/springframework/aot/hint/TypeHint.java",
+          "start_line": 118,
+          "end_line": 124
+        },
+        {
+          "path": "src/main/java/org/springframework/aot/hint/TypeHint.java",
+          "start_line": 267,
+          "end_line": 294
+        }
+      ],
+      "declaration_targets": [
+        "src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.getTypeHint:method(TypeReference)",
+        "src/main/java/org/springframework/aot/hint/TypeHint.java::org.springframework.aot.hint.TypeHint.<init>:constructor(Builder)",
+        "src/main/java/org/springframework/aot/hint/TypeHint.java::org.springframework.aot.hint.TypeHint.Builder.build:method()",
+        "src/main/java/org/springframework/aot/hint/TypeHint.java::org.springframework.aot.hint.TypeHint.Builder.withJavaSerialization:method(boolean)",
+        "src/main/java/org/springframework/aot/hint/TypeHint.java::org.springframework.aot.hint.TypeHint.Builder.withMembers:method(MemberCategory...)",
+        "src/main/java/org/springframework/aot/hint/TypeHint.java::org.springframework.aot.hint.TypeHint.getMemberCategories:method()"
+      ]
+    }
+  }
+}

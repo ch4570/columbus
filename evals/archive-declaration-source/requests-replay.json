@@ -1,0 +1,54 @@
+{
+  "model_calls": 0,
+  "checks": [
+    {
+      "target": "src/requests/sessions.py::Session.send:method",
+      "pages": [
+        {
+          "start_line": 673,
+          "end_line": 748,
+          "next_offset": null,
+          "output_bytes": 3726,
+          "output_sha256": "0c37c65b296c9060177d73b4c00fc46d74406d2b1b2b25c4d1ae1d07c45f9747"
+        }
+      ],
+      "full_declaration_equal": true,
+      "source_hash": "0a5d5da449ce7f0af3ccf6e4bbe7a67a935e37846dff4ff9f08cb6c7e2464e6f"
+    },
+    {
+      "target": "src/requests/sessions.py::SessionRedirectMixin.resolve_redirects:method",
+      "pages": [
+        {
+          "start_line": 159,
+          "end_line": 278,
+          "next_offset": 120,
+          "output_bytes": 5940,
+          "output_sha256": "20a8121a1e9d2704e7d72b8e6bae814653cfaae9a798eaff9248ae52f60cfc3c"
+        },
+        {
+          "start_line": 279,
+          "end_line": 280,
+          "next_offset": null,
+          "output_bytes": 736,
+          "output_sha256": "6e6a3fc390a5da3fab296318d56f5238a98801725a192b12145dabe2e2593921"
+        }
+      ],
+      "full_declaration_equal": true,
+      "source_hash": "0a5d5da449ce7f0af3ccf6e4bbe7a67a935e37846dff4ff9f08cb6c7e2464e6f"
+    },
+    {
+      "target": "src/requests/adapters.py::HTTPAdapter.send:method",
+      "pages": [
+        {
+          "start_line": 590,
+          "end_line": 696,
+          "next_offset": null,
+          "output_bytes": 5292,
+          "output_sha256": "9b87488ff62a0f4501c006e76029f99821a100b118702ce5311ff609bf4352fe"
+        }
+      ],
+      "full_declaration_equal": true,
+      "source_hash": "f275f5d7781b6f5db7694b71d844e400dffa22c617f8cd9f4682c696e4c47119"
+    }
+  ]
+}

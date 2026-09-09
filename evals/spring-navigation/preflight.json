@@ -1,0 +1,134 @@
+{
+  "spring_revision": "4c8c6409a27a62ab163d3b6196ad862b7c835440",
+  "source_ranges": [
+    {
+      "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+      "sha256": "a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c",
+      "start_line": 155,
+      "end_line": 184,
+      "text": "\tpublic Resource getResource(String location) {\n\t\tAssert.notNull(location, \"Location must not be null\");\n\n\t\tfor (ProtocolResolver protocolResolver : getProtocolResolvers()) {\n\t\t\tResource resource = protocolResolver.resolve(location, this);\n\t\t\tif (resource != null) {\n\t\t\t\treturn resource;\n\t\t\t}\n\t\t}\n\n\t\tif (location.startsWith(\"/\")) {\n\t\t\treturn getResourceByPath(location);\n\t\t}\n\t\telse if (location.startsWith(CLASSPATH_URL_PREFIX)) {\n\t\t\treturn new ClassPathResource(location.substring(CLASSPATH_URL_PREFIX.length()), getClassLoader());\n\t\t}\n\t\telse if (location.startsWith(CLASSPATH_ALL_URL_PREFIX)) {\n\t\t\treturn new ClassPathAllResource(location.substring(CLASSPATH_ALL_URL_PREFIX.length()), getClassLoader());\n\t\t}\n\t\telse {\n\t\t\ttry {\n\t\t\t\t// Try to parse the location as a URL...\n\t\t\t\tURL url = ResourceUtils.toURL(location);\n\t\t\t\treturn (ResourceUtils.isFileURL(url) ? new FileUrlResource(url) : new UrlResource(url));\n\t\t\t}\n\t\t\tcatch (MalformedURLException ex) {\n\t\t\t\t// No URL -> resolve as resource path.\n\t\t\t\treturn getResourceByPath(location);\n\t\t\t}\n\t\t}"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+      "sha256": "a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c",
+      "start_line": 198,
+      "end_line": 200,
+      "text": "\tprotected Resource getResourceByPath(String path) {\n\t\treturn new ClassPathContextResource(path, getClassLoader());\n\t}"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+      "sha256": "a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c",
+      "start_line": 242,
+      "end_line": 267,
+      "text": "\t\tpublic InputStream getInputStream() throws IOException {\n\t\t\tList<InputStream> streams = new ArrayList<>();\n\t\t\tClassLoader cl = getClassLoader();\n\t\t\tEnumeration<URL> urls = (cl != null ? cl.getResources(getPath()) : ClassLoader.getSystemResources(getPath()));\n\t\t\twhile (urls.hasMoreElements()) {\n\t\t\t\ttry {\n\t\t\t\t\tstreams.add(urls.nextElement().openStream());\n\t\t\t\t}\n\t\t\t\tcatch (IOException ex) {\n\t\t\t\t\tstreams.forEach(stream -> {\n\t\t\t\t\t\ttry {\n\t\t\t\t\t\t\tstream.close();\n\t\t\t\t\t\t}\n\t\t\t\t\t\tcatch (IOException ex2) {\n\t\t\t\t\t\t\tex.addSuppressed(ex2);\n\t\t\t\t\t\t}\n\t\t\t\t\t});\n\t\t\t\t\tthrow ex;\n\t\t\t\t}\n\t\t\t}\n\t\t\treturn switch (streams.size()) {\n\t\t\t\tcase 0 -> InputStream.nullInputStream();\n\t\t\t\tcase 1 -> streams.get(0);\n\t\t\t\tdefault -> new SequenceInputStream(Collections.enumeration(streams));\n\t\t\t};\n\t\t}"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+      "sha256": "a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c",
+      "start_line": 297,
+      "end_line": 302,
+      "text": "\tprotected static class ClassPathContextResource extends ClassPathResource implements ContextResource {\n\n\t\tpublic ClassPathContextResource(String path, @Nullable ClassLoader classLoader) {\n\t\t\tsuper(path, classLoader);\n\t\t}\n"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+      "sha256": "c8157b437588b1860a7dbf2380752f721566a550a82f44aeb65fc4b426750e96",
+      "start_line": 200,
+      "end_line": 216,
+      "text": "\tpublic InputStream getInputStream() throws IOException {\n\t\tInputStream is;\n\t\tif (this.clazz != null) {\n\t\t\tis = this.clazz.getResourceAsStream(this.path);\n\t\t}\n\t\telse if (this.classLoader != null) {\n\t\t\tis = this.classLoader.getResourceAsStream(this.absolutePath);\n\t\t}\n\t\telse {\n\t\t\tis = ClassLoader.getSystemResourceAsStream(this.absolutePath);\n\t\t}\n\t\tif (is == null) {\n\t\t\tthrow new FileNotFoundException(getDescription() + \" cannot be opened because it does not exist\");\n\t\t}\n\t\treturn is;\n\t}\n"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/UrlResource.java",
+      "sha256": "ea60891c29d7f85083aec952a8540839913d64e51af75d38cf155ad0221d4f3e",
+      "start_line": 244,
+      "end_line": 257,
+      "text": "\tpublic InputStream getInputStream() throws IOException {\n\t\tURLConnection con = this.url.openConnection();\n\t\tcustomizeConnection(con);\n\t\ttry {\n\t\t\treturn con.getInputStream();\n\t\t}\n\t\tcatch (IOException ex) {\n\t\t\t// Close the HTTP connection (if applicable).\n\t\t\tif (con instanceof HttpURLConnection httpCon) {\n\t\t\t\thttpCon.disconnect();\n\t\t\t}\n\t\t\tthrow ex;\n\t\t}\n\t}"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/FileUrlResource.java",
+      "sha256": "8976287532732cce3d0f0aa67a7e752993438f95c0cccec867a900908bd07d38",
+      "start_line": 47,
+      "end_line": 47,
+      "text": "public class FileUrlResource extends UrlResource implements WritableResource {"
+    },
+    {
+      "path": "src/main/java/org/springframework/core/io/ResourceLoader.java",
+      "sha256": "eb0177da28c355501e6ad6d787c2592f71175d7ea779ff059576e6875dfe3043",
+      "start_line": 48,
+      "end_line": 68,
+      "text": "\t * @see ClassLoader#getResource\n\t */\n\tString CLASSPATH_URL_PREFIX = ResourceUtils.CLASSPATH_URL_PREFIX;\n\n\t/**\n\t * Pseudo URL prefix for all matching resources from the class path: {@value}.\n\t * <p>This differs from the common {@link #CLASSPATH_URL_PREFIX \"classpath:\"} prefix\n\t * in that it retrieves all matching resources for a given path. For example, to\n\t * locate all \"messages.properties\" files in the root of all deployed JAR files\n\t * you can use the location pattern {@code \"classpath*:/messages.properties\"}.\n\t * <p>As of Spring Framework 6.0, the semantics for the {@code \"classpath*:\"}\n\t * prefix have been expanded to include the module path as well as the class path.\n\t * <p>As of Spring Framework 7.1, this prefix is supported for {@link #getResource}\n\t * calls as well (exposing a multi-content resource handle), rather than just for\n\t * {@link org.springframework.core.io.support.ResourcePatternResolver#getResources}.\n\t * @since 7.1 (previously only declared on the\n\t * {@link org.springframework.core.io.support.ResourcePatternResolver} sub-interface)\n\t * @see ClassLoader#getResources\n\t * @see Resource#consumeContent\n\t */\n\tString CLASSPATH_ALL_URL_PREFIX = \"classpath*:\";"
+    }
+  ],
+  "graph_nodes": [
+    {
+      "id": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+      "start_line": 154,
+      "end_line": 185,
+      "stored_calls": [
+        [
+          "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource:class",
+          169,
+          "new ClassPathResource(location.substring(CLASSPATH_URL_PREFIX.length()), getClassLoader())"
+        ],
+        [
+          "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource:class",
+          172,
+          "new ClassPathAllResource(location.substring(CLASSPATH_ALL_URL_PREFIX.length()), getClassLoader())"
+        ],
+        [
+          "src/main/java/org/springframework/core/io/FileUrlResource.java::org.springframework.core.io.FileUrlResource:class",
+          178,
+          "new FileUrlResource(url)"
+        ],
+        [
+          "src/main/java/org/springframework/core/io/UrlResource.java::org.springframework.core.io.UrlResource:class",
+          178,
+          "new UrlResource(url)"
+        ],
+        [
+          "src/main/java/org/springframework/util/ResourceUtils.java::org.springframework.util.ResourceUtils.isFileURL:method(URL)",
+          178,
+          "ResourceUtils.isFileURL(url)"
+        ],
+        [
+          "src/main/java/org/springframework/util/ResourceUtils.java::org.springframework.util.ResourceUtils.toURL:method(String)",
+          177,
+          "ResourceUtils.toURL(location)"
+        ]
+      ]
+    },
+    {
+      "id": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResourceByPath:method(String)",
+      "start_line": 198,
+      "end_line": 200,
+      "stored_calls": [
+        [
+          "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathContextResource:class",
+          199,
+          "new ClassPathContextResource(path, getClassLoader())"
+        ]
+      ]
+    },
+    {
+      "id": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.ClassPathAllResource.getInputStream:method()",
+      "start_line": 241,
+      "end_line": 267,
+      "stored_calls": []
+    },
+    {
+      "id": "src/main/java/org/springframework/core/io/ClassPathResource.java::org.springframework.core.io.ClassPathResource.getInputStream:method()",
+      "start_line": 199,
+      "end_line": 215,
+      "stored_calls": []
+    },
+    {
+      "id": "src/main/java/org/springframework/core/io/UrlResource.java::org.springframework.core.io.UrlResource.getInputStream:method()",
+      "start_line": 243,
+      "end_line": 257,
+      "stored_calls": []
+    }
+  ],
+  "source_hashes_match_index": true,
+  "all_requested_declarations_present": true,
+  "runtime_executed": false,
+  "model_trial_started": false
+}

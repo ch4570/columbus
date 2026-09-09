@@ -1,0 +1,17 @@
+{
+  "exact_set_negative_controls": 3,
+  "source_manifest_equal": true,
+  "runtime_manifest_equal": true,
+  "positive_citation_control": true,
+  "negative_citation_controls": 12,
+  "index": {
+    "passed": true,
+    "files": 5465,
+    "symbols": 46630,
+    "edges": 86828,
+    "indexed_bytes": 35218163,
+    "revision": "c5f8fa062e8cdc5a8c49"
+  },
+  "semantic_grading": "Manual review against all SOURCE-REVIEW.md criteria remains mandatory for both answers.",
+  "model_trial_started": false
+}

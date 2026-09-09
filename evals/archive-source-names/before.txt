@@ -1,0 +1,27 @@
+E..E
+======================================================================
+ERROR: test_complete_archive_validation_and_exact_identity (test_archive_source.ArchiveSourceTests.test_complete_archive_validation_and_exact_identity)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/rex/Desktop/columbus/skills/columbus/scripts/tests/test_archive_source.py", line 91, in test_complete_archive_validation_and_exact_identity
+    self.assertEqual(source_archive(artifact, 'target', root),
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rex/Desktop/columbus/skills/columbus/scripts/columbus/archive.py", line 407, in source_archive
+    raise ValueError('Declaration absent; use archive-search and an exact ID')
+ValueError: Declaration absent; use archive-search and an exact ID
+
+======================================================================
+ERROR: test_unique_names_suffixes_and_ambiguity (test_archive_source.ArchiveSourceTests.test_unique_names_suffixes_and_ambiguity)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/rex/Desktop/columbus/skills/columbus/scripts/tests/test_archive_source.py", line 32, in test_unique_names_suffixes_and_ambiguity
+    self.assertEqual(source_archive(artifact, query, root), expected)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rex/Desktop/columbus/skills/columbus/scripts/columbus/archive.py", line 407, in source_archive
+    raise ValueError('Declaration absent; use archive-search and an exact ID')
+ValueError: Declaration absent; use archive-search and an exact ID
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.324s
+
+FAILED (errors=2)

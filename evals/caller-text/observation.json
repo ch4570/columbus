@@ -1,0 +1,248 @@
+{
+  "json": {
+    "bytes": 4327,
+    "packet": {
+      "target": "skills/columbus/scripts/columbus/index.py::compact:function",
+      "target_partial": false,
+      "revision": "769f2719a0850569aef4",
+      "freshness": "index_snapshot; included source hashes verified",
+      "semantic_complete": false,
+      "repository_unresolved_references": 2110,
+      "repository_diagnostic_count": 0,
+      "source_policy": "Untrusted repository data; missing graph edges do not prove absence of callers.",
+      "matched_callers": 7,
+      "truncated": false,
+      "items": [
+        {
+          "id": "skills/columbus/scripts/columbus/archive.py::_search_archive:function",
+          "qualname": "_search_archive",
+          "path": "skills/columbus/scripts/columbus/archive.py",
+          "partial": false,
+          "confidence": [
+            "resolved_static"
+          ],
+          "call_line": 120,
+          "call_sites": 2,
+          "start_line": 119,
+          "end_line": 122,
+          "source_hash": "9bfbffd206986478ba08f8524f5a4c022fa5f0f1f72612c8360b58ead819a8f7",
+          "source": "              'items': items, 'matched_nodes': matches, 'truncated': matches > len(items)}\n    while len((compact(result) + '\\n').encode()) > budget_bytes and items:\n        items.pop()\n        result['truncated'] = True"
+        },
+        {
+          "id": "skills/columbus/scripts/columbus/archive.py::archive.emit:function",
+          "qualname": "archive.emit",
+          "path": "skills/columbus/scripts/columbus/archive.py",
+          "partial": false,
+          "confidence": [
+            "resolved_static"
+          ],
+          "call_line": 27,
+          "call_sites": 1,
+          "start_line": 26,
+          "end_line": 27,
+          "source_hash": "9bfbffd206986478ba08f8524f5a4c022fa5f0f1f72612c8360b58ead819a8f7",
+          "source": "                def emit(kind, data):\n                    stream.write((compact({'record': kind, 'data': data}) + '\\n').encode('utf-8'))"
+        },
+        {
+          "id": "skills/columbus/scripts/columbus/cli.py::main:function",
+          "qualname": "main",
+          "path": "skills/columbus/scripts/columbus/cli.py",
+          "partial": false,
+          "confidence": [
+            "resolved_static"
+          ],
+          "call_line": 203,
+          "call_sites": 6,
+          "start_line": 202,
+          "end_line": 205,
+          "source_hash": "d1f9e8d6919c4189a58b5663488cc233002337b34661fb9202a58788c47d374b",
+          "source": "            summary = summarize(args.log)\n            sys.stdout.write(summary_text(summary) if args.format == 'text' else compact(summary) + '\\n')\n            return 0\n        if args.command == 'doctor':"
+        },
+        {
+          "id": "skills/columbus/scripts/columbus/index.py::RepositoryIndex.neighbors:method",
+          "qualname": "RepositoryIndex.neighbors",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "partial": false,
+          "confidence": [
+            "resolved_static"
+          ],
+          "call_line": 566,
+          "call_sites": 1,
+          "start_line": 565,
+          "end_line": 568,
+          "source_hash": "486de767b54ae3d5290704f4c475b77fbf3c15b591beed7f1fdf97a9833b361a",
+          "source": "                        queue.append((other, depth+1))\n                    key = compact(edge)\n                    if key not in seen_edges:\n                        if len(edges) >= 2000:"
+        },
+        {
+          "id": "skills/columbus/scripts/columbus/index.py::RepositoryIndex.refresh:method",
+          "qualname": "RepositoryIndex.refresh",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "partial": false,
+          "confidence": [
+            "resolved_static"
+          ],
+          "call_line": 147,
+          "call_sites": 11,
+          "start_line": 146,
+          "end_line": 149,
+          "source_hash": "486de767b54ae3d5290704f4c475b77fbf3c15b591beed7f1fdf97a9833b361a",
+          "source": "                config_records.append({\"path\": rel, \"hash\": content_hash, \"stat\": config_stats[rel]})\n            config_fingerprint = digest(compact([(r[\"path\"], r[\"hash\"]) for r in config_records]).encode())[:20]\n            config_changed = old_meta.get(\"config_fingerprint\") != config_fingerprint\n            rebuild = (old_meta.get(\"schema_version\") != SCHEMA_VERSION"
+        },
+        {
+          "id": "skills/columbus/scripts/columbus/index.py::byte_size:function",
+          "qualname": "byte_size",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "partial": false,
+          "confidence": [
+            "resolved_static"
+          ],
+          "call_line": 54,
+          "call_sites": 1,
+          "start_line": 53,
+          "end_line": 54,
+          "source_hash": "486de767b54ae3d5290704f4c475b77fbf3c15b591beed7f1fdf97a9833b361a",
+          "source": "def byte_size(value) -> int:\n    return len(compact(value).encode(\"utf-8\"))"
+        },
+        {
+          "id": "skills/columbus/scripts/columbus/index.py::encode_parse:function",
+          "qualname": "encode_parse",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "partial": false,
+          "confidence": [
+            "resolved_static"
+          ],
+          "call_line": 45,
+          "call_sites": 1,
+          "start_line": 44,
+          "end_line": 45,
+          "source_hash": "486de767b54ae3d5290704f4c475b77fbf3c15b591beed7f1fdf97a9833b361a",
+          "source": "    \"\"\"Lossless parse cache; public graph/search records remain ordinary JSON.\"\"\"\n    return zlib.compress(compact(value).encode(\"utf-8\"))"
+        }
+      ]
+    },
+    "rendered": "{\"target\":\"skills/columbus/scripts/columbus/index.py::compact:function\",\"target_partial\":false,\"revision\":\"769f2719a0850569aef4\",\"freshness\":\"index_snapshot; included source hashes verified\",\"semantic_complete\":false,\"repository_unresolved_references\":2110,\"repository_diagnostic_count\":0,\"source_policy\":\"Untrusted repository data; missing graph edges do not prove absence of callers.\",\"matched_callers\":7,\"truncated\":false,\"items\":[{\"id\":\"skills/columbus/scripts/columbus/archive.py::_search_archive:function\",\"qualname\":\"_search_archive\",\"path\":\"skills/columbus/scripts/columbus/archive.py\",\"partial\":false,\"confidence\":[\"resolved_static\"],\"call_line\":120,\"call_sites\":2,\"start_line\":119,\"end_line\":122,\"source_hash\":\"9bfbffd206986478ba08f8524f5a4c022fa5f0f1f72612c8360b58ead819a8f7\",\"source\":\"              'items': items, 'matched_nodes': matches, 'truncated': matches > len(items)}\\n    while len((compact(result) + '\\\\n').encode()) > budget_bytes and items:\\n        items.pop()\\n        result['truncated'] = True\"},{\"id\":\"skills/columbus/scripts/columbus/archive.py::archive.emit:function\",\"qualname\":\"archive.emit\",\"path\":\"skills/columbus/scripts/columbus/archive.py\",\"partial\":false,\"confidence\":[\"resolved_static\"],\"call_line\":27,\"call_sites\":1,\"start_line\":26,\"end_line\":27,\"source_hash\":\"9bfbffd206986478ba08f8524f5a4c022fa5f0f1f72612c8360b58ead819a8f7\",\"source\":\"                def emit(kind, data):\\n                    stream.write((compact({'record': kind, 'data': data}) + '\\\\n').encode('utf-8'))\"},{\"id\":\"skills/columbus/scripts/columbus/cli.py::main:function\",\"qualname\":\"main\",\"path\":\"skills/columbus/scripts/columbus/cli.py\",\"partial\":false,\"confidence\":[\"resolved_static\"],\"call_line\":203,\"call_sites\":6,\"start_line\":202,\"end_line\":205,\"source_hash\":\"d1f9e8d6919c4189a58b5663488cc233002337b34661fb9202a58788c47d374b\",\"source\":\"            summary = summarize(args.log)\\n            sys.stdout.write(summary_text(summary) if args.format == 'text' else compact(summary) + '\\\\n')\\n            return 0\\n        if args.command == 'doctor':\"},{\"id\":\"skills/columbus/scripts/columbus/index.py::RepositoryIndex.neighbors:method\",\"qualname\":\"RepositoryIndex.neighbors\",\"path\":\"skills/columbus/scripts/columbus/index.py\",\"partial\":false,\"confidence\":[\"resolved_static\"],\"call_line\":566,\"call_sites\":1,\"start_line\":565,\"end_line\":568,\"source_hash\":\"486de767b54ae3d5290704f4c475b77fbf3c15b591beed7f1fdf97a9833b361a\",\"source\":\"                        queue.append((other, depth+1))\\n                    key = compact(edge)\\n                    if key not in seen_edges:\\n                        if len(edges) >= 2000:\"},{\"id\":\"skills/columbus/scripts/columbus/index.py::RepositoryIndex.refresh:method\",\"qualname\":\"RepositoryIndex.refresh\",\"path\":\"skills/columbus/scripts/columbus/index.py\",\"partial\":false,\"confidence\":[\"resolved_static\"],\"call_line\":147,\"call_sites\":11,\"start_line\":146,\"end_line\":149,\"source_hash\":\"486de767b54ae3d5290704f4c475b77fbf3c15b591beed7f1fdf97a9833b361a\",\"source\":\"                config_records.append({\\\"path\\\": rel, \\\"hash\\\": content_hash, \\\"stat\\\": config_stats[rel]})\\n            config_fingerprint = digest(compact([(r[\\\"path\\\"], r[\\\"hash\\\"]) for r in config_records]).encode())[:20]\\n            config_changed = old_meta.get(\\\"config_fingerprint\\\") != config_fingerprint\\n            rebuild = (old_meta.get(\\\"schema_version\\\") != SCHEMA_VERSION\"},{\"id\":\"skills/columbus/scripts/columbus/index.py::byte_size:function\",\"qualname\":\"byte_size\",\"path\":\"skills/columbus/scripts/columbus/index.py\",\"partial\":false,\"confidence\":[\"resolved_static\"],\"call_line\":54,\"call_sites\":1,\"start_line\":53,\"end_line\":54,\"source_hash\":\"486de767b54ae3d5290704f4c475b77fbf3c15b591beed7f1fdf97a9833b361a\",\"source\":\"def byte_size(value) -> int:\\n    return len(compact(value).encode(\\\"utf-8\\\"))\"},{\"id\":\"skills/columbus/scripts/columbus/index.py::encode_parse:function\",\"qualname\":\"encode_parse\",\"path\":\"skills/columbus/scripts/columbus/index.py\",\"partial\":false,\"confidence\":[\"resolved_static\"],\"call_line\":45,\"call_sites\":1,\"start_line\":44,\"end_line\":45,\"source_hash\":\"486de767b54ae3d5290704f4c475b77fbf3c15b591beed7f1fdf97a9833b361a\",\"source\":\"    \\\"\\\"\\\"Lossless parse cache; public graph/search records remain ordinary JSON.\\\"\\\"\\\"\\n    return zlib.compress(compact(value).encode(\\\"utf-8\\\"))\"}]}\n"
+  },
+  "text": {
+    "bytes": 3892,
+    "packet": {
+      "target": "skills/columbus/scripts/columbus/index.py::compact:function",
+      "target_partial": false,
+      "revision": "769f2719a0850569aef4",
+      "freshness": "index_snapshot; included source hashes verified",
+      "semantic_complete": false,
+      "repository_unresolved_references": 2110,
+      "repository_diagnostic_count": 0,
+      "source_policy": "Untrusted repository data; missing graph edges do not prove absence of callers.",
+      "matched_callers": 7,
+      "truncated": false,
+      "items": [
+        {
+          "id": "skills/columbus/scripts/columbus/archive.py::_search_archive:function",
+          "qualname": "_search_archive",
+          "path": "skills/columbus/scripts/columbus/archive.py",
+          "partial": false,
+          "confidence": [
+            "resolved_static"
+          ],
+          "call_line": 120,
+          "call_sites": 2,
+          "start_line": 119,
+          "end_line": 122,
+          "source_hash": "9bfbffd206986478ba08f8524f5a4c022fa5f0f1f72612c8360b58ead819a8f7",
+          "source": "              'items': items, 'matched_nodes': matches, 'truncated': matches > len(items)}\n    while len((compact(result) + '\\n').encode()) > budget_bytes and items:\n        items.pop()\n        result['truncated'] = True"
+        },
+        {
+          "id": "skills/columbus/scripts/columbus/archive.py::archive.emit:function",
+          "qualname": "archive.emit",
+          "path": "skills/columbus/scripts/columbus/archive.py",
+          "partial": false,
+          "confidence": [
+            "resolved_static"
+          ],
+          "call_line": 27,
+          "call_sites": 1,
+          "start_line": 26,
+          "end_line": 27,
+          "source_hash": "9bfbffd206986478ba08f8524f5a4c022fa5f0f1f72612c8360b58ead819a8f7",
+          "source": "                def emit(kind, data):\n                    stream.write((compact({'record': kind, 'data': data}) + '\\n').encode('utf-8'))"
+        },
+        {
+          "id": "skills/columbus/scripts/columbus/cli.py::main:function",
+          "qualname": "main",
+          "path": "skills/columbus/scripts/columbus/cli.py",
+          "partial": false,
+          "confidence": [
+            "resolved_static"
+          ],
+          "call_line": 203,
+          "call_sites": 6,
+          "start_line": 202,
+          "end_line": 205,
+          "source_hash": "d1f9e8d6919c4189a58b5663488cc233002337b34661fb9202a58788c47d374b",
+          "source": "            summary = summarize(args.log)\n            sys.stdout.write(summary_text(summary) if args.format == 'text' else compact(summary) + '\\n')\n            return 0\n        if args.command == 'doctor':"
+        },
+        {
+          "id": "skills/columbus/scripts/columbus/index.py::RepositoryIndex.neighbors:method",
+          "qualname": "RepositoryIndex.neighbors",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "partial": false,
+          "confidence": [
+            "resolved_static"
+          ],
+          "call_line": 566,
+          "call_sites": 1,
+          "start_line": 565,
+          "end_line": 568,
+          "source_hash": "486de767b54ae3d5290704f4c475b77fbf3c15b591beed7f1fdf97a9833b361a",
+          "source": "                        queue.append((other, depth+1))\n                    key = compact(edge)\n                    if key not in seen_edges:\n                        if len(edges) >= 2000:"
+        },
+        {
+          "id": "skills/columbus/scripts/columbus/index.py::RepositoryIndex.refresh:method",
+          "qualname": "RepositoryIndex.refresh",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "partial": false,
+          "confidence": [
+            "resolved_static"
+          ],
+          "call_line": 147,
+          "call_sites": 11,
+          "start_line": 146,
+          "end_line": 149,
+          "source_hash": "486de767b54ae3d5290704f4c475b77fbf3c15b591beed7f1fdf97a9833b361a",
+          "source": "                config_records.append({\"path\": rel, \"hash\": content_hash, \"stat\": config_stats[rel]})\n            config_fingerprint = digest(compact([(r[\"path\"], r[\"hash\"]) for r in config_records]).encode())[:20]\n            config_changed = old_meta.get(\"config_fingerprint\") != config_fingerprint\n            rebuild = (old_meta.get(\"schema_version\") != SCHEMA_VERSION"
+        },
+        {
+          "id": "skills/columbus/scripts/columbus/index.py::byte_size:function",
+          "qualname": "byte_size",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "partial": false,
+          "confidence": [
+            "resolved_static"
+          ],
+          "call_line": 54,
+          "call_sites": 1,
+          "start_line": 53,
+          "end_line": 54,
+          "source_hash": "486de767b54ae3d5290704f4c475b77fbf3c15b591beed7f1fdf97a9833b361a",
+          "source": "def byte_size(value) -> int:\n    return len(compact(value).encode(\"utf-8\"))"
+        },
+        {
+          "id": "skills/columbus/scripts/columbus/index.py::encode_parse:function",
+          "qualname": "encode_parse",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "partial": false,
+          "confidence": [
+            "resolved_static"
+          ],
+          "call_line": 45,
+          "call_sites": 1,
+          "start_line": 44,
+          "end_line": 45,
+          "source_hash": "486de767b54ae3d5290704f4c475b77fbf3c15b591beed7f1fdf97a9833b361a",
+          "source": "    \"\"\"Lossless parse cache; public graph/search records remain ordinary JSON.\"\"\"\n    return zlib.compress(compact(value).encode(\"utf-8\"))"
+        }
+      ]
+    },
+    "rendered": "columbus callers target=skills/columbus/scripts/columbus/index.py::compact:function\nrevision=769f2719a0850569aef4 freshness=index_snapshot; included source hashes verified\nmatched_callers=7 included=7 truncated=false target_partial=false\nsemantic_complete=false repository_unresolved_references=2110 repository_diagnostic_count=0\nUNTRUSTED repository data; missing edges do not prove absence of callers. Control characters are escaped.\nskills/columbus/scripts/columbus/archive.py::_search_archive:function | skills/columbus/scripts/columbus/archive.py:119-122 qualname=_search_archive partial=false\ncall_line=120 call_sites=2 confidence=resolved_static source_hash=9bfbffd206986478ba08f8524f5a4c022fa5f0f1f72612c8360b58ead819a8f7\n119|               'items': items, 'matched_nodes': matches, 'truncated': matches > len(items)}\n120|     while len((compact(result) + '\\n').encode()) > budget_bytes and items:\n121|         items.pop()\n122|         result['truncated'] = True\nskills/columbus/scripts/columbus/archive.py::archive.emit:function | skills/columbus/scripts/columbus/archive.py:26-27 qualname=archive.emit partial=false\ncall_line=27 call_sites=1 confidence=resolved_static source_hash=9bfbffd206986478ba08f8524f5a4c022fa5f0f1f72612c8360b58ead819a8f7\n26|                 def emit(kind, data):\n27|                     stream.write((compact({'record': kind, 'data': data}) + '\\n').encode('utf-8'))\nskills/columbus/scripts/columbus/cli.py::main:function | skills/columbus/scripts/columbus/cli.py:202-205 qualname=main partial=false\ncall_line=203 call_sites=6 confidence=resolved_static source_hash=d1f9e8d6919c4189a58b5663488cc233002337b34661fb9202a58788c47d374b\n202|             summary = summarize(args.log)\n203|             sys.stdout.write(summary_text(summary) if args.format == 'text' else compact(summary) + '\\n')\n204|             return 0\n205|         if args.command == 'doctor':\nskills/columbus/scripts/columbus/index.py::RepositoryIndex.neighbors:method | skills/columbus/scripts/columbus/index.py:565-568 qualname=RepositoryIndex.neighbors partial=false\ncall_line=566 call_sites=1 confidence=resolved_static source_hash=486de767b54ae3d5290704f4c475b77fbf3c15b591beed7f1fdf97a9833b361a\n565|                         queue.append((other, depth+1))\n566|                     key = compact(edge)\n567|                     if key not in seen_edges:\n568|                         if len(edges) >= 2000:\nskills/columbus/scripts/columbus/index.py::RepositoryIndex.refresh:method | skills/columbus/scripts/columbus/index.py:146-149 qualname=RepositoryIndex.refresh partial=false\ncall_line=147 call_sites=11 confidence=resolved_static source_hash=486de767b54ae3d5290704f4c475b77fbf3c15b591beed7f1fdf97a9833b361a\n146|                 config_records.append({\"path\": rel, \"hash\": content_hash, \"stat\": config_stats[rel]})\n147|             config_fingerprint = digest(compact([(r[\"path\"], r[\"hash\"]) for r in config_records]).encode())[:20]\n148|             config_changed = old_meta.get(\"config_fingerprint\") != config_fingerprint\n149|             rebuild = (old_meta.get(\"schema_version\") != SCHEMA_VERSION\nskills/columbus/scripts/columbus/index.py::byte_size:function | skills/columbus/scripts/columbus/index.py:53-54 qualname=byte_size partial=false\ncall_line=54 call_sites=1 confidence=resolved_static source_hash=486de767b54ae3d5290704f4c475b77fbf3c15b591beed7f1fdf97a9833b361a\n53| def byte_size(value) -> int:\n54|     return len(compact(value).encode(\"utf-8\"))\nskills/columbus/scripts/columbus/index.py::encode_parse:function | skills/columbus/scripts/columbus/index.py:44-45 qualname=encode_parse partial=false\ncall_line=45 call_sites=1 confidence=resolved_static source_hash=486de767b54ae3d5290704f4c475b77fbf3c15b591beed7f1fdf97a9833b361a\n44|     \"\"\"Lossless parse cache; public graph/search records remain ordinary JSON.\"\"\"\n45|     return zlib.compress(compact(value).encode(\"utf-8\"))\n"
+  }
+}

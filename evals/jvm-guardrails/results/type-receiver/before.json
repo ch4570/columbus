@@ -1,0 +1,372 @@
+{
+  "compiler": "javac 17.0.20.1",
+  "versions": {
+    "tree-sitter": "0.26.0",
+    "tree-sitter-java": "0.23.5",
+    "tree-sitter-kotlin": "1.1.0"
+  },
+  "analyzer_sha256": "8f5dffc0a504e7035e43f95ad13706b14f737fc68b174256245e04ca454a9171",
+  "cases": [
+    {
+      "name": "split_False_static_False",
+      "sources": {
+        "T.java": "public class T { public void hit() {} }class C { void run() { T.hit(); } }"
+      },
+      "source_hashes": {
+        "T.java": "af6bf74f2126a336dd860f77e6f183746339a446d9456d8057f4a2dfb580ba39"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle qa3tlalx/split_False_static_False/T.java:1: error: non-static method hit() cannot be referenced from a static context\npublic class T { public void hit() {} }class C { void run() { T.hit(); } }\n                                                               ^\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "T.java::C.run:method()",
+        "scope_id": "T.java::C.run:method()",
+        "kind": "calls",
+        "name": "T.hit",
+        "member": "hit",
+        "receiver": "T",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "static_context": false,
+        "path": "T.java",
+        "line": 1,
+        "evidence": "T.hit()",
+        "resolved": false,
+        "reason": "receiver shadowed, inferred or ambiguous"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "split_False_static_True",
+      "sources": {
+        "T.java": "public class T { public static void hit() {} }class C { void run() { T.hit(); } }"
+      },
+      "source_hashes": {
+        "T.java": "28f8466b94803ad69111939f5608d59df0c36007ebd0774be3a8824593c6871c"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "T.java::C.run:method()",
+        "scope_id": "T.java::C.run:method()",
+        "kind": "calls",
+        "name": "T.hit",
+        "member": "hit",
+        "receiver": "T",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "static_context": false,
+        "path": "T.java",
+        "line": 1,
+        "evidence": "T.hit()",
+        "resolved": false,
+        "reason": "receiver shadowed, inferred or ambiguous"
+      },
+      "edges": [],
+      "passed": false
+    },
+    {
+      "name": "split_True_static_False",
+      "sources": {
+        "T.java": "public class T { public void hit() {} }",
+        "C.java": "class C { void run() { T.hit(); } }"
+      },
+      "source_hashes": {
+        "T.java": "58950b002ec4fa4fc82969201b6776c753f90c16f19807d65f906bf38f58ccea",
+        "C.java": "a5d9c27ebc93061fbadb71533639f036052e58cec837144930e59d1bcb3b5c2e"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle qa3tlalx/split_True_static_False/C.java:1: error: non-static method hit() cannot be referenced from a static context\nclass C { void run() { T.hit(); } }\n                        ^\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "T.hit",
+        "member": "hit",
+        "receiver": "T",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "T.hit()",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "T.java::T.hit:method()",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "T.java::T.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "T.hit()",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": false
+    },
+    {
+      "name": "split_True_static_True",
+      "sources": {
+        "T.java": "public class T { public static void hit() {} }",
+        "C.java": "class C { void run() { T.hit(); } }"
+      },
+      "source_hashes": {
+        "T.java": "368b4c68b99eef0a2ce823ce0f346590328dde84730fc0b3ceb2038e8184695d",
+        "C.java": "a5d9c27ebc93061fbadb71533639f036052e58cec837144930e59d1bcb3b5c2e"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "T.hit",
+        "member": "hit",
+        "receiver": "T",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "T.hit()",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "T.java::T.hit:method()",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "T.java::T.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "T.hit()",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "typed_value_named_T",
+      "sources": {
+        "T.java": "class T { void hit() {} } class C { void run(T T) { T.hit(); } }"
+      },
+      "source_hashes": {
+        "T.java": "e0bbf95b60430cfd83fc3366b3f9c3861639e029f5c75dc746cbf51cab772c12"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "T.java::C.run:method(T)",
+        "scope_id": "T.java::C.run:method(T)",
+        "kind": "calls",
+        "name": "T.hit",
+        "member": "hit",
+        "receiver": "T",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "static_context": false,
+        "path": "T.java",
+        "line": 1,
+        "evidence": "T.hit()",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "T.java::T.hit:method()",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "T.java::C.run:method(T)",
+          "target": "T.java::T.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "T.hit()",
+          "path": "T.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "unknown_value_shadows_T",
+      "sources": {
+        "T.java": "class T { static void hit() {} } class C { void run() { Object T = new Object(); T.hit(); } }"
+      },
+      "source_hashes": {
+        "T.java": "7347dd4f1ac96aa432a01be962ce47f9e06c68f7379928aa78cef8bf33298ab2"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle qa3tlalx/unknown_value_shadows_T/T.java:1: error: cannot find symbol\nclass T { static void hit() {} } class C { void run() { Object T = new Object(); T.hit(); } }\n                                                                                  ^\n  symbol:   method hit()\n  location: variable T of type Object\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "T.java::C.run:method()",
+        "scope_id": "T.java::C.run:method()",
+        "kind": "calls",
+        "name": "T.hit",
+        "member": "hit",
+        "receiver": "T",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "static_context": false,
+        "path": "T.java",
+        "line": 1,
+        "evidence": "T.hit()",
+        "resolved": false,
+        "reason": "receiver type external, ambiguous or unknown"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "type_parameter_shadows_T",
+      "sources": {
+        "T.java": "class T { static void hit() {} } class C<T> { void run() { T.hit(); } }"
+      },
+      "source_hashes": {
+        "T.java": "dd277fa9e23c8000895f8f410cb11850695a989f960372493e14dadd50964c8d"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle qa3tlalx/type_parameter_shadows_T/T.java:1: error: cannot find symbol\nclass T { static void hit() {} } class C<T> { void run() { T.hit(); } }\n                                                            ^\n  symbol:   method hit()\n  location: class Object\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "T.java::C.run:method()",
+        "scope_id": "T.java::C.run:method()",
+        "kind": "calls",
+        "name": "T.hit",
+        "member": "hit",
+        "receiver": "T",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "static_context": false,
+        "path": "T.java",
+        "line": 1,
+        "evidence": "T.hit()",
+        "resolved": false,
+        "reason": "receiver shadowed, inferred or ambiguous"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "private_static_foreign",
+      "sources": {
+        "T.java": "class T { private static void hit() {} } class C { void run() { T.hit(); } }"
+      },
+      "source_hashes": {
+        "T.java": "8cde46be45639fdefcdc93674ec4ba53a562f682e5d623596c913b5b9bd0028b"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle qa3tlalx/private_static_foreign/T.java:1: error: hit() has private access in T\nclass T { private static void hit() {} } class C { void run() { T.hit(); } }\n                                                                 ^\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "T.java::C.run:method()",
+        "scope_id": "T.java::C.run:method()",
+        "kind": "calls",
+        "name": "T.hit",
+        "member": "hit",
+        "receiver": "T",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "static_context": false,
+        "path": "T.java",
+        "line": 1,
+        "evidence": "T.hit()",
+        "resolved": false,
+        "reason": "receiver shadowed, inferred or ambiguous"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "private_static_nestmate",
+      "sources": {
+        "T.java": "class T { private static void hit() {} static class C { void run() { T.hit(); } } }"
+      },
+      "source_hashes": {
+        "T.java": "4b36e102ce571790dc4a4ccf0ac2c057dffdc463aa505f7319ed667b2048d6b9"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "T.java::T.C.run:method()",
+        "scope_id": "T.java::T.C.run:method()",
+        "kind": "calls",
+        "name": "T.hit",
+        "member": "hit",
+        "receiver": "T",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "static_context": false,
+        "path": "T.java",
+        "line": 1,
+        "evidence": "T.hit()",
+        "resolved": false,
+        "reason": "receiver shadowed, inferred or ambiguous"
+      },
+      "edges": [],
+      "passed": false
+    },
+    {
+      "name": "inherited_static_unresolved",
+      "sources": {
+        "T.java": "class Base { static void hit() {} } class T extends Base {} class C { void run() { T.hit(); } }"
+      },
+      "source_hashes": {
+        "T.java": "b40035146637ddcdf8281931271ec33fb35b1f96536177042b885d88c5361083"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": false,
+      "reference": {
+        "source": "T.java::C.run:method()",
+        "scope_id": "T.java::C.run:method()",
+        "kind": "calls",
+        "name": "T.hit",
+        "member": "hit",
+        "receiver": "T",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "static_context": false,
+        "path": "T.java",
+        "line": 1,
+        "evidence": "T.hit()",
+        "resolved": false,
+        "reason": "receiver shadowed, inferred or ambiguous"
+      },
+      "edges": [],
+      "passed": true
+    }
+  ],
+  "passed": false
+}

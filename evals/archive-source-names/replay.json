@@ -1,0 +1,25 @@
+{
+  "model_calls": 0,
+  "checks": [
+    {
+      "query": "requests.sessions.Session.send",
+      "target": "src/requests/sessions.py::Session.send:method",
+      "packet_equal": true
+    },
+    {
+      "query": "resolve_redirects",
+      "target": "src/requests/sessions.py::SessionRedirectMixin.resolve_redirects:method",
+      "packet_equal": true
+    },
+    {
+      "query": "requests.sessions.Session.resolve_redirects",
+      "rejected": true,
+      "reason": "Declaration is ambiguous or absent; use archive-search and an exact ID"
+    },
+    {
+      "query": "src/requests/sessions.py::Session.resolve_redirects:method",
+      "rejected": true,
+      "reason": "Declaration is ambiguous or absent; use archive-search and an exact ID"
+    }
+  ]
+}

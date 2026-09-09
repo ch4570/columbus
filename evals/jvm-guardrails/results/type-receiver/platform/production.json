@@ -1,0 +1,116 @@
+{
+  "conclusion": "success",
+  "headSha": "9a249be870ffc088e226b0541d2f8c08f15fd99d",
+  "jobs": [
+    {
+      "name": "distribution (macos-latest, 3.14)",
+      "conclusion": "success",
+      "verification_steps": [
+        {
+          "name": "Engine tests",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify clean install and portable bundle",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify pre-commit partial staging and deletion-only updates",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "distribution (windows-latest, 3.14)",
+      "conclusion": "success",
+      "verification_steps": [
+        {
+          "name": "Engine tests",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify clean install and portable bundle",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify pre-commit partial staging and deletion-only updates",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "distribution (ubuntu-latest, 3.11)",
+      "conclusion": "success",
+      "verification_steps": [
+        {
+          "name": "Engine tests",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify clean install and portable bundle",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify pre-commit partial staging and deletion-only updates",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "distribution (windows-latest, 3.11)",
+      "conclusion": "success",
+      "verification_steps": [
+        {
+          "name": "Engine tests",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify clean install and portable bundle",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify pre-commit partial staging and deletion-only updates",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "distribution (ubuntu-latest, 3.14)",
+      "conclusion": "success",
+      "verification_steps": [
+        {
+          "name": "Engine tests",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify clean install and portable bundle",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify pre-commit partial staging and deletion-only updates",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "distribution (macos-latest, 3.11)",
+      "conclusion": "success",
+      "verification_steps": [
+        {
+          "name": "Engine tests",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify clean install and portable bundle",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify pre-commit partial staging and deletion-only updates",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/ch4570/columbus/actions/runs/34153270568"
+}

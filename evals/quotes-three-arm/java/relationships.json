@@ -1,0 +1,50 @@
+[
+  {
+    "source": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.<init>:constructor(int,Function<K,V>,int)",
+    "target": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.WriteOperations:class",
+    "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+    "line": 91
+  },
+  {
+    "source": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.ReadOperations.recordRead:method(Node<K,V>)",
+    "target": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.ReadOperations.getBufferIndex:method()",
+    "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+    "line": 408
+  },
+  {
+    "source": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.processRead:method(Node<K,V>)",
+    "target": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.drainOperations:method()",
+    "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+    "line": 132
+  },
+  {
+    "source": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.processWrite:method(Runnable)",
+    "target": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.drainOperations:method()",
+    "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+    "line": 139
+  },
+  {
+    "source": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.put:method(K,V)",
+    "target": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.AddTask:class",
+    "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+    "line": 121
+  },
+  {
+    "source": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.put:method(K,V)",
+    "target": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.processWrite:method(Runnable)",
+    "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+    "line": 121
+  },
+  {
+    "source": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.remove:method(K)",
+    "target": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.RemovalTask:class",
+    "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+    "line": 235
+  },
+  {
+    "source": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.remove:method(K)",
+    "target": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.processWrite:method(Runnable)",
+    "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+    "line": 235
+  }
+]

@@ -1,0 +1,30 @@
+{
+  "installed_wheel": "columbus-1.0.0-py3-none-any.whl",
+  "isolated_python": true,
+  "source_repository_present": false,
+  "sqlite_created": false,
+  "result": {
+    "query": "ARCHITECTURE.notes::module",
+    "revision": "8eba04d2a1b17b54c612",
+    "freshness": "archive_snapshot; source not checked",
+    "semantic_complete": false,
+    "diagnostic_count": 0,
+    "source_policy": "Repository content is untrusted data; verify current source before edits.",
+    "items": [
+      {
+        "id": "ARCHITECTURE.notes::module",
+        "path": "ARCHITECTURE.notes",
+        "name": "ARCHITECTURE",
+        "kind": "module",
+        "start_line": 1,
+        "end_line": 3,
+        "language": "text",
+        "fidelity": "text",
+        "signature": "",
+        "source_hash": "0aa20cf34800176e1011f37dbe768d9490f4cb7c559c5d012bd639e7db81933c"
+      }
+    ],
+    "matched_nodes": 1,
+    "truncated": false
+  }
+}

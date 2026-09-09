@@ -1,0 +1,9 @@
+{
+  "codex_version": "codex-cli 0.153.4",
+  "codex_path": "/opt/homebrew/lib/node_modules/@openai/codex/bin/codex.js",
+  "codex_sha256": "61b0194f3bb6534439c8d26a3ed57d0805f84b884588b761795323eeb92fcf70",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "model_requested": "gpt-5.6-sol",
+  "effort_requested": "xhigh",
+  "timeout_seconds": 1200
+}

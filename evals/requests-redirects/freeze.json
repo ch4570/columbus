@@ -1,0 +1,31 @@
+{
+  "metadata_sha256": {
+    "manifest.json": "2d9eafc3dd8cc9823015f65a5fa89c86b41e4e9fe0fb34efb532d7a6e028bc7c",
+    "engine.json": "dd104ec149fe22d812af2aba52bd1a7519e30e316c659f163805d354d05e18af",
+    "cases.json": "91923077269fb2ebe31afc4e34fe32dad10b4812ca91ffbf2e2bb2ccddb3c110"
+  },
+  "index": {
+    "files": 112,
+    "symbols": 883,
+    "edges": 1188,
+    "indexed_bytes": 1495090,
+    "revision": "d0bb3237e5b7aa6f7198"
+  },
+  "index_seconds": 0.533,
+  "archive": {
+    "archive_sha256": "8cbf904bdce4b250b442316093384347480b186a7cb81123f2b9acb9dd841dad",
+    "bytes": 173816,
+    "counts": {
+      "files": 112,
+      "nodes": 883,
+      "scopes": 825,
+      "edges": 1188,
+      "references": 2674,
+      "imports": 471,
+      "diagnostics": 1
+    },
+    "export_seconds": 0.262,
+    "codec": "xz"
+  },
+  "model_started": false
+}

@@ -20,6 +20,13 @@ def edges(files, kind):
 
 
 class DetectionTests(unittest.TestCase):
+    def test_text_control_classifier_preserves_character_policy(self):
+        from columbus.discovery import DISALLOWED_TEXT_CONTROLS
+        for value in list(range(256)) + [0x2028, 0x2029, 0x1f600]:
+            character = chr(value)
+            expected = ord(character) < 32 and character not in "\n\r\t\f\b"
+            self.assertEqual(bool(DISALLOWED_TEXT_CONTROLS.search('prefix' + character + 'suffix')), expected)
+
     def test_extensions_names_shebang_and_unknown(self):
         expected = {"a.TSX": "typescript", "a.C": "cpp", "a.rs": "rust", "a.go": "go",
                     "Dockerfile": "dockerfile", "Gemfile": "ruby", "go.mod": "go-module",
@@ -50,7 +57,7 @@ class DetectionTests(unittest.TestCase):
             self.assertIn(".gitignore", inventory["config_paths"])
             self.assertIn("large.odd", inventory["oversized_paths"])
             self.assertEqual(set(inventory["binary_paths"]), {"picture.odd", "late_binary.odd"})
-            self.assertEqual(inventory["probe_files"], 4)
+            self.assertEqual(inventory["probe_files"], 5)  # Includes text-fidelity README.md.
 
     def test_extensionless_python_honors_encoding_cookie(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -59,6 +66,28 @@ class DetectionTests(unittest.TestCase):
             paths, inventory = discover(root)
             self.assertEqual(paths, ["tool"])
             self.assertEqual(inventory["detected_languages"]["tool"], "python")
+
+    def test_plain_text_binary_assets_are_excluded_and_can_become_text(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            asset = root / "attachment.txt"
+            asset.write_bytes(b"\x89PNG\r\n\0binary")
+            paths, inventory = discover(root)
+            self.assertNotIn("attachment.txt", paths)
+            self.assertIn("attachment.txt", inventory["binary_paths"])
+            asset.write_text("valid text")
+            paths, inventory = discover(root)
+            self.assertIn("attachment.txt", paths)
+            self.assertNotIn("attachment.txt", inventory["binary_paths"])
+
+    def test_non_utf8_text_fidelity_assets_are_excluded(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "legacy.css").write_bytes(b"caf\xe9 {}")
+            (root / "valid.css").write_text("body {}")
+            paths, inventory = discover(root)
+            self.assertEqual(paths, ["valid.css"])
+            self.assertIn("legacy.css", inventory["binary_paths"])
 
     def test_known_languages_need_no_discovery_content_reads(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -174,6 +203,86 @@ class PolyglotParserTests(unittest.TestCase):
                 self.assertFalse(any("hidden" in r["name"] for r in file["references"]))
                 masked, _ = mask_source(textwrap.dedent(source).lstrip("\n"), file["language"])
                 self.assertEqual(masked.count("\n"), textwrap.dedent(source).lstrip("\n").count("\n"))
+
+    def test_jsx_literal_text_is_not_code_and_braced_expressions_remain_calls(self):
+        samples = [
+            ('<div>helper() function fake()</div>', 0),
+            ('<div>{helper()}</div>', 1),
+            ('<div label="function fake() helper()">helper()<span>helper()</span>{helper()}</div>', 1),
+            ('<><span>helper()</span><Button value={helper()} /></>', 1),
+            ('<div>{ready ? <span>helper()</span> : helper()}</div>', 1),
+            ('<div>{({ text: "}", run: helper() })}<span>helper()</span></div>', 1),
+            ('<div>{/}/.test(value) ? helper() : null}helper()</div>', 1),
+            ('<div>{true && /}/.test(value) ? helper() : null}helper()</div>', 1),
+            ('<div>{false || /}/.test(value) ? helper() : null}helper()</div>', 1),
+            ('<div>{/* } <span> */ helper()}\nhelper()\n</div>', 1),
+            ("<div title='helper()'>don't call helper()</div>", 0),
+        ]
+        for path in ('main.jsx', 'main.tsx', 'main.js'):
+            for expression, expected in samples:
+                with self.subTest(path=path, expression=expression):
+                    source = 'function helper() {}\nexport function View() { return ' + expression + '; }\n'
+                    file = parsed(path, source)
+                    self.assertEqual({s['name'] for s in file['symbols'][1:]}, {'helper', 'View'})
+                    calls = edges([file], 'calls')
+                    self.assertEqual(len(calls), expected)
+                    for call in calls:
+                        self.assertEqual(call['source'], path + '::View:function')
+                        self.assertEqual(call['target'], path + '::helper:function')
+                        self.assertEqual(call['confidence'], 'heuristic')
+                    masked, _ = mask_source(source, file['language'])
+                    self.assertEqual(len(masked), len(source))
+                    self.assertEqual(masked.count('\n'), source.count('\n'))
+
+    def test_jsx_mask_preserves_typescript_generics_and_comparisons(self):
+        source = '''
+            function helper() {}
+            function generic<T>(value: T) { helper(); const text = "</T>"; }
+            function compare(a, b) { return a < b ? helper() : null; }
+        '''
+        for path in ('main.ts', 'main.mts', 'main.cts', 'main.tsx'):
+            with self.subTest(path=path):
+                file = parsed(path, source)
+                self.assertEqual({s['name'] for s in file['symbols'][1:]}, {'helper', 'generic', 'compare'})
+                self.assertEqual({e['source'] for e in edges([file], 'calls')},
+                                 {path + '::generic:function', path + '::compare:function'})
+        for path in ('main.ts', 'main.mts', 'main.cts'):
+            with self.subTest(path=path):
+                file = parsed(path, source + '\nfunction assertion() { const value = <T>helper(); const text = "</T>"; }')
+                self.assertIn(path + '::assertion:function', {e['source'] for e in edges([file], 'calls')})
+        file = parsed('main.tsx', '''
+            const identity = <T,>(value: T) => value;
+            function helper() {}
+            function View() { return <div>helper() function fake()</div>; }
+        ''')
+        self.assertNotIn('fake', {s['name'] for s in file['symbols']})
+        self.assertEqual(edges([file], 'calls'), [])
+        for constraint, body in (('object', 'helper()'), ('{}', '{ return helper(); }'),
+                                 ('{ value: string }', '{ return helper(); }')):
+            with self.subTest(constraint=constraint, body=body):
+                source = ('function helper() {}\nconst id = <T extends ' + constraint
+                          + '>(value: T) => ' + body + ';\nconst text = "</T>";\n'
+                          + 'function View() { return <div>helper() function fake()</div>; }')
+                file = parsed('main.tsx', source)
+                calls = edges([file], 'calls')
+                self.assertEqual(len(calls), 1)
+                self.assertEqual(calls[0]['target'], 'main.tsx::helper:function')
+                self.assertNotIn('fake', {s['name'] for s in file['symbols']})
+        for annotation in ('unknown', 'Promise<T>', '{ value: T }', 'T | undefined',
+                           '[T, string]', '((value: T) => unknown)', '<U>(value: U) => U',
+                           '{ callback: (value: T) => Promise<T> }', '"</T>" | T'):
+            with self.subTest(annotation=annotation):
+                source = ('function helper() {}\nconst id = <T extends object>(value: T): '
+                          + annotation + ' => helper() || "</T>";\n'
+                          + 'function after() { helper(); }\n'
+                          + 'function View() { return <div>helper() function fake()</div>; }')
+                file = parsed('main.tsx', source)
+                self.assertIn('after', {s['name'] for s in file['symbols']})
+                self.assertNotIn('fake', {s['name'] for s in file['symbols']})
+                calls = edges([file], 'calls')
+                self.assertEqual(len(calls), 2)
+                self.assertEqual({call['target'] for call in calls}, {'main.tsx::helper:function'})
+                self.assertIn('main.tsx::after:function', {call['source'] for call in calls})
 
     def test_relative_import_call_and_file_dependency(self):
         helper = parsed("lib/helper.ts", "export function help() {}")

@@ -1,0 +1,14 @@
+{
+  "repository": "https://github.com/google/gson",
+  "commit": "b3f4ca20087f9066de4c340522ff84e0558e1ad1",
+  "url": "https://codeload.github.com/google/gson/zip/b3f4ca20087f9066de4c340522ff84e0558e1ad1",
+  "sha256": "0980ae32fae04e0cdd1c9637b19881e4dbfcda358d77c182e34326daedf49e4e",
+  "files": 313,
+  "zip_bytes": 783863,
+  "license": "LICENSE",
+  "license_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+  "omitted_gitlinks": [],
+  "requested_url": "https://codeload.github.com/google/gson/zip/b3f4ca20087f9066de4c340522ff84e0558e1ad1",
+  "resolved_url": "https://codeload.github.com/google/gson/zip/b3f4ca20087f9066de4c340522ff84e0558e1ad1",
+  "snapshot_scope": "complete superproject archive; not recursive checkout"
+}

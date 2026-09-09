@@ -1,0 +1,21 @@
+{
+  "checks": [
+    {
+      "query": "requests.sessions.Session.send",
+      "exact_id": "src/requests/sessions.py::Session.send:method",
+      "packet_equal": true
+    },
+    {
+      "query": "requests.sessions.SessionRedirectMixin.resolve_redirects",
+      "exact_id": "src/requests/sessions.py::SessionRedirectMixin.resolve_redirects:method",
+      "packet_equal": true
+    },
+    {
+      "query": "requests.adapters.HTTPAdapter.send",
+      "exact_id": "src/requests/adapters.py::HTTPAdapter.send:method",
+      "packet_equal": true
+    }
+  ],
+  "model_calls": 0,
+  "note": "Replay verifies declaration resolution and packet parity, not model token savings."
+}

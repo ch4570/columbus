@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "queries": [
+    "lib/response.js::render:function",
+    "lib/application.js::render:function"
+  ],
+  "targets": [
+    {
+      "id": "lib/response.js::render:function",
+      "path": "lib/response.js",
+      "source_hash": "969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a",
+      "declaration_start_line": 894,
+      "declaration_end_line": 918,
+      "partial": false,
+      "fidelity": "heuristic"
+    },
+    {
+      "id": "lib/application.js::render:function",
+      "path": "lib/application.js",
+      "source_hash": "6d7e08355025786982d17042fc0355b6a5e9339545dc27e2782b3aaa28a7bc04",
+      "declaration_start_line": 522,
+      "declaration_end_line": 575,
+      "partial": false,
+      "fidelity": "heuristic"
+    }
+  ],
+  "bytes": 3418,
+  "output_sha256": "d7827aa1a1618e54f548f82a95815b7850a526d073f000c31faf941c4cafa346",
+  "total_lines": 79,
+  "next_offset": null,
+  "no_consumer_sqlite": true
+}

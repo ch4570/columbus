@@ -1,0 +1,154 @@
+{
+  "answer": {
+    "findings": [
+      {
+        "id": "resource_location_routing",
+        "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+        "start_line": 177,
+        "end_line": 177,
+        "quote": "\t\t\t\tURL url = ResourceUtils.toURL(location);",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "classpath_coordinates",
+        "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+        "start_line": 121,
+        "end_line": 121,
+        "quote": "\t\tthis.absolutePath = absolutePath;",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "classpath_url_lookup",
+        "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+        "start_line": 182,
+        "end_line": 182,
+        "quote": "\t\t\t\treturn ClassLoader.getSystemResource(this.absolutePath);",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "classpath_stream_access",
+        "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+        "start_line": 209,
+        "end_line": 209,
+        "quote": "\t\t\tis = ClassLoader.getSystemResourceAsStream(this.absolutePath);",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "classpath_relative_handles",
+        "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+        "start_line": 239,
+        "end_line": 239,
+        "quote": "\t\tString pathToUse = StringUtils.applyRelativePath(this.path, relativePath);",
+        "explanation": "Citation control only, not semantic approval."
+      }
+    ]
+  },
+  "positive": {
+    "passed": true,
+    "findings": [
+      {
+        "id": "resource_location_routing",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "classpath_coordinates",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "classpath_url_lookup",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "classpath_stream_access",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "classpath_relative_handles",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "negative_answer": {
+    "findings": [
+      {
+        "id": "resource_location_routing",
+        "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+        "start_line": 177,
+        "end_line": 177,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "classpath_coordinates",
+        "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+        "start_line": 121,
+        "end_line": 121,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "classpath_url_lookup",
+        "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+        "start_line": 182,
+        "end_line": 182,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "classpath_stream_access",
+        "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+        "start_line": 209,
+        "end_line": 209,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "classpath_relative_handles",
+        "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+        "start_line": 239,
+        "end_line": 239,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      }
+    ]
+  },
+  "negative": {
+    "passed": false,
+    "findings": [
+      {
+        "id": "resource_location_routing",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "classpath_coordinates",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "classpath_url_lookup",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "classpath_stream_access",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "classpath_relative_handles",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  }
+}

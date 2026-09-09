@@ -1,0 +1,46 @@
+{
+  "source_hashes_equal": true,
+  "files": 1166,
+  "symbols": 20811,
+  "edges": 33008,
+  "added_edges": [
+    [
+      "src/main/java/org/springframework/aot/hint/support/SpringFactoriesLoaderRuntimeHints.java::org.springframework.aot.hint.support.SpringFactoriesLoaderRuntimeHints.registerHints:method(RuntimeHints,ClassLoader,String,List<String>)",
+      "src/main/java/org/springframework/aot/hint/RuntimeHints.java::org.springframework.aot.hint.RuntimeHints.reflection:method()",
+      "calls",
+      "heuristic",
+      "hints.reflection()",
+      "src/main/java/org/springframework/aot/hint/support/SpringFactoriesLoaderRuntimeHints.java",
+      89
+    ],
+    [
+      "src/main/java/org/springframework/aot/hint/support/SpringFactoriesLoaderRuntimeHints.java::org.springframework.aot.hint.support.SpringFactoriesLoaderRuntimeHints.registerHints:method(RuntimeHints,ClassLoader,String,List<String>)",
+      "src/main/java/org/springframework/aot/hint/support/SpringFactoriesLoaderRuntimeHints.java::org.springframework.aot.hint.support.SpringFactoriesLoaderRuntimeHints.resolveClassName:method(ClassLoader,String)",
+      "calls",
+      "heuristic",
+      "resolveClassName(classLoader, implementationClassName)",
+      "src/main/java/org/springframework/aot/hint/support/SpringFactoriesLoaderRuntimeHints.java",
+      82
+    ],
+    [
+      "src/main/java/org/springframework/cglib/core/KeyFactory.java::org.springframework.cglib.core.KeyFactory.create:method(ClassLoader,Class,KeyFactoryCustomizer,List<KeyFactoryCustomizer>)",
+      "src/main/java/org/springframework/cglib/core/KeyFactory.java::org.springframework.cglib.core.KeyFactory.Generator.addCustomizer:method(KeyFactoryCustomizer)",
+      "calls",
+      "heuristic",
+      "gen.addCustomizer(keyFactoryCustomizer)",
+      "src/main/java/org/springframework/cglib/core/KeyFactory.java",
+      174
+    ],
+    [
+      "src/main/java/org/springframework/core/BridgeMethodResolver.java::org.springframework.core.BridgeMethodResolver.searchCandidates:method(List<Method>,Method,Class<?>)",
+      "src/main/java/org/springframework/core/BridgeMethodResolver.java::org.springframework.core.BridgeMethodResolver.isBridgeMethodFor:method(Method,Method,Class<?>)",
+      "calls",
+      "heuristic",
+      "isBridgeMethodFor(bridgeMethod, candidateMethod, targetClass)",
+      "src/main/java/org/springframework/core/BridgeMethodResolver.java",
+      157
+    ]
+  ],
+  "removed_edges": [],
+  "scope": "Same fixed Spring corpus; delta is not independently reviewed precision."
+}

@@ -1,0 +1,345 @@
+{
+  "plan_commit": "d85796e",
+  "conditions": {
+    "baseline": {
+      "schema": "columbus.exploration-observation/v1",
+      "case": "source-read-three-hop",
+      "condition": "baseline",
+      "repeat": 1,
+      "model_requested": "gpt-5.6-sol",
+      "effort_requested": "xhigh",
+      "elapsed_seconds": 106.456,
+      "return_code": 0,
+      "timed_out": false,
+      "source_unchanged": true,
+      "usage": {
+        "input_tokens": 66318,
+        "cached_input_tokens": 43264,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 3059,
+        "reasoning_output_tokens": 2096,
+        "uncached_input_tokens": 23054
+      },
+      "commands": [
+        {
+          "command": "/bin/zsh -lc 'rg -n \"class RepositoryIndex|def |read_stable|safe_source\" .'",
+          "exit_code": 0,
+          "output_bytes": 19381,
+          "output_sha256": "273cc2d1939208ca9ca8f43106b88ae5e79a7f97bd56c28932167f2565f3de08"
+        },
+        {
+          "command": "/bin/zsh -lc \"rg -n -C 3 \\\"self\\\\.[A-Za-z_][A-Za-z0-9_]*\\\\(\\\" skills/columbus/scripts/columbus/index.py && sed -n '55,185p' skills/columbus/scripts/columbus/index.py && sed -n '285,345p' skills/columbus/scripts/columbus/index.py && sed -n '425,545p' skills/columbus/scripts/columbus/index.py\"",
+          "exit_code": 0,
+          "output_bytes": 24098,
+          "output_sha256": "ae164523ccfdd22a94f338c99303cfacf45067c60796959c03e24b2f9234fe68"
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '1,22p' skills/columbus/scripts/columbus/index.py; sed -n '67,78p' skills/columbus/scripts/columbus/sync_state.py; sed -n '43,55p' skills/columbus/scripts/columbus/discovery.py; sed -n '132,143p' skills/columbus/scripts/columbus/index.py; sed -n '311,321p' skills/columbus/scripts/columbus/index.py; sed -n '436,445p' skills/columbus/scripts/columbus/index.py; sed -n '520,526p' skills/columbus/scripts/columbus/index.py\"",
+          "exit_code": 0,
+          "output_bytes": 4096,
+          "output_sha256": "8b410e8997fc63fc29cb6d4924d959c4154705a8dc5a8921f02b14577a6f37c1"
+        }
+      ],
+      "command_count": 3,
+      "command_output_bytes": 47575,
+      "failed_commands": 0,
+      "other_tool_types": [],
+      "runtime_warnings": [],
+      "turn_failed": false,
+      "quality": {
+        "passed": true,
+        "findings": [
+          {
+            "id": "RepositoryIndex._source",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "RepositoryIndex.refresh",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "RepositoryIndex.status",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "RepositoryIndex.symbol",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "__exact_caller_set__",
+            "passed": true,
+            "reason": "no extra callers"
+          }
+        ],
+        "grader_version": "reachability-enumeration-1",
+        "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+      },
+      "index_preflight": null,
+      "answer": {
+        "findings": [
+          {
+            "id": "RepositoryIndex.refresh",
+            "path": "skills/columbus/scripts/columbus/index.py",
+            "start_line": 139,
+            "end_line": 139,
+            "quote": "                    data, stable_stat = read_stable(root, rel, config_stats[rel], max_bytes=10_000_000)",
+            "explanation": "Shortest ordered path: RepositoryIndex.refresh \u2192 sync_state.read_stable \u2192 discovery.safe_source (2 calls). The first handoff is a direct call to read_stable, imported from .sync_state; read_stable directly calls safe_source imported from .discovery. This is a source-level path inside conditional/iterative code and does not prove runtime execution or dispatch completeness."
+          },
+          {
+            "id": "RepositoryIndex.status",
+            "path": "skills/columbus/scripts/columbus/index.py",
+            "start_line": 317,
+            "end_line": 317,
+            "quote": "                        data, signature = read_stable(root, rel)",
+            "explanation": "Shortest ordered path: RepositoryIndex.status \u2192 sync_state.read_stable \u2192 discovery.safe_source (2 calls). The first handoff directly uses the read_stable import; that function directly invokes safe_source. The call is conditional on check_files and loop state, so only lexical source reachability\u2014not runtime execution or completeness\u2014is asserted."
+          },
+          {
+            "id": "RepositoryIndex._source",
+            "path": "skills/columbus/scripts/columbus/index.py",
+            "start_line": 441,
+            "end_line": 441,
+            "quote": "            data, _ = read_stable(Path(meta[\"root\"]), symbol[\"path\"])",
+            "explanation": "Shortest ordered path: RepositoryIndex._source \u2192 sync_state.read_stable \u2192 discovery.safe_source (2 calls). The static method directly calls the imported read_stable, whose body directly calls safe_source. This follows source-level imported bindings only and does not claim runtime dispatch is proven."
+          },
+          {
+            "id": "RepositoryIndex.symbol",
+            "path": "skills/columbus/scripts/columbus/index.py",
+            "start_line": 524,
+            "end_line": 524,
+            "quote": "            result = self._source(conn, self._find(conn, symbol_id), max_lines)",
+            "explanation": "Shortest ordered path: RepositoryIndex.symbol \u2192 RepositoryIndex._source \u2192 sync_state.read_stable \u2192 discovery.safe_source (3 calls). The first handoff is the lexical self._source call to a method declared in RepositoryIndex; _source directly calls the imported read_stable, which directly calls safe_source. This is lexical source-level reasoning and does not establish runtime receiver dispatch or completeness."
+          }
+        ]
+      },
+      "prompt_bytes": 1574,
+      "events_sha256": "4de87485cce3c59b4a5c5ddc266fc75610edc0718473be4af5cbe37d62ddd615"
+    },
+    "columbus": {
+      "schema": "columbus.exploration-observation/v1",
+      "case": "source-read-three-hop",
+      "condition": "columbus",
+      "repeat": 1,
+      "model_requested": "gpt-5.6-sol",
+      "effort_requested": "xhigh",
+      "elapsed_seconds": 160.976,
+      "return_code": 0,
+      "timed_out": false,
+      "source_unchanged": true,
+      "usage": {
+        "input_tokens": 104367,
+        "cached_input_tokens": 63104,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 4539,
+        "reasoning_output_tokens": 2846,
+        "uncached_input_tokens": 41263
+      },
+      "commands": [
+        {
+          "command": "/bin/zsh -lc \"sed -n '1,240p' /private/tmp/columbus-multihop-ready/runtime/SKILL.md\"",
+          "exit_code": 0,
+          "output_bytes": 4032,
+          "output_sha256": "979da9e1e7162b57df431de52cfd476a19824e2eeeedfae76306320306517024"
+        },
+        {
+          "command": "/bin/zsh -lc \"rg -n --glob '*.py' 'class RepositoryIndex|def read_stable|def safe_source|read_stable\\\\(|self\\\\.[A-Za-z_][A-Za-z0-9_]*\\\\(' .\"",
+          "exit_code": 0,
+          "output_bytes": 14712,
+          "output_sha256": "154c0c53bcf9e7daaec42cbf7da0956e738fae4d757aef79508b625e8129956b"
+        },
+        {
+          "command": "/bin/zsh -lc '/Users/rex/Desktop/columbus/.venv/bin/python /private/tmp/columbus-multihop-ready/runtime/columbus.py callers safe_source --format text --budget-bytes 12000 --repo . --snapshot'",
+          "exit_code": 0,
+          "output_bytes": 1995,
+          "output_sha256": "ed1251170af56defb7edf01abb466cb2ee43a6cc0b8d2056c2a396470903f177"
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '1,210p' skills/columbus/scripts/columbus/index.py; sed -n '280,350p' skills/columbus/scripts/columbus/index.py; sed -n '420,455p' skills/columbus/scripts/columbus/index.py\"",
+          "exit_code": 0,
+          "output_bytes": 17712,
+          "output_sha256": "ada9d02e77c934744cc0a0675182a6580f2b7461fe6809506225b9bff071ac9f"
+        },
+        {
+          "command": "/bin/zsh -lc '/Users/rex/Desktop/columbus/.venv/bin/python /private/tmp/columbus-multihop-ready/runtime/columbus.py callers read_stable --format text --budget-bytes 20000 --repo . --snapshot'",
+          "exit_code": 0,
+          "output_bytes": 2037,
+          "output_sha256": "a8d83f6ac8cac8a92c01e389379e429cb1b551d8ae59256c9399ee52a87067c0"
+        },
+        {
+          "command": "/bin/zsh -lc '/Users/rex/Desktop/columbus/.venv/bin/python /private/tmp/columbus-multihop-ready/runtime/columbus.py impact skills/columbus/scripts/columbus/sync_state.py::read_stable:function --hops 2 --include-candidates --format text --repo . --snapshot'",
+          "exit_code": 0,
+          "output_bytes": 3222,
+          "output_sha256": "e4e173e9f1cb399bec4e35f5e3db2ace2bfe14d8b172a2692e024ae72a8aa066"
+        },
+        {
+          "command": "/bin/zsh -lc \"rg -n '\"'^    (async )?def |'\"\\\\bread_stable\\\\s*\\\\(|\\\\bself\\\\.(?:refresh|status|_source)\\\\s*\\\\(' skills/columbus/scripts/columbus/index.py\"",
+          "exit_code": 0,
+          "output_bytes": 1661,
+          "output_sha256": "7649e8eb278734fbcbcce2f12bff856e0c45533d56a29d15e55029fc7354f950"
+        },
+        {
+          "command": "/bin/zsh -lc \"rg -n --glob '*.py' '\"'^class RepositoryIndex'\"\\\\b|from \\\\.sync_state import .*\\\\bread_stable\\\\b|from \\\\.discovery import .*\\\\bsafe_source\\\\b' skills/columbus\"",
+          "exit_code": 0,
+          "output_bytes": 288,
+          "output_sha256": "34a3213e7350c13218a548396c3b18cfde8101f666206975010ae15224aa3285"
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '1,90p' skills/columbus/scripts/columbus/sync_state.py; sed -n '40,60p' skills/columbus/scripts/columbus/discovery.py; sed -n '286,334p' skills/columbus/scripts/columbus/index.py; sed -n '432,447p' skills/columbus/scripts/columbus/index.py; sed -n '516,528p' skills/columbus/scripts/columbus/index.py\"",
+          "exit_code": 0,
+          "output_bytes": 8247,
+          "output_sha256": "6a99aebc3d72710e2e020de99537afb76102a8db92b25f4a66e0dc36c167bebb"
+        },
+        {
+          "command": "/bin/zsh -lc \"nl -ba skills/columbus/scripts/columbus/index.py | sed -n '134,142p;312,320p;436,443p;520,525p'\"",
+          "exit_code": 0,
+          "output_bytes": 2046,
+          "output_sha256": "6b7bce235e350e265e7c34db13bf2e44b5a226b10b2de7f28a3476dc6fa6c35e"
+        }
+      ],
+      "command_count": 10,
+      "command_output_bytes": 55952,
+      "failed_commands": 0,
+      "other_tool_types": [],
+      "runtime_warnings": [],
+      "turn_failed": false,
+      "quality": {
+        "passed": true,
+        "findings": [
+          {
+            "id": "RepositoryIndex._source",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "RepositoryIndex.refresh",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "RepositoryIndex.status",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "RepositoryIndex.symbol",
+            "passed": true,
+            "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+          },
+          {
+            "id": "__exact_caller_set__",
+            "passed": true,
+            "reason": "no extra callers"
+          }
+        ],
+        "grader_version": "reachability-enumeration-1",
+        "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+      },
+      "index_preflight": {
+        "passed": true,
+        "files": 22,
+        "symbols": 203,
+        "edges": 508,
+        "indexed_bytes": 253867,
+        "revision": "cb985190444de8cd6894"
+      },
+      "answer": {
+        "findings": [
+          {
+            "id": "RepositoryIndex.refresh",
+            "path": "skills/columbus/scripts/columbus/index.py",
+            "start_line": 138,
+            "end_line": 140,
+            "quote": "                else:\n                    data, stable_stat = read_stable(root, rel, config_stats[rel], max_bytes=10_000_000)\n                    content_hash = digest(data)",
+            "explanation": "Refresh reads configuration content through the directly imported function. Ordered shortest path: RepositoryIndex.refresh \u2192 sync_state.read_stable \u2192 discovery.safe_source (2 calls). This treats imported names lexically and recognizes read_stable\u2019s direct safe_source call; it does not prove branch execution or runtime dispatch."
+          },
+          {
+            "id": "RepositoryIndex.status",
+            "path": "skills/columbus/scripts/columbus/index.py",
+            "start_line": 316,
+            "end_line": 318,
+            "quote": "                    try:\n                        data, signature = read_stable(root, rel)\n                        checked_stats[rel] = signature",
+            "explanation": "When checking files, status obtains each file\u2019s bytes and signature through the imported reader. Ordered shortest path: RepositoryIndex.status \u2192 sync_state.read_stable \u2192 discovery.safe_source (2 calls). This is source-level reachability through direct imported calls; conditional execution and runtime dispatch are not proven."
+          },
+          {
+            "id": "RepositoryIndex._source",
+            "path": "skills/columbus/scripts/columbus/index.py",
+            "start_line": 438,
+            "end_line": 442,
+            "quote": "        meta = RepositoryIndex._meta(conn)\n        record = conn.execute(\"SELECT hash FROM files WHERE path=?\", (symbol[\"path\"],)).fetchone()\n        try:\n            data, _ = read_stable(Path(meta[\"root\"]), symbol[\"path\"])\n        except (OSError, ValueError) as exc:",
+            "explanation": "The source-extraction method reads the indexed symbol\u2019s file through the stable reader before validating its hash. Ordered shortest path: RepositoryIndex._source \u2192 sync_state.read_stable \u2192 discovery.safe_source (2 calls). The path follows direct imported-name calls at source level and does not establish runtime dispatch."
+          },
+          {
+            "id": "RepositoryIndex.symbol",
+            "path": "skills/columbus/scripts/columbus/index.py",
+            "start_line": 520,
+            "end_line": 524,
+            "quote": "    def symbol(self, symbol_id: str, max_lines: int = 80) -> dict:\n        if not 1 <= max_lines <= 200:\n            raise ValueError(\"max_lines must be 1\u2013200\")\n        with self._read() as conn:\n            result = self._source(conn, self._find(conn, symbol_id), max_lines)",
+            "explanation": "Symbol retrieval lexically hands off to RepositoryIndex._source, which performs the stable source read. Ordered shortest path: RepositoryIndex.symbol \u2192 RepositoryIndex._source \u2192 sync_state.read_stable \u2192 discovery.safe_source (3 calls). This applies the requested lexical interpretation of self._source and direct imported calls; it neither follows aliases or callbacks nor proves Python\u2019s runtime attribute dispatch."
+          }
+        ]
+      },
+      "prompt_bytes": 2104,
+      "events_sha256": "f5fc195b02d42fe3cc5d6cff1b86eab246d0c11ff724ab66ad6bd8a8e6872f33"
+    }
+  },
+  "semantic_review": {
+    "baseline": [
+      {
+        "id": "RepositoryIndex.refresh",
+        "passed": true,
+        "review": "Ordered shortest path and 2-call count match the independent AST oracle; correct import handoffs and explicit source-level/runtime uncertainty."
+      },
+      {
+        "id": "RepositoryIndex.status",
+        "passed": true,
+        "review": "Ordered shortest path and 2-call count match the independent AST oracle; correct import handoffs and explicit source-level/runtime uncertainty."
+      },
+      {
+        "id": "RepositoryIndex._source",
+        "passed": true,
+        "review": "Ordered shortest path and 2-call count match the independent AST oracle; correct import handoffs and explicit source-level/runtime uncertainty."
+      },
+      {
+        "id": "RepositoryIndex.symbol",
+        "passed": true,
+        "review": "Ordered shortest path and 3-call count match the independent AST oracle; correct import handoffs and explicit source-level/runtime uncertainty."
+      }
+    ],
+    "columbus": [
+      {
+        "id": "RepositoryIndex.refresh",
+        "passed": true,
+        "review": "Ordered shortest path and 2-call count match the independent AST oracle; correct import handoffs and explicit source-level/runtime uncertainty."
+      },
+      {
+        "id": "RepositoryIndex.status",
+        "passed": true,
+        "review": "Ordered shortest path and 2-call count match the independent AST oracle; correct import handoffs and explicit source-level/runtime uncertainty."
+      },
+      {
+        "id": "RepositoryIndex._source",
+        "passed": true,
+        "review": "Ordered shortest path and 2-call count match the independent AST oracle; correct import handoffs and explicit source-level/runtime uncertainty."
+      },
+      {
+        "id": "RepositoryIndex.symbol",
+        "passed": true,
+        "review": "Ordered shortest path and 3-call count match the independent AST oracle; correct import handoffs and explicit source-level/runtime uncertainty."
+      }
+    ]
+  },
+  "percent_change_columbus_vs_baseline": {
+    "input_tokens": 57.37,
+    "uncached_input_tokens": 78.98,
+    "output_tokens": 48.38
+  },
+  "integrity": {
+    "source_and_engine_unchanged": true,
+    "preflight_equals_postflight": true,
+    "index_sha256": "6efdfbae4d66acbf41407392552fd743424c9a2fad1163c53a93a17f0e63e66f"
+  },
+  "verdict": "Both quality gates pass; input, uncached input and output tokens all increase. No savings."
+}

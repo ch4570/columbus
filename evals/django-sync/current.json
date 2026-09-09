@@ -1,0 +1,368 @@
+{
+  "cold": {
+    "seconds": 18.41551391700341,
+    "refresh": {
+      "mode": "full",
+      "check": "content_hash_verified",
+      "parsed_files": 5466,
+      "cached_parses_loaded": 0,
+      "reused_files": 0,
+      "metadata_reused_files": 0,
+      "added_files": 5466,
+      "removed_files": 0,
+      "hashed_files": 5466,
+      "hashed_bytes": 35218440,
+      "config_hashed_files": 3,
+      "config_hashed_bytes": 3012,
+      "head_changed": false,
+      "branch_changed": false,
+      "git_state_changed": true,
+      "config_changed": true,
+      "global_relink": true,
+      "elapsed_seconds": 18.0609
+    },
+    "probe_files": 3907,
+    "probe_bytes": 24486875,
+    "files": 5466,
+    "symbols": 46631,
+    "edges": 86592
+  },
+  "warm": [
+    {
+      "seconds": 3.4440031249978347,
+      "refresh": {
+        "mode": "fast",
+        "check": "metadata_checked",
+        "parsed_files": 0,
+        "cached_parses_loaded": 0,
+        "reused_files": 5466,
+        "metadata_reused_files": 5466,
+        "added_files": 0,
+        "removed_files": 0,
+        "hashed_files": 0,
+        "hashed_bytes": 0,
+        "config_hashed_files": 0,
+        "config_hashed_bytes": 0,
+        "head_changed": false,
+        "branch_changed": false,
+        "git_state_changed": false,
+        "config_changed": false,
+        "global_relink": false,
+        "elapsed_seconds": 3.4314
+      },
+      "probe_files": 3907,
+      "probe_bytes": 24486875,
+      "files": 5466,
+      "symbols": 46631,
+      "edges": 86592
+    },
+    {
+      "seconds": 3.402274749998469,
+      "refresh": {
+        "mode": "fast",
+        "check": "metadata_checked",
+        "parsed_files": 0,
+        "cached_parses_loaded": 0,
+        "reused_files": 5466,
+        "metadata_reused_files": 5466,
+        "added_files": 0,
+        "removed_files": 0,
+        "hashed_files": 0,
+        "hashed_bytes": 0,
+        "config_hashed_files": 0,
+        "config_hashed_bytes": 0,
+        "head_changed": false,
+        "branch_changed": false,
+        "git_state_changed": false,
+        "config_changed": false,
+        "global_relink": false,
+        "elapsed_seconds": 3.3898
+      },
+      "probe_files": 3907,
+      "probe_bytes": 24486875,
+      "files": 5466,
+      "symbols": 46631,
+      "edges": 86592
+    },
+    {
+      "seconds": 3.3988885409926297,
+      "refresh": {
+        "mode": "fast",
+        "check": "metadata_checked",
+        "parsed_files": 0,
+        "cached_parses_loaded": 0,
+        "reused_files": 5466,
+        "metadata_reused_files": 5466,
+        "added_files": 0,
+        "removed_files": 0,
+        "hashed_files": 0,
+        "hashed_bytes": 0,
+        "config_hashed_files": 0,
+        "config_hashed_bytes": 0,
+        "head_changed": false,
+        "branch_changed": false,
+        "git_state_changed": false,
+        "config_changed": false,
+        "global_relink": false,
+        "elapsed_seconds": 3.3862
+      },
+      "probe_files": 3907,
+      "probe_bytes": 24486875,
+      "files": 5466,
+      "symbols": 46631,
+      "edges": 86592
+    }
+  ],
+  "warm_median_seconds": 3.402274749998469,
+  "one_file_edit": {
+    "seconds": 9.193817708001006,
+    "refresh": {
+      "mode": "fast",
+      "check": "metadata_checked",
+      "parsed_files": 1,
+      "cached_parses_loaded": 5465,
+      "reused_files": 5465,
+      "metadata_reused_files": 5465,
+      "added_files": 0,
+      "removed_files": 0,
+      "hashed_files": 1,
+      "hashed_bytes": 8813,
+      "config_hashed_files": 0,
+      "config_hashed_bytes": 0,
+      "head_changed": false,
+      "branch_changed": false,
+      "git_state_changed": false,
+      "config_changed": false,
+      "global_relink": true,
+      "elapsed_seconds": 8.9073
+    },
+    "probe_files": 3907,
+    "probe_bytes": 24486875,
+    "files": 5466,
+    "symbols": 46631,
+    "edges": 86592
+  },
+  "restoration": {
+    "seconds": 9.08946391599602,
+    "refresh": {
+      "mode": "fast",
+      "check": "metadata_checked",
+      "parsed_files": 1,
+      "cached_parses_loaded": 5465,
+      "reused_files": 5465,
+      "metadata_reused_files": 5465,
+      "added_files": 0,
+      "removed_files": 0,
+      "hashed_files": 1,
+      "hashed_bytes": 8793,
+      "config_hashed_files": 0,
+      "config_hashed_bytes": 0,
+      "head_changed": false,
+      "branch_changed": false,
+      "git_state_changed": false,
+      "config_changed": false,
+      "global_relink": true,
+      "elapsed_seconds": 8.7767
+    },
+    "probe_files": 3907,
+    "probe_bytes": 24486875,
+    "files": 5466,
+    "symbols": 46631,
+    "edges": 86592
+  },
+  "database_bytes": 147763200,
+  "profiled_warm": {
+    "seconds": 12.832404333996237,
+    "refresh": {
+      "mode": "fast",
+      "check": "metadata_checked",
+      "parsed_files": 0,
+      "cached_parses_loaded": 0,
+      "reused_files": 5466,
+      "metadata_reused_files": 5466,
+      "added_files": 0,
+      "removed_files": 0,
+      "hashed_files": 0,
+      "hashed_bytes": 0,
+      "config_hashed_files": 0,
+      "config_hashed_bytes": 0,
+      "head_changed": false,
+      "branch_changed": false,
+      "git_state_changed": false,
+      "config_changed": false,
+      "global_relink": false,
+      "elapsed_seconds": 12.8201
+    },
+    "probe_files": 3907,
+    "probe_bytes": 24486875,
+    "files": 5466,
+    "symbols": 46631,
+    "edges": 86592
+  },
+  "profile_top_cumulative": [
+    {
+      "file": "measure.py",
+      "line": 19,
+      "name": "run",
+      "calls": 1,
+      "own_seconds": 0.0015685830000000001,
+      "cumulative_seconds": 12.832411917
+    },
+    {
+      "file": "index.py",
+      "line": 84,
+      "name": "refresh",
+      "calls": 1,
+      "own_seconds": 0.009275115,
+      "cumulative_seconds": 12.830842792
+    },
+    {
+      "file": "discovery.py",
+      "line": 114,
+      "name": "discover",
+      "calls": 2,
+      "own_seconds": 0.12107316500000001,
+      "cumulative_seconds": 10.919101876000001
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method builtins.any>",
+      "calls": 32617,
+      "own_seconds": 1.37367521,
+      "cumulative_seconds": 6.822794506
+    },
+    {
+      "file": "discovery.py",
+      "line": 201,
+      "name": "<genexpr>",
+      "calls": 32488704,
+      "own_seconds": 4.365619842,
+      "cumulative_seconds": 5.438365242000001
+    },
+    {
+      "file": "discovery.py",
+      "line": 47,
+      "name": "safe_source",
+      "calls": 24654,
+      "own_seconds": 0.093395113,
+      "cumulative_seconds": 4.153882989
+    },
+    {
+      "file": "pathlib.py",
+      "line": 981,
+      "name": "resolve",
+      "calls": 49309,
+      "own_seconds": 0.043924115,
+      "cumulative_seconds": 2.648473107
+    },
+    {
+      "file": "<frozen posixpath>",
+      "line": 409,
+      "name": "realpath",
+      "calls": 49309,
+      "own_seconds": 0.040318636000000005,
+      "cumulative_seconds": 2.0270327480000003
+    },
+    {
+      "file": "<frozen posixpath>",
+      "line": 418,
+      "name": "_joinrealpath",
+      "calls": 49310,
+      "own_seconds": 0.423908987,
+      "cumulative_seconds": 1.849305557
+    },
+    {
+      "file": "sync_state.py",
+      "line": 61,
+      "name": "file_stat",
+      "calls": 10936,
+      "own_seconds": 0.008320678,
+      "cumulative_seconds": 1.8251719080000002
+    },
+    {
+      "file": "pathlib.py",
+      "line": 484,
+      "name": "_parse_args",
+      "calls": 341319,
+      "own_seconds": 0.280266039,
+      "cumulative_seconds": 1.5613394680000001
+    },
+    {
+      "file": "pathlib.py",
+      "line": 56,
+      "name": "parse_parts",
+      "calls": 341320,
+      "own_seconds": 0.798173651,
+      "cumulative_seconds": 1.209979087
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method builtins.ord>",
+      "calls": 32483514,
+      "own_seconds": 1.0727454,
+      "cumulative_seconds": 1.0727454
+    },
+    {
+      "file": "pathlib.py",
+      "line": 504,
+      "name": "_from_parts",
+      "calls": 161005,
+      "own_seconds": 0.08703519900000001,
+      "cumulative_seconds": 1.033043852
+    },
+    {
+      "file": "index.py",
+      "line": 140,
+      "name": "<dictcomp>",
+      "calls": 1,
+      "own_seconds": 0.002817361,
+      "cumulative_seconds": 0.916428208
+    },
+    {
+      "file": "pathlib.py",
+      "line": 1008,
+      "name": "stat",
+      "calls": 215912,
+      "own_seconds": 0.046263136,
+      "cumulative_seconds": 0.728949881
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method posix.stat>",
+      "calls": 215912,
+      "own_seconds": 0.42111559400000004,
+      "cumulative_seconds": 0.682686745
+    },
+    {
+      "file": "pathlib.py",
+      "line": 868,
+      "name": "__new__",
+      "calls": 111696,
+      "own_seconds": 0.043888043,
+      "cumulative_seconds": 0.6716018180000001
+    },
+    {
+      "file": "<frozen posixpath>",
+      "line": 71,
+      "name": "join",
+      "calls": 522771,
+      "own_seconds": 0.440897625,
+      "cumulative_seconds": 0.668170111
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method posix.lstat>",
+      "calls": 522699,
+      "own_seconds": 0.6538976940000001,
+      "cumulative_seconds": 0.6538976940000001
+    }
+  ],
+  "limited_search_ids_equal": true,
+  "graph_counts_equal": true,
+  "os_caches": "Not flushed; same host, sequential observations. Profile timing excluded from median.",
+  "scope": "Current implementation diagnosis, not a controlled before/after or full graph parity proof."
+}

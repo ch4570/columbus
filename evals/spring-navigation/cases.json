@@ -1,0 +1,83 @@
+{
+  "schema": "columbus.exploration-cases/v1",
+  "cases": [
+    {
+      "id": "spring-resource-streams",
+      "question": "Explain how DefaultResourceLoader chooses a resource handle for an ordinary path, a leading-slash path, classpath:, classpath*:, and a URL, and how the selected implementations open an InputStream. Include extension points and missing-resource behavior. Follow the implementation in this checkout, cite source lines for each behavior, and distinguish default behavior from overrides or externally supplied resolvers. Do not execute the project or assume all resources exist.",
+      "findings": [
+        {
+          "id": "resolver-precedence",
+          "description": "Explain the extension point and when its result takes precedence.",
+          "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+          "marker": "protocolResolver.resolve(location, this)",
+          "call_lines": [
+            159
+          ]
+        },
+        {
+          "id": "location-selection",
+          "description": "Explain handle selection for the listed location forms and fallback behavior.",
+          "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+          "marker": "ResourceUtils.toURL(location)",
+          "call_lines": [
+            177
+          ]
+        },
+        {
+          "id": "path-hook",
+          "description": "Explain what the default path hook returns and whether it can be overridden.",
+          "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+          "marker": "new ClassPathContextResource(path, getClassLoader())",
+          "call_lines": [
+            199
+          ]
+        },
+        {
+          "id": "context-inheritance",
+          "description": "Identify the implementation supplying stream behavior for the default context path handle.",
+          "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+          "marker": "class ClassPathContextResource extends ClassPathResource",
+          "call_lines": [
+            297
+          ]
+        },
+        {
+          "id": "classpath-stream",
+          "description": "Explain how a single classpath resource opens its stream and handles absence.",
+          "path": "src/main/java/org/springframework/core/io/ClassPathResource.java",
+          "marker": "throw new FileNotFoundException",
+          "call_lines": [
+            212
+          ]
+        },
+        {
+          "id": "multi-classpath-stream",
+          "description": "Explain stream behavior with zero, one or several classpath matches and failures while opening them.",
+          "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+          "marker": "new SequenceInputStream",
+          "call_lines": [
+            265
+          ]
+        },
+        {
+          "id": "file-url-inheritance",
+          "description": "Identify where a file URL handle gets its stream implementation.",
+          "path": "src/main/java/org/springframework/core/io/FileUrlResource.java",
+          "marker": "class FileUrlResource extends UrlResource",
+          "call_lines": [
+            47
+          ]
+        },
+        {
+          "id": "url-stream",
+          "description": "Explain how URL resources open streams and handle opening failure.",
+          "path": "src/main/java/org/springframework/core/io/UrlResource.java",
+          "marker": "httpCon.disconnect()",
+          "call_lines": [
+            253
+          ]
+        }
+      ]
+    }
+  ]
+}

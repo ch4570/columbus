@@ -1,0 +1,121 @@
+  comments:
+      1. ✓ comment -- Warning: Slow parse rate (239.528 bytes/ms)
+      2. ✓ comments and literals
+  declarations:
+      3. ✓ local variable
+      4. ✓ local array variable
+      5. ✓ module
+      6. ✓ module with normal annotation
+      7. ✓ module with marker annotation
+      8. ✓ module with single element annotation
+      9. ✓ package_declaration
+     10. ✓ module directive
+     11. ✓ module directive with requires, exports, opens, uses and provides
+     12. ✓ single type import declaration
+     13. ✓ type_import_on_declaraction
+     14. ✓ single static import declaration
+     15. ✓ static import on demand declaration
+     16. ✓ class declaration
+     17. ✓ class declaration involving public, private, abstract and superclass
+     18. ✓ class declaration with implements
+     19. ✓ class declaration with body
+     20. ✓ interface declaration
+     21. ✓ interface declaration with extends
+     22. ✓ interface with annotation type declaration
+     23. ✓ method declaration
+     24. ✓ constructor declaration
+     25. ✓ Nested field expression in receiver parameter
+     26. ✓ Receiver parameter with additional parameters
+     27. ✓ throws
+     28. ✓ object instantiation
+     29. ✓ variable declaration
+     30. ✓ enum declaration
+     31. ✓ enum declaration inside an interface
+     32. ✓ record declaration
+     33. ✓ record declaration with generics
+     34. ✓ record declaration inside a class
+     35. ✓ record declaration inside an interface
+     36. ✓ record declaration with compact constructor
+     37. ✓ record declaration that implements interface
+     38. ✓ class declaration with dollar-sign identifiers
+     39. ✓ Sealed classes
+     40. ✓ Reserved identifiers
+     41. ✓ Annontations
+     42. ✓ unnamed class
+     43. ✓ Annotation following type arguments
+  expressions:
+     44. ✓ standalone assignment expression
+     45. ✓ standalone binary expression
+     46. ✓ instanceof expressions
+     47. ✓ if statements
+     48. ✓ if statements with nested parenthesized expression
+     49. ✓ if statements with braces
+     50. ✓ if statements with assignment without braces
+     51. ✓ if then else statement
+     52. ✓ nested if then else statements
+     53. ✓ ternary expressions
+     54. ✓ for statement
+     55. ✓ Enhanced for statements
+     56. ✓ while statement
+     57. ✓ try-with-resources statements
+     58. ✓ return statement
+     59. ✓ annotation
+     60. ✓ marker annotation
+     61. ✓ single element annotation
+     62. ✓ annotation in array creation
+     63. ✓ lambda expression
+     64. ✓ traditional switch statement
+     65. ✓ functional switch statement
+     66. ✓ traditional-style switch expression
+     67. ✓ functional switch expression
+     68. ✓ switch expression with block
+     69. ✓ switch expressions added
+     70. ✓ switch statement and pre-increment
+     71. ✓ Pattern matching
+     72. ✓ Switch statements
+     73. ✓ type arguments
+     74. ✓ wildcard
+     75. ✓ type arguments with generic types
+     76. ✓ empty type arguments
+     77. ✓ method references
+     78. ✓ Non-ascii identifiers
+     79. ✓ Local variable declaration with scoped type identifiers -- Warning: Slow parse rate (274.829 bytes/ms)
+     80. ✓ binary expression
+     81. ✓ string interpolation
+     82. ✓ switch with qualified enum constant
+     83. ✓ switch with guarded case
+     84. ✓ switch with complex type
+     85. ✓ switch with unnamed pattern
+     86. ✓ switch with unnamed pattern variable
+     87. ✓ underscore pattern
+     88. ✓ for loops and underscore pattern
+     89. ✓ Annotations before a spread parameter's ellipsis
+     90. ✓ Annotations in a catch type
+     91. ✓ Annotations before an array's bracket
+  literals:
+     92. ✓ decimal integer literals
+     93. ✓ hex integer literals
+     94. ✓ octal integer literals
+     95. ✓ binary integer literal
+     96. ✓ floating point literals
+     97. ✓ boolean literals
+     98. ✓ character literals
+     99. ✓ string literals
+    100. ✓ text block
+    101. ✓ escape sequences
+    102. ✓ null literals
+    103. ✓ char escapes
+    104. ✓ octal escapes
+    105. ✓ unicode escapes
+    106. ✓ ascii escapes
+    107. ✓ class literals
+  precedence:
+    108. ✓ Precedence -- Warning: Slow parse rate (285.258 bytes/ms)
+  types:
+    109. ✓ integral types
+    110. ✓ floating point types
+
+syntax highlighting:
+      1. ✓ types.java (17 assertions)
+Total parses: 110; successful parses: 110; failed parses: 0; success percentage: 100.00%; average speed: 2603 bytes/ms
+

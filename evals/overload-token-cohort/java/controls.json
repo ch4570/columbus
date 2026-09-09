@@ -1,0 +1,128 @@
+{
+  "positive": {
+    "passed": true,
+    "findings": [
+      {
+        "id": "overload-routing",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "null-shortcuts",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "full-consumption",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "reader-strictness",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "adapter-result-validation",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "eof-and-errors",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "negative": {
+    "passed": false,
+    "findings": [
+      {
+        "id": "overload-routing",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "null-shortcuts",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "full-consumption",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "reader-strictness",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "adapter-result-validation",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "eof-and-errors",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "control_answer": {
+    "findings": [
+      {
+        "id": "overload-routing",
+        "path": "gson/src/main/java/com/google/gson/Gson.java",
+        "start_line": 1004,
+        "end_line": 1004,
+        "quote": "    T object = fromJson(jsonReader, typeOfT);",
+        "explanation": "Mechanical citation control only; not a semantic answer."
+      },
+      {
+        "id": "null-shortcuts",
+        "path": "gson/src/main/java/com/google/gson/Gson.java",
+        "start_line": 1216,
+        "end_line": 1216,
+        "quote": "    return fromJson(new JsonTreeReader(json), typeOfT);",
+        "explanation": "Mechanical citation control only; not a semantic answer."
+      },
+      {
+        "id": "full-consumption",
+        "path": "gson/src/main/java/com/google/gson/Gson.java",
+        "start_line": 1221,
+        "end_line": 1221,
+        "quote": "      if (obj != null && reader.peek() != JsonToken.END_DOCUMENT) {",
+        "explanation": "Mechanical citation control only; not a semantic answer."
+      },
+      {
+        "id": "reader-strictness",
+        "path": "gson/src/main/java/com/google/gson/Gson.java",
+        "start_line": 1093,
+        "end_line": 1093,
+        "quote": "      reader.setStrictness(this.strictness);",
+        "explanation": "Mechanical citation control only; not a semantic answer."
+      },
+      {
+        "id": "adapter-result-validation",
+        "path": "gson/src/main/java/com/google/gson/Gson.java",
+        "start_line": 1105,
+        "end_line": 1105,
+        "quote": "      if (object != null && !expectedTypeWrapped.isInstance(object)) {",
+        "explanation": "Mechanical citation control only; not a semantic answer."
+      },
+      {
+        "id": "eof-and-errors",
+        "path": "gson/src/main/java/com/google/gson/Gson.java",
+        "start_line": 1116,
+        "end_line": 1116,
+        "quote": "    } catch (EOFException e) {",
+        "explanation": "Mechanical citation control only; not a semantic answer."
+      }
+    ]
+  }
+}

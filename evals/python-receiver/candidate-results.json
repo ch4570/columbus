@@ -1,0 +1,180 @@
+{
+  "python": "3.11.16 (main, Aug 14 2026, 15:24:25) [Clang 22.1.3 ]",
+  "analyzer_sha256": "c3a03b6aa28ecd22a8a48fec6c1c80b391a5643068e3e390fb15e117d2744181",
+  "cases": [
+    {
+      "name": "instance",
+      "source": "class C:\n    def helper(self): events.append('C.helper')\n    def run(self): self.helper()\nC().run()\n",
+      "source_sha256": "83d55e7eec96d0c838b56b03c2eea790a37541c15702b4d87a4b67db5033a58f",
+      "runtime_events": [
+        "C.helper"
+      ],
+      "receiver_reference": {
+        "source": "instance.py::C.run:method",
+        "scope_id": "instance.py::C.run:method",
+        "kind": "calls",
+        "name": "self.helper",
+        "path": "instance.py",
+        "line": 3,
+        "evidence": "self.helper",
+        "resolved": false,
+        "reason": "dynamic, external, shadowed, ambiguous or unknown name",
+        "retrieval_candidates": [
+          {
+            "target": "instance.py::C.helper:method",
+            "confidence": "retrieval_only",
+            "reason": "lexical instance-receiver member; runtime dispatch and external mutation unverified"
+          }
+        ]
+      }
+    },
+    {
+      "name": "static_target",
+      "source": "class C:\n    @staticmethod\n    def helper(): events.append('C.helper')\n    def run(self): self.helper()\nC().run()\n",
+      "source_sha256": "9f16b8a9cca7c153b710fe77763c5e66451cf87c19a2061acb160e3a171405f4",
+      "runtime_events": [
+        "C.helper"
+      ],
+      "receiver_reference": {
+        "source": "static_target.py::C.run:method",
+        "scope_id": "static_target.py::C.run:method",
+        "kind": "calls",
+        "name": "self.helper",
+        "path": "static_target.py",
+        "line": 4,
+        "evidence": "self.helper",
+        "resolved": false,
+        "reason": "dynamic, external, shadowed, ambiguous or unknown name",
+        "retrieval_candidates": [
+          {
+            "target": "static_target.py::C.helper:method",
+            "confidence": "retrieval_only",
+            "reason": "lexical instance-receiver member; runtime dispatch and external mutation unverified"
+          }
+        ]
+      }
+    },
+    {
+      "name": "reassigned_receiver",
+      "source": "class D:\n    def helper(self): events.append('D.helper')\nclass C:\n    def helper(self): events.append('C.helper')\n    def run(self):\n        self = D()\n        self.helper()\nC().run()\n",
+      "source_sha256": "c3fa3ac7f2343aa2ca636e2b1a1b5f136a31fde0aef89c0a817a3a451c7d1fca",
+      "runtime_events": [
+        "D.helper"
+      ],
+      "receiver_reference": {
+        "source": "reassigned_receiver.py::C.run:method",
+        "scope_id": "reassigned_receiver.py::C.run:method",
+        "kind": "calls",
+        "name": "self.helper",
+        "path": "reassigned_receiver.py",
+        "line": 7,
+        "evidence": "self.helper",
+        "resolved": false,
+        "reason": "dynamic, external, shadowed, ambiguous or unknown name"
+      }
+    },
+    {
+      "name": "overridden_receiver",
+      "source": "class C:\n    def helper(self): events.append('C.helper')\n    def run(self): self.helper()\nclass D(C):\n    def helper(self): events.append('D.helper')\nD().run()\n",
+      "source_sha256": "40d7d14043fdc506159ac30b766f6fefc92c982092032c6587c897d528ddaf1d",
+      "runtime_events": [
+        "D.helper"
+      ],
+      "receiver_reference": {
+        "source": "overridden_receiver.py::C.run:method",
+        "scope_id": "overridden_receiver.py::C.run:method",
+        "kind": "calls",
+        "name": "self.helper",
+        "path": "overridden_receiver.py",
+        "line": 3,
+        "evidence": "self.helper",
+        "resolved": false,
+        "reason": "dynamic, external, shadowed, ambiguous or unknown name"
+      }
+    },
+    {
+      "name": "assigned_attribute",
+      "source": "class C:\n    def helper(self): events.append('C.helper')\n    def run(self):\n        self.helper = lambda: events.append('replacement')\n        self.helper()\nC().run()\n",
+      "source_sha256": "2f8f964be1d8d884c00b0740a62c61d18d83cd17e2328d5f0ebdab4513701052",
+      "runtime_events": [
+        "replacement"
+      ],
+      "receiver_reference": {
+        "source": "assigned_attribute.py::C.run:method",
+        "scope_id": "assigned_attribute.py::C.run:method",
+        "kind": "calls",
+        "name": "self.helper",
+        "path": "assigned_attribute.py",
+        "line": 5,
+        "evidence": "self.helper",
+        "resolved": false,
+        "reason": "dynamic, external, shadowed, ambiguous or unknown name"
+      }
+    },
+    {
+      "name": "static_parameter",
+      "source": "class D:\n    def helper(self): events.append('D.helper')\nclass C:\n    def helper(self): events.append('C.helper')\n    @staticmethod\n    def run(self): self.helper()\nC.run(D())\n",
+      "source_sha256": "3fc0943e608464647fbc0b157ed4d3b5eae223d0cfe47e911001014bbdd361b5",
+      "runtime_events": [
+        "D.helper"
+      ],
+      "receiver_reference": {
+        "source": "static_parameter.py::C.run:method",
+        "scope_id": "static_parameter.py::C.run:method",
+        "kind": "calls",
+        "name": "self.helper",
+        "path": "static_parameter.py",
+        "line": 6,
+        "evidence": "self.helper",
+        "resolved": false,
+        "reason": "dynamic, external, shadowed, ambiguous or unknown name"
+      }
+    },
+    {
+      "name": "decorated_target",
+      "source": "def replace(fn):\n    return lambda self: events.append('replacement')\nclass C:\n    @replace\n    def helper(self): events.append('C.helper')\n    def run(self): self.helper()\nC().run()\n",
+      "source_sha256": "f770430701446e48ea7b88392b4dae02c9a675672c63650a363d4bfe0e49cee4",
+      "runtime_events": [
+        "replacement"
+      ],
+      "receiver_reference": {
+        "source": "decorated_target.py::C.run:method",
+        "scope_id": "decorated_target.py::C.run:method",
+        "kind": "calls",
+        "name": "self.helper",
+        "path": "decorated_target.py",
+        "line": 6,
+        "evidence": "self.helper",
+        "resolved": false,
+        "reason": "dynamic, external, shadowed, ambiguous or unknown name"
+      }
+    },
+    {
+      "name": "nested_capture",
+      "source": "class C:\n    @staticmethod\n    def helper(): events.append('C.helper')\n    def run(self):\n        def inner(): self.helper()\n        inner()\nC().run()\n",
+      "source_sha256": "66c6c8a781df65aa9c83cfae53eaf600877afa8015bbd4de761b064a940567e4",
+      "runtime_events": [
+        "C.helper"
+      ],
+      "receiver_reference": {
+        "source": "nested_capture.py::C.run.inner:function",
+        "scope_id": "nested_capture.py::C.run.inner:function",
+        "kind": "calls",
+        "name": "self.helper",
+        "path": "nested_capture.py",
+        "line": 5,
+        "evidence": "self.helper",
+        "resolved": false,
+        "reason": "dynamic, external, shadowed, ambiguous or unknown name",
+        "retrieval_candidates": [
+          {
+            "target": "nested_capture.py::C.helper:method",
+            "confidence": "retrieval_only",
+            "reason": "lexical instance-receiver member; runtime dispatch and external mutation unverified"
+          }
+        ]
+      }
+    }
+  ],
+  "scope": "Eight literal generated fixtures; these executions do not prove general dispatch completeness."
+}

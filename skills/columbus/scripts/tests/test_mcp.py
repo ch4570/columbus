@@ -12,6 +12,66 @@ import unittest
 
 @unittest.skipUnless(importlib.util.find_spec("mcp"), "optional MCP SDK not installed")
 class MCPIntegrationTests(unittest.TestCase):
+    def test_stdio_search_cursor_roundtrip_and_scope_rejection(self):
+        from columbus.index import RepositoryIndex
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / 'repo'
+            root.mkdir()
+            for number in range(25):
+                (root / f'part_{number:03}.py').write_text(
+                    f'def pagination_target():\n    return {number}\n', encoding='utf-8', newline='\n')
+            database = Path(temporary) / 'index.sqlite'
+            index = RepositoryIndex(database)
+            index.refresh(root)
+            expected = index.search('pagination_target', limit=50, path='part_*.py', language='python')
+            self.assertFalse(expected['truncated'])
+            asyncio.run(self._exercise_search_cursor(database, root, expected['hits']))
+
+    async def _exercise_search_cursor(self, database, root, expected):
+        from columbus.index import RepositoryIndex
+        from mcp.client import ClientSession
+        from mcp.client.stdio import StdioServerParameters, stdio_client
+
+        package_root = str(Path(__file__).resolve().parents[1])
+        parameters = StdioServerParameters(
+            command=sys.executable,
+            args=['-m', 'columbus', '--db', str(database), 'serve'],
+            env={'PYTHONPATH': os.pathsep.join([package_root] + [entry for entry in sys.path if entry])},
+            cwd=package_root,
+        )
+        async with stdio_client(parameters) as (reader, writer):
+            async with ClientSession(reader, writer, read_timeout_seconds=20) as session:
+                await session.initialize()
+                listing = await session.list_tools()
+                tool = next(tool for tool in listing.tools if tool.name == 'find_symbols')
+                self.assertIn('cursor', tool.input_schema['properties'])
+                arguments = {'query': 'pagination_target', 'limit': 20, 'path': 'part_*.py', 'language': 'python'}
+                first = await session.call_tool('find_symbols', arguments)
+                self.assertFalse(first.is_error)
+                page = first.structured_content
+                self.assertEqual(len(page['hits']), 20)
+                self.assertTrue(page['truncated'])
+                self.assertIsInstance(page['next_cursor'], str)
+                second = await session.call_tool('find_symbols', dict(arguments, limit=50, cursor=page['next_cursor']))
+                self.assertFalse(second.is_error)
+                self.assertEqual(len(second.structured_content['hits']), len(expected) - 20)
+                self.assertFalse(second.structured_content['truncated'])
+                self.assertIsNone(second.structured_content['next_cursor'])
+                identifiers = [item['id'] for packet in (page, second.structured_content) for item in packet['hits']]
+                self.assertEqual(len(identifiers), len(set(identifiers)))
+                self.assertEqual(identifiers, [item['id'] for item in expected])
+                self.assertTrue({f'part_{number:03}.py::pagination_target:function' for number in range(25)} <= set(identifiers))
+                for changes in ({'query': 'different_query'}, {'path': 'part_00*.py'}, {'language': 'java'}):
+                    invalid = await session.call_tool('find_symbols', dict(arguments, cursor=page['next_cursor'], **changes))
+                    self.assertTrue(invalid.is_error)
+                    self.assertIn('cursor', invalid.content[0].text.lower())
+                (root / 'part_024.py').write_text('def pagination_target():\n    return "changed"\n', encoding='utf-8', newline='\n')
+                RepositoryIndex(database).refresh(root)
+                changed = await session.call_tool('find_symbols', dict(arguments, cursor=page['next_cursor']))
+                self.assertTrue(changed.is_error)
+                self.assertIn('revision', changed.content[0].text.lower())
+
     def test_stdio_initialize_discover_and_query(self):
         from columbus.index import RepositoryIndex
 

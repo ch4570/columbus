@@ -1,0 +1,209 @@
+{
+  "schema": "columbus.exploration-observation/v1",
+  "case": "java-gson-fromjson-overloads",
+  "condition": "columbus",
+  "repeat": 2,
+  "model_requested": "gpt-5.6-sol",
+  "effort_requested": "xhigh",
+  "evidence_mode": "saved_archive",
+  "elapsed_seconds": 426.14,
+  "return_code": 0,
+  "timed_out": false,
+  "source_unchanged": true,
+  "usage": {
+    "input_tokens": 286351,
+    "cached_input_tokens": 241536,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 12536,
+    "reasoning_output_tokens": 9189,
+    "uncached_input_tokens": 44815
+  },
+  "commands": [
+    {
+      "command": "/bin/zsh -lc \"sed -n '1,240p' /tmp/columbus-overload-token-java/runtime/SKILL.md\"",
+      "exit_code": 0,
+      "output_bytes": 5392,
+      "output_sha256": "0b49697a532e2efcf565c8ae56395ee1b48413bb8a49ab3bd98219bfb14645d4"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/personal/columbus/.venv/bin/python /tmp/columbus-overload-token-java/runtime/columbus.py archive-source 'Gson.fromJson' --overloads --input /tmp/columbus-overload-token-java/graph.jsonl.xz --repo . --format text --limit 400 --budget-bytes 30000\"",
+      "exit_code": 0,
+      "output_bytes": 8122,
+      "output_sha256": "37be420130d20baa1b2875c9fd052dbb5fd5ff44e8c504d72772c6b003210019"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n -C 12 \\\"(newJsonReader|assertFullConsumption|Strictness strictness|setStrictness\\\\()\\\" gson/src/main/java/com/google/gson/Gson.java gson/src/main/java/com/google/gson/stream/JsonReader.java\"",
+      "exit_code": 0,
+      "output_bytes": 62431,
+      "output_sha256": "b5dc3db6a77bf85da98229a01ce39310f2853ddf99213dc36385dade01d23ab7"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n -C 5 \\\"class JsonTreeReader|JsonTreeReader\\\\(|instanceof JsonNull|static <T> Class<T> wrap|Class<T> wrap|wrap\\\\(Class\\\" gson/src/main/java/com/google/gson/internal/bind/JsonTreeReader.java gson/src/main/java/com/google/gson/internal/Primitives.java gson/src/main/java/com/google/gson/JsonNull.java && sed -n '995,1232p' gson/src/main/java/com/google/gson/Gson.java\"",
+      "exit_code": 0,
+      "output_bytes": 17918,
+      "output_sha256": "8c3bfa1e45497beffb8390a236ffbc265fdc36b62352d54ec90a1eeac4b49a22"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n \\\"public JsonToken peek|int doPeek|EMPTY_DOCUMENT|NONEMPTY_DOCUMENT|PEEKED_EOF\\\" gson/src/main/java/com/google/gson/stream/JsonReader.java | head -35 && sed -n '535,655p' gson/src/main/java/com/google/gson/stream/JsonReader.java && rg -n \\\"public abstract T read\\\" gson/src/main/java/com/google/gson/TypeAdapter.java\"",
+      "exit_code": 0,
+      "output_bytes": 4493,
+      "output_sha256": "5f9fd6291a6c7e98fcc3cda03d72cde8e2026f461931aa019fcbe8c513394a3a"
+    },
+    {
+      "command": "/bin/zsh -lc \"sed -n '666,710p' gson/src/main/java/com/google/gson/stream/JsonReader.java && sed -n '40,78p' gson/src/main/java/com/google/gson/internal/Primitives.java && sed -n '140,170p' gson/src/main/java/com/google/gson/internal/bind/JsonTreeReader.java && sed -n '812,826p' gson/src/main/java/com/google/gson/Gson.java\"",
+      "exit_code": 0,
+      "output_bytes": 4358,
+      "output_sha256": "e62984571f21bb4140c87de2adf9f43fa695a5e1884b672bc9802ce87e3ac7f6"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n -A 8 -B 4 \\\"static TypeToken.*get\\\\(|static <T> TypeToken<T> get\\\\(\\\" gson/src/main/java/com/google/gson/reflect/TypeToken.java && sed -n '840,980p' gson/src/main/java/com/google/gson/Gson.java\"",
+      "exit_code": 0,
+      "output_bytes": 8413,
+      "output_sha256": "7779e7b95d47167d863b70afe268a8d393e7c11ad18f82151fce6040d8959a80"
+    },
+    {
+      "command": "/bin/zsh -lc \"sed -n '1,120p' gson/src/main/java/com/google/gson/JsonSyntaxException.java && sed -n '1,110p' gson/src/main/java/com/google/gson/JsonIOException.java && sed -n '1,110p' gson/src/main/java/com/google/gson/JsonParseException.java\"",
+      "exit_code": 0,
+      "output_bytes": 5183,
+      "output_sha256": "8719fcf45e908a891c1f27ade4b57cfd6236d69bea1139f7cd6d062218232623"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n \\\"public <T> T fromJson\\\\(\\\" gson/src/main/java/com/google/gson/Gson.java\"",
+      "exit_code": 0,
+      "output_bytes": 905,
+      "output_sha256": "3bc89b3b508f0b07fb3dc958aebcf4514eddb4283922ac404da33e153a2d037c"
+    }
+  ],
+  "command_count": 9,
+  "command_output_bytes": 117215,
+  "failed_commands": 0,
+  "other_tool_types": [],
+  "runtime_warnings": [],
+  "turn_failed": false,
+  "quality": {
+    "passed": false,
+    "findings": [
+      {
+        "id": "overload-routing",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "null-shortcuts",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "full-consumption",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "reader-strictness",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "adapter-result-validation",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "eof-and-errors",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "index_preflight": null,
+  "archive_preflight": {
+    "passed": true,
+    "archive_sha256": "ade93949ec07761d9819b5b3b58fe6b3e1b9b8ccd357c868c43c504db8bc6dd8",
+    "revision": "1a4e614188fb3c227fbf",
+    "source_files_verified": 313,
+    "indexed_source_files_verified": 310,
+    "counts": {
+      "files": 310,
+      "nodes": 5629,
+      "scopes": 5441,
+      "edges": 9853,
+      "references": 23400,
+      "imports": 2671,
+      "diagnostics": 0
+    },
+    "consumer_index_absent": true
+  },
+  "archive_postflight": {
+    "passed": true,
+    "archive_sha256": "ade93949ec07761d9819b5b3b58fe6b3e1b9b8ccd357c868c43c504db8bc6dd8",
+    "revision": "1a4e614188fb3c227fbf",
+    "source_files_verified": 313,
+    "indexed_source_files_verified": 310,
+    "counts": {
+      "files": 310,
+      "nodes": 5629,
+      "scopes": 5441,
+      "edges": 9853,
+      "references": 23400,
+      "imports": 2671,
+      "diagnostics": 0
+    },
+    "consumer_index_absent": true
+  },
+  "answer": {
+    "findings": [
+      {
+        "id": "overload-routing",
+        "path": "gson/src/main/java/com/google/gson/Gson.java",
+        "start_line": 1001,
+        "end_line": 1007,
+        "quote": "  public <T> T fromJson(Reader json, TypeToken<T> typeOfT)\n      throws JsonIOException, JsonSyntaxException {\n    JsonReader jsonReader = newJsonReader(json);\n    T object = fromJson(jsonReader, typeOfT);\n    assertFullConsumption(object, jsonReader);\n    return object;\n  }",
+        "explanation": "There are eleven declared overloads: String × Class/Type/TypeToken; Reader × Class/Type/TypeToken; JsonReader × Type/TypeToken; and JsonElement × Class/Type/TypeToken. Each Class overload converts with TypeToken.get(Class) and delegates without an explicit cast. Each Type overload converts with TypeToken.get(Type), delegates, and performs a source-level unchecked `(T)` cast. String/TypeToken returns early for Java null, otherwise wraps the text in StringReader and delegates to Reader/TypeToken. Reader/TypeToken creates a configured JsonReader, calls the common JsonReader/TypeToken implementation, then checks full consumption. JsonElement/TypeToken returns early for Java null, otherwise wraps the tree in JsonTreeReader and calls that same core implementation without a completion check. There is deliberately no JsonReader/Class overload. Because Class implements Type, `fromJson(jsonReader, SomeClass.class)` selects JsonReader/Type, whose return type is not tied to the Class argument; it creates a token through the Type overload and uses the unchecked return cast, although the core still validates a non-null result against SomeClass's raw class."
+      },
+      {
+        "id": "null-shortcuts",
+        "path": "gson/src/main/java/com/google/gson/Gson.java",
+        "start_line": 1212,
+        "end_line": 1217,
+        "quote": "  public <T> T fromJson(JsonElement json, TypeToken<T> typeOfT) throws JsonSyntaxException {\n    if (json == null) {\n      return null;\n    }\n    return fromJson(new JsonTreeReader(json), typeOfT);\n  }",
+        "explanation": "The Java-null shortcuts exist only in String/TypeToken and JsonElement/TypeToken. Consequently, the corresponding Class and Type wrappers first convert their valid target argument to a TypeToken and then reach the shortcut. A Java-null String returns before StringReader creation, Reader delegation, adapter lookup, or completion checking; a Java-null JsonElement returns before JsonTreeReader creation and core parsing. JsonNull is an actual, non-null tree node, so it does not take this branch: JsonTreeReader exposes it as a NULL token, after which the core performs adapter lookup and calls the adapter. Its result is adapter-defined and undergoes the normal non-null result check. Likewise, the string text `null` is parsed as a JSON token rather than treated as a Java-null input."
+      },
+      {
+        "id": "full-consumption",
+        "path": "gson/src/main/java/com/google/gson/Gson.java",
+        "start_line": 1219,
+        "end_line": 1228,
+        "quote": "  private static void assertFullConsumption(Object obj, JsonReader reader) {\n    try {\n      if (obj != null && reader.peek() != JsonToken.END_DOCUMENT) {\n        throw new JsonSyntaxException(\"JSON document was not fully consumed.\");\n      }\n    } catch (MalformedJsonException e) {\n      throw new JsonSyntaxException(e);\n    } catch (IOException e) {\n      throw new JsonIOException(e);\n    }\n  }",
+        "explanation": "Reader/TypeToken runs this check after the core parse and result validation; all Reader Class/Type overloads inherit it, and String overloads inherit it through Reader delegation. For a non-null adapter result, END_DOCUMENT means success, while any returned token means trailing or unconsumed data and produces a JsonSyntaxException with the shown message and no cause. This is only an end-position check: an adapter that consumes multiple top-level values can pass if it reaches the end. If the adapter returns null—including after reading JSON null or without consuming the pending value—the condition skips peek entirely, so trailing, unconsumed, or malformed remaining input is not detected. During the completion peek, MalformedJsonException becomes JsonSyntaxException with the original cause; every other IOException, including EOFException, becomes JsonIOException with its cause. Other runtime exceptions and errors from that peek are not caught here. Direct JsonReader entry points perform no completion check and may leave trailing input. JsonElement entry points also call the core directly, so a custom adapter's partial consumption of the tree is not checked."
+      },
+      {
+        "id": "reader-strictness",
+        "path": "gson/src/main/java/com/google/gson/Gson.java",
+        "start_line": 1089,
+        "end_line": 1097,
+        "quote": "    boolean isEmpty = true;\n    Strictness oldStrictness = reader.getStrictness();\n\n    if (this.strictness != null) {\n      reader.setStrictness(this.strictness);\n    } else if (reader.getStrictness() == Strictness.LEGACY_STRICT) {\n      // For backward compatibility change to LENIENT if reader has default strictness LEGACY_STRICT\n      reader.setStrictness(Strictness.LENIENT);\n    }",
+        "explanation": "JsonReader itself defaults to LEGACY_STRICT, and Gson.newJsonReader explicitly assigns either the Gson instance's configured strictness or LEGACY_STRICT when no explicit setting exists. The core saves the reader's current setting. An explicit Gson setting temporarily overrides any existing LEGACY_STRICT, LENIENT, or STRICT setting. Without an explicit Gson setting, an existing LEGACY_STRICT reader is temporarily changed to LENIENT, while existing LENIENT and STRICT settings remain unchanged. The core's finally block restores oldStrictness after success, the empty-input return, translated failures, a result mismatch, or other exceptions/errors leaving the try. For String/Reader parsing, that restoration occurs before assertFullConsumption: with default Gson configuration, parsing therefore runs LENIENT but completion peeks under restored LEGACY_STRICT; with explicit configuration, the internally created reader's restored value is that explicit setting. A directly supplied JsonReader is likewise restored, but has no subsequent completion check."
+      },
+      {
+        "id": "adapter-result-validation",
+        "path": "gson/src/main/java/com/google/gson/Gson.java",
+        "start_line": 1099,
+        "end_line": 1115,
+        "quote": "    try {\n      JsonToken unused = reader.peek();\n      isEmpty = false;\n      TypeAdapter<T> typeAdapter = getAdapter(typeOfT);\n      T object = typeAdapter.read(reader);\n      Class<?> expectedTypeWrapped = Primitives.wrap(typeOfT.getRawType());\n      if (object != null && !expectedTypeWrapped.isInstance(object)) {\n        throw new ClassCastException(\n            \"Type adapter '\"\n                + typeAdapter\n                + \"' returned wrong type; requested \"\n                + typeOfT.getRawType()\n                + \" but got instance of \"\n                + object.getClass()\n                + \"\\nVerify that the adapter was registered for the correct type.\");\n      }\n      return object;",
+        "explanation": "The core first peeks, then marks the input non-empty after any normal peek result, looks up the adapter for the complete TypeToken, invokes its read method, and only afterward validates the returned object. Null is always accepted, even for a primitive raw target; any later unboxing can therefore fail outside this check. Primitive raw classes are wrapped before testing, so an int target accepts an Integer result. Validation uses Class.isInstance against the token's raw class: assignable subclasses and implementations are accepted, exact class equality is not required, and parameterized content such as the element types of List<String> is not inspected. A non-null non-assignable result causes the shown ClassCastException after whatever reader consumption the adapter already performed. That exception is not translated by the core catches, though strictness is restored. The core itself imposes no one-value consumption postcondition; only the outer Reader/String path may subsequently check that a non-null result left the reader at END_DOCUMENT."
+      },
+      {
+        "id": "eof-and-errors",
+        "path": "gson/src/main/java/com/google/gson/Gson.java",
+        "start_line": 1116,
+        "end_line": 1135,
+        "quote": "    } catch (EOFException e) {\n      /*\n       * For compatibility with JSON 1.5 and earlier, we return null for empty\n       * documents instead of throwing.\n       */\n      if (isEmpty) {\n        return null;\n      }\n      throw new JsonSyntaxException(e);\n    } catch (IllegalStateException e) {\n      throw new JsonSyntaxException(e);\n    } catch (IOException e) {\n      // TODO(inder): Figure out whether it is indeed right to rethrow this as JsonSyntaxException\n      throw new JsonSyntaxException(e);\n    } catch (AssertionError e) {\n      throw new AssertionError(\n          \"AssertionError (GSON \" + GsonBuildConfig.VERSION + \"): \" + e.getMessage(), e);\n    } finally {\n      reader.setStrictness(oldStrictness);\n    }",
+        "explanation": "isEmpty remains true only until the initial peek returns normally. Therefore an EOFException thrown by that initial peek is treated as an empty document: the method returns null without adapter lookup, and finally still restores strictness. Once the initial peek succeeds, later EOFException—normally while the adapter reads a truncated value—is wrapped in JsonSyntaxException with the EOFException as cause. A peek that returns END_DOCUMENT is not an EOFException and still sets isEmpty false; adapter lookup and read proceed with END_DOCUMENT visible, so a custom adapter may return a value or null, while an adapter-thrown EOF is treated as later EOF. IllegalStateException and every non-EOF IOException during this parse phase are also wrapped in JsonSyntaxException with their original cause; thus parse-phase MalformedJsonException and ordinary reader I/O failures use JsonSyntaxException. AssertionError is replaced with a new AssertionError whose message includes the Gson version and original message and whose cause is the original error. ClassCastException from result validation, NumberFormatException/other IllegalArgumentException, other runtime exceptions (including adapter-thrown JsonParseException), and non-AssertionError Errors are not caught and propagate unchanged, with finally still restoring strictness. Completion checking is a later, separate phase: it has no empty-EOF rule or AssertionError rewrite, and maps malformed JSON to JsonSyntaxException but other I/O failures to JsonIOException."
+      }
+    ]
+  },
+  "prompt_bytes": 4653,
+  "events_sha256": "0e0d8bfb3be510b32a9e90acb15b885d1a6ee9dba28db47ffa1a072c77064433"
+}

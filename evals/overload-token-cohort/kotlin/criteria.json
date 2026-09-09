@@ -1,0 +1,39 @@
+{
+  "legacy-string-bytestring": [
+    "The deprecated create(MediaType?, String) delegates to content.toRequestBody(contentType), selecting the String receiver extension.",
+    "The deprecated create(MediaType?, ByteString) delegates to content.toRequestBody(contentType), selecting the ByteString receiver extension rather than the String encoding path.",
+    "These are content-type-first compatibility declarations. The replacement uses content as the Kotlin extension receiver; the deprecation guidance moves content first for Java calls. The two receiver types remain distinct overloads, not one shared implementation merely because they have the same toRequestBody or JVM create name."
+  ],
+  "legacy-array-file": [
+    "The deprecated create(MediaType?, ByteArray, offset, byteCount) delegates to content.toRequestBody(contentType, offset, byteCount), passing the requested media type, offset and count unchanged. Its defaults are offset=0 and byteCount=content.size.",
+    "The deprecated create(MediaType?, File) delegates to file.asRequestBody(contentType), not the ByteArray, Path or FileDescriptor implementation.",
+    "These compatibility declarations take content type first; the replacements use the array/file as the Kotlin receiver and the deprecation guidance moves content/file first for Java calls."
+  ],
+  "string-encoding": [
+    "The String extension first obtains charset and finalContentType from contentType.chooseCharset(), then encodes the String with toByteArray(charset). Charset selection precedes encoding.",
+    "It delegates those encoded bytes to the ByteArray extension with finalContentType, offset 0 and bytes.size. The resulting body reports that final nullable content type and encoded byte count, and writes the whole encoded byte array; length is not the String character count."
+  ],
+  "charset-policy": [
+    "A null media type selects UTF-8 and leaves finalContentType null; it does not invent a media type.",
+    "For a non-null media type with a supported charset, chooseCharset uses that resolved charset and preserves the original media type.",
+    "MediaType.charset() defaults to null when no charset parameter exists or Charset.forName rejects an invalid/unsupported charset with IllegalArgumentException. In those cases chooseCharset encodes with UTF-8 and attempts to parse the original media type text plus '; charset=utf-8'. Unsupported charset alone is not propagated as an encoding-selection exception here.",
+    "The augmentation uses toMediaTypeOrNull: its parsing result becomes finalContentType, and a parse failure yields null. Do not promise that this nullable parse always produces a MediaType or that every valid media type with a missing/unsupported charset necessarily fails parsing.",
+    "This appends a charset parameter rather than replacing an existing one. MediaType retains parameter order and parameter lookup returns the first matching name, ignoring name case. Thus an existing unsupported charset can remain the first charset and later charset() can still return its default/null despite UTF-8-encoded body bytes; appending does not guarantee that lookup now resolves UTF-8."
+  ],
+  "array-slice": [
+    "The ByteArray extension defaults offset to 0 and byteCount to the entire array size, not size minus offset. Supplying a positive offset while omitting byteCount fails the bounds check rather than automatically selecting the remaining suffix.",
+    "checkOffsetAndCount runs eagerly before the RequestBody object is returned. It rejects negative offset/count, offset beyond array length, or count exceeding arrayLength minus offset with ArrayIndexOutOfBoundsException. This is not deferred until writeTo; the exact exception message is outside scope.",
+    "The body preserves the supplied nullable content type, reports byteCount.toLong(), and writes the original array with the selected offset and byteCount.",
+    "The original ByteArray is captured, not defensively copied. Later mutations in the selected slice can affect subsequent writes; do not claim an immutable byte snapshot."
+  ],
+  "bytestring-body": [
+    "The ByteString body preserves the supplied nullable content type and reports the ByteString size as a Long byte count.",
+    "writeTo directly calls sink.write with the ByteString receiver. This path does not perform String charset selection or re-encode the content based on the media type; no claim about deeper Okio buffer internals is required."
+  ],
+  "file-body": [
+    "The File body preserves the supplied nullable content type. contentLength() calls File.length() when queried; length and content are not eagerly snapshotted at body creation.",
+    "Each writeTo opens a new source from the File and copies it with sink.writeAll(source) inside use. Once opening succeeds, use closes that owned source on block exit, including after a copying failure. The passed sink is not closed by this body; source ownership is distinct from caller-owned sink ownership.",
+    "This File body does not override isOneShot and inherits RequestBody.isOneShot() = false. Do not transfer FileDescriptor's one-shot override to File.",
+    "Reopening per write and isOneShot=false do not freeze the file or guarantee identical bytes or successful writes on repetition: file contents/length can change. This is a local body implementation statement, not a network retry-policy or universal replay-safety guarantee."
+  ]
+}

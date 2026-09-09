@@ -1,0 +1,17 @@
+{
+  "unavailable_candidate_tag": "columbus_unavailable",
+  "runtime_mutated": false,
+  "upstream_wheels": {
+    "tree_sitter_java-0.23.5-cp39-abi3-macosx_11_0_arm64.whl": "24acd59c4720dedad80d548fe4237e43ef2b7a4e94c8549b0ca6e4c4d7bf6e69"
+  },
+  "without_constraint": {
+    "exit_code": 0,
+    "stdout": "Looking in links: /var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus unavailable parser _hrv1ipm\nProcessing /var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus unavailable parser _hrv1ipm/tree_sitter_java-0.23.5-cp39-abi3-macosx_11_0_arm64.whl\nWould install tree-sitter-java-0.23.5\n",
+    "stderr": ""
+  },
+  "with_constraint": {
+    "exit_code": 1,
+    "stdout": "Looking in links: /var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus unavailable parser _hrv1ipm\n\nThe conflict is caused by:\n    The user requested tree-sitter-java==0.23.5\n    The user requested (constraint) tree-sitter-java==0.23.5+columbus.1\n\nTo fix this you could try to:\n1. loosen the range of package versions you've specified\n2. remove package versions to allow pip attempt to solve the dependency conflict\n\n",
+    "stderr": "ERROR: Cannot install tree-sitter-java==0.23.5 because these package versions have conflicting dependencies.\nERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts\n"
+  }
+}

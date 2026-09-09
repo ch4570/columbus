@@ -1,0 +1,11 @@
+{
+  "frozen_commit": "e0694bf7b223d9e034565f964e1747f84e056505",
+  "frozen_inputs_verified": 34,
+  "collection_errors": [],
+  "terminal_verified_trials": 12,
+  "completed_semantic_reviews": 12,
+  "accepted_pairs": 0,
+  "expected_pairs": 6,
+  "columbus_trials_with_useful_batch_source": 6,
+  "merge_release_gate_passed": false
+}

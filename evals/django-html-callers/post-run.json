@@ -1,0 +1,8 @@
+{
+  "source_manifest_equal": true,
+  "runtime_manifest_equal": true,
+  "database_hash_equal": true,
+  "harness_schema_case_review_hashes_equal": true,
+  "both_trials_terminal": true,
+  "semantic_review_pending": false
+}

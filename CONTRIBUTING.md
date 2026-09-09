@@ -47,8 +47,8 @@ From the repository root:
 .venv/bin/python scripts/build_bundle.py
 .venv/bin/python scripts/release_assets.py
 .venv/bin/python scripts/verify_distribution.py \
-  --wheel dist/columbus-1.0.0-py3-none-any.whl \
-  --bundle dist/columbus-1.0.0.zip
+  --wheel dist/columbus-1.1.0-py3-none-any.whl \
+  --bundle dist/columbus-1.1.0.zip
 ```
 
 The distribution verifier creates isolated environments and may download dependencies. The ZIP inventory is checksummed and reproducible for the same input. Keep package and skill bundle versions aligned. New shipped assets must be included in the distribution inventory rather than only existing in the checkout.

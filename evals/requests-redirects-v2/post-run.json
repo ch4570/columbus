@@ -1,0 +1,37 @@
+{
+  "source_manifest_equal": true,
+  "runtime_manifest_equal": true,
+  "frozen_input_hashes_equal": true,
+  "archive_postflight": {
+    "passed": true,
+    "archive_sha256": "65422f45e880ac587c66bc5c23e0d917cda24f8b6ace8158771ff092ad2bd270",
+    "revision": "23d1f0347e082dcfd3d3",
+    "source_files_verified": 132,
+    "indexed_source_files_verified": 112,
+    "counts": {
+      "files": 112,
+      "nodes": 883,
+      "scopes": 825,
+      "edges": 1188,
+      "references": 2674,
+      "imports": 471,
+      "diagnostics": 1
+    },
+    "consumer_index_absent": true
+  },
+  "terminal_observations": {
+    "baseline": {
+      "completed_turns": 1,
+      "timed_out": false,
+      "turn_failed": false
+    },
+    "columbus": {
+      "completed_turns": 1,
+      "timed_out": false,
+      "turn_failed": false
+    }
+  },
+  "semantic_review_pending": false,
+  "both_quality_gates_passed": false,
+  "accepted_quality_preserving_savings": false
+}

@@ -1,0 +1,36 @@
+{
+  "same_packet_pages": [
+    {
+      "offset": 0,
+      "before_bytes": 28027,
+      "after_same_packet_bytes": 24785,
+      "contexts": 19
+    },
+    {
+      "offset": 22,
+      "before_bytes": 28027,
+      "after_same_packet_bytes": 25066,
+      "contexts": 19
+    }
+  ],
+  "all_fields_and_source_display_preserved": true,
+  "before_matches_completed_trial_outputs": true,
+  "complete_oracle_sites": 46,
+  "new_pages": [
+    {
+      "offset": 0,
+      "next_offset": 26,
+      "edges": 26,
+      "bytes": 29193
+    },
+    {
+      "offset": 26,
+      "next_offset": null,
+      "edges": 20,
+      "bytes": 20659
+    }
+  ],
+  "candidate_renderer_sha256": "595e956e4c6d626f8bbffa4cf1e938e329f87ff0bc1a63534d93528b2d299538",
+  "model_trial": false,
+  "token_savings_claimed": false
+}

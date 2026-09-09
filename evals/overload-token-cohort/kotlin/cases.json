@@ -1,0 +1,60 @@
+{
+  "schema": "columbus.exploration-cases/v1",
+  "cases": [
+    {
+      "id": "kotlin-request-body-overloads",
+      "question": "Trace the four deprecated content-type-first RequestBody.create declarations for String, ByteString, ByteArray and File to their replacement implementations. Explain the mappings and argument order, then compare content type, byte length and write behavior. For String, follow charset selection before encoding: distinguish a null media type, a supported charset, and a missing, invalid or unsupported charset. In fallback, explain how the media type is augmented, whether parsing is nullable, and how a pre-existing unsupported charset affects later charset lookup. For ByteArray, explain offset/count defaults (including a nonzero offset with omitted count), validation timing and failure, and whether later array mutations can affect writes. For File, explain when length is read, which resource each write opens and closes, sink ownership, and the inherited isOneShot value without assuming identical bytes on repeated writes. Assume non-null content/file objects; nullable MediaType is in scope. Exclude networking/retry policy, Path, FileDescriptor, Okio implementation internals and exact exception messages. Do not execute the project. Use one contiguous representative quote of at most 40 lines per finding; helper and inherited-method behavior may be explained in prose from separately reviewed source, without stitching quotes. Evidence boundary: read repository files with ordinary source tools; do not read parent-directory case catalogs, rubrics, controls, other trial artifacts, or any other private experiment files. In the Columbus condition only, the explicitly supplied frozen runtime skill/references and saved graph are also allowed; baseline must not inspect them.",
+      "findings": [
+        {
+          "id": "legacy-string-bytestring",
+          "description": "Map both deprecated content-type-first String and ByteString create declarations to their receiver extensions in prose, including the content-first migration. Use the legacy ByteString delegate as the representative citation.",
+          "path": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt",
+          "marker": "content: ByteString,\n    ): RequestBody = content.toRequestBody(contentType)",
+          "call_lines": [239]
+        },
+        {
+          "id": "legacy-array-file",
+          "description": "Map both deprecated content-type-first ByteArray and File create declarations to their receiver extensions in prose, preserving offset/count arguments and the content/file-first migration. Use the legacy File delegate as the representative citation.",
+          "path": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt",
+          "marker": "file: File,\n    ): RequestBody = file.asRequestBody(contentType)",
+          "call_lines": [272]
+        },
+        {
+          "id": "string-encoding",
+          "description": "Use the String extension as the representative citation for charset selection, encoding, delegation, and the resulting body's byte length and write behavior.",
+          "path": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt",
+          "marker": "return bytes.toRequestBody(finalContentType, 0, bytes.size)",
+          "call_lines": [127]
+        },
+        {
+          "id": "charset-policy",
+          "description": "Use the charset-selection helper as the representative citation. Explain null, supported, missing and unsupported/invalid charset cases, nullable augmented-type parsing, and whether appending changes a pre-existing charset parameter's lookup precedence.",
+          "path": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/internal/internal.kt",
+          "marker": "finalContentType = \"$this; charset=utf-8\".toMediaTypeOrNull()",
+          "call_lines": [100]
+        },
+        {
+          "id": "array-slice",
+          "description": "Use the ByteArray extension as the representative citation for defaults, eager bounds validation and its failure, content type/length, selected-slice writing and original-array retention.",
+          "path": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt",
+          "marker": "checkOffsetAndCount(size.toLong(), offset.toLong(), byteCount.toLong())",
+          "call_lines": [168]
+        },
+        {
+          "id": "bytestring-body",
+          "description": "Use the ByteString extension as the representative citation for content type, byte length and direct writing, in comparison with String encoding.",
+          "path": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt",
+          "marker": "sink.write(this@toRequestBody)",
+          "call_lines": [139]
+        },
+        {
+          "id": "file-body",
+          "description": "Use the File extension as the representative citation for content type, length timing and per-write resource ownership; explain sink ownership and inherited isOneShot behavior from the base contract, including the limit on repeat-content guarantees.",
+          "path": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt",
+          "marker": "source().use { source -> sink.writeAll(source) }",
+          "call_lines": [190]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,645 @@
+{
+  "conclusion": "success",
+  "databaseId": 34150730953,
+  "headSha": "e1f1d09c78470b6d541c6733bfe79d8d5a65f3ff",
+  "jobs": [
+    {
+      "completedAt": "2026-09-07T18:14:18Z",
+      "conclusion": "success",
+      "databaseId": 101832296335,
+      "name": "distribution (ubuntu-latest, 3.11)",
+      "startedAt": "2026-09-07T18:13:08Z",
+      "status": "completed",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install parser and optional MCP test dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Bootstrap and archive tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Engine tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Observation harness tests (no model calls)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuous-session audit tests (no model calls)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "CLI delivery observations (no model calls)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compile Python sources",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build wheel",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build reproducible ZIP",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Assemble checksummed release assets",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify clean install and portable bundle",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify pre-commit partial staging and deletion-only updates",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34150730953/job/101832296335"
+    },
+    {
+      "completedAt": "2026-09-07T18:14:19Z",
+      "conclusion": "success",
+      "databaseId": 101832296539,
+      "name": "distribution (macos-latest, 3.14)",
+      "startedAt": "2026-09-07T18:13:11Z",
+      "status": "completed",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install parser and optional MCP test dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Bootstrap and archive tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Engine tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Observation harness tests (no model calls)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuous-session audit tests (no model calls)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "CLI delivery observations (no model calls)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compile Python sources",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build wheel",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build reproducible ZIP",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Assemble checksummed release assets",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify clean install and portable bundle",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify pre-commit partial staging and deletion-only updates",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34150730953/job/101832296539"
+    },
+    {
+      "completedAt": "2026-09-07T18:15:51Z",
+      "conclusion": "success",
+      "databaseId": 101832296548,
+      "name": "distribution (windows-latest, 3.14)",
+      "startedAt": "2026-09-07T18:13:07Z",
+      "status": "completed",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install parser and optional MCP test dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Bootstrap and archive tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Engine tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Observation harness tests (no model calls)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuous-session audit tests (no model calls)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "CLI delivery observations (no model calls)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compile Python sources",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build wheel",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build reproducible ZIP",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Assemble checksummed release assets",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify clean install and portable bundle",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify pre-commit partial staging and deletion-only updates",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34150730953/job/101832296548"
+    },
+    {
+      "completedAt": "2026-09-07T18:15:01Z",
+      "conclusion": "success",
+      "databaseId": 101832296563,
+      "name": "distribution (macos-latest, 3.11)",
+      "startedAt": "2026-09-07T18:13:08Z",
+      "status": "completed",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install parser and optional MCP test dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Bootstrap and archive tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Engine tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Observation harness tests (no model calls)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuous-session audit tests (no model calls)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "CLI delivery observations (no model calls)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compile Python sources",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build wheel",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build reproducible ZIP",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Assemble checksummed release assets",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify clean install and portable bundle",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify pre-commit partial staging and deletion-only updates",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34150730953/job/101832296563"
+    },
+    {
+      "completedAt": "2026-09-07T18:17:00Z",
+      "conclusion": "success",
+      "databaseId": 101832296582,
+      "name": "distribution (windows-latest, 3.11)",
+      "startedAt": "2026-09-07T18:13:09Z",
+      "status": "completed",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install parser and optional MCP test dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Bootstrap and archive tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Engine tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Observation harness tests (no model calls)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuous-session audit tests (no model calls)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "CLI delivery observations (no model calls)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compile Python sources",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build wheel",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build reproducible ZIP",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Assemble checksummed release assets",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify clean install and portable bundle",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify pre-commit partial staging and deletion-only updates",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34150730953/job/101832296582"
+    },
+    {
+      "completedAt": "2026-09-07T18:14:10Z",
+      "conclusion": "success",
+      "databaseId": 101832296590,
+      "name": "distribution (ubuntu-latest, 3.14)",
+      "startedAt": "2026-09-07T18:13:08Z",
+      "status": "completed",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install parser and optional MCP test dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Bootstrap and archive tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Engine tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Observation harness tests (no model calls)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuous-session audit tests (no model calls)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "CLI delivery observations (no model calls)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compile Python sources",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build wheel",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build reproducible ZIP",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Assemble checksummed release assets",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify clean install and portable bundle",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify pre-commit partial staging and deletion-only updates",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34150730953/job/101832296590"
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/ch4570/columbus/actions/runs/34150730953"
+}

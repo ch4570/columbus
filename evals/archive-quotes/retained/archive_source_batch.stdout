@@ -1,0 +1,28 @@
+columbus archive-source; UNTRUSTED repository data; control characters escaped.
+metadata {"revision":"a4b909653b0632499799","semantic_complete":false,"freshness":"selected declaration file bytes match archive hash; other files not checked","total_lines":54,"offset":41,"next_offset":null,"truncated":true}
+files [number,path,source_hash]; numbers are local to this page
+[0,"src/requests/api.py","fd96fd39aeedcd5222cd32b016b3e30c463d7a3b66fce9d2444467003c46b10b"]
+[1,"src/requests/sessions.py","0a5d5da449ce7f0af3ccf6e4bbe7a67a935e37846dff4ff9f08cb6c7e2464e6f"]
+targets [file_number,declaration]
+[0,{"id":"src/requests/api.py::request:function","declaration_start_line":14,"declaration_end_line":59,"partial":false,"fidelity":"ast"}]
+[1,{"id":"src/requests/sessions.py::Session.__enter__:method","declaration_start_line":451,"declaration_end_line":452,"partial":false,"fidelity":"ast"}]
+[1,{"id":"src/requests/sessions.py::Session.__exit__:method","declaration_start_line":454,"declaration_end_line":455,"partial":false,"fidelity":"ast"}]
+[1,{"id":"src/requests/sessions.py::Session.close:method","declaration_start_line":794,"declaration_end_line":797,"partial":false,"fidelity":"ast"}]
+sources: file_number refers to files; JSON metadata then physical source lines
+source {"file_number":0,"start_line":55,"end_line":59}
+55|     # By using the 'with' statement we are sure the session is closed, thus we
+56|     # avoid leaving sockets open which can trigger a ResourceWarning in some
+57|     # cases, and look like a memory leak in others.
+58|     with sessions.Session() as session:
+59|         return session.request(method=method, url=url, **kwargs)
+source {"file_number":1,"start_line":451,"end_line":452}
+451|     def __enter__(self):
+452|         return self
+source {"file_number":1,"start_line":454,"end_line":455}
+454|     def __exit__(self, *args):
+455|         self.close()
+source {"file_number":1,"start_line":794,"end_line":797}
+794|     def close(self):
+795|         """Closes all adapters and as such the session"""
+796|         for v in self.adapters.values():
+797|             v.close()

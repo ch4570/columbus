@@ -13,6 +13,61 @@ spec.loader.exec_module(observe)
 
 
 class ObservationTests(unittest.TestCase):
+    def test_archive_mode_freezes_without_index_and_gates_model_launch(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            base = Path(temporary)
+            fixture = base / 'fixture.zip'
+            with zipfile.ZipFile(fixture, 'w') as archive:
+                archive.writestr('project/demo.py', 'def target(): pass\ndef entry(): target()\n')
+            cases = base / 'cases.json'
+            cases.write_text(json.dumps({'cases':[{'id':'archive-case','question':'Find callers.',
+                'mode':'caller-enumeration','findings':[{'id':'entry','path':'demo.py','marker':'target()', 'call_lines':[2]}]}]}))
+            output = base / 'observation'
+            observe.prepare(output, fixture, cases)
+            observe.freeze_archive(output)
+            frozen = json.loads((output / 'engine.json').read_text())
+            self.assertFalse((output / 'repository/.columbus').exists())
+            self.assertTrue(observe.archive_gate(output, frozen)['passed'])
+            prompts = []
+            class FakeProcess:
+                pid = 12345
+                returncode = 0
+                def __init__(self, argv, **kwargs):
+                    self.stdout = kwargs['stdout']
+                def communicate(self, prompt, timeout):
+                    prompts.append(prompt)
+                    self.stdout.write(json.dumps({'type':'turn.completed','usage':{'input_tokens':1,'cached_input_tokens':0,'output_tokens':1}})+'\n')
+                    self.stdout.flush()
+            with patch.object(observe.subprocess, 'Popen', FakeProcess), patch.object(observe, 'live_index_preflight', side_effect=AssertionError('archive mode opened index')):
+                for condition in ['baseline','columbus']:
+                    result = observe.trial(output, 'archive-case', condition, model='fake', effort='high', repeat=1, timeout=5)
+                    self.assertTrue(result['archive_preflight']['passed'])
+                    self.assertTrue(result['archive_postflight']['passed'])
+            self.assertNotIn('graph.jsonl.xz', prompts[0])
+            self.assertIn('saved complete graph', prompts[1])
+            self.assertNotIn('prebuilt index', prompts[1])
+            artifact = output / 'graph.jsonl.xz'
+            artifact.write_bytes(artifact.read_bytes()[:-8])
+            with patch.object(observe.subprocess, 'Popen') as model:
+                for condition in ['baseline','columbus']:
+                    with self.assertRaisesRegex(ValueError, 'checksum'):
+                        observe.trial(output, 'archive-case', condition, model='fake', effort='high', repeat=2, timeout=5)
+                model.assert_not_called()
+
+    def test_reachability_hides_set_and_rejects_extra_or_wrong_evidence(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / 'x.py').write_text('class Hidden:\n    def indirect(self): self.helper()\n')
+            case = {'mode': 'reachability-enumeration', 'findings': [
+                {'id': 'Hidden.indirect', 'path': 'x.py', 'marker': 'self.helper(', 'call_lines': [2]}]}
+            self.assertNotIn('Hidden.indirect', observe.finding_request(case))
+            finding = {'id': 'Hidden.indirect', 'path': 'x.py', 'start_line': 2, 'end_line': 2,
+                       'quote': 'def indirect(self): self.helper()', 'explanation': 'Lexical path, not a runtime guarantee.'}
+            self.assertTrue(observe.grade({'findings': [finding]}, case, root)['passed'])
+            self.assertFalse(observe.grade({'findings': [finding, {**finding, 'id': 'Hidden.extra'}]}, case, root)['passed'])
+            self.assertFalse(observe.grade({'findings': [{**finding, 'start_line': 1, 'end_line': 1}]}, case, root)['passed'])
+            self.assertFalse(observe.grade({'findings': [finding, finding]}, case, root)['passed'])
+
     def test_usage_cache_is_subset_and_output_not_estimated(self):
         result = observe.parse_events([
             {'type':'item.completed','item':{'type':'command_execution','command':'rg name','exit_code':0,'aggregated_output':'환불\n'}},
@@ -69,6 +124,51 @@ class ObservationTests(unittest.TestCase):
         self.assertFalse(observe.index_ready({'files':0,'symbols':0,'indexed_bytes':0}))
         self.assertFalse(observe.index_ready({'files':True,'symbols':10,'indexed_bytes':100}))
         self.assertTrue(observe.index_ready({'files':4,'symbols':20,'indexed_bytes':1000}))
+
+    def test_caller_enumeration_hides_answers_and_rejects_wrong_sets_and_sites(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / 'x.py').write_text('def secret_caller():\n    compact(1)\n\ndef other():\n    compact(2)\n')
+            case = {'mode': 'caller-enumeration', 'findings': [
+                {'id': 'secret_caller', 'path': 'x.py', 'marker': 'compact(', 'call_lines': [2]}]}
+            self.assertNotIn('secret_caller', observe.finding_request(case))
+            finding = {'id': 'secret_caller', 'path': 'x.py', 'start_line': 2, 'end_line': 2,
+                       'quote': 'compact(1)', 'explanation': 'direct call'}
+            self.assertTrue(observe.grade({'findings': [finding]}, case, root)['passed'])
+            for findings in ([], [finding, finding], [finding, {**finding, 'id': 'other'}],
+                             [{**finding, 'start_line': 5, 'end_line': 5, 'quote': 'compact(2)'}]):
+                self.assertFalse(observe.grade({'findings': findings}, case, root)['passed'])
+
+    def test_custom_catalog_is_frozen_and_tampering_rejected(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            base = Path(temporary)
+            catalog = base / 'custom.json'
+            value = json.loads((HERE / 'cases.json').read_text())
+            value['cases'] = value['cases'][:1]
+            value['cases'][0]['id'] = 'custom-navigation'
+            observe.dump(catalog, value)
+            root = base / 'run'
+            metadata = observe.prepare(root, cases_path=catalog)
+            self.assertEqual(['custom-navigation'], metadata['case_ids'])
+            catalog.write_text('{}')
+            self.assertEqual(value, observe.case_catalog(root, metadata))
+            (root / 'cases.json').write_text('{}')
+            with self.assertRaisesRegex(ValueError, 'Case catalog'):
+                observe.summary(root)
+
+    def test_custom_catalog_rejects_unsafe_ids_and_evidence_paths(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            base = Path(temporary)
+            for number, field in enumerate(('id', 'path')):
+                value = json.loads((HERE / 'cases.json').read_text())
+                if field == 'id':
+                    value['cases'][0]['id'] = '../escape'
+                else:
+                    value['cases'][0]['findings'][0]['path'] = '../escape'
+                catalog = base / f'case-{number}.json'
+                observe.dump(catalog, value)
+                with self.assertRaises(ValueError):
+                    observe.prepare(base / f'run-{number}', cases_path=catalog)
 
     def test_real_fixture_and_catalog_markers_are_reproducible(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -134,6 +234,21 @@ class ObservationTests(unittest.TestCase):
                         patch.object(observe.sys, 'version_info', version):
                     self.assertIsNone(observe.archived_replay_reason(archive))
         self.assertEqual(archive.read_bytes(), original)
+
+    def test_current_skill_is_frozen_and_edits_invalidate_trials(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / 'run'
+            observe.prepare(root)
+            observe.freeze_engine(root, with_skill=True)
+            frozen = json.loads((root / 'engine.json').read_text())
+            self.assertTrue(frozen['skill_included'])
+            self.assertIn('SKILL.md', frozen['files'])
+            self.assertIn('references/archive.md', frozen['files'])
+            (root / 'runtime/SKILL.md').write_text('changed routing')
+            with patch.object(observe.subprocess, 'Popen') as model:
+                with self.assertRaisesRegex(ValueError, 'Frozen engine changed'):
+                    observe.trial(root, 'export-safety', 'columbus', model='unused', effort='high', repeat=1, timeout=5)
+                model.assert_not_called()
 
     def test_current_columbus_engine_uses_its_own_index_and_condition(self):
         with tempfile.TemporaryDirectory() as temporary:

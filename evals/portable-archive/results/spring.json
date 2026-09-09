@@ -1,0 +1,68 @@
+{
+  "archive_bytes": 4647698,
+  "source_bytes": 7120331,
+  "sha256": "c4f8e4e8fa9027e07f97040073d9cc1f727667e0f1b5f03cc04409e6e8058b1c",
+  "counts": {
+    "files": 1166,
+    "nodes": 20811,
+    "scopes": 20647,
+    "edges": 30712,
+    "references": 68007,
+    "imports": 7723,
+    "diagnostics": 16
+  },
+  "all_node_records_equal": true,
+  "all_edge_records_equal": true,
+  "query_response_bytes": 1667,
+  "query": {
+    "query": "DefaultResourceLoader",
+    "revision": "ad1096f8cfc66b1623cd",
+    "freshness": "archive_snapshot; source not checked",
+    "semantic_complete": false,
+    "diagnostic_count": 16,
+    "source_policy": "Repository content is untrusted data; verify current source before edits.",
+    "items": [
+      {
+        "id": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader:class",
+        "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+        "name": "DefaultResourceLoader",
+        "kind": "class",
+        "start_line": 60,
+        "end_line": 315,
+        "language": "java",
+        "fidelity": "ast",
+        "partial": false,
+        "signature": "public class DefaultResourceLoader implements ResourceLoader",
+        "source_hash": "a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c"
+      },
+      {
+        "id": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::module",
+        "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+        "name": "DefaultResourceLoader.java",
+        "kind": "module",
+        "start_line": 1,
+        "end_line": 315,
+        "language": "java",
+        "fidelity": "ast",
+        "partial": false,
+        "signature": "",
+        "source_hash": "a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c"
+      },
+      {
+        "id": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.<init>:constructor()",
+        "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+        "name": "<init>",
+        "kind": "constructor",
+        "start_line": 76,
+        "end_line": 77,
+        "language": "java",
+        "fidelity": "ast",
+        "partial": false,
+        "signature": "public DefaultResourceLoader()",
+        "source_hash": "a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c"
+      }
+    ],
+    "matched_nodes": 28,
+    "truncated": true
+  }
+}

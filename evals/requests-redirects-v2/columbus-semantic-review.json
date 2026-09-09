@@ -1,0 +1,64 @@
+{
+  "condition": "columbus",
+  "review_basis": "Frozen SOURCE-REVIEW.md; all findings reviewed after completed turn, using prose and actual quotes.",
+  "passed": false,
+  "passed_findings": 8,
+  "total_findings": 11,
+  "findings": [
+    {
+      "id": "dispatch",
+      "passed": false,
+      "note": "Correct adapter send, generator consumption, allow_redirects=False hops and disabled _next. Neither prose nor quote states response-hook ordering, default allow_redirects=True, history/final-response rearrangement or final non-stream content consumption. Mentioning unproven hook behavior does not provide its static ordering."
+    },
+    {
+      "id": "method_policy",
+      "passed": true,
+      "note": "Correct 303/302 non-HEAD, 301 POST-only and other methods/statuses. Separate citation failure: quote omits an intervening source comment before the 301 branch."
+    },
+    {
+      "id": "body_retention",
+      "passed": false,
+      "note": "Correct status guard independently of method rewrite, but does not state the required rebuild_method-before-purge ordering in prose or actual quote."
+    },
+    {
+      "id": "body_position",
+      "passed": true,
+      "note": "Correct stream exclusions, tell offset, non-None OSError sentinel, no-tell None and later controlled replay error; quote is verbatim."
+    },
+    {
+      "id": "body_rewind",
+      "passed": true,
+      "note": "Covers non-None position and length/transfer header guard, integer seek, OSError translation, missing seek and sentinel failure."
+    },
+    {
+      "id": "origin_auth_policy",
+      "passed": true,
+      "note": "Correct different-host stripping, same-host standard-port upgrade exception, equivalent default ports and remaining scheme/port changes."
+    },
+    {
+      "id": "auth_rebuild",
+      "passed": true,
+      "note": "Quoted policy call uses old response request URL and new URL; prose covers trust_env and netrc reapplication/replacement."
+    },
+    {
+      "id": "proxy_selection",
+      "passed": true,
+      "note": "Actual quote includes None-to-empty guard, copied map, trust_env/bypass, scheme/all fallback and setdefault; prose correctly preserves existing entries under bypass."
+    },
+    {
+      "id": "proxy_auth",
+      "passed": true,
+      "note": "Covers rebuilt mapping scheme key, removal and recreation conditions, and HTTPS adapter handling. Quote substantiates missing-key None credentials. First removal describes header handling before credential inspection, not a claim that proxy resolution occurs afterward."
+    },
+    {
+      "id": "cookies",
+      "passed": false,
+      "note": "Correct copied jar, removal, extraction with old request, session merge and header rebuilding. Neither prose nor quote supplies post-send extraction into the session jar."
+    },
+    {
+      "id": "redirect_url",
+      "passed": true,
+      "note": "Request copy is covered in body_retention and disabled behavior in dispatch. Quote supplies all three fallback errors, undecoded read, limit and close; prose covers fragment/scheme/relative normalization, stored native URL and refreshed target. No claim of runtime dispatch is made."
+    }
+  ]
+}

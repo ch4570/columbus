@@ -1,0 +1,40 @@
+# Completed force_bytes comparison
+
+No accepted token savings: both answers find all 37 lexical owners and pass the citation gate, but both fail semantic review and graph exploration consumes more actual tokens. The shortened skill did not eliminate repeated searching or source reading in this task.
+
+| Measurement | Baseline | Graph |
+| --- | ---: | ---: |
+| Elapsed seconds | 605.409 | 820.475 |
+| Total input tokens | 253,653 | 692,264 |
+| Cached input tokens, subset | 181,120 | 599,424 |
+| Uncached input tokens | 72,533 | 92,840 |
+| Output tokens | 18,081 | 23,907 |
+| Reasoning output tokens, subset | 7,014 | 12,180 |
+| Commands | 34 | 70 |
+| Command output bytes | 139,993 | 247,167 |
+| Exact caller/citation gate | pass | pass |
+| Manual semantic review | fail | fail |
+
+Graph input increased 172.92%, uncached input 28.00%, and output 32.22%. Both runs completed normally within the predeclared 1,200-second limit. Baseline ran first, graph second, once each, requested gpt-5.6-sol/xhigh; backend identity is not independently attested. The task was selected before inspecting its inventory and inputs/criteria were committed at 9d5213c before either model. Its larger scope motivated the longer limit before execution; comparison to prior 600-second tasks is not controlled. No retry, timeout extension, prompt tuning or task narrowing occurred.
+
+Both answers assert that GDALRaster.vsi_buffer asks GDAL to delete the buffer on read, although the passed VSI_DELETE_BUFFER_ON_READ constant is False. The frozen review explicitly required checking rather than inferring this value. The graph answer also says non-string Feature.index inputs would be stringified, overlooking force_bytes's existing-bytes and memoryview paths. Per-owner judgments and exact source/hash evidence are in baseline-semantic-review.json and graph-semantic-review.json. Automated identification and bounded quotations do not prove explanation correctness.
+
+The graph agent read the shortened 3,706-byte skill and additionally listed runtime files, then read the 7,117-byte archive reference. It made four archive searches: a full Python module-qualified name, a module path, the bare name and a shorter qualified name. The qualified forms yielded no declaration matches. It then queried scoped callers with radius 3 and again with radius 0, rather than the skill's behavior example radius 20, and performed substantial ordinary source/prototype reading. Repeated searches and context retrieval are observations, not proof that every additional source check was unnecessary. The qualified-name mismatch is a concrete interface gap for future work; this completed pair must not be replayed after a fix.
+
+The independent AST/import oracle covers all 883 Python files under django/ and 46 scoped direct call sites, including nested owners and same-line multiplicity. The saved graph has 51 incoming calls before excluding top-level tests. Frozen context verification reproduces all 46 sites and exact source excerpts in six 12,000-byte pages (66,257 bytes total); the model chose different query options, so that preflight size is not its observed consumption.
+
+Source/runtime manifests, harness/schema/case/review hashes and archive pre/postflight checks pass. The artifact remains 61a036d5a9eac24e9788531d8b803a2664d312383372500a58c1f8d042a12aa7, with no consumer SQLite. It contains 5,465 indexed files, 46,630 nodes and 86,828 edges in 8,592,880 bytes. Producer indexing took 17.172 seconds and export 7.526 seconds, separate from model usage. results.json retains answers, usage, commands and event hashes; raw traces remain under .omx/observations/archive-force-bytes and the original trial directory.
+
+The objective remains incomplete. Functional graph storage, retrieval and smaller instruction files are not a substitute for correct answers with lower actual usage. This broader task is still on the same Django repository and provides no population-wide conclusion.
+
+## Command-phase diagnosis
+
+command_phases.py groups the retained whole commands and verifies that the groups reproduce the reported command/output totals. Graph mode spent two commands and 13,624 bytes on instructions/runtime listing, four searches and 5,358 bytes, two neighbor queries and 76,722 bytes, plus 62 other commands and 151,463 bytes. Baseline's 34 commands total 139,993 bytes. Thus even the graph condition's non-archive, non-instruction commands exceed the baseline totals. The later zero-radius neighbors query appears at command index 64, after substantial intervening exploration, rather than immediately following the initial radius-three query.
+
+The module-qualified search fix addresses a real failed query but cannot by itself account for all this additional work. These groups do not prove every ordinary read was redundant, do not attribute actual tokens to individual phases, and do not estimate counterfactual savings from deleting commands. command-phases.json preserves source-result hash and every grouped command index so the diagnostic can be inspected without replaying model work.
+
+## Verified source rereads
+
+The expanded source-reread diagnostic verifies frozen hashes and matches numbered or plain source ranges against actual completed command output. It recognizes multiple sed ranges and shell-separated bounded reads without executing commands. On this trace it verifies 39 baseline ranges (1,721 unique physical lines, 68,856 source bytes, 5,833 repeated bytes) versus 141 graph ranges (3,370 unique lines, 136,544 source bytes, 21,225 repeated bytes). source-rereads.json retains every range. These counts exclude rg and other unrecognized output, metadata and model tokens; they are not full command-byte totals or estimated attainable savings.
+
+The initial diagnostic missed the baseline's grouped sed ranges and reported one beyond-EOF graph request as unverified. source-rereads-initial.json preserves that incomplete observation. The corrected version records the empty request separately (line 190 in a 169-line file) and has zero unverified recognized nonempty ranges. Re-running the original urlencode diagnostic preserves all its prior counts and per-range records exactly, with only the new empty-range field added. This is a measurement-tool correction, not a model replay or evidence that all repeated reads could safely be removed.

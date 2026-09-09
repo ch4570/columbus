@@ -11,6 +11,26 @@ from columbus import sync_state
 
 
 class StableReadTests(unittest.TestCase):
+    def test_canonical_root_reuse_still_rejects_replaced_root_and_traversal(self):
+        from columbus.discovery import safe_source
+        root = self.root.resolve()
+        self.assertEqual(safe_source(root, 'source.py', root_is_resolved=True), self.source.resolve())
+        with self.assertRaises(ValueError):
+            safe_source(root, '../outside.py', root_is_resolved=True)
+        # A previously canonical path must not acquire a new outside containment boundary.
+        directory = root / 'repository'
+        outside = root / 'outside'
+        directory.mkdir(); outside.mkdir()
+        (outside / 'source.py').write_text('outside', encoding='utf-8')
+        canonical = directory.resolve()
+        directory.rmdir()
+        try:
+            directory.symlink_to(outside, target_is_directory=True)
+        except OSError:
+            self.skipTest('Directory symlinks unavailable')
+        with self.assertRaisesRegex(ValueError, 'escapes repository'):
+            safe_source(canonical, 'source.py', root_is_resolved=True)
+
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)

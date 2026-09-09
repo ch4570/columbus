@@ -1,0 +1,29 @@
+{
+  "archive_sha256": "84db1ce7bd993494a74940fb6955d69441f35c7cb69b5e77b9b4ed42961f8fda",
+  "pages": [
+    {
+      "offset": 0,
+      "edges": 11,
+      "contexts": 10,
+      "bytes": 11010,
+      "next_offset": 11
+    },
+    {
+      "offset": 11,
+      "edges": 12,
+      "contexts": 10,
+      "bytes": 11440,
+      "next_offset": null
+    }
+  ],
+  "total_bytes": 22450,
+  "source_files_checked": 11,
+  "production_call_sites": 22,
+  "production_callers": 14,
+  "exact_excerpt_parity": true,
+  "oracle_parity": true,
+  "archive_unchanged": true,
+  "consumer_index_absent": true,
+  "model_trial": false,
+  "token_savings_claimed": false
+}

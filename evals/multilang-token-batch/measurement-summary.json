@@ -1,0 +1,65 @@
+{
+  "formula": "100 * (columbus / baseline - 1); input includes cached subset",
+  "pairs": [
+    {
+      "language": "java",
+      "repeat": 1,
+      "input_change_percent": 293.3200122778403,
+      "output_change_percent": 66.57706093189964,
+      "baseline_commands": 13,
+      "columbus_commands": 36,
+      "baseline_output_bytes": 95042,
+      "columbus_output_bytes": 107065
+    },
+    {
+      "language": "java",
+      "repeat": 2,
+      "input_change_percent": 29.634994475240717,
+      "output_change_percent": 50.51676619200735,
+      "baseline_commands": 12,
+      "columbus_commands": 17,
+      "baseline_output_bytes": 117613,
+      "columbus_output_bytes": 134848
+    },
+    {
+      "language": "kotlin",
+      "repeat": 1,
+      "input_change_percent": 244.7029271366544,
+      "output_change_percent": 49.434405758777736,
+      "baseline_commands": 12,
+      "columbus_commands": 16,
+      "baseline_output_bytes": 62667,
+      "columbus_output_bytes": 121695
+    },
+    {
+      "language": "kotlin",
+      "repeat": 2,
+      "input_change_percent": 68.37973056420208,
+      "output_change_percent": 83.20154630117729,
+      "baseline_commands": 16,
+      "columbus_commands": 23,
+      "baseline_output_bytes": 89813,
+      "columbus_output_bytes": 74725
+    },
+    {
+      "language": "javascript",
+      "repeat": 1,
+      "input_change_percent": 446.68376890599114,
+      "output_change_percent": 30.101767541510437,
+      "baseline_commands": 9,
+      "columbus_commands": 22,
+      "baseline_output_bytes": 27025,
+      "columbus_output_bytes": 52975
+    },
+    {
+      "language": "javascript",
+      "repeat": 2,
+      "input_change_percent": 29.62291091241047,
+      "output_change_percent": 8.788809831824063,
+      "baseline_commands": 10,
+      "columbus_commands": 22,
+      "baseline_output_bytes": 39657,
+      "columbus_output_bytes": 48403
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "answer_sha256": "4ffaa6bfd91b557aec3fe978a8eb430eabfb0c968e5f2766bdbc3c9518543adf",
+  "rubric_sha256": "ea0f2380f9c5d415d22c5133a5bd6bc89af3d1eacf2362b515ae53863d7984fc",
+  "findings": [
+    {
+      "id": "resource_location_routing",
+      "passed": true,
+      "reason": "The full routing implementation quote and prose cover null validation, resolver precedence/order, every requested handle route, the URL fallback and handle-only scope.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "The quote shows Assert.notNull before resolve(location, this), null continuation and first non-null return; prose identifies LinkedHashSet registration order and precedence over built-in interpretations."},
+        {"criterion_index": 1, "passed": true, "reason": "The quote supplies the slash hook, both prefix removals and loader arguments. Prose names ClassPathResource, ClassPathAllResource and the unmodified default ClassPathContextResource hook rather than interpreting leading slash as a filesystem handle."},
+        {"criterion_index": 2, "passed": true, "reason": "The full quote uses ResourceUtils.toURL and isFileURL, both URL handle types and a catch limited to MalformedURLException around URL setup; prose names file, vfsfile and vfs and the default path fallback."},
+        {"criterion_index": 3, "passed": true, "reason": "Prose explicitly allows an earlier resolver result to override standard interpretation, qualifies the hook as the unmodified default, and distinguishes construction/URL syntax parsing from existence checks and stream opening."}
+      ]
+    },
+    {
+      "id": "classpath_coordinates",
+      "passed": false,
+      "reason": "Constructor coordinates, null contexts, getter exposure and lexical limits are supported, but the answer omits DefaultResourceLoader.getClassLoader's own explicit/default choice before construction.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "Prose explains null validation, cleanPath, leading-slash removal, both stored coordinates, cleared clazz, explicit loader storage or default selection during construction, and one-argument null-loader delegation."},
+        {"criterion_index": 1, "passed": true, "reason": "The complete Class constructor quote and prose retain cleaned path, derive package-relative or slash-stripped absolutePath, store clazz and null classLoader, and explicitly direct a null Class context to later system lookup."},
+        {"criterion_index": 2, "passed": false, "reason": "The answer correctly states getPath/getClassLoader behavior and the ClassPathResource constructor's captured explicit/default context without later dynamic re-selection. It never states or quotes DefaultResourceLoader.getClassLoader choosing its explicit loader or ClassUtils.getDefaultClassLoader before passing that result into a handle. The shared routing quote only calls the getter, so it does not supply the missing callee behavior."},
+        {"criterion_index": 3, "passed": true, "reason": "Prose identifies lexical separator/dot/parent normalization, including unmatched parents, and denies resource-root canonicalization/traversal protection; the shared relative explanation additionally rejects existence and containment/security guarantees."}
+      ]
+    },
+    {
+      "id": "classpath_url_lookup",
+      "passed": true,
+      "reason": "The complete resolver quote and prose correctly distinguish lookup contexts/arguments, narrow exception suppression, public missing-resource behavior and later independent stream access.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "Quote and prose specify Class.getResource(path), stored ClassLoader.getResource(absolutePath) and system getSystemResource(absolutePath), retaining Class-relative versus absolute coordinates."},
+        {"criterion_index": 1, "passed": true, "reason": "The full quote catches only IllegalArgumentException and returns null; prose gives exists as a non-null test and getURL as FileNotFoundException on null or the URL otherwise."},
+        {"criterion_index": 2, "passed": true, "reason": "Prose distinguishes missing exists false from getURL's exception, states neither API opens/reserves content, and explains why the independent later stream lookup can fail after a successful URL lookup."}
+      ]
+    },
+    {
+      "id": "classpath_stream_access",
+      "passed": true,
+      "reason": "The complete direct-stream method and prose establish all branches, null-to-exception behavior, lack of URL-helper suppression and an uncached caller-owned stream.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "The full quote and prose use Class.getResourceAsStream(path), ClassLoader.getResourceAsStream(absolutePath) or system getSystemResourceAsStream(absolutePath), without a resolveURL/open-URL path."},
+        {"criterion_index": 1, "passed": true, "reason": "The quote throws FileNotFoundException using getDescription on null and returns a non-null stream. Prose explicitly states the method does not inherit resolveURL's IllegalArgumentException suppression."},
+        {"criterion_index": 2, "passed": true, "reason": "The complete body performs its own selected lookup each invocation with no retained stream/content or successful-stream close; prose states caller ownership, while the shared URL finding denies prior lookup success as a read guarantee."}
+      ]
+    },
+    {
+      "id": "classpath_relative_handles",
+      "passed": false,
+      "reason": "The ordinary method and path-helper branches are covered, but the context subtype explanation omits both its ContextResource interface and the override's getClassLoader constructor argument.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "The full ordinary-method quote and prose pass stored path to applyRelativePath and preserve non-null clazz or pass the stored ClassLoader. The additional explanation of new construction selecting a default from a null loader agrees with the source."},
+        {"criterion_index": 1, "passed": true, "reason": "Prose describes final-segment replacement, preserving an existing parent for a leading-slash relative argument with no extra slash, and direct relativePath return when the base has no separator."},
+        {"criterion_index": 2, "passed": true, "reason": "Prose describes repeated cleaning and constructor-specific slash handling with the corresponding Class/loader context, and restricts the result to lexical handle coordinates without existence, content access or containment/security guarantees."},
+        {"criterion_index": 3, "passed": false, "reason": "The answer covers ClassPathContextResource, getPathWithinContext -> getPath, helper(getPath), and preservation of that subtype. It does not state or quote that the subtype implements ContextResource or that its override constructs the new subtype with getClassLoader. The quoted plain ClassPathResource method cannot supply those distinct class/override facts."}
+      ]
+    }
+  ],
+  "execution_review": {
+    "events_sha256": "21712b3169a9fb88df824ba8abc06e3930b975772361dd70c0394eba59c63c24",
+    "passed": true,
+    "reason": "Audited all 30 command_execution items: item_1 through item_29 and item_31, with matching started/completed records; item_30 is an intermediate message, not another command or terminal answer. The first command reads the offered candidate SKILL.md. Ordinary rg/nl/sed searches and reads remain within the repository; item_2's wrong spring-core/src/main/java path fails locally and is not a scope violation. Nine Columbus calls (item_3, item_4, item_6 through item_11 and item_31) use the exact supplied absolute Python -B prefix, candidate wrapper and graph, and --repo . for source/quotes. They perform only archive-search, archive-source --call-sites or archive-quotes. No source/repository code execution, tests/builds, SQLite/index/sync, writes, network/web, delegation, installation or private/sibling oracle reads occur. The supplied skill already describes the used basic source/call-sites operation; the optional detailed reference was not needed for a new unsupported operation. Recognition or usefulness of the delivered calls is separate from this policy audit, and trace reads do not repair final-answer omissions."
+  }
+}

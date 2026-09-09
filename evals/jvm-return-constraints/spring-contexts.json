@@ -1,0 +1,1829 @@
+{
+  "all_removed_calls_matched": true,
+  "calls": 43,
+  "immediate_parent_counts": {
+    "argument_list": 27,
+    "variable_declarator": 3,
+    "assignment_expression": 1,
+    "ternary_expression": 5,
+    "return_statement": 5,
+    "method_invocation": 1,
+    "binary_expression": 1
+  },
+  "missing_expected_type_parent_counts": {
+    "argument_list": 27,
+    "assignment_expression": 1,
+    "ternary_expression": 5,
+    "method_invocation": 1,
+    "binary_expression": 1
+  },
+  "rows": [
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findAllMergedAnnotations:method(AnnotatedElement,Class<A>)",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.highAggregateIndexesFirst:method()",
+      "line": 664,
+      "expected_type": "",
+      "callee_span": [
+        35305,
+        35332
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 664,
+          "end_line": 664
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 663,
+          "end_line": 664
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 663,
+          "end_line": 665
+        },
+        {
+          "type": "return_statement",
+          "start_line": 663,
+          "end_line": 665
+        },
+        {
+          "type": "block",
+          "start_line": 662,
+          "end_line": 666
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 662,
+          "end_line": 666
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findAllMergedAnnotations:method(AnnotatedElement,Class<A>)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+      "line": 665,
+      "expected_type": "",
+      "callee_span": [
+        35347,
+        35391
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 665,
+          "end_line": 665
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 663,
+          "end_line": 665
+        },
+        {
+          "type": "return_statement",
+          "start_line": 663,
+          "end_line": 665
+        },
+        {
+          "type": "block",
+          "start_line": 662,
+          "end_line": 666
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 662,
+          "end_line": 666
+        },
+        {
+          "type": "class_body",
+          "start_line": 99,
+          "end_line": 843
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findAllMergedAnnotations:method(AnnotatedElement,Set<Class<?extendsAnnotation>>)",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.highAggregateIndexesFirst:method()",
+      "line": 689,
+      "expected_type": "",
+      "callee_span": [
+        36673,
+        36700
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 689,
+          "end_line": 689
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 687,
+          "end_line": 689
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 687,
+          "end_line": 690
+        },
+        {
+          "type": "return_statement",
+          "start_line": 687,
+          "end_line": 690
+        },
+        {
+          "type": "block",
+          "start_line": 686,
+          "end_line": 691
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 686,
+          "end_line": 691
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findAllMergedAnnotations:method(AnnotatedElement,Set<Class<?extendsAnnotation>>)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+      "line": 690,
+      "expected_type": "",
+      "callee_span": [
+        36715,
+        36759
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 690,
+          "end_line": 690
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 687,
+          "end_line": 690
+        },
+        {
+          "type": "return_statement",
+          "start_line": 687,
+          "end_line": 690
+        },
+        {
+          "type": "block",
+          "start_line": 686,
+          "end_line": 691
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 686,
+          "end_line": 691
+        },
+        {
+          "type": "class_body",
+          "start_line": 99,
+          "end_line": 843
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotation:method(AnnotatedElement,Class<A>)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationSelectors.java::org.springframework.core.annotation.MergedAnnotationSelectors.firstDirectlyDeclared:method()",
+      "line": 639,
+      "expected_type": "",
+      "callee_span": [
+        33908,
+        33957
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 639,
+          "end_line": 639
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 638,
+          "end_line": 639
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 638,
+          "end_line": 640
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 638,
+          "end_line": 640
+        },
+        {
+          "type": "return_statement",
+          "start_line": 638,
+          "end_line": 640
+        },
+        {
+          "type": "block",
+          "start_line": 631,
+          "end_line": 641
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotationAttributes:method(AnnotatedElement,Class<?extendsAnnotation>,boolean,boolean)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationSelectors.java::org.springframework.core.annotation.MergedAnnotationSelectors.firstDirectlyDeclared:method()",
+      "line": 576,
+      "expected_type": "",
+      "callee_span": [
+        30180,
+        30229
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 576,
+          "end_line": 576
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 575,
+          "end_line": 576
+        },
+        {
+          "type": "variable_declarator",
+          "start_line": 575,
+          "end_line": 576
+        },
+        {
+          "type": "local_variable_declaration",
+          "start_line": 575,
+          "end_line": 576
+        },
+        {
+          "type": "block",
+          "start_line": 573,
+          "end_line": 578
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 572,
+          "end_line": 578
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotationAttributes:method(AnnotatedElement,String,boolean,boolean)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationSelectors.java::org.springframework.core.annotation.MergedAnnotationSelectors.firstDirectlyDeclared:method()",
+      "line": 609,
+      "expected_type": "",
+      "callee_span": [
+        32194,
+        32243
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 609,
+          "end_line": 609
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 608,
+          "end_line": 609
+        },
+        {
+          "type": "variable_declarator",
+          "start_line": 608,
+          "end_line": 609
+        },
+        {
+          "type": "local_variable_declaration",
+          "start_line": 608,
+          "end_line": 609
+        },
+        {
+          "type": "block",
+          "start_line": 606,
+          "end_line": 611
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 605,
+          "end_line": 611
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findMergedRepeatableAnnotations:method(AnnotatedElement,Class<A>,Class<?extendsAnnotation>)",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.highAggregateIndexesFirst:method()",
+      "line": 768,
+      "expected_type": "",
+      "callee_span": [
+        41330,
+        41357
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 768,
+          "end_line": 768
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 766,
+          "end_line": 768
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 766,
+          "end_line": 769
+        },
+        {
+          "type": "return_statement",
+          "start_line": 766,
+          "end_line": 769
+        },
+        {
+          "type": "block",
+          "start_line": 764,
+          "end_line": 770
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 763,
+          "end_line": 770
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findMergedRepeatableAnnotations:method(AnnotatedElement,Class<A>,Class<?extendsAnnotation>)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+      "line": 769,
+      "expected_type": "",
+      "callee_span": [
+        41372,
+        41416
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 769,
+          "end_line": 769
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 766,
+          "end_line": 769
+        },
+        {
+          "type": "return_statement",
+          "start_line": 766,
+          "end_line": 769
+        },
+        {
+          "type": "block",
+          "start_line": 764,
+          "end_line": 770
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 763,
+          "end_line": 770
+        },
+        {
+          "type": "class_body",
+          "start_line": 99,
+          "end_line": 843
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.getAllMergedAnnotations:method(AnnotatedElement,Class<A>)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+      "line": 367,
+      "expected_type": "",
+      "callee_span": [
+        18320,
+        18364
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 367,
+          "end_line": 367
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 366,
+          "end_line": 367
+        },
+        {
+          "type": "return_statement",
+          "start_line": 366,
+          "end_line": 367
+        },
+        {
+          "type": "block",
+          "start_line": 364,
+          "end_line": 368
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 363,
+          "end_line": 368
+        },
+        {
+          "type": "class_body",
+          "start_line": 99,
+          "end_line": 843
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.getAllMergedAnnotations:method(AnnotatedElement,Set<Class<?extendsAnnotation>>)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+      "line": 393,
+      "expected_type": "",
+      "callee_span": [
+        19646,
+        19690
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 393,
+          "end_line": 393
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 391,
+          "end_line": 393
+        },
+        {
+          "type": "return_statement",
+          "start_line": 391,
+          "end_line": 393
+        },
+        {
+          "type": "block",
+          "start_line": 389,
+          "end_line": 394
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 388,
+          "end_line": 394
+        },
+        {
+          "type": "class_body",
+          "start_line": 99,
+          "end_line": 843
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.getMergedAnnotation:method(AnnotatedElement,Class<A>)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationSelectors.java::org.springframework.core.annotation.MergedAnnotationSelectors.firstDirectlyDeclared:method()",
+      "line": 339,
+      "expected_type": "",
+      "callee_span": [
+        16858,
+        16907
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 339,
+          "end_line": 339
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 338,
+          "end_line": 339
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 338,
+          "end_line": 340
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 338,
+          "end_line": 340
+        },
+        {
+          "type": "return_statement",
+          "start_line": 338,
+          "end_line": 340
+        },
+        {
+          "type": "block",
+          "start_line": 331,
+          "end_line": 341
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.getMergedAnnotationAttributes:method(AnnotatedElement,Class<?extendsAnnotation>)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationSelectors.java::org.springframework.core.annotation.MergedAnnotationSelectors.firstDirectlyDeclared:method()",
+      "line": 256,
+      "expected_type": "",
+      "callee_span": [
+        11995,
+        12044
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 256,
+          "end_line": 256
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 255,
+          "end_line": 256
+        },
+        {
+          "type": "variable_declarator",
+          "start_line": 255,
+          "end_line": 256
+        },
+        {
+          "type": "local_variable_declaration",
+          "start_line": 255,
+          "end_line": 256
+        },
+        {
+          "type": "block",
+          "start_line": 253,
+          "end_line": 258
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 252,
+          "end_line": 258
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.getMergedAnnotationAttributes:method(AnnotatedElement,String,boolean,boolean)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationSelectors.java::org.springframework.core.annotation.MergedAnnotationSelectors.firstDirectlyDeclared:method()",
+      "line": 313,
+      "expected_type": "",
+      "callee_span": [
+        15432,
+        15481
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 313,
+          "end_line": 313
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 312,
+          "end_line": 313
+        },
+        {
+          "type": "variable_declarator",
+          "start_line": 312,
+          "end_line": 313
+        },
+        {
+          "type": "local_variable_declaration",
+          "start_line": 312,
+          "end_line": 313
+        },
+        {
+          "type": "block",
+          "start_line": 310,
+          "end_line": 315
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 309,
+          "end_line": 315
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.getMergedRepeatableAnnotations:method(AnnotatedElement,Class<A>,Class<?extendsAnnotation>)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+      "line": 472,
+      "expected_type": "",
+      "callee_span": [
+        24253,
+        24297
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 472,
+          "end_line": 472
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 470,
+          "end_line": 472
+        },
+        {
+          "type": "return_statement",
+          "start_line": 470,
+          "end_line": 472
+        },
+        {
+          "type": "block",
+          "start_line": 468,
+          "end_line": 473
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 466,
+          "end_line": 473
+        },
+        {
+          "type": "class_body",
+          "start_line": 99,
+          "end_line": 843
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationUtils.java::org.springframework.core.annotation.AnnotationUtils.computeDefaultValues:method(Class<?extendsAnnotation>)",
+      "target": "src/main/java/org/springframework/util/CollectionUtils.java::org.springframework.util.CollectionUtils.newLinkedHashMap:method(int)",
+      "line": 916,
+      "expected_type": "Map<String,DefaultValueHolder>",
+      "callee_span": [
+        44422,
+        44470
+      ],
+      "ancestors": [
+        {
+          "type": "variable_declarator",
+          "start_line": 916,
+          "end_line": 916
+        },
+        {
+          "type": "local_variable_declaration",
+          "start_line": 916,
+          "end_line": 916
+        },
+        {
+          "type": "block",
+          "start_line": 910,
+          "end_line": 937
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 909,
+          "end_line": 937
+        },
+        {
+          "type": "class_body",
+          "start_line": 110,
+          "end_line": 1369
+        },
+        {
+          "type": "class_declaration",
+          "start_line": 110,
+          "end_line": 1369
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationUtils.java::org.springframework.core.annotation.AnnotationUtils.getDeclaredRepeatableAnnotations:method(AnnotatedElement,Class<A>,Class<?extendsAnnotation>)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+      "line": 478,
+      "expected_type": "",
+      "callee_span": [
+        23100,
+        23144
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 478,
+          "end_line": 478
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 475,
+          "end_line": 478
+        },
+        {
+          "type": "return_statement",
+          "start_line": 475,
+          "end_line": 478
+        },
+        {
+          "type": "block",
+          "start_line": 469,
+          "end_line": 479
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 467,
+          "end_line": 479
+        },
+        {
+          "type": "class_body",
+          "start_line": 110,
+          "end_line": 1369
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationUtils.java::org.springframework.core.annotation.AnnotationUtils.getRepeatableAnnotations:method(AnnotatedElement,Class<A>,Class<?extendsAnnotation>)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+      "line": 398,
+      "expected_type": "",
+      "callee_span": [
+        18598,
+        18642
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 398,
+          "end_line": 398
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 394,
+          "end_line": 398
+        },
+        {
+          "type": "return_statement",
+          "start_line": 394,
+          "end_line": 398
+        },
+        {
+          "type": "block",
+          "start_line": 388,
+          "end_line": 399
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 386,
+          "end_line": 399
+        },
+        {
+          "type": "class_body",
+          "start_line": 110,
+          "end_line": 1369
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/MergedAnnotationsCollection.java::org.springframework.core.annotation.MergedAnnotationsCollection.find:method(Object,Predicate<?superMergedAnnotation<A>>,MergedAnnotationSelector<A>)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationSelectors.java::org.springframework.core.annotation.MergedAnnotationSelectors.nearest:method()",
+      "line": 167,
+      "expected_type": "",
+      "callee_span": [
+        5481,
+        5516
+      ],
+      "ancestors": [
+        {
+          "type": "assignment_expression",
+          "start_line": 167,
+          "end_line": 167
+        },
+        {
+          "type": "expression_statement",
+          "start_line": 167,
+          "end_line": 167
+        },
+        {
+          "type": "block",
+          "start_line": 166,
+          "end_line": 168
+        },
+        {
+          "type": "if_statement",
+          "start_line": 166,
+          "end_line": 168
+        },
+        {
+          "type": "block",
+          "start_line": 164,
+          "end_line": 192
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 161,
+          "end_line": 192
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/MergedAnnotationsCollection.java::org.springframework.core.annotation.MergedAnnotationsCollection.get:method(Class<A>,Predicate<?superMergedAnnotation<A>>,MergedAnnotationSelector<A>)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotation.java::org.springframework.core.annotation.MergedAnnotation.missing:method()",
+      "line": 137,
+      "expected_type": "",
+      "callee_span": [
+        4479,
+        4505
+      ],
+      "ancestors": [
+        {
+          "type": "ternary_expression",
+          "start_line": 137,
+          "end_line": 137
+        },
+        {
+          "type": "parenthesized_expression",
+          "start_line": 137,
+          "end_line": 137
+        },
+        {
+          "type": "return_statement",
+          "start_line": 137,
+          "end_line": 137
+        },
+        {
+          "type": "block",
+          "start_line": 134,
+          "end_line": 138
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 131,
+          "end_line": 138
+        },
+        {
+          "type": "class_body",
+          "start_line": 41,
+          "end_line": 317
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/MergedAnnotationsCollection.java::org.springframework.core.annotation.MergedAnnotationsCollection.get:method(String,Predicate<?superMergedAnnotation<A>>,MergedAnnotationSelector<A>)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotation.java::org.springframework.core.annotation.MergedAnnotation.missing:method()",
+      "line": 158,
+      "expected_type": "",
+      "callee_span": [
+        5171,
+        5197
+      ],
+      "ancestors": [
+        {
+          "type": "ternary_expression",
+          "start_line": 158,
+          "end_line": 158
+        },
+        {
+          "type": "parenthesized_expression",
+          "start_line": 158,
+          "end_line": 158
+        },
+        {
+          "type": "return_statement",
+          "start_line": 158,
+          "end_line": 158
+        },
+        {
+          "type": "block",
+          "start_line": 155,
+          "end_line": 159
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 152,
+          "end_line": 159
+        },
+        {
+          "type": "class_body",
+          "start_line": 41,
+          "end_line": 317
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java::org.springframework.core.annotation.TypeMappedAnnotations.AggregatesSpliterator.tryAdvance:method(Aggregate,Consumer<?superMergedAnnotation<A>>)",
+      "target": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java::org.springframework.core.annotation.TypeMappedAnnotations.Aggregate.createMergedAnnotationIfPossible:method(int,int,IntrospectionFailureLogger)",
+      "line": 584,
+      "expected_type": "MergedAnnotation<A>",
+      "callee_span": [
+        19723,
+        19931
+      ],
+      "ancestors": [
+        {
+          "type": "variable_declarator",
+          "start_line": 584,
+          "end_line": 586
+        },
+        {
+          "type": "local_variable_declaration",
+          "start_line": 584,
+          "end_line": 586
+        },
+        {
+          "type": "block",
+          "start_line": 583,
+          "end_line": 593
+        },
+        {
+          "type": "if_statement",
+          "start_line": 583,
+          "end_line": 593
+        },
+        {
+          "type": "block",
+          "start_line": 567,
+          "end_line": 595
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 567,
+          "end_line": 595
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java::org.springframework.core.annotation.TypeMappedAnnotations.MergedAnnotationFinder.<init>:constructor(Object,Predicate<?superMergedAnnotation<A>>,MergedAnnotationSelector<A>)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationSelectors.java::org.springframework.core.annotation.MergedAnnotationSelectors.nearest:method()",
+      "line": 381,
+      "expected_type": "",
+      "callee_span": [
+        12779,
+        12814
+      ],
+      "ancestors": [
+        {
+          "type": "ternary_expression",
+          "start_line": 381,
+          "end_line": 381
+        },
+        {
+          "type": "parenthesized_expression",
+          "start_line": 381,
+          "end_line": 381
+        },
+        {
+          "type": "assignment_expression",
+          "start_line": 381,
+          "end_line": 381
+        },
+        {
+          "type": "expression_statement",
+          "start_line": 381,
+          "end_line": 381
+        },
+        {
+          "type": "constructor_body",
+          "start_line": 377,
+          "end_line": 382
+        },
+        {
+          "type": "constructor_declaration",
+          "start_line": 376,
+          "end_line": 382
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java::org.springframework.core.annotation.TypeMappedAnnotations.get:method(Class<A>,Predicate<?superMergedAnnotation<A>>,MergedAnnotationSelector<A>)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotation.java::org.springframework.core.annotation.MergedAnnotation.missing:method()",
+      "line": 148,
+      "expected_type": "MergedAnnotation<A>",
+      "callee_span": [
+        4725,
+        4751
+      ],
+      "ancestors": [
+        {
+          "type": "return_statement",
+          "start_line": 148,
+          "end_line": 148
+        },
+        {
+          "type": "block",
+          "start_line": 147,
+          "end_line": 149
+        },
+        {
+          "type": "if_statement",
+          "start_line": 147,
+          "end_line": 149
+        },
+        {
+          "type": "block",
+          "start_line": 145,
+          "end_line": 153
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 142,
+          "end_line": 153
+        },
+        {
+          "type": "class_body",
+          "start_line": 42,
+          "end_line": 642
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java::org.springframework.core.annotation.TypeMappedAnnotations.get:method(Class<A>,Predicate<?superMergedAnnotation<A>>,MergedAnnotationSelector<A>)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotation.java::org.springframework.core.annotation.MergedAnnotation.missing:method()",
+      "line": 152,
+      "expected_type": "",
+      "callee_span": [
+        4917,
+        4943
+      ],
+      "ancestors": [
+        {
+          "type": "ternary_expression",
+          "start_line": 152,
+          "end_line": 152
+        },
+        {
+          "type": "parenthesized_expression",
+          "start_line": 152,
+          "end_line": 152
+        },
+        {
+          "type": "return_statement",
+          "start_line": 152,
+          "end_line": 152
+        },
+        {
+          "type": "block",
+          "start_line": 145,
+          "end_line": 153
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 142,
+          "end_line": 153
+        },
+        {
+          "type": "class_body",
+          "start_line": 42,
+          "end_line": 642
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java::org.springframework.core.annotation.TypeMappedAnnotations.get:method(String,Predicate<?superMergedAnnotation<A>>,MergedAnnotationSelector<A>)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotation.java::org.springframework.core.annotation.MergedAnnotation.missing:method()",
+      "line": 173,
+      "expected_type": "MergedAnnotation<A>",
+      "callee_span": [
+        5564,
+        5590
+      ],
+      "ancestors": [
+        {
+          "type": "return_statement",
+          "start_line": 173,
+          "end_line": 173
+        },
+        {
+          "type": "block",
+          "start_line": 172,
+          "end_line": 174
+        },
+        {
+          "type": "if_statement",
+          "start_line": 172,
+          "end_line": 174
+        },
+        {
+          "type": "block",
+          "start_line": 170,
+          "end_line": 178
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 167,
+          "end_line": 178
+        },
+        {
+          "type": "class_body",
+          "start_line": 42,
+          "end_line": 642
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java::org.springframework.core.annotation.TypeMappedAnnotations.get:method(String,Predicate<?superMergedAnnotation<A>>,MergedAnnotationSelector<A>)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotation.java::org.springframework.core.annotation.MergedAnnotation.missing:method()",
+      "line": 177,
+      "expected_type": "",
+      "callee_span": [
+        5756,
+        5782
+      ],
+      "ancestors": [
+        {
+          "type": "ternary_expression",
+          "start_line": 177,
+          "end_line": 177
+        },
+        {
+          "type": "parenthesized_expression",
+          "start_line": 177,
+          "end_line": 177
+        },
+        {
+          "type": "return_statement",
+          "start_line": 177,
+          "end_line": 177
+        },
+        {
+          "type": "block",
+          "start_line": 170,
+          "end_line": 178
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 167,
+          "end_line": 178
+        },
+        {
+          "type": "class_body",
+          "start_line": 42,
+          "end_line": 642
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/codec/Decoder.java::org.springframework.core.codec.Decoder.decode:method(DataBuffer,ResolvableType,MimeType,Map<String,Object>)",
+      "target": "src/main/java/org/springframework/core/codec/Decoder.java::org.springframework.core.codec.Decoder.decodeToMono:method(Publisher<DataBuffer>,ResolvableType,MimeType,Map<String,Object>)",
+      "line": 96,
+      "expected_type": "",
+      "callee_span": [
+        3994,
+        4054
+      ],
+      "ancestors": [
+        {
+          "type": "method_invocation",
+          "start_line": 96,
+          "end_line": 96
+        },
+        {
+          "type": "variable_declarator",
+          "start_line": 96,
+          "end_line": 96
+        },
+        {
+          "type": "local_variable_declaration",
+          "start_line": 96,
+          "end_line": 96
+        },
+        {
+          "type": "block",
+          "start_line": 94,
+          "end_line": 110
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 93,
+          "end_line": 110
+        },
+        {
+          "type": "interface_body",
+          "start_line": 44,
+          "end_line": 136
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/env/PropertySource.java::org.springframework.core.env.PropertySource.toString:method()",
+      "target": "src/main/java/org/springframework/core/env/PropertySource.java::org.springframework.core.env.PropertySource.getSource:method()",
+      "line": 167,
+      "expected_type": "",
+      "callee_span": [
+        6073,
+        6084
+      ],
+      "ancestors": [
+        {
+          "type": "binary_expression",
+          "start_line": 166,
+          "end_line": 167
+        },
+        {
+          "type": "binary_expression",
+          "start_line": 166,
+          "end_line": 167
+        },
+        {
+          "type": "return_statement",
+          "start_line": 166,
+          "end_line": 167
+        },
+        {
+          "type": "block",
+          "start_line": 165,
+          "end_line": 168
+        },
+        {
+          "type": "if_statement",
+          "start_line": 165,
+          "end_line": 171
+        },
+        {
+          "type": "block",
+          "start_line": 164,
+          "end_line": 172
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/serializer/Deserializer.java::org.springframework.core.serializer.Deserializer.deserializeFromByteArray:method(byte[])",
+      "target": "src/main/java/org/springframework/core/serializer/Deserializer.java::org.springframework.core.serializer.Deserializer.deserialize:method(InputStream)",
+      "line": 55,
+      "expected_type": "T",
+      "callee_span": [
+        1802,
+        1851
+      ],
+      "ancestors": [
+        {
+          "type": "return_statement",
+          "start_line": 55,
+          "end_line": 55
+        },
+        {
+          "type": "block",
+          "start_line": 54,
+          "end_line": 56
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 54,
+          "end_line": 56
+        },
+        {
+          "type": "interface_body",
+          "start_line": 34,
+          "end_line": 58
+        },
+        {
+          "type": "interface_declaration",
+          "start_line": 33,
+          "end_line": 58
+        },
+        {
+          "type": "program",
+          "start_line": 1,
+          "end_line": 59
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/type/AnnotatedTypeMetadata.java::org.springframework.core.type.AnnotatedTypeMetadata.getAnnotationAttributes:method(String,boolean)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationSelectors.java::org.springframework.core.annotation.MergedAnnotationSelectors.firstDirectlyDeclared:method()",
+      "line": 121,
+      "expected_type": "",
+      "callee_span": [
+        5191,
+        5240
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 120,
+          "end_line": 121
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 120,
+          "end_line": 121
+        },
+        {
+          "type": "variable_declarator",
+          "start_line": 120,
+          "end_line": 121
+        },
+        {
+          "type": "local_variable_declaration",
+          "start_line": 120,
+          "end_line": 121
+        },
+        {
+          "type": "block",
+          "start_line": 118,
+          "end_line": 126
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 117,
+          "end_line": 126
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/util/LinkedMultiValueMap.java::org.springframework.util.LinkedMultiValueMap.<init>:constructor(int)",
+      "target": "src/main/java/org/springframework/util/CollectionUtils.java::org.springframework.util.CollectionUtils.newLinkedHashMap:method(int)",
+      "line": 59,
+      "expected_type": "",
+      "callee_span": [
+        2070,
+        2116
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 59,
+          "end_line": 59
+        },
+        {
+          "type": "explicit_constructor_invocation",
+          "start_line": 59,
+          "end_line": 59
+        },
+        {
+          "type": "constructor_body",
+          "start_line": 58,
+          "end_line": 60
+        },
+        {
+          "type": "constructor_declaration",
+          "start_line": 58,
+          "end_line": 60
+        },
+        {
+          "type": "class_body",
+          "start_line": 38,
+          "end_line": 106
+        },
+        {
+          "type": "class_declaration",
+          "start_line": 38,
+          "end_line": 106
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/util/MultiValueMapAdapter.java::org.springframework.util.MultiValueMapAdapter.toSingleValueMap:method()",
+      "target": "src/main/java/org/springframework/util/CollectionUtils.java::org.springframework.util.CollectionUtils.newLinkedHashMap:method(int)",
+      "line": 95,
+      "expected_type": "Map<K,V>",
+      "callee_span": [
+        2600,
+        2655
+      ],
+      "ancestors": [
+        {
+          "type": "variable_declarator",
+          "start_line": 95,
+          "end_line": 95
+        },
+        {
+          "type": "local_variable_declaration",
+          "start_line": 95,
+          "end_line": 95
+        },
+        {
+          "type": "block",
+          "start_line": 94,
+          "end_line": 102
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 93,
+          "end_line": 102
+        },
+        {
+          "type": "class_body",
+          "start_line": 41,
+          "end_line": 192
+        },
+        {
+          "type": "class_declaration",
+          "start_line": 40,
+          "end_line": 192
+        }
+      ]
+    },
+    {
+      "source": "src/main/java24/org/springframework/core/type/classreading/ClassFileAnnotationDelegate.java::org.springframework.core.type.classreading.ClassFileAnnotationDelegate.readAnnotationValue:method(String,AnnotationValue,ClassLoader)",
+      "target": "src/main/java24/org/springframework/core/type/classreading/ClassFileAnnotationDelegate.java::org.springframework.core.type.classreading.ClassFileAnnotationDelegate.createMergedAnnotation:method(String,Annotation,ClassLoader)",
+      "line": 95,
+      "expected_type": "Object",
+      "callee_span": [
+        3609,
+        3685
+      ],
+      "ancestors": [
+        {
+          "type": "return_statement",
+          "start_line": 95,
+          "end_line": 95
+        },
+        {
+          "type": "block",
+          "start_line": 94,
+          "end_line": 96
+        },
+        {
+          "type": "switch_rule",
+          "start_line": 94,
+          "end_line": 96
+        },
+        {
+          "type": "switch_block",
+          "start_line": 90,
+          "end_line": 106
+        },
+        {
+          "type": "switch_expression",
+          "start_line": 90,
+          "end_line": 106
+        },
+        {
+          "type": "block",
+          "start_line": 88,
+          "end_line": 107
+        }
+      ]
+    },
+    {
+      "source": "src/main/java24/org/springframework/core/type/classreading/ClassFileAnnotationDelegate.java::org.springframework.core.type.classreading.ClassFileAnnotationDelegate.readAnnotationValue:method(String,AnnotationValue,ClassLoader)",
+      "target": "src/main/java24/org/springframework/core/type/classreading/ClassFileAnnotationDelegate.java::org.springframework.core.type.classreading.ClassFileAnnotationDelegate.parseEnum:method(AnnotationValue.OfEnum,ClassLoader)",
+      "line": 101,
+      "expected_type": "Object",
+      "callee_span": [
+        3884,
+        3917
+      ],
+      "ancestors": [
+        {
+          "type": "return_statement",
+          "start_line": 101,
+          "end_line": 101
+        },
+        {
+          "type": "block",
+          "start_line": 100,
+          "end_line": 102
+        },
+        {
+          "type": "switch_rule",
+          "start_line": 100,
+          "end_line": 102
+        },
+        {
+          "type": "switch_block",
+          "start_line": 90,
+          "end_line": 106
+        },
+        {
+          "type": "switch_expression",
+          "start_line": 90,
+          "end_line": 106
+        },
+        {
+          "type": "block",
+          "start_line": 88,
+          "end_line": 107
+        }
+      ]
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/MergedAnnotationCollectorsTests.java::org.springframework.core.annotation.MergedAnnotationCollectorsTests.toAnnotationSetCollectsLinkedHashSetWithSynthesizedAnnotations:method()",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+      "line": 45,
+      "expected_type": "",
+      "callee_span": [
+        1413,
+        1457
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 44,
+          "end_line": 45
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 44,
+          "end_line": 45
+        },
+        {
+          "type": "variable_declarator",
+          "start_line": 44,
+          "end_line": 45
+        },
+        {
+          "type": "local_variable_declaration",
+          "start_line": 44,
+          "end_line": 45
+        },
+        {
+          "type": "block",
+          "start_line": 43,
+          "end_line": 49
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 42,
+          "end_line": 49
+        }
+      ]
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/MergedAnnotationsCollectionTests.java::org.springframework.core.annotation.MergedAnnotationsCollectionTests.getWhenNotPresentReturnsMissing:method()",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotation.java::org.springframework.core.annotation.MergedAnnotation.missing:method()",
+      "line": 159,
+      "expected_type": "",
+      "callee_span": [
+        5738,
+        5764
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 159,
+          "end_line": 159
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 159,
+          "end_line": 159
+        },
+        {
+          "type": "expression_statement",
+          "start_line": 159,
+          "end_line": 159
+        },
+        {
+          "type": "block",
+          "start_line": 157,
+          "end_line": 160
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 156,
+          "end_line": 160
+        },
+        {
+          "type": "class_body",
+          "start_line": 39,
+          "end_line": 313
+        }
+      ]
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/MergedAnnotationsRepeatableAnnotationTests.java::org.springframework.core.annotation.MergedAnnotationsRepeatableAnnotationTests.getAnnotations:method(Class<?extendsAnnotation>,Class<A>,SearchStrategy,AnnotatedElement,AnnotationFilter)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+      "line": 279,
+      "expected_type": "",
+      "callee_span": [
+        12493,
+        12537
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 279,
+          "end_line": 279
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 279,
+          "end_line": 279
+        },
+        {
+          "type": "return_statement",
+          "start_line": 279,
+          "end_line": 279
+        },
+        {
+          "type": "block",
+          "start_line": 275,
+          "end_line": 280
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 274,
+          "end_line": 280
+        },
+        {
+          "type": "class_body",
+          "start_line": 49,
+          "end_line": 485
+        }
+      ]
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/MergedAnnotationsRepeatableAnnotationTests.java::org.springframework.core.annotation.MergedAnnotationsRepeatableAnnotationTests.searchFindsRepeatableContainerAnnotationAndRepeatedAnnotations:method()",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+      "line": 246,
+      "expected_type": "",
+      "callee_span": [
+        10597,
+        10641
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 246,
+          "end_line": 246
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 245,
+          "end_line": 246
+        },
+        {
+          "type": "variable_declarator",
+          "start_line": 244,
+          "end_line": 246
+        },
+        {
+          "type": "local_variable_declaration",
+          "start_line": 244,
+          "end_line": 246
+        },
+        {
+          "type": "block",
+          "start_line": 231,
+          "end_line": 266
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 230,
+          "end_line": 266
+        }
+      ]
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/MergedAnnotationsRepeatableAnnotationTests.java::org.springframework.core.annotation.MergedAnnotationsRepeatableAnnotationTests.searchFindsRepeatableContainerAnnotationAndRepeatedAnnotations:method()",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+      "line": 262,
+      "expected_type": "",
+      "callee_span": [
+        11488,
+        11532
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 262,
+          "end_line": 262
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 261,
+          "end_line": 262
+        },
+        {
+          "type": "assignment_expression",
+          "start_line": 261,
+          "end_line": 262
+        },
+        {
+          "type": "expression_statement",
+          "start_line": 261,
+          "end_line": 262
+        },
+        {
+          "type": "block",
+          "start_line": 231,
+          "end_line": 266
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 230,
+          "end_line": 266
+        }
+      ]
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/NestedRepeatableAnnotationsTests.java::org.springframework.core.annotation.NestedRepeatableAnnotationsTests.MultipleRepeatableAnnotationsTests.streamRepeatableAnnotationsWithExplicitRepeatables_MergedAnnotationsApi:method()",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+      "line": 114,
+      "expected_type": "",
+      "callee_span": [
+        4524,
+        4568
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 114,
+          "end_line": 114
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 113,
+          "end_line": 114
+        },
+        {
+          "type": "variable_declarator",
+          "start_line": 113,
+          "end_line": 114
+        },
+        {
+          "type": "local_variable_declaration",
+          "start_line": 113,
+          "end_line": 114
+        },
+        {
+          "type": "block",
+          "start_line": 110,
+          "end_line": 117
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 109,
+          "end_line": 117
+        }
+      ]
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/NestedRepeatableAnnotationsTests.java::org.springframework.core.annotation.NestedRepeatableAnnotationsTests.MultipleRepeatableAnnotationsTests.streamRepeatableAnnotationsWithStandardRepeatables_MergedAnnotationsApi:method()",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+      "line": 104,
+      "expected_type": "",
+      "callee_span": [
+        3931,
+        3975
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 104,
+          "end_line": 104
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 103,
+          "end_line": 104
+        },
+        {
+          "type": "variable_declarator",
+          "start_line": 103,
+          "end_line": 104
+        },
+        {
+          "type": "local_variable_declaration",
+          "start_line": 103,
+          "end_line": 104
+        },
+        {
+          "type": "block",
+          "start_line": 101,
+          "end_line": 107
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 100,
+          "end_line": 107
+        }
+      ]
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/NestedRepeatableAnnotationsTests.java::org.springframework.core.annotation.NestedRepeatableAnnotationsTests.SingleRepeatableAnnotationTests.streamRepeatableAnnotations_MergedAnnotationsApi:method()",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+      "line": 54,
+      "expected_type": "",
+      "callee_span": [
+        1810,
+        1854
+      ],
+      "ancestors": [
+        {
+          "type": "argument_list",
+          "start_line": 54,
+          "end_line": 54
+        },
+        {
+          "type": "method_invocation",
+          "start_line": 53,
+          "end_line": 54
+        },
+        {
+          "type": "variable_declarator",
+          "start_line": 53,
+          "end_line": 54
+        },
+        {
+          "type": "local_variable_declaration",
+          "start_line": 53,
+          "end_line": 54
+        },
+        {
+          "type": "block",
+          "start_line": 52,
+          "end_line": 57
+        },
+        {
+          "type": "method_declaration",
+          "start_line": 51,
+          "end_line": 57
+        }
+      ]
+    }
+  ],
+  "scope": "AST context categories only; no compiler validity or resolution claim."
+}

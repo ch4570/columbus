@@ -1,0 +1,115 @@
+{
+  "analyzer_sha256": "7014b2d5a6894a5e9c734b6a6c2089ce667a897c295a61e1f23c46419c61bd8b",
+  "cases": [
+    {
+      "parameter": "C",
+      "source": "interface API {} class Other {} class Item { void hit(C x) {} } class C implements API { Item[] items() { return null; } void run() { for(Item item : items()) item.hit(this); } }",
+      "source_sha256": "fb7508eac8300f6111beb979d6c1a6b7e95944f651eec5836143390f7a5d109e",
+      "javac_return_code": 0,
+      "diagnostics": "",
+      "javap": "Compiled from \"C.java\"\nclass C implements API {\n  C();\n    Code:\n       0: aload_0\n       1: invokespecial #1                  // Method java/lang/Object.\"<init>\":()V\n       4: return\n\n  Item[] items();\n    Code:\n       0: aconst_null\n       1: areturn\n\n  void run();\n    Code:\n       0: aload_0\n       1: invokevirtual #7                  // Method items:()[LItem;\n       4: astore_1\n       5: aload_1\n       6: arraylength\n       7: istore_2\n       8: iconst_0\n       9: istore_3\n      10: iload_3\n      11: iload_2\n      12: if_icmpge     32\n      15: aload_1\n      16: iload_3\n      17: aaload\n      18: astore        4\n      20: aload         4\n      22: aload_0\n      23: invokevirtual #13                 // Method Item.hit:(LC;)V\n      26: iinc          3, 1\n      29: goto          10\n      32: return\n}\n",
+      "expected_target": "C.java::Item.hit:method(C)",
+      "actual": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()::array_loop:134",
+        "kind": "calls",
+        "name": "item.hit",
+        "member": "hit",
+        "receiver": "item",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "this"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "item.hit(this)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::Item.hit:method(C)",
+        "confidence": "heuristic"
+      }
+    },
+    {
+      "parameter": "API",
+      "source": "interface API {} class Other {} class Item { void hit(API x) {} } class C implements API { Item[] items() { return null; } void run() { for(Item item : items()) item.hit(this); } }",
+      "source_sha256": "7ca873b3c1a63651f0d81ee46133fb9bc415b939e0d2e7d392438eeefc6cf32f",
+      "javac_return_code": 0,
+      "diagnostics": "",
+      "javap": "Compiled from \"C.java\"\nclass C implements API {\n  C();\n    Code:\n       0: aload_0\n       1: invokespecial #1                  // Method java/lang/Object.\"<init>\":()V\n       4: return\n\n  Item[] items();\n    Code:\n       0: aconst_null\n       1: areturn\n\n  void run();\n    Code:\n       0: aload_0\n       1: invokevirtual #7                  // Method items:()[LItem;\n       4: astore_1\n       5: aload_1\n       6: arraylength\n       7: istore_2\n       8: iconst_0\n       9: istore_3\n      10: iload_3\n      11: iload_2\n      12: if_icmpge     32\n      15: aload_1\n      16: iload_3\n      17: aaload\n      18: astore        4\n      20: aload         4\n      22: aload_0\n      23: invokevirtual #13                 // Method Item.hit:(LAPI;)V\n      26: iinc          3, 1\n      29: goto          10\n      32: return\n}\n",
+      "expected_target": "C.java::Item.hit:method(API)",
+      "actual": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()::array_loop:136",
+        "kind": "calls",
+        "name": "item.hit",
+        "member": "hit",
+        "receiver": "item",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "this"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "item.hit(this)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::Item.hit:method(API)",
+        "confidence": "heuristic"
+      }
+    },
+    {
+      "parameter": "Other",
+      "source": "interface API {} class Other {} class Item { void hit(Other x) {} } class C implements API { Item[] items() { return null; } void run() { for(Item item : items()) item.hit(this); } }",
+      "source_sha256": "0ebd64b9f5bd2ca56a0183eeb2e7d3764e648e8cd35788b48a38c72381d98d1f",
+      "javac_return_code": 1,
+      "diagnostics": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/tmpbpt4nr2k/C.java:1: error: incompatible types: C cannot be converted to Other\ninterface API {} class Other {} class Item { void hit(Other x) {} } class C implements API { Item[] items() { return null; } void run() { for(Item item : items()) item.hit(this); } }\n                                                                                                                                                                            ^\nNote: Some messages have been simplified; recompile with -Xdiags:verbose to get full output\n1 error\n",
+      "javap": null,
+      "expected_target": null,
+      "actual": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()::array_loop:138",
+        "kind": "calls",
+        "name": "item.hit",
+        "member": "hit",
+        "receiver": "item",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "this"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "item.hit(this)",
+        "resolved": false,
+        "reason": "this argument conversion unsupported or incompatible"
+      }
+    }
+  ],
+  "false_edges": 0
+}

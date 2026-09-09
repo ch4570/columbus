@@ -1,0 +1,32 @@
+{
+  "source_commit": "4ea267661b260ea0d0c87e9dcb99d70037c6f2fc",
+  "production_files_hash_verified": 883,
+  "target": "django/utils/text.py::capfirst:function",
+  "production_call_sites": 22,
+  "production_callers": 14,
+  "missing": [],
+  "extra": [],
+  "archive_all_call_edges": 23,
+  "archive_pages": [
+    {
+      "offset": 0,
+      "edges": 8,
+      "next_offset": 8
+    },
+    {
+      "offset": 8,
+      "edges": 7,
+      "next_offset": 15
+    },
+    {
+      "offset": 15,
+      "edges": 8,
+      "next_offset": null
+    }
+  ],
+  "archive_sqlite_edge_parity": true,
+  "archive_sha256": "1bd6397d4e8df8e0e9f94eaac41bb777dea40bad6a61e71e203bd40a6bb981d5",
+  "archive_bytes": 10726317,
+  "sqlite_bytes": 153387008,
+  "runtime_completeness_claimed": false
+}

@@ -1,0 +1,238 @@
+{
+  "schema": "columbus.exploration-observation/v1",
+  "case": "kotlin-reflection-hint-state",
+  "condition": "baseline",
+  "repeat": 2,
+  "model_requested": "gpt-5.6-sol",
+  "effort_requested": "xhigh",
+  "evidence_mode": "saved_archive",
+  "elapsed_seconds": 202.534,
+  "return_code": 0,
+  "timed_out": false,
+  "source_unchanged": true,
+  "usage": {
+    "input_tokens": 158702,
+    "cached_input_tokens": 115712,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 5691,
+    "reasoning_output_tokens": 3254,
+    "uncached_input_tokens": 42990
+  },
+  "commands": [
+    {
+      "command": "/bin/zsh -lc \"rg -n --glob '*.kt' --glob '*.java' \\\"getTypeHint|registerType\\\" .\"",
+      "exit_code": 0,
+      "output_bytes": 41323,
+      "output_sha256": "83d672f4d63bdfa037598e99888fa8e99dcfdda5c8be020ad02d869c7f79f419"
+    },
+    {
+      "command": "/bin/zsh -lc \"sed -n '18,50p' src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt\"",
+      "exit_code": 0,
+      "output_bytes": 837,
+      "output_sha256": "2e490eb21406614f2be2bcc52515d720f5ab01f2bece8fcde957e0330f476dde"
+    },
+    {
+      "command": "/bin/zsh -lc \"sed -n '60,145p' src/main/java/org/springframework/aot/hint/ReflectionHints.java\"",
+      "exit_code": 0,
+      "output_bytes": 2977,
+      "output_sha256": "f2788f9f00de09300c17d22863c45edecc5c22e433fbb8552eadced07a9d73e0"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n \\\"class TypeHint|memberCategories|withMembers|build\\\\(\\\" src/main/java/org/springframework/aot/hint/TypeHint.java src/main/java/org/springframework/aot/hint/TypeReference.java\"",
+      "exit_code": 0,
+      "output_bytes": 1412,
+      "output_sha256": "8cf49b2c3ae7e3646bde34a33bf2e24d9fef89d1bb52e2a07472e1ab4ef7dd0a"
+    },
+    {
+      "command": "/bin/zsh -lc 'rg -n \"canonical|getCanonicalName|isLambdaClass|ClassUtils\" src/main/java/org/springframework/aot/hint/ReflectionHints.java src/main/java/org/springframework/aot/hint/TypeReference.java src/main/java/org/springframework/util/ClassUtils.java'",
+      "exit_code": 0,
+      "output_bytes": 2868,
+      "output_sha256": "1b1cac58d5954e1e126e2ea8d85b253fe83f9f183cf08ade0e2ca66a17b2b8bf"
+    },
+    {
+      "command": "/bin/zsh -lc \"sed -n '1,125p' src/main/java/org/springframework/aot/hint/TypeReference.java\"",
+      "exit_code": 0,
+      "output_bytes": 2863,
+      "output_sha256": "706f34ea6ad5b01407c80415ec48c82799c1a245f00dcc0f2e48ee0c7a8aa6df"
+    },
+    {
+      "command": "/bin/zsh -lc \"sed -n '112,154p' src/main/java/org/springframework/aot/hint/TypeHint.java\"",
+      "exit_code": 0,
+      "output_bytes": 1146,
+      "output_sha256": "065b01c04f933306d7ec9f813514258963f7c02cefb7268e6d9015273021edfb"
+    },
+    {
+      "command": "/bin/zsh -lc \"sed -n '40,75p' src/main/java/org/springframework/aot/hint/TypeHint.java\"",
+      "exit_code": 0,
+      "output_bytes": 1156,
+      "output_sha256": "4a2d78292edd5eced479eaadb1a6058905fe6613eb6fee76caeaaa3425d0f7be"
+    },
+    {
+      "command": "/bin/zsh -lc \"sed -n '155,180p' src/main/java/org/springframework/aot/hint/TypeHint.java && sed -n '260,300p' src/main/java/org/springframework/aot/hint/TypeHint.java\"",
+      "exit_code": 0,
+      "output_bytes": 2037,
+      "output_sha256": "264b9f504ef6b16c920a79fb99c5029953031c22521cb3252f0d52b298c03932"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n \\\"class ReflectionTypeReference|static ReflectionTypeReference of|canonicalName|notNull\\\\(type\\\" src/main/java/org/springframework/aot/hint\"",
+      "exit_code": 0,
+      "output_bytes": 2671,
+      "output_sha256": "1af9246d0e1a71b8fa830967fad8dd1c2149c180a2d8086ae1d9e1ad8f08ed82"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/test/java/org/springframework/aot/hint/ReflectionHintsTests.java | sed -n '42,155p'\"",
+      "exit_code": 0,
+      "output_bytes": 5663,
+      "output_sha256": "0de331ec23c08d7f8abf1ed63ba77c113b97f1591e32eebb96f703d2d80eefa2"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/aot/hint/ReflectionTypeReference.java | sed -n '25,58p'\"",
+      "exit_code": 0,
+      "output_bytes": 1252,
+      "output_sha256": "0a4db9e76dc60899798bb04b3d46d824f5bfde7f298293d67c52aed68c49bf3b"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/aot/hint/ReflectionHints.java | sed -n '38,145p'\"",
+      "exit_code": 0,
+      "output_bytes": 4279,
+      "output_sha256": "68cd70c3789e3d76135374e2cb232bd4a353ae7d75a7edf866cabe0712155842"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt | sed -n '18,49p'\"",
+      "exit_code": 0,
+      "output_bytes": 1047,
+      "output_sha256": "3448ec91c2cb962953bf38098311e0f31f773270382ee84d0dab024f5299789b"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/aot/hint/TypeHint.java | sed -n '50,68p'; nl -ba src/main/java/org/springframework/aot/hint/TypeHint.java | sed -n '114,150p'; nl -ba src/main/java/org/springframework/aot/hint/TypeHint.java | sed -n '264,296p'\"",
+      "exit_code": 0,
+      "output_bytes": 3338,
+      "output_sha256": "be1a2a0057eb584a1d9c4107edb16da0a628dc96d77b88fc5963376a4ea227a9"
+    },
+    {
+      "command": "/bin/zsh -lc 'rg -n -C 3 \"throw|Throws|exception|fails|failure|MemberCategor|snapshot|same type|twice|accumul|reuses\" src/test/java/org/springframework/aot/hint/ReflectionHintsTests.java src/test/kotlin/org/springframework/aot/hint/ReflectionHintsExtensionsTests.kt'",
+      "exit_code": 0,
+      "output_bytes": 14944,
+      "output_sha256": "4838deece94839fe8dcfb5153e2758aeafd778dcba2d2b7868da354fb8a72145"
+    }
+  ],
+  "command_count": 16,
+  "command_output_bytes": 89813,
+  "failed_commands": 0,
+  "other_tool_types": [],
+  "runtime_warnings": [],
+  "turn_failed": false,
+  "quality": {
+    "passed": false,
+    "findings": [
+      {
+        "id": "kotlin-delegation",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "registration-class-guards",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "registration-state-errors",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "lookup-absence-errors",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "category-snapshots",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "index_preflight": null,
+  "archive_preflight": {
+    "passed": true,
+    "archive_sha256": "d61661f62e09e0750ab1b174179c6f7f1ac62b9295b2323965db0e66e2cbba7a",
+    "revision": "c3eb9cdaa72e23456cca",
+    "source_files_verified": 1166,
+    "indexed_source_files_verified": 1166,
+    "counts": {
+      "files": 1166,
+      "nodes": 20811,
+      "scopes": 20647,
+      "edges": 32145,
+      "references": 68007,
+      "imports": 7723,
+      "diagnostics": 16
+    },
+    "consumer_index_absent": true
+  },
+  "archive_postflight": {
+    "passed": true,
+    "archive_sha256": "d61661f62e09e0750ab1b174179c6f7f1ac62b9295b2323965db0e66e2cbba7a",
+    "revision": "c3eb9cdaa72e23456cca",
+    "source_files_verified": 1166,
+    "indexed_source_files_verified": 1166,
+    "counts": {
+      "files": 1166,
+      "nodes": 20811,
+      "scopes": 20647,
+      "edges": 32145,
+      "references": 68007,
+      "imports": 7723,
+      "diagnostics": 16
+    },
+    "consumer_index_absent": true
+  },
+  "answer": {
+    "findings": [
+      {
+        "id": "kotlin-delegation",
+        "path": "src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt",
+        "start_line": 26,
+        "end_line": 47,
+        "quote": "inline fun <reified T> ReflectionHints.getTypeHint() =\n\tgetTypeHint(T::class.java)\n\ninline fun <reified T> ReflectionHints.registerType(noinline typeHint: (TypeHint.Builder) -> Unit) =\n\tregisterType(T::class.java, typeHint::invoke)\n\ninline fun <reified T> ReflectionHints.registerType(vararg memberCategories: MemberCategory) =\n\tregisterType(T::class.java, *memberCategories)",
+        "explanation": "All three extensions materialize the reified Kotlin type as T::class.java. Lookup delegates to Java getTypeHint(Class<?>). Builder customization delegates to registerType(Class<?>, Consumer), adapting the non-inlined Kotlin function through typeHint::invoke, so Java controls whether and when it runs. The category extension spreads the Kotlin vararg into Java registerType(Class<?>, MemberCategory...), forwarding every supplied element."
+      },
+      {
+        "id": "registration-class-guards",
+        "path": "src/main/java/org/springframework/aot/hint/ReflectionHints.java",
+        "start_line": 122,
+        "end_line": 142,
+        "quote": "Assert.notNull(type, \"'type' must not be null\");\nif (type.getCanonicalName() != null) {\n\tregisterType(TypeReference.of(type), typeHint);\n}",
+        "explanation": "Both Class-based registration overloads first reject a null Class with IllegalArgumentException. A non-null Class lacking a canonical name is instead silently skipped and the method returns this. Because delegation is inside the canonical-name condition, a supplied customizer is not called for either a rejected null Class or a skipped no-canonical-name Class; likewise, skipped category registration applies no categories."
+      },
+      {
+        "id": "registration-state-errors",
+        "path": "src/main/java/org/springframework/aot/hint/ReflectionHints.java",
+        "start_line": 98,
+        "end_line": 112,
+        "quote": "Builder builder = this.types.computeIfAbsent(type, TypeHint.Builder::new);\ntypeHint.accept(builder);\nreturn this;\n...\nreturn registerType(type, TypeHint.builtWith(memberCategories));",
+        "explanation": "Registration stores or retrieves one builder per equal TypeReference, then applies each customizer to that same builder. Category registration becomes a builder customizer; withMembers adds categories to a HashSet, so repeated registrations form a deduplicated set union. There is no rollback or exception handling around accept: a thrown exception propagates, but the builder was already inserted. Existing categories and categories added before the throw remain. For a newly inserted type whose customizer throws before adding a category, the type remains registered with an empty category set."
+      },
+      {
+        "id": "lookup-absence-errors",
+        "path": "src/main/java/org/springframework/aot/hint/ReflectionHints.java",
+        "start_line": 76,
+        "end_line": 100,
+        "quote": "Builder typeHintBuilder = this.types.get(type);\nreturn (typeHintBuilder != null ? typeHintBuilder.build() : null);\n...\npublic @Nullable TypeHint getTypeHint(Class<?> type) {\n\treturn getTypeHint(TypeReference.of(type));\n}",
+        "explanation": "For a valid Class, lookup first converts it to a TypeReference and reads the map; an unregistered valid type returns null, whereas registration creates a builder and therefore an entry. Unlike Class-based registration, lookup does not pre-skip a Class with no canonical name: TypeReference.of delegates to ReflectionTypeReference.of, which throws IllegalArgumentException when getCanonicalName() is null. That factory also rejects a null Class with \"'type' must not be null\"; registration performs its own equivalent null assertion before delegation."
+      },
+      {
+        "id": "category-snapshots",
+        "path": "src/main/java/org/springframework/aot/hint/TypeHint.java",
+        "start_line": 54,
+        "end_line": 63,
+        "quote": "private final Set<MemberCategory> memberCategories;\n...\nthis.memberCategories = Set.copyOf(builder.memberCategories);",
+        "explanation": "Each lookup builds a TypeHint whose category set is an immutable copy of the builder's categories. Consequently, a previously returned TypeHint and its returned category set do not change when the same type is registered again. A later lookup builds a new TypeHint that observes the builder's newly accumulated category set."
+      }
+    ]
+  },
+  "prompt_bytes": 2137,
+  "events_sha256": "1e276aaab08799b94112f7add2298a8a592f63b3813628501434a09e825ef5b4"
+}

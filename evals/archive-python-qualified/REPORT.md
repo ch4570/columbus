@@ -1,0 +1,9 @@
+# Python module names in saved-archive search
+
+The completed force_bytes trial attempted both django.utils.encoding.force_bytes and encoding.force_bytes, which returned no declarations because Python qualname excludes the module while the public ID uses a slash path. The agent then made additional searches. Archive search now combines stored Python module and qualname metadata for exact full-name matching and component-boundary suffix ranking. It does not infer import identity from paths or change the archive format.
+
+On the unchanged trial archive, both formerly empty queries return django/utils/encoding.py::force_bytes:function as their sole match. The existing bare force_bytes query remains identical in its entire JSON response, including all five matched declarations, order, metadata and budget behavior. results.json records before/after IDs, counts, reader hashes and the unchanged archive hash. This is a read-only diagnostic against a completed trial artifact, not a model replay.
+
+The new source-free regression covers gzip/XZ, JSON/text, duplicate module suffixes, full module-qualified methods, rejected partial-component suffixes and unchanged bare names after deleting the source repository. Existing Java qualified-suffix ranking and actual rendered-byte budget tests also pass. Both parser environments pass 233 engine tests; 53 root tests and newly built wheel/ZIP clean installation verification pass. Logs and distribution.json are retained here.
+
+This fixes an observed interface mismatch and makes the intended first query work. It does not establish that a model will avoid subsequent source searches or use fewer actual tokens. Earlier failed pairs remain unchanged. Native parser correctness and source freshness are separate from saved declaration-name matching; returned archive evidence remains a historical snapshot.

@@ -1,0 +1,44 @@
+{
+  "databaseId": 34173030266,
+  "headSha": "cf635cf970f1eab67f3063dc946fd07ec9df9436",
+  "status": "completed",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "distribution (macos-latest, 3.14)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ch4570/columbus/actions/runs/34173030266/job/101896892831"
+    },
+    {
+      "name": "distribution (macos-latest, 3.11)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ch4570/columbus/actions/runs/34173030266/job/101896892907"
+    },
+    {
+      "name": "distribution (windows-latest, 3.14)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ch4570/columbus/actions/runs/34173030266/job/101896892985"
+    },
+    {
+      "name": "distribution (ubuntu-latest, 3.11)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ch4570/columbus/actions/runs/34173030266/job/101896893011"
+    },
+    {
+      "name": "distribution (windows-latest, 3.11)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ch4570/columbus/actions/runs/34173030266/job/101896893026"
+    },
+    {
+      "name": "distribution (ubuntu-latest, 3.14)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ch4570/columbus/actions/runs/34173030266/job/101896893049"
+    }
+  ]
+}

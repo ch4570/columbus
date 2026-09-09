@@ -1,0 +1,15 @@
+{
+  "evals/archive-force-bytes/PLAN.md": "208569e5cc78fb307ce1428cae86b376f2b6976d61703072623297714c0c1d9a",
+  "evals/archive-force-bytes/cases.json": "3589c0c5f0711c6571b2ab9331a0f6c332dea1ec4cfe38902c3418458ca65f7c",
+  "evals/archive-force-bytes/SOURCE-REVIEW.md": "383fb0d6ba8f016dd116cf22478540ad23bca3047022ee855b37d999ac7f4125",
+  "evals/archive-force-bytes/oracle.json": "ad7c988f47c24fc242eedc5669a005ee30deb22304026b7d45475f70024c122b",
+  "evals/archive-force-bytes/oracle.py": "34ddbd00447ca4fd40edf6ab9b2952563ec2640b7cf2280085b2f1d12ec65ce8",
+  "evals/archive-force-bytes/attribute-exclusions.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "evals/archive-force-bytes/verify_frozen.py": "6bf91dca0608507e69b4609449a9dcef44fadb8827b5361a8a9a6425930f9d8c",
+  "evals/archive-force-bytes/verify_context.py": "f5341f8aaaa05c5498dcb888d4391b6d8943852a50bec0f31f8b58c0d734489f",
+  "evals/archive-force-bytes/validate.py": "820cf57034ff94ce19bd9c6863a70364f20c038a0ad24952523436b21faad8c7",
+  "evals/archive-force-bytes/collect.py": "48ecac5cac7f9c24fd34a00b20fa15f16b4d621ee48c831364c7006b6e5e7df6",
+  "evals/exploration/observe.py": "d0c35c72e5e4747a25575b5def7a8be814ee54c925734db635ed562ea8016d80",
+  "evals/exploration/answer.schema.json": "a5aff654fe899a710cbf44ad63e97f4d4818e314e24c2d71af29c4c4c863ae83",
+  "evals/archive-exploration/preflight.py": "981d18f13648886ac4198caba36339f8d855d4f02bbea1f75ae26d0268326869"
+}

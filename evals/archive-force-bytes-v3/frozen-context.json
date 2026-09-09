@@ -1,0 +1,58 @@
+{
+  "archive_sha256": "78ee50a0a33b447e08a2e2dc90a24d0a8548b7c8c269bf584e8022b4b7ef747d",
+  "pages": [
+    {
+      "offset": 0,
+      "edges": 6,
+      "contexts": 6,
+      "bytes": 11699,
+      "next_offset": 6
+    },
+    {
+      "offset": 6,
+      "edges": 8,
+      "contexts": 4,
+      "bytes": 11358,
+      "next_offset": 14
+    },
+    {
+      "offset": 14,
+      "edges": 8,
+      "contexts": 8,
+      "bytes": 9882,
+      "next_offset": 22
+    },
+    {
+      "offset": 22,
+      "edges": 7,
+      "contexts": 6,
+      "bytes": 11412,
+      "next_offset": 29
+    },
+    {
+      "offset": 29,
+      "edges": 7,
+      "contexts": 7,
+      "bytes": 11839,
+      "next_offset": 36
+    },
+    {
+      "offset": 36,
+      "edges": 10,
+      "contexts": 6,
+      "bytes": 10067,
+      "next_offset": null
+    }
+  ],
+  "total_bytes": 66257,
+  "source_files_checked": 17,
+  "production_call_sites": 46,
+  "production_callers": 37,
+  "exact_excerpt_parity": true,
+  "oracle_parity": true,
+  "archive_unchanged": true,
+  "consumer_index_absent": true,
+  "path_filter": "django/*",
+  "model_trial": false,
+  "token_savings_claimed": false
+}

@@ -1,0 +1,238 @@
+{
+  "case": "javascript-axios-uri-composition",
+  "condition": "baseline",
+  "repeat": 2,
+  "return_code": 0,
+  "timed_out": false,
+  "finished_at": "2026-09-08T22:17:22.715737+00:00",
+  "elapsed_seconds": 369.70196762500564,
+  "usage": {
+    "input_tokens": 131456,
+    "cached_input_tokens": 95232,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 11089,
+    "reasoning_output_tokens": 7952,
+    "uncached_input_tokens": 36224
+  },
+  "preflight": {
+    "baseline": {
+      "passed": true,
+      "archive_sha256": "9bdd1b2ca6ff306b3700d141bdeab1593f511e73046deaa89ff27c7b9e4b17c7",
+      "revision": "14898a983357327f60a7",
+      "source_files_verified": 242,
+      "indexed_source_files_verified": 237,
+      "counts": {
+        "files": 237,
+        "nodes": 778,
+        "scopes": 0,
+        "edges": 1270,
+        "references": 7258,
+        "imports": 390,
+        "diagnostics": 1
+      },
+      "consumer_index_absent": true
+    },
+    "control": {
+      "passed": true,
+      "archive_sha256": "9bdd1b2ca6ff306b3700d141bdeab1593f511e73046deaa89ff27c7b9e4b17c7",
+      "revision": "14898a983357327f60a7",
+      "source_files_verified": 242,
+      "indexed_source_files_verified": 237,
+      "counts": {
+        "files": 237,
+        "nodes": 778,
+        "scopes": 0,
+        "edges": 1270,
+        "references": 7258,
+        "imports": 390,
+        "diagnostics": 1
+      },
+      "consumer_index_absent": true
+    },
+    "candidate": {
+      "passed": true,
+      "archive_sha256": "9bdd1b2ca6ff306b3700d141bdeab1593f511e73046deaa89ff27c7b9e4b17c7",
+      "revision": "14898a983357327f60a7",
+      "source_files_verified": 242,
+      "indexed_source_files_verified": 237,
+      "counts": {
+        "files": 237,
+        "nodes": 778,
+        "scopes": 0,
+        "edges": 1270,
+        "references": 7258,
+        "imports": 390,
+        "diagnostics": 1
+      },
+      "consumer_index_absent": true
+    }
+  },
+  "postflight": {
+    "baseline": {
+      "passed": true,
+      "archive_sha256": "9bdd1b2ca6ff306b3700d141bdeab1593f511e73046deaa89ff27c7b9e4b17c7",
+      "revision": "14898a983357327f60a7",
+      "source_files_verified": 242,
+      "indexed_source_files_verified": 237,
+      "counts": {
+        "files": 237,
+        "nodes": 778,
+        "scopes": 0,
+        "edges": 1270,
+        "references": 7258,
+        "imports": 390,
+        "diagnostics": 1
+      },
+      "consumer_index_absent": true
+    },
+    "control": {
+      "passed": true,
+      "archive_sha256": "9bdd1b2ca6ff306b3700d141bdeab1593f511e73046deaa89ff27c7b9e4b17c7",
+      "revision": "14898a983357327f60a7",
+      "source_files_verified": 242,
+      "indexed_source_files_verified": 237,
+      "counts": {
+        "files": 237,
+        "nodes": 778,
+        "scopes": 0,
+        "edges": 1270,
+        "references": 7258,
+        "imports": 390,
+        "diagnostics": 1
+      },
+      "consumer_index_absent": true
+    },
+    "candidate": {
+      "passed": true,
+      "archive_sha256": "9bdd1b2ca6ff306b3700d141bdeab1593f511e73046deaa89ff27c7b9e4b17c7",
+      "revision": "14898a983357327f60a7",
+      "source_files_verified": 242,
+      "indexed_source_files_verified": 237,
+      "counts": {
+        "files": 237,
+        "nodes": 778,
+        "scopes": 0,
+        "edges": 1270,
+        "references": 7258,
+        "imports": 390,
+        "diagnostics": 1
+      },
+      "consumer_index_absent": true
+    }
+  },
+  "events_sha256": "3404b2837b1532e999c68cd5a20b375a8019d9c9e48c53777d66c547531fa869",
+  "commands": [
+    {
+      "command": "/bin/zsh -lc 'rg -n \"getUri|buildFullPath|buildURL|mergeConfig|isAbsoluteURL|combineURLs|toURLEncodedForm|AxiosURLSearchParams|toFormData|defaultVisitor|paramsSerializer\" lib src index.js'",
+      "exit_code": 2,
+      "output_bytes": 5348,
+      "output_sha256": "e6c9e45573c19357bbf54598118ae25f253b6cc0b4c8589270e9cd367ab910dc"
+    },
+    {
+      "command": "/bin/zsh -lc \"for spec in 'lib/core/Axios.js:190:206' 'lib/core/mergeConfig.js:1:110' 'lib/core/buildFullPath.js:1:40' 'lib/helpers/isAbsoluteURL.js:1:30' 'lib/helpers/combineURLs.js:1:30' 'lib/helpers/buildURL.js:1:90' 'lib/helpers/AxiosURLSearchParams.js:1:90' 'lib/helpers/toFormData.js:80:230' 'lib/utils.js:90:140' 'lib/utils.js:300:380'; do f=\"'${spec%%:*}; rest=${spec#*:}; a=${rest%%:*}; b=${rest##*:}; sed -n \"${a},${b}p\" \"$f\" | nl -ba -v \"$a\"; done'",
+      "exit_code": 0,
+      "output_bytes": 20245,
+      "output_sha256": "d57b937c91b971952a8f146b10f7a3752a629653c2cd78fc2073447fe96f6efb"
+    },
+    {
+      "command": "/bin/zsh -lc \"sed -n '1,85p' lib/helpers/toFormData.js | nl -ba; rg -n \\\"getUri\\\\(|allowAbsoluteUrls|paramsSerializer|buildURL\\\\(|nested|\\\\[\\\\]\\\" test spec | head -n 220\"",
+      "exit_code": 0,
+      "output_bytes": 30095,
+      "output_sha256": "7305f636acd27af6884996f5a386e2490e18c27d6730dec049c9115e91efba4c"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n \\\"isURLSearchParams|const isDate|function forEach|const forEach|isUndefined\\\" lib/utils.js; sed -n '45,90p' lib/utils.js | nl -ba -v 45; sed -n '235,295p' lib/utils.js | nl -ba -v 235; sed -n '1,45p' lib/core/Axios.js | nl -ba\"",
+      "exit_code": 0,
+      "output_bytes": 5741,
+      "output_sha256": "30dc4443d06787d32b104bc67b88b928375286d953327706a07b0055d3f85e18"
+    },
+    {
+      "command": "/bin/zsh -lc \"sed -n '1,125p' test/specs/helpers/buildURL.spec.js | nl -ba; sed -n '125,175p' test/specs/instance.spec.js | nl -ba -v 125; sed -n '1,45p' test/specs/core/buildFullPath.spec.js | nl -ba\"",
+      "exit_code": 0,
+      "output_bytes": 6370,
+      "output_sha256": "784de6e0baa5ae0b55c2045a371a57a8773345e83286b81d8a51b55e23d781db"
+    }
+  ],
+  "command_count": 5,
+  "command_output_bytes": 67799,
+  "failed_commands": 1,
+  "other_tool_types": [],
+  "runtime_warnings": [],
+  "turn_failed": false,
+  "answer": {
+    "findings": [
+      {
+        "id": "uri_handoffs",
+        "path": "lib/core/Axios.js",
+        "start_line": 200,
+        "end_line": 204,
+        "quote": "  getUri(config) {\n    config = mergeConfig(this.defaults, config);\n    const fullPath = buildFullPath(config.baseURL, config.url, config.allowAbsoluteUrls);\n    return buildURL(fullPath, config.params, config.paramsSerializer);\n  }",
+        "explanation": "getUri synchronously performs three ordered handoffs. It first calls mergeConfig with instance defaults as the first argument and the per-call configuration as the second. It then passes the resulting config's exact baseURL, url, and allowAbsoluteUrls values to buildFullPath. Finally, it passes that returned fullPath plus the merged params and paramsSerializer to buildURL and directly returns buildURL's string. There is no Promise or catch boundary here: serializer, encoder, Date-conversion, or other helper exceptions propagate synchronously to the caller. The method does not call request/_request, run request interceptors, select or invoke an adapter, dispatch a request, or perform network I/O."
+      },
+      {
+        "id": "uri_config_merge",
+        "path": "lib/core/mergeConfig.js",
+        "start_line": 43,
+        "end_line": 74,
+        "quote": "  function valueFromConfig2(a, b) {\n    if (!utils.isUndefined(b)) {\n      return getMergedValue(undefined, b);\n    }\n  }\n\n  // eslint-disable-next-line consistent-return\n  function defaultToConfig2(a, b) {\n    if (!utils.isUndefined(b)) {\n      return getMergedValue(undefined, b);\n    } else if (!utils.isUndefined(a)) {\n      return getMergedValue(undefined, a);\n    }\n  }\n\n  // eslint-disable-next-line consistent-return\n  function mergeDirectKeys(a, b, prop) {\n    if (prop in config2) {\n      return getMergedValue(a, b);\n    } else if (prop in config1) {\n      return getMergedValue(undefined, a);\n    }\n  }\n\n  const mergeMap = {\n    url: valueFromConfig2,\n    method: valueFromConfig2,\n    data: valueFromConfig2,\n    baseURL: defaultToConfig2,\n    transformRequest: defaultToConfig2,\n    transformResponse: defaultToConfig2,\n    paramsSerializer: defaultToConfig2,",
+        "explanation": "mergeConfig constructs a new top-level result and does not assign into either ordinary input configuration. Its getMergedValue helper recursively combines two plain objects through utils.merge, with later/per-call values winning at matching keys. A plain object selected from one side is recursively copied; a selected array is copied with slice and replaces the earlier array rather than being concatenated. The url map entry uses valueFromConfig2, so URL is per-call-only: an absent or undefined per-call url does not fall back to defaults.url. baseURL and paramsSerializer use defaultToConfig2: per-call undefined or absence inherits the instance value, while null—and, for baseURL, an empty string—is a defined override that clears the default. A supplied paramsSerializer object replaces rather than merges with the default serializer object, though its plain structure is copied. params and allowAbsoluteUrls are absent from mergeMap, so the later fallback mergeDeepProperties applies: per-call undefined inherits; params null and allowAbsoluteUrls false override; and two plain params objects combine recursively with per-call precedence. The same helper copies arrays at every merged plain-object level. Non-plain values are returned by reference, so a native URLSearchParams—or a Date or callback nested in configuration—does not imply a universal deep clone."
+      },
+      {
+        "id": "uri_base_path",
+        "path": "lib/core/buildFullPath.js",
+        "start_line": 16,
+        "end_line": 21,
+        "quote": "export default function buildFullPath(baseURL, requestedURL, allowAbsoluteUrls) {\n  let isRelativeUrl = !isAbsoluteURL(requestedURL);\n  if (baseURL && (isRelativeUrl || allowAbsoluteUrls == false)) {\n    return combineURLs(baseURL, requestedURL);\n  }\n  return requestedURL;\n}",
+        "explanation": "isAbsoluteURL recognizes only strings beginning with case-insensitive `scheme://`, where the scheme starts with a letter and then uses letters, digits, plus, period, or hyphen, or beginning with protocol-relative `//`. A root-relative `/x` and schemes without `//` do not match. A truthy baseURL is combined with every relative URL. An absolute or protocol-relative URL is normally returned unchanged, but boolean false allowAbsoluteUrls forces combination when a truthy base exists; true or absence does not. A null, empty-string, or absent base is falsy, so the requested URL remains unchanged even when allowAbsoluteUrls is false. combineURLs is literal string joining: for a truthy requested URL it removes one or two final slashes using `/\\/?\\/$/` from the base, removes all leading slashes from the requested string, and inserts one slash. Consequently, forced combination can produce strings such as `base/https://host/path`; it is not URL resolution. If the requested string is empty, combineURLs returns the base exactly as supplied. No origin check, traversal normalization, dot-segment processing, or security enforcement occurs."
+      },
+      {
+        "id": "uri_serializer_selection",
+        "path": "lib/helpers/buildURL.js",
+        "start_line": 31,
+        "end_line": 66,
+        "quote": "export default function buildURL(url, params, options) {\n  /*eslint no-param-reassign:0*/\n  if (!params) {\n    return url;\n  }\n  \n  const _encode = options && options.encode || encode;\n\n  if (utils.isFunction(options)) {\n    options = {\n      serialize: options\n    };\n  } \n\n  const serializeFn = options && options.serialize;\n\n  let serializedParams;\n\n  if (serializeFn) {\n    serializedParams = serializeFn(params, options);\n  } else {\n    serializedParams = utils.isURLSearchParams(params) ?\n      params.toString() :\n      new AxiosURLSearchParams(params, options).toString(_encode);\n  }\n\n  if (serializedParams) {\n    const hashmarkIndex = url.indexOf(\"#\");\n\n    if (hashmarkIndex !== -1) {\n      url = url.slice(0, hashmarkIndex);\n    }\n    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;\n  }\n\n  return url;\n}",
+        "explanation": "Absent or null params take the initial fast path: the original URL is returned and no serializer is called. A function-form paramsSerializer is normalized to `{serialize: originalFunction}`; an object-form serializer remains that object. In either form the callback receives the raw merged params as its first argument and the normalized/current options object as its second. A custom serialize callback takes precedence over both native URLSearchParams.toString and Axios's plain-object materialization, and its returned string is appended verbatim without subsequent encoding. The selected custom encoder is used only by the default AxiosURLSearchParams plain-object branch, once for each accumulated key and value; AxiosURLSearchParams supplies its internal encoder as the custom encoder's second argument. It is bypassed by both a custom serialize callback and native URLSearchParams.toString. Serializer and encoder exceptions are not caught and therefore propagate synchronously through getUri. Fragment removal happens only when serializedParams is nonempty/truthy: everything from the first `#` onward is removed, then `?` is used if the remaining URL contains no question mark and `&` otherwise. An empty serialized string leaves the URL completely unchanged, including any fragment."
+      },
+      {
+        "id": "uri_parameter_materialization",
+        "path": "lib/helpers/toFormData.js",
+        "start_line": 148,
+        "end_line": 181,
+        "quote": "  function defaultVisitor(value, key, path) {\n    let arr = value;\n\n    if (value && !path && typeof value === 'object') {\n      if (utils.endsWith(key, '{}')) {\n        // eslint-disable-next-line no-param-reassign\n        key = metaTokens ? key : key.slice(0, -2);\n        // eslint-disable-next-line no-param-reassign\n        value = JSON.stringify(value);\n      } else if (\n        (utils.isArray(value) && isFlatArray(value)) ||\n        ((utils.isFileList(value) || utils.endsWith(key, '[]')) && (arr = utils.toArray(value))\n        )) {\n        // eslint-disable-next-line no-param-reassign\n        key = removeBrackets(key);\n\n        arr.forEach(function each(el, index) {\n          !(utils.isUndefined(el) || el === null) && formData.append(\n            // eslint-disable-next-line no-nested-ternary\n            indexes === true ? renderKey([key], index, dots) : (indexes === null ? key : key + '[]'),\n            convertValue(el)\n          );\n        });\n        return false;\n      }\n    }\n\n    if (isVisitable(value)) {\n      return true;\n    }\n\n    formData.append(renderKey(path, key, dots), convertValue(value));\n\n    return false;\n  }",
+        "explanation": "For a plain params object without a custom serializer, buildURL constructs AxiosURLSearchParams. Its constructor creates a `_pairs` accumulator and passes itself to toFormData; the visitor's formData.append calls therefore add raw name/value pairs. The build traversal omits null and undefined object members before invoking the visitor, and the flat-array branch independently omits null and undefined elements. With default indexes=false, a flat array directly under the root params object produces repeated `key[]` names. Plain objects and arrays deemed visitable return true and are recursively traversed. Nested plain-object paths use bracket names such as `outer[inner]`; an array reached below such a path is traversed by numeric keys, producing names such as `outer[items][0]`. Dates are converted with toISOString, booleans with toString (`true` or `false`), and other ordinary scalar values pass through for string coercion during encoding. AxiosURLSearchParams.toString encodes every pair component, emits `key=value`, and joins pairs with `&`. Under buildURL's default encoder, spaces become `+`; encoded colon, dollar, and comma are restored as literal `:`, `$`, and `,`; square brackets remain percent-encoded as `%5B` and `%5D`. These accumulator, visitor, conversion, and encoder rules do not apply to native URLSearchParams, which uses its own toString, or to a custom serializer, whose result bypasses materialization and encoding."
+      }
+    ]
+  },
+  "quality": {
+    "passed": false,
+    "findings": [
+      {
+        "id": "uri_handoffs",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "uri_config_merge",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "uri_base_path",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "uri_serializer_selection",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "uri_parameter_materialization",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  }
+}

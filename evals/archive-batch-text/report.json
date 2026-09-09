@@ -1,0 +1,113 @@
+{
+  "metric": "UTF-8 tool stdout bytes for identical retained physical source rows",
+  "method": "Decode retained legacy batch stdout, reproduce it exactly, render compact text, verify parity",
+  "limitations": [
+    "This is a renderer replay, not a new agent task run.",
+    "Output byte reduction does not establish model token, billing, or task-quality changes.",
+    "Source parity covers the escaped physical rows present in retained tool stdout."
+  ],
+  "renderer_path": "skills/columbus/scripts/columbus/presentation.py",
+  "renderer_sha256": "3cdfaa97897634018f89fed46a18b83cf3f431578dedcc6de8d058b16a9c7637",
+  "captures": [
+    {
+      "path": "evals/multilang-token-batch/java/trials/java-property-resolution-columbus-1/events.jsonl.gz",
+      "compressed_sha256": "196552a98b61e9e81f19552b60763bebd5915686713ce4b0f897b5fdf573170f"
+    },
+    {
+      "path": "evals/multilang-token-batch/java/trials/java-property-resolution-columbus-2/events.jsonl.gz",
+      "compressed_sha256": "243473cbe318c3b3f4e0efd38dc51bba8a13080da7ab8c188b48d3cb2618b653"
+    }
+  ],
+  "batches": [
+    {
+      "capture": "evals/multilang-token-batch/java/trials/java-property-resolution-columbus-1/events.jsonl.gz",
+      "event_id": "item_13",
+      "event_line_sha256": "45d6bf7588108a2bd5aff86efebf0fb7b9b16576412139bbb056fe5ea3b4fba5",
+      "before_stdout_sha256": "2259b95cb66ec9aabf2a28e264dd9e7bf562394b084f1402f7dc2aeebfe704ec",
+      "after_stdout_sha256": "85af88e725756b63d3bd57346fb89256207178a62e38bb402c11ad557dfd9a30",
+      "targets": 11,
+      "source_rows": 88,
+      "before_bytes": 11168,
+      "after_bytes": 7868,
+      "saved_bytes": 3300,
+      "reduction_percent": 29.55,
+      "legacy_stdout_equal": true,
+      "decoded_metadata_equal": true,
+      "decoded_source_rows_equal": true,
+      "physical_line_numbers_valid": true,
+      "metadata_sha256": "65eb1b0879b454aaee5ea6127a2901b04d91bedd133a37aebf09ca8cdb2d604a",
+      "source_rows_sha256": "6c0dc2c7defa5b514aecfe0b90110a0f488b870dc36b6e52f1a2aa5b56dd3bb2"
+    },
+    {
+      "capture": "evals/multilang-token-batch/java/trials/java-property-resolution-columbus-1/events.jsonl.gz",
+      "event_id": "item_18",
+      "event_line_sha256": "d1e56ae0ab3571c237a008783b7bd708bd4357a9456326c0d197ae58575ec6a8",
+      "before_stdout_sha256": "356f87296cc803ab61ada74f69e3728f7891ada2e9422e499c20252384ae4d81",
+      "after_stdout_sha256": "8d195df47a0d632156119682a2710abb6efbd4f948af0a9746fff796299da198",
+      "targets": 4,
+      "source_rows": 15,
+      "before_bytes": 3931,
+      "after_bytes": 3069,
+      "saved_bytes": 862,
+      "reduction_percent": 21.93,
+      "legacy_stdout_equal": true,
+      "decoded_metadata_equal": true,
+      "decoded_source_rows_equal": true,
+      "physical_line_numbers_valid": true,
+      "metadata_sha256": "aabb409d85f657c26f3d68004e9e5f589fba1bd29d3278bd896101ee5f2c508d",
+      "source_rows_sha256": "8a911a2026d5ec5fb5861873331cb61ebb78d2289f8560f74fe221fbd56f4452"
+    },
+    {
+      "capture": "evals/multilang-token-batch/java/trials/java-property-resolution-columbus-1/events.jsonl.gz",
+      "event_id": "item_27",
+      "event_line_sha256": "bc886292a9c2384c80c199f421b661f5b10fa639b31349058ddaf8efdc0153bd",
+      "before_stdout_sha256": "8817a3b57c5f654ec34845aa3f51f4803ca538918b787d6dbdf1d3459c912483",
+      "after_stdout_sha256": "2cfd1306c025de1a225e6b911829ec8c574c5d4ab427ea670468d1f5c695f306",
+      "targets": 3,
+      "source_rows": 28,
+      "before_bytes": 3664,
+      "after_bytes": 3035,
+      "saved_bytes": 629,
+      "reduction_percent": 17.17,
+      "legacy_stdout_equal": true,
+      "decoded_metadata_equal": true,
+      "decoded_source_rows_equal": true,
+      "physical_line_numbers_valid": true,
+      "metadata_sha256": "4cf5306a4011c81ecea565678cd1dc821dc5aa4205b4f416fd130846fef7446a",
+      "source_rows_sha256": "d3b4f89695973d4d9292aeea33ce6ca4541c1b82b2e24645e586ca86a569f3f8"
+    },
+    {
+      "capture": "evals/multilang-token-batch/java/trials/java-property-resolution-columbus-2/events.jsonl.gz",
+      "event_id": "item_10",
+      "event_line_sha256": "fc67a876de9fa663f4633384ea9b0fe901580a1da25caed212019ec1938d4fef",
+      "before_stdout_sha256": "75869a586215d5710fbbcac1725fcfc4b89e6fa5e5abbea5ff0c29daa3a31d19",
+      "after_stdout_sha256": "436a5db5ebae24275bf7a06b8fe127d99ae6170e252d9eec0c21b04a0f56478e",
+      "targets": 7,
+      "source_rows": 148,
+      "before_bytes": 11004,
+      "after_bytes": 9151,
+      "saved_bytes": 1853,
+      "reduction_percent": 16.84,
+      "legacy_stdout_equal": true,
+      "decoded_metadata_equal": true,
+      "decoded_source_rows_equal": true,
+      "physical_line_numbers_valid": true,
+      "metadata_sha256": "8421f9f873272c504ff6b872bc0105a0a710d61994a4e5ba442e2128fbd19656",
+      "source_rows_sha256": "bcd29a58d7e4a1528ade6d8f4324f7a275be6afa26ab0bfc2737780a750f292f"
+    }
+  ],
+  "combined": {
+    "batches": 4,
+    "targets": 25,
+    "source_rows": 279,
+    "before_bytes": 29767,
+    "after_bytes": 23123,
+    "saved_bytes": 6644,
+    "reduction_percent": 22.32,
+    "all_legacy_stdout_equal": true,
+    "all_decoded_metadata_equal": true,
+    "all_decoded_source_rows_equal": true,
+    "all_physical_line_numbers_valid": true,
+    "input_captures_unchanged": true
+  }
+}

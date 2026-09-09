@@ -1,0 +1,83 @@
+{
+  "cases": {
+    "comment": {
+      "refresh": {
+        "mode": "fast",
+        "check": "metadata_checked",
+        "parsed_files": 1,
+        "cached_parses_loaded": 5465,
+        "reused_files": 5465,
+        "metadata_reused_files": 5465,
+        "added_files": 0,
+        "removed_files": 0,
+        "hashed_files": 1,
+        "hashed_bytes": 8817,
+        "discovery_probe_files": 7814,
+        "discovery_probe_bytes": 48973750,
+        "config_hashed_files": 0,
+        "config_hashed_bytes": 0,
+        "head_changed": false,
+        "branch_changed": false,
+        "git_state_changed": false,
+        "config_changed": false,
+        "global_relink": true,
+        "elapsed_seconds": 7.2476
+      },
+      "files": 5466,
+      "identical_cache_blobs": 5465,
+      "changed_cache_paths": [
+        "django/utils/encoding.py"
+      ],
+      "changed_cache_bytes_before": 4667,
+      "all_cache_bytes_before": 11184236,
+      "changed_source_paths": [
+        "django/utils/encoding.py"
+      ]
+    },
+    "rename": {
+      "refresh": {
+        "mode": "fast",
+        "check": "metadata_checked",
+        "parsed_files": 1,
+        "cached_parses_loaded": 5465,
+        "reused_files": 5465,
+        "metadata_reused_files": 5465,
+        "added_files": 0,
+        "removed_files": 0,
+        "hashed_files": 1,
+        "hashed_bytes": 8801,
+        "discovery_probe_files": 7814,
+        "discovery_probe_bytes": 48973750,
+        "config_hashed_files": 0,
+        "config_hashed_bytes": 0,
+        "head_changed": false,
+        "branch_changed": false,
+        "git_state_changed": false,
+        "config_changed": false,
+        "global_relink": true,
+        "elapsed_seconds": 7.0531
+      },
+      "files": 5466,
+      "identical_cache_blobs": 5456,
+      "changed_cache_paths": [
+        "django/contrib/flatpages/models.py",
+        "django/contrib/syndication/views.py",
+        "django/http/request.py",
+        "django/http/response.py",
+        "django/template/defaultfilters.py",
+        "django/templatetags/static.py",
+        "django/utils/encoding.py",
+        "django/utils/feedgenerator.py",
+        "tests/admin_views/tests.py",
+        "tests/utils_tests/test_encoding.py"
+      ],
+      "changed_cache_bytes_before": 227714,
+      "all_cache_bytes_before": 11184236,
+      "changed_source_paths": [
+        "django/utils/encoding.py"
+      ]
+    }
+  },
+  "all_restored_cache_blobs_equal": true,
+  "scope": "Byte-identical compressed resolved parse caches, not just unchanged source; full relinking still ran. Isolated copy, unflushed caches; timings are diagnostic only."
+}

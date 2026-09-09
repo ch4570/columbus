@@ -1,0 +1,18 @@
+{
+  "scope": "Initial verifier compared internal search_documents rowids through edit/restoration. Only its table hash differed. Corrected verifier compares all logical document fields and full selected search hits.",
+  "differing_fields": [
+    "table_sha256"
+  ],
+  "initial_table_hashes": {
+    "symbols": "c6bc9ffca926e3d1c693936c1e44b2cfe376fe87a85edc0254cd9a46861f17fd",
+    "edges": "ce788ccaa759ec803dbef067bc217456162a7dc1b3240dd3c0e48d172f8139ce",
+    "search_documents": "a377ee0c75a477aa367f060ad71a5693b32162d4b3d9fc92ba9a667f52b8631e"
+  },
+  "restored_table_hashes": {
+    "symbols": "c6bc9ffca926e3d1c693936c1e44b2cfe376fe87a85edc0254cd9a46861f17fd",
+    "edges": "ce788ccaa759ec803dbef067bc217456162a7dc1b3240dd3c0e48d172f8139ce",
+    "search_documents": "67a561e080d40e3fc6b7cd07286d0602efefc3ba56860ee72d8322e5efd20130"
+  },
+  "search_hits_equal": true,
+  "facts_equal": true
+}

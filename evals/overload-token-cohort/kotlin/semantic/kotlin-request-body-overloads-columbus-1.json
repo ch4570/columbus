@@ -1,0 +1,78 @@
+{
+  "reviewer": "cost_review, independent of the evaluated model; no token comparison inspected",
+  "answer_sha256": "107061e65e63025e88d0b236d518610f3532228f0b62a10ae65d8a6accbc1449",
+  "rubric_sha256": "2b1b224e6f38051261efcfcfe71b3c702393451a0c0fb13d8a1d80b464138dab",
+  "execution_review": {
+    "events_sha256": "29cd2c8b35dccc4d2be244df363cb6709b96f157d368c516beb514e5c644023d",
+    "passed": true,
+    "reason": "Audited all 17 completed command executions and all completed item types. Commands read repository source with rg/sed/nl/head, read the explicitly supplied frozen skill, or invoke the supplied runtime against the supplied saved graph and repository. The receiver-ambiguous archive-source command failed without a protocol violation; later exact-ID batch source reads succeeded. No private catalog/rubric/control/trial reads, target code/tests/builds execution, web, delegation or source-write command appears."
+  },
+  "citation_note": "All seven findings pass the unchanged mechanical citation grader. The helper quote is valid representative evidence but does not itself quote MediaType.charset or parameter lookup implementation.",
+  "findings": [
+    {
+      "id": "legacy-string-bytestring", "passed": true,
+      "reason": "Both receiver-specific legacy mappings and the content-first migration are established by explanation and the deprecation annotation quote.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "Explicitly maps deprecated create(contentType, String) to content.toRequestBody(contentType) and distinguishes the String charset/encoding extension."},
+        {"criterion_index": 1, "passed": true, "reason": "The complete ByteString delegate is quoted and explained as the ByteString direct-byte path, distinct from String encoding."},
+        {"criterion_index": 2, "passed": true, "reason": "Prose identifies content-type-first compatibility and content receiver migration; the quoted annotation explicitly instructs Java callers to put content first. Receiver behavior remains distinct."}
+      ]
+    },
+    {
+      "id": "legacy-array-file", "passed": true,
+      "reason": "Array forwarding/defaults and the separate File replacement are correctly explained without conflating other receiver types.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "States the ByteArray delegate with contentType, offset and byteCount unchanged and explicitly gives legacy defaults zero and content.size."},
+        {"criterion_index": 1, "passed": true, "reason": "Quotes and explains File create(contentType, file) delegating directly to file.asRequestBody(contentType)."},
+        {"criterion_index": 2, "passed": true, "reason": "Explains the old content-type-first calls and moving array/file into receiver/content-first positions; the File annotation supplies explicit Java migration guidance."}
+      ]
+    },
+    {
+      "id": "string-encoding", "passed": true,
+      "reason": "The whole String implementation and explanation establish charset-before-encoding and complete encoded-array delegation.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "Quote shows chooseCharset followed by toByteArray(charset), and prose explicitly states selection precedes encoding."},
+        {"criterion_index": 1, "passed": true, "reason": "Quote supplies finalContentType, zero offset and bytes.size; explanation gives final type, encoded byte count rather than character count, and writes of the whole captured encoded array."}
+      ]
+    },
+    {
+      "id": "charset-policy", "passed": false,
+      "reason": "Correctly explains null/supported/fallback behavior, nullable augmented parsing and first-parameter precedence, but omits two positive implementation details required by the frozen rubric: Charset.forName rejection caught as IllegalArgumentException and case-insensitive parameter-name matching. The quoted helper contains neither callee implementation.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "Explicitly states null media type returns UTF-8 and null final type, matching the initial values in the quote."},
+        {"criterion_index": 1, "passed": true, "reason": "Explicitly preserves the supported resolved charset and unchanged media type; the helper quote shows the branch."},
+        {"criterion_index": 2, "passed": false, "reason": "The explanation correctly says missing, invalid and runtime-unsupported charset yield null and trigger UTF-8 plus appended-type parsing. It does not establish the required Charset.forName call and caught IllegalArgumentException mechanism, which is absent from the chosen helper quote. Reading MediaType in the command trace does not supply an omitted final-answer fact."},
+        {"criterion_index": 3, "passed": true, "reason": "Explicitly describes toMediaTypeOrNull, nullable parsing and parse failure producing null, without promising that normal augmentation necessarily fails or always succeeds."},
+        {"criterion_index": 4, "passed": false, "reason": "Correctly explains append rather than replacement, original-before-appended order, first matching parameter and continued null resolution despite UTF-8 bytes. Neither prose nor quote states that parameter-name matching ignores case, a positive frozen clause detail implemented in MediaType.kt 57-64."}
+      ]
+    },
+    {
+      "id": "array-slice", "passed": true,
+      "reason": "Defaults, eager failure, exact slice semantics and caller-visible mutable-array retention are all established.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "States zero/full-size defaults, explicitly rejects size-minus-offset as the default, and explains nonzero offset with omitted count fails."},
+        {"criterion_index": 1, "passed": true, "reason": "Explains validation before returning the body and ArrayIndexOutOfBoundsException for negative values or a slice outside the array, covering negative offset/count, offset past end and count beyond the remainder; the quote places validation before object creation."},
+        {"criterion_index": 2, "passed": true, "reason": "Explains supplied nullable content type, fixed count and exact selected slice; the complete quote explicitly shows byteCount.toLong and writing the original receiver with offset/count."},
+        {"criterion_index": 3, "passed": true, "reason": "Explicitly says the original array is retained without copying and selected-element mutations can change later writes."}
+      ]
+    },
+    {
+      "id": "bytestring-body", "passed": true,
+      "reason": "Explanation and complete receiver body establish unchanged media type, byte-size length and direct non-text writing.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "States unchanged nullable content type and ByteString byte size; the quote explicitly returns size.toLong."},
+        {"criterion_index": 1, "passed": true, "reason": "Quote directly writes the ByteString receiver and prose excludes charset selection, media-type augmentation and encoding on this path."}
+      ]
+    },
+    {
+      "id": "file-body", "passed": true,
+      "reason": "Correctly separates per-query length and per-write source ownership from caller-owned sink and inherited non-one-shot behavior, without asserting a content snapshot or guaranteed repeat success.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "Explicitly states unchanged nullable media type and File.length evaluated at each contentLength query rather than captured at construction."},
+        {"criterion_index": 1, "passed": true, "reason": "States fresh source per write, copying and closure through use including failure, and non-closure of the caller-owned sink; quote supplies source().use and sink.writeAll(source)."},
+        {"criterion_index": 2, "passed": true, "reason": "Explicitly identifies the absent isOneShot override and inherited false, consistent with the complete anonymous-body quote and reviewed base contract."},
+        {"criterion_index": 3, "passed": true, "reason": "Limits multiple-write permission to the body contract and explains that reopened file contents and separately observed lengths can differ. It does not promise successful repeats, immutable content or network replay safety."}
+      ]
+    }
+  ]
+}

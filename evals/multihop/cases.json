@@ -1,0 +1,46 @@
+{
+  "schema": "columbus.exploration-cases/v1",
+  "cases": [
+    {
+      "id": "source-read-three-hop",
+      "mode": "reachability-enumeration",
+      "question": "Find every method of RepositoryIndex in this frozen package whose shortest source-level call path reaches safe_source in discovery.py through read_stable in sync_state.py within at most three calls. For this task, count direct imported read_stable calls, lexical self.member calls to methods declared in RepositoryIndex, and the direct read_stable-to-safe_source call. Treat self as the lexical instance receiver, exclude arbitrary aliases/callbacks and other call routes, and do not infer runtime completeness. Report each qualifying method and explain its shortest ordered path and hop count.",
+      "findings": [
+        {
+          "id": "RepositoryIndex._source",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "marker": "read_stable(",
+          "call_lines": [
+            441
+          ]
+        },
+        {
+          "id": "RepositoryIndex.refresh",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "marker": "read_stable(",
+          "call_lines": [
+            139,
+            170
+          ]
+        },
+        {
+          "id": "RepositoryIndex.status",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "marker": "read_stable(",
+          "call_lines": [
+            317,
+            327
+          ]
+        },
+        {
+          "id": "RepositoryIndex.symbol",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "marker": "self._source(",
+          "call_lines": [
+            524
+          ]
+        }
+      ]
+    }
+  ]
+}

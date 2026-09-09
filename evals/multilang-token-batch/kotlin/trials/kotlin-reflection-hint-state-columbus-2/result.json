@@ -1,0 +1,280 @@
+{
+  "schema": "columbus.exploration-observation/v1",
+  "case": "kotlin-reflection-hint-state",
+  "condition": "columbus",
+  "repeat": 2,
+  "model_requested": "gpt-5.6-sol",
+  "effort_requested": "xhigh",
+  "evidence_mode": "saved_archive",
+  "elapsed_seconds": 370.119,
+  "return_code": 0,
+  "timed_out": false,
+  "source_unchanged": true,
+  "usage": {
+    "input_tokens": 267222,
+    "cached_input_tokens": 228352,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 10426,
+    "reasoning_output_tokens": 6144,
+    "uncached_input_tokens": 38870
+  },
+  "commands": [
+    {
+      "command": "/bin/zsh -lc \"sed -n '1,240p' /tmp/columbus-token-kotlin-batch/runtime/SKILL.md\"",
+      "exit_code": 0,
+      "output_bytes": 4999,
+      "output_sha256": "1ce85fbc4caf133c0e6c2476532088fc4d61a11938bcd11c8df35d5e52565f56"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/columbus/.venv/bin/python /tmp/columbus-token-kotlin-batch/runtime/columbus.py archive-search ReflectionHints --input /tmp/columbus-token-kotlin-batch/graph.jsonl.xz --format text --budget-bytes 10000'",
+      "exit_code": 0,
+      "output_bytes": 2842,
+      "output_sha256": "6ce76fd20e83f144f7127886fa460876c8c8a3dfd7126787ab433e5e1e42884f"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n --glob '*.kt' 'getTypeHint|inline fun.*registerType|ReflectionHints' . | head -80\"",
+      "exit_code": 0,
+      "output_bytes": 3773,
+      "output_sha256": "c0f5a3465da865990a0b465fa34b3705eee85c098c11c03c4799c3ed8fd59ebf"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/columbus/.venv/bin/python /tmp/columbus-token-kotlin-batch/runtime/columbus.py archive-search registerType --input /tmp/columbus-token-kotlin-batch/graph.jsonl.xz --format text --budget-bytes 16000'",
+      "exit_code": 0,
+      "output_bytes": 3070,
+      "output_sha256": "be6ea25cdc80150c467d255e6594c48a39f40db1522a19d57bcbe1a117b78d6c"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/columbus/.venv/bin/python /tmp/columbus-token-kotlin-batch/runtime/columbus.py archive-search getTypeHint --input /tmp/columbus-token-kotlin-batch/graph.jsonl.xz --format text --budget-bytes 12000'",
+      "exit_code": 0,
+      "output_bytes": 3038,
+      "output_sha256": "709095e8b1c3aa27773b469c78d09c8c18a9e95b259415f9575262ee41915eb0"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/columbus/.venv/bin/python /tmp/columbus-token-kotlin-batch/runtime/columbus.py archive-search TypeHint --input /tmp/columbus-token-kotlin-batch/graph.jsonl.xz --format text --budget-bytes 14000'",
+      "exit_code": 0,
+      "output_bytes": 2934,
+      "output_sha256": "81c628594fd7262c6f24013e5e5fad5e2170db087151d1e6b8d75e8cb8a9a50d"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/columbus/.venv/bin/python /tmp/columbus-token-kotlin-batch/runtime/columbus.py archive-source 'org.springframework.aot.hint.ReflectionHints.getTypeHint' 'org.springframework.aot.hint.ReflectionHints.registerType' --input /tmp/columbus-token-kotlin-batch/graph.jsonl.xz --repo . --format text --limit 220 --budget-bytes 26000\"",
+      "exit_code": 2,
+      "output_bytes": 214,
+      "output_sha256": "41e7709c06ba49fd0259d3f70d93374eef5c5087c5c37ce155b013289a08f610"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/columbus/.venv/bin/python /tmp/columbus-token-kotlin-batch/runtime/columbus.py archive-source 'org.springframework.aot.hint.getTypeHint' 'org.springframework.aot.hint.registerType' --input /tmp/columbus-token-kotlin-batch/graph.jsonl.xz --repo . --format text --limit 120 --budget-bytes 16000\"",
+      "exit_code": 2,
+      "output_bytes": 138,
+      "output_sha256": "9630b67650cc9ee6cd2b7c3626fe7ddbe884eddd57686398e0542d93c05b0342"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/columbus/.venv/bin/python /tmp/columbus-token-kotlin-batch/runtime/columbus.py archive-search TypeReference.of --input /tmp/columbus-token-kotlin-batch/graph.jsonl.xz --format text --budget-bytes 12000'",
+      "exit_code": 0,
+      "output_bytes": 2755,
+      "output_sha256": "b727e3d2cdcb9c547a9805c63f71db7431654d63807f44ee53ee928a1ff245a5"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/columbus-token-kotlin-batch/runtime/columbus.py archive-source 'src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.getTypeHint:method(Class<?>)' 'src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.getTypeHint:method(TypeReference)' 'src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.registerType:method(Class<?>,Consumer<TypeHint.Builder>)' 'src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.registerType:method(Class<?>,MemberCategory...)' 'src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.registerType:method(TypeReference,Consumer<TypeHint.Builder>)' 'src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.registerType:method(TypeReference,MemberCategory...)' --input /tmp/columbus-token-kotlin-batch/graph.jsonl.xz --repo . --format text --limit 140 --budget-bytes 18000\"",
+      "exit_code": 127,
+      "output_bytes": 101,
+      "output_sha256": "e3d95c84ac227156fe4bdb83d27389eb882a74e4c96d8a71e100cbf9d69d24c7"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/columbus/.venv/bin/python /tmp/columbus-token-kotlin-batch/runtime/columbus.py archive-search memberCategories --input /tmp/columbus-token-kotlin-batch/graph.jsonl.xz --format text --budget-bytes 14000'",
+      "exit_code": 0,
+      "output_bytes": 2931,
+      "output_sha256": "ffdec3191a5f83c65e1db9b4c85c6cf98a1b43e2973bb2ee54c8dca3a79ba637"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/columbus/.venv/bin/python /tmp/columbus-token-kotlin-batch/runtime/columbus.py archive-search ReflectionTypeReference --input /tmp/columbus-token-kotlin-batch/graph.jsonl.xz --format text --budget-bytes 12000'",
+      "exit_code": 0,
+      "output_bytes": 2851,
+      "output_sha256": "e749b01d82a2892cc51d0943e41094ba3f6c9a94746d38ab9af3c3e778a6cf42"
+    },
+    {
+      "command": "/bin/zsh -lc '/Users/rex/Desktop/columbus/.venv/bin/python /tmp/columbus-token-kotlin-batch/runtime/columbus.py archive-search withMembers --input /tmp/columbus-token-kotlin-batch/graph.jsonl.xz --format text --budget-bytes 10000'",
+      "exit_code": 0,
+      "output_bytes": 2192,
+      "output_sha256": "6ddba3017f4012338a2237c30dcdabae4fde25080e731d500b34a2e7e6d17997"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/columbus/.venv/bin/python /tmp/columbus-token-kotlin-batch/runtime/columbus.py archive-source 'src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt::org.springframework.aot.hint.getTypeHint:function()@ReflectionHints' 'src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt::org.springframework.aot.hint.registerType:function(Function1<? super TypeHint.Builder,Unit>)@ReflectionHints' 'src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt::org.springframework.aot.hint.registerType:function(MemberCategory...)@ReflectionHints' --input /tmp/columbus-token-kotlin-batch/graph.jsonl.xz --repo . --format text --limit 100 --budget-bytes 12000\"",
+      "exit_code": 2,
+      "output_bytes": 267,
+      "output_sha256": "6a9ab33555eaa358d2cbcf0776f3bc47665fc2b732c2f4a6a9d41eec170e46a3"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt | sed -n '15,55p'\nnl -ba src/main/java/org/springframework/aot/hint/ReflectionHints.java | sed -n '42,155p'\nnl -ba src/main/java/org/springframework/aot/hint/TypeHint.java | sed -n '42,135p'\nnl -ba src/main/java/org/springframework/aot/hint/TypeHint.java | sed -n '150,290p'\nnl -ba src/main/java/org/springframework/aot/hint/TypeReference.java | sed -n '50,92p'\nnl -ba src/main/java/org/springframework/aot/hint/ReflectionTypeReference.java | sed -n '25,62p'\"",
+      "exit_code": 0,
+      "output_bytes": 18150,
+      "output_sha256": "46672645113f5a8c7d9e86b4b93270a45711f5878228a3623762d1aa5699348d"
+    },
+    {
+      "command": "/bin/zsh -lc \"nl -ba src/main/java/org/springframework/aot/hint/TypeHint.java | sed -n '134,180p'\nnl -ba src/main/java/org/springframework/aot/hint/TypeHint.java | sed -n '266,305p'\nrg -n \\\"builtWith\\\\(\\\" src/main/java/org/springframework/aot/hint/TypeHint.java\"",
+      "exit_code": 0,
+      "output_bytes": 3491,
+      "output_sha256": "647644c7fe42b1dc8ec5c89985c857f1b646cdfe02fa46101480ef29170fa00f"
+    },
+    {
+      "command": "/bin/zsh -lc \"rg -n \\\"boolean equals|int hashCode|class AbstractTypeReference\\\" src/main/java/org/springframework/aot/hint/AbstractTypeReference.java\nnl -ba src/main/java/org/springframework/aot/hint/AbstractTypeReference.java | sed -n '25,150p'\"",
+      "exit_code": 0,
+      "output_bytes": 2539,
+      "output_sha256": "24ac6309881a4b60e9e964d784c880dfba801faa89a64ee152cdc49ec4d489b6"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/columbus/.venv/bin/python /tmp/columbus-token-kotlin-batch/runtime/columbus.py archive-source 'src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.getTypeHint:method(Class<?>)' 'src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.getTypeHint:method(TypeReference)' 'src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.registerType:method(Class<?>,Consumer<TypeHint.Builder>)' 'src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.registerType:method(Class<?>,MemberCategory...)' 'src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.registerType:method(TypeReference,Consumer<TypeHint.Builder>)' 'src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.registerType:method(TypeReference,MemberCategory...)' 'src/main/java/org/springframework/aot/hint/TypeHint.java::org.springframework.aot.hint.TypeHint.Builder.withMembers:method(MemberCategory...)' 'src/main/java/org/springframework/aot/hint/TypeHint.java::org.springframework.aot.hint.TypeHint.getMemberCategories:method()' 'src/main/java/org/springframework/aot/hint/ReflectionTypeReference.java::org.springframework.aot.hint.ReflectionTypeReference.of:method(Class<?>)' --input /tmp/columbus-token-kotlin-batch/graph.jsonl.xz --repo . --format text --limit 220 --budget-bytes 26000\"",
+      "exit_code": 0,
+      "output_bytes": 7805,
+      "output_sha256": "734d0bf981da7b547bdac72f3f8917372c836854df2403b120580a6ef7823413"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/columbus/.venv/bin/python /tmp/columbus-token-kotlin-batch/runtime/columbus.py archive-source 'src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt::module' --input /tmp/columbus-token-kotlin-batch/graph.jsonl.xz --repo . --format text --limit 80 --budget-bytes 10000\"",
+      "exit_code": 0,
+      "output_bytes": 2379,
+      "output_sha256": "a304a8a19b3b07843982f2171c9f8443eb88c84e1c79b9c48a9de87ef8ce6ee2"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/columbus/.venv/bin/python /tmp/columbus-token-kotlin-batch/runtime/columbus.py archive-search 'Builder.build' --input /tmp/columbus-token-kotlin-batch/graph.jsonl.xz --format text --budget-bytes 8000\"",
+      "exit_code": 0,
+      "output_bytes": 2625,
+      "output_sha256": "5747676e921afffb78e64182eac69ca30fed4e2321576e8624b246ac7ebe981e"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/columbus/.venv/bin/python /tmp/columbus-token-kotlin-batch/runtime/columbus.py archive-source 'src/main/java/org/springframework/aot/hint/AbstractTypeReference.java::org.springframework.aot.hint.AbstractTypeReference.equals:method(Object)' 'src/main/java/org/springframework/aot/hint/AbstractTypeReference.java::org.springframework.aot.hint.AbstractTypeReference.hashCode:method()' --input /tmp/columbus-token-kotlin-batch/graph.jsonl.xz --repo . --format text --limit 40 --budget-bytes 6000\"",
+      "exit_code": 0,
+      "output_bytes": 1887,
+      "output_sha256": "9fb09a23eb20a1197d28bf2bd4f28cbbe987edf86bef2c609983b4e5d73006a5"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/columbus/.venv/bin/python /tmp/columbus-token-kotlin-batch/runtime/columbus.py archive-search 'TypeHint.<init>' --input /tmp/columbus-token-kotlin-batch/graph.jsonl.xz --format text --budget-bytes 8000\"",
+      "exit_code": 0,
+      "output_bytes": 827,
+      "output_sha256": "619ecee7fd08632c804792668ae11d9a1093c5e1916abd854cc789f7cb7fc1df"
+    },
+    {
+      "command": "/bin/zsh -lc \"/Users/rex/Desktop/columbus/.venv/bin/python /tmp/columbus-token-kotlin-batch/runtime/columbus.py archive-source 'src/main/java/org/springframework/aot/hint/TypeHint.java::org.springframework.aot.hint.TypeHint.<init>:constructor(Builder)' 'src/main/java/org/springframework/aot/hint/TypeHint.java::org.springframework.aot.hint.TypeHint.Builder.build:method()' 'src/main/java/org/springframework/aot/hint/TypeHint.java::org.springframework.aot.hint.TypeHint.builtWith:method(MemberCategory...)' --input /tmp/columbus-token-kotlin-batch/graph.jsonl.xz --repo . --format text --limit 60 --budget-bytes 8000\"",
+      "exit_code": 0,
+      "output_bytes": 2917,
+      "output_sha256": "2097f140b2a5c8fa82dea0e2f94520e5d88e9a94b1bc155e11bf921753e2db5a"
+    }
+  ],
+  "command_count": 23,
+  "command_output_bytes": 74725,
+  "failed_commands": 4,
+  "other_tool_types": [],
+  "runtime_warnings": [],
+  "turn_failed": false,
+  "quality": {
+    "passed": true,
+    "findings": [
+      {
+        "id": "kotlin-delegation",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "registration-class-guards",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "registration-state-errors",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "lookup-absence-errors",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "category-snapshots",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "index_preflight": null,
+  "archive_preflight": {
+    "passed": true,
+    "archive_sha256": "d61661f62e09e0750ab1b174179c6f7f1ac62b9295b2323965db0e66e2cbba7a",
+    "revision": "c3eb9cdaa72e23456cca",
+    "source_files_verified": 1166,
+    "indexed_source_files_verified": 1166,
+    "counts": {
+      "files": 1166,
+      "nodes": 20811,
+      "scopes": 20647,
+      "edges": 32145,
+      "references": 68007,
+      "imports": 7723,
+      "diagnostics": 16
+    },
+    "consumer_index_absent": true
+  },
+  "archive_postflight": {
+    "passed": true,
+    "archive_sha256": "d61661f62e09e0750ab1b174179c6f7f1ac62b9295b2323965db0e66e2cbba7a",
+    "revision": "c3eb9cdaa72e23456cca",
+    "source_files_verified": 1166,
+    "indexed_source_files_verified": 1166,
+    "counts": {
+      "files": 1166,
+      "nodes": 20811,
+      "scopes": 20647,
+      "edges": 32145,
+      "references": 68007,
+      "imports": 7723,
+      "diagnostics": 16
+    },
+    "consumer_index_absent": true
+  },
+  "answer": {
+    "findings": [
+      {
+        "id": "kotlin-delegation",
+        "path": "src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt",
+        "start_line": 26,
+        "end_line": 47,
+        "quote": "inline fun <reified T> ReflectionHints.getTypeHint() =\n\tgetTypeHint(T::class.java)",
+        "explanation": "All three extensions materialize the reified T as T::class.java. getTypeHint<T>() selects Java getTypeHint(Class<?>), which converts the Class to a TypeReference and performs the lookup. The customizer form selects registerType(Class<?>, Consumer<Builder>); noinline permits the bound typeHint::invoke adapter, which passes the Java Builder to the original Kotlin callback. The category form uses *memberCategories, passing the vararg elements to registerType(Class<?>, MemberCategory...), which forwards them to the TypeReference overload and TypeHint.builtWith rather than treating the array as one category."
+      },
+      {
+        "id": "registration-class-guards",
+        "path": "src/main/java/org/springframework/aot/hint/ReflectionHints.java",
+        "start_line": 122,
+        "end_line": 143,
+        "quote": "public ReflectionHints registerType(Class<?> type, Consumer<TypeHint.Builder> typeHint) {\n\t\tAssert.notNull(type, \"'type' must not be null\");\n\t\tif (type.getCanonicalName() != null) {\n\t\t\tregisterType(TypeReference.of(type), typeHint);\n\t\t}\n\t\treturn this;\n\t}",
+        "explanation": "Both Class-based registration overloads first reject a null Class with Assert.notNull, which throws IllegalArgumentException. Their only subsequent Class guard is a non-null canonical name; a Class without one is silently skipped and this is returned. Thus the customizer is not called for either a null Class or a canonical-name-less Class. For a valid Class, the appropriate TypeReference overload is reached and the customizer runs there. Primitive and array classes are not separately rejected if their canonical names are non-null."
+      },
+      {
+        "id": "registration-state-errors",
+        "path": "src/main/java/org/springframework/aot/hint/ReflectionHints.java",
+        "start_line": 98,
+        "end_line": 113,
+        "quote": "public ReflectionHints registerType(TypeReference type, Consumer<TypeHint.Builder> typeHint) {\n\t\tBuilder builder = this.types.computeIfAbsent(type, TypeHint.Builder::new);\n\t\ttypeHint.accept(builder);\n\t\treturn this;\n\t}",
+        "explanation": "Repeated registration under an equal TypeReference key—TypeReference equality is canonical-name based—reuses the same Builder. The category overload supplies TypeHint.builtWith, whose Builder.withMembers adds all categories to a HashSet: registrations therefore accumulate as set union, retaining earlier categories and collapsing duplicates. The builder is inserted by computeIfAbsent before the customizer is invoked. Because accept has no catch or rollback, a thrown exception propagates while the map entry remains; previously accumulated categories and any categories added before the throw remain. For a newly encountered type, even a throw before category mutation leaves an entry whose category set is empty."
+      },
+      {
+        "id": "lookup-absence-errors",
+        "path": "src/main/java/org/springframework/aot/hint/ReflectionHints.java",
+        "start_line": 76,
+        "end_line": 88,
+        "quote": "public @Nullable TypeHint getTypeHint(TypeReference type) {\n\t\tBuilder typeHintBuilder = this.types.get(type);\n\t\treturn (typeHintBuilder != null ? typeHintBuilder.build() : null);\n\t}",
+        "explanation": "getTypeHint(Class<?>) unconditionally calls TypeReference.of(type), then the TypeReference overload reads the map and returns null when a valid type has no entry; lookup does not create one. In contrast, registering an absent valid type creates its builder and invokes the registration callback. TypeReference.of(Class<?>) delegates to ReflectionTypeReference.of, which validates both the Class and its canonical name with Assert.notNull. Consequently lookup with null Class throws IllegalArgumentException for \"'type' must not be null\", and lookup for a Class with no canonical name throws IllegalArgumentException for \"'type.getCanonicalName()' must not be null\". Registration validates null Class directly but silently skips a non-null Class lacking a canonical name."
+      },
+      {
+        "id": "category-snapshots",
+        "path": "src/main/java/org/springframework/aot/hint/TypeHint.java",
+        "start_line": 54,
+        "end_line": 67,
+        "quote": "private TypeHint(Builder builder) {\n\t\tthis.type = builder.type;\n\t\tthis.reachableType = builder.reachableType;\n\t\tthis.memberCategories = Set.copyOf(builder.memberCategories);",
+        "explanation": "Each lookup builds a new TypeHint from the retained Builder. Set.copyOf makes that TypeHint's member-category set an unmodifiable snapshot, so a TypeHint returned earlier—and the set returned by its getMemberCategories()—does not change when the same type is registered again. A later lookup builds another TypeHint and observes the builder's newly accumulated category union."
+      }
+    ]
+  },
+  "prompt_bytes": 2802,
+  "events_sha256": "dfc5e19c8ed4f5d8e86a19d5127afbca2f3b699ef85a24b348ad37af3352a586"
+}

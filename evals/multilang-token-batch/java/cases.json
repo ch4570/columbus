@@ -1,0 +1,56 @@
+{
+  "schema": "columbus.exploration-cases/v1",
+  "cases": [
+    {
+      "id": "java-property-resolution",
+      "question": "Trace how PropertySourcesPropertyResolver resolves ordinary, typed, default-valued and required property lookups across multiple sources. Explain which value wins, nested-placeholder versus raw retrieval, strict and non-strict placeholder behavior, conversion-service selection (including explicit configuration and getConversionService()), and what happens when processing returns null or throws. Include whether later sources or defaults are tried after a failure and whether values are cached. Follow the implementation in this checkout. Stay at these API boundaries: do not enumerate all converters or the full placeholder escape/default grammar, and do not include validateRequiredProperties. Do not execute the project or assume custom PropertySource/conversion implementations always succeed.",
+      "findings": [
+        {
+          "id": "source-selection",
+          "description": "Explain source ordering, null results and when lookup stops, including processing failures.",
+          "path": "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java",
+          "marker": "Object value = propertySource.getProperty(key);",
+          "call_lines": [
+            80
+          ]
+        },
+        {
+          "id": "nested-value-processing",
+          "description": "Explain placeholder eligibility, raw lookups and the order of processing a retrieved value.",
+          "path": "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java",
+          "marker": "value = resolveNestedPlaceholders(string);",
+          "call_lines": [
+            84
+          ]
+        },
+        {
+          "id": "placeholder-policy",
+          "description": "Explain nested versus explicit placeholder strictness, empty inputs and which errors an ignore policy suppresses.",
+          "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+          "marker": "resolvePlaceholders(value) : resolveRequiredPlaceholders(value)",
+          "call_lines": [
+            277
+          ]
+        },
+        {
+          "id": "conversion-policy",
+          "description": "Explain original-value retention, conversion-service selection/configuration and conversion failures.",
+          "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+          "marker": "return conversionServiceToUse.convert(value, targetType);",
+          "call_lines": [
+            311
+          ]
+        },
+        {
+          "id": "missing-default-required",
+          "description": "Explain nullable, default-valued and required retrieval, including failures after finding a source value.",
+          "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+          "marker": "throw new IllegalStateException(\"Required key",
+          "call_lines": [
+            230
+          ]
+        }
+      ]
+    }
+  ]
+}

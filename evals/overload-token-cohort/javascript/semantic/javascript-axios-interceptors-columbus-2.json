@@ -1,0 +1,146 @@
+{
+  "answer_sha256": "299eb50787d1b0ba2fdea646ae8a8e6351735819fa36e07072f560e5ab141410",
+  "rubric_sha256": "358ffd7d026864662c1588e83f29ede68a84a7ad0eaf7c951762a624c384d1a2",
+  "findings": [
+    {
+      "id": "registration_removal",
+      "passed": false,
+      "reason": "Registration defaults, stable IDs/holes, reset and iteration are correct, but the required no-op behavior for absent or already-empty eject slots is neither stated nor quoted.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The explanation and use quote establish independent manager arrays, record append/index IDs, false/null defaults without options and unnormalized option properties including undefined. Eligibility context establishes that missing synchronous selects the Promise path."
+        },
+        {
+          "criterion_index": 1,
+          "passed": false,
+          "reason": "The answer says eject nulls a currently present record without splicing/reusing/renumbering slots and later registrations append at the old length. It does not establish that absent or already-null slots are no-ops. The actual manager quote ends at use's return and does not contain the eject guard; the unrequested undefined-return observation does not supply the absent-slot behavior."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The answer explicitly says clear creates a fresh empty array, iteration then sees no entries, the next registration returns zero and old numeric IDs may collide with new registrations."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The prose states ascending slot iteration and skipping null tombstones. Together with quoted manager-based chain assembly, this establishes registration-order traversal and removal of ejected records from execution/mode selection."
+        }
+      ]
+    },
+    {
+      "id": "eligibility_order",
+      "passed": true,
+      "reason": "The answer correctly explains assembly-time predicate evaluation, strict-false filtering, eligible-only mode calculation and empty-set handling, opposite request/response order and ignored response options.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The prose explicitly says runWhen functions receive the same already-prepared config during _request assembly before request interceptor execution, rather than prior fulfilled outputs."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The explanation limits skipping to exactly false and keeps other results eligible. The full quoted typeof/function and === false condition establishes that absent/non-callable predicates do not filter records."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The answer explicitly describes an initially true AND flag, only eligible records contributing, all truthy-synchronous values including the empty eligible set, and false/undefined selecting the Promise path. Null-slot traversal supplies the ejected-record exclusion."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The answer states request LIFO order from unshift and response FIFO order from push, preserving callback adjacency. It states response runWhen and synchronous options are not consulted; the quote shows every surviving response pair is appended without a predicate check."
+        }
+      ]
+    },
+    {
+      "id": "promise_path",
+      "passed": true,
+      "reason": "The prose and complete Promise-assembly quote establish Promise initialization/order, adoption, downstream rejection and recovery, paired-handler limits and dispatch/response consequences.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The explanation explicitly selects Promise mode for an eligible non-synchronous interceptor and constructs Promise.resolve(config), reversed request pairs, dispatch and registration-order response pairs before callbacks run."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The answer explicitly describes fulfilled-value forwarding, adoption of returned promises/thenables and throws producing downstream rejection. Adoption in the quoted ordinary then chain also covers a rejected returned promise."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The explanation says both callbacks in a then pair consume the preceding promise, so a fulfilled throw reaches a later rejection callback rather than its own. Its missing-handler propagation and unrecovered-dispatch-skip explanation establish bypassing fulfilled stages while rejection persists."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The prose explains recovery by normal return, propagation through missing handlers and replacement by thrown errors, and explicitly says unrecovered request failure skips dispatch and can reach response rejection handlers. The full then-pair assembly and adopted-promise behavior establish resolving/rejecting returned promises and valid recovery reaching subsequent dispatch."
+        }
+      ]
+    },
+    {
+      "id": "synchronous_errors",
+      "passed": true,
+      "reason": "The direct path and failure boundaries are explained correctly. The complete, literal direct-loop/dispatch quote also establishes the mutation-survival detail that is not separately restated in prose.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The explanation explicitly says fulfilled callbacks run directly and immediately, with each successful configuration return replacing newConfig."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The prose identifies the same interceptor's own rejection callback, Axios as receiver, ignored return value and termination of the request loop. The exact quote supplies the error argument and break after a normal rejection-callback return."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The prose states dispatch uses the last successfully assigned configuration. The complete literal quote passes that same object directly into onFulfilled, assigns only on a successful return, and contains no clone, rollback or reset between catch/break and dispatch. Under JavaScript assignment/reference semantics this quoted mechanism establishes that pre-throw in-place mutations survive, even though the prose does not repeat that consequence."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The answer explicitly explains missing-callback TypeError or a rejection-callback throw escaping before dispatch/response attachment and becoming public async request rejection. The exact direct call also establishes ordinary non-callable failure."
+        }
+      ]
+    },
+    {
+      "id": "response_boundary",
+      "passed": false,
+      "reason": "The required response_boundary finding ID is absent: the answer contains only four findings. The clauses below receive credit where the frozen shared-context rule allows supporting prose/quotes under promise_path or synchronous_errors, but that cannot satisfy the separate requirement to return each of the five IDs exactly once.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "Shared synchronous_errors context explicitly states direct-mode response attachment follows a normal dispatch return and an asynchronously rejected returned promise passes through those handlers. eligibility_order supplies registration order, while promise_path supplies the assembled response stages in Promise mode."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "Shared synchronous_errors prose and its exact dispatch-catch quote explicitly establish the direct-path early Promise.reject return bypassing all response interceptors and yielding public rejection."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "Shared promise_path prose explicitly states response stages are already attached when dispatch executes and that a synchronous dispatch throw becomes a rejection visible to them. It correctly distinguishes that behavior from the direct-path early return."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "Shared promise_path context describes the complete request/dispatch/response then chain, value forwarding/adoption, normal-return recovery, missing/throwing handler rejection propagation and the same-pair rejection limit. It says the public request awaits the final chain and rethrows an unrecovered rejection; the quoted returned final promise establishes fulfillment after successful recovery."
+        }
+      ]
+    }
+  ],
+  "execution_review": {
+    "events_sha256": "908d665628d64f16b4e6ec81f8dabbb9e5f34c621629bf06590967e05bf0cb0d",
+    "passed": true,
+    "reason": "Reviewed all command-event variants and all nine completed commands, item_1 through item_9. They read the explicitly allowed frozen skill, search/read repository files with rg/nl/sed, and invoke only authorized archive-search/archive-source operations through the supplied frozen Python wrapper against the supplied graph/repository. The compound item_8 contains only an rg search followed by a bounded source read. Item_2 contains an empty regex alternative and consequently performs an unnecessarily broad lib search, but it does not cross the evidence boundary or execute source. No command reads private catalogs/rubrics/controls/other trials, writes source, executes repository code/tests/builds, synchronizes/installs/creates an index, uses the web or delegates. Other completed item types are agent messages. Graph recognition/usefulness, retrieval efficiency and citation validity are separate from this boundary-compliance review."
+  }
+}

@@ -1,0 +1,358 @@
+{
+  "scope": "Isolated collection loop cases with manually specified declaration owners; no runtime-dispatch assertion. Missing targets count as gaps, not correct resolution.",
+  "cases": [
+    {
+      "name": "list_parameter",
+      "source": "class Item { void hit() {} } class C { void run(java.util.List<Item> values) { for(Item item : values) item.hit(); } }",
+      "source_sha256": "f59d44d63b1f61e37d2d7041ba24d7c2696a758081e24343d6da6f3114425176",
+      "javac_return_code": 0,
+      "javac_stderr": "",
+      "javap": "Compiled from \"C.java\"\nclass C {\n  C();\n    Code:\n       0: aload_0\n       1: invokespecial #1                  // Method java/lang/Object.\"<init>\":()V\n       4: return\n\n  void run(java.util.List<Item>);\n    Code:\n       0: aload_1\n       1: invokeinterface #7,  1            // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;\n       6: astore_2\n       7: aload_2\n       8: invokeinterface #13,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z\n      13: ifeq          33\n      16: aload_2\n      17: invokeinterface #19,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;\n      22: checkcast     #23                 // class Item\n      25: astore_3\n      26: aload_3\n      27: invokevirtual #25                 // Method Item.hit:()V\n      30: goto          7\n      33: return\n}\n",
+      "calls": [
+        {
+          "expected_static_target": "C.java::Item.hit:method()",
+          "actual": {
+            "source": "C.java::C.run:method(java.util.List<Item>)",
+            "scope_id": "C.java::C.run:method(java.util.List<Item>)::array_loop:79",
+            "kind": "calls",
+            "name": "item.hit",
+            "member": "hit",
+            "receiver": "item",
+            "constructor": false,
+            "argument_count": 0,
+            "argument_types": [],
+            "argument_facts": [],
+            "expected_type": "",
+            "explicit_type_arguments": false,
+            "static_context": false,
+            "path": "C.java",
+            "line": 1,
+            "evidence": "item.hit()",
+            "resolved": true,
+            "reason": "unique syntax candidate; runtime dispatch unverified",
+            "target": "C.java::Item.hit:method()",
+            "confidence": "heuristic"
+          },
+          "resolved_expected_target": true
+        }
+      ]
+    },
+    {
+      "name": "collection_getter",
+      "source": "class Item { void hit() {} } class C { java.util.Collection<Item> items() { return null; } void run() { for(Item item : items()) item.hit(); } }",
+      "source_sha256": "241ec56b14c47420684258721e83ac3800c78f1d68d028dec0a99db5f2db274a",
+      "javac_return_code": 0,
+      "javac_stderr": "",
+      "javap": "Compiled from \"C.java\"\nclass C {\n  C();\n    Code:\n       0: aload_0\n       1: invokespecial #1                  // Method java/lang/Object.\"<init>\":()V\n       4: return\n\n  java.util.Collection<Item> items();\n    Code:\n       0: aconst_null\n       1: areturn\n\n  void run();\n    Code:\n       0: aload_0\n       1: invokevirtual #7                  // Method items:()Ljava/util/Collection;\n       4: invokeinterface #13,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;\n       9: astore_1\n      10: aload_1\n      11: invokeinterface #19,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z\n      16: ifeq          36\n      19: aload_1\n      20: invokeinterface #25,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;\n      25: checkcast     #29                 // class Item\n      28: astore_2\n      29: aload_2\n      30: invokevirtual #31                 // Method Item.hit:()V\n      33: goto          10\n      36: return\n}\n",
+      "calls": [
+        {
+          "expected_static_target": "C.java::Item.hit:method()",
+          "actual": {
+            "source": "C.java::C.run:method()",
+            "scope_id": "C.java::C.run:method()::array_loop:104",
+            "kind": "calls",
+            "name": "item.hit",
+            "member": "hit",
+            "receiver": "item",
+            "constructor": false,
+            "argument_count": 0,
+            "argument_types": [],
+            "argument_facts": [],
+            "expected_type": "",
+            "explicit_type_arguments": false,
+            "static_context": false,
+            "path": "C.java",
+            "line": 1,
+            "evidence": "item.hit()",
+            "resolved": false,
+            "reason": "loop iterable element type unsupported"
+          },
+          "resolved_expected_target": false
+        }
+      ]
+    },
+    {
+      "name": "receiver_getter",
+      "source": "class Item { void hit() {} } class C { java.util.Collection<Item> items() { return null; } void run(C other) { for(Item item : other.items()) item.hit(); } }",
+      "source_sha256": "08119f976bdb1fa147c0fb59b18649cac30e1a486fbb49d05e9a66d597138077",
+      "javac_return_code": 0,
+      "javac_stderr": "",
+      "javap": "Compiled from \"C.java\"\nclass C {\n  C();\n    Code:\n       0: aload_0\n       1: invokespecial #1                  // Method java/lang/Object.\"<init>\":()V\n       4: return\n\n  java.util.Collection<Item> items();\n    Code:\n       0: aconst_null\n       1: areturn\n\n  void run(C);\n    Code:\n       0: aload_1\n       1: invokevirtual #7                  // Method items:()Ljava/util/Collection;\n       4: invokeinterface #13,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;\n       9: astore_2\n      10: aload_2\n      11: invokeinterface #19,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z\n      16: ifeq          36\n      19: aload_2\n      20: invokeinterface #25,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;\n      25: checkcast     #29                 // class Item\n      28: astore_3\n      29: aload_3\n      30: invokevirtual #31                 // Method Item.hit:()V\n      33: goto          10\n      36: return\n}\n",
+      "calls": [
+        {
+          "expected_static_target": "C.java::Item.hit:method()",
+          "actual": {
+            "source": "C.java::C.run:method(C)",
+            "scope_id": "C.java::C.run:method(C)::array_loop:111",
+            "kind": "calls",
+            "name": "item.hit",
+            "member": "hit",
+            "receiver": "item",
+            "constructor": false,
+            "argument_count": 0,
+            "argument_types": [],
+            "argument_facts": [],
+            "expected_type": "",
+            "explicit_type_arguments": false,
+            "static_context": false,
+            "path": "C.java",
+            "line": 1,
+            "evidence": "item.hit()",
+            "resolved": false,
+            "reason": "loop iterable element type unsupported"
+          },
+          "resolved_expected_target": false
+        }
+      ]
+    },
+    {
+      "name": "list_var",
+      "source": "class Item { void hit() {} } class C { void run(java.util.List<Item> values) { for(var item : values) item.hit(); } }",
+      "source_sha256": "713271f72c9e136875b7fdc4762a06d30ba73cdb177381742b36751bfa2078c9",
+      "javac_return_code": 0,
+      "javac_stderr": "",
+      "javap": "Compiled from \"C.java\"\nclass C {\n  C();\n    Code:\n       0: aload_0\n       1: invokespecial #1                  // Method java/lang/Object.\"<init>\":()V\n       4: return\n\n  void run(java.util.List<Item>);\n    Code:\n       0: aload_1\n       1: invokeinterface #7,  1            // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;\n       6: astore_2\n       7: aload_2\n       8: invokeinterface #13,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z\n      13: ifeq          33\n      16: aload_2\n      17: invokeinterface #19,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;\n      22: checkcast     #23                 // class Item\n      25: astore_3\n      26: aload_3\n      27: invokevirtual #25                 // Method Item.hit:()V\n      30: goto          7\n      33: return\n}\n",
+      "calls": [
+        {
+          "expected_static_target": "C.java::Item.hit:method()",
+          "actual": {
+            "source": "C.java::C.run:method(java.util.List<Item>)",
+            "scope_id": "C.java::C.run:method(java.util.List<Item>)::array_loop:79",
+            "kind": "calls",
+            "name": "item.hit",
+            "member": "hit",
+            "receiver": "item",
+            "constructor": false,
+            "argument_count": 0,
+            "argument_types": [],
+            "argument_facts": [],
+            "expected_type": "",
+            "explicit_type_arguments": false,
+            "static_context": false,
+            "path": "C.java",
+            "line": 1,
+            "evidence": "item.hit()",
+            "resolved": true,
+            "reason": "unique syntax candidate; runtime dispatch unverified",
+            "target": "C.java::Item.hit:method()",
+            "confidence": "heuristic"
+          },
+          "resolved_expected_target": true
+        }
+      ]
+    },
+    {
+      "name": "extends_wildcard",
+      "source": "class Item { void hit() {} } class C { void run(java.util.List<? extends Item> values) { for(Item item : values) item.hit(); } }",
+      "source_sha256": "ce6d3ac0ca9ba848c971e08fa0656f4b88fb2445eaa52b6209637ff4fbfd97bf",
+      "javac_return_code": 0,
+      "javac_stderr": "",
+      "javap": "Compiled from \"C.java\"\nclass C {\n  C();\n    Code:\n       0: aload_0\n       1: invokespecial #1                  // Method java/lang/Object.\"<init>\":()V\n       4: return\n\n  void run(java.util.List<? extends Item>);\n    Code:\n       0: aload_1\n       1: invokeinterface #7,  1            // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;\n       6: astore_2\n       7: aload_2\n       8: invokeinterface #13,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z\n      13: ifeq          33\n      16: aload_2\n      17: invokeinterface #19,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;\n      22: checkcast     #23                 // class Item\n      25: astore_3\n      26: aload_3\n      27: invokevirtual #25                 // Method Item.hit:()V\n      30: goto          7\n      33: return\n}\n",
+      "calls": [
+        {
+          "expected_static_target": "C.java::Item.hit:method()",
+          "actual": {
+            "source": "C.java::C.run:method(java.util.List<?extendsItem>)",
+            "scope_id": "C.java::C.run:method(java.util.List<?extendsItem>)::array_loop:89",
+            "kind": "calls",
+            "name": "item.hit",
+            "member": "hit",
+            "receiver": "item",
+            "constructor": false,
+            "argument_count": 0,
+            "argument_types": [],
+            "argument_facts": [],
+            "expected_type": "",
+            "explicit_type_arguments": false,
+            "static_context": false,
+            "path": "C.java",
+            "line": 1,
+            "evidence": "item.hit()",
+            "resolved": false,
+            "reason": "loop iterable element type unsupported"
+          },
+          "resolved_expected_target": false
+        }
+      ]
+    },
+    {
+      "name": "super_wildcard",
+      "source": "class Item { void hit() {} } class C { void run(java.util.List<? super Item> values) { for(Item item : values) item.hit(); } }",
+      "source_sha256": "0d3926587e5739c22c3f47a44998d0db5056113ba89bc84d731b828b04447e38",
+      "javac_return_code": 1,
+      "javac_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/tmpsg8gbrmv/C.java:1: error: incompatible types: CAP#1 cannot be converted to Item\nclass Item { void hit() {} } class C { void run(java.util.List<? super Item> values) { for(Item item : values) item.hit(); } }\n                                                                                                       ^\n  where CAP#1 is a fresh type-variable:\n    CAP#1 extends Object super: Item from capture of ? super Item\n1 error\n",
+      "javap": null,
+      "calls": [
+        {
+          "expected_static_target": null,
+          "actual": {
+            "source": "C.java::C.run:method(java.util.List<?superItem>)",
+            "scope_id": "C.java::C.run:method(java.util.List<?superItem>)::array_loop:87",
+            "kind": "calls",
+            "name": "item.hit",
+            "member": "hit",
+            "receiver": "item",
+            "constructor": false,
+            "argument_count": 0,
+            "argument_types": [],
+            "argument_facts": [],
+            "expected_type": "",
+            "explicit_type_arguments": false,
+            "static_context": false,
+            "path": "C.java",
+            "line": 1,
+            "evidence": "item.hit()",
+            "resolved": false,
+            "reason": "loop iterable element type unsupported"
+          },
+          "resolved_expected_target": false
+        }
+      ]
+    },
+    {
+      "name": "raw_list",
+      "source": "class Item { void hit() {} } class C { void run(java.util.List values) { for(Item item : values) item.hit(); } }",
+      "source_sha256": "914de92758eb5a4dd1e5df87bf01448d63f116a5633eac523fae1daa614e384a",
+      "javac_return_code": 1,
+      "javac_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/tmp0_ncj1jw/C.java:1: error: incompatible types: Object cannot be converted to Item\nclass Item { void hit() {} } class C { void run(java.util.List values) { for(Item item : values) item.hit(); } }\n                                                                                         ^\n1 error\n",
+      "javap": null,
+      "calls": [
+        {
+          "expected_static_target": null,
+          "actual": {
+            "source": "C.java::C.run:method(java.util.List)",
+            "scope_id": "C.java::C.run:method(java.util.List)::array_loop:73",
+            "kind": "calls",
+            "name": "item.hit",
+            "member": "hit",
+            "receiver": "item",
+            "constructor": false,
+            "argument_count": 0,
+            "argument_types": [],
+            "argument_facts": [],
+            "expected_type": "",
+            "explicit_type_arguments": false,
+            "static_context": false,
+            "path": "C.java",
+            "line": 1,
+            "evidence": "item.hit()",
+            "resolved": false,
+            "reason": "loop iterable element type unsupported"
+          },
+          "resolved_expected_target": false
+        }
+      ]
+    },
+    {
+      "name": "same_name_non_iterable",
+      "source": "class Item { void hit() {} } class List<T> {} class C { void run(List<Item> values) { for(Item item : values) item.hit(); } }",
+      "source_sha256": "43a6943956a21b99aa83dcc3d65e9003f76ed92e5bec4ba71fa4b5e2b7f519af",
+      "javac_return_code": 1,
+      "javac_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/tmpeso7eezw/C.java:1: error: for-each not applicable to expression type\nclass Item { void hit() {} } class List<T> {} class C { void run(List<Item> values) { for(Item item : values) item.hit(); } }\n                                                                                                      ^\n  required: array or java.lang.Iterable\n  found:    List<Item>\n1 error\n",
+      "javap": null,
+      "calls": [
+        {
+          "expected_static_target": null,
+          "actual": {
+            "source": "C.java::C.run:method(List<Item>)",
+            "scope_id": "C.java::C.run:method(List<Item>)::array_loop:86",
+            "kind": "calls",
+            "name": "item.hit",
+            "member": "hit",
+            "receiver": "item",
+            "constructor": false,
+            "argument_count": 0,
+            "argument_types": [],
+            "argument_facts": [],
+            "expected_type": "",
+            "explicit_type_arguments": false,
+            "static_context": false,
+            "path": "C.java",
+            "line": 1,
+            "evidence": "item.hit()",
+            "resolved": false,
+            "reason": "loop iterable element type unsupported"
+          },
+          "resolved_expected_target": false
+        }
+      ]
+    },
+    {
+      "name": "custom_iterable",
+      "source": "class Item { void hit() {} } class Values implements Iterable<Item> { public java.util.Iterator<Item> iterator() { return null; } } class C { void run(Values values) { for(Item item : values) item.hit(); } }",
+      "source_sha256": "6a14b389083d9c34b668da91120627734093ac9fae5ed2c62763497fe20278b6",
+      "javac_return_code": 0,
+      "javac_stderr": "",
+      "javap": "Compiled from \"C.java\"\nclass C {\n  C();\n    Code:\n       0: aload_0\n       1: invokespecial #1                  // Method java/lang/Object.\"<init>\":()V\n       4: return\n\n  void run(Values);\n    Code:\n       0: aload_1\n       1: invokevirtual #7                  // Method Values.iterator:()Ljava/util/Iterator;\n       4: astore_2\n       5: aload_2\n       6: invokeinterface #13,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z\n      11: ifeq          31\n      14: aload_2\n      15: invokeinterface #19,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;\n      20: checkcast     #23                 // class Item\n      23: astore_3\n      24: aload_3\n      25: invokevirtual #25                 // Method Item.hit:()V\n      28: goto          5\n      31: return\n}\n",
+      "calls": [
+        {
+          "expected_static_target": "C.java::Item.hit:method()",
+          "actual": {
+            "source": "C.java::C.run:method(Values)",
+            "scope_id": "C.java::C.run:method(Values)::array_loop:168",
+            "kind": "calls",
+            "name": "item.hit",
+            "member": "hit",
+            "receiver": "item",
+            "constructor": false,
+            "argument_count": 0,
+            "argument_types": [],
+            "argument_facts": [],
+            "expected_type": "",
+            "explicit_type_arguments": false,
+            "static_context": false,
+            "path": "C.java",
+            "line": 1,
+            "evidence": "item.hit()",
+            "resolved": false,
+            "reason": "loop iterable element type unsupported"
+          },
+          "resolved_expected_target": false
+        }
+      ]
+    },
+    {
+      "name": "subtype_elements",
+      "source": "class Item { void hit() {} } class Child extends Item {} class C { void run(java.util.List<Child> values) { for(Item item : values) item.hit(); } }",
+      "source_sha256": "0a4868906613b924221769dc1684f31a6413146ad074aaaf8a2a5c61c6b348a8",
+      "javac_return_code": 0,
+      "javac_stderr": "",
+      "javap": "Compiled from \"C.java\"\nclass C {\n  C();\n    Code:\n       0: aload_0\n       1: invokespecial #1                  // Method java/lang/Object.\"<init>\":()V\n       4: return\n\n  void run(java.util.List<Child>);\n    Code:\n       0: aload_1\n       1: invokeinterface #7,  1            // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;\n       6: astore_2\n       7: aload_2\n       8: invokeinterface #13,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z\n      13: ifeq          33\n      16: aload_2\n      17: invokeinterface #19,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;\n      22: checkcast     #23                 // class Item\n      25: astore_3\n      26: aload_3\n      27: invokevirtual #25                 // Method Item.hit:()V\n      30: goto          7\n      33: return\n}\n",
+      "calls": [
+        {
+          "expected_static_target": "C.java::Item.hit:method()",
+          "actual": {
+            "source": "C.java::C.run:method(java.util.List<Child>)",
+            "scope_id": "C.java::C.run:method(java.util.List<Child>)::array_loop:108",
+            "kind": "calls",
+            "name": "item.hit",
+            "member": "hit",
+            "receiver": "item",
+            "constructor": false,
+            "argument_count": 0,
+            "argument_types": [],
+            "argument_facts": [],
+            "expected_type": "",
+            "explicit_type_arguments": false,
+            "static_context": false,
+            "path": "C.java",
+            "line": 1,
+            "evidence": "item.hit()",
+            "resolved": false,
+            "reason": "loop element assignment unsupported or incompatible"
+          },
+          "resolved_expected_target": false
+        }
+      ]
+    }
+  ],
+  "compiler": "javac 17.0.20.1",
+  "python": "3.11.16 (main, Aug 14 2026, 15:24:25) [Clang 22.1.3 ]",
+  "analyzer_sha256": "8496c88fd19151071600190ebc5159c94cbe2e127811cf3eeb424a85534af532",
+  "versions": {
+    "tree-sitter": "0.26.0",
+    "tree-sitter-java": "0.23.5+columbus.1"
+  },
+  "expected_valid_calls": 7,
+  "resolved_expected_calls": 2
+}

@@ -1,0 +1,34 @@
+{
+  "overload-routing": [
+    "There are eleven declared fromJson overloads: String, Reader and JsonElement each have Class, Type and TypeToken forms; JsonReader has Type and TypeToken forms. There is no declared JsonReader/Class overload, but a Class argument can still select the JsonReader/Type overload because Class implements Type.",
+    "The Class and Type forms delegate to the same input family's TypeToken form using TypeToken.get with the supplied target. The Type forms use an unchecked result cast; the TypeToken parameter carries the target typing into the common implementation. Do not invent an intermediate Class-to-Type fromJson hop where this source directly constructs a TypeToken.",
+    "For non-null inputs, String/TypeToken constructs a StringReader and calls Reader/TypeToken. Reader/TypeToken constructs a configured JsonReader with newJsonReader and calls JsonReader/TypeToken. JsonElement/TypeToken constructs a JsonTreeReader and calls JsonReader/TypeToken. JsonReader/Type also delegates to JsonReader/TypeToken. These routes converge on the same core adapter-reading implementation."
+  ],
+  "null-shortcuts": [
+    "String/TypeToken returns Java null immediately for a Java-null String, before constructing StringReader or reaching adapter lookup. With the assumed valid target arguments, the String Class and Type routes inherit this result.",
+    "JsonElement/TypeToken returns Java null immediately for a Java-null tree, before constructing JsonTreeReader or reaching adapter lookup. JsonNull.INSTANCE is a non-null tree value and therefore follows the adapter-reading route; its converted result is not established by the Java-null shortcut.",
+    "The task assumes valid target arguments. Class/Type overloads construct TypeToken before reaching these input guards, so the shortcut is not an unconditional guarantee for invalid or null target arguments. This is a scope/contradiction boundary; the answer need not analyze out-of-scope invalid-target exceptions."
+  ],
+  "full-consumption": [
+    "After a successful core return, Reader/TypeToken invokes assertFullConsumption and then returns the parsed result. String routes inherit this check through Reader. A parse exception prevents reaching the helper.",
+    "The helper calls reader.peek only when the returned Java object is non-null. Any null adapter result skips the completion check, not only a result caused by an empty document or JSON null; do not promise trailing-input rejection for all String/Reader inputs.",
+    "For a non-null result, the helper requires END_DOCUMENT; another token causes JsonSyntaxException. MalformedJsonException thrown by this helper's peek is wrapped in JsonSyntaxException, while other IOException is wrapped in JsonIOException, preserving the original exception as cause.",
+    "Direct JsonReader entry points perform an adapter read without this full-consumption helper; the tree route also calls the core directly. The source permits consuming the next value without validating the rest of a stream, but arbitrary custom adapters control their consumption. Do not claim the core enforces exactly one consumed value or guarantees that every custom adapter ignores trailing input."
+  ],
+  "reader-strictness": [
+    "newJsonReader creates a JsonReader and assigns the Gson instance's explicit strictness if present, otherwise LEGACY_STRICT. That initial setting is distinct from the core's temporary compatibility adjustment.",
+    "The core captures the existing reader strictness. Explicit Gson strictness overrides that reader setting, including an existing STRICT setting. With no explicit Gson setting, only LEGACY_STRICT is changed to LENIENT; existing LENIENT and STRICT remain as they were.",
+    "The finally block restores the captured reader strictness on normal return and when the core propagates an exception. On the Reader route this restoration occurs before assertFullConsumption, so its trailing peek uses the restored setting rather than necessarily the temporary parsing setting."
+  ],
+  "adapter-result-validation": [
+    "The core first calls reader.peek. Only after that returns does it clear the isEmpty flag, obtain getAdapter(typeOfT), and call that adapter's read(reader). Adapter lookup therefore does not precede the initial peek.",
+    "After reading, the core wraps the target TypeToken's raw class with Primitives.wrap and checks a non-null result with isInstance. Primitive targets are checked against their boxed classes; non-primitive classes remain unchanged. A null adapter result passes this check and is returned.",
+    "An incompatible non-null result causes ClassCastException, which this core does not translate into JsonSyntaxException. This is raw-class assignability validation, allowing appropriate subtype instances; it is neither exact runtime-class equality nor validation of generic type arguments or collection contents."
+  ],
+  "eof-and-errors": [
+    "isEmpty starts true and becomes false only after the initial peek returns. An EOFException while it is still true returns null for compatibility with empty documents. A successful peek returning END_DOCUMENT is not this exception branch and does not itself cause an immediate null return.",
+    "An EOFException after the initial peek, IllegalStateException, or other IOException within the core try block is wrapped in JsonSyntaxException with the original cause. This includes ordinary read I/O failures; do not map all parse I/O to JsonIOException just because the declared throws/Javadoc lists it.",
+    "An AssertionError within the core try block is replaced with an AssertionError whose message includes the Gson build version and original message, retaining the original AssertionError as its cause. Do not require a hard-coded version string or complete exception-message transcription.",
+    "There is no catch-all for Exception, RuntimeException, Error or Throwable. Unmatched failures, including the result-validation ClassCastException, propagate while finally restores strictness. These mappings describe the core try block; the later completion helper has its separate malformed-input versus other-I/O mapping."
+  ]
+}

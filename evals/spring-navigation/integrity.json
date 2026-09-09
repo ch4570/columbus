@@ -1,0 +1,14 @@
+{
+  "database_sha256": "e77e4ff632e1deee7392b214646e1f4491c61269f414b7ff275d13674a5b9309",
+  "database_bytes": 96677888,
+  "fixture_sha256": "68572527bfad750c2ab2c55dcbab1324568a4584d0d122cc3a4dfac8c139bd0c",
+  "observation": "/tmp/columbus-spring-navigation-frozen",
+  "model": "gpt-5.6-sol",
+  "effort": "xhigh",
+  "timeout_seconds": 600,
+  "order": [
+    "baseline",
+    "columbus"
+  ],
+  "repeats": 1
+}

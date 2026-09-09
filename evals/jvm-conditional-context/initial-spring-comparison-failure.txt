@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/Users/rex/Desktop/columbus/evals/jvm-class-tokens/compare_spring.py", line 43, in <module>
+    assert all(syntax(old[1][path])==syntax(new[1][path]) for path in old[1])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

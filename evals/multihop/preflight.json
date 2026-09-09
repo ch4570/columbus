@@ -1,0 +1,114 @@
+{
+  "source_unchanged": true,
+  "engine_unchanged": true,
+  "index_sha256": "6efdfbae4d66acbf41407392552fd743424c9a2fad1163c53a93a17f0e63e66f",
+  "revision": "cb985190444de8cd6894",
+  "matched": [
+    {
+      "id": "RepositoryIndex._source",
+      "hops": 2,
+      "edges": [
+        {
+          "source": "skills/columbus/scripts/columbus/index.py::RepositoryIndex._source:method",
+          "target": "skills/columbus/scripts/columbus/sync_state.py::read_stable:function",
+          "kind": "calls",
+          "confidence": "resolved_static",
+          "evidence": "read_stable",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "line": 441
+        },
+        {
+          "source": "skills/columbus/scripts/columbus/sync_state.py::read_stable:function",
+          "target": "skills/columbus/scripts/columbus/discovery.py::safe_source:function",
+          "kind": "calls",
+          "confidence": "resolved_static",
+          "evidence": "safe_source",
+          "path": "skills/columbus/scripts/columbus/sync_state.py",
+          "line": 73
+        }
+      ]
+    },
+    {
+      "id": "RepositoryIndex.refresh",
+      "hops": 2,
+      "edges": [
+        {
+          "source": "skills/columbus/scripts/columbus/index.py::RepositoryIndex.refresh:method",
+          "target": "skills/columbus/scripts/columbus/sync_state.py::read_stable:function",
+          "kind": "calls",
+          "confidence": "resolved_static",
+          "evidence": "read_stable",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "line": 139
+        },
+        {
+          "source": "skills/columbus/scripts/columbus/sync_state.py::read_stable:function",
+          "target": "skills/columbus/scripts/columbus/discovery.py::safe_source:function",
+          "kind": "calls",
+          "confidence": "resolved_static",
+          "evidence": "safe_source",
+          "path": "skills/columbus/scripts/columbus/sync_state.py",
+          "line": 73
+        }
+      ]
+    },
+    {
+      "id": "RepositoryIndex.status",
+      "hops": 2,
+      "edges": [
+        {
+          "source": "skills/columbus/scripts/columbus/index.py::RepositoryIndex.status:method",
+          "target": "skills/columbus/scripts/columbus/sync_state.py::read_stable:function",
+          "kind": "calls",
+          "confidence": "resolved_static",
+          "evidence": "read_stable",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "line": 317
+        },
+        {
+          "source": "skills/columbus/scripts/columbus/sync_state.py::read_stable:function",
+          "target": "skills/columbus/scripts/columbus/discovery.py::safe_source:function",
+          "kind": "calls",
+          "confidence": "resolved_static",
+          "evidence": "safe_source",
+          "path": "skills/columbus/scripts/columbus/sync_state.py",
+          "line": 73
+        }
+      ]
+    },
+    {
+      "id": "RepositoryIndex.symbol",
+      "hops": 3,
+      "edges": [
+        {
+          "source": "skills/columbus/scripts/columbus/index.py::RepositoryIndex.symbol:method",
+          "target": "skills/columbus/scripts/columbus/index.py::RepositoryIndex._source:method",
+          "kind": "candidate_calls",
+          "confidence": "retrieval_only",
+          "evidence": "lexical instance-receiver member; runtime dispatch and external mutation unverified",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "line": 524
+        },
+        {
+          "source": "skills/columbus/scripts/columbus/index.py::RepositoryIndex._source:method",
+          "target": "skills/columbus/scripts/columbus/sync_state.py::read_stable:function",
+          "kind": "calls",
+          "confidence": "resolved_static",
+          "evidence": "read_stable",
+          "path": "skills/columbus/scripts/columbus/index.py",
+          "line": 441
+        },
+        {
+          "source": "skills/columbus/scripts/columbus/sync_state.py::read_stable:function",
+          "target": "skills/columbus/scripts/columbus/discovery.py::safe_source:function",
+          "kind": "calls",
+          "confidence": "resolved_static",
+          "evidence": "safe_source",
+          "path": "skills/columbus/scripts/columbus/sync_state.py",
+          "line": 73
+        }
+      ]
+    }
+  ],
+  "truncated": false
+}

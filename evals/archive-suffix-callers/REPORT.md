@@ -1,0 +1,9 @@
+# Qualified caller lookup
+
+The completed Requests observation made three failed archive-callers queries after successful searches using requests.sessions.Session.send, requests.sessions.SessionRedirectMixin.resolve_redirects and requests.adapters.HTTPAdapter.send. The stored modules include src; search accepted qualified suffixes, while callers accepted exact names only.
+
+Callers now falls back to a unique, case-sensitive qualified suffix at a dot boundary only when no exact name matches. Exact IDs retain priority, then exact names, then suffixes. Ambiguous names fail across the entire archive before path filtering; substrings and case mismatches remain rejected. No graph edges, archive records or JSON/text packet formats change. Two validated passes remain sufficient for exporter order; arbitrary valid record order retains its three-pass fallback.
+
+The added regression failed before implementation. Gzip and XZ checks cover unique resolution, ambiguity, boundary/case rejection, path filters, unordered nodes, exact-ID and exact-name precedence. The fixture uses external rather than vendor because vendor is excluded from indexing. Full engine suites passed 246 tests in both Java environments; root tests passed 53. The final extra exact-name assertion passed in the 17-test archive suite; wheel/ZIP construction and installation verification then passed.
+
+Replaying all three failed Requests identifiers now produces exactly the same packets as their explicit IDs. Those targets still have no resolved incoming calls; this change does not infer dynamic dispatch or supply missing source context. No model was called, and no measured token improvement is claimed. The completed Requests inputs and results remain unchanged. A remaining exploration need is bounded source access for a declaration even when its graph has no resolved adjacent calls.

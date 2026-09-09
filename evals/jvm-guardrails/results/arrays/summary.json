@@ -1,0 +1,557 @@
+{
+  "baseline_commit": "9d190fa",
+  "compiler": "javac 17.0.20.1",
+  "analyzer_sha256": "ea0e0f858d9a93294e1091904552611e9af29fca3fd76154b54d80afae7f724f",
+  "cases": [
+    {
+      "source": "class C { void hit(int[] value) {} void run() { hit(1); } }",
+      "source_sha256": "af0bf630fe2d833e39f597d13e186c5ec51a6e64e5262a3852269ca5b124ba7e",
+      "expected_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "C.java:1: error: incompatible types: int cannot be converted to int[]\nclass C { void hit(int[] value) {} void run() { hit(1); } }\n                                                    ^\nNote: Some messages have been simplified; recompile with -Xdiags:verbose to get full output\n1 error\n",
+      "before": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(int[])",
+        "confidence": "heuristic"
+      },
+      "after": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": false,
+        "reason": "literal argument incompatible with array parameter"
+      }
+    },
+    {
+      "source": "class C { void hit(String[] value) {} void run() { hit(\"x\"); } }",
+      "source_sha256": "2b313b33423c3ce2a68087d5e9a09bb0ea9c66cec0a703c4ed10f0c0d05aa674",
+      "expected_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "C.java:1: error: incompatible types: String cannot be converted to String[]\nclass C { void hit(String[] value) {} void run() { hit(\"x\"); } }\n                                                       ^\nNote: Some messages have been simplified; recompile with -Xdiags:verbose to get full output\n1 error\n",
+      "before": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(\"x\")",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(String[])",
+        "confidence": "heuristic"
+      },
+      "after": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(\"x\")",
+        "resolved": false,
+        "reason": "literal argument incompatible with array parameter"
+      }
+    },
+    {
+      "source": "class C { void hit(Object[] value) {} void run() { hit(true); } }",
+      "source_sha256": "75354f80b3902783ccfd03e0a63914df415350b0214a16380090d4a214d03ddb",
+      "expected_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "C.java:1: error: incompatible types: boolean cannot be converted to Object[]\nclass C { void hit(Object[] value) {} void run() { hit(true); } }\n                                                       ^\nNote: Some messages have been simplified; recompile with -Xdiags:verbose to get full output\n1 error\n",
+      "before": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "boolean"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(true)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(Object[])",
+        "confidence": "heuristic"
+      },
+      "after": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "boolean"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(true)",
+        "resolved": false,
+        "reason": "literal argument incompatible with array parameter"
+      }
+    },
+    {
+      "source": "class C { void hit(int[]... value) {} void run() { hit(1); } }",
+      "source_sha256": "588e64d1314be5e0271e530aaa09e40baed01555ae715cb712d5804a8de0eaca",
+      "expected_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "C.java:1: error: method hit in class C cannot be applied to given types;\nclass C { void hit(int[]... value) {} void run() { hit(1); } }\n                                                   ^\n  required: int[][]\n  found:    int\n  reason: varargs mismatch; int cannot be converted to int[]\n1 error\n",
+      "before": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(int[]...)",
+        "confidence": "heuristic"
+      },
+      "after": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": false,
+        "reason": "literal argument incompatible with array parameter"
+      }
+    },
+    {
+      "source": "class C { void hit(int[][] value) {} void run() { hit('x'); } }",
+      "source_sha256": "5f748fcbb464626132184d675e7c143cbcc238a90623838fd23e44c5e8a7d9f3",
+      "expected_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "C.java:1: error: incompatible types: char cannot be converted to int[][]\nclass C { void hit(int[][] value) {} void run() { hit('x'); } }\n                                                      ^\nNote: Some messages have been simplified; recompile with -Xdiags:verbose to get full output\n1 error\n",
+      "before": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "char"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit('x')",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(int[][])",
+        "confidence": "heuristic"
+      },
+      "after": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "char"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit('x')",
+        "resolved": false,
+        "reason": "literal argument incompatible with array parameter"
+      }
+    },
+    {
+      "source": "class C { void hit(Object[] value) {} void run() { hit(1.0); } }",
+      "source_sha256": "c4f11b871cd95aa8b9e107b07bf3134bf843c8e1d11581b02c4540106c0ebe05",
+      "expected_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "C.java:1: error: incompatible types: double cannot be converted to Object[]\nclass C { void hit(Object[] value) {} void run() { hit(1.0); } }\n                                                       ^\nNote: Some messages have been simplified; recompile with -Xdiags:verbose to get full output\n1 error\n",
+      "before": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "double"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1.0)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(Object[])",
+        "confidence": "heuristic"
+      },
+      "after": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "double"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1.0)",
+        "resolved": false,
+        "reason": "literal argument incompatible with array parameter"
+      }
+    },
+    {
+      "source": "class C { void hit(int[] value) {} void run() { hit(null); } }",
+      "source_sha256": "93bcd6d01b96f633258cad2c650d0d0c2eb7f483bb5cdbb138325fecb447cf14",
+      "expected_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "before": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "null"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(null)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(int[])",
+        "confidence": "heuristic"
+      },
+      "after": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "null"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(null)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(int[])",
+        "confidence": "heuristic"
+      }
+    },
+    {
+      "source": "class C { void hit(String[] value) {} void run() { hit(null); } }",
+      "source_sha256": "fb0c5ed28da8d2006be744f2d777036358dc54649d654dcc693d4e1260e4dca5",
+      "expected_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "before": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "null"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(null)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(String[])",
+        "confidence": "heuristic"
+      },
+      "after": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "null"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(null)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(String[])",
+        "confidence": "heuristic"
+      }
+    },
+    {
+      "source": "class C { void hit(int[]... value) {} void run() { hit(); } }",
+      "source_sha256": "770c387f3c6ac40ba1eeaccd70d1b8ce091bf1240e5c0200d6e58609e77f21ba",
+      "expected_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "before": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit()",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(int[]...)",
+        "confidence": "heuristic"
+      },
+      "after": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit()",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(int[]...)",
+        "confidence": "heuristic"
+      }
+    },
+    {
+      "source": "class C { void hit(int[]... value) {} void run() { hit(null, null); } }",
+      "source_sha256": "b31d51bb5b556a6122a33d6b9b9a7cbc23f811b66b1c8a3c39b9b7b9243df5b1",
+      "expected_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "before": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          "null",
+          "null"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(null, null)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(int[]...)",
+        "confidence": "heuristic"
+      },
+      "after": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          "null",
+          "null"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(null, null)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(int[]...)",
+        "confidence": "heuristic"
+      }
+    },
+    {
+      "source": "class C { void hit(Object... value) {} void run() { hit(1); } }",
+      "source_sha256": "8c7466612530be2cb1b03edf3ffb5a6bb6df6234cb11995d9a6e307605718f6b",
+      "expected_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "before": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(Object...)",
+        "confidence": "heuristic"
+      },
+      "after": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(Object...)",
+        "confidence": "heuristic"
+      }
+    },
+    {
+      "source": "class C { void hit(int[]... value) {} void run() { hit((int[]) null); } }",
+      "source_sha256": "e60e8b936d505263844e4a25fb87545cbb7bcc8ed7cac4dc5b1c49856c19c147",
+      "expected_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "before": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          null
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit((int[]) null)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(int[]...)",
+        "confidence": "heuristic"
+      },
+      "after": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          null
+        ],
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit((int[]) null)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(int[]...)",
+        "confidence": "heuristic"
+      }
+    }
+  ]
+}

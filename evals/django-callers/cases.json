@@ -1,0 +1,111 @@
+{
+  "schema": "columbus.exploration-cases/v1",
+  "cases": [
+    {
+      "id": "django-iri-callers",
+      "mode": "caller-enumeration",
+      "question": "Find every production Python function or method under django/ that directly calls django.utils.encoding.iri_to_uri in this checkout. Explain what each caller converts and why, including relevant branch conditions and all converted fields when a caller invokes it more than once. Exclude tests and transitive callers. Distinguish source-level direct calls from runtime reachability.",
+      "findings": [
+        {
+          "id": "FlatPage.get_absolute_url",
+          "path": "django/contrib/flatpages/models.py",
+          "marker": "iri_to_uri(",
+          "call_lines": [
+            49
+          ]
+        },
+        {
+          "id": "add_domain",
+          "path": "django/contrib/syndication/views.py",
+          "marker": "iri_to_uri(",
+          "call_lines": [
+            21
+          ]
+        },
+        {
+          "id": "HttpRequest._get_full_path",
+          "path": "django/http/request.py",
+          "marker": "iri_to_uri(",
+          "call_lines": [
+            226
+          ]
+        },
+        {
+          "id": "HttpRequest.build_absolute_uri",
+          "path": "django/http/request.py",
+          "marker": "iri_to_uri(",
+          "call_lines": [
+            293
+          ]
+        },
+        {
+          "id": "HttpResponseRedirectBase.__init__",
+          "path": "django/http/response.py",
+          "marker": "iri_to_uri(",
+          "call_lines": [
+            638
+          ]
+        },
+        {
+          "id": "iriencode",
+          "path": "django/template/defaultfilters.py",
+          "marker": "iri_to_uri(",
+          "call_lines": [
+            226
+          ]
+        },
+        {
+          "id": "PrefixNode.handle_simple",
+          "path": "django/templatetags/static.py",
+          "marker": "iri_to_uri(",
+          "call_lines": [
+            48
+          ]
+        },
+        {
+          "id": "Stylesheet.url",
+          "path": "django/utils/feedgenerator.py",
+          "marker": "iri_to_uri(",
+          "call_lines": [
+            89
+          ]
+        },
+        {
+          "id": "Stylesheet.__str__",
+          "path": "django/utils/feedgenerator.py",
+          "marker": "iri_to_uri(",
+          "call_lines": [
+            99
+          ]
+        },
+        {
+          "id": "SyndicationFeed.__init__",
+          "path": "django/utils/feedgenerator.py",
+          "marker": "iri_to_uri(",
+          "call_lines": [
+            147,
+            152,
+            155
+          ]
+        },
+        {
+          "id": "SyndicationFeed.add_item",
+          "path": "django/utils/feedgenerator.py",
+          "marker": "iri_to_uri(",
+          "call_lines": [
+            196,
+            200
+          ]
+        },
+        {
+          "id": "Enclosure.__init__",
+          "path": "django/utils/feedgenerator.py",
+          "marker": "iri_to_uri(",
+          "call_lines": [
+            290
+          ]
+        }
+      ]
+    }
+  ]
+}

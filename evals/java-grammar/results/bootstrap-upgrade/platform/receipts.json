@@ -1,0 +1,302 @@
+[
+  {
+    "platform": "java-candidate-macos-latest-py3.11",
+    "observation": {
+      "source_unchanged": true,
+      "runs": [
+        {
+          "version": "0.23.5",
+          "partial": true,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": null
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "75e46f1c0210acbb55ca06136eadff90ef73de7cf26beda91e21cac0fc754e92",
+          "install_stderr_sha256": "e83027fdad71dd5c64c8a1e0f5936d39c5fd7054cb00da95a3ad89cd911a8158"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "ed8ea730425464d34ac31618cd11428dd07fe1a7753b35abf39304708342c78d"
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "bc4174daaf58d04e1399e992216154181ae554a292aab5c09faa22c7b08697fd",
+          "install_stderr_sha256": "64484c2452ea0d8ba80d18d30c95a21a92298734fb4e675a1db78362d375ef40"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "ed8ea730425464d34ac31618cd11428dd07fe1a7753b35abf39304708342c78d"
+          },
+          "pip_ran": false,
+          "install_stdout_sha256": "2a7e217ba1c8e72e6fee27536272b0a5efbb5d426a74ccd93d3d1410afa1e28b",
+          "install_stderr_sha256": "8da630a5c3d3fd07867c947c0f94f2c1d0d4c2e4cfb1c66a8b4309b9fafaf6d3"
+        }
+      ]
+    }
+  },
+  {
+    "platform": "java-candidate-macos-latest-py3.14",
+    "observation": {
+      "source_unchanged": true,
+      "runs": [
+        {
+          "version": "0.23.5",
+          "partial": true,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": null
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "4eb571113ca2bcac3bbc10930038c113969254534966d63ec70c405117cd91e5",
+          "install_stderr_sha256": "e83027fdad71dd5c64c8a1e0f5936d39c5fd7054cb00da95a3ad89cd911a8158"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "82c701a2b2c70c4c2d08776fe82d8791be088416d413278bef1fdc91cc6e8465"
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "ab0c533a083fea90e24fd462ba97cbc479edbf2a6edb16612b30a8d28bd7fe62",
+          "install_stderr_sha256": "64484c2452ea0d8ba80d18d30c95a21a92298734fb4e675a1db78362d375ef40"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "82c701a2b2c70c4c2d08776fe82d8791be088416d413278bef1fdc91cc6e8465"
+          },
+          "pip_ran": false,
+          "install_stdout_sha256": "6afa7d87c38f08bc8975eabec86e1121349c12bc17ee44ce566eabc35ef44f41",
+          "install_stderr_sha256": "8da630a5c3d3fd07867c947c0f94f2c1d0d4c2e4cfb1c66a8b4309b9fafaf6d3"
+        }
+      ]
+    }
+  },
+  {
+    "platform": "java-candidate-ubuntu-latest-py3.11",
+    "observation": {
+      "source_unchanged": true,
+      "runs": [
+        {
+          "version": "0.23.5",
+          "partial": true,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": null
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "9257e8a178c1a0209bc84d3a38eb983dff93e4f6c2e2a35cceaffccdf1ebb3f8",
+          "install_stderr_sha256": "e83027fdad71dd5c64c8a1e0f5936d39c5fd7054cb00da95a3ad89cd911a8158"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "10b6d19f1328a5b2b61886ca1ab6f6a9f6d86148cc6b8492465dd6bfa187a25f"
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "205541241e8a68d0ec4798ed8786b7c2d0598a691acfe6c8cb3cd6c9ffa9c619",
+          "install_stderr_sha256": "64484c2452ea0d8ba80d18d30c95a21a92298734fb4e675a1db78362d375ef40"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "10b6d19f1328a5b2b61886ca1ab6f6a9f6d86148cc6b8492465dd6bfa187a25f"
+          },
+          "pip_ran": false,
+          "install_stdout_sha256": "41931166969e7665130f2c04f05d0ce64dacb44d613d7a340585781d50a077de",
+          "install_stderr_sha256": "8da630a5c3d3fd07867c947c0f94f2c1d0d4c2e4cfb1c66a8b4309b9fafaf6d3"
+        }
+      ]
+    }
+  },
+  {
+    "platform": "java-candidate-ubuntu-latest-py3.14",
+    "observation": {
+      "source_unchanged": true,
+      "runs": [
+        {
+          "version": "0.23.5",
+          "partial": true,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": null
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "66aac512d506729eb1386277fbbdcc0add5aef80ab67ad7acee7b34a1a536a4f",
+          "install_stderr_sha256": "e83027fdad71dd5c64c8a1e0f5936d39c5fd7054cb00da95a3ad89cd911a8158"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "8d8efc528ae93aedbb565c5601a1d4d64ab96195cea6df6a4abb3611ecaf60f0"
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "9a2cc57e22d4034e3dc55c63623cb123f9cdc230582f732458dd5cecd31cec51",
+          "install_stderr_sha256": "64484c2452ea0d8ba80d18d30c95a21a92298734fb4e675a1db78362d375ef40"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "8d8efc528ae93aedbb565c5601a1d4d64ab96195cea6df6a4abb3611ecaf60f0"
+          },
+          "pip_ran": false,
+          "install_stdout_sha256": "576fb90c60888cdace30aaf3bfa11133972a1430b91cc169acc0ae8c73945621",
+          "install_stderr_sha256": "8da630a5c3d3fd07867c947c0f94f2c1d0d4c2e4cfb1c66a8b4309b9fafaf6d3"
+        }
+      ]
+    }
+  },
+  {
+    "platform": "java-candidate-windows-latest-py3.11",
+    "observation": {
+      "source_unchanged": true,
+      "runs": [
+        {
+          "version": "0.23.5",
+          "partial": true,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": null
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "65d1e289854d0202f6fda8641bfdfecb97c434b33a8ac70e7933bbcd78474249",
+          "install_stderr_sha256": "e83027fdad71dd5c64c8a1e0f5936d39c5fd7054cb00da95a3ad89cd911a8158"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "ad427bfe86d7b7378dcf0556e363c9b1dd5f989a19d3b5da272f5aea089a8610"
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "4b1b74424cb3bb8575fbfecfaaf4e47709b0d6af91854093cd29cc253d8a1def",
+          "install_stderr_sha256": "64484c2452ea0d8ba80d18d30c95a21a92298734fb4e675a1db78362d375ef40"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "ad427bfe86d7b7378dcf0556e363c9b1dd5f989a19d3b5da272f5aea089a8610"
+          },
+          "pip_ran": false,
+          "install_stdout_sha256": "5e0555b66ef075d7f05de3999afc9e95c746e96858d20e1e42e44c06e6ebad76",
+          "install_stderr_sha256": "8da630a5c3d3fd07867c947c0f94f2c1d0d4c2e4cfb1c66a8b4309b9fafaf6d3"
+        }
+      ]
+    }
+  },
+  {
+    "platform": "java-candidate-windows-latest-py3.14",
+    "observation": {
+      "source_unchanged": true,
+      "runs": [
+        {
+          "version": "0.23.5",
+          "partial": true,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": null
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "000d449137ae85ae2f59c04c02984151a6df5f2812da73f6b1fcc9f11c538be3",
+          "install_stderr_sha256": "e83027fdad71dd5c64c8a1e0f5936d39c5fd7054cb00da95a3ad89cd911a8158"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "6a3d76bbb33c9462b524a2b662a430b2c98c2c262cd9f7ba4690930053493495"
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "cc78d5226697bdbcf06a13ccc7e5b553e071dab2ca605fc70aae17289c752b9a",
+          "install_stderr_sha256": "64484c2452ea0d8ba80d18d30c95a21a92298734fb4e675a1db78362d375ef40"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "6a3d76bbb33c9462b524a2b662a430b2c98c2c262cd9f7ba4690930053493495"
+          },
+          "pip_ran": false,
+          "install_stdout_sha256": "08a3116501649809606c0cd09af8d42d45c1d591fe85047abb6813e5feb4b33e",
+          "install_stderr_sha256": "8da630a5c3d3fd07867c947c0f94f2c1d0d4c2e4cfb1c66a8b4309b9fafaf6d3"
+        }
+      ]
+    }
+  }
+]

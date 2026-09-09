@@ -1,0 +1,132 @@
+{
+  "schema": "columbus.exploration-cases/v1",
+  "cases": [
+    {
+      "id": "archive-capfirst",
+      "mode": "caller-enumeration",
+      "question": "Find every Python function or method under django/ containing a syntactic direct call to django.utils.text.capfirst in this checkout. Include nested functions as their own lexical callers. Explain what each caller capitalizes and the relevant conditions or early returns, covering every direct call when a caller has several. Include library code under django/test/; exclude the top-level tests/ directory. Resolve the target by its definition and imports, not merely a matching name. Do not list higher-order-only or transitive callers. Distinguish source-level calls from runtime reachability.",
+      "findings": [
+        {
+          "id": "ModelAdmin._get_action_description",
+          "path": "django/contrib/admin/options.py",
+          "marker": "capfirst(",
+          "call_lines": [
+            1043
+          ]
+        },
+        {
+          "id": "ModelAdmin.history_view",
+          "path": "django/contrib/admin/options.py",
+          "marker": "capfirst(",
+          "call_lines": [
+            2317
+          ]
+        },
+        {
+          "id": "AdminSite._build_app_dict",
+          "path": "django/contrib/admin/sites.py",
+          "marker": "capfirst(",
+          "call_lines": [
+            502
+          ]
+        },
+        {
+          "id": "date_hierarchy",
+          "path": "django/contrib/admin/templatetags/admin_list.py",
+          "marker": "capfirst(",
+          "call_lines": [
+            413,
+            416,
+            436,
+            451
+          ]
+        },
+        {
+          "id": "get_deleted_objects.format_callback",
+          "path": "django/contrib/admin/utils.py",
+          "marker": "capfirst(",
+          "call_lines": [
+            145,
+            165
+          ]
+        },
+        {
+          "id": "AuthenticationForm.__init__",
+          "path": "django/contrib/auth/forms.py",
+          "marker": "capfirst(",
+          "call_lines": [
+            358
+          ]
+        },
+        {
+          "id": "Command.handle",
+          "path": "django/contrib/auth/management/commands/createsuperuser.py",
+          "marker": "capfirst(",
+          "call_lines": [
+            121
+          ]
+        },
+        {
+          "id": "Command._get_input_message",
+          "path": "django/contrib/auth/management/commands/createsuperuser.py",
+          "marker": "capfirst(",
+          "call_lines": [
+            274
+          ]
+        },
+        {
+          "id": "Command._validate_username",
+          "path": "django/contrib/auth/management/commands/createsuperuser.py",
+          "marker": "capfirst(",
+          "call_lines": [
+            313
+          ]
+        },
+        {
+          "id": "Model.date_error_message",
+          "path": "django/db/models/base.py",
+          "marker": "capfirst(",
+          "call_lines": [
+            1566,
+            1569,
+            1571
+          ]
+        },
+        {
+          "id": "Model.unique_error_message",
+          "path": "django/db/models/base.py",
+          "marker": "capfirst(",
+          "call_lines": [
+            1581,
+            1588,
+            1598
+          ]
+        },
+        {
+          "id": "Field.formfield",
+          "path": "django/db/models/fields/__init__.py",
+          "marker": "capfirst(",
+          "call_lines": [
+            1105
+          ]
+        },
+        {
+          "id": "BaseInlineFormSet.add_fields",
+          "path": "django/forms/models.py",
+          "marker": "capfirst(",
+          "call_lines": [
+            1170
+          ]
+        },
+        {
+          "id": "SeleniumTestCaseBase.__new__",
+          "path": "django/test/selenium.py",
+          "marker": "capfirst(",
+          "call_lines": [
+            54
+          ]
+        }
+      ]
+    }
+  ]
+}

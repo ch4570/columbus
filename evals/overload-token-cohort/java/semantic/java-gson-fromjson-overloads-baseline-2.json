@@ -1,0 +1,153 @@
+{
+  "answer_sha256": "9b1c2328851ff94709de27734f5ad3fd58d927ecc0e93c529e10403f9509f66f",
+  "rubric_sha256": "a3ec0794ccc98ecd0dd6e1078f16346bc8655a4acdb8eafdaad2f57ffe0bfaf1",
+  "findings": [
+    {
+      "id": "overload-routing",
+      "passed": true,
+      "reason": "The answer enumerates all eleven overloads, correctly routes Class/Type arguments through TypeToken, distinguishes the missing JsonReader/Class declaration from valid Class argument use, and traces every wrapper into the shared core.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The explanation explicitly lists three String, three Reader, two JsonReader and three JsonElement forms. It states no JsonReader/Class overload exists and correctly explains that Foo.class selects JsonReader/Type because Class implements Type."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The prose explicitly states Class forms call TypeToken.get(classOfT) directly without Class.cast and Type forms use TypeToken.get(typeOfT) plus an unchecked T return cast. It correctly distinguishes the Type method's independent return typing from Class/TypeToken-parameterized forms and invents no intermediate Class-to-Type fromJson hop."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The answer traces non-null String through StringReader and Reader/TypeToken, Reader through a configured newJsonReader and the shared core, JsonElement through JsonTreeReader directly to the core, and JsonReader/Type through TypeToken conversion. The Reader handoff quote directly supports convergence and its later completion check."
+        }
+      ]
+    },
+    {
+      "id": "null-shortcuts",
+      "passed": true,
+      "reason": "The answer correctly separates Java-null String/tree guards from JSON null values and retains the valid-target assumption and conversion-before-guard ordering.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The explanation explicitly says String Class/Type forms first convert their target and String/TypeToken returns null before StringReader construction; its shared routing/null discussion establishes no adapter lookup occurs."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The exact tree quote and prose establish Java null returning before JsonTreeReader or adapter work. The explanation distinguishes non-null JsonNull, which is wrapped and reaches adapter.read, leaving its converted result to the adapter rather than this shortcut."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The answer expressly refers to converting valid Class/Type targets before reaching the tree/String guards and makes no unconditional promise for invalid/null target arguments. It respects this scope boundary without introducing a required invalid-target analysis."
+        }
+      ]
+    },
+    {
+      "id": "full-consumption",
+      "passed": true,
+      "reason": "The answer correctly explains the Reader/String post-parse helper, null-result bypass, completion-token and exception mappings, and lack of equivalent enforcement in direct JsonReader/tree routes.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The prose says String inherits Reader/TypeToken's check and that it runs only after the core returns normally. The routing quote shows helper invocation followed by returning the object, so a propagated parse failure cannot reach it."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The answer explicitly states any null adapter result prevents even the helper peek, regardless of the adapter's actual consumption, with empty-input null taking the same bypass. It does not promise universal trailing-input rejection."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The exact helper quote and prose establish END_DOCUMENT passing, another token causing JsonSyntaxException, MalformedJsonException being wrapped as JsonSyntaxException and other IOException as JsonIOException with its original cause."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The explanation explicitly states direct JsonReader has no completion check and may leave trailing tokens, tree routes likewise call the core without whole-tree validation, and arbitrary custom adapter consumption is not constrained to exactly one value."
+        }
+      ]
+    },
+    {
+      "id": "reader-strictness",
+      "passed": true,
+      "reason": "The answer correctly distinguishes initial reader configuration, the core's temporary override/compatibility adjustment and finally restoration before Reader completion checking.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The explanation explicitly says Gson.newJsonReader selects configured Gson strictness or LEGACY_STRICT when absent, and separately describes temporary LENIENT parsing under default settings."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The quote and prose establish capture of old strictness, explicit Gson override even over STRICT, and conversion only from LEGACY_STRICT to LENIENT without an explicit Gson setting, leaving existing LENIENT/STRICT unchanged."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The answer explicitly describes restoration of the exact old setting for success, initial-empty return and caught/uncaught failures inside the try. It places this before String/Reader completion checking and explains the default LENIENT-parse versus restored LEGACY_STRICT completion distinction."
+        }
+      ]
+    },
+    {
+      "id": "adapter-result-validation",
+      "passed": true,
+      "reason": "The answer correctly orders peek/empty-flag/lookup/read/validation and explains null acceptance, boxed primitive/raw-class assignability, generic limitations and escaping mismatch ClassCastException.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The exact core quote and prose state successful peek first, clearing isEmpty next, then lookup by the complete TypeToken and adapter.read before validating the result. Initial EOF therefore precedes lookup; a successful END_DOCUMENT peek does not skip it."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The explanation explicitly accepts null even for primitive targets and describes wrapping primitive raw classes, including Integer for int, before Class.isInstance against the requested raw class. The quote establishes the non-null guard and returning the result."
+        },
+          {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The answer explicitly distinguishes assignability from exact-class equality, permits subclasses/assignable implementations, excludes generic-content checking and says an incompatible result throws ClassCastException before Reader completion and escapes the core catches unchanged."
+        }
+      ]
+    },
+    {
+      "id": "eof-and-errors",
+      "passed": true,
+      "reason": "The answer correctly distinguishes initial-peek EOFException from later EOF and returned END_DOCUMENT, explains parse-phase wrapping and AssertionError causes, and preserves the uncaught-exception/finally boundary and different helper mappings.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The answer explicitly says isEmpty remains true until the first peek completes, initial-peek EOFException returns null, and a returned END_DOCUMENT instead clears the flag and continues to adapter lookup/read without an automatic null shortcut."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The explanation explicitly wraps later EOFException, IllegalStateException and all other parse-phase IOException, including MalformedJsonException, in JsonSyntaxException with the original cause, contrasting this with JsonIOException from the later helper."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The exact catch quote and prose establish replacing AssertionError with one containing the Gson build version and original message and preserving the original AssertionError as cause, without demanding a hard-coded version."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The answer explicitly identifies unmatched RuntimeExceptions, including result ClassCastException and adapter-thrown JSON exceptions, and non-AssertionError errors as escaping unchanged while finally restores strictness. It limits the mappings to the core try and separately explains the completion helper's IOException classifications and lack of special IllegalStateException/AssertionError handling."
+        }
+      ]
+    }
+  ],
+  "execution_review": {
+    "events_sha256": "fa587fad9289c41b87ff1b53a4ee0d5e2569d1db4f9ff48fe2f4c9726197356c",
+    "passed": true,
+    "reason": "Reviewed all command-event variants and all 14 completed commands, item_1 through item_14. They use repository-local rg discovery/search and nl/sed/head source reads of Gson entry points and related reader, tree, strictness and exception classes. Semicolon-separated compound commands contain only additional permitted source reads/searches. No command reads private parent catalogs/rubrics/controls/other trials or Columbus runtime/skill/graph, invokes a graph tool, executes repository code/tests/builds, writes source, uses the web or delegates. The only other completed item types are agent messages. This boundary review is independent of token use and collector acceptance."
+  }
+}

@@ -1,0 +1,210 @@
+{
+  "condition": "columbus",
+  "answer_sha256": "7b09f5b48a13dd58e674620ca8b72af9164aa7b0ed993b6be0dfd59cb59ac3d6",
+  "criteria_sha256": "383fb0d6ba8f016dd116cf22478540ad23bca3047022ee855b37d999ac7f4125",
+  "passed": false,
+  "reviewed_owners": 37,
+  "findings": [
+    {
+      "id": "PasswordResetForm.save",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "DataSource.__init__",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "DataSource.__getitem__",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "Driver.__init__",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "Feature.index",
+      "passed": false,
+      "note": "Claims non-string values would be stringified, overlooking bytes identity at default UTF-8 and the separate memoryview conversion path."
+    },
+    {
+      "id": "OGRGeometry.from_json",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "OGRGeometry.from_gml",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "Layer.test_capability",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "GDALRaster.__init__",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "GDALRaster.__del__",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "GDALRaster.vsi_buffer",
+      "passed": false,
+      "note": "Claims delete-on-read although the passed constant is False."
+    },
+    {
+      "id": "GDALRaster.clone",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "SpatialReference.attr_value",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "SpatialReference.auth_name",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "SpatialReference.auth_code",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "SpatialReference.import_user_input",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "SpatialReference.import_wkt",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "SpatialReference.xml",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "GEOSGeometryBase.from_ewkt",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "GEOSGeometryBase.relate_pattern",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "GEOSGeometry.__init__",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "_WKTReader.read",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "EmailMessage._create_mime_attachment",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "_cookie_signer_key",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "OracleParam.__init__",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "DatabaseOperations.convert_binaryfield_value",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "FakePayload.write",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "encode_multipart.to_bytes",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "encode_file.to_bytes",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "RequestFactory._encode_data",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "RequestFactory.generic",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "AsyncRequestFactory.generic",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "salted_hmac",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "constant_time_compare",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "pbkdf2",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "smart_bytes",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    },
+    {
+      "id": "uri_to_iri",
+      "passed": true,
+      "note": "Conversion input/options, guards and relevant downstream/exception paths agree with the frozen criteria; source quotations can substantiate omitted noncontradictory detail."
+    }
+  ],
+  "failure_evidence": [
+    {
+      "path": "django/contrib/gis/gdal/raster/const.py",
+      "start_line": 105,
+      "end_line": 105,
+      "quote": "VSI_DELETE_BUFFER_ON_READ = False",
+      "source_sha256": "0bfb2f05cfb1d39d8a2688c7d6dde90f5376f5debb850c7237cae6f2ed35e35a"
+    },
+    {
+      "path": "django/utils/encoding.py",
+      "start_line": 87,
+      "end_line": 104,
+      "quote": "def force_bytes(s, encoding=\"utf-8\", strings_only=False, errors=\"strict\"):\n    \"\"\"\n    Similar to smart_bytes, except that lazy instances are resolved to\n    strings, rather than kept as lazy objects.\n\n    If strings_only is True, don't convert (some) non-string-like objects.\n    \"\"\"\n    # Handle the common case first for performance reasons.\n    if isinstance(s, bytes):\n        if encoding == \"utf-8\":\n            return s\n        else:\n            return s.decode(\"utf-8\", errors).encode(encoding, errors)\n    if strings_only and is_protected_type(s):\n        return s\n    if isinstance(s, memoryview):\n        return bytes(s)\n    return str(s).encode(encoding, errors)",
+      "source_sha256": "0cb8dc023bc1c6bcf926be5df13d979c451c72c7915474d35ce9becdff85543e"
+    }
+  ]
+}

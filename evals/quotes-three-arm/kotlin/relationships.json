@@ -1,0 +1,26 @@
+[
+  {
+    "source": "src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)",
+    "target": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder:class",
+    "path": "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+    "line": 49
+  },
+  {
+    "source": "src/main/java/org/springframework/aot/hint/ProxyHints.java::org.springframework.aot.hint.ProxyHints.registerJdkProxy:method(Consumer<JdkProxyHint.Builder>)",
+    "target": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()",
+    "path": "src/main/java/org/springframework/aot/hint/ProxyHints.java",
+    "line": 51
+  },
+  {
+    "source": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.proxiedInterfaces:method(Class<?>...)",
+    "target": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.toTypeReferences:method(Class<?>...)",
+    "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+    "line": 135
+  },
+  {
+    "source": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint.Builder.build:method()",
+    "target": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java::org.springframework.aot.hint.JdkProxyHint:class",
+    "path": "src/main/java/org/springframework/aot/hint/JdkProxyHint.java",
+    "line": 165
+  }
+]

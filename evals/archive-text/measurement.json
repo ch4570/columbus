@@ -1,0 +1,59 @@
+{
+  "archive_sha256": "84db1ce7bd993494a74940fb6955d69441f35c7cb69b5e77b9b4ed42961f8fda",
+  "target": "django/utils/text.py::capfirst:function",
+  "model_trial": false,
+  "formats": {
+    "json": {
+      "pages": [
+        {
+          "offset": 0,
+          "edges": 8,
+          "bytes": 5697,
+          "next_offset": 8
+        },
+        {
+          "offset": 8,
+          "edges": 7,
+          "bytes": 5749,
+          "next_offset": 15
+        },
+        {
+          "offset": 15,
+          "edges": 8,
+          "bytes": 5813,
+          "next_offset": null
+        }
+      ],
+      "total_bytes": 17259,
+      "elapsed_seconds": 9.0379
+    },
+    "text": {
+      "pages": [
+        {
+          "offset": 0,
+          "edges": 11,
+          "bytes": 5710,
+          "next_offset": 11
+        },
+        {
+          "offset": 11,
+          "edges": 11,
+          "bytes": 5536,
+          "next_offset": 22
+        },
+        {
+          "offset": 22,
+          "edges": 1,
+          "bytes": 1624,
+          "next_offset": null
+        }
+      ],
+      "total_bytes": 12870,
+      "elapsed_seconds": 9.7946
+    }
+  },
+  "edge_parity": true,
+  "edges": 23,
+  "archive_unchanged": true,
+  "timing_limitation": "One fixed-order warm-cache diagnostic, not a latency benchmark or token measurement."
+}

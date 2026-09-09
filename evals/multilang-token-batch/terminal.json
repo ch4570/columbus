@@ -1,0 +1,110 @@
+{
+  "observed_at": "2026-09-08T10:31:52.994958+00:00",
+  "frozen_evaluation_commit": "e0694bf7b223d9e034565f964e1747f84e056505",
+  "cohort_processes_finished": true,
+  "controller_return_codes": {
+    "java": 0,
+    "kotlin": 0,
+    "javascript": 0
+  },
+  "trials": [
+    {
+      "language": "java",
+      "trial": "java-property-resolution-baseline-1",
+      "pid": 37011,
+      "pid_absent": true,
+      "return_code": 0,
+      "timed_out": false
+    },
+    {
+      "language": "java",
+      "trial": "java-property-resolution-baseline-2",
+      "pid": 48495,
+      "pid_absent": true,
+      "return_code": 0,
+      "timed_out": false
+    },
+    {
+      "language": "java",
+      "trial": "java-property-resolution-columbus-1",
+      "pid": 39668,
+      "pid_absent": true,
+      "return_code": 0,
+      "timed_out": false
+    },
+    {
+      "language": "java",
+      "trial": "java-property-resolution-columbus-2",
+      "pid": 44136,
+      "pid_absent": true,
+      "return_code": 0,
+      "timed_out": false
+    },
+    {
+      "language": "kotlin",
+      "trial": "kotlin-reflection-hint-state-baseline-1",
+      "pid": 40400,
+      "pid_absent": true,
+      "return_code": 0,
+      "timed_out": false
+    },
+    {
+      "language": "kotlin",
+      "trial": "kotlin-reflection-hint-state-baseline-2",
+      "pid": 42363,
+      "pid_absent": true,
+      "return_code": 0,
+      "timed_out": false
+    },
+    {
+      "language": "kotlin",
+      "trial": "kotlin-reflection-hint-state-columbus-1",
+      "pid": 37012,
+      "pid_absent": true,
+      "return_code": 0,
+      "timed_out": false
+    },
+    {
+      "language": "kotlin",
+      "trial": "kotlin-reflection-hint-state-columbus-2",
+      "pid": 43779,
+      "pid_absent": true,
+      "return_code": 0,
+      "timed_out": false
+    },
+    {
+      "language": "javascript",
+      "trial": "express-render-pipeline-baseline-1",
+      "pid": 36938,
+      "pid_absent": true,
+      "return_code": 0,
+      "timed_out": false
+    },
+    {
+      "language": "javascript",
+      "trial": "express-render-pipeline-baseline-2",
+      "pid": 48608,
+      "pid_absent": true,
+      "return_code": 0,
+      "timed_out": false
+    },
+    {
+      "language": "javascript",
+      "trial": "express-render-pipeline-columbus-1",
+      "pid": 40279,
+      "pid_absent": true,
+      "return_code": 0,
+      "timed_out": false
+    },
+    {
+      "language": "javascript",
+      "trial": "express-render-pipeline-columbus-2",
+      "pid": 44438,
+      "pid_absent": true,
+      "return_code": 0,
+      "timed_out": false
+    }
+  ],
+  "raw_event_gzip_roundtrip_verified": true,
+  "local_full_snapshots": ".omx/observations/multilang-token-batch/{language}/observation"
+}

@@ -1,0 +1,22 @@
+{
+  "repository": "https://github.com/square/okhttp",
+  "resolved_repository": "https://github.com/lysine-dev/okhttp",
+  "commit": "d4e7006216ddf06ffe628d1320b62ac01843b63d",
+  "url": "https://codeload.github.com/square/okhttp/zip/d4e7006216ddf06ffe628d1320b62ac01843b63d",
+  "sha256": "0d15e84d42a532c9ba5df19024ecc3bd64792e63c72264c068f30455c60a87e4",
+  "files": 844,
+  "zip_bytes": 2931580,
+  "license": "LICENSE.txt",
+  "license_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+  "omitted_gitlinks": [
+    {
+      "path": "okhttp-hpacktests/src/test/resources/hpack-test-case",
+      "repository": "https://github.com/http2jp/hpack-test-case.git",
+      "commit": "8a1406e7d14bfcb6c046021f13cc15cfb162726d",
+      "reason": "Unrelated HPACK test data is outside the RequestBody task; this is a complete superproject snapshot, not a recursive checkout."
+    }
+  ],
+  "requested_url": "https://codeload.github.com/square/okhttp/zip/d4e7006216ddf06ffe628d1320b62ac01843b63d",
+  "resolved_url": "https://codeload.github.com/square/okhttp/zip/d4e7006216ddf06ffe628d1320b62ac01843b63d",
+  "snapshot_scope": "complete superproject archive; not recursive checkout"
+}

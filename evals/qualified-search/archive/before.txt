@@ -1,0 +1,20 @@
+..F
+======================================================================
+FAIL: test_source_free_qualified_suffix_outranks_substrings (test_archive.ArchiveTests.test_source_free_qualified_suffix_outranks_substrings)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/rex/Desktop/columbus/skills/columbus/scripts/tests/test_archive.py", line 72, in test_source_free_qualified_suffix_outranks_substrings
+    self.assertEqual([i["path"] for i in packet["items"]], ["b.java", "c.java"])
+AssertionError: Lists differ: ['a.java', 'b.java'] != ['b.java', 'c.java']
+
+First differing element 0:
+'a.java'
+'b.java'
+
+- ['a.java', 'b.java']
++ ['b.java', 'c.java']
+
+----------------------------------------------------------------------
+Ran 3 tests in 1.933s
+
+FAILED (failures=1)

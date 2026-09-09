@@ -1,0 +1,7 @@
+{
+  "before_commit": "a49391b",
+  "before_harness_sha256": "5caefb6dd6b3cc2418d020380b8610839d6234a148d3cdbfbeb45d74c8181c84",
+  "after_harness_sha256": "76d95236123039eb808a44e6c19b8f551aebb84c3cc8be3856118eb8abe29374",
+  "prior_trials_regraded": false,
+  "new_model_trials": 0
+}

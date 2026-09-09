@@ -1,0 +1,65 @@
+{
+  "answer_sha256": "514b54049a98b34ef391ca87aeb33deed88bd70a84ee1d0f69b2230272fda53f",
+  "rubric_sha256": "f13227a5521ad04ea49e3210b86ba9d4a8d5badd2554b15448dc915216167036",
+  "findings": [
+    {
+      "id": "kotlin_lookup_handoffs",
+      "passed": true,
+      "reason": "All three clauses are supported by the final explanation and complete extension declarations; the Kotlin delegation boundary is accurate.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "Explicitly identifies the non-generic bracket operator, String? return and exact getProperty(key) delegation."},
+        {"criterion_index": 1, "passed": true, "reason": "States inline/reified T : Any, all three return nullabilities, and the exact typed/default/required argument lists; the quoted bodies confirm them."},
+        {"criterion_index": 2, "passed": true, "reason": "Explains runtime Class rather than nested generic element preservation, places the actual policies in Java, and states that non-null forms do not guarantee success or prevent delegate exceptions."}
+      ]
+    },
+    {
+      "id": "ordered_property_lookup",
+      "passed": true,
+      "reason": "All four clauses are explicit, including the distinction between the first raw match and a successful or non-null conversion.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "Gives the ordinary String, typed and raw String entry tuples with true/true/false nested flags; the nested-policy explanation makes clear that raw lookup still searches and converts."},
+        {"criterion_index": 1, "passed": true, "reason": "Specifies collection iteration precedence, raw-null continuation, and null for a null/empty collection or all-null/no-match traversal."},
+        {"criterion_index": 2, "passed": true, "reason": "Explains that the first raw non-null value is processed then directly returned, so neither a null conversion nor a source/placeholder/conversion exception triggers a later-source retry."},
+        {"criterion_index": 3, "passed": true, "reason": "Explicitly denies a resolver property-value cache and says separate lookups call the sources again, while distinguishing any behavior internal to an individual source."}
+      ]
+    },
+    {
+      "id": "nested_placeholder_policy",
+      "passed": true,
+      "reason": "All four clauses are covered without conflating resolver raw lookup with the placeholder parser's own nested processing.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "Explains all-String processing, exact String.class/CharSequence.class targets for other CharSequence values, StringBuilder/Object exclusions, processing before conversion, and raw-mode disabling."},
+        {"criterion_index": 1, "passed": true, "reason": "States the empty-string fast return, initially false nested-policy flag, strict default, permissive unresolved-text retention and propagation of strict failures rather than source reselection."},
+        {"criterion_index": 2, "passed": true, "reason": "Describes direct APIs as independent of the nested flag and their distinct lazy strict/non-strict helpers with false/true policies; the final quote includes construction using the resolver settings."},
+        {"criterion_index": 3, "passed": true, "reason": "The complete final quote shows replacePlaceholders(text, this::getPropertyAsRawString); prose explains raw callback lookup, parser-controlled nesting and helper caching rather than resolved-value caching."}
+      ]
+    },
+    {
+      "id": "property_conversion_service",
+      "passed": true,
+      "reason": "All four clauses accurately distinguish the no-service fast paths, shared fallback and stored independent service.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "Explicitly states the null-target return and the assignability shortcut only when no conversion service is stored."},
+        {"criterion_index": 1, "passed": true, "reason": "States shared DefaultConversionService use only when needed without an instance service, and stored-service invocation even for an otherwise assignable value."},
+        {"criterion_index": 2, "passed": true, "reason": "Explains setter null rejection and getter volatile read, synchronization, second null check, independent instance creation/storage, and the resulting change in later lookup selection."},
+        {"criterion_index": 3, "passed": true, "reason": "States direct propagation of a service's null result and conversion exception, no guarantee of convertibility, and elsewhere explicitly rules out retrying a lower source."}
+      ]
+    },
+    {
+      "id": "default_required_outcomes",
+      "passed": true,
+      "reason": "All four clauses correctly place default/required decisions after the normal lookup pipeline and distinguish null results from exceptions.",
+      "checks": [
+        {"criterion_index": 0, "passed": true, "reason": "Describes both typed and String defaults as post-lookup null tests after source selection, placeholders and conversion; a non-null result wins, including an empty string."},
+        {"criterion_index": 1, "passed": true, "reason": "Explains that both required overloads perform the normal lookup and throw IllegalStateException for a final null, with the final quote showing the direct branches."},
+        {"criterion_index": 2, "passed": true, "reason": "Explicitly contrasts raw-null source continuation with a selected raw non-null value converted to null; the latter activates wrapper fallback/error without restarting selection."},
+        {"criterion_index": 3, "passed": true, "reason": "States that source, placeholder and conversion exceptions occur before the wrappers' null checks, propagate unchanged and are neither suppressed by defaults nor universally translated by required lookup."}
+      ]
+    }
+  ],
+  "execution_review": {
+    "events_sha256": "45355059540358cb3d776590b543feebbcc5c44638d7ad35ae6dc5519c2ebfd6",
+    "passed": true,
+    "reason": "Independently inspected all 16 actual command executions and all event item types. Commands use only offered runtime SKILL/archive-search/archive-source/archive-quotes and repository-local rg/sed/nl reads; every runtime invocation uses the supplied absolute interpreter, -B and wrapper prefix. The quote batch's budget error (item_13, exit 2) is retained and followed by a larger-budget read, not a model rerun or mutation. No source/index/runtime writes, repository code/tests/builds, web/network tools, delegation or private/sibling evidence access appear. Compound shell reads and bounded inspection of helper implementations are within the prompt. Utility and citation grading are separate from this command-protocol review."
+  }
+}

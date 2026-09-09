@@ -1,0 +1,106 @@
+{
+  "archive_sha256": "1d80eb233d8da303b984fc423bf453181b7443c636431cbeff4b6a18cf5a4e12",
+  "runtimes": {
+    "before": {
+      "columbus/__init__.py": "87f632dcdb12b5a9b78e5961202c87910906399c90157131799707e5b35b375c",
+      "columbus/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "columbus/archive.py": "c1052625e620f4e0e775708a42bedaabcfd1a1443918552e37fe615917ded828",
+      "columbus/bundle.py": "f73fe1c36c89211c823f6c94eae67efc054e8c69b835b3ef49371482e7dd7f00",
+      "columbus/cli.py": "5eed07a6da9dc61f5e885c1ecbff81d0667824a05d39b4c33b3b4d57824b14c4",
+      "columbus/discovery.py": "31b40e39531a3e903d43285ecff26315e79bbac27adc86943fc61c7d5ad8fee3",
+      "columbus/export.py": "258f6b2df72a08da837480c96db82c78eeec63007d8d1c48baed8aa36b445957",
+      "columbus/graph_views.py": "9e935520bb990c2066cfdb943c37477e78378b5ffd868e31735cc6a5e261f1c7",
+      "columbus/hooks.py": "07e7e50d250904d03158bd559b32869c2a83185c6a318587278681e1956fcb42",
+      "columbus/index.py": "202c00206be8567066b2ba1538f4048205bc7088fb30466ffdbccf7c90789f88",
+      "columbus/jvm.py": "530465036c5a2fd6dda3cc12791e37854228079bc6b407732daff3278d00f5e4",
+      "columbus/language_profiles.py": "cda7c22cce6227d2627225110adafa641c7b09134b7c5d800ffcf1329092a1ce",
+      "columbus/languages.py": "606fe8469d2cafdfa58d9026b86e0d7debc5922e40e4eb600af4b57a4909539b",
+      "columbus/mcp_server.py": "8205f39755c51f1486fd66a1f9c993502fb2a614376510757cb4d1bdf29641c7",
+      "columbus/parser.py": "06aade1a1ce3e49cb75cc2c137ab6816b4d79768cd5a3225eaa24d2d126775a0",
+      "columbus/polyglot.py": "fdaf6ff2253945b31eeca00f87175ea9179be9c7b404db5468403d4a269948ae",
+      "columbus/presentation.py": "6aee6094ad820118917d63430bf82d99c94f2c83ee31e97ab867ee019520c781",
+      "columbus/receipts.py": "11068a6fd2d78a8d22a86c102b199c395c5f001e50ed5ff010f6893ab9b13ca9",
+      "columbus/retrieval.py": "bdf731d03095efc705f6470a1c0721bb72117cd286a600ff5b0cae38f3d33dd5",
+      "columbus/sync_state.py": "f18f0fa4a6cc970de4f527356ac9af70c29a12111cc3c58e42ba7e267ed457d3",
+      "columbus/telemetry.py": "9f49124a606e3a30191c596c8bd40f7255d5fbbb93f5ba2a531940b7f63c32dc",
+      "columbus/tree.py": "2be73caa6fb142ef744d2e1d6812775ae7ad12502f72e5789fe02496a83426a1"
+    },
+    "after": {
+      "columbus/__init__.py": "87f632dcdb12b5a9b78e5961202c87910906399c90157131799707e5b35b375c",
+      "columbus/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "columbus/archive.py": "5a50389e0b10ce49449ee88bb4ecadfcaf3da7c9381495c14256666da6b2f991",
+      "columbus/bundle.py": "f73fe1c36c89211c823f6c94eae67efc054e8c69b835b3ef49371482e7dd7f00",
+      "columbus/cli.py": "5eed07a6da9dc61f5e885c1ecbff81d0667824a05d39b4c33b3b4d57824b14c4",
+      "columbus/discovery.py": "31b40e39531a3e903d43285ecff26315e79bbac27adc86943fc61c7d5ad8fee3",
+      "columbus/export.py": "258f6b2df72a08da837480c96db82c78eeec63007d8d1c48baed8aa36b445957",
+      "columbus/graph_views.py": "9e935520bb990c2066cfdb943c37477e78378b5ffd868e31735cc6a5e261f1c7",
+      "columbus/hooks.py": "07e7e50d250904d03158bd559b32869c2a83185c6a318587278681e1956fcb42",
+      "columbus/index.py": "202c00206be8567066b2ba1538f4048205bc7088fb30466ffdbccf7c90789f88",
+      "columbus/jvm.py": "530465036c5a2fd6dda3cc12791e37854228079bc6b407732daff3278d00f5e4",
+      "columbus/language_profiles.py": "cda7c22cce6227d2627225110adafa641c7b09134b7c5d800ffcf1329092a1ce",
+      "columbus/languages.py": "606fe8469d2cafdfa58d9026b86e0d7debc5922e40e4eb600af4b57a4909539b",
+      "columbus/mcp_server.py": "8205f39755c51f1486fd66a1f9c993502fb2a614376510757cb4d1bdf29641c7",
+      "columbus/parser.py": "06aade1a1ce3e49cb75cc2c137ab6816b4d79768cd5a3225eaa24d2d126775a0",
+      "columbus/polyglot.py": "fdaf6ff2253945b31eeca00f87175ea9179be9c7b404db5468403d4a269948ae",
+      "columbus/presentation.py": "6aee6094ad820118917d63430bf82d99c94f2c83ee31e97ab867ee019520c781",
+      "columbus/receipts.py": "11068a6fd2d78a8d22a86c102b199c395c5f001e50ed5ff010f6893ab9b13ca9",
+      "columbus/retrieval.py": "bdf731d03095efc705f6470a1c0721bb72117cd286a600ff5b0cae38f3d33dd5",
+      "columbus/sync_state.py": "f18f0fa4a6cc970de4f527356ac9af70c29a12111cc3c58e42ba7e267ed457d3",
+      "columbus/telemetry.py": "9f49124a606e3a30191c596c8bd40f7255d5fbbb93f5ba2a531940b7f63c32dc",
+      "columbus/tree.py": "2be73caa6fb142ef744d2e1d6812775ae7ad12502f72e5789fe02496a83426a1"
+    }
+  },
+  "results": {
+    "gzip": {
+      "before": {
+        "seconds": [
+          3.1889452500035986,
+          3.1954461249988526,
+          3.1849140420090407
+        ],
+        "median_seconds": 3.1889452500035986,
+        "packet_sha256": "ba723932ebac9a69618bbd7e233b17e2c2043d11bc9de7bb4d7fd26deb547fdd",
+        "edges": 46,
+        "next_offset": null
+      },
+      "after": {
+        "seconds": [
+          2.134299750003265,
+          2.135173084010603,
+          2.150781249976717
+        ],
+        "median_seconds": 2.135173084010603,
+        "packet_sha256": "ba723932ebac9a69618bbd7e233b17e2c2043d11bc9de7bb4d7fd26deb547fdd",
+        "edges": 46,
+        "next_offset": null
+      }
+    },
+    "xz": {
+      "before": {
+        "seconds": [
+          4.819527542014839,
+          4.552035540982615,
+          4.556346124998527
+        ],
+        "median_seconds": 4.556346124998527,
+        "packet_sha256": "ba723932ebac9a69618bbd7e233b17e2c2043d11bc9de7bb4d7fd26deb547fdd",
+        "edges": 46,
+        "next_offset": null
+      },
+      "after": {
+        "seconds": [
+          3.0415548339951783,
+          3.0293634999834467,
+          3.1577911670028698
+        ],
+        "median_seconds": 3.0415548339951783,
+        "packet_sha256": "ba723932ebac9a69618bbd7e233b17e2c2043d11bc9de7bb4d7fd26deb547fdd",
+        "edges": 46,
+        "next_offset": null
+      }
+    }
+  },
+  "all_packets_equal": true,
+  "archive_unchanged": true,
+  "scope": "One full Django target, three samples per condition, fixed gzip then XZ and before then after order; unflushed OS caches. No model or isolated causal timing claim."
+}

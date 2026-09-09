@@ -1,0 +1,46 @@
+{
+  "fixture": "columbus-source-c67b20a.zip",
+  "source_call_line": 524,
+  "source_call": "self._source(conn, self._find(conn, symbol_id), max_lines)",
+  "reference": {
+    "source": "skills/columbus/scripts/columbus/index.py::RepositoryIndex.symbol:method",
+    "scope_id": "skills/columbus/scripts/columbus/index.py::RepositoryIndex.symbol:method",
+    "kind": "calls",
+    "name": "self._source",
+    "path": "skills/columbus/scripts/columbus/index.py",
+    "line": 524,
+    "evidence": "self._source",
+    "resolved": false,
+    "reason": "dynamic, external, shadowed, ambiguous or unknown name"
+  },
+  "path": [
+    {
+      "source": "RepositoryIndex.symbol",
+      "target": "RepositoryIndex._source",
+      "stored": []
+    },
+    {
+      "source": "RepositoryIndex._source",
+      "target": "read_stable",
+      "stored": [
+        [
+          "skills/columbus/scripts/columbus/index.py",
+          441,
+          "resolved_static"
+        ]
+      ]
+    },
+    {
+      "source": "read_stable",
+      "target": "safe_source",
+      "stored": [
+        [
+          "skills/columbus/scripts/columbus/sync_state.py",
+          73,
+          "resolved_static"
+        ]
+      ]
+    }
+  ],
+  "interpretation": "A source-reviewed first hop is absent, so the incoming three-hop path cannot be returned as a complete path by the current graph."
+}

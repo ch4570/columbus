@@ -1,5 +1,7 @@
 from contextlib import closing
 import json
+import io
+from contextlib import redirect_stdout
 import os
 from pathlib import Path
 import sqlite3
@@ -15,6 +17,25 @@ from columbus import languages
 
 
 class SyncTests(unittest.TestCase):
+    def test_warm_probe_reads_are_reported_across_both_discovery_passes(self):
+        self.write('main.py', 'def run(): pass\n')
+        binary = self.root / 'attachment.txt'
+        binary.write_bytes(b'\x00binary')
+        for newline in (b'\n', b'\r\n'):
+            with self.subTest(newline=newline):
+                payload = b'ordinary text' + newline
+                (self.root / 'note.txt').write_bytes(payload)
+                self.index.refresh(self.root)
+                result = self.index.refresh(self.root, fast=True)
+                refresh = result['refresh']
+                self.assertEqual(refresh['hashed_bytes'], 0)
+                self.assertEqual(refresh['parsed_files'], 0)
+                self.assertEqual(refresh['discovery_probe_files'], 4)
+                self.assertEqual(refresh['discovery_probe_bytes'], 2 * (len(payload) + len(b'\x00binary')))
+                from columbus.presentation import sync_summary
+                summary = sync_summary(result)
+                self.assertEqual(summary['refresh']['discovery_probe_bytes'], refresh['discovery_probe_bytes'])
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
@@ -45,6 +66,62 @@ class SyncTests(unittest.TestCase):
 
     def graph(self, index=None):
         return (index or self.index).graph()
+
+    def test_lazy_parse_cache_preserves_diagnostics_and_relink(self):
+        self.write("one.py", "def one(): return missing()\n")
+        self.write("broken.py", "def broken(:\n")
+        first = self.index.refresh(self.root, fast=True)
+        graph = self.graph()
+        original_loads = index_module.json.loads
+
+        def reject_parse_decode(value, *args, **kwargs):
+            result = original_loads(value, *args, **kwargs)
+            if isinstance(result, dict) and "symbols" in result and "references" in result:
+                raise AssertionError("unchanged sync decoded cached parse facts")
+            return result
+
+        with patch.object(index_module.json, "loads", side_effect=reject_parse_decode):
+            for fast in (True, False):
+                report = self.index.refresh(self.root, fast=fast)
+                self.assertEqual(report["diagnostics"], first["diagnostics"])
+                self.assertEqual(report["unresolved_references"], first["unresolved_references"])
+                self.assertEqual(report["refresh"]["cached_parses_loaded"], 0)
+            with self.assertRaisesRegex(ValueError, "Incomplete parse"):
+                self.index.refresh(self.root, fast=True, require_complete=True)
+        self.assertEqual(self.graph(), graph)
+        self.write("broken.py", "def missing(): return 1\n")
+        report = self.index.refresh(self.root, fast=True)
+        self.assertEqual(report["refresh"]["cached_parses_loaded"], 1)
+        self.assertEqual(report["diagnostics"], [])
+        self.assertTrue(report["refresh"]["global_relink"])
+        self.assertEqual(report["refresh"]["parsed_files"], 1)
+
+    def test_cli_summary_preserves_parse_counts_and_stale_state(self):
+        from columbus.cli import main
+        self.write("broken.py", "def broken(:\n")
+        for number in range(80):
+            self.write(f"long_nested_path/worker_{number}.py", f"def call_{number}(): return unknown()\n")
+        def invoke(*args):
+            output = io.StringIO()
+            with redirect_stdout(output):
+                self.assertEqual(main([*args, '--repo', str(self.root), '--db', str(self.index.db)]), 0)
+            return json.loads(output.getvalue()), len(output.getvalue().encode())
+        full, full_bytes = invoke('sync')
+        summary, summary_bytes = invoke('sync', '--summary')
+        self.assertTrue(summary['details_omitted'])
+        self.assertEqual(summary['diagnostic_count'], len(full['diagnostics']))
+        self.assertEqual(summary['unresolved_references'], full['unresolved_references'])
+        self.assertEqual(summary['files'], 81)
+        self.assertEqual(summary['refresh']['parsed_files'], 0)
+        self.assertNotIn('detected_languages', summary['inventory'])
+        self.assertLess(summary_bytes, full_bytes)
+        self.write('broken.py', 'def fixed(): return 1\n')
+        stale, _ = invoke('status', '--summary', '--verify-content')
+        self.assertEqual(stale['freshness'], 'stale')
+        self.assertEqual(stale['stale_files'], 1)
+        fresh, _ = invoke('sync', '--summary')
+        self.assertEqual(fresh['diagnostic_count'], 0)
+        self.assertEqual(fresh['refresh']['parsed_files'], 1)
 
     def test_fast_noop_never_reads_source_bodies(self):
         self.write("one.py", "def one(): return 1\n")
@@ -213,6 +290,79 @@ class SyncTests(unittest.TestCase):
             with self.assertRaisesRegex(SnapshotChanged, "Git HEAD/branch/worktree changed"):
                 self.index.refresh(self.root, fast=True)
         self.assertEqual(self.graph(), original)
+
+    def test_compressed_parse_cache_and_atomic_schema_two_upgrade(self):
+        self.write("one.py", "def one(): return missing()\n")
+        self.index.refresh(self.root)
+        symbol_id = self.index.search("one")["hits"][0]["id"]
+        before = self.index.symbol(symbol_id)
+        with closing(sqlite3.connect(self.index.db)) as conn, conn:
+            row = conn.execute("SELECT parsed FROM files").fetchone()[0]
+            self.assertIsInstance(row, bytes)
+            plain = index_module.compact(index_module.decode_parse(row))
+            self.assertLess(len(row), len(plain))
+            conn.execute("UPDATE files SET parsed=?", (plain,))
+            conn.execute("UPDATE metadata SET value=? WHERE key='schema_version'", (json.dumps("2"),))
+        self.assertEqual(self.index.symbol(symbol_id), before)
+        with patch.object(index_module, "resolve_files", side_effect=RuntimeError("upgrade failed")):
+            with self.assertRaisesRegex(RuntimeError, "upgrade failed"):
+                self.index.refresh(self.root, fast=True)
+        self.assertEqual(self.index.status()["schema_version"], "2")
+        self.assertEqual(self.index.symbol(symbol_id), before)
+        report = self.index.refresh(self.root, fast=True)
+        self.assertEqual(report["schema_version"], "4")
+        after = self.index.symbol(symbol_id)
+        before.pop("revision"); after.pop("revision")
+        self.assertEqual(after, before)
+        with closing(sqlite3.connect(self.index.db)) as conn:
+            self.assertEqual(conn.execute("SELECT typeof(parsed) FROM files").fetchone()[0], "blob")
+
+    def test_external_search_migration_update_delete_and_rollback(self):
+        source = self.write("one.py", "def one(): return 'olduniquetoken'\n")
+        self.write("two.py", "def two(): return 'keepuniquetoken'\n")
+        self.index.refresh(self.root)
+        before = self.index.search("olduniquetoken")["hits"]
+        # Reconstruct the actual schema-3 FTS layout, not just its version flag.
+        with closing(sqlite3.connect(self.index.db)) as conn, conn:
+            conn.create_function("inflate", 1, lambda b: index_module.zlib.decompress(b).decode())
+            docs = conn.execute("SELECT rowid,id,name,path,body FROM symbol_fts").fetchall()
+            conn.execute("DROP TABLE symbol_fts")
+            conn.execute("DROP VIEW search_content")
+            conn.execute("DROP TABLE search_documents")
+            conn.execute("CREATE VIRTUAL TABLE symbol_fts USING fts5(id UNINDEXED,name,path,body)")
+            conn.executemany("INSERT INTO symbol_fts(rowid,id,name,path,body) VALUES(?,?,?,?,?)", docs)
+            conn.execute("UPDATE metadata SET value=? WHERE key='schema_version'", (json.dumps("3"),))
+        self.assertEqual(self.index.search("olduniquetoken")["hits"], before)
+        with patch.object(index_module, "resolve_files", side_effect=RuntimeError("migration failed")):
+            with self.assertRaisesRegex(RuntimeError, "migration failed"):
+                self.index.refresh(self.root)
+        self.assertEqual(self.index.status()["schema_version"], "3")
+        self.assertEqual(self.index.search("olduniquetoken")["hits"], before)
+        with self.index._read() as reader:
+            old_docs = [tuple(r) for r in reader.execute("SELECT rowid,id,name,path,body FROM symbol_fts ORDER BY rowid")]
+            self.index.refresh(self.root)
+            self.assertEqual(self.index._meta(reader)["schema_version"], "3")
+            self.assertEqual([tuple(r) for r in reader.execute("SELECT rowid,id,name,path,body FROM symbol_fts ORDER BY rowid")], old_docs)
+        self.assertEqual(self.index.status()["schema_version"], "4")
+        self.assertEqual(self.index.search("olduniquetoken")["hits"], before)
+        source.write_text("def one(): return 'newuniquetoken'\n")
+        self.index.refresh(self.root)
+        self.assertFalse(self.index.search("olduniquetoken")["hits"])
+        self.assertTrue(self.index.search("newuniquetoken")["hits"])
+        self.assertTrue(self.index.search("keepuniquetoken")["hits"])
+        source.write_text("def one(): return 'rollbackuniquetoken'\n")
+        state = index_module.git_state(self.root)
+        with patch.object(index_module, "git_state", side_effect=[state, SnapshotChanged("late change")]):
+            with self.assertRaisesRegex(SnapshotChanged, "late change"):
+                self.index.refresh(self.root)
+        self.assertTrue(self.index.search("newuniquetoken")["hits"])
+        self.assertFalse(self.index.search("rollbackuniquetoken")["hits"])
+        source.unlink()
+        self.index.refresh(self.root)
+        self.assertFalse(self.index.search("newuniquetoken")["hits"])
+        with closing(sqlite3.connect(self.index.db)) as conn, conn:
+            conn.create_function("inflate", 1, lambda b: index_module.zlib.decompress(b).decode())
+            conn.execute("INSERT INTO symbol_fts(symbol_fts,rank) VALUES('integrity-check',1)")
 
     def test_schema_one_database_is_untouched_and_rejected(self):
         self.index.db.parent.mkdir()

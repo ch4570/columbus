@@ -1,0 +1,7 @@
+{
+  "mode": "historical_graph_reuse",
+  "copy_and_consumer_verification_seconds": 4.702084874996217,
+  "new_cold_index_seconds": null,
+  "new_cold_export_seconds": null,
+  "note": "New wall time for source/runtime/graph copies and consumer checks; historical producer times are separate."
+}

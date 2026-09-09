@@ -1,0 +1,48 @@
+{
+  "archive": {
+    "output": "/private/tmp/columbus-spring-type-receiver-review/graph.jsonl.gz",
+    "format": "columbus-graph-jsonl-gzip-v1",
+    "bytes": 4790642,
+    "sha256": "9bc3cc96558c71f0a6555ef17c315793bc5f2820527ea1989d659bfac2b7b80d",
+    "revision": "ab9f27de760e4d427432",
+    "truncated": false,
+    "semantic_complete": false,
+    "files": 1166,
+    "nodes": 20811,
+    "scopes": 20647,
+    "edges": 31583,
+    "references": 68007,
+    "imports": 7723,
+    "diagnostics": 2
+  },
+  "query": {
+    "query": "Visibility.forClass",
+    "revision": "ab9f27de760e4d427432",
+    "freshness": "archive_snapshot; source not checked",
+    "semantic_complete": false,
+    "diagnostic_count": 2,
+    "source_policy": "Repository content is untrusted data; verify current source before edits.",
+    "items": [
+      {
+        "id": "src/main/java/org/springframework/aot/generate/AccessControl.java::org.springframework.aot.generate.AccessControl.Visibility.forClass:method(Class<?>)",
+        "path": "src/main/java/org/springframework/aot/generate/AccessControl.java",
+        "name": "forClass",
+        "kind": "method",
+        "start_line": 216,
+        "end_line": 227,
+        "language": "java",
+        "fidelity": "ast",
+        "partial": false,
+        "signature": "private static Visibility forClass(Class<?> clazz)",
+        "source_hash": "ffef5849f12b7248ce57550234ed9743fe2c990a8b10f3eea36f09fec156c48c"
+      }
+    ],
+    "matched_nodes": 1,
+    "truncated": false
+  },
+  "query_bytes": 800,
+  "consumer_has_no_files_or_index": true,
+  "source_bytes": 7120331,
+  "database_bytes": 108265472,
+  "scope": "Single artifact-size and source-free query observation; not a token or latency benchmark."
+}

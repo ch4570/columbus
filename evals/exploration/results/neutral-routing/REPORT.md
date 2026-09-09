@@ -1,0 +1,9 @@
+# Neutral common instructions for future tool-use evaluations
+
+Inspection of the actual Spring trial prompt found a common instruction to “Work efficiently using ripgrep and bounded source reads.” The Columbus condition then separately instructed the model to follow the skill and choose the cheapest evidence. Both conditions received the common instruction, so the measured outcomes remain valid observations of those prompts. However, the direct source-tool preference is a possible contributor to graph non-use; the experiment cannot isolate the skill as its cause.
+
+The common instruction now asks for bounded evidence without naming a retrieval tool. The baseline-specific instruction still requires ordinary shell search/source reads and excludes graph tools. The Columbus condition still follows the skill, retains a prebuilt index and can fall back to source. No forced graph step is added. Future invocation receipts also hash the harness and output schema to make instruction/grading provenance easier to audit.
+
+No existing trial is rerun, regraded or relabelled as successful. The preceding Spring pair still fails citation quality and contains no graph-tool use. This change alone does not establish better routing, answer quality or token savings. A future comparison needs a different predeclared task and observed tool use before attributing an effect to graph retrieval.
+
+The quotation requirement is part of the recorded benchmark, not a user requirement for all navigation. Both agents' stitched quotations remain benchmark failures even though their behavior explanations were correct. Future task design should distinguish normal source citations from explicit verbatim quotations and avoid requiring the model to regenerate long source excerpts merely to prove retrieval quality.

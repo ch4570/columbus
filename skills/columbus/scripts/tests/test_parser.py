@@ -2,7 +2,8 @@ import json
 import textwrap
 import unittest
 
-from columbus.parser import parse_source, resolve_files
+from columbus.parser import parse_source, resolve_files, _Parser
+import ast
 
 
 def parsed(module, source, path=None):
@@ -15,6 +16,39 @@ def relations(files, kind="calls"):
 
 
 class ParserTests(unittest.TestCase):
+    def test_literal_assignments_are_search_evidence_not_callable_bindings(self):
+        file = parsed('flags', '''
+            FLAG = False
+            LIMIT: int = 8
+            FLAG = True
+            ALIAS = FLAG
+            def run():
+                LOCAL = False
+                FLAG()
+            class C:
+                MEMBER = False
+        ''')
+        importer = parsed('consumer', 'from flags import FLAG\nimport flags\nFLAG()\nflags.FLAG()\n')
+        nodes = [s for s in file['symbols'] if s['kind'] == 'assignment']
+        self.assertEqual([s['signature'] for s in nodes], ['FLAG = False', 'LIMIT = 8', 'FLAG = True'])
+        self.assertEqual(len({s['id'] for s in nodes}), 3)
+        self.assertEqual([s['start_line'] for s in nodes], [1, 2, 3])
+        self.assertEqual(relations([file, importer]), [])
+        self.assertFalse(importer['imports'][0]['resolved'])
+        excluded = parsed('limits', 'ANNOTATED: bool\nLOWER = ' + repr('x' * 257) + '\nsmall = False\n')
+        self.assertFalse(any(s['kind'] == 'assignment' for s in excluded['symbols']))
+
+    def test_cached_evidence_matches_ast_byte_offsets_and_line_endings(self):
+        for newline in ['\n', '\r\n', '\r']:
+            source = newline.join(['def café():', '    return target("🙂é\u2028x",', '                  other("a\u0085b\f"))', ''])
+            tree = ast.parse(source)
+            parser = _Parser('unicode.py', source, 'unicode')
+            for node in ast.walk(tree):
+                expected = ast.get_source_segment(source, node)
+                if expected is not None:
+                    self.assertEqual(parser._evidence(node), ' '.join(expected.split())[:240])
+        self.assertEqual(parser._evidence(ast.Name(id='fallback', ctx=ast.Load())), 'fallback')
+
     def test_absolute_import_alias_and_module_alias(self):
         helpers = parsed("pkg.helpers", "def work(): pass")
         caller = parsed("pkg.main", """
@@ -138,6 +172,19 @@ class ParserTests(unittest.TestCase):
         self.assertEqual(len(relations([helper, caller])), 1)
         imports = relations([helper, caller], "imports")
         self.assertEqual(imports[0]["target"], "company/pkg/helper.py::module")
+
+    def test_namespace_component_boundaries_do_not_resolve_partial_names(self):
+        for expression, count in [('company.pkg.helper.run()', 1),
+                                  ('company.pk.helper.run()', 0),
+                                  ('company.pkg.hel.run()', 0),
+                                  ('company.pkg.helper_extra.run()', 0)]:
+            with self.subTest(expression=expression):
+                helper = parsed("company.pkg.helper", "def run(): pass")
+                caller = parsed("main", "import company.pkg.helper\n" + expression)
+                calls = relations([helper, caller])
+                self.assertEqual(len(calls), count)
+                if calls:
+                    self.assertEqual(calls[0]['target'], 'company/pkg/helper.py::run:function')
 
     def test_comprehension_and_lambda_parameters_are_local(self):
         file = parsed("main", """

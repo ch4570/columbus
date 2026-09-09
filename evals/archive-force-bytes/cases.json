@@ -1,0 +1,317 @@
+{
+  "schema": "columbus.exploration-cases/v1",
+  "cases": [
+    {
+      "id": "archive-force-bytes",
+      "mode": "caller-enumeration",
+      "question": "Find every Python function or method under django/ containing a syntactic direct call to django.utils.encoding.force_bytes in this checkout. Include django/test/ and exclude top-level tests/. For each caller explain the value being converted, its purpose and downstream use, the encoding, strings_only and errors arguments (explicit or default), and relevant guards and exception handling. Resolve imports and distinguish similarly named definitions or receiver methods. Include nested functions as separate lexical callers. Do not include higher-order-only or transitive callers, and distinguish source calls from runtime reachability.",
+      "findings": [
+        {
+          "id": "PasswordResetForm.save",
+          "path": "django/contrib/auth/forms.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            487
+          ]
+        },
+        {
+          "id": "DataSource.__init__",
+          "path": "django/contrib/gis/gdal/datasource.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            68
+          ]
+        },
+        {
+          "id": "DataSource.__getitem__",
+          "path": "django/contrib/gis/gdal/datasource.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            97
+          ]
+        },
+        {
+          "id": "Driver.__init__",
+          "path": "django/contrib/gis/gdal/driver.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            51
+          ]
+        },
+        {
+          "id": "Feature.index",
+          "path": "django/contrib/gis/gdal/feature.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            117
+          ]
+        },
+        {
+          "id": "OGRGeometry.from_json",
+          "path": "django/contrib/gis/gdal/geometries.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            172
+          ]
+        },
+        {
+          "id": "OGRGeometry.from_gml",
+          "path": "django/contrib/gis/gdal/geometries.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            176
+          ]
+        },
+        {
+          "id": "Layer.test_capability",
+          "path": "django/contrib/gis/gdal/layer.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            234
+          ]
+        },
+        {
+          "id": "GDALRaster.__init__",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            101,
+            119,
+            126,
+            129,
+            169
+          ]
+        },
+        {
+          "id": "GDALRaster.__del__",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            221
+          ]
+        },
+        {
+          "id": "GDALRaster.vsi_buffer",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            286
+          ]
+        },
+        {
+          "id": "GDALRaster.clone",
+          "path": "django/contrib/gis/gdal/raster/source.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            505
+          ]
+        },
+        {
+          "id": "SpatialReference.attr_value",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            154
+          ]
+        },
+        {
+          "id": "SpatialReference.auth_name",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            159
+          ]
+        },
+        {
+          "id": "SpatialReference.auth_code",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            165
+          ]
+        },
+        {
+          "id": "SpatialReference.import_user_input",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            309
+          ]
+        },
+        {
+          "id": "SpatialReference.import_wkt",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            313
+          ]
+        },
+        {
+          "id": "SpatialReference.xml",
+          "path": "django/contrib/gis/gdal/srs.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            343
+          ]
+        },
+        {
+          "id": "GEOSGeometryBase.from_ewkt",
+          "path": "django/contrib/gis/geos/geometry.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            128
+          ]
+        },
+        {
+          "id": "GEOSGeometryBase.relate_pattern",
+          "path": "django/contrib/gis/geos/geometry.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            357
+          ]
+        },
+        {
+          "id": "GEOSGeometry.__init__",
+          "path": "django/contrib/gis/geos/geometry.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            760,
+            763
+          ]
+        },
+        {
+          "id": "_WKTReader.read",
+          "path": "django/contrib/gis/geos/prototypes/io.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            253
+          ]
+        },
+        {
+          "id": "EmailMessage._create_mime_attachment",
+          "path": "django/core/mail/message.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            402
+          ]
+        },
+        {
+          "id": "_cookie_signer_key",
+          "path": "django/core/signing.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            106
+          ]
+        },
+        {
+          "id": "OracleParam.__init__",
+          "path": "django/db/backends/oracle/base.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            449
+          ]
+        },
+        {
+          "id": "DatabaseOperations.convert_binaryfield_value",
+          "path": "django/db/backends/oracle/operations.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            258
+          ]
+        },
+        {
+          "id": "FakePayload.write",
+          "path": "django/test/client.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            115
+          ]
+        },
+        {
+          "id": "encode_multipart.to_bytes",
+          "path": "django/test/client.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            289
+          ]
+        },
+        {
+          "id": "encode_file.to_bytes",
+          "path": "django/test/client.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            342
+          ]
+        },
+        {
+          "id": "RequestFactory._encode_data",
+          "path": "django/test/client.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            448
+          ]
+        },
+        {
+          "id": "RequestFactory.generic",
+          "path": "django/test/client.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            647
+          ]
+        },
+        {
+          "id": "AsyncRequestFactory.generic",
+          "path": "django/test/client.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            747
+          ]
+        },
+        {
+          "id": "salted_hmac",
+          "path": "django/utils/crypto.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            30,
+            31,
+            45
+          ]
+        },
+        {
+          "id": "constant_time_compare",
+          "path": "django/utils/crypto.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            67,
+            67
+          ]
+        },
+        {
+          "id": "pbkdf2",
+          "path": "django/utils/crypto.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            75,
+            76
+          ]
+        },
+        {
+          "id": "smart_bytes",
+          "path": "django/utils/encoding.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            84
+          ]
+        },
+        {
+          "id": "uri_to_iri",
+          "path": "django/utils/encoding.py",
+          "marker": "force_bytes(",
+          "call_lines": [
+            167
+          ]
+        }
+      ]
+    }
+  ]
+}

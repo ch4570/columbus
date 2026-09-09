@@ -1,0 +1,47 @@
+{
+  "archive_sha256": "61a036d5a9eac24e9788531d8b803a2664d312383372500a58c1f8d042a12aa7",
+  "queries": [
+    {
+      "query": "django.utils.encoding.force_bytes",
+      "before_ids": [],
+      "after_ids": [
+        "django/utils/encoding.py::force_bytes:function"
+      ],
+      "before_matches": 0,
+      "after_matches": 1
+    },
+    {
+      "query": "encoding.force_bytes",
+      "before_ids": [],
+      "after_ids": [
+        "django/utils/encoding.py::force_bytes:function"
+      ],
+      "before_matches": 0,
+      "after_matches": 1
+    },
+    {
+      "query": "force_bytes",
+      "before_ids": [
+        "django/utils/encoding.py::force_bytes:function",
+        "tests/utils_tests/test_encoding.py::TestEncodingUtils.test_force_bytes_encoding:method",
+        "tests/utils_tests/test_encoding.py::TestEncodingUtils.test_force_bytes_exception:method",
+        "tests/utils_tests/test_encoding.py::TestEncodingUtils.test_force_bytes_memory_view:method",
+        "tests/utils_tests/test_encoding.py::TestEncodingUtils.test_force_bytes_strings_only:method"
+      ],
+      "after_ids": [
+        "django/utils/encoding.py::force_bytes:function",
+        "tests/utils_tests/test_encoding.py::TestEncodingUtils.test_force_bytes_encoding:method",
+        "tests/utils_tests/test_encoding.py::TestEncodingUtils.test_force_bytes_exception:method",
+        "tests/utils_tests/test_encoding.py::TestEncodingUtils.test_force_bytes_memory_view:method",
+        "tests/utils_tests/test_encoding.py::TestEncodingUtils.test_force_bytes_strings_only:method"
+      ],
+      "before_matches": 5,
+      "after_matches": 5
+    }
+  ],
+  "archive_unchanged": true,
+  "model_trial": false,
+  "token_savings_claimed": false,
+  "before_archive_reader_sha256": "0f7c25e896c75fdc6fc297242578e55af0fa4e1f83a95451529381f2cf301418",
+  "after_archive_reader_sha256": "2773bfc9dbc0c3f56fa2122ec6da6206abbe87e73f77d3427650edaa863ea9ea"
+}

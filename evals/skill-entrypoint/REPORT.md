@@ -1,0 +1,9 @@
+# Reduce basic-query instruction cost
+
+The completed safe-redirect graph trial read 5,839 bytes of SKILL.md and 7,117 bytes of archive reference before searching. Their combined 12,956 bytes exceeded the baseline's entire 8,627-byte command output. The trial then repeated ordinary source exploration. These observed costs motivate a shorter self-contained query entrypoint, not a claim that all verification reads were unnecessary.
+
+SKILL.md now has 3,706 bytes, 36.5% less than its predecessor. Basic saved-archive search and incoming-call commands are adjacent examples; the behavior example directly uses context-lines 20 rather than first showing 2 and qualifying it later. Scope, pagination, missing context, source hashes, stale snapshots and semantic incompleteness remain explicit. Detailed archive format/export guidance is linked for those operations instead of being presented as an apparent prerequisite for basic queries. Local index, session and installation routes remain available.
+
+The skill validator passes and every reference link resolves. The basic scoped archive command uses the same options already verified in archive-safe-redirect/frozen-context.json: three call sites, two contexts, one 5,620-byte page with exact source parity. No runtime behavior or frozen trial inputs changed. This documentation edit does not require another engine test suite.
+
+results.json records before/after hashes and sizes. Fewer instruction bytes do not establish fewer actual model tokens or improved decisions. In particular, extra imports/helper reads can still be necessary, and the failed trial's repeated search cannot be declared avoidable solely because a graph existed. No model pair was replayed and no savings are claimed for this revision until an independently declared task tests its behavior.

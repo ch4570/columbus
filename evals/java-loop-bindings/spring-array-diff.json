@@ -1,0 +1,127 @@
+{
+  "source_hashes_equal": true,
+  "files": 1166,
+  "symbols": 20811,
+  "edges": 33004,
+  "added_edges": [
+    [
+      "src/main/java/org/springframework/asm/MethodWriter.java::org.springframework.asm.MethodWriter.visitSwitchInsn:method(Label,Label[])",
+      "src/main/java/org/springframework/asm/Label.java::org.springframework.asm.Label.getCanonicalInstance:method()",
+      "calls",
+      "heuristic",
+      "label.getCanonicalInstance()",
+      "src/main/java/org/springframework/asm/MethodWriter.java",
+      1372
+    ],
+    [
+      "src/main/java/org/springframework/asm/MethodWriter.java::org.springframework.asm.MethodWriter.visitSwitchInsn:method(Label,Label[])",
+      "src/main/java/org/springframework/asm/MethodWriter.java::org.springframework.asm.MethodWriter.addSuccessorToCurrentBasicBlock:method(int,Label)",
+      "calls",
+      "heuristic",
+      "addSuccessorToCurrentBasicBlock(Edge.JUMP, label)",
+      "src/main/java/org/springframework/asm/MethodWriter.java",
+      1371
+    ],
+    [
+      "src/main/java/org/springframework/asm/MethodWriter.java::org.springframework.asm.MethodWriter.visitSwitchInsn:method(Label,Label[])",
+      "src/main/java/org/springframework/asm/MethodWriter.java::org.springframework.asm.MethodWriter.addSuccessorToCurrentBasicBlock:method(int,Label)",
+      "calls",
+      "heuristic",
+      "addSuccessorToCurrentBasicBlock(relativeStackSize, label)",
+      "src/main/java/org/springframework/asm/MethodWriter.java",
+      1380
+    ],
+    [
+      "src/main/java/org/springframework/cglib/beans/BeanGenerator.java::org.springframework.cglib.beans.BeanGenerator.addProperties:method(BeanGenerator,PropertyDescriptor[])",
+      "src/main/java/org/springframework/cglib/beans/BeanGenerator.java::org.springframework.cglib.beans.BeanGenerator.addProperty:method(String,Class)",
+      "calls",
+      "heuristic",
+      "gen.addProperty(descriptor.getName(), descriptor.getPropertyType())",
+      "src/main/java/org/springframework/cglib/beans/BeanGenerator.java",
+      165
+    ],
+    [
+      "src/main/java/org/springframework/cglib/core/EmitUtils.java::org.springframework.cglib.core.EmitUtils.wrap_undeclared_throwable:method(CodeEmitter,Block,Type[],Type)",
+      "src/main/java/org/springframework/cglib/core/CodeEmitter.java::org.springframework.cglib.core.CodeEmitter.catch_exception:method(Block,Type)",
+      "calls",
+      "heuristic",
+      "e.catch_exception(handler, exception)",
+      "src/main/java/org/springframework/cglib/core/EmitUtils.java",
+      929
+    ],
+    [
+      "src/main/java/org/springframework/cglib/core/TypeUtils.java::org.springframework.cglib.core.TypeUtils.getStackSize:method(Type[])",
+      "src/main/java/org/springframework/asm/Type.java::org.springframework.asm.Type.getSize:method()",
+      "calls",
+      "heuristic",
+      "type.getSize()",
+      "src/main/java/org/springframework/cglib/core/TypeUtils.java",
+      158
+    ],
+    [
+      "src/main/java/org/springframework/cglib/proxy/Enhancer.java::org.springframework.cglib.proxy.Enhancer.getMethods:method(Class,Class[],List,List,Set)",
+      "src/main/java/org/springframework/cglib/core/ReflectUtils.java::org.springframework.cglib.core.ReflectUtils.addAllMethods:method(Class,List)",
+      "calls",
+      "heuristic",
+      "ReflectUtils.addAllMethods(element, target)",
+      "src/main/java/org/springframework/cglib/proxy/Enhancer.java",
+      632
+    ],
+    [
+      "src/main/java/org/springframework/cglib/proxy/MixinEverythingEmitter.java::org.springframework.cglib.proxy.MixinEverythingEmitter.getInterfaces:method(Class[])",
+      "src/main/java/org/springframework/cglib/core/ReflectUtils.java::org.springframework.cglib.core.ReflectUtils.addAllInterfaces:method(Class,List)",
+      "calls",
+      "heuristic",
+      "ReflectUtils.addAllInterfaces(clazz, list)",
+      "src/main/java/org/springframework/cglib/proxy/MixinEverythingEmitter.java",
+      45
+    ],
+    [
+      "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java::org.springframework.core.annotation.TypeMappedAnnotations.AggregatesCollector.addAggregateAnnotations:method(List<Annotation>,Annotation[])",
+      "src/main/java/org/springframework/core/annotation/RepeatableContainers.java::org.springframework.core.annotation.RepeatableContainers.findRepeatedAnnotations:method(Annotation)",
+      "calls",
+      "heuristic",
+      "repeatableContainers.findRepeatedAnnotations(annotation)",
+      "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java",
+      473
+    ],
+    [
+      "src/main/java/org/springframework/core/type/classreading/SimpleAnnotationMetadataReadingVisitor.java::org.springframework.core.type.classreading.SimpleAnnotationMetadataReadingVisitor.visit:method(int,int,String,String,String,String[])",
+      "src/main/java/org/springframework/core/type/classreading/SimpleAnnotationMetadataReadingVisitor.java::org.springframework.core.type.classreading.SimpleAnnotationMetadataReadingVisitor.toClassName:method(String)",
+      "calls",
+      "heuristic",
+      "toClassName(element)",
+      "src/main/java/org/springframework/core/type/classreading/SimpleAnnotationMetadataReadingVisitor.java",
+      87
+    ],
+    [
+      "src/main/java/org/springframework/util/AntPathMatcher.java::org.springframework.util.AntPathMatcher.isPotentialMatch:method(String,String[])",
+      "src/main/java/org/springframework/util/AntPathMatcher.java::org.springframework.util.AntPathMatcher.isWildcardChar:method(char)",
+      "calls",
+      "heuristic",
+      "isWildcardChar(pattDir.charAt(0))",
+      "src/main/java/org/springframework/util/AntPathMatcher.java",
+      351
+    ],
+    [
+      "src/main/java/org/springframework/util/AntPathMatcher.java::org.springframework.util.AntPathMatcher.isPotentialMatch:method(String,String[])",
+      "src/main/java/org/springframework/util/AntPathMatcher.java::org.springframework.util.AntPathMatcher.skipSegment:method(String,int,String)",
+      "calls",
+      "heuristic",
+      "skipSegment(path, pos, pattDir)",
+      "src/main/java/org/springframework/util/AntPathMatcher.java",
+      349
+    ],
+    [
+      "src/main/java/org/springframework/util/AntPathMatcher.java::org.springframework.util.AntPathMatcher.isPotentialMatch:method(String,String[])",
+      "src/main/java/org/springframework/util/AntPathMatcher.java::org.springframework.util.AntPathMatcher.skipSeparator:method(String,int,String)",
+      "calls",
+      "heuristic",
+      "skipSeparator(path, pos, this.pathSeparator)",
+      "src/main/java/org/springframework/util/AntPathMatcher.java",
+      347
+    ]
+  ],
+  "removed_edges": [],
+  "scope": "Same Spring corpus; edge delta is not independently verified precision."
+}

@@ -1,0 +1,45 @@
+{
+  "baseline_commit": "e1f1d09",
+  "source": "class C:\n    def helper(self): events.append('original')\n    def run(self): self.helper()\nC.helper = lambda self: events.append('replacement')\nC().run()\n",
+  "runtime_events": [
+    "replacement"
+  ],
+  "observations": {
+    "before": {
+      "parser_sha256": "c3a03b6aa28ecd22a8a48fec6c1c80b391a5643068e3e390fb15e117d2744181",
+      "reference": {
+        "source": "fixture.py::C.run:method",
+        "scope_id": "fixture.py::C.run:method",
+        "kind": "calls",
+        "name": "self.helper",
+        "path": "fixture.py",
+        "line": 3,
+        "evidence": "self.helper",
+        "resolved": false,
+        "reason": "dynamic, external, shadowed, ambiguous or unknown name",
+        "retrieval_candidates": [
+          {
+            "target": "fixture.py::C.helper:method",
+            "confidence": "retrieval_only",
+            "reason": "lexical instance-receiver member; runtime dispatch and external mutation unverified"
+          }
+        ]
+      }
+    },
+    "after": {
+      "parser_sha256": "ffc37f48fc8a4764a3091c2f16cef04589a6bddced39d8b4759ab4df01f0b38a",
+      "reference": {
+        "source": "fixture.py::C.run:method",
+        "scope_id": "fixture.py::C.run:method",
+        "kind": "calls",
+        "name": "self.helper",
+        "path": "fixture.py",
+        "line": 3,
+        "evidence": "self.helper",
+        "resolved": false,
+        "reason": "dynamic, external, shadowed, ambiguous or unknown name"
+      }
+    }
+  },
+  "scope": "Literal generated fixture only; does not execute repository source or prove general mutation analysis."
+}

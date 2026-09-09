@@ -1,0 +1,284 @@
+{
+  "baseline": {
+    "schema": "columbus.exploration-observation/v1",
+    "case": "archive-safe-redirect",
+    "condition": "baseline",
+    "repeat": 1,
+    "model_requested": "gpt-5.6-sol",
+    "effort_requested": "xhigh",
+    "evidence_mode": "saved_archive",
+    "elapsed_seconds": 157.54,
+    "return_code": 0,
+    "timed_out": false,
+    "source_unchanged": true,
+    "usage": {
+      "input_tokens": 29960,
+      "cached_input_tokens": 18048,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 4581,
+      "reasoning_output_tokens": 3244,
+      "uncached_input_tokens": 11912
+    },
+    "commands": [
+      {
+        "command": "/bin/zsh -lc \"rg -n --glob '*.py' --glob '\"'!tests/**'\"' 'url_has_allowed_host_and_scheme' django\"",
+        "exit_code": 0,
+        "output_bytes": 779,
+        "output_sha256": "66c11fc9067c2e7939f65def108af817e6e2ea72e72357c81559db8da5419bd0"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/auth/views.py | sed -n '1,90p'\"",
+        "exit_code": 0,
+        "output_bytes": 4173,
+        "output_sha256": "1b4698352d71443a302fb4a67a783f3e29d894ffa0205229ba64976981ec5451"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/views/i18n.py | sed -n '1,85p'\"",
+        "exit_code": 0,
+        "output_bytes": 3675,
+        "output_sha256": "8756347e16c653bf7e56453462e9c6f46694cff1c369c3f100aef3411933e647"
+      }
+    ],
+    "command_count": 3,
+    "command_output_bytes": 8627,
+    "failed_commands": 0,
+    "other_tool_types": [],
+    "runtime_warnings": [],
+    "turn_failed": false,
+    "quality": {
+      "passed": true,
+      "findings": [
+        {
+          "id": "RedirectURLMixin.get_redirect_url",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "set_language",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "__exact_caller_set__",
+          "passed": true,
+          "reason": "no extra callers"
+        }
+      ],
+      "grader_version": "caller-enumeration-1",
+      "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+    },
+    "index_preflight": null,
+    "archive_preflight": {
+      "passed": true,
+      "archive_sha256": "b93921c806a24628528d88c4045969f9d70b6236c415a62be23dcf6c903f39e6",
+      "revision": "5474fa22b418194d5c05",
+      "source_files_verified": 6928,
+      "indexed_source_files_verified": 5465,
+      "counts": {
+        "files": 5465,
+        "nodes": 46630,
+        "scopes": 46964,
+        "edges": 86828,
+        "references": 188003,
+        "imports": 18268,
+        "diagnostics": 1
+      },
+      "consumer_index_absent": true
+    },
+    "archive_postflight": {
+      "passed": true,
+      "archive_sha256": "b93921c806a24628528d88c4045969f9d70b6236c415a62be23dcf6c903f39e6",
+      "revision": "5474fa22b418194d5c05",
+      "source_files_verified": 6928,
+      "indexed_source_files_verified": 5465,
+      "counts": {
+        "files": 5465,
+        "nodes": 46630,
+        "scopes": 46964,
+        "edges": 86828,
+        "references": 188003,
+        "imports": 18268,
+        "diagnostics": 1
+      },
+      "consumer_index_absent": true
+    },
+    "answer": {
+      "findings": [
+        {
+          "id": "RedirectURLMixin.get_redirect_url",
+          "path": "django/contrib/auth/views.py",
+          "start_line": 24,
+          "end_line": 56,
+          "quote": "from django.utils.http import url_has_allowed_host_and_scheme, urlsafe_base64_decode\nfrom django.utils.translation import gettext_lazy as _\nfrom django.views.decorators.cache import never_cache\nfrom django.views.decorators.csrf import csrf_protect\nfrom django.views.decorators.debug import sensitive_post_parameters\nfrom django.views.generic.base import TemplateView\nfrom django.views.generic.edit import FormView\n\nUserModel = get_user_model()\n\n\nclass RedirectURLMixin:\n    next_page = None\n    redirect_field_name = REDIRECT_FIELD_NAME\n    success_url_allowed_hosts = set()\n\n    def get_success_url(self):\n        return self.get_redirect_url() or self.get_default_redirect_url()\n\n    def get_redirect_url(self):\n        \"\"\"Return the user-originating redirect URL if it's safe.\"\"\"\n        redirect_to = self.request.POST.get(\n            self.redirect_field_name, self.request.GET.get(self.redirect_field_name)\n        )\n        url_is_safe = url_has_allowed_host_and_scheme(\n            url=redirect_to,\n            allowed_hosts=self.get_success_url_allowed_hosts(),\n            require_https=self.request.is_secure(),\n        )\n        return redirect_to if url_is_safe else \"\"\n\n    def get_success_url_allowed_hosts(self):\n        return {self.request.get_host(), *self.success_url_allowed_hosts}",
+          "explanation": "The target is directly imported from django.utils.http. Whenever get_redirect_url() itself executes, its call is unconditional. The candidate is the redirect-field value from POST, falling back to the corresponding GET value when the POST key is absent. Allowed hosts are the current request host plus every host configured in success_url_allowed_hosts. require_https is true exactly when the incoming request is secure, so an explicit non-HTTPS URL is rejected in that case. An accepted candidate is returned unchanged; a rejected candidate becomes an empty string. The neighboring get_success_url() treats that empty string as false and uses get_default_redirect_url(), which resolves next_page or raises ImproperlyConfigured when no default exists. This finding belongs lexically to the mixin method; subclasses and get_success_url() may reach it at runtime but contain no direct target call and are not separate callers."
+        },
+        {
+          "id": "set_language",
+          "path": "django/views/i18n.py",
+          "start_line": 30,
+          "end_line": 56,
+          "quote": "def set_language(request):\n    \"\"\"\n    Redirect to a given URL while setting the chosen language in the language\n    cookie. The URL and the language code need to be specified in the request\n    parameters.\n\n    Since this view changes how the user will see the rest of the site, it must\n    only be accessed as a POST request. If called as a GET request, it will\n    redirect to the page in the request (the 'next' parameter) without changing\n    any state.\n    \"\"\"\n    next_url = request.POST.get(\"next\", request.GET.get(\"next\"))\n    if (\n        next_url or request.accepts(\"text/html\")\n    ) and not url_has_allowed_host_and_scheme(\n        url=next_url,\n        allowed_hosts={request.get_host()},\n        require_https=request.is_secure(),\n    ):\n        next_url = request.META.get(\"HTTP_REFERER\")\n        if not url_has_allowed_host_and_scheme(\n            url=next_url,\n            allowed_hosts={request.get_host()},\n            require_https=request.is_secure(),\n        ):\n            next_url = \"/\"\n    response = HttpResponseRedirect(next_url) if next_url else HttpResponse(status=204)",
+          "explanation": "This is a module-level function, not a View receiver method; the local target name is directly imported from django.utils.http at line 12. It contains two source-level direct calls and is therefore enumerated once. The first candidate is POST['next'] with GET['next'] as the missing-key default. That call executes only when next_url is truthy or the request accepts text/html; if both are false, short-circuiting bypasses both calls and the falsey URL produces a 204 response. Both calls allow only request.get_host() and require HTTPS exactly when request.is_secure() is true. If the first call accepts the candidate, fallback is bypassed and the response redirects to it. If it rejects, HTTP_REFERER becomes the second candidate and the second call executes. An accepted referrer is retained; a rejected or absent referrer is replaced with '/'. The resulting truthy URL is redirected to, while a falsey URL yields 204. Later POST-only language handling may translate that selected URL and set the language cookie, but it is not another call to the target. The second call is lexically present even though runtime control flow reaches it only after the first check rejects."
+        }
+      ]
+    },
+    "prompt_bytes": 1726,
+    "events_sha256": "da8d687b6e131f827b93515588ffeb439f361deb601a80c3cb9745444400260b"
+  },
+  "columbus": {
+    "schema": "columbus.exploration-observation/v1",
+    "case": "archive-safe-redirect",
+    "condition": "columbus",
+    "repeat": 1,
+    "model_requested": "gpt-5.6-sol",
+    "effort_requested": "xhigh",
+    "evidence_mode": "saved_archive",
+    "elapsed_seconds": 228.52,
+    "return_code": 0,
+    "timed_out": false,
+    "source_unchanged": true,
+    "usage": {
+      "input_tokens": 90104,
+      "cached_input_tokens": 71680,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 5909,
+      "reasoning_output_tokens": 3990,
+      "uncached_input_tokens": 18424
+    },
+    "commands": [
+      {
+        "command": "/bin/zsh -lc \"sed -n '1,240p' /private/tmp/columbus-archive-safe-redirect-trial/runtime/SKILL.md\"",
+        "exit_code": 0,
+        "output_bytes": 5839,
+        "output_sha256": "960eeaba328befde10e80d7b32908cc0a20e381bb6a57d6a59ed6fbac8007e57"
+      },
+      {
+        "command": "/bin/zsh -lc \"sed -n '1,280p' /private/tmp/columbus-archive-safe-redirect-trial/runtime/references/archive.md\"",
+        "exit_code": 0,
+        "output_bytes": 7117,
+        "output_sha256": "69d9166f5a5f0fe927a59a2f5c691ed349899dde95b93403673ec933ba136115"
+      },
+      {
+        "command": "/bin/zsh -lc '/Users/rex/Desktop/columbus/.venv/bin/python /private/tmp/columbus-archive-safe-redirect-trial/runtime/columbus.py archive-search url_has_allowed_host_and_scheme --input /private/tmp/columbus-archive-safe-redirect-trial/graph.jsonl.xz --budget-bytes 6000 --format text'",
+        "exit_code": 0,
+        "output_bytes": 1235,
+        "output_sha256": "7cf38c87d83e610b79c301e1651504fa3fb915a22644671eda923e6f6e499c4e"
+      },
+      {
+        "command": "/bin/zsh -lc \"/Users/rex/Desktop/columbus/.venv/bin/python /private/tmp/columbus-archive-safe-redirect-trial/runtime/columbus.py archive-neighbors 'django/utils/http.py::url_has_allowed_host_and_scheme:function' --input /private/tmp/columbus-archive-safe-redirect-trial/graph.jsonl.xz --repo . --direction in --kinds calls --path 'django/*' --context-lines 2 --budget-bytes 6000 --format text\"",
+        "exit_code": 0,
+        "output_bytes": 4008,
+        "output_sha256": "3472e44503c439c6c3e60ec2dc61d8f6f91affa60804dd4f46a66721f7f43abd"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n --glob '*.py' 'url_has_allowed_host_and_scheme' django\"",
+        "exit_code": 0,
+        "output_bytes": 779,
+        "output_sha256": "bddc561cbf2ef9a563ccf68f2e1ccf0bf4fc6676dc64f46b25df586c38e81680"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/auth/views.py | sed -n '1,75p'\"",
+        "exit_code": 0,
+        "output_bytes": 3388,
+        "output_sha256": "dfafc16873d353df4f55e6eead653c68a8ecbb9504be24814b5348b583ae0b7a"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/views/i18n.py | sed -n '1,85p'\"",
+        "exit_code": 0,
+        "output_bytes": 3675,
+        "output_sha256": "8756347e16c653bf7e56453462e9c6f46694cff1c369c3f100aef3411933e647"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/utils/http.py | sed -n '235,310p'\"",
+        "exit_code": 0,
+        "output_bytes": 3688,
+        "output_sha256": "f6ae6b57577fd45067fae18fff405c698ad51d61c64189250da25cc74887a8e7"
+      }
+    ],
+    "command_count": 8,
+    "command_output_bytes": 29729,
+    "failed_commands": 0,
+    "other_tool_types": [],
+    "runtime_warnings": [],
+    "turn_failed": false,
+    "quality": {
+      "passed": true,
+      "findings": [
+        {
+          "id": "RedirectURLMixin.get_redirect_url",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "set_language",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "__exact_caller_set__",
+          "passed": true,
+          "reason": "no extra callers"
+        }
+      ],
+      "grader_version": "caller-enumeration-1",
+      "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+    },
+    "index_preflight": null,
+    "archive_preflight": {
+      "passed": true,
+      "archive_sha256": "b93921c806a24628528d88c4045969f9d70b6236c415a62be23dcf6c903f39e6",
+      "revision": "5474fa22b418194d5c05",
+      "source_files_verified": 6928,
+      "indexed_source_files_verified": 5465,
+      "counts": {
+        "files": 5465,
+        "nodes": 46630,
+        "scopes": 46964,
+        "edges": 86828,
+        "references": 188003,
+        "imports": 18268,
+        "diagnostics": 1
+      },
+      "consumer_index_absent": true
+    },
+    "archive_postflight": {
+      "passed": true,
+      "archive_sha256": "b93921c806a24628528d88c4045969f9d70b6236c415a62be23dcf6c903f39e6",
+      "revision": "5474fa22b418194d5c05",
+      "source_files_verified": 6928,
+      "indexed_source_files_verified": 5465,
+      "counts": {
+        "files": 5465,
+        "nodes": 46630,
+        "scopes": 46964,
+        "edges": 86828,
+        "references": 188003,
+        "imports": 18268,
+        "diagnostics": 1
+      },
+      "consumer_index_absent": true
+    },
+    "answer": {
+      "findings": [
+        {
+          "id": "RedirectURLMixin.get_redirect_url",
+          "path": "django/contrib/auth/views.py",
+          "start_line": 24,
+          "end_line": 56,
+          "quote": "from django.utils.http import url_has_allowed_host_and_scheme, urlsafe_base64_decode\nfrom django.utils.translation import gettext_lazy as _\nfrom django.views.decorators.cache import never_cache\nfrom django.views.decorators.csrf import csrf_protect\nfrom django.views.decorators.debug import sensitive_post_parameters\nfrom django.views.generic.base import TemplateView\nfrom django.views.generic.edit import FormView\n\nUserModel = get_user_model()\n\n\nclass RedirectURLMixin:\n    next_page = None\n    redirect_field_name = REDIRECT_FIELD_NAME\n    success_url_allowed_hosts = set()\n\n    def get_success_url(self):\n        return self.get_redirect_url() or self.get_default_redirect_url()\n\n    def get_redirect_url(self):\n        \"\"\"Return the user-originating redirect URL if it's safe.\"\"\"\n        redirect_to = self.request.POST.get(\n            self.redirect_field_name, self.request.GET.get(self.redirect_field_name)\n        )\n        url_is_safe = url_has_allowed_host_and_scheme(\n            url=redirect_to,\n            allowed_hosts=self.get_success_url_allowed_hosts(),\n            require_https=self.request.is_secure(),\n        )\n        return redirect_to if url_is_safe else \"\"\n\n    def get_success_url_allowed_hosts(self):\n        return {self.request.get_host(), *self.success_url_allowed_hosts}",
+          "explanation": "This is the RedirectURLMixin receiver method, and its unqualified callee is the public function imported directly from django.utils.http, not the similarly named private helper in django.utils.http. Its candidate is the redirect-field value from POST, with the GET value used only as dict.get()'s default when that POST key is absent. The allowed-host set contains the request host plus every configured success_url_allowed_hosts entry. require_https follows request.is_secure(), so a secure request disallows non-HTTPS network URLs. Lexically the method contains one direct call; at runtime it is unconditional once this method is entered, even when the candidate is empty or None. An accepted candidate is returned, while a rejected candidate becomes an empty string. The surrounding get_success_url() treats that empty string as false and falls back to get_default_redirect_url(), which resolves next_page or raises ImproperlyConfigured if no default was supplied. get_success_url() is therefore only a transitive caller and is not a separate finding."
+        },
+        {
+          "id": "set_language",
+          "path": "django/views/i18n.py",
+          "start_line": 30,
+          "end_line": 63,
+          "quote": "def set_language(request):\n    \"\"\"\n    Redirect to a given URL while setting the chosen language in the language\n    cookie. The URL and the language code need to be specified in the request\n    parameters.\n\n    Since this view changes how the user will see the rest of the site, it must\n    only be accessed as a POST request. If called as a GET request, it will\n    redirect to the page in the request (the 'next' parameter) without changing\n    any state.\n    \"\"\"\n    next_url = request.POST.get(\"next\", request.GET.get(\"next\"))\n    if (\n        next_url or request.accepts(\"text/html\")\n    ) and not url_has_allowed_host_and_scheme(\n        url=next_url,\n        allowed_hosts={request.get_host()},\n        require_https=request.is_secure(),\n    ):\n        next_url = request.META.get(\"HTTP_REFERER\")\n        if not url_has_allowed_host_and_scheme(\n            url=next_url,\n            allowed_hosts={request.get_host()},\n            require_https=request.is_secure(),\n        ):\n            next_url = \"/\"\n    response = HttpResponseRedirect(next_url) if next_url else HttpResponse(status=204)\n    if request.method == \"POST\":\n        lang_code = request.POST.get(LANGUAGE_QUERY_PARAMETER)\n        if lang_code and check_for_language(lang_code):\n            if next_url:\n                next_trans = translate_url(next_url, lang_code)\n                if next_trans != next_url:\n                    response = HttpResponseRedirect(next_trans)",
+          "explanation": "This is the module-level set_language function; django/views/i18n.py directly imports the public django.utils.http.url_has_allowed_host_and_scheme, so both unqualified calls resolve to that function rather than its private underscore-prefixed helper. The initial candidate is POST's next value, using GET's next value as the default when the POST key is absent. Both calls supply the singleton allowed-host set {request.get_host()} and set require_https from request.is_secure(). The first call executes only when next_url is truthy or the request accepts text/html; otherwise short-circuiting bypasses it, leaves next_url empty, and produces a 204 response. If the first call accepts the candidate, the fallback block is skipped and that URL is used. If it rejects, HTTP_REFERER becomes the second candidate and the second direct call always executes; an accepted referrer is retained, while a rejected or empty referrer falls back to \"/\". A resulting nonempty URL produces a redirect, and a valid POSTed language may replace it with its translated form. Thus this one lexical caller contains two source-level direct calls with distinct runtime reachability conditions."
+        }
+      ]
+    },
+    "prompt_bytes": 2451,
+    "events_sha256": "96468e33f9af64284b83f06dc5ef3cac50fca9c1adeeb3d9c218cacbb25a7071"
+  }
+}

@@ -188,6 +188,35 @@ class BootstrapTests(unittest.TestCase):
         self.assertIn("--no-index", pip)
         self.assertEqual(pip[pip.index("--find-links") + 1], str(wheels.resolve()))
 
+    def test_changed_wheelhouse_upgrades_ready_runtime_and_failure_is_retryable(self):
+        runtime, _ = self.environment()
+        wheels = Path(self.temporary.name) / "wheels"
+        wheels.mkdir()
+        wheel = wheels / "example-1-py3-none-any.whl"
+        wheel.write_bytes(b"first candidate")
+        calls = []
+        fail = False
+        def invoke(command, **kwargs):
+            calls.append(command)
+            return subprocess.CompletedProcess(command, int(fail and "pip" in command))
+        with patch.object(b, "invoke", side_effect=invoke):
+            b.ensure_runtime(self.repo, mcp=False, offline=False, wheelhouse=wheels)
+            pip = next(command for command in calls if "pip" in command)
+            self.assertIn("--upgrade", pip)
+            self.assertIn("--force-reinstall", pip)
+            original = b.runtime_state(self.repo, runtime)["wheelhouse_sha256"]
+            calls.clear()
+            b.ensure_runtime(self.repo, mcp=False, offline=False, wheelhouse=wheels)
+            self.assertFalse(any("pip" in command for command in calls))
+            wheel.write_bytes(b"replacement candidate")
+            fail = True
+            with self.assertRaises(b.SetupError):
+                b.ensure_runtime(self.repo, mcp=False, offline=False, wheelhouse=wheels)
+            self.assertEqual(b.runtime_state(self.repo, runtime)["wheelhouse_sha256"], original)
+            fail = False
+            b.ensure_runtime(self.repo, mcp=False, offline=False, wheelhouse=wheels)
+            self.assertNotEqual(b.runtime_state(self.repo, runtime)["wheelhouse_sha256"], original)
+
     def test_mcp_readiness_includes_import_and_exact_version(self):
         calls = []
         def invoke(command, **kwargs):

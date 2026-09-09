@@ -1,0 +1,359 @@
+{
+  "scope": "All eleven newly added edges only; selection by delta, not an unbiased precision sample. Reviewed against raw source and declared receiver/import/signature context; no whole-Spring compiler or runtime execution.",
+  "reviewed": 11,
+  "static_declaration_matches": 11,
+  "edges": [
+    {
+      "source": "src/main/java/org/springframework/cglib/core/EmitUtils.java::org.springframework.cglib.core.EmitUtils.append_string_helper:method(CodeEmitter,Type,ArrayDelimiters,CustomizerRegistry,ProcessArrayCallback)",
+      "target": "src/main/java/org/springframework/cglib/core/internal/CustomizerRegistry.java::org.springframework.cglib.core.internal.CustomizerRegistry.get:method(Class<T>)",
+      "line": 670,
+      "static_declaration_matches_source": true,
+      "runtime_dispatch_proven": false,
+      "compiler_checked_on_this_real_source": false,
+      "review": "registry is a CustomizerRegistry formal parameter with the explicit internal-package import. Its declared get(Class<T>) accepts the shown Customizer or HashCodeCustomizer class token.",
+      "evidence": [
+        {
+          "path": "src/main/java/org/springframework/cglib/core/EmitUtils.java",
+          "source_sha256": "13ded91dd0b98cf9e744742783115a3d5a81571d9d666540c7130d47ff530c92",
+          "start_line": 665,
+          "end_line": 671,
+          "source": "                e.invoke_virtual(Constants.TYPE_STRING_BUFFER, APPEND_STRING);\n            }\n        } else {\n            e.dup();\n            e.ifnull(skip);\n            for (Customizer customizer : registry.get(Customizer.class)) {\n                customizer.customize(e, type);"
+        },
+        {
+          "path": "src/main/java/org/springframework/cglib/core/EmitUtils.java",
+          "source_sha256": "13ded91dd0b98cf9e744742783115a3d5a81571d9d666540c7130d47ff530c92",
+          "start_line": 622,
+          "end_line": 625,
+          "source": "    private static void append_string_helper(CodeEmitter e,\n                                             Type type,\n                                             ArrayDelimiters delims,\n                                             CustomizerRegistry registry,"
+        },
+        {
+          "path": "src/main/java/org/springframework/cglib/core/internal/CustomizerRegistry.java",
+          "source_sha256": "5d35321580099180722aeba9fef2db3e085b6e7db206c605b2441ca6c69ba04f",
+          "start_line": 31,
+          "end_line": 34,
+          "source": "    public <T> List<T> get(Class<T> klass) {\n        List<KeyFactoryCustomizer> list = customizers.get(klass);\n        if (list == null) {\n            return Collections.emptyList();"
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/cglib/core/EmitUtils.java::org.springframework.cglib.core.EmitUtils.hash_object:method(CodeEmitter,Type,CustomizerRegistry)",
+      "target": "src/main/java/org/springframework/cglib/core/internal/CustomizerRegistry.java::org.springframework.cglib.core.internal.CustomizerRegistry.get:method(Class<T>)",
+      "line": 445,
+      "static_declaration_matches_source": true,
+      "runtime_dispatch_proven": false,
+      "compiler_checked_on_this_real_source": false,
+      "review": "registry is a CustomizerRegistry formal parameter with the explicit internal-package import. Its declared get(Class<T>) accepts the shown Customizer or HashCodeCustomizer class token.",
+      "evidence": [
+        {
+          "path": "src/main/java/org/springframework/cglib/core/EmitUtils.java",
+          "source_sha256": "13ded91dd0b98cf9e744742783115a3d5a81571d9d666540c7130d47ff530c92",
+          "start_line": 440,
+          "end_line": 446,
+          "source": "                customHashCode = true;\n                break;\n            }\n        }\n        if (!customHashCode) {\n            for (Customizer customizer : registry.get(Customizer.class)) {\n                customizer.customize(e, type);"
+        },
+        {
+          "path": "src/main/java/org/springframework/cglib/core/EmitUtils.java",
+          "source_sha256": "13ded91dd0b98cf9e744742783115a3d5a81571d9d666540c7130d47ff530c92",
+          "start_line": 431,
+          "end_line": 434,
+          "source": "    private static void hash_object(CodeEmitter e, Type type, CustomizerRegistry registry) {\n        // (f == null) ? 0 : f.hashCode();\n        Label skip = e.make_label();\n        Label end = e.make_label();"
+        },
+        {
+          "path": "src/main/java/org/springframework/cglib/core/internal/CustomizerRegistry.java",
+          "source_sha256": "5d35321580099180722aeba9fef2db3e085b6e7db206c605b2441ca6c69ba04f",
+          "start_line": 31,
+          "end_line": 34,
+          "source": "    public <T> List<T> get(Class<T> klass) {\n        List<KeyFactoryCustomizer> list = customizers.get(klass);\n        if (list == null) {\n            return Collections.emptyList();"
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/cglib/core/EmitUtils.java::org.springframework.cglib.core.EmitUtils.hash_object:method(CodeEmitter,Type,CustomizerRegistry)",
+      "target": "src/main/java/org/springframework/cglib/core/internal/CustomizerRegistry.java::org.springframework.cglib.core.internal.CustomizerRegistry.get:method(Class<T>)",
+      "line": 438,
+      "static_declaration_matches_source": true,
+      "runtime_dispatch_proven": false,
+      "compiler_checked_on_this_real_source": false,
+      "review": "registry is a CustomizerRegistry formal parameter with the explicit internal-package import. Its declared get(Class<T>) accepts the shown Customizer or HashCodeCustomizer class token.",
+      "evidence": [
+        {
+          "path": "src/main/java/org/springframework/cglib/core/EmitUtils.java",
+          "source_sha256": "13ded91dd0b98cf9e744742783115a3d5a81571d9d666540c7130d47ff530c92",
+          "start_line": 433,
+          "end_line": 439,
+          "source": "        Label skip = e.make_label();\n        Label end = e.make_label();\n        e.dup();\n        e.ifnull(skip);\n        boolean customHashCode = false;\n        for (HashCodeCustomizer customizer : registry.get(HashCodeCustomizer.class)) {\n            if (customizer.customize(e, type)) {"
+        },
+        {
+          "path": "src/main/java/org/springframework/cglib/core/EmitUtils.java",
+          "source_sha256": "13ded91dd0b98cf9e744742783115a3d5a81571d9d666540c7130d47ff530c92",
+          "start_line": 431,
+          "end_line": 434,
+          "source": "    private static void hash_object(CodeEmitter e, Type type, CustomizerRegistry registry) {\n        // (f == null) ? 0 : f.hashCode();\n        Label skip = e.make_label();\n        Label end = e.make_label();"
+        },
+        {
+          "path": "src/main/java/org/springframework/cglib/core/internal/CustomizerRegistry.java",
+          "source_sha256": "5d35321580099180722aeba9fef2db3e085b6e7db206c605b2441ca6c69ba04f",
+          "start_line": 31,
+          "end_line": 34,
+          "source": "    public <T> List<T> get(Class<T> klass) {\n        List<KeyFactoryCustomizer> list = customizers.get(klass);\n        if (list == null) {\n            return Collections.emptyList();"
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/OrderComparator.java::org.springframework.core.OrderComparator.getOrder:method(Object,OrderSourceProvider)",
+      "target": "src/main/java/org/springframework/util/ObjectUtils.java::org.springframework.util.ObjectUtils.toObjectArray:method(Object)",
+      "line": 106,
+      "static_declaration_matches_source": true,
+      "runtime_dispatch_proven": false,
+      "compiler_checked_on_this_real_source": false,
+      "review": "ObjectUtils is explicitly imported from org.springframework.util; orderSource is a local Object and the declared static method accepts Object.",
+      "evidence": [
+        {
+          "path": "src/main/java/org/springframework/core/OrderComparator.java",
+          "source_sha256": "59fb2de0700bb860ebf0679e194ba00fdf2cbaa98cdb5d6a03cce6b01c3593c3",
+          "start_line": 101,
+          "end_line": 107,
+          "source": "\t\tInteger order = null;\n\t\tif (obj != null && sourceProvider != null) {\n\t\t\tObject orderSource = sourceProvider.getOrderSource(obj);\n\t\t\tif (orderSource != null) {\n\t\t\t\tif (orderSource.getClass().isArray()) {\n\t\t\t\t\tfor (Object source : ObjectUtils.toObjectArray(orderSource)) {\n\t\t\t\t\t\torder = findOrder(source);"
+        },
+        {
+          "path": "src/main/java/org/springframework/core/OrderComparator.java",
+          "source_sha256": "59fb2de0700bb860ebf0679e194ba00fdf2cbaa98cdb5d6a03cce6b01c3593c3",
+          "start_line": 100,
+          "end_line": 103,
+          "source": "\tpublic int getOrder(@Nullable Object obj, @Nullable OrderSourceProvider sourceProvider) {\n\t\tInteger order = null;\n\t\tif (obj != null && sourceProvider != null) {\n\t\t\tObject orderSource = sourceProvider.getOrderSource(obj);"
+        },
+        {
+          "path": "src/main/java/org/springframework/util/ObjectUtils.java",
+          "source_sha256": "b0bc0e946f5903f48ef0b4d25a0ecf405c56b6975faf5d8a590169be4b91d7ba",
+          "start_line": 301,
+          "end_line": 304,
+          "source": "\tpublic static Object[] toObjectArray(@Nullable Object source) {\n\t\tif (source instanceof Object[] objects) {\n\t\t\treturn objects;\n\t\t}"
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/convert/support/GenericConversionService.java::org.springframework.core.convert.support.GenericConversionService.Converters.toString:method()",
+      "target": "src/main/java/org/springframework/core/convert/support/GenericConversionService.java::org.springframework.core.convert.support.GenericConversionService.Converters.getConverterStrings:method()",
+      "line": 592,
+      "static_declaration_matches_source": true,
+      "runtime_dispatch_proven": false,
+      "compiler_checked_on_this_real_source": false,
+      "review": "Unqualified zero-argument call in the same nested Converters class targets its private List<String> getter.",
+      "evidence": [
+        {
+          "path": "src/main/java/org/springframework/core/convert/support/GenericConversionService.java",
+          "source_sha256": "bec1c504c920803461502b8b0b22ce199ff7f7f27c0bf32ff7a9b612de2ec33d",
+          "start_line": 587,
+          "end_line": 593,
+          "source": "\n\t\t@Override\n\t\tpublic String toString() {\n\t\t\tStringBuilder builder = new StringBuilder();\n\t\t\tbuilder.append(\"ConversionService converters =\\n\");\n\t\t\tfor (String converterString : getConverterStrings()) {\n\t\t\t\tbuilder.append('\\t').append(converterString).append('\\n');"
+        },
+        {
+          "path": "src/main/java/org/springframework/core/convert/support/GenericConversionService.java",
+          "source_sha256": "bec1c504c920803461502b8b0b22ce199ff7f7f27c0bf32ff7a9b612de2ec33d",
+          "start_line": 588,
+          "end_line": 591,
+          "source": "\t\t@Override\n\t\tpublic String toString() {\n\t\t\tStringBuilder builder = new StringBuilder();\n\t\t\tbuilder.append(\"ConversionService converters =\\n\");"
+        },
+        {
+          "path": "src/main/java/org/springframework/core/convert/support/GenericConversionService.java",
+          "source_sha256": "bec1c504c920803461502b8b0b22ce199ff7f7f27c0bf32ff7a9b612de2ec33d",
+          "start_line": 598,
+          "end_line": 601,
+          "source": "\t\tprivate List<String> getConverterStrings() {\n\t\t\tList<String> converterStrings = new ArrayList<>();\n\t\t\tfor (ConvertersForPair convertersForPair : this.converters.values()) {\n\t\t\t\tconverterStrings.add(convertersForPair.toString());"
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/env/AbstractEnvironment.java::org.springframework.core.env.AbstractEnvironment.merge:method(ConfigurableEnvironment)",
+      "target": "src/main/java/org/springframework/core/env/ConfigurableEnvironment.java::org.springframework.core.env.ConfigurableEnvironment.getPropertySources:method()",
+      "line": 470,
+      "static_declaration_matches_source": true,
+      "runtime_dispatch_proven": false,
+      "compiler_checked_on_this_real_source": false,
+      "review": "parent is a ConfigurableEnvironment formal parameter; its interface declares this zero-argument getter. Concrete implementing runtime method is not identified.",
+      "evidence": [
+        {
+          "path": "src/main/java/org/springframework/core/env/AbstractEnvironment.java",
+          "source_sha256": "f20bd0e58d1fd695a9f729b784d84f4bd2df664b55a7869cfc84615fa5e695f2",
+          "start_line": 465,
+          "end_line": 471,
+          "source": "\t\treturn SpringProperties.getFlag(IGNORE_GETENV_PROPERTY_NAME);\n\t}\n\n\t@Override\n\tpublic void merge(ConfigurableEnvironment parent) {\n\t\tfor (PropertySource<?> ps : parent.getPropertySources()) {\n\t\t\tif (!this.propertySources.contains(ps.getName())) {"
+        },
+        {
+          "path": "src/main/java/org/springframework/core/env/AbstractEnvironment.java",
+          "source_sha256": "f20bd0e58d1fd695a9f729b784d84f4bd2df664b55a7869cfc84615fa5e695f2",
+          "start_line": 468,
+          "end_line": 471,
+          "source": "\t@Override\n\tpublic void merge(ConfigurableEnvironment parent) {\n\t\tfor (PropertySource<?> ps : parent.getPropertySources()) {\n\t\t\tif (!this.propertySources.contains(ps.getName())) {"
+        },
+        {
+          "path": "src/main/java/org/springframework/core/env/ConfigurableEnvironment.java",
+          "source_sha256": "b3e006a4957ea62e0c6791df65964da988d6b302a659b174fe5ad1b248afcf3f",
+          "start_line": 119,
+          "end_line": 119,
+          "source": "\tMutablePropertySources getPropertySources();"
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getResource:method(String)",
+      "target": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java::org.springframework.core.io.DefaultResourceLoader.getProtocolResolvers:method()",
+      "line": 158,
+      "static_declaration_matches_source": true,
+      "runtime_dispatch_proven": false,
+      "compiler_checked_on_this_real_source": false,
+      "review": "Unqualified zero-argument call matches the local getter returning Collection<ProtocolResolver>; no runtime override claim.",
+      "evidence": [
+        {
+          "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+          "source_sha256": "a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c",
+          "start_line": 153,
+          "end_line": 159,
+          "source": "\n\t@Override\n\tpublic Resource getResource(String location) {\n\t\tAssert.notNull(location, \"Location must not be null\");\n\n\t\tfor (ProtocolResolver protocolResolver : getProtocolResolvers()) {\n\t\t\tResource resource = protocolResolver.resolve(location, this);"
+        },
+        {
+          "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+          "source_sha256": "a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c",
+          "start_line": 154,
+          "end_line": 157,
+          "source": "\t@Override\n\tpublic Resource getResource(String location) {\n\t\tAssert.notNull(location, \"Location must not be null\");\n"
+        },
+        {
+          "path": "src/main/java/org/springframework/core/io/DefaultResourceLoader.java",
+          "source_sha256": "a80386107541683cd5f929e479be638ad2821d1a2cb0d7518225b2740e62801c",
+          "start_line": 129,
+          "end_line": 131,
+          "source": "\tpublic Collection<ProtocolResolver> getProtocolResolvers() {\n\t\treturn this.protocolResolvers;\n\t}"
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/core/type/filter/AbstractTypeHierarchyTraversingFilter.java::org.springframework.core.type.filter.AbstractTypeHierarchyTraversingFilter.match:method(MetadataReader,MetadataReaderFactory)",
+      "target": "src/main/java/org/springframework/core/type/ClassMetadata.java::org.springframework.core.type.ClassMetadata.getInterfaceNames:method()",
+      "line": 98,
+      "static_declaration_matches_source": true,
+      "runtime_dispatch_proven": false,
+      "compiler_checked_on_this_real_source": false,
+      "review": "metadata is explicitly declared ClassMetadata, imported from org.springframework.core.type; that interface declares String[] getInterfaceNames(). Concrete runtime implementation is not identified.",
+      "evidence": [
+        {
+          "path": "src/main/java/org/springframework/core/type/filter/AbstractTypeHierarchyTraversingFilter.java",
+          "source_sha256": "cf1701c1937c86897078cffa40a67b51de32f7afc9584cab3384d629a9bf2968",
+          "start_line": 93,
+          "end_line": 99,
+          "source": "\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\tif (this.considerInterfaces) {\n\t\t\tfor (String ifc : metadata.getInterfaceNames()) {\n\t\t\t\t// Optimization to avoid creating ClassReader for superclass"
+        },
+        {
+          "path": "src/main/java/org/springframework/core/type/filter/AbstractTypeHierarchyTraversingFilter.java",
+          "source_sha256": "cf1701c1937c86897078cffa40a67b51de32f7afc9584cab3384d629a9bf2968",
+          "start_line": 56,
+          "end_line": 59,
+          "source": "\t@Override\n\tpublic boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory)\n\t\t\tthrows IOException {\n"
+        },
+        {
+          "path": "src/main/java/org/springframework/core/type/ClassMetadata.java",
+          "source_sha256": "756de5e2040364932978ed182c470694c69372a081ec4c134cea5d79ab667208",
+          "start_line": 108,
+          "end_line": 108,
+          "source": "\tString[] getInterfaceNames();"
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/util/ReflectionUtils.java::org.springframework.util.ReflectionUtils.doWithFields:method(Class<?>,FieldCallback,FieldFilter)",
+      "target": "src/main/java/org/springframework/util/ReflectionUtils.java::org.springframework.util.ReflectionUtils.getDeclaredFields:method(Class<?>)",
+      "line": 722,
+      "static_declaration_matches_source": true,
+      "runtime_dispatch_proven": false,
+      "compiler_checked_on_this_real_source": false,
+      "review": "Unqualified call within ReflectionUtils targets its private static Class<?> -> Field[] helper; clazz and targetClass have declared Class<?> types.",
+      "evidence": [
+        {
+          "path": "src/main/java/org/springframework/util/ReflectionUtils.java",
+          "source_sha256": "79fbdf76b94d8ca292436326df49a76cacaa5517faba4b838bdbb138163cc9b5",
+          "start_line": 717,
+          "end_line": 723,
+          "source": "\t */\n\tpublic static void doWithFields(Class<?> clazz, FieldCallback fc, @Nullable FieldFilter ff) {\n\t\t// Keep backing up the inheritance hierarchy.\n\t\tClass<?> targetClass = clazz;\n\t\tdo {\n\t\t\tfor (Field field : getDeclaredFields(targetClass)) {\n\t\t\t\tif (ff != null && !ff.matches(field)) {"
+        },
+        {
+          "path": "src/main/java/org/springframework/util/ReflectionUtils.java",
+          "source_sha256": "79fbdf76b94d8ca292436326df49a76cacaa5517faba4b838bdbb138163cc9b5",
+          "start_line": 718,
+          "end_line": 721,
+          "source": "\tpublic static void doWithFields(Class<?> clazz, FieldCallback fc, @Nullable FieldFilter ff) {\n\t\t// Keep backing up the inheritance hierarchy.\n\t\tClass<?> targetClass = clazz;\n\t\tdo {"
+        },
+        {
+          "path": "src/main/java/org/springframework/util/ReflectionUtils.java",
+          "source_sha256": "79fbdf76b94d8ca292436326df49a76cacaa5517faba4b838bdbb138163cc9b5",
+          "start_line": 746,
+          "end_line": 749,
+          "source": "\tprivate static Field[] getDeclaredFields(Class<?> clazz) {\n\t\tAssert.notNull(clazz, \"Class must not be null\");\n\t\tField[] result = declaredFieldsCache.get(clazz);\n\t\tif (result == null) {"
+        }
+      ]
+    },
+    {
+      "source": "src/main/java/org/springframework/util/ReflectionUtils.java::org.springframework.util.ReflectionUtils.doWithLocalFields:method(Class<?>,FieldCallback)",
+      "target": "src/main/java/org/springframework/util/ReflectionUtils.java::org.springframework.util.ReflectionUtils.getDeclaredFields:method(Class<?>)",
+      "line": 689,
+      "static_declaration_matches_source": true,
+      "runtime_dispatch_proven": false,
+      "compiler_checked_on_this_real_source": false,
+      "review": "Unqualified call within ReflectionUtils targets its private static Class<?> -> Field[] helper; clazz and targetClass have declared Class<?> types.",
+      "evidence": [
+        {
+          "path": "src/main/java/org/springframework/util/ReflectionUtils.java",
+          "source_sha256": "79fbdf76b94d8ca292436326df49a76cacaa5517faba4b838bdbb138163cc9b5",
+          "start_line": 684,
+          "end_line": 690,
+          "source": "\t * @throws IllegalStateException if introspection fails\n\t * @since 4.2\n\t * @see #doWithFields\n\t */\n\tpublic static void doWithLocalFields(Class<?> clazz, FieldCallback fc) {\n\t\tfor (Field field : getDeclaredFields(clazz)) {\n\t\t\ttry {"
+        },
+        {
+          "path": "src/main/java/org/springframework/util/ReflectionUtils.java",
+          "source_sha256": "79fbdf76b94d8ca292436326df49a76cacaa5517faba4b838bdbb138163cc9b5",
+          "start_line": 688,
+          "end_line": 691,
+          "source": "\tpublic static void doWithLocalFields(Class<?> clazz, FieldCallback fc) {\n\t\tfor (Field field : getDeclaredFields(clazz)) {\n\t\t\ttry {\n\t\t\t\tfc.doWith(field);"
+        },
+        {
+          "path": "src/main/java/org/springframework/util/ReflectionUtils.java",
+          "source_sha256": "79fbdf76b94d8ca292436326df49a76cacaa5517faba4b838bdbb138163cc9b5",
+          "start_line": 746,
+          "end_line": 749,
+          "source": "\tprivate static Field[] getDeclaredFields(Class<?> clazz) {\n\t\tAssert.notNull(clazz, \"Class must not be null\");\n\t\tField[] result = declaredFieldsCache.get(clazz);\n\t\tif (result == null) {"
+        }
+      ]
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotationTypeMappingsTests.java::org.springframework.core.annotation.AnnotationTypeMappingsTests.getMapping:method(AnnotationTypeMappings,Class<?extendsAnnotation>)",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationTypeMappingsTests.java::org.springframework.core.annotation.AnnotationTypeMappingsTests.getAll:method(AnnotationTypeMappings)",
+      "line": 458,
+      "static_declaration_matches_source": true,
+      "runtime_dispatch_proven": false,
+      "compiler_checked_on_this_real_source": false,
+      "review": "Unqualified call in the test class targets its private helper accepting the AnnotationTypeMappings formal parameter.",
+      "evidence": [
+        {
+          "path": "src/test/java/org/springframework/core/annotation/AnnotationTypeMappingsTests.java",
+          "source_sha256": "2467fac55a89895e2bdc29c770b29c07e3cf37eea48ef327366e22d5ec5b1b27",
+          "start_line": 453,
+          "end_line": 459,
+          "source": "\t}\n\n\tprivate AnnotationTypeMapping getMapping(AnnotationTypeMappings mappings,\n\t\t\tClass<? extends Annotation> annotationType) {\n\n\t\tfor (AnnotationTypeMapping candidate : getAll(mappings)) {\n\t\t\tif (candidate.getAnnotationType() == annotationType) {"
+        },
+        {
+          "path": "src/test/java/org/springframework/core/annotation/AnnotationTypeMappingsTests.java",
+          "source_sha256": "2467fac55a89895e2bdc29c770b29c07e3cf37eea48ef327366e22d5ec5b1b27",
+          "start_line": 455,
+          "end_line": 458,
+          "source": "\tprivate AnnotationTypeMapping getMapping(AnnotationTypeMappings mappings,\n\t\t\tClass<? extends Annotation> annotationType) {\n\n\t\tfor (AnnotationTypeMapping candidate : getAll(mappings)) {"
+        },
+        {
+          "path": "src/test/java/org/springframework/core/annotation/AnnotationTypeMappingsTests.java",
+          "source_sha256": "2467fac55a89895e2bdc29c770b29c07e3cf37eea48ef327366e22d5ec5b1b27",
+          "start_line": 466,
+          "end_line": 469,
+          "source": "\tprivate List<AnnotationTypeMapping> getAll(AnnotationTypeMappings mappings) {\n\t\t// AnnotationTypeMappings does not implement Iterable so we don't create\n\t\t// too many garbage Iterators\n\t\treturn IntStream.range(0, mappings.size()).mapToObj(mappings::get).collect(toList());"
+        }
+      ]
+    }
+  ]
+}

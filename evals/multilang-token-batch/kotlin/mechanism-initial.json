@@ -1,0 +1,8 @@
+{
+  "passed": false,
+  "queries": [
+    "src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt::org.springframework.aot.hint.getTypeHint:function()",
+    "src/main/java/org/springframework/aot/hint/TypeHint.java::org.springframework.aot.hint.TypeHint:class"
+  ],
+  "error": "Declaration is ambiguous or absent for queries: 'src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt::org.s'...; use archive-search and an exact ID"
+}

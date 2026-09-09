@@ -1,0 +1,129 @@
+{
+  "source_sha256": "f22b6d759e93f17091cecfaf66f16f8f86fb74756d2b505b62d7ef57f001f44b",
+  "source_unchanged": true,
+  "runs": [
+    {
+      "refresh": {
+        "mode": "fast",
+        "check": "content_hash_verified",
+        "parsed_files": 1,
+        "cached_parses_loaded": 0,
+        "reused_files": 0,
+        "metadata_reused_files": 0,
+        "added_files": 1,
+        "removed_files": 0,
+        "hashed_files": 1,
+        "hashed_bytes": 78,
+        "config_hashed_files": 0,
+        "config_hashed_bytes": 0,
+        "head_changed": false,
+        "branch_changed": false,
+        "git_state_changed": true,
+        "config_changed": true,
+        "global_relink": true,
+        "elapsed_seconds": 0.038
+      },
+      "fingerprint": {
+        "languages": [
+          "java"
+        ],
+        "versions": {
+          "engine": "columbus-1.0.0",
+          "python_ast": "3.11.16",
+          "tree-sitter": "0.26.0",
+          "tree-sitter-java": "0.23.5",
+          "tree-sitter-kotlin": "1.1.0",
+          "analyzer_code": "f64f7c12875d55ec9cd5",
+          "language_config": "44136fa355b3678a1146"
+        },
+        "fidelity": {
+          "java": "ast"
+        }
+      },
+      "revision": "96a1f70744b991ff2ae3",
+      "calls": 1
+    },
+    {
+      "refresh": {
+        "mode": "fast",
+        "check": "content_hash_verified",
+        "parsed_files": 1,
+        "cached_parses_loaded": 0,
+        "reused_files": 0,
+        "metadata_reused_files": 0,
+        "added_files": 0,
+        "removed_files": 0,
+        "hashed_files": 1,
+        "hashed_bytes": 78,
+        "config_hashed_files": 0,
+        "config_hashed_bytes": 0,
+        "head_changed": false,
+        "branch_changed": false,
+        "git_state_changed": false,
+        "config_changed": false,
+        "global_relink": true,
+        "elapsed_seconds": 0.029
+      },
+      "fingerprint": {
+        "languages": [
+          "java"
+        ],
+        "versions": {
+          "engine": "columbus-1.0.0",
+          "python_ast": "3.11.16",
+          "tree-sitter": "0.26.0",
+          "tree-sitter-java": "0.23.5",
+          "tree-sitter-kotlin": "1.1.0",
+          "analyzer_code": "371fc7560056ed62eb0b",
+          "language_config": "44136fa355b3678a1146"
+        },
+        "fidelity": {
+          "java": "ast"
+        }
+      },
+      "revision": "f842a5e910dcab7f80f4",
+      "calls": 0
+    },
+    {
+      "refresh": {
+        "mode": "fast",
+        "check": "metadata_checked",
+        "parsed_files": 0,
+        "cached_parses_loaded": 0,
+        "reused_files": 1,
+        "metadata_reused_files": 1,
+        "added_files": 0,
+        "removed_files": 0,
+        "hashed_files": 0,
+        "hashed_bytes": 0,
+        "config_hashed_files": 0,
+        "config_hashed_bytes": 0,
+        "head_changed": false,
+        "branch_changed": false,
+        "git_state_changed": false,
+        "config_changed": false,
+        "global_relink": false,
+        "elapsed_seconds": 0.0266
+      },
+      "fingerprint": {
+        "languages": [
+          "java"
+        ],
+        "versions": {
+          "engine": "columbus-1.0.0",
+          "python_ast": "3.11.16",
+          "tree-sitter": "0.26.0",
+          "tree-sitter-java": "0.23.5",
+          "tree-sitter-kotlin": "1.1.0",
+          "analyzer_code": "371fc7560056ed62eb0b",
+          "language_config": "44136fa355b3678a1146"
+        },
+        "fidelity": {
+          "java": "ast"
+        }
+      },
+      "revision": "f842a5e910dcab7f80f4",
+      "calls": 0
+    }
+  ]
+}

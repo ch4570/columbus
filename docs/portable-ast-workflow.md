@@ -15,11 +15,11 @@ flowchart LR
 
 ## Install into another repository
 
-Use Python 3.11+ and a Columbus revision containing these commands (this source change is newer than the v1.0.0 release assets). Install the wheel built from that revision into an isolated environment, or use the portable ZIP's `install.py --repo PROJECT`. Run `columbus init --repo PROJECT` to install the managed agent skill. Ignore `.columbus/` in the target repository. The source installation and wheel both include the same engine; the target does not need to become a Python project.
+Use Python 3.11+ and Columbus 1.1.0 or newer. Install the wheel into an isolated environment, or use the portable ZIP's `install.py --repo PROJECT`. Run `columbus init --repo PROJECT` to install the managed agent skill. Ignore `.columbus/` in the target repository. The source installation and wheel both include the same engine; the target does not need to become a Python project.
 
 ```sh
 python3.11 -m venv /path/to/columbus-runtime
-/path/to/columbus-runtime/bin/python -m pip install "git+https://github.com/ch4570/columbus@438ba8e9694cff9b7022ba19c2c79775a009448f"
+/path/to/columbus-runtime/bin/python -m pip install https://github.com/ch4570/columbus/releases/download/v1.1.0/columbus-1.1.0-py3-none-any.whl
 # Activate that environment, then:
 columbus init --repo /path/to/project
 columbus tree --repo /path/to/project --label DefaultResourceLoader --limit 50
@@ -32,12 +32,12 @@ The tree organizes declarations, not arbitrary token windows. `context ID` reads
 
 ## pre-commit framework
 
-Run pre-commit itself under Python 3.11+. Add this entry to the target's existing `.pre-commit-config.yaml`, using the pinned implementation below (v1.0.0 does not contain this hook):
+Run pre-commit itself under Python 3.11+. Add this entry to the target's existing `.pre-commit-config.yaml`:
 
 ```yaml
 repos:
   - repo: https://github.com/ch4570/columbus
-    rev: 438ba8e9694cff9b7022ba19c2c79775a009448f
+    rev: v1.1.0
     hooks:
       - id: columbus-sync
         # Optional: reject parse diagnostics and keep the prior snapshot.
@@ -65,4 +65,4 @@ Installation is explicit and preserves existing hooks, symlink hook paths, and `
 - Git hooks may be skipped. Query-time synchronization is still needed after edits, checkout, hook skips, and framework restoration.
 - `.columbus/` is a local cache. Never add it to commits merely to publish the graph. Export reviewed JSONL or graph artifacts separately when needed.
 
-The current call resolver still has known type-parameter and inherited-overload false-target cases in [issue #8](https://github.com/ch4570/columbus/issues/8). AST declaration trees and exact verified source are usable independently of those inferred call edges. Wider call resolution needs those negative cases gated first.
+The call resolver remains conservative and incomplete: unsupported type inference, inherited overloads and dynamic dispatch can remain unresolved. [Issue #8](https://github.com/ch4570/columbus/issues/8) tracks broader precision and coverage acceptance. AST declaration trees and exact verified source are usable independently of inferred call edges. The ordinary release retains upstream Java grammar `0.23.5`; the separately tested annotation-parser candidate is not the release default. See [release scope and evidence](releases/1.1.0.md).

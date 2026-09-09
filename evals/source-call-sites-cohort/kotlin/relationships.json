@@ -1,0 +1,50 @@
+[
+  {
+    "source": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.getConversionService:method()",
+    "target": "src/main/java/org/springframework/core/convert/support/DefaultConversionService.java::org.springframework.core.convert.support.DefaultConversionService:class",
+    "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+    "line": 116
+  },
+  {
+    "source": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.resolvePlaceholders:method(String)",
+    "target": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.createPlaceholderHelper:method(boolean)",
+    "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+    "line": 247
+  },
+  {
+    "source": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.resolvePlaceholders:method(String)",
+    "target": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders:method(String,PropertyPlaceholderHelper)",
+    "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+    "line": 249
+  },
+  {
+    "source": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders:method(String)",
+    "target": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.createPlaceholderHelper:method(boolean)",
+    "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+    "line": 255
+  },
+  {
+    "source": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders:method(String)",
+    "target": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders:method(String,PropertyPlaceholderHelper)",
+    "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+    "line": 257
+  },
+  {
+    "source": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.createPlaceholderHelper:method(boolean)",
+    "target": "src/main/java/org/springframework/util/PropertyPlaceholderHelper.java::org.springframework.util.PropertyPlaceholderHelper:class",
+    "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+    "line": 281
+  },
+  {
+    "source": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.convertValueIfNecessary:method(Object,Class<T>)",
+    "target": "src/main/java/org/springframework/core/convert/support/DefaultConversionService.java::org.springframework.core.convert.support.DefaultConversionService.getSharedInstance:method()",
+    "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+    "line": 309
+  },
+  {
+    "source": "src/main/java/org/springframework/util/PropertyPlaceholderHelper.java::org.springframework.util.PropertyPlaceholderHelper.<init>:constructor(String,String,String,Character,boolean)",
+    "target": "src/main/java/org/springframework/util/PlaceholderParser.java::org.springframework.util.PlaceholderParser:class",
+    "path": "src/main/java/org/springframework/util/PropertyPlaceholderHelper.java",
+    "line": 70
+  }
+]

@@ -1,0 +1,56 @@
+{
+  "schema": "columbus.exploration-cases/v1",
+  "cases": [
+    {
+      "id": "kotlin-reflection-hint-state",
+      "question": "Starting at the Kotlin ReflectionHints extensions, trace getTypeHint<T>(), registerType<T>(member categories), and registerType<T> { builder customization } through the Java implementation. Explain repeated registration for the same type, how categories combine, what an earlier returned TypeHint observes after later registration, and what remains if a customizer throws. Compare registration and lookup for an absent valid type and for a Java Class with no canonical name, and identify null-Class validation. Assume non-null category arrays/elements and callbacks. Restrict the state question to member categories; do not enumerate field/method/constructor registration or claim that recording hints executes reflection or proves native-image/runtime reachability. Do not execute the project.",
+      "findings": [
+        {
+          "id": "kotlin-delegation",
+          "description": "Trace all three Kotlin extension entry points to the Java overloads, preserving callback and vararg behavior.",
+          "path": "src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt",
+          "marker": "registerType(T::class.java, typeHint::invoke)",
+          "call_lines": [
+            37
+          ]
+        },
+        {
+          "id": "registration-class-guards",
+          "description": "Explain the Java class-based registration guards and whether the callback runs for rejected or skipped classes.",
+          "path": "src/main/java/org/springframework/aot/hint/ReflectionHints.java",
+          "marker": "if (type.getCanonicalName() != null)",
+          "call_lines": [
+            124
+          ]
+        },
+        {
+          "id": "registration-state-errors",
+          "description": "Explain repeated registration, category accumulation, and state/error behavior when a customizer throws.",
+          "path": "src/main/java/org/springframework/aot/hint/ReflectionHints.java",
+          "marker": "typeHint.accept(builder);",
+          "call_lines": [
+            100
+          ]
+        },
+        {
+          "id": "lookup-absence-errors",
+          "description": "Explain the class-to-type lookup path, absence, and invalid-class behavior in comparison with registration.",
+          "path": "src/main/java/org/springframework/aot/hint/ReflectionHints.java",
+          "marker": "return (typeHintBuilder != null ? typeHintBuilder.build() : null);",
+          "call_lines": [
+            78
+          ]
+        },
+        {
+          "id": "category-snapshots",
+          "description": "Explain whether an already returned TypeHint and its category set change after later registration for the same type.",
+          "path": "src/main/java/org/springframework/aot/hint/TypeHint.java",
+          "marker": "this.memberCategories = Set.copyOf(builder.memberCategories);",
+          "call_lines": [
+            62
+          ]
+        }
+      ]
+    }
+  ]
+}

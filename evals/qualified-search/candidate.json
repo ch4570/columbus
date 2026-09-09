@@ -1,0 +1,10 @@
+{
+  "fixture_declarations": 60,
+  "bounded_search_hits": 50,
+  "search_truncated": true,
+  "context_truncated": true,
+  "filtered_declaration": "p59.Loader.getResource",
+  "filtered_truncated": false,
+  "exact_first": "p59.Loader.getResource",
+  "runtime_executed": false
+}

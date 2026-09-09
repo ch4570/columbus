@@ -1,0 +1,247 @@
+{
+  "source_revision": "6c4c968f73db47aa3a5ed4db7856ff7c0e86b4a1",
+  "analyzer_sha256": "ea0e0f858d9a93294e1091904552611e9af29fca3fd76154b54d80afae7f724f",
+  "compiler": "javac 17.0.20.1",
+  "cases": [
+    {
+      "name": "private_foreign_value",
+      "source": "class T { private void hit() {} } class C { void run(T item) { item.hit(); } }",
+      "source_sha256": "f22b6d759e93f17091cecfaf66f16f8f86fb74756d2b505b62d7ef57f001f44b",
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/tmpori1kb70/private_foreign_value/C.java:1: error: hit() has private access in T\nclass T { private void hit() {} } class C { void run(T item) { item.hit(); } }\n                                                                   ^\n1 error\n",
+      "partial": false,
+      "references": [
+        {
+          "source": "C.java::C.run:method(T)",
+          "scope_id": "C.java::C.run:method(T)",
+          "kind": "calls",
+          "name": "item.hit",
+          "member": "hit",
+          "receiver": "item",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "path": "C.java",
+          "line": 1,
+          "evidence": "item.hit()",
+          "resolved": true,
+          "reason": "unique syntax candidate; runtime dispatch unverified",
+          "target": "C.java::T.hit:method()",
+          "confidence": "heuristic"
+        }
+      ],
+      "call_edges": [
+        {
+          "source": "C.java::C.run:method(T)",
+          "target": "C.java::T.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "item.hit()",
+          "path": "C.java",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "name": "public_foreign_value",
+      "source": "class T { public void hit() {} } class C { void run(T item) { item.hit(); } }",
+      "source_sha256": "3a41ab6b617b8a1f75735f8dbb798e9293b6ddf83f789c5644f1b6f77095dc97",
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "partial": false,
+      "references": [
+        {
+          "source": "C.java::C.run:method(T)",
+          "scope_id": "C.java::C.run:method(T)",
+          "kind": "calls",
+          "name": "item.hit",
+          "member": "hit",
+          "receiver": "item",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "path": "C.java",
+          "line": 1,
+          "evidence": "item.hit()",
+          "resolved": true,
+          "reason": "unique syntax candidate; runtime dispatch unverified",
+          "target": "C.java::T.hit:method()",
+          "confidence": "heuristic"
+        }
+      ],
+      "call_edges": [
+        {
+          "source": "C.java::C.run:method(T)",
+          "target": "C.java::T.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "item.hit()",
+          "path": "C.java",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "name": "private_nestmate_value",
+      "source": "class T { private void hit() {} static class C { void run(T item) { item.hit(); } } }",
+      "source_sha256": "db1392519fbba43c11eccd1f6f664eb31786a0412813f7cb3ad222f4429c4c1d",
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "partial": false,
+      "references": [
+        {
+          "source": "C.java::T.C.run:method(T)",
+          "scope_id": "C.java::T.C.run:method(T)",
+          "kind": "calls",
+          "name": "item.hit",
+          "member": "hit",
+          "receiver": "item",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "path": "C.java",
+          "line": 1,
+          "evidence": "item.hit()",
+          "resolved": true,
+          "reason": "unique syntax candidate; runtime dispatch unverified",
+          "target": "C.java::T.hit:method()",
+          "confidence": "heuristic"
+        }
+      ],
+      "call_edges": [
+        {
+          "source": "C.java::T.C.run:method(T)",
+          "target": "C.java::T.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "item.hit()",
+          "path": "C.java",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "name": "instance_from_static",
+      "source": "class T { void hit() {} static void run() { hit(); } }",
+      "source_sha256": "87e42da8167b7c00eeb0d4d492d25bbdc60b7d97c94398ac6cc6bb9d780ccd0c",
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/tmpori1kb70/instance_from_static/C.java:1: error: non-static method hit() cannot be referenced from a static context\nclass T { void hit() {} static void run() { hit(); } }\n                                            ^\n1 error\n",
+      "partial": false,
+      "references": [
+        {
+          "source": "C.java::T.run:method()",
+          "scope_id": "C.java::T.run:method()",
+          "kind": "calls",
+          "name": "hit",
+          "member": "hit",
+          "receiver": "",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "path": "C.java",
+          "line": 1,
+          "evidence": "hit()",
+          "resolved": true,
+          "reason": "unique syntax candidate; runtime dispatch unverified",
+          "target": "C.java::T.hit:method()",
+          "confidence": "heuristic"
+        }
+      ],
+      "call_edges": [
+        {
+          "source": "C.java::T.run:method()",
+          "target": "C.java::T.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit()",
+          "path": "C.java",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "name": "instance_from_instance",
+      "source": "class T { void hit() {} void run() { hit(); } }",
+      "source_sha256": "1d5cf82954aaf30e0629a8582e432b05c4c463fdb3fb4b17054510e439fe8bba",
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "partial": false,
+      "references": [
+        {
+          "source": "C.java::T.run:method()",
+          "scope_id": "C.java::T.run:method()",
+          "kind": "calls",
+          "name": "hit",
+          "member": "hit",
+          "receiver": "",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "path": "C.java",
+          "line": 1,
+          "evidence": "hit()",
+          "resolved": true,
+          "reason": "unique syntax candidate; runtime dispatch unverified",
+          "target": "C.java::T.hit:method()",
+          "confidence": "heuristic"
+        }
+      ],
+      "call_edges": [
+        {
+          "source": "C.java::T.run:method()",
+          "target": "C.java::T.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit()",
+          "path": "C.java",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "name": "static_from_static",
+      "source": "class T { static void hit() {} static void run() { hit(); } }",
+      "source_sha256": "b840fb3bb6f36d4969d252d4e5cb02b99a58aef7271cd66ee3e03cc7d2782334",
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "partial": false,
+      "references": [
+        {
+          "source": "C.java::T.run:method()",
+          "scope_id": "C.java::T.run:method()",
+          "kind": "calls",
+          "name": "hit",
+          "member": "hit",
+          "receiver": "",
+          "constructor": false,
+          "argument_count": 0,
+          "argument_types": [],
+          "path": "C.java",
+          "line": 1,
+          "evidence": "hit()",
+          "resolved": true,
+          "reason": "unique syntax candidate; runtime dispatch unverified",
+          "target": "C.java::T.hit:method()",
+          "confidence": "heuristic"
+        }
+      ],
+      "call_edges": [
+        {
+          "source": "C.java::T.run:method()",
+          "target": "C.java::T.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit()",
+          "path": "C.java",
+          "line": 1
+        }
+      ]
+    }
+  ]
+}

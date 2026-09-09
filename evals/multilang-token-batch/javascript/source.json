@@ -1,0 +1,81 @@
+{
+  "repository": "https://github.com/expressjs/express",
+  "commit": "023767fe9872e029271df1418f73401bff20ff40",
+  "source_root": "/tmp/columbus-express-token-eval",
+  "primary_files": [
+    "lib/application.js",
+    "lib/response.js",
+    "lib/view.js"
+  ],
+  "supporting_tests_read_not_run": [
+    "test/app.render.js",
+    "test/res.render.js"
+  ],
+  "files": [
+    {
+      "path": "lib/application.js",
+      "sha256": "6d7e08355025786982d17042fc0355b6a5e9339545dc27e2782b3aaa28a7bc04",
+      "lines": 631
+    },
+    {
+      "path": "lib/response.js",
+      "sha256": "969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a",
+      "lines": 1047
+    },
+    {
+      "path": "lib/view.js",
+      "sha256": "74f4171b66263e22481820bc5975708f7dd8a61484f570aac7c5b4ab77ecbd79",
+      "lines": 205
+    },
+    {
+      "path": "test/app.render.js",
+      "sha256": "65cedddf807447609b5f8cbc381c03ca814e70d6d76c870dd8ec46d1c8d5a66c",
+      "lines": 392
+    },
+    {
+      "path": "test/res.render.js",
+      "sha256": "9db3993c09c0319caed25a548b800feeddd05b2f8242e82b166ebd194c6421fe",
+      "lines": 367
+    }
+  ],
+  "finding_markers": [
+    {
+      "id": "response_delegation",
+      "path": "lib/response.js",
+      "line": 917,
+      "marker": "app.render(view, opts, done);"
+    },
+    {
+      "id": "locals_and_cache",
+      "path": "lib/application.js",
+      "line": 536,
+      "marker": "var renderOptions = { ...this.locals, ...opts._locals, ...opts };"
+    },
+    {
+      "id": "engine_selection",
+      "path": "lib/view.js",
+      "line": 81,
+      "marker": "var fn = require(mod).__express"
+    },
+    {
+      "id": "view_lookup",
+      "path": "lib/view.js",
+      "line": 119,
+      "marker": "path = this.resolve(dir, file);"
+    },
+    {
+      "id": "error_boundary",
+      "path": "lib/application.js",
+      "line": 627,
+      "marker": "view.render(options, callback);"
+    },
+    {
+      "id": "callback_timing",
+      "path": "lib/view.js",
+      "line": 153,
+      "marker": "return process.nextTick(function renderTick() {"
+    }
+  ],
+  "source_unchanged": true,
+  "model_started": false
+}

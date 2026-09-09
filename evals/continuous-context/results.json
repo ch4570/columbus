@@ -1,0 +1,89 @@
+{
+  "source": "skills/columbus/scripts/columbus/receipts.py",
+  "source_sha256": "11068a6fd2d78a8d22a86c102b199c395c5f001e50ed5ff010f6893ab9b13ca9",
+  "queries": [
+    "ReceiptFile",
+    "ReceiptFile.save",
+    "ReceiptFile"
+  ],
+  "budget_bytes": 16000,
+  "conditions": {
+    "without_receipt": [
+      {
+        "query": "ReceiptFile",
+        "response_bytes": 8078,
+        "source_bytes": 5514,
+        "repeated_characters": 0,
+        "receipt_status": null,
+        "items": 3
+      },
+      {
+        "query": "ReceiptFile.save",
+        "response_bytes": 8663,
+        "source_bytes": 5512,
+        "repeated_characters": 5512,
+        "receipt_status": null,
+        "items": 4
+      },
+      {
+        "query": "ReceiptFile",
+        "response_bytes": 8078,
+        "source_bytes": 5514,
+        "repeated_characters": 5514,
+        "receipt_status": null,
+        "items": 3
+      }
+    ],
+    "retained_receipt": [
+      {
+        "query": "ReceiptFile",
+        "response_bytes": 8151,
+        "source_bytes": 5514,
+        "repeated_characters": 0,
+        "receipt_status": {
+          "status": "applied",
+          "seen_source_bytes": 0
+        },
+        "items": 3
+      },
+      {
+        "query": "ReceiptFile.save",
+        "response_bytes": 847,
+        "source_bytes": 0,
+        "repeated_characters": 0,
+        "receipt_status": {
+          "status": "applied",
+          "seen_source_bytes": 5514
+        },
+        "items": 0
+      },
+      {
+        "query": "ReceiptFile",
+        "response_bytes": 842,
+        "source_bytes": 0,
+        "repeated_characters": 0,
+        "receipt_status": {
+          "status": "applied",
+          "seen_source_bytes": 5514
+        },
+        "items": 0
+      }
+    ]
+  },
+  "analyzer_fingerprint": {
+    "languages": [
+      "python"
+    ],
+    "versions": {
+      "engine": "columbus-1.0.0",
+      "python_ast": "3.11.16",
+      "analyzer_code": "7ba0c9d4bfbafb07916f",
+      "language_config": "44136fa355b3678a1146"
+    },
+    "fidelity": {
+      "python": "ast"
+    }
+  },
+  "fresh_agent_reemits": true,
+  "changed_source_reemits": true
+}

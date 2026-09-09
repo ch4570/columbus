@@ -1,0 +1,111 @@
+{
+  "database_bytes": 153391104,
+  "database_sha256": "90cfefc9f0bac1862b156c0ee8e76258eceb0880e09638121b5131dadf66d729",
+  "indexed_source_bytes": 35218163,
+  "source_files": 5465,
+  "source_manifest_sha256": "91d7b192232a1818c4f45e2d6c2428f051c4fb28b05d3ed8d62971ea50b7d3a9",
+  "parser_versions": {
+    "tree-sitter": "0.26.0",
+    "tree-sitter-java": "0.23.5",
+    "tree-sitter-kotlin": "1.1.0"
+  },
+  "archive_manifest": {
+    "format": "columbus-graph",
+    "version": 1,
+    "revision": "6f504f681d66baba3acc",
+    "analyzer_version": "columbus-1.0.0",
+    "analyzer_fingerprint": {
+      "languages": [
+        "batch",
+        "css",
+        "html",
+        "javascript",
+        "json",
+        "make",
+        "markdown",
+        "python",
+        "shell",
+        "text",
+        "toml",
+        "xml",
+        "yaml"
+      ],
+      "versions": {
+        "engine": "columbus-1.0.0",
+        "python_ast": "3.11.16",
+        "analyzer_code": "5c9d31368022cacfc8e4",
+        "language_config": "44136fa355b3678a1146"
+      },
+      "fidelity": {
+        "batch": "text",
+        "css": "text",
+        "html": "text",
+        "javascript": "heuristic",
+        "json": "text",
+        "make": "text",
+        "markdown": "text",
+        "python": "ast",
+        "shell": "heuristic",
+        "text": "text",
+        "toml": "text",
+        "xml": "text",
+        "yaml": "text"
+      }
+    },
+    "freshness": "index_snapshot",
+    "semantic_complete": false,
+    "truncated": false,
+    "source_bodies_included": false
+  },
+  "categories": {
+    "diagnostic": {
+      "count": 1,
+      "sha256": "a0b682f87fcdac715399c7e672a5dd6edf7f85cb47a1e50bc56c97e3b8598bb0"
+    },
+    "edge": {
+      "count": 86828,
+      "sha256": "0a3a62ff60c0b4a46fa7af2d9ec4d236a6bcfdf50c6ea5a9223e51223c31f7a6"
+    },
+    "file": {
+      "count": 5465,
+      "sha256": "06cd5f2c72b488e4696dbbf4691b1d89d4faeefe959073fcdc2e59bcb320eb23"
+    },
+    "import": {
+      "count": 18268,
+      "sha256": "00557c4cf85ec0d9339522b1f359458bb64acd21c82d2f6bdfc733a6dc00f8b2"
+    },
+    "node": {
+      "count": 46630,
+      "sha256": "9906fdca3d0f00f5ba990b3e4d90b57806bd1a570aaab0934fe93aaaa045083f"
+    },
+    "reference": {
+      "count": 188003,
+      "sha256": "8135ce3a2eb9db575c8c57b08814eda4e69c111f525d5fc513bdf10d36e4d60c"
+    },
+    "scope": {
+      "count": 46964,
+      "sha256": "df7b36bedb4c94386f2350b848c144707abf8a723708f70d5f1121cdccfd00b2"
+    }
+  },
+  "codecs": {
+    "gzip": {
+      "bytes": 10726231,
+      "sha256": "120b1fc5ad8cc30bb0cc3e9ff450d026ee6dc8c3bc17a9c74f7e715dddd4f869",
+      "export_seconds": 6.419031708006514,
+      "uncompressed_bytes": 199045876,
+      "uncompressed_sha256": "9e27215f3c46d16a316eec4321d1418305713c1ec907d104b5685a2ee0ca1978",
+      "all_record_categories_equal_sqlite": true
+    },
+    "xz": {
+      "bytes": 8592880,
+      "sha256": "1d80eb233d8da303b984fc423bf453181b7443c636431cbeff4b6a18cf5a4e12",
+      "export_seconds": 7.540648124995641,
+      "uncompressed_bytes": 199045876,
+      "uncompressed_sha256": "9e27215f3c46d16a316eec4321d1418305713c1ec907d104b5685a2ee0ca1978",
+      "all_record_categories_equal_sqlite": true
+    }
+  },
+  "database_and_source_unchanged": true,
+  "all_decompressed_bytes_equal": true,
+  "scope": "Full exported graph facts; excludes SQLite FTS/source bodies and does not prove compiler accuracy or model savings. Fixed codec order, unflushed caches, single timing observation."
+}

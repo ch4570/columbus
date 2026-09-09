@@ -1,0 +1,154 @@
+{
+  "answer": {
+    "findings": [
+      {
+        "id": "kotlin_lookup_handoffs",
+        "path": "src/main/kotlin/org/springframework/core/env/PropertyResolverExtensions.kt",
+        "start_line": 50,
+        "end_line": 50,
+        "quote": "inline fun <reified T : Any> PropertyResolver.getProperty(key: String, default: T) : T =",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "ordered_property_lookup",
+        "path": "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java",
+        "start_line": 92,
+        "end_line": 92,
+        "quote": "\t\t\t\t\treturn convertValueIfNecessary(value, targetValueType);",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "nested_placeholder_policy",
+        "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+        "start_line": 286,
+        "end_line": 286,
+        "quote": "\t\treturn helper.replacePlaceholders(text, this::getPropertyAsRawString);",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "property_conversion_service",
+        "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+        "start_line": 309,
+        "end_line": 309,
+        "quote": "\t\t\tconversionServiceToUse = DefaultConversionService.getSharedInstance();",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "default_required_outcomes",
+        "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+        "start_line": 237,
+        "end_line": 237,
+        "quote": "\t\tT value = getProperty(key, valueType);",
+        "explanation": "Citation control only, not semantic approval."
+      }
+    ]
+  },
+  "positive": {
+    "passed": true,
+    "findings": [
+      {
+        "id": "kotlin_lookup_handoffs",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "ordered_property_lookup",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "nested_placeholder_policy",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "property_conversion_service",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "default_required_outcomes",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "negative_answer": {
+    "findings": [
+      {
+        "id": "kotlin_lookup_handoffs",
+        "path": "src/main/kotlin/org/springframework/core/env/PropertyResolverExtensions.kt",
+        "start_line": 50,
+        "end_line": 50,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "ordered_property_lookup",
+        "path": "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java",
+        "start_line": 92,
+        "end_line": 92,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "nested_placeholder_policy",
+        "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+        "start_line": 286,
+        "end_line": 286,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "property_conversion_service",
+        "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+        "start_line": 309,
+        "end_line": 309,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      },
+      {
+        "id": "default_required_outcomes",
+        "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+        "start_line": 237,
+        "end_line": 237,
+        "quote": "__THIS_IS_NOT_A_SOURCE_QUOTE__",
+        "explanation": "Citation control only, not semantic approval."
+      }
+    ]
+  },
+  "negative": {
+    "passed": false,
+    "findings": [
+      {
+        "id": "kotlin_lookup_handoffs",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "ordered_property_lookup",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "nested_placeholder_policy",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "property_conversion_service",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "default_required_outcomes",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  }
+}

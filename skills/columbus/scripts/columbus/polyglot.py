@@ -25,13 +25,237 @@ CONTROL_WORDS = {"if", "for", "while", "switch", "catch", "with", "match", "when
                  "synchronized", "foreach", "using", "lock", "checked", "unchecked", "delete"}
 
 
-def mask_source(source: str, language: str) -> tuple[str, list[dict]]:
+def _jsx_start(source: str, offset: int) -> bool:
+    cursor = offset - 1
+    while cursor >= 0 and source[cursor].isspace():
+        cursor -= 1
+    if cursor < 0 or source[cursor] in '=(:,![{;?&|>+-*/%^~':
+        return True
+    end = cursor + 1
+    while cursor >= 0 and (source[cursor].isalnum() or source[cursor] in '_$'):
+        cursor -= 1
+    return source[cursor + 1:end] in {'return', 'yield', 'case', 'throw'}
+
+
+def _generic_arrow_start(source: str, start: int) -> bool:
+    """Disambiguate constrained TSX arrows before looking for JSX close tags."""
+    if not re.match(r'<' + IDENT + r'\s+(?:extends\b)', source[start:]):
+        return False
+
+    def opaque_end(cursor):
+        if source.startswith(('//', '/*'), cursor):
+            block = source.startswith('/*', cursor)
+            stop = source.find('*/' if block else '\n', cursor + 2)
+            return len(source) if stop < 0 else stop + (2 if block else 1)
+        if source[cursor] in '\"\'`':
+            quote = source[cursor]
+            cursor += 1
+            while cursor < len(source):
+                if source[cursor] == '\\':
+                    cursor += 2
+                elif source[cursor] == quote:
+                    return cursor + 1
+                else:
+                    cursor += 1
+            return len(source)
+        return None
+
+    def balanced_end(cursor, opening, closing):
+        if cursor >= len(source) or source[cursor] != opening:
+            return None
+        nesting = 1
+        cursor += 1
+        while cursor < len(source):
+            opaque = opaque_end(cursor)
+            if opaque is not None:
+                cursor = opaque
+                continue
+            if source[cursor] == opening:
+                nesting += 1
+            elif source[cursor] == closing and not (closing == '>' and source[cursor - 1] == '='):
+                nesting -= 1
+                if not nesting:
+                    return cursor + 1
+            cursor += 1
+        return None
+
+    cursor = balanced_end(start, '<', '>')
+    if cursor is None:
+        return False
+    while cursor < len(source) and source[cursor].isspace():
+        cursor += 1
+    cursor = balanced_end(cursor, '(', ')')
+    if cursor is None:
+        return False
+    while cursor < len(source) and source[cursor].isspace():
+        cursor += 1
+    if source.startswith(':', cursor):
+        # Return annotations can contain objects, tuples, generics and arrow
+        # types. They are code even when a later string looks like </T>.
+        cursor += 1
+        seen_type = False
+        while cursor < len(source):
+            opaque = opaque_end(cursor)
+            if opaque is not None:
+                seen_type |= source[cursor] in '\"\'`'
+                cursor = opaque
+                continue
+            if source.startswith('=>', cursor):
+                return seen_type
+            token = source[cursor]
+            if token in '({[<':
+                closing = {'(': ')', '{': '}', '[': ']', '<': '>'}[token]
+                cursor = balanced_end(cursor, token, closing)
+                if cursor is None:
+                    return False
+                seen_type = True
+                continue
+            if token in ')}]>;':
+                return False
+            seen_type |= not token.isspace()
+            cursor += 1
+        return False
+    return source.startswith('=>', cursor)
+
+
+def _jsx_regions(source: str, start: int, depth: int = 0) -> tuple[int, list[tuple[int, int]]] | None:
+    """Recognize a complete JSX element and return only its non-code spans.
+
+    Requiring a matching close (or a self-closing tag) avoids treating ordinary
+    TypeScript generic headers and comparison operators as JSX. Braced values
+    retain their JavaScript, including nested JSX values; this is still a
+    lexical mask, not JSX name resolution or a syntax validator.
+    """
+    if depth > 128 or _generic_arrow_start(source, start):
+        return None
+    size = len(source)
+    regions = []
+
+    def expression(cursor):
+        nesting = 1
+        cursor += 1
+        while cursor < size:
+            if source.startswith(('//', '/*'), cursor):
+                block = source.startswith('/*', cursor)
+                stop = source.find('*/' if block else '\n', cursor + 2)
+                if stop < 0:
+                    return None
+                cursor = stop + (2 if block else 1)
+                continue
+            character = source[cursor]
+            if character in '\"\'`':
+                quote = character
+                cursor += 1
+                while cursor < size:
+                    if source[cursor] == '\\':
+                        cursor += 2
+                    elif source[cursor] == quote:
+                        cursor += 1
+                        break
+                    else:
+                        cursor += 1
+                continue
+            if character == '/':
+                prefix = source[:cursor].rstrip()
+                if not prefix or prefix[-1] in '=(:,![{;?&|' or re.search(r'\b(?:return|yield|case)\s*$', prefix):
+                    regex_cursor, in_class = cursor + 1, False
+                    while regex_cursor < size and source[regex_cursor] != '\n':
+                        token = source[regex_cursor]
+                        if token == '\\':
+                            regex_cursor += 2
+                            continue
+                        if token == '[':
+                            in_class = True
+                        elif token == ']':
+                            in_class = False
+                        elif token == '/' and not in_class:
+                            cursor = regex_cursor + 1
+                            break
+                        regex_cursor += 1
+                    else:
+                        cursor += 1
+                    continue
+            if character == '<' and _jsx_start(source, cursor):
+                nested = _jsx_regions(source, cursor, depth + 1)
+                if nested:
+                    cursor, spans = nested
+                    regions.extend(spans)
+                    continue
+            if character == '{':
+                nesting += 1
+            elif character == '}':
+                nesting -= 1
+                if not nesting:
+                    return cursor + 1
+            cursor += 1
+        return None
+
+    opening = re.match(r'<(?P<name>[A-Za-z_$][\w$.:\-]*)(?=[\s/>])|<(?=>)', source[start:])
+    if not opening:
+        return None
+    name = opening.group('name') or ''
+    cursor, chunk = start + opening.end(), start
+    while cursor < size:
+        character = source[cursor]
+        if character in '\"\'':
+            stop = source.find(character, cursor + 1)
+            if stop < 0:
+                return None
+            cursor = stop + 1
+        elif character == '{':
+            regions.append((chunk, cursor))
+            stop = expression(cursor)
+            if stop is None:
+                return None
+            cursor = chunk = stop
+        elif source.startswith('/>', cursor):
+            regions.append((chunk, cursor + 2))
+            return cursor + 2, regions
+        elif character == '>':
+            cursor += 1
+            regions.append((chunk, cursor))
+            break
+        else:
+            cursor += 1
+    else:
+        return None
+    chunk = cursor
+    while cursor < size:
+        if source.startswith('</', cursor):
+            closing = re.match(r'</' + re.escape(name) + r'\s*>', source[cursor:])
+            if not closing:
+                return None
+            cursor += closing.end()
+            regions.append((chunk, cursor))
+            return cursor, regions
+        if source[cursor] == '<':
+            regions.append((chunk, cursor))
+            nested = _jsx_regions(source, cursor, depth + 1)
+            if not nested:
+                return None
+            cursor, spans = nested
+            regions.extend(spans)
+            chunk = cursor
+        elif source[cursor] == '{':
+            regions.append((chunk, cursor))
+            stop = expression(cursor)
+            if stop is None:
+                return None
+            cursor = chunk = stop
+        else:
+            cursor += 1
+    return None
+
+
+def mask_source(source: str, language: str, *, jsx: bool = True) -> tuple[str, list[dict]]:
     """Blank comments and literal bodies, preserving offsets and line numbers.
 
     Interpolated string expressions are deliberately omitted too: resolving
     them without a language grammar would manufacture misleading call facts.
     """
     chars, literals, size, i = list(source), [], len(source), 0
+    expression_end = 0
+    jsx_regions = {}
 
     def blank(start, end):
         for offset in range(start, end):
@@ -39,6 +263,17 @@ def mask_source(source: str, language: str) -> tuple[str, list[dict]]:
                 chars[offset] = " "
 
     while i < size:
+        if i in jsx_regions:
+            end = jsx_regions[i]
+            blank(i, end)
+            expression_end = end
+            i = end
+            continue
+        if jsx and source[i] == '<' and language in {'javascript', 'typescript'} and _jsx_start(source, i):
+            element = _jsx_regions(source, i)
+            if element:
+                jsx_regions.update((start, end) for start, end in element[1] if start < end)
+                continue
         start, end, literal = i, None, False
         if source.startswith("/*", i) and language not in {"ruby", "shell", "lua", "haskell"}:
             # Nested block comments occur in Rust, Swift, Kotlin and several DSLs.
@@ -116,7 +351,15 @@ def mask_source(source: str, language: str) -> tuple[str, list[dict]]:
             # A regex literal can contain apparent declarations/calls. Recognize
             # expression-start positions; division remains ordinary source.
             prefix = source[:i].rstrip()
-            if not prefix or prefix[-1] in "=(:,![{;?" or re.search(r"\b(?:return|yield|case)\s*$", prefix):
+            previous = i - 1
+            while previous >= 0 and chars[previous].isspace():
+                previous -= 1
+            # Comments may intervene after =>, but an already masked literal
+            # or JSX expression must not turn later division into a regex.
+            after_arrow = (previous >= 1 and chars[previous - 1:previous + 1] == ["=", ">"]
+                           and previous - 1 >= expression_end)
+            if (not prefix or prefix[-1] in "=(:,![{;?&|" or after_arrow
+                    or re.search(r"\b(?:return|yield|case)\s*$", prefix)):
                 cursor, in_class = i + 1, False
                 while cursor < size and source[cursor] != "\n":
                     if source[cursor] == "\\":
@@ -134,6 +377,7 @@ def mask_source(source: str, language: str) -> tuple[str, list[dict]]:
             end = size if end < 0 else end
             if literal:
                 literals.append({"start": start, "end": end, "text": source[start:end]})
+                expression_end = end
             blank(start, end)
             i = end
         else:
@@ -210,6 +454,158 @@ def _braces(masked: str) -> dict[int, int]:
     return pairs
 
 
+def _js_export_bindings(masked, literals, symbols, spans, scopes, imports, dynamic_scope):
+    """Recognize a small, conservative subset of module export bindings.
+
+    Separate ``export default identifier;`` exports a value, not a general
+    live alias. We deliberately reject writes even after that statement, and
+    shadows in unrelated scopes, rather than infer evaluation order. This is
+    still lexical evidence: no re-exports, expression/receiver dispatch or
+    named function-expression bindings are inferred.
+    """
+    # Literals are not whitespace between syntax tokens. Their contents must
+    # stay masked, but their presence must prevent matching an export prefix.
+    chars = list(masked)
+    for literal in literals:
+        chars[literal["start"]] = "\0"
+    code = "".join(chars)
+    export_tokens = list(re.finditer(r"\bexport\b", code))
+    if not export_tokens:
+        return
+    positions = {span["name_start"] for span in spans} | {m.start() for m in export_tokens}
+    prefixes, empty_prefixes, stack, start, only_space, pattern_writes = {}, set(), [], 0, True, set()
+    assignment = re.compile(r"\s*(?:=(?!=|>)|(?:\*\*|&&|\|\||\?\?|>>>|>>|<<|[+*/%&|^~-])=|\+\+|--)")
+    loop_binding = re.compile(r"\s*(?:in|of)\b")
+    # A deliberately small ASI boundary: a complete top-level variable
+    # initializer consisting of a direct call, optionally an identifier-only
+    # arrow returning that call. No controls, chains or conditional expressions.
+    parameters = rf"(?:{IDENT}(?:\s*,\s*{IDENT})*)?"
+    asi_call = re.compile(rf"\s*(?:export\s+)?(?:const|let|var)\s+{IDENT}\s*=\s*"
+                          rf"(?:(?:async[ \t]+)?(?:{IDENT}|\(\s*{parameters}\s*\))\s*=>\s*)?"
+                          rf"(?:new\s+)?{IDENT}\s*\(")
+    for offset, char in enumerate(code):
+        if offset in positions and not stack:
+            # Retain offsets, not repeated source-prefix copies (which can be
+            # quadratic on many unsupported export tokens in one statement).
+            prefixes[offset] = start
+            if only_space:
+                empty_prefixes.add(offset)
+        if not char.isspace():
+            only_space = False
+        if char in "({[":
+            stack.append((char, offset))
+        elif char in ")}]":
+            if not stack or stack[-1][0] != {")": "(", "}": "{", "]": "["}[char]:
+                return
+            _, begin = stack.pop()
+            previous = begin - 1
+            while previous >= 0 and code[previous].isspace():
+                previous -= 1
+            if (assignment.match(code, offset + 1)
+                    or loop_binding.match(code, offset + 1)
+                    or code[max(0, previous - 1):previous + 1] in {"++", "--"}):
+                pattern_writes.update(re.findall(IDENT, code[begin:offset]))
+            if not stack and char == "}":
+                start, only_space = offset + 1, True
+            elif not stack and char == ")":
+                following = offset + 1
+                while following < len(code) and code[following].isspace():
+                    following += 1
+                if (any(c in "\r\n" for c in code[offset + 1:following])
+                        and re.match(r"export\b", code[following:following + 7])):
+                    initializer = asi_call.match(code, start, begin + 1)
+                    if initializer and initializer.end() == begin + 1:
+                        start, only_space = offset + 1, True
+        elif char == ";" and not stack:
+            start, only_space = offset + 1, True
+    # Even parenthesized/aliased eval can hide exporter writes. Reject the
+    # lexical name conservatively; proving whether it is shadowed is outside
+    # this subset (as are escaped identifiers).
+    if stack or dynamic_scope or "\\" in code or re.search(r"\b(?:eval|with)\b", code):
+        return
+    templates = [literal["text"] for literal in literals
+                 if literal["text"].startswith("`") and "${" in literal["text"]]
+    # The shared masker intentionally omits executable template expressions.
+    # Do not let hidden writes or computed eval bypass the export guard.
+    # Ordinary template escapes (e.g. RegExp's \\s) cannot spell identifiers.
+    # Unicode escapes can hide binding names, so they remain unsupported even
+    # when they might instead belong to harmless literal text.
+    if any(re.search(r"\b(?:eval|with)\b|\\u(?:[0-9a-fA-F]{4}|\{)", text) for text in templates):
+        return
+    blocked = pattern_writes | {name for scope in scopes.values() for name in scope["blocked"]}
+    for imported in imports:
+        blocked.update(imported.get("names", {}))
+        if imported.get("alias"):
+            blocked.add(imported["alias"])
+    blocked.update(re.findall(rf"(?:\+\+|--)\s*({IDENT})", code))
+    blocked.update(re.findall(rf"\bfor\s+await\s*\(\s*({IDENT})\s+(?:in|of)\b", code))
+    scope_blocked = blocked.copy()
+    writes = rf"(?<![\w$])(?P<name>{IDENT})\s*(?:=(?!=|>)|(?:\*\*|&&|\|\||\?\?|>>>|>>|<<|[+*/%&|^~-])=|\+\+|--)"
+    write_occurrences = defaultdict(list)
+    for match in re.finditer(writes, code):
+        write_occurrences[match.group("name")].append(match)
+        blocked.add(match.group("name"))
+    # Initializers belong to inline callable variable declarations, but later
+    # writes to the same name do not. Simple assignment guards above therefore
+    # exclude those declarations below, unless their initializer is the only
+    # write and the existing scope guards agree.
+    by_name = defaultdict(list)
+    by_id = {symbol["id"]: symbol for symbol in symbols}
+    for symbol in symbols:
+        if symbol["parent_id"] == f"{symbol['path']}::module":
+            by_name[symbol["name"]].append(symbol)
+    declarations = {}
+    inline_defaults = []
+    function_prefix = re.compile(r"\s*(?:(?P<export>export)\s+(?:(?P<default>default)\s+)?)?"
+                                 r"(?:async[ \t]+)?function\s*\*?\s*")
+    variable_prefix = re.compile(r"\s*export\s+(?:const|let|var)\s*")
+    for span in spans:
+        symbol = by_id[span["id"]]
+        if span["name_start"] not in prefixes:
+            continue
+        begin, end = prefixes[span["name_start"]], span["name_start"]
+        genuine = function_prefix.fullmatch(code, begin, end)
+        inline_variable = variable_prefix.fullmatch(code, begin, end)
+        if symbol["kind"] != "function" or len(by_name[symbol["name"]]) != 1:
+            continue
+        header = code[span["name_start"]:span["header_end"]]
+        # The shared body finder can mistake a TS return-type object for a
+        # function body. Only no annotation or a simple named/array return type
+        # is accepted here; complex valid return types are false negatives.
+        parameter_end = header.rfind(")")
+        return_type = header[parameter_end + 1:]
+        simple_type = rf"(?!(?:keyof|typeof|readonly|unique|infer|asserts)\b){IDENT}"
+        supported_return = parameter_end >= 0 and re.fullmatch(rf"\s*(?::\s*{simple_type}(?:\.{IDENT})*(?:\s*\[\s*\])*)?\s*", return_type)
+        if genuine and span["body"] is not None and supported_return:
+            declarations[symbol["name"]] = symbol
+            if genuine.group("default"):
+                inline_defaults.append(symbol)
+            elif genuine.group("export"):
+                symbol["exported"] = True
+        elif inline_variable:
+            # Preserve the existing explicit named arrow/function binding path.
+            symbol["exported"] = True
+            name = symbol["name"]
+            occurrences = write_occurrences[name]
+            if (len(occurrences) == 1 and occurrences[0].start("name") == span["name_start"]
+                    and name not in scope_blocked):
+                blocked.discard(name)
+    default_prefix = re.compile(r"export\s+(?:default\b|\{[^;{}]*(?:\bdefault\b|\0)|\*\s+as\s+(?:default\b|\0))")
+    defaults = [m for m in export_tokens if m.start() in empty_prefixes and default_prefix.match(code, m.start())]
+    if len(defaults) == 1:
+        match = re.compile(rf"export\s+default\s+({IDENT})\s*;").match(code, defaults[0].start())
+        if match and match.group(1) in declarations:
+            declarations[match.group(1)]["default_export"] = True
+        elif len(inline_defaults) == 1:
+            inline_defaults[0]["default_export"] = True
+    for symbol in symbols:
+        if not (symbol.get("exported") or symbol.get("default_export")):
+            continue
+        name = symbol["name"]
+        if name in blocked or any(re.search(rf"(?<![\w$]){re.escape(name)}(?![\w$])", text) for text in templates):
+            symbol["exported"] = symbol["default_export"] = False
+
+
 def parse_polyglot(path: str, source: str, module: str, language: str, config: dict | None = None) -> dict:
     config = config or {}
     fidelity = fidelity_for(language, config)
@@ -226,7 +622,10 @@ def parse_polyglot(path: str, source: str, module: str, language: str, config: d
         result["analysis_note"] = "Text module only; declaration and call semantics are unavailable."
         return result
     result["analysis_note"] = "Lexical heuristics; receiver dispatch, macros, overloads and external packages are unresolved."
-    masked, literals = mask_source(source, language)
+    # TypeScript only permits JSX in .tsx; angle assertions in .ts/.mts/.cts
+    # must remain ordinary code even if a later string resembles a close tag.
+    masked, literals = mask_source(source, language,
+                                   jsx=language != 'typescript' or PurePosixPath(path).suffix.lower() == '.tsx')
     braces = _braces(masked)
     candidates, seen = [], set()
     for kind, pattern in _patterns(language, config):
@@ -277,9 +676,18 @@ def parse_polyglot(path: str, source: str, module: str, language: str, config: d
             name_start, name = match.start("name"), match.group("name")
             containers = [c for c in candidates if c["body"] is not None and c["body"] < name_start < c["end"]]
             parent = min(containers, key=lambda c: c["end"] - c["start"]) if containers else None
-            if (name_start in seen or name in CONTROL_WORDS or not parent
+            delete_method = name == "delete" and parent and parent["kind"] == "class"
+            if (name_start in seen or (name in CONTROL_WORDS and not delete_method) or not parent
                     or parent["kind"] not in {"class", "interface"}):
                 continue
+            if delete_method:
+                # A class member may be named delete, but the unary operator
+                # in a static block (or an object-literal method in a field)
+                # must not acquire the surrounding class as its method owner.
+                lexical_body = max((opening for opening, closing in braces.items()
+                                    if opening < name_start < closing), default=None)
+                if lexical_body != parent["body"]:
+                    continue
             body = masked.find("{", match.end())
             if body not in braces:
                 continue
@@ -307,10 +715,10 @@ def parse_polyglot(path: str, source: str, module: str, language: str, config: d
                       kind=kind, parent_id=parent_id, start_line=line(candidate["name_start"]),
                       end_line=line(max(candidate["name_start"], candidate["end"] - 1)),
                       signature=signature, doc="", language=language, fidelity="heuristic", confidence="heuristic")
-        # Export flags are used only for explicit relative JS imports.
+        # JS export bindings are checked after lexical scopes/imports exist.
         declaration_line = source[line_starts[line(candidate["name_start"]) - 1]:candidate["name_start"]]
-        symbol["exported"] = bool(re.search(r"\bexport\b", declaration_line))
-        symbol["default_export"] = bool(re.search(r"\bexport\s+default\b", declaration_line))
+        symbol["exported"] = language not in {"javascript", "typescript"} and bool(re.search(r"\bexport\b", declaration_line))
+        symbol["default_export"] = language not in {"javascript", "typescript"} and bool(re.search(r"\bexport\s+default\b", declaration_line))
         symbols.append(symbol)
         spans.append(dict(candidate, id=key, qualname=qualname, kind=kind,
                           body_start=(candidate["body"] + 1) if candidate["body"] is not None else candidate["header_end"]))
@@ -371,6 +779,8 @@ def parse_polyglot(path: str, source: str, module: str, language: str, config: d
                                              resolved=False))
     if re.search(r"\b(?:eval|with)\s*\(", masked):
         result["dynamic_scope"] = True
+    if language in {"javascript", "typescript"}:
+        _js_export_bindings(masked, literals, symbols, spans, scopes, imports, result.get("dynamic_scope", False))
     return result
 
 

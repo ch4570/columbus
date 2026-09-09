@@ -1,0 +1,570 @@
+{
+  "baseline": {
+    "schema": "columbus.exploration-observation/v1",
+    "case": "archive-urlencode",
+    "condition": "baseline",
+    "repeat": 1,
+    "model_requested": "gpt-5.6-sol",
+    "effort_requested": "xhigh",
+    "evidence_mode": "saved_archive",
+    "elapsed_seconds": 441.208,
+    "return_code": 0,
+    "timed_out": false,
+    "source_unchanged": true,
+    "usage": {
+      "input_tokens": 379707,
+      "cached_input_tokens": 321536,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 12594,
+      "reasoning_output_tokens": 8259,
+      "uncached_input_tokens": 58171
+    },
+    "commands": [
+      {
+        "command": "/bin/zsh -lc \"rg -n --glob '*.py' '\\\\burlencode\\\\b' django\"",
+        "exit_code": 0,
+        "output_bytes": 2649,
+        "output_sha256": "18bfd247004a34e2ddf9fa15cb56ff3bf19a59af54676f970487c489366fac25"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n --glob '*.py' 'django\\\\.utils(?:\\\\.http)?|from django\\\\.utils\\\\.http import|import django\\\\.utils\\\\.http' django\"",
+        "exit_code": 0,
+        "output_bytes": 62562,
+        "output_sha256": "f617c86b6a57b62a3f0950379c16bdb7b3387f9c4ca7a9db8185a1d13e7f5500"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n --glob '*.py' '(from django\\\\.utils\\\\.http import|import django\\\\.utils\\\\.http|django\\\\.utils\\\\.http\\\\.urlencode)' django\"",
+        "exit_code": 0,
+        "output_bytes": 2212,
+        "output_sha256": "dc54cf9dd3f9268fccc60b4847d08c2963ddcba426157baaa8f474758f902587"
+      },
+      {
+        "command": "/bin/zsh -lc \"sed -n '1,45p' django/test/testcases.py\nsed -n '1,45p' django/test/client.py\nsed -n '1,50p' django/contrib/admin/views/main.py\nsed -n '1,30p' django/contrib/admin/widgets.py\nsed -n '45,70p' django/contrib/admin/options.py\nsed -n '1,15p' django/contrib/admin/templatetags/admin_urls.py\"",
+        "exit_code": 0,
+        "output_bytes": 6517,
+        "output_sha256": "8522bf58abc741850282b25a9aca1e4a7d7c5fb71dcb6b080ea680f45ff4f368"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/test/client.py | sed -n '330,420p'\nnl -ba django/test/client.py | sed -n '610,680p'\nnl -ba django/test/client.py | sed -n '710,780p'\"",
+        "exit_code": 0,
+        "output_bytes": 9167,
+        "output_sha256": "5f24b96c516e5452685642a585857ee391ac2da3033191a533d1554ba3f47fa9"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/test/client.py | sed -n '780,815p'\nnl -ba django/contrib/admin/views/main.py | sed -n '270,320p'\nnl -ba django/contrib/admin/widgets.py | sed -n '125,175p'\nnl -ba django/contrib/admin/options.py | sed -n '1225,1280p'\nnl -ba django/contrib/admin/templatetags/admin_urls.py | sed -n '35,80p'\"",
+        "exit_code": 0,
+        "output_bytes": 10080,
+        "output_sha256": "b4068d6c91c2c8ece936a4111cbed1632194c7591daa793cf2075f91cd3c6cc2"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/admin/templatetags/admin_urls.py | sed -n '15,72p'\nnl -ba django/contrib/admin/widgets.py | sed -n '90,132p'\nrg -n '\"'^class |''^    def '\"' django/contrib/admin/options.py | sed -n '1,120p'\nrg -n '\"'^class |''^    def '\"' django/contrib/admin/views/main.py | sed -n '1,80p'\"",
+        "exit_code": 0,
+        "output_bytes": 10899,
+        "output_sha256": "c7829d6394cdd19d842622b3a409d954944d2ec67d996cab6d28c41c53ffd801"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n 'def url_parameters' django/contrib/admin/widgets.py\nnl -ba django/contrib/admin/widgets.py | sed -n '175,215p'\nnl -ba django/contrib/admin/views/main.py | sed -n '60,185p'\"",
+        "exit_code": 0,
+        "output_bytes": 7257,
+        "output_sha256": "984d6ee8c6ccefc56d0094ba53081ce86f1d0202332eae92a513fdf7f130a7f9"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/admin/widgets.py | sed -n '215,240p'\nnl -ba django/utils/http.py | sed -n '1,75p'\"",
+        "exit_code": 0,
+        "output_bytes": 4195,
+        "output_sha256": "e0970be21225f6adfcd70caca6ca27d26e8c321bda9d98606a9c5c04f453f3e9"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/utils/http.py | sed -n '44,90p'\"",
+        "exit_code": 0,
+        "output_bytes": 2112,
+        "output_sha256": "eb780211a9bdeef1e83196e9495365f07bfc6fb154ae996893e37cf6e6263714"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/test/client.py | sed -n '401,475p'\nrg -n '\"'^class (Client|AsyncClient)'\"' django/test/client.py\"",
+        "exit_code": 0,
+        "output_bytes": 3612,
+        "output_sha256": "732b7b0f0d9feadc418da078c1ba57be09760190402cd8ab439cc78432080541"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/test/client.py | sed -n '674,718p'\nnl -ba django/test/client.py | sed -n '1020,1055p'\nnl -ba django/test/client.py | sed -n '1390,1420p'\"",
+        "exit_code": 0,
+        "output_bytes": 4690,
+        "output_sha256": "230542097cc9c7428119f5fae3859e3c0358d2143283d77a11b54b2fa101c98c"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/admin/options.py | sed -n '1398,1420p'\nrg -n 'preserved_qsl' django --glob '*.py'\"",
+        "exit_code": 0,
+        "output_bytes": 1975,
+        "output_sha256": "eb338d54d17e9fdb70506fb192faa59132c32ff888ab44811daf1cfadf01d382"
+      }
+    ],
+    "command_count": 13,
+    "command_output_bytes": 127927,
+    "failed_commands": 0,
+    "other_tool_types": [],
+    "runtime_warnings": [],
+    "turn_failed": false,
+    "quality": {
+      "passed": true,
+      "findings": [
+        {
+          "id": "ModelAdmin.get_preserved_filters",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "add_preserved_filters",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "ChangeList.get_query_string",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "ForeignKeyRawIdWidget.get_context",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "RequestFactory.__init__",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "RequestFactory.generic",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "AsyncRequestFactory.generic",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "__exact_caller_set__",
+          "passed": true,
+          "reason": "no extra callers"
+        }
+      ],
+      "grader_version": "caller-enumeration-1",
+      "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+    },
+    "index_preflight": null,
+    "archive_preflight": {
+      "passed": true,
+      "archive_sha256": "628c02774deaef31a5dc16fde0d7f97565280e69809dd4f9196b700ac35482be",
+      "revision": "117f364f708bf12f336c",
+      "source_files_verified": 6928,
+      "indexed_source_files_verified": 5465,
+      "counts": {
+        "files": 5465,
+        "nodes": 46630,
+        "scopes": 46964,
+        "edges": 86828,
+        "references": 188003,
+        "imports": 18268,
+        "diagnostics": 1
+      },
+      "consumer_index_absent": true
+    },
+    "archive_postflight": {
+      "passed": true,
+      "archive_sha256": "628c02774deaef31a5dc16fde0d7f97565280e69809dd4f9196b700ac35482be",
+      "revision": "117f364f708bf12f336c",
+      "source_files_verified": 6928,
+      "indexed_source_files_verified": 5465,
+      "counts": {
+        "files": 5465,
+        "nodes": 46630,
+        "scopes": 46964,
+        "edges": 86828,
+        "references": 188003,
+        "imports": 18268,
+        "diagnostics": 1
+      },
+      "consumer_index_absent": true
+    },
+    "answer": {
+      "findings": [
+        {
+          "id": "RequestFactory.__init__",
+          "path": "django/test/client.py",
+          "start_line": 384,
+          "end_line": 399,
+          "quote": "    def __init__(\n        self,\n        *,\n        json_encoder=DjangoJSONEncoder,\n        headers=None,\n        query_params=None,\n        **defaults,\n    ):\n        self.json_encoder = json_encoder\n        self.defaults = defaults\n        self.cookies = SimpleCookie()\n        self.errors = BytesIO()\n        if headers:\n            self.defaults.update(HttpHeaders.to_wsgi_names(headers))\n        if query_params:\n            self.defaults[\"QUERY_STRING\"] = urlencode(query_params, doseq=True)",
+          "explanation": "The module imports this bare `urlencode` from `django.utils.http`. A truthy constructor `query_params` mapping or pair sequence is encoded into the factory defaults as `QUERY_STRING`, replacing any same-named default after normalized headers have been merged. Falsy or empty query data bypasses the call. `doseq=True` expands non-string iterable values into repeated parameters and preserves all values of a `MultiValueDict`; strings and bytes remain single values. This is the one lexical call in `RequestFactory.__init__`; execution through subclasses or their `super()` calls is runtime reachability, not another caller."
+        },
+        {
+          "id": "RequestFactory.generic",
+          "path": "django/test/client.py",
+          "start_line": 645,
+          "end_line": 671,
+          "quote": "        \"\"\"Construct an arbitrary HTTP request.\"\"\"\n        parsed = urlsplit(str(path))  # path can be lazy\n        data = force_bytes(data, settings.DEFAULT_CHARSET)\n        r = {\n            \"PATH_INFO\": self._get_path(parsed),\n            \"REQUEST_METHOD\": method,\n            \"SERVER_PORT\": \"443\" if secure else \"80\",\n            \"wsgi.url_scheme\": \"https\" if secure else \"http\",\n        }\n        if data:\n            r.update(\n                {\n                    \"CONTENT_LENGTH\": str(len(data)),\n                    \"CONTENT_TYPE\": content_type,\n                    \"wsgi.input\": FakePayload(data),\n                }\n            )\n        if headers:\n            extra.update(HttpHeaders.to_wsgi_names(headers))\n        if query_params:\n            extra[\"QUERY_STRING\"] = urlencode(query_params, doseq=True)\n        r.update(extra)\n        # If QUERY_STRING is absent or empty, we want to extract it from the URL.\n        if not r.get(\"QUERY_STRING\"):\n            # WSGI requires latin-1 encoded strings. See get_path_info().\n            r[\"QUERY_STRING\"] = parsed.query.encode().decode(\"iso-8859-1\")\n        return self.request(**r)",
+          "explanation": "This bare name is imported from `django.utils.http`. Truthy per-request `query_params` are encoded and overwrite an explicit `QUERY_STRING` in `extra`; they are not merged with the URL's query. If `query_params` is falsy, the call is bypassed and a truthy `extra` query string is retained, otherwise the URL query is used. Even after the call, an empty encoded result falls through to the URL query. `doseq=True` expands iterable values into repeated keys while treating strings and bytes atomically. Methods such as `get()` and the `Client` subclass can reach this method, but they contain no lexical target call themselves."
+        },
+        {
+          "id": "AsyncRequestFactory.generic",
+          "path": "django/test/client.py",
+          "start_line": 745,
+          "end_line": 772,
+          "quote": "        \"\"\"Construct an arbitrary HTTP request.\"\"\"\n        parsed = urlsplit(str(path))  # path can be lazy.\n        data = force_bytes(data, settings.DEFAULT_CHARSET)\n        s = {\n            \"method\": method,\n            \"path\": self._get_path(parsed),\n            \"server\": (\"127.0.0.1\", \"443\" if secure else \"80\"),\n            \"scheme\": \"https\" if secure else \"http\",\n            \"headers\": [(b\"host\", b\"testserver\")],\n        }\n        if self.defaults:\n            extra = {**self.defaults, **extra}\n        if data:\n            s[\"headers\"].extend(\n                [\n                    (b\"content-length\", str(len(data)).encode(\"ascii\")),\n                    (b\"content-type\", content_type.encode(\"ascii\")),\n                ]\n            )\n            s[\"_body_file\"] = FakePayload(data)\n        if query_params:\n            s[\"query_string\"] = urlencode(query_params, doseq=True)\n        elif query_string := extra.pop(\"QUERY_STRING\", None):\n            s[\"query_string\"] = query_string\n        else:\n            # If QUERY_STRING is absent or empty, we want to extract it from\n            # the URL.\n            s[\"query_string\"] = parsed.query",
+          "explanation": "This override has its own lexical call to the `django.utils.http` import. Truthy per-request `query_params` are encoded directly as the ASGI query string, without merging with constructor defaults, `extra`, or the URL query. If they are falsy, the call is bypassed: the method first uses a truthy `QUERY_STRING` from `extra` after merging factory defaults with per-call values taking precedence, then falls back to the URL query. Unlike the WSGI method, an empty result from an executed call does not trigger fallback because the alternatives are in `elif`/`else` branches. `doseq=True` expands iterable values into repeated keys. Runtime use through `AsyncClient` is not a separate source caller."
+        },
+        {
+          "id": "ChangeList.get_query_string",
+          "path": "django/contrib/admin/views/main.py",
+          "start_line": 290,
+          "end_line": 306,
+          "quote": "    def get_query_string(self, new_params=None, remove=None):\n        if new_params is None:\n            new_params = {}\n        if remove is None:\n            remove = []\n        p = self.filter_params.copy()\n        for r in remove:\n            for k in list(p):\n                if k.startswith(r):\n                    del p[k]\n        for k, v in new_params.items():\n            if v is None:\n                if k in p:\n                    del p[k]\n            else:\n                p[k] = v\n        return \"?%s\" % urlencode(sorted(p.items()), doseq=True)",
+          "explanation": "The module-level bare name is imported from `django.utils.http`. The method starts with a copy of `self.filter_params`, which is built from `request.GET.lists()` and therefore retains multiple values. It removes every key beginning with any requested prefix, then merges `new_params`: `None` deletes an exact key and any other value replaces or adds it. The remaining pairs are sorted by key and always encoded; there is no conditional bypass on a normal return path. `doseq=True` turns the retained value lists or other non-string iterables into repeated query parameters. The result always receives a leading `?`, including when the encoded data is empty."
+        },
+        {
+          "id": "ForeignKeyRawIdWidget.get_context",
+          "path": "django/contrib/admin/widgets.py",
+          "start_line": 146,
+          "end_line": 163,
+          "quote": "    def get_context(self, name, value, attrs):\n        context = super().get_context(name, value, attrs)\n        rel_to = self.rel.model\n        if self.admin_site.is_registered(rel_to):\n            # The related object is registered with the same AdminSite\n            related_url = reverse(\n                \"admin:%s_%s_changelist\"\n                % (\n                    rel_to._meta.app_label,\n                    rel_to._meta.model_name,\n                ),\n                current_app=self.admin_site.name,\n            )\n\n            params = self.url_parameters()\n            if params:\n                related_url += \"?\" + urlencode(params)\n            context[\"related_url\"] = related_url",
+          "explanation": "Here `urlencode` is the function imported from `django.utils.http`; `self.url_parameters()` is a distinct receiver method. The call runs only when the related model is registered with the admin site and the returned parameter mapping is truthy. Otherwise no query suffix is encoded (and an unregistered relation gets no related URL). The base `ForeignKeyRawIdWidget.url_parameters()` merges normalized `limit_choices_to` values with `_to_field` set to the related field name; `ManyToManyRawIdWidget` overrides that receiver method to return only the normalized limits, so it can return an empty mapping. Built-in normalization converts lists/tuples to comma-separated strings, booleans to `0`/`1`, and other values to strings. `doseq` is omitted and therefore false, so values are not expanded into repeated keys. Inherited execution of this source method by `ManyToManyRawIdWidget` remains this single lexical caller."
+        },
+        {
+          "id": "ModelAdmin.get_preserved_filters",
+          "path": "django/contrib/admin/options.py",
+          "start_line": 1250,
+          "end_line": 1268,
+          "quote": "    def get_preserved_filters(self, request):\n        \"\"\"\n        Return the preserved filters querystring.\n        \"\"\"\n        match = request.resolver_match\n        if self.preserve_filters and match:\n            current_url = \"%s:%s\" % (match.app_name, match.url_name)\n            changelist_url = \"admin:%s_%s_changelist\" % (\n                self.opts.app_label,\n                self.opts.model_name,\n            )\n            if current_url == changelist_url:\n                preserved_filters = request.GET.urlencode()\n            else:\n                preserved_filters = request.GET.get(\"_changelist_filters\")\n\n            if preserved_filters:\n                return urlencode({\"_changelist_filters\": preserved_filters})\n        return \"\"",
+          "explanation": "Only the final bare `urlencode`, imported from `django.utils.http`, is the target call. The earlier `request.GET.urlencode()` is the separately defined `QueryDict` receiver method and is not another target call. When preservation is enabled and a resolver match exists, a request on this model's changelist serializes all GET data; other admin routes select only the existing scalar `_changelist_filters` value. A truthy selected string is then percent-encoded as the value of one outer `_changelist_filters` parameter. Missing preservation, no match, or an empty selected value bypasses the target and returns an empty string. `doseq` defaults to false, but the sole value is already a scalar string, so no repeated-key expansion is needed."
+        },
+        {
+          "id": "add_preserved_filters",
+          "path": "django/contrib/admin/templatetags/admin_urls.py",
+          "start_line": 31,
+          "end_line": 69,
+          "quote": "    if preserved_qsl:\n        merged_qs.update(preserved_qsl)\n\n    if opts and preserved_filters:\n        preserved_filters = dict(parse_qsl(preserved_filters))\n\n        match_url = \"/%s\" % unquote(url).partition(get_script_prefix())[2]\n        try:\n            match = resolve(match_url)\n        except Resolver404:\n            pass\n        else:\n            current_url = \"%s:%s\" % (match.app_name, match.url_name)\n            changelist_url = \"admin:%s_%s_changelist\" % (\n                opts.app_label,\n                opts.model_name,\n            )\n            if (\n                changelist_url == current_url\n                and \"_changelist_filters\" in preserved_filters\n            ):\n                preserved_filters = dict(\n                    parse_qsl(preserved_filters[\"_changelist_filters\"])\n                )\n\n        merged_qs.update(preserved_filters)\n\n    if popup:\n        from django.contrib.admin.options import IS_POPUP_VAR\n\n        merged_qs[IS_POPUP_VAR] = 1\n    if to_field:\n        from django.contrib.admin.options import TO_FIELD_VAR\n\n        merged_qs[TO_FIELD_VAR] = to_field\n\n    merged_qs.update(parsed_qs)\n\n    parsed_url[3] = urlencode(merged_qs)",
+          "explanation": "This module imports the bare name from `django.utils.http`, and the call always executes before rebuilding the URL. The merge begins with contextual `preserved_qsl`. If both model options and a preserved-filter string exist, that string is parsed and merged next; when the destination resolves to the same model's changelist, an outer `_changelist_filters` value is unwrapped and its inner query is merged instead. Popup and to-field parameters are added next. Finally, parameters already present in the destination URL are merged last and therefore win every key collision. Converting parsed pairs into dictionaries also collapses duplicate names. With no inputs, an empty mapping is still encoded. `doseq` is omitted, so it defaults to false; parsed values, the popup integer, and the to-field value are scalar and are not expanded into repeated keys."
+        }
+      ]
+    },
+    "prompt_bytes": 1675,
+    "events_sha256": "f912c50e90a1f5cd06aee15f0d360878b7a0bf8af356de263e2ffa0d3e565fe3"
+  },
+  "columbus": {
+    "schema": "columbus.exploration-observation/v1",
+    "case": "archive-urlencode",
+    "condition": "columbus",
+    "repeat": 1,
+    "model_requested": "gpt-5.6-sol",
+    "effort_requested": "xhigh",
+    "evidence_mode": "saved_archive",
+    "elapsed_seconds": 495.087,
+    "return_code": 0,
+    "timed_out": false,
+    "source_unchanged": true,
+    "usage": {
+      "input_tokens": 555486,
+      "cached_input_tokens": 514944,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 13297,
+      "reasoning_output_tokens": 7503,
+      "uncached_input_tokens": 40542
+    },
+    "commands": [
+      {
+        "command": "/bin/zsh -lc \"sed -n '1,240p' /private/tmp/columbus-archive-urlencode-trial/runtime/SKILL.md\"",
+        "exit_code": 0,
+        "output_bytes": 5595,
+        "output_sha256": "70e517ae5e1faf384c98503ed44488064da6a3263c2042caeb3d8e06fe0e31c5"
+      },
+      {
+        "command": "/bin/zsh -lc \"sed -n '1,280p' /private/tmp/columbus-archive-urlencode-trial/runtime/references/archive.md\"",
+        "exit_code": 0,
+        "output_bytes": 6711,
+        "output_sha256": "7306adaa9f12016d9ec976f32cb9b202e838f236a6aefb6d6eb259815031172f"
+      },
+      {
+        "command": "/bin/zsh -lc '/Users/rex/Desktop/columbus/.venv/bin/python /private/tmp/columbus-archive-urlencode-trial/runtime/columbus.py archive-search urlencode --input /private/tmp/columbus-archive-urlencode-trial/graph.jsonl.xz --budget-bytes 6000 --format text'",
+        "exit_code": 2,
+        "output_bytes": 391,
+        "output_sha256": "0625639405d9a3b05dc100e47bf03c138a84de5d8bd8c4bc3bb9d2a16339e2b3"
+      },
+      {
+        "command": "/bin/zsh -lc '/Users/rex/Desktop/columbus/.venv/bin/python /private/tmp/columbus-archive-urlencode-trial/runtime/columbus.py archive-search --help'",
+        "exit_code": 0,
+        "output_bytes": 784,
+        "output_sha256": "cf56f6c3d2047dbcfe5932b2cf91b935c6048240e00a065c313b8f2d4bef99ad"
+      },
+      {
+        "command": "/bin/zsh -lc '/Users/rex/Desktop/columbus/.venv/bin/python /private/tmp/columbus-archive-urlencode-trial/runtime/columbus.py archive-search urlencode --input /private/tmp/columbus-archive-urlencode-trial/graph.jsonl.xz --budget-bytes 6000'",
+        "exit_code": 0,
+        "output_bytes": 1980,
+        "output_sha256": "b9c3f6f66d7a4d3bd5fd440379ce6975b040281cdcb7736c792ac9361d995723"
+      },
+      {
+        "command": "/bin/zsh -lc '/Users/rex/Desktop/columbus/.venv/bin/python /private/tmp/columbus-archive-urlencode-trial/runtime/columbus.py archive-neighbors --help'",
+        "exit_code": 0,
+        "output_bytes": 1471,
+        "output_sha256": "d1e63710305860badc6f500ba9d32bb02918436b1c312aaf65fb4afadec9bc65"
+      },
+      {
+        "command": "/bin/zsh -lc \"/Users/rex/Desktop/columbus/.venv/bin/python /private/tmp/columbus-archive-urlencode-trial/runtime/columbus.py archive-neighbors 'django/utils/http.py::urlencode:function' --input /private/tmp/columbus-archive-urlencode-trial/graph.jsonl.xz --repo . --direction in --kinds calls --path 'django/*' --context-lines 4 --budget-bytes 20000 --format text\"",
+        "exit_code": 0,
+        "output_bytes": 8738,
+        "output_sha256": "9c1f7b9a14e62ccbec4f5a127174d3a9bee8bad528225fa6b21bd01916b6af53"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n --glob '*.py' '\\\\burlencode\\\\s*\\\\(' django\"",
+        "exit_code": 0,
+        "output_bytes": 1780,
+        "output_sha256": "28fdf359f9b2f71eb95a1bae92515e5e3105adc1ca2f74e1d38cd25b3357dc6d"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n --glob '*.py' '(\"'^|import ).*urlencode|urlencode.*import'\"' django/http/request.py django/test/testcases.py django/test/client.py django/contrib/admin/views/main.py django/contrib/admin/widgets.py django/urls/base.py django/contrib/auth/views.py django/contrib/admin/options.py django/contrib/admin/templatetags/admin_urls.py django/utils/http.py django/utils/html.py django/template/defaulttags.py django/template/defaultfilters.py\"",
+        "exit_code": 0,
+        "output_bytes": 3035,
+        "output_sha256": "a3a9aeeca153e3ae0eab792fd4efae8b195b7d2811bfcec2bc5cf419ece4cc2b"
+      },
+      {
+        "command": "/bin/zsh -lc \"sed -n '1,42p' django/test/testcases.py\nsed -n '1,48p' django/test/client.py\nsed -n '1,80p' django/contrib/admin/options.py\nsed -n '1,46p' django/contrib/admin/views/main.py\nsed -n '1,24p' django/contrib/admin/widgets.py\nsed -n '1,20p' django/contrib/admin/templatetags/admin_urls.py\"",
+        "exit_code": 0,
+        "output_bytes": 7961,
+        "output_sha256": "dc96acdac885d7252a91f522fd7bd551a66e5120aff60989d132deeb485836e0"
+      },
+      {
+        "command": "/bin/zsh -lc \"sed -n '1246,1270p' django/contrib/admin/options.py\nsed -n '22,72p' django/contrib/admin/templatetags/admin_urls.py\nsed -n '286,308p' django/contrib/admin/views/main.py\nsed -n '140,181p' django/contrib/admin/widgets.py\nsed -n '376,404p' django/test/client.py\nsed -n '626,674p' django/test/client.py\nsed -n '726,786p' django/test/client.py\"",
+        "exit_code": 0,
+        "output_bytes": 9366,
+        "output_sha256": "cd34e814e74e258711d2a1cf185d43f73ca3217950cbde79d9d9a4bb98e643d3"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n 'filter_params|def url_parameters|def base_url_parameters' django/contrib/admin/views/main.py django/contrib/admin/widgets.py\nsed -n '110,155p' django/contrib/admin/views/main.py\nsed -n '178,220p' django/contrib/admin/widgets.py\"",
+        "exit_code": 0,
+        "output_bytes": 4079,
+        "output_sha256": "af0a657434964fd6939284e9c62807c727aff9da8bbfddb850df96dd5a0cb050"
+      },
+      {
+        "command": "/bin/zsh -lc \"sed -n '220,240p' django/contrib/admin/widgets.py\nrg -n '\"'^class .*RawIdWidget|def url_parameters'\"' django/contrib/admin/widgets.py\"",
+        "exit_code": 0,
+        "output_bytes": 863,
+        "output_sha256": "ff071323b69bda7b3ab9da8a16736ea1487ad1dc979cc9653defc82d6889e8a9"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n 'preserved_qsl' django --glob '*.py'\"",
+        "exit_code": 0,
+        "output_bytes": 945,
+        "output_sha256": "92aaa91a04e4abe6d7eebd4f1824363a3890e22186066203a5b878364335a583"
+      },
+      {
+        "command": "/bin/zsh -lc \"sed -n '1400,1425p' django/contrib/admin/options.py\"",
+        "exit_code": 0,
+        "output_bytes": 1055,
+        "output_sha256": "0647e558763032d17286a435ca170a636fe6dd45ffefc71a74324adc7f65e003"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n 'def url_params_from_lookup_dict' django/contrib/admin/widgets.py django/contrib/admin --glob '*.py'\nsed -n '255,285p' django/contrib/admin/widgets.py\"",
+        "exit_code": 0,
+        "output_bytes": 1517,
+        "output_sha256": "4120d72e0340caa0f3a710f40e4da517610b12d7273b17828736c8d325ea7316"
+      },
+      {
+        "command": "/bin/zsh -lc \"sed -n '100,132p' django/contrib/admin/widgets.py\"",
+        "exit_code": 0,
+        "output_bytes": 909,
+        "output_sha256": "50116da42802ed07ff82c60aecfb210a15c399502a1088b9c1b18c7c0ffae95a"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n --glob '*.py' 'django\\\\.utils(?:\\\\s+import\\\\s+http|\\\\.http\\\\s+import)|django\\\\.utils\\\\.http|\\\\bhttp\\\\.urlencode\\\\s*\\\\(' django\"",
+        "exit_code": 0,
+        "output_bytes": 2212,
+        "output_sha256": "b358e68d3fbd7a704a96873b07bb81a1289be72c9927f2dc58c9cd157d47705f"
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n --glob '*.py' '\\\\burlencode\\\\b' django\"",
+        "exit_code": 0,
+        "output_bytes": 2649,
+        "output_sha256": "79ac2fb0326b99977d1a9817decea74cb964fb4a727e2865bcc74454a6544b6f"
+      },
+      {
+        "command": "/bin/zsh -lc \"sed -n '44,84p' django/utils/http.py\"",
+        "exit_code": 0,
+        "output_bytes": 1563,
+        "output_sha256": "67c461d00695587b4a4f7cc64ff7e9398c1508f184f03a063e87e80ce4868de4"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/contrib/admin/options.py | sed -n '1250,1268p'\nnl -ba django/contrib/admin/templatetags/admin_urls.py | sed -n '31,70p'\nnl -ba django/contrib/admin/views/main.py | sed -n '290,306p'\nnl -ba django/contrib/admin/widgets.py | sed -n '146,166p'\nnl -ba django/test/client.py | sed -n '384,399p'\nnl -ba django/test/client.py | sed -n '633,671p'\nnl -ba django/test/client.py | sed -n '733,770p'\"",
+        "exit_code": 0,
+        "output_bytes": 7904,
+        "output_sha256": "6dbb8b047ec31862f3351b292ff610f04115e6632bd02b16a79c4bcf4efd25f5"
+      },
+      {
+        "command": "/bin/zsh -lc \"nl -ba django/test/client.py | sed -n '765,774p'\nnl -ba django/contrib/admin/templatetags/admin_urls.py | sed -n '22,35p'\nnl -ba django/contrib/admin/widgets.py | sed -n '180,192p'\nnl -ba django/contrib/admin/widgets.py | sed -n '226,234p'\"",
+        "exit_code": 0,
+        "output_bytes": 2060,
+        "output_sha256": "47774bd988f55ad1d479a86446e6aacc3ba90a9e0443b4a3c155d43015e2dba1"
+      },
+      {
+        "command": "/bin/zsh -lc \"sed -n '698,730p' django/http/request.py\"",
+        "exit_code": 0,
+        "output_bytes": 903,
+        "output_sha256": "bf76fafa281e74b0c0f67abbcc36d9a9d58a9dde468f9a428de3a76dafea5621"
+      },
+      {
+        "command": "/bin/zsh -lc \"sed -n '400,470p' django/test/client.py\nrg -n '\"'^    def request|''^    async def request'\"' django/test/client.py | head -20\"",
+        "exit_code": 0,
+        "output_bytes": 2775,
+        "output_sha256": "3aee6e7ea64dbaa007d94601fabdea650a5da791b3e954b5fd66aa9b887001db"
+      }
+    ],
+    "command_count": 24,
+    "command_output_bytes": 77246,
+    "failed_commands": 1,
+    "other_tool_types": [],
+    "runtime_warnings": [],
+    "turn_failed": false,
+    "quality": {
+      "passed": true,
+      "findings": [
+        {
+          "id": "ModelAdmin.get_preserved_filters",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "add_preserved_filters",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "ChangeList.get_query_string",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "ForeignKeyRawIdWidget.get_context",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "RequestFactory.__init__",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "RequestFactory.generic",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "AsyncRequestFactory.generic",
+          "passed": true,
+          "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+        },
+        {
+          "id": "__exact_caller_set__",
+          "passed": true,
+          "reason": "no extra callers"
+        }
+      ],
+      "grader_version": "caller-enumeration-1",
+      "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+    },
+    "index_preflight": null,
+    "archive_preflight": {
+      "passed": true,
+      "archive_sha256": "628c02774deaef31a5dc16fde0d7f97565280e69809dd4f9196b700ac35482be",
+      "revision": "117f364f708bf12f336c",
+      "source_files_verified": 6928,
+      "indexed_source_files_verified": 5465,
+      "counts": {
+        "files": 5465,
+        "nodes": 46630,
+        "scopes": 46964,
+        "edges": 86828,
+        "references": 188003,
+        "imports": 18268,
+        "diagnostics": 1
+      },
+      "consumer_index_absent": true
+    },
+    "archive_postflight": {
+      "passed": true,
+      "archive_sha256": "628c02774deaef31a5dc16fde0d7f97565280e69809dd4f9196b700ac35482be",
+      "revision": "117f364f708bf12f336c",
+      "source_files_verified": 6928,
+      "indexed_source_files_verified": 5465,
+      "counts": {
+        "files": 5465,
+        "nodes": 46630,
+        "scopes": 46964,
+        "edges": 86828,
+        "references": 188003,
+        "imports": 18268,
+        "diagnostics": 1
+      },
+      "consumer_index_absent": true
+    },
+    "answer": {
+      "findings": [
+        {
+          "id": "ModelAdmin.get_preserved_filters",
+          "path": "django/contrib/admin/options.py",
+          "start_line": 1250,
+          "end_line": 1268,
+          "quote": "    def get_preserved_filters(self, request):\n        \"\"\"\n        Return the preserved filters querystring.\n        \"\"\"\n        match = request.resolver_match\n        if self.preserve_filters and match:\n            current_url = \"%s:%s\" % (match.app_name, match.url_name)\n            changelist_url = \"admin:%s_%s_changelist\" % (\n                self.opts.app_label,\n                self.opts.model_name,\n            )\n            if current_url == changelist_url:\n                preserved_filters = request.GET.urlencode()\n            else:\n                preserved_filters = request.GET.get(\"_changelist_filters\")\n\n            if preserved_filters:\n                return urlencode({\"_changelist_filters\": preserved_filters})\n        return \"\"",
+          "explanation": "The bare `urlencode` is imported from `django.utils.http` at line 62. On the model's changelist, the method first obtains an encoded representation of the entire GET `QueryDict`; on other admin URLs it selects only the existing `_changelist_filters` value. It then encodes that selected string as the value of a new one-key `_changelist_filters` query, nesting and escaping the preserved query string. The direct target call executes only when filter preservation is enabled, a resolver match exists, and the selected value is nonempty; otherwise the method returns an empty string. `doseq` is omitted, so it is false and performs no sequence expansion. The earlier `request.GET.urlencode()` is a distinct receiver method, `QueryDict.urlencode`, whose module imports `urllib.parse.urlencode`; it is not another direct call to the target."
+        },
+        {
+          "id": "add_preserved_filters",
+          "path": "django/contrib/admin/templatetags/admin_urls.py",
+          "start_line": 31,
+          "end_line": 70,
+          "quote": "    if preserved_qsl:\n        merged_qs.update(preserved_qsl)\n\n    if opts and preserved_filters:\n        preserved_filters = dict(parse_qsl(preserved_filters))\n\n        match_url = \"/%s\" % unquote(url).partition(get_script_prefix())[2]\n        try:\n            match = resolve(match_url)\n        except Resolver404:\n            pass\n        else:\n            current_url = \"%s:%s\" % (match.app_name, match.url_name)\n            changelist_url = \"admin:%s_%s_changelist\" % (\n                opts.app_label,\n                opts.model_name,\n            )\n            if (\n                changelist_url == current_url\n                and \"_changelist_filters\" in preserved_filters\n            ):\n                preserved_filters = dict(\n                    parse_qsl(preserved_filters[\"_changelist_filters\"])\n                )\n\n        merged_qs.update(preserved_filters)\n\n    if popup:\n        from django.contrib.admin.options import IS_POPUP_VAR\n\n        merged_qs[IS_POPUP_VAR] = 1\n    if to_field:\n        from django.contrib.admin.options import TO_FIELD_VAR\n\n        merged_qs[TO_FIELD_VAR] = to_field\n\n    merged_qs.update(parsed_qs)\n\n    parsed_url[3] = urlencode(merged_qs)\n    return urlunsplit(parsed_url)",
+          "explanation": "The bare name is imported from `django.utils.http` at line 6. The function starts with an empty mapping and the destination URL's parsed query (`parsed_qs`). It merges context `preserved_qsl`, then\u2014when both model options and `preserved_filters` exist\u2014parses and merges those filters. For a resolvable matching changelist URL, a nested `_changelist_filters` query is unwrapped before merging; resolution failure leaves the outer parsed filters in use. Truthy `popup` and `to_field` arguments then set their admin parameters. Finally, the destination URL's own query is merged last, so it wins on duplicate keys. On every normal path the target call executes, including when the merged mapping is empty. `doseq` defaults to false, so iterable values are not expanded into repeated keys; conversion through `dict(parse_qsl(...))` also collapses duplicate parsed keys before encoding."
+        },
+        {
+          "id": "ChangeList.get_query_string",
+          "path": "django/contrib/admin/views/main.py",
+          "start_line": 290,
+          "end_line": 306,
+          "quote": "    def get_query_string(self, new_params=None, remove=None):\n        if new_params is None:\n            new_params = {}\n        if remove is None:\n            remove = []\n        p = self.filter_params.copy()\n        for r in remove:\n            for k in list(p):\n                if k.startswith(r):\n                    del p[k]\n        for k, v in new_params.items():\n            if v is None:\n                if k in p:\n                    del p[k]\n            else:\n                p[k] = v\n        return \"?%s\" % urlencode(sorted(p.items()), doseq=True)",
+          "explanation": "The bare name is the `django.utils.http.urlencode` import at line 37. The method copies `self.filter_params`, which is initialized from `request.GET.lists()` with the page and error parameters removed. Every key beginning with a requested removal prefix is deleted. New entries are then merged: a `None` value deletes that exact key, while any other value adds or replaces it. The remaining items are sorted for stable output and encoded after a leading `?`. The direct call is unconditional on normal completion. `doseq=True` is significant because filter values are generally lists: iterable values become repeated query parameters, while strings and bytes remain scalar."
+        },
+        {
+          "id": "ForeignKeyRawIdWidget.get_context",
+          "path": "django/contrib/admin/widgets.py",
+          "start_line": 146,
+          "end_line": 166,
+          "quote": "    def get_context(self, name, value, attrs):\n        context = super().get_context(name, value, attrs)\n        rel_to = self.rel.model\n        if self.admin_site.is_registered(rel_to):\n            # The related object is registered with the same AdminSite\n            related_url = reverse(\n                \"admin:%s_%s_changelist\"\n                % (\n                    rel_to._meta.app_label,\n                    rel_to._meta.model_name,\n                ),\n                current_app=self.admin_site.name,\n            )\n\n            params = self.url_parameters()\n            if params:\n                related_url += \"?\" + urlencode(params)\n            context[\"related_url\"] = related_url\n            context[\"link_title\"] = _(\"Lookup\")\n            # The JavaScript code looks for this class.\n            css_class = \"vForeignKeyRawIdAdminField\"",
+          "explanation": "The bare encoder is imported from `django.utils.http` at line 16. It encodes the lookup parameters returned through the dynamic `self.url_parameters()` receiver. For `ForeignKeyRawIdWidget`, those are normalized `limit_choices_to` values plus `_to_field`; list/tuple limits are converted to comma-separated strings. The inherited `ManyToManyRawIdWidget` implementation overrides `url_parameters()` and supplies only the normalized limits. The target call runs only when the related model is registered with the admin site and the resulting parameter mapping is nonempty. `doseq` is omitted and therefore false; the helper has already scalarized ordinary list/tuple limits. Runtime execution through a subclass does not make that subclass or its `super().get_context()` call an additional direct lexical caller."
+        },
+        {
+          "id": "RequestFactory.__init__",
+          "path": "django/test/client.py",
+          "start_line": 384,
+          "end_line": 399,
+          "quote": "    def __init__(\n        self,\n        *,\n        json_encoder=DjangoJSONEncoder,\n        headers=None,\n        query_params=None,\n        **defaults,\n    ):\n        self.json_encoder = json_encoder\n        self.defaults = defaults\n        self.cookies = SimpleCookie()\n        self.errors = BytesIO()\n        if headers:\n            self.defaults.update(HttpHeaders.to_wsgi_names(headers))\n        if query_params:\n            self.defaults[\"QUERY_STRING\"] = urlencode(query_params, doseq=True)",
+          "explanation": "`django/test/client.py` imports the bare name from `django.utils.http` at line 28. A truthy constructor-level `query_params` mapping or pair sequence is encoded and stored as the factory's default WSGI `QUERY_STRING`, replacing any same-named value already supplied through `defaults`. A falsey value bypasses the direct call and leaves existing defaults untouched. With `doseq=True`, iterable values are emitted as repeated keys, including all values of a `MultiValueDict`; strings and bytes remain single values. This is lexically `RequestFactory.__init__` even when inherited and executed while constructing an `AsyncRequestFactory`."
+        },
+        {
+          "id": "RequestFactory.generic",
+          "path": "django/test/client.py",
+          "start_line": 633,
+          "end_line": 671,
+          "quote": "    def generic(\n        self,\n        method,\n        path,\n        data=\"\",\n        content_type=\"application/octet-stream\",\n        secure=False,\n        *,\n        headers=None,\n        query_params=None,\n        **extra,\n    ):\n        \"\"\"Construct an arbitrary HTTP request.\"\"\"\n        parsed = urlsplit(str(path))  # path can be lazy\n        data = force_bytes(data, settings.DEFAULT_CHARSET)\n        r = {\n            \"PATH_INFO\": self._get_path(parsed),\n            \"REQUEST_METHOD\": method,\n            \"SERVER_PORT\": \"443\" if secure else \"80\",\n            \"wsgi.url_scheme\": \"https\" if secure else \"http\",\n        }\n        if data:\n            r.update(\n                {\n                    \"CONTENT_LENGTH\": str(len(data)),\n                    \"CONTENT_TYPE\": content_type,\n                    \"wsgi.input\": FakePayload(data),\n                }\n            )\n        if headers:\n            extra.update(HttpHeaders.to_wsgi_names(headers))\n        if query_params:\n            extra[\"QUERY_STRING\"] = urlencode(query_params, doseq=True)\n        r.update(extra)\n        # If QUERY_STRING is absent or empty, we want to extract it from the URL.\n        if not r.get(\"QUERY_STRING\"):\n            # WSGI requires latin-1 encoded strings. See get_path_info().\n            r[\"QUERY_STRING\"] = parsed.query.encode().decode(\"iso-8859-1\")\n        return self.request(**r)",
+          "explanation": "The bare name resolves through the file's line-28 import from `django.utils.http`. When the method-level `query_params` argument is truthy, it alone is encoded and assigned to `extra[\"QUERY_STRING\"]`, overriding a raw query string supplied in `extra` and taking precedence over the query embedded in `path`. If `query_params` is falsey, the target call is bypassed: a nonempty `QUERY_STRING` already in `extra` is retained, otherwise the parsed URL query is used verbatim after the WSGI-compatible decoding step. `doseq=True` expands iterable values into repeated keys while treating strings and bytes as scalar. Convenience request methods that reach this method at runtime are transitive callers, not additional lexical findings."
+        },
+        {
+          "id": "AsyncRequestFactory.generic",
+          "path": "django/test/client.py",
+          "start_line": 733,
+          "end_line": 772,
+          "quote": "    def generic(\n        self,\n        method,\n        path,\n        data=\"\",\n        content_type=\"application/octet-stream\",\n        secure=False,\n        *,\n        headers=None,\n        query_params=None,\n        **extra,\n    ):\n        \"\"\"Construct an arbitrary HTTP request.\"\"\"\n        parsed = urlsplit(str(path))  # path can be lazy.\n        data = force_bytes(data, settings.DEFAULT_CHARSET)\n        s = {\n            \"method\": method,\n            \"path\": self._get_path(parsed),\n            \"server\": (\"127.0.0.1\", \"443\" if secure else \"80\"),\n            \"scheme\": \"https\" if secure else \"http\",\n            \"headers\": [(b\"host\", b\"testserver\")],\n        }\n        if self.defaults:\n            extra = {**self.defaults, **extra}\n        if data:\n            s[\"headers\"].extend(\n                [\n                    (b\"content-length\", str(len(data)).encode(\"ascii\")),\n                    (b\"content-type\", content_type.encode(\"ascii\")),\n                ]\n            )\n            s[\"_body_file\"] = FakePayload(data)\n        if query_params:\n            s[\"query_string\"] = urlencode(query_params, doseq=True)\n        elif query_string := extra.pop(\"QUERY_STRING\", None):\n            s[\"query_string\"] = query_string\n        else:\n            # If QUERY_STRING is absent or empty, we want to extract it from\n            # the URL.\n            s[\"query_string\"] = parsed.query",
+          "explanation": "This distinct `generic` definition in `AsyncRequestFactory` uses the same line-28 import of `django.utils.http.urlencode`. Factory defaults are first merged with call-specific `extra`, with `extra` winning. A truthy method-level `query_params` argument is encoded directly and takes precedence as the ASGI query string. If it is falsey, the direct call is bypassed and the method instead uses a truthy raw `QUERY_STRING` from the merged extras, or finally the query embedded in `path`. These sources are alternatives rather than merged query datasets. `doseq=True` expands iterable values into repeated keys while leaving strings and bytes scalar. The synchronous `RequestFactory.generic` method is a separate lexical caller despite the shared method name."
+        }
+      ]
+    },
+    "prompt_bytes": 2384,
+    "events_sha256": "4a812db6fa4be083cee1764adcd1a7402eb32dcaab655895476eae2ab461ed59"
+  }
+}

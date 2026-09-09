@@ -1,0 +1,23 @@
+{
+  "java": {
+    "repository": "https://github.com/spring-projects/spring-framework",
+    "commit": "4c8c6409a27a62ab163d3b6196ad862b7c835440",
+    "scope": "Complete spring-core subtree, not complete Spring Framework repository; reused corpus, new cache lifecycle operation.",
+    "fixture": "/tmp/columbus-spring-navigation-source.zip",
+    "fixture_sha256": "68572527bfad750c2ab2c55dcbab1324568a4584d0d122cc3a4dfac8c139bd0c"
+  },
+  "kotlin": {
+    "repository": "https://github.com/spring-projects/spring-framework",
+    "commit": "4c8c6409a27a62ab163d3b6196ad862b7c835440",
+    "scope": "Complete spring-core subtree, not complete Spring Framework repository; reused corpus, new proxy hint operation.",
+    "fixture": "/tmp/columbus-spring-navigation-source.zip",
+    "fixture_sha256": "68572527bfad750c2ab2c55dcbab1324568a4584d0d122cc3a4dfac8c139bd0c"
+  },
+  "javascript": {
+    "repository": "https://github.com/expressjs/express",
+    "commit": "023767fe9872e029271df1418f73401bff20ff40",
+    "scope": "Complete pinned Express superproject source ZIP; dependencies not vendored; reused corpus, new download/sendFile operation.",
+    "fixture": "/tmp/columbus-express-token-source.zip",
+    "fixture_sha256": "019254986d23c8ad14e1212c7be1d5f7d803a8d6e023563e566045c49036b278"
+  }
+}

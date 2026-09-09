@@ -1,0 +1,19 @@
+Compiled from "Inherited.java"
+class Inherited extends Base {
+  Inherited();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method Base."<init>":()V
+       4: return
+
+  void hit(java.lang.String);
+    Code:
+       0: return
+
+  void run();
+    Code:
+       0: aload_0
+       1: iconst_1
+       2: invokevirtual #7                  // Method hit:(I)V
+       5: return
+}

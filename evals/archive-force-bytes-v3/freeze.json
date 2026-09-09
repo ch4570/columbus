@@ -1,0 +1,34 @@
+{
+  "source_runtime_metadata_hashes": {
+    "manifest.json": "54b9b10d3f4ca04f05e29059258b8fd588e9b44843a4f7da49ca2b376fe5200e",
+    "engine.json": "984c47aa72a4d7beba12c320fd0c6c1e8b1d445cca18aea0713bf4467dd4eca5",
+    "cases.json": "dbce8d9f5ce3ed6d16de10fd945484da1d4477e501325f47812f3a2c28c8dd55"
+  },
+  "index_seconds": 17.06,
+  "index": {
+    "files": 5465,
+    "symbols": 46630,
+    "edges": 86828,
+    "indexed_bytes": 35218163,
+    "revision": "88947a469a4e4f398f37"
+  },
+  "archive": {
+    "archive_sha256": "78ee50a0a33b447e08a2e2dc90a24d0a8548b7c8c269bf584e8022b4b7ef747d",
+    "bytes": 8592884,
+    "export_seconds": 8.061,
+    "codec": "xz",
+    "counts": {
+      "files": 5465,
+      "nodes": 46630,
+      "scopes": 46964,
+      "edges": 86828,
+      "references": 188003,
+      "imports": 18268,
+      "diagnostics": 1
+    }
+  },
+  "model_trial_started": false,
+  "repeat_not_holdout": true,
+  "question_and_semantic_criteria_equal_v2": true,
+  "source_manifest_equal_v2": true
+}

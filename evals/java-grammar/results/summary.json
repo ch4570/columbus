@@ -1,0 +1,30 @@
+{
+  "upstream_pr": 206,
+  "upstream_commit": "6018d681d319aada6d9fe1b8a8d17f9f4d6c758e",
+  "generator": "tree-sitter-cli 0.27.0 --abi 14",
+  "corpus_commit": "4c8c6409a27a62ab163d3b6196ad862b7c835440",
+  "source_hashes_equal": true,
+  "local_patch_sha256": "701ad2f492a934051b721206cdfc4903b2a83a89023ec406d4cb700ecbd60b4c",
+  "generated_parser_sha256": "64aece257d41d4c27848125dac05e619b2e0164388330cd657411b741ace6ff7",
+  "counts": {
+    "pinned": {
+      "files": 1091,
+      "partial_files": 5,
+      "symbols": 20416,
+      "references": 67088
+    },
+    "candidate": {
+      "files": 1091,
+      "partial_files": 0,
+      "symbols": 20416,
+      "references": 67088
+    },
+    "fixed": {
+      "files": 1091,
+      "partial_files": 0,
+      "symbols": 20416,
+      "references": 67088
+    }
+  },
+  "fixture_spans_and_parameter_types_checked": true
+}

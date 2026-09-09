@@ -1,0 +1,146 @@
+{
+  "positive": {
+    "passed": true,
+    "findings": [
+      {
+        "id": "legacy-string-bytestring",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "legacy-array-file",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "string-encoding",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "charset-policy",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "array-slice",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "bytestring-body",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      },
+      {
+        "id": "file-body",
+        "passed": true,
+        "reason": "mechanism and code-line quote grounded in bounded source range (indentation ignored)"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "negative": {
+    "passed": false,
+    "findings": [
+      {
+        "id": "legacy-string-bytestring",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "legacy-array-file",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "string-encoding",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "charset-policy",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "array-slice",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "bytestring-body",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      },
+      {
+        "id": "file-body",
+        "passed": false,
+        "reason": "quote not verbatim within cited lines"
+      }
+    ],
+    "grader_version": 2,
+    "note": "Checks source locations and quoted mechanisms; explanation semantics are reviewed separately."
+  },
+  "control_answer": {
+    "findings": [
+      {
+        "id": "legacy-string-bytestring",
+        "path": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt",
+        "start_line": 238,
+        "end_line": 239,
+        "quote": "      content: ByteString,\n    ): RequestBody = content.toRequestBody(contentType)",
+        "explanation": "Mechanical citation control only; not a semantic answer."
+      },
+      {
+        "id": "legacy-array-file",
+        "path": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt",
+        "start_line": 271,
+        "end_line": 272,
+        "quote": "      file: File,\n    ): RequestBody = file.asRequestBody(contentType)",
+        "explanation": "Mechanical citation control only; not a semantic answer."
+      },
+      {
+        "id": "string-encoding",
+        "path": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt",
+        "start_line": 127,
+        "end_line": 127,
+        "quote": "      return bytes.toRequestBody(finalContentType, 0, bytes.size)",
+        "explanation": "Mechanical citation control only; not a semantic answer."
+      },
+      {
+        "id": "charset-policy",
+        "path": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/internal/internal.kt",
+        "start_line": 100,
+        "end_line": 100,
+        "quote": "      finalContentType = \"$this; charset=utf-8\".toMediaTypeOrNull()",
+        "explanation": "Mechanical citation control only; not a semantic answer."
+      },
+      {
+        "id": "array-slice",
+        "path": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt",
+        "start_line": 168,
+        "end_line": 168,
+        "quote": "      checkOffsetAndCount(size.toLong(), offset.toLong(), byteCount.toLong())",
+        "explanation": "Mechanical citation control only; not a semantic answer."
+      },
+      {
+        "id": "bytestring-body",
+        "path": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt",
+        "start_line": 139,
+        "end_line": 139,
+        "quote": "          sink.write(this@toRequestBody)",
+        "explanation": "Mechanical citation control only; not a semantic answer."
+      },
+      {
+        "id": "file-body",
+        "path": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt",
+        "start_line": 190,
+        "end_line": 190,
+        "quote": "          source().use { source -> sink.writeAll(source) }",
+        "explanation": "Mechanical citation control only; not a semantic answer."
+      }
+    ]
+  }
+}

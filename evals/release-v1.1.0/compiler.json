@@ -1,0 +1,4901 @@
+{
+  "compiler": "javac 17.0.20.1",
+  "versions": {
+    "tree-sitter": "0.26.0",
+    "tree-sitter-java": "0.23.5",
+    "tree-sitter-kotlin": "1.1.0"
+  },
+  "analyzer_sha256": "7014b2d5a6894a5e9c734b6a6c2089ce667a897c295a61e1f23c46419c61bd8b",
+  "cases": [
+    {
+      "name": "literal_valid",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(String.class, \"text\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "521f8c779e230abb3c820758a8bf778e291a79ed763c544d3441b95f3ce60524"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "String"
+          },
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(String.class, \"text\")",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::Factory.hit:method(Class<T>,T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::Factory.hit:method(Class<T>,T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "Factory.hit(String.class, \"text\")",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "literal_invalid",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(String.class, 1); } }"
+      },
+      "source_hashes": {
+        "C.java": "6c437ca8308d35c966d61501a08c8befb29e5b977ed2e915d5a1110a3afd0944"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/literal_invalid/C.java:1: error: method hit in class Factory cannot be applied to given types;\nclass Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(String.class, 1); } }\n                                                                                               ^\n  required: Class<T>,T\n  found:    Class<String>,int\n  reason: inference variable T has incompatible bounds\n    equality constraints: String\n    lower bounds: Integer\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(Class<T>,T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          "int"
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "String"
+          },
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(String.class, 1)",
+        "resolved": false,
+        "reason": "generic argument type constraints incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "expression_valid",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(String.class, String.valueOf(1)); } }"
+      },
+      "source_hashes": {
+        "C.java": "5b823e6bdcf4c8d92186fe36532d0883edf3004dffd207ee5c7884bffb1c40c5"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "String"
+          },
+          {
+            "kind": "value_of",
+            "receiver": "String",
+            "literal": "int"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(String.class, String.valueOf(1))",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::Factory.hit:method(Class<T>,T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::Factory.hit:method(Class<T>,T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "Factory.hit(String.class, String.valueOf(1))",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "expression_invalid",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(String.class, Integer.valueOf(1)); } }"
+      },
+      "source_hashes": {
+        "C.java": "4a1bc12793078ca9f0dec36bb47ace5d84156ce310f2c4b268288b1c3757fee7"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/expression_invalid/C.java:1: error: method hit in class Factory cannot be applied to given types;\nclass Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(String.class, Integer.valueOf(1)); } }\n                                                                                               ^\n  required: Class<T>,T\n  found:    Class<String>,Integer\n  reason: inference variable T has incompatible bounds\n    equality constraints: String\n    lower bounds: Integer\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(Class<T>,T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "String"
+          },
+          {
+            "kind": "value_of",
+            "receiver": "Integer",
+            "literal": "int"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(String.class, Integer.valueOf(1))",
+        "resolved": false,
+        "reason": "generic argument type constraints incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "literal_charsequence_valid",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(CharSequence.class, \"text\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "74f1da3ef7a014b4079cf1bdab0ac8de79dbf22193dfef1d558dac38f2e0900e"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "CharSequence"
+          },
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(CharSequence.class, \"text\")",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::Factory.hit:method(Class<T>,T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::Factory.hit:method(Class<T>,T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "Factory.hit(CharSequence.class, \"text\")",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "generic_filter_valid_literal",
+      "sources": {
+        "C.java": "class Filter<T> {} class C { static <T> void hit(Filter<T> filter, T value) {} void run() { hit(new Filter<String>(), \"text\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "f363252a5696a3e4f415c587acaf177c224f94c758a122407bab917453d3bbff"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {
+            "kind": "new",
+            "type": "Filter<String>"
+          },
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(new Filter<String>(), \"text\")",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(Filter<T>,T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::C.hit:method(Filter<T>,T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(new Filter<String>(), \"text\")",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "generic_array_valid",
+      "sources": {
+        "C.java": "class C { static <T> T[] hit(T... values) { return values; } void run() { String[] values = hit(\"text\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "94fba0e4128c125d0fb94017e01f13aacf9e471f2b71e60872641d7883fc317a"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "Note: /var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/generic_array_valid/C.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "String[]",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(\"text\")",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(T...)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::C.hit:method(T...)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(\"text\")",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "generic_filter_invalid_expression",
+      "sources": {
+        "C.java": "class Filter<T> {} class C { static <T> void hit(Filter<T> filter, T value) {} void run() { hit(new Filter<String>(), Integer.valueOf(1)); } }"
+      },
+      "source_hashes": {
+        "C.java": "1e3852fa0dfb3f2e20f993f65d63e8feefbda1f63f71147e75b9cf85f0a46209"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/generic_filter_invalid_expression/C.java:1: error: method hit in class C cannot be applied to given types;\nclass Filter<T> {} class C { static <T> void hit(Filter<T> filter, T value) {} void run() { hit(new Filter<String>(), Integer.valueOf(1)); } }\n                                                                                            ^\n  required: Filter<T>,T\n  found:    Filter<String>,Integer\n  reason: inference variable T has incompatible bounds\n    equality constraints: String\n    lower bounds: Integer\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(Filter<T>,T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "new",
+            "type": "Filter<String>"
+          },
+          {
+            "kind": "value_of",
+            "receiver": "Integer",
+            "literal": "int"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(new Filter<String>(), Integer.valueOf(1))",
+        "resolved": false,
+        "reason": "generic argument type constraints incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "nested_type_mimics_java_lang",
+      "sources": {
+        "C.java": "class java { static class lang { static class String {} } } class C { static <T> void hit(Class<T> type,T value) {} void run() { hit(java.lang.String.class, \"text\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "96e4b619e728c04328d8db6fbce3882863f53ec0ddea4c676d80e891a3e1e166"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/nested_type_mimics_java_lang/C.java:1: error: method hit in class C cannot be applied to given types;\nclass java { static class lang { static class String {} } } class C { static <T> void hit(Class<T> type,T value) {} void run() { hit(java.lang.String.class, \"text\"); } }\n                                                                                                                                 ^\n  required: Class<T>,T\n  found:    Class<java.lang.String>,java.lang.String\n  reason: inference variable T has incompatible bounds\n    equality constraints: java.lang.String\n    lower bounds: java.lang.String\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(Class<T>,T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "java.lang.String"
+          },
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(java.lang.String.class, \"text\")",
+        "resolved": false,
+        "reason": "generic argument type constraints incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "generic_source_identity_valid",
+      "sources": {
+        "C.java": "class Value {} class C { static <T> void hit(Class<T> type,T value) {} void run() { hit(Value.class, new Value()); } }"
+      },
+      "source_hashes": {
+        "C.java": "e38cc0cdfbdae5cd4c1c9b7fc728f114b85b7d55c245607e1ac88071ae5b2d8a"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "Value"
+          },
+          {
+            "kind": "new",
+            "type": "Value"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(Value.class, new Value())",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(Class<T>,T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::C.hit:method(Class<T>,T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(Value.class, new Value())",
+          "path": "C.java",
+          "line": 1
+        },
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::Value:class",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "new Value()",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "declaring_type_invalid",
+      "sources": {
+        "C.java": "class C<T> { void hit(T value) {} void run() { hit(Integer.valueOf(1)); } }"
+      },
+      "source_hashes": {
+        "C.java": "7f713735babffc007ebe06dfc06e00c2008d3d0ec6bd01781628cf3c8ae7d181"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/declaring_type_invalid/C.java:1: error: incompatible types: Integer cannot be converted to T\nclass C<T> { void hit(T value) {} void run() { hit(Integer.valueOf(1)); } }\n                                                                  ^\n  where T is a type-variable:\n    T extends Object declared in class C\nNote: Some messages have been simplified; recompile with -Xdiags:verbose to get full output\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "value_of",
+            "receiver": "Integer",
+            "literal": "int"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(Integer.valueOf(1))",
+        "resolved": false,
+        "reason": "generic declaring-type substitution requires semantic analysis"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "number_anchor",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(Number.class, 1); } }"
+      },
+      "source_hashes": {
+        "C.java": "34f96db78efd777453272ed7021fa5e45a5e17ff9ca8bf40ad3859650513312a"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          "int"
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "Number"
+          },
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(Number.class, 1)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::Factory.hit:method(Class<T>,T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::Factory.hit:method(Class<T>,T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "Factory.hit(Number.class, 1)",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "typed_local_valid",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run(String value) { Factory.hit(String.class, value); } }"
+      },
+      "source_hashes": {
+        "C.java": "f97a4c9b3b2c219c65b78577b19f5b4545a6a6eb9cb09dc03e3e618ad9456e2c"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method(String)",
+        "scope_id": "C.java::C.run:method(String)",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "String"
+          },
+          {
+            "kind": "name",
+            "name": "value"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(String.class, value)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::Factory.hit:method(Class<T>,T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method(String)",
+          "target": "C.java::Factory.hit:method(Class<T>,T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "Factory.hit(String.class, value)",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "typed_local_invalid",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run(Integer value) { Factory.hit(String.class, value); } }"
+      },
+      "source_hashes": {
+        "C.java": "6320f0759f93e1d98a15919b8da9ccbe2d4cecfabae1de53022ff51533e88542"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/typed_local_invalid/C.java:1: error: method hit in class Factory cannot be applied to given types;\nclass Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run(Integer value) { Factory.hit(String.class, value); } }\n                                                                                                            ^\n  required: Class<T>,T\n  found:    Class<String>,Integer\n  reason: inference variable T has incompatible bounds\n    equality constraints: String\n    lower bounds: Integer\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(Class<T>,T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method(Integer)",
+        "scope_id": "C.java::C.run:method(Integer)",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "String"
+          },
+          {
+            "kind": "name",
+            "name": "value"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(String.class, value)",
+        "resolved": false,
+        "reason": "generic argument type constraints incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "typed_class_token",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run(Class<String> type) { Factory.hit(type, \"ok\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "73087ff522e82dac8d7fcb51d59296158df5d92cf39258b3f55efd6fc00613a7"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method(Class<String>)",
+        "scope_id": "C.java::C.run:method(Class<String>)",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {
+            "kind": "name",
+            "name": "type"
+          },
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(type, \"ok\")",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::Factory.hit:method(Class<T>,T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method(Class<String>)",
+          "target": "C.java::Factory.hit:method(Class<T>,T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "Factory.hit(type, \"ok\")",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "conflicting_tokens",
+      "sources": {
+        "C.java": "class C { static <T> void hit(Class<T> a, Class<T> b, T value) {} void run() { hit(String.class, Integer.class, \"text\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "92f9674ccf3be9212f2b0f94555e49cab6715de360e9f13dac4de4e11995b75b"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/conflicting_tokens/C.java:1: error: method hit in class C cannot be applied to given types;\nclass C { static <T> void hit(Class<T> a, Class<T> b, T value) {} void run() { hit(String.class, Integer.class, \"text\"); } }\n                                                                               ^\n  required: Class<T>,Class<T>,T\n  found:    Class<String>,Class<Integer>,String\n  reason: inference variable T has incompatible equality constraints Integer,String\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(Class<T>,Class<T>,T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 3,
+        "argument_types": [
+          null,
+          null,
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "String"
+          },
+          {
+            "kind": "class_literal",
+            "type": "Integer"
+          },
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(String.class, Integer.class, \"text\")",
+        "resolved": false,
+        "reason": "generic invariant type constraints conflict or are unknown"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "bounded_valid_unresolved",
+      "sources": {
+        "C.java": "class C { static <T extends Number> void hit(T value) {} void run() { hit(1); } }"
+      },
+      "source_hashes": {
+        "C.java": "eb70db610f4b477df509e07d37d838bd8d12bfa3379855e15499bf5e2f931053"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": false,
+        "reason": "generic bounds or explicit type arguments require semantic analysis"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "bounded_invalid",
+      "sources": {
+        "C.java": "class C { static <T extends Number> void hit(T value) {} void run() { hit(\"bad\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "05ed59667aae12f83920780624ebc7144a393808b366eb133bf7e36bdde39874"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/bounded_invalid/C.java:1: error: method hit in class C cannot be applied to given types;\nclass C { static <T extends Number> void hit(T value) {} void run() { hit(\"bad\"); } }\n                                                                      ^\n  required: T\n  found:    String\n  reason: inference variable T has incompatible bounds\n    lower bounds: Number\n    lower bounds: String\n  where T is a type-variable:\n    T extends Number declared in method <T>hit(T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(\"bad\")",
+        "resolved": false,
+        "reason": "generic bounds or explicit type arguments require semantic analysis"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "explicit_valid_unresolved",
+      "sources": {
+        "C.java": "class C { static <T> void hit(T value) {} void run() { C.<String>hit(\"ok\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "728418f2c853095fd958bf96058366a21b151e688886ffa7ea21370b254fc23d"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "C.hit",
+        "member": "hit",
+        "receiver": "C",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": true,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "C.<String>hit(\"ok\")",
+        "resolved": false,
+        "reason": "generic bounds or explicit type arguments require semantic analysis"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "explicit_invalid",
+      "sources": {
+        "C.java": "class C { static <T> void hit(T value) {} void run() { C.<String>hit(1); } }"
+      },
+      "source_hashes": {
+        "C.java": "d54b7b5f8bf4536dd2cdce46076121da95ce9bd900931eec4cd0dd1821c2eb4c"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/explicit_invalid/C.java:1: error: incompatible types: int cannot be converted to String\nclass C { static <T> void hit(T value) {} void run() { C.<String>hit(1); } }\n                                                                     ^\nNote: Some messages have been simplified; recompile with -Xdiags:verbose to get full output\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "C.hit",
+        "member": "hit",
+        "receiver": "C",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": true,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "C.<String>hit(1)",
+        "resolved": false,
+        "reason": "generic bounds or explicit type arguments require semantic analysis"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "array_wrong_assignment",
+      "sources": {
+        "C.java": "class C { static <T> T[] hit(T... values) { return values; } void run() { String[] a = hit(1); } }"
+      },
+      "source_hashes": {
+        "C.java": "864559d682f3b80e762817fa633ea5889bf32d91f8afa2571d38547d64919528"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/array_wrong_assignment/C.java:1: error: incompatible types: inference variable T has incompatible bounds\nclass C { static <T> T[] hit(T... values) { return values; } void run() { String[] a = hit(1); } }\n                                                                                          ^\n    lower bounds: String,Object\n    lower bounds: Integer\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(T...)\nNote: /var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/array_wrong_assignment/C.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "String[]",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": false,
+        "reason": "generic result context incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "array_wrong_return",
+      "sources": {
+        "C.java": "class C { static <T> T[] hit(T... values) { return values; } String[] run() { return hit(1); } }"
+      },
+      "source_hashes": {
+        "C.java": "9d387e5724eb1bf0a8fe7b47f115129fdfaec538954a27c9b69b66eed8c14210"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/array_wrong_return/C.java:1: error: incompatible types: inference variable T has incompatible bounds\nclass C { static <T> T[] hit(T... values) { return values; } String[] run() { return hit(1); } }\n                                                                                        ^\n    lower bounds: String,Object\n    lower bounds: Integer\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(T...)\nNote: /var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/array_wrong_return/C.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "String[]",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": false,
+        "reason": "generic result context incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "array_mixed_valid",
+      "sources": {
+        "C.java": "class C { static <T> T[] hit(T... values) { return values; } void run() { Object[] a = hit(1, \"text\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "7072ace9ccb8c7a33923d499f1c375008ad9de62a821f226ba80f209dce8955d"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "Note: /var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/array_mixed_valid/C.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          "int",
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {},
+          {}
+        ],
+        "expected_type": "Object[]",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1, \"text\")",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(T...)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::C.hit:method(T...)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(1, \"text\")",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "shadowed_value_factory",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class String { static Integer valueOf(int value) { return value; } } class C { void run() { Factory.hit(java.lang.String.class, String.valueOf(1)); } }"
+      },
+      "source_hashes": {
+        "C.java": "47986964783654e6f221b84e549a1960cd30b3f6ded1c043177d15eb0685d128"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/shadowed_value_factory/C.java:1: error: method hit in class Factory cannot be applied to given types;\nclass Factory { static <T> void hit(Class<T> type, T value) {} } class String { static Integer valueOf(int value) { return value; } } class C { void run() { Factory.hit(java.lang.String.class, String.valueOf(1)); } }\n                                                                                                                                                                    ^\n  required: Class<T>,T\n  found:    Class<String>,Integer\n  reason: inference variable T has incompatible bounds\n    equality constraints: String\n    lower bounds: Integer\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(Class<T>,T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "java.lang.String"
+          },
+          {
+            "kind": "value_of",
+            "receiver": "String",
+            "literal": "int"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(java.lang.String.class, String.valueOf(1))",
+        "resolved": false,
+        "reason": "generic value type requires semantic analysis"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::String.valueOf:method(int)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "String.valueOf(1)",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "type_variable_class_token",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C<String> { void run() { Factory.hit(String.class, \"text\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "41c0ee059b73186190e85e3fee03759f7e39ccf1f58af3f38dfbe7e729caf518"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/type_variable_class_token/C.java:1: error: cannot select from a type variable\nclass Factory { static <T> void hit(Class<T> type, T value) {} } class C<String> { void run() { Factory.hit(String.class, \"text\"); } }\n                                                                                                                  ^\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "String"
+          },
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(String.class, \"text\")",
+        "resolved": false,
+        "reason": "generic invariant type constraints conflict or are unknown"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "array_bootstrap_object",
+      "sources": {
+        "C.java": "class C { static <T> T[] hit(T... values) { return values; } void run() { Object result = hit(\"text\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "b8877e4396576a6a281fb0886cf96598425f67297ed2f95802bd14c25dda7e80"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "Note: /var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/array_bootstrap_object/C.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "Object",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(\"text\")",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(T...)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::C.hit:method(T...)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(\"text\")",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "array_shadowed_object",
+      "sources": {
+        "C.java": "class Object {} class C { static <T> T[] hit(T... values) { return values; } void run() { Object result = hit(\"text\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "e5354d44f21a07e17a80caff9216cdd96fc112a41bc39cd03a6d72fca47ad535"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/array_shadowed_object/C.java:1: error: incompatible types: no instance(s) of type variable(s) T exist so that T[] conforms to Object\nclass Object {} class C { static <T> T[] hit(T... values) { return values; } void run() { Object result = hit(\"text\"); } }\n                                                                                                             ^\n  where T is a type-variable:\n    T extends java.lang.Object declared in method <T>hit(T...)\nNote: /var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/array_shadowed_object/C.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "Object",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(\"text\")",
+        "resolved": false,
+        "reason": "generic array result context requires semantic analysis"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "array_qualified_object",
+      "sources": {
+        "C.java": "class Object {} class C { static <T> T[] hit(T... values) { return values; } void run() { java.lang.Object result = hit(\"text\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "43d50720618dfd3f59b12e8e8482744267453192bb58209deecd14efb539cd78"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "Note: /var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/array_qualified_object/C.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "java.lang.Object",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(\"text\")",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(T...)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::C.hit:method(T...)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(\"text\")",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "array_cloneable",
+      "sources": {
+        "C.java": "class C { static <T> T[] hit(T... values) { return values; } void run() { Cloneable result = hit(\"text\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "1d25df870b3bfea8a4647d46f359e42ac8ec41823de2ba6516bdc18accc2ff22"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "Note: /var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/array_cloneable/C.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "Cloneable",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(\"text\")",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(T...)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::C.hit:method(T...)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(\"text\")",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "array_serializable",
+      "sources": {
+        "C.java": "class C { static <T> T[] hit(T... values) { return values; } void run() { java.io.Serializable result = hit(\"text\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "196b429cfe4ea8c0435067ae8e5fc6000d36bfe7269ca578426076f00f0f4688"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "Note: /var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/array_serializable/C.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "java.io.Serializable",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(\"text\")",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(T...)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::C.hit:method(T...)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(\"text\")",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "array_shadowed_cloneable",
+      "sources": {
+        "C.java": "class Cloneable {} class C { static <T> T[] hit(T... values) { return values; } void run() { Cloneable result = hit(\"text\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "44f4859227c4b2c1d69db1d65c9f5e6791dec9d866bf47e21de80fb13eeaecad"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/array_shadowed_cloneable/C.java:1: error: incompatible types: no instance(s) of type variable(s) T exist so that T[] conforms to Cloneable\nclass Cloneable {} class C { static <T> T[] hit(T... values) { return values; } void run() { Cloneable result = hit(\"text\"); } }\n                                                                                                                   ^\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(T...)\nNote: /var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/array_shadowed_cloneable/C.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "Cloneable",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(\"text\")",
+        "resolved": false,
+        "reason": "generic array result context requires semantic analysis"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "primitive_int_valid",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(int.class, 1); } }"
+      },
+      "source_hashes": {
+        "C.java": "60748d3ddfce530839f38f478d1186e477c3335355b7a99a3a6c48082fbf2742"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          "int"
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "int"
+          },
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(int.class, 1)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::Factory.hit:method(Class<T>,T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::Factory.hit:method(Class<T>,T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "Factory.hit(int.class, 1)",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "primitive_int_wrong_boolean",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(int.class, true); } }"
+      },
+      "source_hashes": {
+        "C.java": "e87d585272e1adfaf1e9f423a2b7919f943e402881adab6fc814637b7714b602"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/primitive_int_wrong_boolean/C.java:1: error: method hit in class Factory cannot be applied to given types;\nclass Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(int.class, true); } }\n                                                                                               ^\n  required: Class<T>,T\n  found:    Class<Integer>,boolean\n  reason: inference variable T has incompatible bounds\n    equality constraints: Integer\n    lower bounds: Boolean\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(Class<T>,T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          "boolean"
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "int"
+          },
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(int.class, true)",
+        "resolved": false,
+        "reason": "generic argument type constraints incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "primitive_boolean_valid",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(boolean.class, true); } }"
+      },
+      "source_hashes": {
+        "C.java": "43805dae1b3944074e11a586f2a5106fc240bd449112b067593c0751f1495d7f"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          "boolean"
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "boolean"
+          },
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(boolean.class, true)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::Factory.hit:method(Class<T>,T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::Factory.hit:method(Class<T>,T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "Factory.hit(boolean.class, true)",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "primitive_boolean_wrong_int",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(boolean.class, 1); } }"
+      },
+      "source_hashes": {
+        "C.java": "406d35c59ad17e508eb590e47798275705e5e0244830a2cf1b1a3e7579a69421"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/primitive_boolean_wrong_int/C.java:1: error: method hit in class Factory cannot be applied to given types;\nclass Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(boolean.class, 1); } }\n                                                                                               ^\n  required: Class<T>,T\n  found:    Class<Boolean>,int\n  reason: inference variable T has incompatible bounds\n    equality constraints: Boolean\n    lower bounds: Integer\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(Class<T>,T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          "int"
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "boolean"
+          },
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(boolean.class, 1)",
+        "resolved": false,
+        "reason": "generic argument type constraints incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "primitive_array_valid",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(int[].class, new int[0]); } }"
+      },
+      "source_hashes": {
+        "C.java": "18e077869d824fbcc470b35bcbd90f8603ffec0298b64c7bf707f0076d02d100"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "int[]"
+          },
+          {
+            "kind": "new",
+            "type": "int[]"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(int[].class, new int[0])",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::Factory.hit:method(Class<T>,T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::Factory.hit:method(Class<T>,T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "Factory.hit(int[].class, new int[0])",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "primitive_array_wrong_component",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(int[].class, new long[0]); } }"
+      },
+      "source_hashes": {
+        "C.java": "2f66cc7b7c8c35fbb0d9e2ed28a88a38da503bf42f778126359cf1b36ef39bc0"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/primitive_array_wrong_component/C.java:1: error: method hit in class Factory cannot be applied to given types;\nclass Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(int[].class, new long[0]); } }\n                                                                                               ^\n  required: Class<T>,T\n  found:    Class<int[]>,long[]\n  reason: inference variable T has incompatible bounds\n    equality constraints: int[]\n    lower bounds: long[]\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(Class<T>,T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "int[]"
+          },
+          {
+            "kind": "new",
+            "type": "long[]"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(int[].class, new long[0])",
+        "resolved": false,
+        "reason": "generic argument type constraints incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "reference_array_valid",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(String[].class, new String[0]); } }"
+      },
+      "source_hashes": {
+        "C.java": "d23bb3aa7c36cb5ae28692cb9d14df0354f6e7de924834ecbb5a26dfb193d6d2"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "String[]"
+          },
+          {
+            "kind": "new",
+            "type": "String[]"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(String[].class, new String[0])",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::Factory.hit:method(Class<T>,T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::Factory.hit:method(Class<T>,T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "Factory.hit(String[].class, new String[0])",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "reference_array_wrong_component",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(String[].class, new Object[0]); } }"
+      },
+      "source_hashes": {
+        "C.java": "2b9bd42b5c13acc403502a376460edc85286488049cd036a1b313665b7642c51"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/reference_array_wrong_component/C.java:1: error: method hit in class Factory cannot be applied to given types;\nclass Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(String[].class, new Object[0]); } }\n                                                                                               ^\n  required: Class<T>,T\n  found:    Class<String[]>,Object[]\n  reason: inference variable T has incompatible bounds\n    equality constraints: String[]\n    lower bounds: Object[]\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(Class<T>,T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "String[]"
+          },
+          {
+            "kind": "new",
+            "type": "Object[]"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(String[].class, new Object[0])",
+        "resolved": false,
+        "reason": "generic argument type constraints incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "primitive_array_not_boxed",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(int[].class, new Integer[0]); } }"
+      },
+      "source_hashes": {
+        "C.java": "00d97164b6626e18f83fad2ca1596ce40ddd2d8c179b0edb62afac55d4ad2fa4"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/primitive_array_not_boxed/C.java:1: error: method hit in class Factory cannot be applied to given types;\nclass Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(int[].class, new Integer[0]); } }\n                                                                                               ^\n  required: Class<T>,T\n  found:    Class<int[]>,Integer[]\n  reason: inference variable T has incompatible bounds\n    equality constraints: int[]\n    lower bounds: Integer[]\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(Class<T>,T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "int[]"
+          },
+          {
+            "kind": "new",
+            "type": "Integer[]"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(int[].class, new Integer[0])",
+        "resolved": false,
+        "reason": "generic argument type constraints incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "boxed_array_not_primitive",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(Integer[].class, new int[0]); } }"
+      },
+      "source_hashes": {
+        "C.java": "580c230334f516912006a57058458504d7957553cc01d7e652783e86ac1f7368"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/boxed_array_not_primitive/C.java:1: error: method hit in class Factory cannot be applied to given types;\nclass Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(Integer[].class, new int[0]); } }\n                                                                                               ^\n  required: Class<T>,T\n  found:    Class<Integer[]>,int[]\n  reason: inference variable T has incompatible bounds\n    equality constraints: Integer[]\n    lower bounds: int[]\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(Class<T>,T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "Integer[]"
+          },
+          {
+            "kind": "new",
+            "type": "int[]"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(Integer[].class, new int[0])",
+        "resolved": false,
+        "reason": "generic argument type constraints incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "array_dimensions_valid",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(int[][].class, new int[1][]); } }"
+      },
+      "source_hashes": {
+        "C.java": "32dde119c5938dced92bb421dc2254ebf372727f3dce35eb622d06a2a8ec6994"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "int[][]"
+          },
+          {
+            "kind": "new",
+            "type": "int[][]"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(int[][].class, new int[1][])",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::Factory.hit:method(Class<T>,T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::Factory.hit:method(Class<T>,T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "Factory.hit(int[][].class, new int[1][])",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "array_dimensions_invalid",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(int[][].class, new int[1]); } }"
+      },
+      "source_hashes": {
+        "C.java": "040288df932125929a8e6898aa2143712e7514974361ca0852020b05650e8343"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/array_dimensions_invalid/C.java:1: error: method hit in class Factory cannot be applied to given types;\nclass Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(int[][].class, new int[1]); } }\n                                                                                               ^\n  required: Class<T>,T\n  found:    Class<int[][]>,int[]\n  reason: inference variable T has incompatible bounds\n    equality constraints: int[][]\n    lower bounds: int[]\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(Class<T>,T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "int[][]"
+          },
+          {
+            "kind": "new",
+            "type": "int[]"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(int[][].class, new int[1])",
+        "resolved": false,
+        "reason": "generic argument type constraints incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "reference_array_covariant",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(Object[].class, new String[0]); } }"
+      },
+      "source_hashes": {
+        "C.java": "58a5e3860ef9d45c45cb3d0c2fac876962573136b88fb6252baf300f15690d73"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "Object[]"
+          },
+          {
+            "kind": "new",
+            "type": "String[]"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(Object[].class, new String[0])",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::Factory.hit:method(Class<T>,T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::Factory.hit:method(Class<T>,T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "Factory.hit(Object[].class, new String[0])",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "primitive_array_not_object_array",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(Object[].class, new int[0]); } }"
+      },
+      "source_hashes": {
+        "C.java": "5c05cfd4f49ca4d2ebc6c087dea6d28ec4fe1e597159bbd9512ffaa334187e8d"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/primitive_array_not_object_array/C.java:1: error: method hit in class Factory cannot be applied to given types;\nclass Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(Object[].class, new int[0]); } }\n                                                                                               ^\n  required: Class<T>,T\n  found:    Class<Object[]>,int[]\n  reason: inference variable T has incompatible bounds\n    equality constraints: Object[]\n    lower bounds: int[]\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(Class<T>,T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "Object[]"
+          },
+          {
+            "kind": "new",
+            "type": "int[]"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(Object[].class, new int[0])",
+        "resolved": false,
+        "reason": "generic argument type constraints incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "nested_primitive_array_is_object_array",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(Object[].class, new int[0][]); } }"
+      },
+      "source_hashes": {
+        "C.java": "2fab68f02b28a28f67472bff942e3a06ff8ac46c9cc7fad4fa01d26d0170d609"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "Object[]"
+          },
+          {
+            "kind": "new",
+            "type": "int[][]"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(Object[].class, new int[0][])",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::Factory.hit:method(Class<T>,T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::Factory.hit:method(Class<T>,T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "Factory.hit(Object[].class, new int[0][])",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "array_initializer",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(String[].class, new String[]{\"x\"}); } }"
+      },
+      "source_hashes": {
+        "C.java": "f34bc31177320f1207571e6479648e73e9d498882d2c0fab0d4ac6dd5d3f9f72"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "String[]"
+          },
+          {
+            "kind": "new",
+            "type": "String[]"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(String[].class, new String[]{\"x\"})",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::Factory.hit:method(Class<T>,T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::Factory.hit:method(Class<T>,T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "Factory.hit(String[].class, new String[]{\"x\"})",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "class_token_array_cloneable",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(Cloneable.class, new int[0]); } }"
+      },
+      "source_hashes": {
+        "C.java": "221b78772e78c8c91e7a64586c77f63166aa7540672dad95ba8840046f87b2fc"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "Cloneable"
+          },
+          {
+            "kind": "new",
+            "type": "int[]"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(Cloneable.class, new int[0])",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::Factory.hit:method(Class<T>,T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::Factory.hit:method(Class<T>,T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "Factory.hit(Cloneable.class, new int[0])",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "class_token_array_serializable",
+      "sources": {
+        "C.java": "class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(java.io.Serializable.class, new int[0]); } }"
+      },
+      "source_hashes": {
+        "C.java": "2612cf7b2d4989c64ac3ba6dad25b95a40dd706c4a1a33f2c6ec2fb900ee98a2"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "java.io.Serializable"
+          },
+          {
+            "kind": "new",
+            "type": "int[]"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(java.io.Serializable.class, new int[0])",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::Factory.hit:method(Class<T>,T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::Factory.hit:method(Class<T>,T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "Factory.hit(java.io.Serializable.class, new int[0])",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "shadowed_reference_array_valid",
+      "sources": {
+        "C.java": "class String {} class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(String[].class, new String[0]); } }"
+      },
+      "source_hashes": {
+        "C.java": "7096a164dce7bfca6674906ae62d54226f7f8b51703e559f8a07b3ea451b7b75"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "String[]"
+          },
+          {
+            "kind": "new",
+            "type": "String[]"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(String[].class, new String[0])",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::Factory.hit:method(Class<T>,T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::Factory.hit:method(Class<T>,T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "Factory.hit(String[].class, new String[0])",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "shadowed_reference_array_mismatch",
+      "sources": {
+        "C.java": "class String {} class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(java.lang.String[].class, new String[0]); } }"
+      },
+      "source_hashes": {
+        "C.java": "819e1f35d09b6321a7a36b5535064d74ff789ec2c3dc155dd4a8b5b3497d37c5"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/shadowed_reference_array_mismatch/C.java:1: error: method hit in class Factory cannot be applied to given types;\nclass String {} class Factory { static <T> void hit(Class<T> type, T value) {} } class C { void run() { Factory.hit(java.lang.String[].class, new String[0]); } }\n                                                                                                               ^\n  required: Class<T>,T\n  found:    Class<java.lang.String[]>,String[]\n  reason: inference variable T has incompatible bounds\n    equality constraints: java.lang.String[]\n    lower bounds: String[]\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(Class<T>,T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "Factory.hit",
+        "member": "hit",
+        "receiver": "Factory",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "java.lang.String[]"
+          },
+          {
+            "kind": "new",
+            "type": "String[]"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "Factory.hit(java.lang.String[].class, new String[0])",
+        "resolved": false,
+        "reason": "generic argument type constraints incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "array_argument_flat_result",
+      "sources": {
+        "C.java": "class C { static <T> T[] hit(T... values) { return values; } void run() { String[] result=hit(new String[0]); } }"
+      },
+      "source_hashes": {
+        "C.java": "de92476583e37b7193c80c8cdd3ffb7e68be8d2ff62a79d5f408fe8f49197964"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "Note: /var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/array_argument_flat_result/C.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "new",
+            "type": "String[]"
+          }
+        ],
+        "expected_type": "String[]",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(new String[0])",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(T...)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::C.hit:method(T...)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(new String[0])",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "array_argument_nested_result",
+      "sources": {
+        "C.java": "class C { static <T> T[] hit(T... values) { return values; } void run() { String[][] result=hit(new String[0]); } }"
+      },
+      "source_hashes": {
+        "C.java": "91798041626926e32475d68ce4f65594dad1d3fd5cc98373cd354c30ce78513a"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/array_argument_nested_result/C.java:1: error: incompatible types: inference variable T has incompatible bounds\nclass C { static <T> T[] hit(T... values) { return values; } void run() { String[][] result=hit(new String[0]); } }\n                                                                                               ^\n    lower bounds: String[],Object\n    lower bounds: String\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(T...)\nNote: /var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/array_argument_nested_result/C.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "new",
+            "type": "String[]"
+          }
+        ],
+        "expected_type": "String[][]",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(new String[0])",
+        "resolved": false,
+        "reason": "generic result context incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "array_argument_object_result",
+      "sources": {
+        "C.java": "class C { static <T> T[] hit(T... values) { return values; } void run() { Object[] result=hit(new String[0]); } }"
+      },
+      "source_hashes": {
+        "C.java": "a69b4fb17f20916e1674ed67472359173f25cfdb8e101511b889a76c5c7d7d18"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "Note: /var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/array_argument_object_result/C.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "new",
+            "type": "String[]"
+          }
+        ],
+        "expected_type": "Object[]",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(new String[0])",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(T...)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::C.hit:method(T...)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(new String[0])",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "anchored_flat_array",
+      "sources": {
+        "C.java": "class C { static <T> void hit(Class<T> type,T... values) {} void run() { hit(String.class,new String[0]); } }"
+      },
+      "source_hashes": {
+        "C.java": "eef5f37f3e989f14fb8d654cf87cd5ff445a1b0b5607dab810c6deed4e3b923b"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "Note: /var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/anchored_flat_array/C.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "String"
+          },
+          {
+            "kind": "new",
+            "type": "String[]"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(String.class,new String[0])",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(Class<T>,T...)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::C.hit:method(Class<T>,T...)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(String.class,new String[0])",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "anchored_array_as_value",
+      "sources": {
+        "C.java": "class C { static <T> void hit(Class<T> type,T... values) {} void run() { hit(String[].class,new String[0]); } }"
+      },
+      "source_hashes": {
+        "C.java": "929baed01311b0db40ec97ecdf7e2f00f3a437a8423b16a2edcc0a1ea56ed25a"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "Note: /var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/anchored_array_as_value/C.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "String[]"
+          },
+          {
+            "kind": "new",
+            "type": "String[]"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(String[].class,new String[0])",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(Class<T>,T...)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::C.hit:method(Class<T>,T...)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(String[].class,new String[0])",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "anchored_primitive_array_as_value",
+      "sources": {
+        "C.java": "class C { static <T> void hit(Class<T> type,T... values) {} void run() { hit(Object.class,new int[0]); } }"
+      },
+      "source_hashes": {
+        "C.java": "bf87a5aea447cda2430c8ff4bb9609ba12a964e8a4d2c3227688bc17edb47d27"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "Note: /var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/anchored_primitive_array_as_value/C.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "Object"
+          },
+          {
+            "kind": "new",
+            "type": "int[]"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(Object.class,new int[0])",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(Class<T>,T...)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::C.hit:method(Class<T>,T...)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(Object.class,new int[0])",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "anchored_wrong_array",
+      "sources": {
+        "C.java": "class C { static <T> void hit(Class<T> type,T... values) {} void run() { hit(String.class,new Object[0]); } }"
+      },
+      "source_hashes": {
+        "C.java": "89fc4bc37525d503c7415a9a8474aecd6e85552fa7cb44860db77c4cc54b844e"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/anchored_wrong_array/C.java:1: error: method hit in class C cannot be applied to given types;\nclass C { static <T> void hit(Class<T> type,T... values) {} void run() { hit(String.class,new Object[0]); } }\n                                                                         ^\n  required: Class<T>,T[]\n  found:    Class<String>,Object[]\n  reason: inference variable T has incompatible bounds\n    equality constraints: String\n    lower bounds: Object[]\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(Class<T>,T...)\nNote: /var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/anchored_wrong_array/C.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 2,
+        "argument_types": [
+          null,
+          null
+        ],
+        "argument_facts": [
+          {
+            "kind": "class_literal",
+            "type": "String"
+          },
+          {
+            "kind": "new",
+            "type": "Object[]"
+          }
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(String.class,new Object[0])",
+        "resolved": false,
+        "reason": "generic argument type constraints incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "bounded_return_invalid",
+      "sources": {
+        "C.java": "class C { static <T extends Number> T hit() { return null; } void run() { String result=hit(); } }"
+      },
+      "source_hashes": {
+        "C.java": "890472ab3a355d9d75a6e38064c342e35e59a776e1049cfecb93304044e49665"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/bounded_return_invalid/C.java:1: error: incompatible types: inference variable T has incompatible upper bounds String,Number\nclass C { static <T extends Number> T hit() { return null; } void run() { String result=hit(); } }\n                                                                                           ^\n  where T is a type-variable:\n    T extends Number declared in method <T>hit()\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "argument_facts": [],
+        "expected_type": "String",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit()",
+        "resolved": false,
+        "reason": "generic bounds or explicit type arguments require semantic analysis"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "bounded_return_valid_unresolved",
+      "sources": {
+        "C.java": "class C { static <T extends Number> T hit() { return null; } void run() { Number result=hit(); } }"
+      },
+      "source_hashes": {
+        "C.java": "ba0ecedd43dad31d3eb30a9253ff1fe80f0f39322f3d2da1ac785b96835c1ba7"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "argument_facts": [],
+        "expected_type": "Number",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit()",
+        "resolved": false,
+        "reason": "generic bounds or explicit type arguments require semantic analysis"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "unbounded_return_valid",
+      "sources": {
+        "C.java": "class C { static <T> T hit() { return null; } void run() { String result=hit(); } }"
+      },
+      "source_hashes": {
+        "C.java": "ceb74f3ddce4a5e0c5106ccf16b0698e98d2ad7a846f899ba69648a82440c2a0"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "argument_facts": [],
+        "expected_type": "String",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit()",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method()",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::C.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit()",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "unbounded_array_return_valid",
+      "sources": {
+        "C.java": "class C { static <T> T[] hit() { return null; } void run() { String[] result=hit(); } }"
+      },
+      "source_hashes": {
+        "C.java": "19a49b42f941e7ea5d960e5a4efd5cd8bc169f81395319d8a9d3e76258330df5"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "argument_facts": [],
+        "expected_type": "String[]",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit()",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method()",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::C.hit:method()",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit()",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "unbounded_array_return_invalid",
+      "sources": {
+        "C.java": "class C { static <T> T[] hit() { return null; } void run() { String result=hit(); } }"
+      },
+      "source_hashes": {
+        "C.java": "f3b3c1ccfab3d8cd2ca3a04ea9dc9e457be5e730c222be07ed6d219faaa97c15"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/unbounded_array_return_invalid/C.java:1: error: incompatible types: no instance(s) of type variable(s) T exist so that T[] conforms to String\nclass C { static <T> T[] hit() { return null; } void run() { String result=hit(); } }\n                                                                              ^\n  where T is a type-variable:\n    T extends Object declared in method <T>hit()\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "argument_facts": [],
+        "expected_type": "String",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit()",
+        "resolved": false,
+        "reason": "generic array result context requires semantic analysis"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "declaring_return_invalid",
+      "sources": {
+        "C.java": "class C<T> { T hit() { return null; } void run() { String result=hit(); } }"
+      },
+      "source_hashes": {
+        "C.java": "0cb317652a7c8b14613064440c6cd346acbd77cdd1997428b44921c19b161ca0"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/declaring_return_invalid/C.java:1: error: incompatible types: T cannot be converted to String\nclass C<T> { T hit() { return null; } void run() { String result=hit(); } }\n                                                                    ^\n  where T is a type-variable:\n    T extends Object declared in class C\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "argument_facts": [],
+        "expected_type": "String",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit()",
+        "resolved": false,
+        "reason": "generic declaring-type substitution requires semantic analysis"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "declaring_return_valid_unresolved",
+      "sources": {
+        "C.java": "class C<T> { T hit() { return null; } void run() { T result=hit(); } }"
+      },
+      "source_hashes": {
+        "C.java": "b71735bd895bf9aaca40bd686be9002e7016059ca076d6a4aa4b03f5b9194959"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 0,
+        "argument_types": [],
+        "argument_facts": [],
+        "expected_type": "T",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit()",
+        "resolved": false,
+        "reason": "generic declaring-type substitution requires semantic analysis"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "conditional_assignment_bad",
+      "sources": {
+        "C.java": "class C { static <T> T hit(T value) { return value; } void run(boolean b) { String s=b ? hit(1) : null; } }"
+      },
+      "source_hashes": {
+        "C.java": "817902b5b8e870976451673acab5e56e3d13a8130be243d137cf36c6cce40492"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/conditional_assignment_bad/C.java:1: error: incompatible types: bad type in conditional expression\nclass C { static <T> T hit(T value) { return value; } void run(boolean b) { String s=b ? hit(1) : null; } }\n                                                                                            ^\n    inference variable T has incompatible bounds\n      lower bounds: String,Object\n      lower bounds: Integer\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method(boolean)",
+        "scope_id": "C.java::C.run:method(boolean)",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "String",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": false,
+        "reason": "generic result context incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "conditional_assignment_good",
+      "sources": {
+        "C.java": "class C { static <T> T hit(T value) { return value; } void run(boolean b) { Integer s=b ? hit(1) : null; } }"
+      },
+      "source_hashes": {
+        "C.java": "1b8ce932a8acd25c89366f275b06ea522301fee28d807c434f4dd42f842cf9dd"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method(boolean)",
+        "scope_id": "C.java::C.run:method(boolean)",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "Integer",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method(boolean)",
+          "target": "C.java::C.hit:method(T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(1)",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "conditional_return_bad",
+      "sources": {
+        "C.java": "class C { static <T> T hit(T value) { return value; } String run(boolean b) { return b ? null : hit(1); } }"
+      },
+      "source_hashes": {
+        "C.java": "55b79ebbe13d5f9fade3c1c9334a999c0a29fe1f4f15bd8fdde3794a84d812cb"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/conditional_return_bad/C.java:1: error: incompatible types: bad type in conditional expression\nclass C { static <T> T hit(T value) { return value; } String run(boolean b) { return b ? null : hit(1); } }\n                                                                                                   ^\n    inference variable T has incompatible bounds\n      lower bounds: String,Object\n      lower bounds: Integer\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method(boolean)",
+        "scope_id": "C.java::C.run:method(boolean)",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "String",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": false,
+        "reason": "generic result context incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "conditional_return_good",
+      "sources": {
+        "C.java": "class C { static <T> T hit(T value) { return value; } Integer run(boolean b) { return b ? null : hit(1); } }"
+      },
+      "source_hashes": {
+        "C.java": "dcaf177b72db5a9781ba9f92baafb36c83c619294533933bd9b15246a813e578"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method(boolean)",
+        "scope_id": "C.java::C.run:method(boolean)",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "Integer",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method(boolean)",
+          "target": "C.java::C.hit:method(T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(1)",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "nested_conditional_bad",
+      "sources": {
+        "C.java": "class C { static <T> T hit(T value) { return value; } void run(boolean b) { String s=(b ? null : (b ? hit(1) : null)); } }"
+      },
+      "source_hashes": {
+        "C.java": "021fc2e8302c7d5b134c813ad37541aa53d536bc9ed976190d90a9eef49f4fdb"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/nested_conditional_bad/C.java:1: error: incompatible types: bad type in conditional expression\nclass C { static <T> T hit(T value) { return value; } void run(boolean b) { String s=(b ? null : (b ? hit(1) : null)); } }\n                                                                                                         ^\n    bad type in conditional expression\n      inference variable T has incompatible bounds\n        lower bounds: String,Object\n        lower bounds: Integer\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method(boolean)",
+        "scope_id": "C.java::C.run:method(boolean)",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "String",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": false,
+        "reason": "generic result context incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "conditional_condition_good",
+      "sources": {
+        "C.java": "class C { static <T> T hit(T value) { return value; } void run() { String s=hit(true) ? \"a\" : \"b\"; } }"
+      },
+      "source_hashes": {
+        "C.java": "72af12aae520b5e29cd757fba2e8909fd7986765a4c96ffd34730859c3af9a94"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "boolean"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(true)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::C.hit:method(T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(true)",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "assignment_bad",
+      "sources": {
+        "C.java": "class C { static <T> T hit(T value) { return value; } void run() { String value; value=hit(1); } }"
+      },
+      "source_hashes": {
+        "C.java": "70a7d489d0dcc96f8af27435a9ba21980c6d7aadd647072e2f5e6fe7e864f0b4"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/assignment_bad/C.java:1: error: incompatible types: inference variable T has incompatible bounds\nclass C { static <T> T hit(T value) { return value; } void run() { String value; value=hit(1); } }\n                                                                                          ^\n    lower bounds: String,Object\n    lower bounds: Integer\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "String",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": false,
+        "reason": "generic result context incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "assignment_good",
+      "sources": {
+        "C.java": "class C { static <T> T hit(T value) { return value; } void run() { Integer value; value=hit(1); } }"
+      },
+      "source_hashes": {
+        "C.java": "42670c7067b6de8d22dc660b8a91a78046ee886810ed49246e20df57f872e8dc"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "Integer",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::C.hit:method(T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(1)",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "parameter_assignment_bad",
+      "sources": {
+        "C.java": "class C { static <T> T hit(T value) { return value; } void run(String value) { value=hit(1); } }"
+      },
+      "source_hashes": {
+        "C.java": "6172eadacb00d7c9c105ccf1132c1611615cbbd3e1b33810667947b9aaf8d19e"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/parameter_assignment_bad/C.java:1: error: incompatible types: inference variable T has incompatible bounds\nclass C { static <T> T hit(T value) { return value; } void run(String value) { value=hit(1); } }\n                                                                                        ^\n    lower bounds: String,Object\n    lower bounds: Integer\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method(String)",
+        "scope_id": "C.java::C.run:method(String)",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "String",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": false,
+        "reason": "generic result context incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "parameter_assignment_good",
+      "sources": {
+        "C.java": "class C { static <T> T hit(T value) { return value; } void run(Integer value) { value=hit(1); } }"
+      },
+      "source_hashes": {
+        "C.java": "3070180db3e8fec70347d4d59a7adfe15e2bf600090cfb45d299bc5865d31cd1"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method(Integer)",
+        "scope_id": "C.java::C.run:method(Integer)",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "Integer",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method(Integer)",
+          "target": "C.java::C.hit:method(T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(1)",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "assignment_conditional_bad",
+      "sources": {
+        "C.java": "class C { static <T> T hit(T value) { return value; } void run(boolean b) { String value; value=b ? hit(1) : null; } }"
+      },
+      "source_hashes": {
+        "C.java": "6051b7956f45662461b883403d5cb2b7f0466283a5eb7e666b68418ddff55af3"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/assignment_conditional_bad/C.java:1: error: incompatible types: bad type in conditional expression\nclass C { static <T> T hit(T value) { return value; } void run(boolean b) { String value; value=b ? hit(1) : null; } }\n                                                                                                       ^\n    inference variable T has incompatible bounds\n      lower bounds: String,Object\n      lower bounds: Integer\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method(boolean)",
+        "scope_id": "C.java::C.run:method(boolean)",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "String",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": false,
+        "reason": "generic result context incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "assignment_conditional_good",
+      "sources": {
+        "C.java": "class C { static <T> T hit(T value) { return value; } void run(boolean b) { Integer value; value=b ? hit(1) : null; } }"
+      },
+      "source_hashes": {
+        "C.java": "54e57dba21b37dce8daf26926551d02a8eba9cc9e2fb0ef8675ae601c8d32a02"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method(boolean)",
+        "scope_id": "C.java::C.run:method(boolean)",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "Integer",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method(boolean)",
+          "target": "C.java::C.hit:method(T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(1)",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "assignment_condition_good",
+      "sources": {
+        "C.java": "class C { static <T> T hit(T value) { return value; } void run() { String value; value=hit(true) ? \"a\" : \"b\"; } }"
+      },
+      "source_hashes": {
+        "C.java": "3f01fe4f091ac37dfc7c7482905e646eb69fb092fd56a1e8569e88a51f0e1c1a"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "boolean"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(true)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::C.hit:method(T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(true)",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "assignment_field_shadow_good",
+      "sources": {
+        "C.java": "class C { static <T> T hit(T value) { return value; } String value; void run() { Integer value; value=hit(1); } }"
+      },
+      "source_hashes": {
+        "C.java": "823312c33544fc6ee8f005a25a0864acaf99de7d2aed3a7c4de6117dff9d3e50"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "Integer",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::C.hit:method(T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(1)",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "assignment_field_shadow_bad",
+      "sources": {
+        "C.java": "class C { static <T> T hit(T value) { return value; } Integer value; void run() { String value; value=hit(1); } }"
+      },
+      "source_hashes": {
+        "C.java": "3dfe5196a5af36ab8897894173fcb71649560c9eb6cbed0c614ba0974509e734"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/assignment_field_shadow_bad/C.java:1: error: incompatible types: inference variable T has incompatible bounds\nclass C { static <T> T hit(T value) { return value; } Integer value; void run() { String value; value=hit(1); } }\n                                                                                                         ^\n    lower bounds: String,Object\n    lower bounds: Integer\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "String",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": false,
+        "reason": "generic result context incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "parameter_trailing_array_bad",
+      "sources": {
+        "C.java": "class C { static <T> T hit(T value) { return value; } void run(Integer value[]) { value=hit(1); } }"
+      },
+      "source_hashes": {
+        "C.java": "c9ed26011a8406517157f97421afb3abc0c2d816420c7f2225d217d891ec4b6b"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/parameter_trailing_array_bad/C.java:1: error: incompatible types: inference variable T has incompatible bounds\nclass C { static <T> T hit(T value) { return value; } void run(Integer value[]) { value=hit(1); } }\n                                                                                           ^\n    lower bounds: Integer[],Object\n    lower bounds: Integer\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method(Integer)",
+        "scope_id": "C.java::C.run:method(Integer)",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "Integer[]",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": false,
+        "reason": "generic result context incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "parameter_varargs_bad",
+      "sources": {
+        "C.java": "class C { static <T> T hit(T value) { return value; } void run(Integer... value) { value=hit(1); } }"
+      },
+      "source_hashes": {
+        "C.java": "cd92ca85ca916045a32e4b0ff74dfae0d9e4dadb607b979bae168b0910a8bb6b"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/parameter_varargs_bad/C.java:1: error: incompatible types: inference variable T has incompatible bounds\nclass C { static <T> T hit(T value) { return value; } void run(Integer... value) { value=hit(1); } }\n                                                                                            ^\n    lower bounds: Integer[],Object\n    lower bounds: Integer\n  where T is a type-variable:\n    T extends Object declared in method <T>hit(T)\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method(Integer...)",
+        "scope_id": "C.java::C.run:method(Integer...)",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "Integer[]",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": false,
+        "reason": "generic result context incompatible or unverified"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "sibling_block_good",
+      "sources": {
+        "C.java": "class C { static <T> T hit(T value) { return value; } void run() { { String value; } { Integer value; value=hit(1); } } }"
+      },
+      "source_hashes": {
+        "C.java": "7c1c4d06f8bcbcd04e9800c6ad7614014b359e2cf895f4b55d780274bc81d737"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "Integer",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::C.hit:method(T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(1)",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "compound_assignment_good",
+      "sources": {
+        "C.java": "class C { static <T> T hit(T value) { return value; } void run() { String value=\"\"; value+=hit(1); } }"
+      },
+      "source_hashes": {
+        "C.java": "2d3d902028ea1d19fa0fc9049f3aa68f3eda52d9c7409555a73a39ac6fe0fa10"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(T)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method()",
+          "target": "C.java::C.hit:method(T)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(1)",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "base_absence_empty_interface_implicit",
+      "sources": {
+        "C.java": "interface API {} class C implements API { void hit(String s) {} void run(C c) { hit(\"x\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "04d72039f66844fd4f75868b216f1efd00c1cd1b8dea2e8e9098e1a162b2dff5"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method(C)",
+        "scope_id": "C.java::C.run:method(C)",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(\"x\")",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(String)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method(C)",
+          "target": "C.java::C.hit:method(String)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(\"x\")",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "base_absence_empty_interface_receiver",
+      "sources": {
+        "C.java": "interface API {} class C implements API { void hit(String s) {} void run(C c) { c.hit(\"x\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "84f0b6408a1bd4c32d0acff741a40ab6c4231d9be2fecf25883cd8bf2fcd06f3"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method(C)",
+        "scope_id": "C.java::C.run:method(C)",
+        "kind": "calls",
+        "name": "c.hit",
+        "member": "hit",
+        "receiver": "c",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "c.hit(\"x\")",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(String)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method(C)",
+          "target": "C.java::C.hit:method(String)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "c.hit(\"x\")",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "base_absence_empty_class_implicit",
+      "sources": {
+        "C.java": "class Base {} class C extends Base { void hit(String s) {} void run(C c) { hit(\"x\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "bbdb7247065abced2677349c62014dba889f7bfb858e4b73edd6ea8255d43453"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method(C)",
+        "scope_id": "C.java::C.run:method(C)",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(\"x\")",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(String)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method(C)",
+          "target": "C.java::C.hit:method(String)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(\"x\")",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "base_absence_empty_class_receiver",
+      "sources": {
+        "C.java": "class Base {} class C extends Base { void hit(String s) {} void run(C c) { c.hit(\"x\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "91e32eac220314ffda3eeb28c3b7fae4923f4f2a5d2b4e4f7809282ef56e6b73"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method(C)",
+        "scope_id": "C.java::C.run:method(C)",
+        "kind": "calls",
+        "name": "c.hit",
+        "member": "hit",
+        "receiver": "c",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "c.hit(\"x\")",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(String)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method(C)",
+          "target": "C.java::C.hit:method(String)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "c.hit(\"x\")",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "base_absence_transitive_interfaces_implicit",
+      "sources": {
+        "C.java": "interface Root {} interface API extends Root {} class C implements API { void hit(String s) {} void run(C c) { hit(\"x\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "533f34e6735d494c695cad41815c93453fbda23b0d11e023a95db2418dfa1ec1"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method(C)",
+        "scope_id": "C.java::C.run:method(C)",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(\"x\")",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(String)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method(C)",
+          "target": "C.java::C.hit:method(String)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "hit(\"x\")",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "base_absence_transitive_interfaces_receiver",
+      "sources": {
+        "C.java": "interface Root {} interface API extends Root {} class C implements API { void hit(String s) {} void run(C c) { c.hit(\"x\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "7aba222f45124c540060d06a9eb22cff50d3321210950a9db93d5748978be6e4"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": true,
+      "reference": {
+        "source": "C.java::C.run:method(C)",
+        "scope_id": "C.java::C.run:method(C)",
+        "kind": "calls",
+        "name": "c.hit",
+        "member": "hit",
+        "receiver": "c",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "c.hit(\"x\")",
+        "resolved": true,
+        "reason": "unique syntax candidate; runtime dispatch unverified",
+        "target": "C.java::C.hit:method(String)",
+        "confidence": "heuristic"
+      },
+      "edges": [
+        {
+          "source": "C.java::C.run:method(C)",
+          "target": "C.java::C.hit:method(String)",
+          "kind": "calls",
+          "confidence": "heuristic",
+          "evidence": "c.hit(\"x\")",
+          "path": "C.java",
+          "line": 1
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "base_absence_base_overload_implicit",
+      "sources": {
+        "C.java": "class Base { void hit(int n) {} } class C extends Base { void hit(String s) {} void run(C c) { hit(\"x\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "d4851d665a0e9e5f2bde9a043a9ef3d55bd0bb6d33299e42c04c36bd3945ee10"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method(C)",
+        "scope_id": "C.java::C.run:method(C)",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(\"x\")",
+        "resolved": false,
+        "reason": "inherited candidate set and argument applicability required"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "base_absence_base_overload_receiver",
+      "sources": {
+        "C.java": "class Base { void hit(int n) {} } class C extends Base { void hit(String s) {} void run(C c) { c.hit(\"x\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "c9439001f80e26b6246dd323ccb63199ff60d34a150efc8ebc86b8eb1db83bfe"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method(C)",
+        "scope_id": "C.java::C.run:method(C)",
+        "kind": "calls",
+        "name": "c.hit",
+        "member": "hit",
+        "receiver": "c",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "c.hit(\"x\")",
+        "resolved": false,
+        "reason": "inherited candidate set and argument applicability required"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "base_absence_interface_overload_implicit",
+      "sources": {
+        "C.java": "interface API { void hit(int n); } abstract class C implements API { void hit(String s) {} void run(C c) { hit(\"x\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "9fdfcac550dd05ef205deac88ef7b882cdca58bb1eac5cc94432d15626e8b004"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method(C)",
+        "scope_id": "C.java::C.run:method(C)",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(\"x\")",
+        "resolved": false,
+        "reason": "inherited candidate set and argument applicability required"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "base_absence_interface_overload_receiver",
+      "sources": {
+        "C.java": "interface API { void hit(int n); } abstract class C implements API { void hit(String s) {} void run(C c) { c.hit(\"x\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "30a20b50a1207ccf37364637916c9c0038837b9c8d1c95fcc3833ae194581ce6"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method(C)",
+        "scope_id": "C.java::C.run:method(C)",
+        "kind": "calls",
+        "name": "c.hit",
+        "member": "hit",
+        "receiver": "c",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "c.hit(\"x\")",
+        "resolved": false,
+        "reason": "inherited candidate set and argument applicability required"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "base_absence_unknown_chain_implicit",
+      "sources": {
+        "C.java": "class Base extends Missing {} class C extends Base { void hit(String s) {} void run(C c) { hit(\"x\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "82dd6013fb14e9989d797bc899fd4439f7c4881ab3e8784d01324f9545eb1e03"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/base_absence_unknown_chain_implicit/C.java:1: error: cannot find symbol\nclass Base extends Missing {} class C extends Base { void hit(String s) {} void run(C c) { hit(\"x\"); } }\n                   ^\n  symbol: class Missing\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method(C)",
+        "scope_id": "C.java::C.run:method(C)",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(\"x\")",
+        "resolved": false,
+        "reason": "inherited candidate set and argument applicability required"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "base_absence_unknown_chain_receiver",
+      "sources": {
+        "C.java": "class Base extends Missing {} class C extends Base { void hit(String s) {} void run(C c) { c.hit(\"x\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "7bb40dc8ea954fc1bac58b67b2761ae20738b47e21eaf38a543b8400b9bab5af"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/base_absence_unknown_chain_receiver/C.java:1: error: cannot find symbol\nclass Base extends Missing {} class C extends Base { void hit(String s) {} void run(C c) { c.hit(\"x\"); } }\n                   ^\n  symbol: class Missing\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method(C)",
+        "scope_id": "C.java::C.run:method(C)",
+        "kind": "calls",
+        "name": "c.hit",
+        "member": "hit",
+        "receiver": "c",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "c.hit(\"x\")",
+        "resolved": false,
+        "reason": "inherited candidate set and argument applicability required"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "base_absence_generic_base_implicit",
+      "sources": {
+        "C.java": "class Base<T> {} class C extends Base<String> { void hit(String s) {} void run(C c) { hit(\"x\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "9470ea0caabdeb6667227ae49e67889f50270b7411822587bb02f81fec24ecdc"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method(C)",
+        "scope_id": "C.java::C.run:method(C)",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(\"x\")",
+        "resolved": false,
+        "reason": "inherited candidate set and argument applicability required"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "base_absence_generic_base_receiver",
+      "sources": {
+        "C.java": "class Base<T> {} class C extends Base<String> { void hit(String s) {} void run(C c) { c.hit(\"x\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "ecaa2df6f7899159ca02a041fc35bf21a0da58588f2de1092494fbbf0801d16c"
+      },
+      "compiler_valid": true,
+      "compiler_exit": 0,
+      "compiler_stderr": "",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method(C)",
+        "scope_id": "C.java::C.run:method(C)",
+        "kind": "calls",
+        "name": "c.hit",
+        "member": "hit",
+        "receiver": "c",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "c.hit(\"x\")",
+        "resolved": false,
+        "reason": "inherited candidate set and argument applicability required"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "base_absence_cyclic_base_implicit",
+      "sources": {
+        "C.java": "class Base extends C {} class C extends Base { void hit(String s) {} void run(C c) { hit(\"x\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "aa71737195575e499903d3099b1a6a073eccd6402d3b3b65934b5873ffd8f76b"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/base_absence_cyclic_base_implicit/C.java:1: error: cyclic inheritance involving Base\nclass Base extends C {} class C extends Base { void hit(String s) {} void run(C c) { hit(\"x\"); } }\n^\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method(C)",
+        "scope_id": "C.java::C.run:method(C)",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(\"x\")",
+        "resolved": false,
+        "reason": "inherited candidate set and argument applicability required"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "base_absence_cyclic_base_receiver",
+      "sources": {
+        "C.java": "class Base extends C {} class C extends Base { void hit(String s) {} void run(C c) { c.hit(\"x\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "8c126266f77f513dcbf65dfb825e96c5f8891637f5efa88a90be619310da887f"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/base_absence_cyclic_base_receiver/C.java:1: error: cyclic inheritance involving Base\nclass Base extends C {} class C extends Base { void hit(String s) {} void run(C c) { c.hit(\"x\"); } }\n^\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method(C)",
+        "scope_id": "C.java::C.run:method(C)",
+        "kind": "calls",
+        "name": "c.hit",
+        "member": "hit",
+        "receiver": "c",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "c.hit(\"x\")",
+        "resolved": false,
+        "reason": "inherited candidate set and argument applicability required"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "base_absence_type_receiver",
+      "sources": {
+        "C.java": "class Base {} class C extends Base { void hit(String s) {} void run() { C.hit(\"x\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "c850be784ca4e736a132dc1ca69b743bd85a496a30beada626112f9b85a264a4"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/base_absence_type_receiver/C.java:1: error: non-static method hit(String) cannot be referenced from a static context\nclass Base {} class C extends Base { void hit(String s) {} void run() { C.hit(\"x\"); } }\n                                                                         ^\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "C.hit",
+        "member": "hit",
+        "receiver": "C",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "C.hit(\"x\")",
+        "resolved": false,
+        "reason": "instance method requires a value receiver, not a type name"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "base_absence_shadowed_receiver",
+      "sources": {
+        "C.java": "class Base {} class C extends Base { void hit(String s) {} void run() { Object c=null; c.hit(\"x\"); } }"
+      },
+      "source_hashes": {
+        "C.java": "21350614a5f0d5ed4c6afe8ebe5be6e23725f8f1028c341654b50a76ad271ffc"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/base_absence_shadowed_receiver/C.java:1: error: cannot find symbol\nclass Base {} class C extends Base { void hit(String s) {} void run() { Object c=null; c.hit(\"x\"); } }\n                                                                                        ^\n  symbol:   method hit(String)\n  location: variable c of type Object\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "c.hit",
+        "member": "hit",
+        "receiver": "c",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "reference_literal"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "c.hit(\"x\")",
+        "resolved": false,
+        "reason": "receiver type external, ambiguous or unknown"
+      },
+      "edges": [],
+      "passed": true
+    },
+    {
+      "name": "base_absence_wrong_argument",
+      "sources": {
+        "C.java": "class Base {} class C extends Base { void hit(String s) {} void run() { hit(1); } }"
+      },
+      "source_hashes": {
+        "C.java": "12b195a1e2d60f64e5ab8123ec2a723fc3986cdf5a22f2b2d04069f2782d58e9"
+      },
+      "compiler_valid": false,
+      "compiler_exit": 1,
+      "compiler_stderr": "/var/folders/xr/pqzpvv_50cj5rx7sxqb4s21c0000gn/T/columbus package oracle n38jbb5e/base_absence_wrong_argument/C.java:1: error: incompatible types: int cannot be converted to String\nclass Base {} class C extends Base { void hit(String s) {} void run() { hit(1); } }\n                                                                            ^\nNote: Some messages have been simplified; recompile with -Xdiags:verbose to get full output\n1 error\n",
+      "expected_resolved": false,
+      "reference": {
+        "source": "C.java::C.run:method()",
+        "scope_id": "C.java::C.run:method()",
+        "kind": "calls",
+        "name": "hit",
+        "member": "hit",
+        "receiver": "",
+        "constructor": false,
+        "argument_count": 1,
+        "argument_types": [
+          "int"
+        ],
+        "argument_facts": [
+          {}
+        ],
+        "expected_type": "",
+        "explicit_type_arguments": false,
+        "static_context": false,
+        "path": "C.java",
+        "line": 1,
+        "evidence": "hit(1)",
+        "resolved": false,
+        "reason": "literal argument incompatible with reference parameter"
+      },
+      "edges": [],
+      "passed": true
+    }
+  ],
+  "passed": true
+}

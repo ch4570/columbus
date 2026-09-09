@@ -1,0 +1,13 @@
+F.
+======================================================================
+FAIL: test_context_tables_verify_each_context_block_not_other_file_lines (test_measure.NumberedReadsTests.test_context_tables_verify_each_context_block_not_other_file_lines)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/rex/Desktop/columbus/evals/source-rereads/test_measure.py", line 44, in test_context_tables_verify_each_context_block_not_other_file_lines
+    self.assertEqual(result['columbus']['verified_ranges'], 0)
+AssertionError: 2 != 0
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.091s
+
+FAILED (failures=1)

@@ -1,0 +1,24 @@
+diff --git a/grammar.js b/grammar.js
+index d1fb26d..9dcffa1 100644
+--- a/grammar.js
++++ b/grammar.js
+@@ -73,6 +73,7 @@ module.exports = grammar({
+   ],
+ 
+   conflicts: $ => [
++    [$.dimensions],
+     [$.modifiers, $.annotated_type, $.receiver_parameter],
+     [$.modifiers, $.annotated_type, $.module_declaration, $.package_declaration],
+     [$._unannotated_type, $.primary_expression, $.inferred_parameters],
+@@ -475,9 +476,9 @@ module.exports = grammar({
+       seq($.super, $._type),
+     ),
+ 
+-    dimensions: $ => prec.right(repeat1(
++    dimensions: $ => repeat1(
+       seq(repeat($._annotation), '[', ']'),
+-    )),
++    ),
+ 
+     switch_expression: $ => seq(
+       'switch',

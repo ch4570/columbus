@@ -1,0 +1,16 @@
+{
+  "production_hashes_verified": 883,
+  "production_callers": 12,
+  "all_15_call_sites_in_excerpts": true,
+  "excerpt_source_equal": true,
+  "text_bytes": 12169,
+  "text_sha256": "4b3b510cea9744ba106d140b11831bcc6b418222315fa64a1e3f5a77f913e854",
+  "budget_bytes": 24000,
+  "context_lines": 30,
+  "path": "django/*",
+  "small_budget_bytes": 2048,
+  "small_budget_truncated": true,
+  "public_cli_verified": true,
+  "semantic_complete": false,
+  "model_trial": false
+}

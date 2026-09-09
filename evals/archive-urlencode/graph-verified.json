@@ -1,0 +1,43 @@
+{
+  "compression": "xz",
+  "source_commit": "4ea267661b260ea0d0c87e9dcb99d70037c6f2fc",
+  "production_files_hash_verified": 883,
+  "target": "django/utils/http.py::urlencode:function",
+  "production_call_sites": 7,
+  "production_callers": 7,
+  "missing": [],
+  "extra": [],
+  "archive_all_call_edges": 27,
+  "archive_pages": [
+    {
+      "offset": 0,
+      "edges": 7,
+      "next_offset": 7
+    },
+    {
+      "offset": 7,
+      "edges": 6,
+      "next_offset": 13
+    },
+    {
+      "offset": 13,
+      "edges": 6,
+      "next_offset": 19
+    },
+    {
+      "offset": 19,
+      "edges": 7,
+      "next_offset": 26
+    },
+    {
+      "offset": 26,
+      "edges": 1,
+      "next_offset": null
+    }
+  ],
+  "archive_sqlite_edge_parity": true,
+  "archive_sha256": "fd8382eaba505f1dd601f15829886ae8a3a94291ea289fac3aa5e25285b9ee64",
+  "archive_bytes": 8592976,
+  "sqlite_bytes": 153387008,
+  "runtime_completeness_claimed": false
+}

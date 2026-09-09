@@ -1,0 +1,24 @@
+{
+  "positive_citation_control": true,
+  "negative_quote_controls": 5,
+  "missing_controls": 5,
+  "duplicate_controls": 5,
+  "archive": {
+    "passed": true,
+    "archive_sha256": "2f272e5b32cd6089f306a106c3b0094d1297038cc2a8e3d0cddb14c526d2b09c",
+    "revision": "f52932877e570ad3267c",
+    "source_files_verified": 1166,
+    "indexed_source_files_verified": 1166,
+    "counts": {
+      "files": 1166,
+      "nodes": 20811,
+      "scopes": 20647,
+      "edges": 32145,
+      "references": 68007,
+      "imports": 7723,
+      "diagnostics": 16
+    },
+    "consumer_index_absent": true
+  },
+  "no_model_started": true
+}

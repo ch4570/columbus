@@ -26,6 +26,103 @@ class IndexTests(unittest.TestCase):
         self.write("orders.py", "from payments import refund_payment\ndef cancel_order():\n    return refund_payment(10)\n")
         return self.index.refresh(self.root)
 
+    def test_literal_assignment_search_tracks_reassignment_and_removal(self):
+        for number, (source, signatures) in enumerate([
+            ('FLAG = False\n', ['FLAG = False']),
+            ('FLAG = True\n', ['FLAG = True']),
+            ('FLAG = True\nFLAG = False\n', ['FLAG = True', 'FLAG = False']),
+            ('FLAG = choose()\n', []),
+            ('FLAG: bool\n', []),
+            ('', []),
+            ('FLAG = False\n', ['FLAG = False']),
+        ]):
+            with self.subTest(source=source):
+                self.write('flags.py', source)
+                self.index.refresh(self.root)
+                hits = self.index.search('FLAG')['hits']
+                assignments = [h for h in hits if h['kind'] == 'assignment']
+                self.assertEqual(sorted(h['signature'] for h in assignments), sorted(signatures))
+                fresh = RepositoryIndex(Path(self.temp.name) / ('literal-fresh-%d.sqlite' % number))
+                fresh.refresh(self.root)
+                self.assertEqual(self.index.graph(), fresh.graph())
+                self.assertEqual(hits, fresh.search('FLAG')['hits'])
+
+    def test_java_base_absence_is_recomputed_after_ancestor_changes(self):
+        from contextlib import closing
+        import sqlite3
+        from columbus.index import decode_parse
+
+        self.write('Base.java', 'class Base {}')
+        self.write('Middle.java', 'class Middle extends Base {}')
+        self.write('C.java', 'class C extends Middle { void hit(String s) {} void run() { hit("x"); } }')
+
+        def snapshot(index):
+            with closing(sqlite3.connect(index.db)) as conn:
+                return {path: decode_parse(data) for path, data in conn.execute('SELECT path,parsed FROM files')}
+
+        initial = None
+        for number, (base, expected) in enumerate([
+            ('class Base {}', True),
+            ('class Base { void hit(int n) {} }', False),
+            ('class Base { void broken( }', False),
+            (None, False),
+            ('class Base {}', True),
+        ]):
+            with self.subTest(base=base):
+                if base is None:
+                    (self.root / 'Base.java').unlink()
+                else:
+                    self.write('Base.java', base)
+                self.index.refresh(self.root)
+                facts = snapshot(self.index)
+                call, = [r for r in facts['C.java']['references'] if r['kind'] == 'calls']
+                self.assertEqual(call['resolved'], expected)
+                fresh = RepositoryIndex(Path(self.temp.name) / ('fresh-%d.sqlite' % number))
+                fresh.refresh(self.root)
+                self.assertEqual(facts, snapshot(fresh))
+                self.assertEqual(self.index.graph(), fresh.graph())
+                if number == 0:
+                    initial = facts
+        self.assertEqual(facts, initial)
+
+    def test_java_getter_loop_relinks_unchanged_consumers(self):
+        from contextlib import closing
+        import sqlite3
+        from columbus.index import decode_parse
+
+        for package in ('a', 'b'):
+            self.write(package + '/Item.java', 'package ' + package +
+                       '; public class Item { public void hit() {} }')
+        self.write('c/C.java', 'package c; class C { void run(p.Source source) { '
+                   'for(var item : source.items()) item.hit(); } }')
+
+        def snapshot(index):
+            with closing(sqlite3.connect(index.db)) as conn:
+                return {p: decode_parse(data) for p, data in conn.execute('SELECT path,parsed FROM files')}
+
+        initial = None
+        for number, package in enumerate(('a', 'b', None, 'a')):
+            with self.subTest(package=package):
+                if package is None:
+                    (self.root / 'p/Source.java').unlink()
+                else:
+                    self.write('p/Source.java', 'package p; import ' + package +
+                               '.Item; public class Source { public java.util.List<Item> items() { return null; } }')
+                status = self.index.refresh(self.root)
+                if number:
+                    self.assertEqual(status['refresh']['parsed_files'], 0 if package is None else 1)
+                facts = snapshot(self.index)
+                call, = [r for r in facts['c/C.java']['references'] if r['member'] == 'hit']
+                expected = (package + '/Item.java::' + package + '.Item.hit:method()') if package else None
+                self.assertEqual(call.get('target'), expected)
+                fresh = RepositoryIndex(Path(self.temp.name) / ('getter-fresh-%d.sqlite' % number))
+                fresh.refresh(self.root)
+                self.assertEqual(facts, snapshot(fresh))
+                self.assertEqual(self.index.graph(), fresh.graph())
+                if number == 0:
+                    initial = facts
+        self.assertEqual(facts, initial)
+
     def test_exact_id_context_survives_long_path_and_noisy_overloads(self):
         path = 'src/main/java/org/example/resource/navigation/DefaultResourceLoader.java'
         self.write(path, 'package org.example.resource.navigation; class DefaultResourceLoader {\n'
@@ -45,6 +142,36 @@ class IndexTests(unittest.TestCase):
         self.assertFalse(self.index.search(target['id'], path='other/*')['hits'])
         self.assertFalse(self.index.search(target['id'], language='python')['hits'])
         self.assertEqual(2, len([s for s in candidates if s['name']=='getResource']))
+
+    def test_relink_reuses_identical_cache_but_updates_unchanged_callers(self):
+        import sqlite3
+        from contextlib import closing
+        import zlib
+        from columbus.index import decode_parse
+        self.write('lib.py', 'def hit(): return 1\n')
+        self.write('caller.py', 'from lib import hit\ndef run(): return hit()\n')
+        self.write('other.py', 'def independent(): return "' + 'unchanged' * 50 + '"\n')
+        self.index.refresh(self.root)
+        with closing(sqlite3.connect(self.index.db)) as conn, conn:
+            row = conn.execute("SELECT parsed FROM files WHERE path='other.py'").fetchone()[0]
+            # A valid alternate compression makes recompression observable.
+            preserved = zlib.compress(zlib.decompress(row), level=0)
+            conn.execute("UPDATE files SET parsed=? WHERE path='other.py'", (preserved,))
+            caller_before = conn.execute("SELECT parsed FROM files WHERE path='caller.py'").fetchone()[0]
+        self.write('lib.py', 'def renamed(): return 1\n')
+        self.index.refresh(self.root)
+        with closing(sqlite3.connect(self.index.db)) as conn, conn:
+            blobs = dict(conn.execute('SELECT path,parsed FROM files'))
+        self.assertEqual(blobs['other.py'], preserved)
+        self.assertNotEqual(blobs['caller.py'], caller_before)
+        caller = decode_parse(blobs['caller.py'])
+        self.assertTrue(all(not r['resolved'] for r in caller['references'] if r['kind'] == 'calls'))
+        clean = RepositoryIndex(Path(self.temp.name) / 'clean-cache.sqlite')
+        clean.refresh(self.root)
+        with closing(sqlite3.connect(clean.db)) as conn:
+            clean_facts = {p: decode_parse(b) for p, b in conn.execute('SELECT path,parsed FROM files')}
+        self.assertEqual({p: decode_parse(b) for p, b in blobs.items()}, clean_facts)
+        self.assertEqual(self.index.graph(), clean.graph())
 
     def test_incremental_delete_and_full_rebuild_equivalence(self):
         first = self.seed()
@@ -142,6 +269,20 @@ class IndexTests(unittest.TestCase):
         report = self.index.refresh(self.root)
         self.assertEqual(report["files"], 1)
         self.assertEqual(self.index.search("visible")["hits"][0]["name"], "visible")
+
+    def test_qualified_suffix_matches_preserve_ambiguity_and_filters(self):
+        for package, name in [("a", "Loader"), ("b", "Loader"), ("c", "OtherLoader")]:
+            self.write(package + "/Loader.java", "package " + package + "; class " + name + " { void getResource() {} }")
+        self.index.refresh(self.root)
+        hits = self.index.search("Loader.getResource")["hits"]
+        suffixes = [h for h in hits if h["retrieval"].get("qualified_suffix")]
+        self.assertEqual({h["qualname"] for h in suffixes}, {"a.Loader.getResource", "b.Loader.getResource"})
+        self.assertEqual(hits[:2], suffixes)
+        self.assertTrue(all(not h["retrieval"]["exact_name"] for h in suffixes))
+        filtered = self.index.search("Loader.getResource", path="b/*")["hits"]
+        self.assertEqual(filtered[0]["qualname"], "b.Loader.getResource")
+        exact = self.index.search("a.Loader.getResource")["hits"][0]
+        self.assertTrue(exact["retrieval"]["exact_name"])
 
     def test_exact_match_survives_fts_candidate_cutoff(self):
         self.write("all.py", "def foo():\n" + "    # unrelated content\n"*500 + "    return 1\n" +

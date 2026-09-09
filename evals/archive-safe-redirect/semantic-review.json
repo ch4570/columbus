@@ -1,0 +1,31 @@
+{
+  "criteria": "SOURCE-REVIEW.md frozen at a164c9b",
+  "baseline": {
+    "passed": true,
+    "owners": [
+      "RedirectURLMixin.get_redirect_url",
+      "set_language"
+    ],
+    "call_sites_covered": [
+      48,
+      44,
+      50
+    ],
+    "notes": "POST absent-key defaults, host union/singleton and secure request options correct; unconditional mixin call and conditional two-stage language validation correct; 204 bypass, referrer and slash fallback, POST translation and cookie handling described."
+  },
+  "columbus": {
+    "passed": true,
+    "owners": [
+      "RedirectURLMixin.get_redirect_url",
+      "set_language"
+    ],
+    "call_sites_covered": [
+      48,
+      44,
+      50
+    ],
+    "notes": "Both call sites in set_language are cited. POST absent-key selection, host/HTTPS arguments, short circuit and referrer/slash fallback are correct. Describes valid POST language redirect replacement. Does not enumerate cookie settings or mention cookie assignment; this does not contradict redirect behavior, and exact cookie detail is outside the selected task. No blanket safety or absolute-HTTPS claim."
+  },
+  "overall_token_savings": false,
+  "limitations": "Manual source review, one unrepeated small task on the same Django repository; not population accuracy evidence."
+}

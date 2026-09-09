@@ -1,0 +1,86 @@
+{
+  "baseline": {
+    "exact_set_and_citations_passed": true,
+    "semantic_passed": true,
+    "findings": [
+      {
+        "id": "RequestFactory.__init__",
+        "passed": true,
+        "note": "Meets the predeclared query-data, selection/merge, guard and doseq criteria."
+      },
+      {
+        "id": "RequestFactory.generic",
+        "passed": true,
+        "note": "Explains query selection, empty-result fallback and doseq; the contiguous quoted source/comment explicitly shows the Latin-1 conversion, though the prose does not repeat it."
+      },
+      {
+        "id": "AsyncRequestFactory.generic",
+        "passed": true,
+        "note": "Meets the predeclared query-data, selection/merge, guard and doseq criteria."
+      },
+      {
+        "id": "ChangeList.get_query_string",
+        "passed": true,
+        "note": "Meets the predeclared query-data, selection/merge, guard and doseq criteria."
+      },
+      {
+        "id": "ForeignKeyRawIdWidget.get_context",
+        "passed": true,
+        "note": "Meets the predeclared query-data, selection/merge, guard and doseq criteria."
+      },
+      {
+        "id": "ModelAdmin.get_preserved_filters",
+        "passed": true,
+        "note": "Meets the predeclared query-data, selection/merge, guard and doseq criteria."
+      },
+      {
+        "id": "add_preserved_filters",
+        "passed": true,
+        "note": "Meets the predeclared query-data, selection/merge, guard and doseq criteria."
+      }
+    ],
+    "additional_claims_checked": "Widget parameter normalization/overrides and ChangeList filter_params construction were checked against source; no contradictory extra behavior found."
+  },
+  "columbus": {
+    "exact_set_and_citations_passed": true,
+    "semantic_passed": false,
+    "findings": [
+      {
+        "id": "ModelAdmin.get_preserved_filters",
+        "passed": true,
+        "note": "Meets the predeclared input, merge/selection, guard and doseq criteria."
+      },
+      {
+        "id": "add_preserved_filters",
+        "passed": true,
+        "note": "Meets the predeclared input, merge/selection, guard and doseq criteria."
+      },
+      {
+        "id": "ChangeList.get_query_string",
+        "passed": true,
+        "note": "Meets the predeclared input, merge/selection, guard and doseq criteria."
+      },
+      {
+        "id": "ForeignKeyRawIdWidget.get_context",
+        "passed": true,
+        "note": "Meets the predeclared input, merge/selection, guard and doseq criteria."
+      },
+      {
+        "id": "RequestFactory.__init__",
+        "passed": true,
+        "note": "Explains truthy query_params, default replacement and doseq. The quoted source includes the preceding header/default merge."
+      },
+      {
+        "id": "RequestFactory.generic",
+        "passed": false,
+        "note": "Fails the predeclared empty-encoded-result behavior: prose says truthy query_params takes precedence over the URL and only describes URL fallback under falsy query_params. A truthy mapping with an empty list can encode to an empty string and trigger URL fallback. The quoted source shows the correct condition but does not repair the misleading prose."
+      },
+      {
+        "id": "AsyncRequestFactory.generic",
+        "passed": true,
+        "note": "The explanation selects the encoding branch by truthy query_params and restricts fallbacks to the opposite branch; the quoted if/elif/else confirms that an empty encoded result does not trigger fallback. No conflicting prose claim."
+      }
+    ],
+    "judgment_boundary": "Source quotes can substantiate a detail not repeated in prose, as with baseline Latin-1 conversion, but cannot override an incorrect prose claim about branch precedence."
+  }
+}

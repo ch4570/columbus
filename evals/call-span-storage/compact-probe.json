@@ -1,0 +1,10 @@
+{
+  "rows_roundtrip_verified": 392163,
+  "changed_records": 214126,
+  "original_gzip_bytes": 10726317,
+  "candidate_gzip_bytes": 10374534,
+  "change_percent": -3.279625243221884,
+  "production_format_changed": false,
+  "same_record_order": true,
+  "scope": "Exact decoded row and embedded evidence string roundtrip, fixed-order four-coordinate arrays; prototype only."
+}

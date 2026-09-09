@@ -1,0 +1,6 @@
+{
+  "before_edges": 86592,
+  "after_edges": 86828,
+  "prior_relationship_and_text_evidence_set_preserved": true,
+  "scope": "Projects new callee spans away; compares full corpus edge sets, not multiplicities."
+}

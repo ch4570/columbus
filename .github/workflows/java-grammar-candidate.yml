@@ -1,0 +1,146 @@
+name: Experimental Java grammar
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/java-grammar-candidate.yml'
+      - 'evals/java-grammar/**'
+      - 'skills/columbus/scripts/columbus/jvm.py'
+      - 'skills/columbus/scripts/tests/test_jvm.py'
+      - 'evals/jvm-*/**/*.py'
+      - 'evals/java-iterable-scope/*.py'
+      - 'evals/java-loop-bindings/*.py'
+      - 'evals/java-collection-loops/*.py'
+      - 'evals/java-collection-loops/cases.json'
+      - 'evals/java-getter-loop-context/*.py'
+      - 'evals/java-getter-this/*.py'
+
+permissions:
+  contents: read
+
+jobs:
+  candidate:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python: ['3.11', '3.14']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Fetch pinned upstream grammar
+        run: |
+          git clone https://github.com/tree-sitter/tree-sitter-java.git candidate
+          git -C candidate fetch origin 6018d681d319aada6d9fe1b8a8d17f9f4d6c758e
+          git -C candidate checkout 6018d681d319aada6d9fe1b8a8d17f9f4d6c758e
+          git -C candidate apply ../evals/java-grammar/dimensions.patch
+      - name: Generate parser and run upstream corpus
+        working-directory: candidate
+        run: |
+          npx --yes tree-sitter-cli@0.27.0 generate --abi 14
+          npx --yes tree-sitter-cli@0.27.0 test
+      - name: Stamp candidate and record source provenance
+        run: python evals/java-grammar/package_candidate.py candidate candidate-results/provenance.json
+      - name: Build candidate wheel
+        run: python -m pip wheel --no-deps --wheel-dir candidate-results candidate/
+      - name: Install production dependencies then candidate wheel
+        run: |
+          python -m pip install -r skills/columbus/scripts/requirements.txt -r skills/columbus/scripts/requirements-mcp.txt
+          python -c "import pathlib, subprocess, sys; wheel = next(pathlib.Path('candidate-results').glob('*.whl')); subprocess.run([sys.executable, '-m', 'pip', 'install', '--no-deps', '--target', 'candidate-target', str(wheel)], check=True)"
+          python evals/java-grammar/verify_upgrade.py candidate-target candidate-results/upgrade.json
+          python -c "import pathlib, subprocess, sys; wheels = list(pathlib.Path('candidate-results').glob('*.whl')); assert len(wheels) == 1; subprocess.run([sys.executable, '-m', 'pip', 'install', '--no-deps', '--force-reinstall', str(wheels[0])], check=True)"
+      - name: Verify existing bootstrap runtime adopts the candidate
+        run: python evals/java-grammar/verify_bootstrap_upgrade.py candidate-results candidate-results/bootstrap-upgrade.json
+      - name: Verify installed candidate and annotation spans
+        run: python evals/java-grammar/verify_candidate.py candidate-results/runtime.json
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Compiler-backed access and static-context gate
+        run: python -c "import os, pathlib, subprocess, sys; env = dict(os.environ, PYTHONPATH=str(pathlib.Path('skills/columbus/scripts').resolve())); subprocess.run([sys.executable, 'evals/jvm-guardrails/verify_access.py', str(pathlib.Path(os.environ['JAVA_HOME']) / 'bin'), 'candidate-results/access.json'], env=env, check=True)"
+      - name: Compiler-backed package accessibility gate
+        run: python -c "import os, pathlib, subprocess, sys; env = dict(os.environ, PYTHONPATH=str(pathlib.Path('skills/columbus/scripts').resolve())); subprocess.run([sys.executable, 'evals/jvm-guardrails/verify_packages.py', str(pathlib.Path(os.environ['JAVA_HOME']) / 'bin'), 'candidate-results/package-access.json'], env=env, check=True)"
+      - name: Compiler-backed type receivers and literal references
+        run: python -c "import os, pathlib, subprocess, sys; env = dict(os.environ, PYTHONPATH=str(pathlib.Path('skills/columbus/scripts').resolve())); subprocess.run([sys.executable, 'evals/jvm-guardrails/verify_type_receivers.py', str(pathlib.Path(os.environ['JAVA_HOME']) / 'bin'), 'candidate-results/type-receivers.json'], env=env, check=True)"
+      - name: Compiler-backed correlated generic arguments
+        run: python -c "import os, pathlib, subprocess, sys; env = dict(os.environ, PYTHONPATH=str(pathlib.Path('skills/columbus/scripts').resolve())); subprocess.run([sys.executable, 'evals/jvm-base-absence/verify.py', str(pathlib.Path(os.environ['JAVA_HOME']) / 'bin'), 'candidate-results/generic-constraints.json'], env=env, check=True)"
+      - name: Compiler-backed enhanced-for iterable scope
+        run: python -c "import os, pathlib, subprocess, sys; env = dict(os.environ, PYTHONPATH=str(pathlib.Path('skills/columbus/scripts').resolve())); subprocess.run([sys.executable, 'evals/java-iterable-scope/verify.py', '--jdk', str(pathlib.Path(os.environ['JAVA_HOME']) / 'bin'), '--output', 'candidate-results/iterable-scope.json'], env=env, check=True)"
+      - name: Compiler-backed array loop bindings
+        run: python -c "import os, pathlib, subprocess, sys; env = dict(os.environ, PYTHONPATH=str(pathlib.Path('skills/columbus/scripts').resolve())); subprocess.run([sys.executable, 'evals/java-loop-bindings/probe.py', '--jdk', str(pathlib.Path(os.environ['JAVA_HOME']) / 'bin'), '--output', 'candidate-results/loop-bindings.json', '--require-array-bindings', '--var-controls'], env=env, check=True)"
+      - name: Compiler-backed standard collection loop parameters
+        run: python -c "import os, pathlib, subprocess, sys; env = dict(os.environ, PYTHONPATH=str(pathlib.Path('skills/columbus/scripts').resolve())); subprocess.run([sys.executable, 'evals/java-collection-loops/probe.py', '--jdk', str(pathlib.Path(os.environ['JAVA_HOME']) / 'bin'), '--output', 'candidate-results/collection-loops.json', '--require-parameters'], env=env, check=True)"
+      - name: Compiler-backed getter return namespaces
+        run: python -c "import os, pathlib, subprocess, sys; env = dict(os.environ, PYTHONPATH=str(pathlib.Path('skills/columbus/scripts').resolve())); subprocess.run([sys.executable, 'evals/java-getter-loop-context/probe.py', '--jdk', str(pathlib.Path(os.environ['JAVA_HOME']) / 'bin'), '--output', 'candidate-results/getter-loops.json', '--require-getters'], env=env, check=True)"
+      - name: Compiler-backed this argument conversions
+        run: python -c "import os, pathlib, subprocess, sys; env = dict(os.environ, PYTHONPATH=str(pathlib.Path('skills/columbus/scripts').resolve())); subprocess.run([sys.executable, 'evals/java-getter-this/probe.py', '--jdk', str(pathlib.Path(os.environ['JAVA_HOME']) / 'bin'), '--output', 'candidate-results/this-arguments.json', '--require-no-false'], env=env, check=True)"
+      - name: Engine regression tests with candidate
+        working-directory: skills/columbus/scripts
+        run: python -m unittest discover -s tests -v
+      - name: Build Columbus wheel and portable ZIP
+        run: |
+          python -m pip wheel --no-deps --wheel-dir dist .
+          python scripts/build_bundle.py --java-wheelhouse candidate-results
+      - name: Verify bundled default through existing-runtime upgrade and relocation
+        run: python -c "import pathlib, subprocess, sys; subprocess.run([sys.executable, 'evals/java-grammar/verify_bootstrap_upgrade.py', 'candidate-results', 'candidate-results/bundled-upgrade.json', '--bundle', str(next(pathlib.Path('dist').glob('*.zip')))], check=True)"
+      - name: Verify incompatible bundled parser cannot fall back to upstream
+        run: python evals/java-grammar/verify_bundled_fallback.py candidate-results candidate-results/bundled-fallback.json
+      - name: Verify candidate through clean Columbus installations
+        run: python -c "import pathlib, subprocess, sys; p = pathlib.Path('dist'); result = subprocess.run([sys.executable, 'scripts/verify_distribution.py', '--wheel', str(next(p.glob('*.whl'))), '--bundle', str(next(p.glob('*.zip'))), '--wheelhouse', str(pathlib.Path('candidate-results').resolve()), '--expected-java-version', '0.23.5+columbus.1', '--bundled-java-default'], check=True, stdout=subprocess.PIPE, text=True); print(result.stdout); pathlib.Path('candidate-results/distribution.json').write_text(result.stdout, encoding='utf-8')"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: java-candidate-${{ matrix.os }}-py${{ matrix.python }}
+          path: candidate-results/
+
+  aggregate:
+    needs: candidate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: java-candidate-*-py3.11
+          path: aggregate-inputs
+      - name: Assemble one three-OS parser ZIP and Columbus wheel
+        run: python evals/java-grammar/aggregate.py assemble aggregate-inputs aggregate-artifacts
+      - uses: actions/upload-artifact@v4
+        with:
+          name: java-aggregate-distribution
+          path: aggregate-artifacts/
+
+  aggregate-verify:
+    needs: aggregate
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python: ['3.11', '3.14']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: java-aggregate-distribution
+          path: aggregate-artifacts
+      - name: Verify the unchanged shared artifact through installation and upgrade
+        run: python evals/java-grammar/aggregate.py verify aggregate-artifacts aggregate-results
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: java-aggregate-check-${{ matrix.os }}-py${{ matrix.python }}
+          path: aggregate-results/

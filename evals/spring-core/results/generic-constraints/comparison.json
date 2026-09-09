@@ -1,0 +1,1679 @@
+{
+  "before_calls": 9349,
+  "after_calls": 9174,
+  "added": 32,
+  "removed": 207,
+  "recovered_previous_32": 32,
+  "source_unchanged": true,
+  "base_syntax_facts_unchanged": true,
+  "removed_edges": [
+    {
+      "source": "src/main/java/org/springframework/aot/hint/annotation/ReflectiveRuntimeHintsRegistrar.java::org.springframework.aot.hint.annotation.ReflectiveRuntimeHintsRegistrar.instantiateClass:method(Class<?extendsReflectiveProcessor>)",
+      "target": "src/main/java/org/springframework/util/ReflectionUtils.java::org.springframework.util.ReflectionUtils.accessibleConstructor:method(Class<T>,Class<?>...)",
+      "path": "src/main/java/org/springframework/aot/hint/annotation/ReflectiveRuntimeHintsRegistrar.java",
+      "line": 133,
+      "reason": "generic invariant argument requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/aot/hint/annotation/RegisterReflectionReflectiveProcessor.java::org.springframework.aot.hint.annotation.RegisterReflectionReflectiveProcessor.registerReflectionHints:method(ReflectionHints,AnnotatedElement)",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.getMergedAnnotation:method(AnnotatedElement,Class<A>)",
+      "path": "src/main/java/org/springframework/aot/hint/annotation/RegisterReflectionReflectiveProcessor.java",
+      "line": 51,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/aot/nativex/BasicJsonWriter.java::org.springframework.aot.nativex.BasicJsonWriter.writeArray:method(List<?>,boolean)",
+      "target": "src/main/java/org/springframework/aot/nativex/BasicJsonWriter.java::org.springframework.aot.nativex.BasicJsonWriter.writeAll:method(Iterator<T>,Consumer<T>)",
+      "path": "src/main/java/org/springframework/aot/nativex/BasicJsonWriter.java",
+      "line": 100,
+      "reason": "generic invariant argument requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/aot/nativex/BasicJsonWriter.java::org.springframework.aot.nativex.BasicJsonWriter.writeObject:method(Map<String,Object>,boolean)",
+      "target": "src/main/java/org/springframework/aot/nativex/BasicJsonWriter.java::org.springframework.aot.nativex.BasicJsonWriter.writeAll:method(Iterator<T>,Consumer<T>)",
+      "path": "src/main/java/org/springframework/aot/nativex/BasicJsonWriter.java",
+      "line": 86,
+      "reason": "generic invariant argument requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/cglib/core/KeyFactory.java::org.springframework.cglib.core.KeyFactory.Generator.getCustomizers:method(Class<T>)",
+      "target": "src/main/java/org/springframework/cglib/core/internal/CustomizerRegistry.java::org.springframework.cglib.core.internal.CustomizerRegistry.get:method(Class<T>)",
+      "path": "src/main/java/org/springframework/cglib/core/KeyFactory.java",
+      "line": 224,
+      "reason": "generic invariant type constraints conflict or are unknown"
+    },
+    {
+      "source": "src/main/java/org/springframework/cglib/core/internal/LoadingCache.java::org.springframework.cglib.core.internal.LoadingCache.get:method(K)",
+      "target": "src/main/java/org/springframework/cglib/core/internal/LoadingCache.java::org.springframework.cglib.core.internal.LoadingCache.createEntry:method(K,KK,Object)",
+      "path": "src/main/java/org/springframework/cglib/core/internal/LoadingCache.java",
+      "line": 34,
+      "reason": "generic declaring-type substitution requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/CollectionFactory.java::org.springframework.core.CollectionFactory.createCollection:method(Class<?>,Class<?>,int)",
+      "target": "src/main/java/org/springframework/util/ReflectionUtils.java::org.springframework.util.ReflectionUtils.accessibleConstructor:method(Class<T>,Class<?>...)",
+      "path": "src/main/java/org/springframework/core/CollectionFactory.java",
+      "line": 213,
+      "reason": "generic invariant argument requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/CollectionFactory.java::org.springframework.core.CollectionFactory.createMap:method(Class<?>,Class<?>,int)",
+      "target": "src/main/java/org/springframework/util/ReflectionUtils.java::org.springframework.util.ReflectionUtils.accessibleConstructor:method(Class<T>,Class<?>...)",
+      "path": "src/main/java/org/springframework/core/CollectionFactory.java",
+      "line": 331,
+      "reason": "generic invariant argument requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/Conventions.java::org.springframework.core.Conventions.getVariableName:method(Object)",
+      "target": "src/main/java/org/springframework/core/Conventions.java::org.springframework.core.Conventions.peekAhead:method(Collection<E>)",
+      "path": "src/main/java/org/springframework/core/Conventions.java",
+      "line": 79,
+      "reason": "generic invariant argument requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/Conventions.java::org.springframework.core.Conventions.getVariableNameForReturnType:method(Method,Class<?>,Object)",
+      "target": "src/main/java/org/springframework/core/Conventions.java::org.springframework.core.Conventions.peekAhead:method(Collection<E>)",
+      "path": "src/main/java/org/springframework/core/Conventions.java",
+      "line": 196,
+      "reason": "generic invariant argument requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/MethodParameter.java::org.springframework.core.MethodParameter.hasMethodAnnotation:method(Class<A>)",
+      "target": "src/main/java/org/springframework/core/MethodParameter.java::org.springframework.core.MethodParameter.getMethodAnnotation:method(Class<A>)",
+      "path": "src/main/java/org/springframework/core/MethodParameter.java",
+      "line": 622,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/MethodParameter.java::org.springframework.core.MethodParameter.hasParameterAnnotation:method(Class<A>)",
+      "target": "src/main/java/org/springframework/core/MethodParameter.java::org.springframework.core.MethodParameter.getParameterAnnotation:method(Class<A>)",
+      "path": "src/main/java/org/springframework/core/MethodParameter.java",
+      "line": 678,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/ResolvableType.java::org.springframework.core.ResolvableType.TypeVariablesVariableResolver.resolveVariable:method(TypeVariable<?>)",
+      "target": "src/main/java/org/springframework/core/SerializableTypeWrapper.java::org.springframework.core.SerializableTypeWrapper.unwrap:method(T)",
+      "path": "src/main/java/org/springframework/core/ResolvableType.java",
+      "line": 1624,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/ResolvableType.java::org.springframework.core.ResolvableType.getType:method()",
+      "target": "src/main/java/org/springframework/core/SerializableTypeWrapper.java::org.springframework.core.SerializableTypeWrapper.unwrap:method(T)",
+      "path": "src/main/java/org/springframework/core/ResolvableType.java",
+      "line": 201,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/ResolvableType.java::org.springframework.core.ResolvableType.resolveVariable:method(TypeVariable<?>)",
+      "target": "src/main/java/org/springframework/core/SerializableTypeWrapper.java::org.springframework.core.SerializableTypeWrapper.unwrap:method(T)",
+      "path": "src/main/java/org/springframework/core/ResolvableType.java",
+      "line": 946,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.getAllAnnotationAttributes:method(AnnotatedElement,String,boolean,boolean)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationPredicates.java::org.springframework.core.annotation.MergedAnnotationPredicates.unique:method(Function<?superMergedAnnotation<A>,K>)",
+      "path": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java",
+      "line": 518,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotatedMethod.java::org.springframework.core.annotation.AnnotatedMethod.hasMethodAnnotation:method(Class<A>)",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedMethod.java::org.springframework.core.annotation.AnnotatedMethod.getMethodAnnotation:method(Class<A>)",
+      "path": "src/main/java/org/springframework/core/annotation/AnnotatedMethod.java",
+      "line": 176,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationTypeMapping.java::org.springframework.core.annotation.AnnotationTypeMapping.<init>:constructor(AnnotationTypeMapping,Class<?extendsAnnotation>,Annotation,Set<Class<?extendsAnnotation>>)",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotationTypeMapping.java::org.springframework.core.annotation.AnnotationTypeMapping.merge:method(List<T>,T)",
+      "path": "src/main/java/org/springframework/core/annotation/AnnotationTypeMapping.java",
+      "line": 92,
+      "reason": "generic invariant argument requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationUtils.java::org.springframework.core.annotation.AnnotationUtils.getRepeatableAnnotations:method(AnnotatedElement,Class<A>,Class<?extendsAnnotation>)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationPredicates.java::org.springframework.core.annotation.MergedAnnotationPredicates.firstRunOf:method(Function<?superMergedAnnotation<A>,?>)",
+      "path": "src/main/java/org/springframework/core/annotation/AnnotationUtils.java",
+      "line": 396,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.process:method(C,AnnotatedElement,SearchStrategy,Predicate<Class<?>>,AnnotationsProcessor<C,R>)",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.processClass:method(C,Class<?>,SearchStrategy,Predicate<Class<?>>,AnnotationsProcessor<C,R>)",
+      "path": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java",
+      "line": 91,
+      "reason": "generic value type requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.process:method(C,AnnotatedElement,SearchStrategy,Predicate<Class<?>>,AnnotationsProcessor<C,R>)",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.processElement:method(C,AnnotatedElement,AnnotationsProcessor<C,R>)",
+      "path": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java",
+      "line": 96,
+      "reason": "generic value type requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.process:method(C,AnnotatedElement,SearchStrategy,Predicate<Class<?>>,AnnotationsProcessor<C,R>)",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.processMethod:method(C,Method,SearchStrategy,AnnotationsProcessor<C,R>)",
+      "path": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java",
+      "line": 94,
+      "reason": "generic value type requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.processClass:method(C,Class<?>,SearchStrategy,Predicate<Class<?>>,AnnotationsProcessor<C,R>)",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.processClassInheritedAnnotations:method(C,Class<?>,AnnotationsProcessor<C,R>)",
+      "path": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java",
+      "line": 104,
+      "reason": "generic value type requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.processClass:method(C,Class<?>,SearchStrategy,Predicate<Class<?>>,AnnotationsProcessor<C,R>)",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.processElement:method(C,AnnotatedElement,AnnotationsProcessor<C,R>)",
+      "path": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java",
+      "line": 103,
+      "reason": "generic value type requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.processClassInheritedAnnotations:method(C,Class<?>,AnnotationsProcessor<C,R>)",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.processElement:method(C,AnnotatedElement,AnnotationsProcessor<C,R>)",
+      "path": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java",
+      "line": 115,
+      "reason": "generic value type requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.processMethod:method(C,Method,SearchStrategy,AnnotationsProcessor<C,R>)",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.processMethodHierarchy:method(C,int[],Class<?>,AnnotationsProcessor<C,R>,Method,boolean)",
+      "path": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java",
+      "line": 240,
+      "reason": "generic value type requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.processMethod:method(C,Method,SearchStrategy,AnnotationsProcessor<C,R>)",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.processMethodHierarchy:method(C,int[],Class<?>,AnnotationsProcessor<C,R>,Method,boolean)",
+      "path": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java",
+      "line": 242,
+      "reason": "generic value type requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.processMethod:method(C,Method,SearchStrategy,AnnotationsProcessor<C,R>)",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.processMethodInheritedAnnotations:method(C,Method,AnnotationsProcessor<C,R>)",
+      "path": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java",
+      "line": 239,
+      "reason": "generic value type requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.processMethodHierarchy:method(C,int[],Class<?>,AnnotationsProcessor<C,R>,Method,boolean)",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.processMethodAnnotations:method(C,int,Method,AnnotationsProcessor<C,R>)",
+      "path": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java",
+      "line": 275,
+      "reason": "generic value type requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.processMethodHierarchy:method(C,int[],Class<?>,AnnotationsProcessor<C,R>,Method,boolean)",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.processMethodHierarchy:method(C,int[],Class<?>,AnnotationsProcessor<C,R>,Method,boolean)",
+      "path": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java",
+      "line": 311,
+      "reason": "generic value type requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.processMethodInheritedAnnotations:method(C,Method,AnnotationsProcessor<C,R>)",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.processMethodAnnotations:method(C,int,Method,AnnotationsProcessor<C,R>)",
+      "path": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java",
+      "line": 253,
+      "reason": "generic value type requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.scan:method(C,AnnotatedElement,SearchStrategy,Predicate<Class<?>>,AnnotationsProcessor<C,R>)",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.process:method(C,AnnotatedElement,SearchStrategy,Predicate<Class<?>>,AnnotationsProcessor<C,R>)",
+      "path": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java",
+      "line": 82,
+      "reason": "generic value type requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/MergedAnnotation.java::org.springframework.core.annotation.MergedAnnotation.Adapt.values:method(boolean,boolean)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotation.java::org.springframework.core.annotation.MergedAnnotation.Adapt.addIfTrue:method(Set<T>,T,boolean)",
+      "path": "src/main/java/org/springframework/core/annotation/MergedAnnotation.java",
+      "line": 674,
+      "reason": "generic invariant argument requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/MergedAnnotation.java::org.springframework.core.annotation.MergedAnnotation.Adapt.values:method(boolean,boolean)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotation.java::org.springframework.core.annotation.MergedAnnotation.Adapt.addIfTrue:method(Set<T>,T,boolean)",
+      "path": "src/main/java/org/springframework/core/annotation/MergedAnnotation.java",
+      "line": 675,
+      "reason": "generic invariant argument requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java::org.springframework.core.annotation.TypeMappedAnnotations.scan:method(C,AnnotationsProcessor<C,R>)",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.scan:method(C,AnnotatedElement,SearchStrategy,Predicate<Class<?>>,AnnotationsProcessor<C,R>)",
+      "path": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java",
+      "line": 242,
+      "reason": "generic value type requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/codec/Hints.java::org.springframework.core.codec.Hints.touchDataBuffer:method(DataBuffer,Map<String,Object>,Log)",
+      "target": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java::org.springframework.core.io.buffer.DataBufferUtils.touch:method(T,Object)",
+      "path": "src/main/java/org/springframework/core/codec/Hints.java",
+      "line": 165,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/codec/ResourceRegionEncoder.java::org.springframework.core.codec.ResourceRegionEncoder.writeResourceRegion:method(ResourceRegion,DataBufferFactory,Map<String,Object>)",
+      "target": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java::org.springframework.core.io.buffer.DataBufferUtils.takeUntilByteCount:method(Publisher<T>,long)",
+      "path": "src/main/java/org/springframework/core/codec/ResourceRegionEncoder.java",
+      "line": 136,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/convert/TypeDescriptor.java::org.springframework.core.convert.TypeDescriptor.getAnnotation:method(Class<T>)",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.getMergedAnnotation:method(AnnotatedElement,Class<A>)",
+      "path": "src/main/java/org/springframework/core/convert/TypeDescriptor.java",
+      "line": 305,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/convert/support/CharacterToNumberFactory.java::org.springframework.core.convert.support.CharacterToNumberFactory.CharacterToNumber.convert:method(Character)",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/main/java/org/springframework/core/convert/support/CharacterToNumberFactory.java",
+      "line": 60,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/convert/support/NumberToNumberConverterFactory.java::org.springframework.core.convert.support.NumberToNumberConverterFactory.NumberToNumber.convert:method(Number)",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/main/java/org/springframework/core/convert/support/NumberToNumberConverterFactory.java",
+      "line": 68,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/convert/support/ObjectToObjectConverter.java::org.springframework.core.convert.support.ObjectToObjectConverter.determineFactoryConstructor:method(Class<?>,Class<?>)",
+      "target": "src/main/java/org/springframework/util/ClassUtils.java::org.springframework.util.ClassUtils.getConstructorIfAvailable:method(Class<T>,Class<?>...)",
+      "path": "src/main/java/org/springframework/core/convert/support/ObjectToObjectConverter.java",
+      "line": 210,
+      "reason": "generic invariant argument requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/io/buffer/DataBuffer.java::org.springframework.core.io.buffer.DataBuffer.retainedSlice:method(int,int)",
+      "target": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java::org.springframework.core.io.buffer.DataBufferUtils.retain:method(T)",
+      "path": "src/main/java/org/springframework/core/io/buffer/DataBuffer.java",
+      "line": 360,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java::org.springframework.core.io.buffer.DataBufferUtils.read:method(Resource,long,DataBufferFactory,int)",
+      "target": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java::org.springframework.core.io.buffer.DataBufferUtils.skipUntilByteCount:method(Publisher<T>,long)",
+      "path": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java",
+      "line": 236,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/io/support/PropertySourceProcessor.java::org.springframework.core.io.support.PropertySourceProcessor.instantiateClass:method(Class<?extendsPropertySourceFactory>)",
+      "target": "src/main/java/org/springframework/util/ReflectionUtils.java::org.springframework.util.ReflectionUtils.accessibleConstructor:method(Class<T>,Class<?>...)",
+      "path": "src/main/java/org/springframework/core/io/support/PropertySourceProcessor.java",
+      "line": 149,
+      "reason": "generic invariant argument requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.and:method(Class<T>,T)",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.of:method(Class<T>,T)",
+      "path": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java",
+      "line": 512,
+      "reason": "generic invariant type constraints conflict or are unknown"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.andSupplied:method(Class<T>,Supplier<T>)",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.ofSupplied:method(Class<T>,Supplier<T>)",
+      "path": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java",
+      "line": 524,
+      "reason": "generic invariant type constraints conflict or are unknown"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.of:method(Class<T>,T)",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.ofSupplied:method(Class<T>,Supplier<T>)",
+      "path": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java",
+      "line": 558,
+      "reason": "generic invariant type constraints conflict or are unknown"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.FactoryInstantiator.findPrimaryKotlinConstructor:method(Class<?>)",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.KotlinDelegate.findPrimaryConstructor:method(Class<T>)",
+      "path": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java",
+      "line": 410,
+      "reason": "generic invariant argument requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.KotlinDelegate.instantiate:method(Constructor<T>,Object[])",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.KotlinDelegate.makeAccessible:method(Constructor<T>,KFunction<T>)",
+      "path": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java",
+      "line": 455,
+      "reason": "generic invariant type constraints conflict or are unknown"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/serializer/Serializer.java::org.springframework.core.serializer.Serializer.serializeToByteArray:method(T)",
+      "target": "src/main/java/org/springframework/core/serializer/Serializer.java::org.springframework.core.serializer.Serializer.serialize:method(T,OutputStream)",
+      "path": "src/main/java/org/springframework/core/serializer/Serializer.java",
+      "line": 56,
+      "reason": "generic declaring-type substitution requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/core/type/AnnotatedTypeMetadata.java::org.springframework.core.type.AnnotatedTypeMetadata.getAllAnnotationAttributes:method(String,boolean)",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationPredicates.java::org.springframework.core.annotation.MergedAnnotationPredicates.unique:method(Function<?superMergedAnnotation<A>,K>)",
+      "path": "src/main/java/org/springframework/core/type/AnnotatedTypeMetadata.java",
+      "line": 164,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/util/AutoPopulatingList.java::org.springframework.util.AutoPopulatingList.ReflectiveElementFactory.createElement:method(int)",
+      "target": "src/main/java/org/springframework/util/ReflectionUtils.java::org.springframework.util.ReflectionUtils.accessibleConstructor:method(Class<T>,Class<?>...)",
+      "path": "src/main/java/org/springframework/util/AutoPopulatingList.java",
+      "line": 299,
+      "reason": "generic invariant argument requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/util/ClassUtils.java::org.springframework.util.ClassUtils.hasConstructor:method(Class<?>,Class<?>...)",
+      "target": "src/main/java/org/springframework/util/ClassUtils.java::org.springframework.util.ClassUtils.getConstructorIfAvailable:method(Class<T>,Class<?>...)",
+      "path": "src/main/java/org/springframework/util/ClassUtils.java",
+      "line": 1193,
+      "reason": "generic invariant argument requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.EvictionQueue.add:method(Node<K,V>)",
+      "target": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.EvictionQueue.contains:method(Node<K,V>)",
+      "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+      "line": 543,
+      "reason": "generic declaring-type substitution requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.EvictionQueue.add:method(Node<K,V>)",
+      "target": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.EvictionQueue.linkLast:method(Node<K,V>)",
+      "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+      "line": 546,
+      "reason": "generic declaring-type substitution requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.EvictionQueue.moveToBack:method(Node<K,V>)",
+      "target": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.EvictionQueue.contains:method(Node<K,V>)",
+      "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+      "line": 585,
+      "reason": "generic declaring-type substitution requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.EvictionQueue.moveToBack:method(Node<K,V>)",
+      "target": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.EvictionQueue.linkLast:method(Node<K,V>)",
+      "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+      "line": 587,
+      "reason": "generic declaring-type substitution requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.EvictionQueue.moveToBack:method(Node<K,V>)",
+      "target": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.EvictionQueue.unlink:method(Node<K,V>)",
+      "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+      "line": 586,
+      "reason": "generic declaring-type substitution requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.EvictionQueue.remove:method(Node<K,V>)",
+      "target": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.EvictionQueue.contains:method(Node<K,V>)",
+      "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+      "line": 592,
+      "reason": "generic declaring-type substitution requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.EvictionQueue.remove:method(Node<K,V>)",
+      "target": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.EvictionQueue.unlink:method(Node<K,V>)",
+      "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+      "line": 593,
+      "reason": "generic declaring-type substitution requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.clear:method()",
+      "target": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.markAsRemoved:method(Node<K,V>)",
+      "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+      "line": 190,
+      "reason": "generic declaring-type substitution requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.get:method(K)",
+      "target": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.processRead:method(Node<K,V>)",
+      "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+      "line": 110,
+      "reason": "generic declaring-type substitution requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.get:method(K)",
+      "target": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.put:method(K,V)",
+      "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+      "line": 107,
+      "reason": "generic declaring-type substitution requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.put:method(K,V)",
+      "target": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.processRead:method(Node<K,V>)",
+      "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+      "line": 124,
+      "reason": "generic declaring-type substitution requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.remove:method(K)",
+      "target": "src/main/java/org/springframework/util/ConcurrentLruCache.java::org.springframework.util.ConcurrentLruCache.markForRemoval:method(Node<K,V>)",
+      "path": "src/main/java/org/springframework/util/ConcurrentLruCache.java",
+      "line": 234,
+      "reason": "generic declaring-type substitution requires semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/util/MimeTypeUtils.java::org.springframework.util.MimeTypeUtils.sortBySpecificity:method(List<T>)",
+      "target": "src/main/java/org/springframework/util/MimeTypeUtils.java::org.springframework.util.MimeTypeUtils.bubbleSort:method(List<T>,BiPredicate<?superT,?superT>)",
+      "path": "src/main/java/org/springframework/util/MimeTypeUtils.java",
+      "line": 327,
+      "reason": "generic invariant type constraints conflict or are unknown"
+    },
+    {
+      "source": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.parseNumber:method(String,Class<T>,NumberFormat)",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/main/java/org/springframework/util/NumberUtils.java",
+      "line": 257,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/main/java/org/springframework/util/concurrent/FutureUtils.java::org.springframework.util.concurrent.FutureUtils.callAsync:method(Callable<T>)",
+      "target": "src/main/java/org/springframework/util/concurrent/FutureUtils.java::org.springframework.util.concurrent.FutureUtils.toSupplier:method(Callable<T>,CompletableFuture<T>)",
+      "path": "src/main/java/org/springframework/util/concurrent/FutureUtils.java",
+      "line": 50,
+      "reason": "generic invariant type constraints conflict or are unknown"
+    },
+    {
+      "source": "src/main/java/org/springframework/util/concurrent/FutureUtils.java::org.springframework.util.concurrent.FutureUtils.callAsync:method(Callable<T>,Executor)",
+      "target": "src/main/java/org/springframework/util/concurrent/FutureUtils.java::org.springframework.util.concurrent.FutureUtils.toSupplier:method(Callable<T>,CompletableFuture<T>)",
+      "path": "src/main/java/org/springframework/util/concurrent/FutureUtils.java",
+      "line": 68,
+      "reason": "generic invariant type constraints conflict or are unknown"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/MethodParameterTests.java::org.springframework.core.MethodParameterTests.annotatedConstructorParameterInInnerClass:method()",
+      "target": "src/main/java/org/springframework/core/MethodParameter.java::org.springframework.core.MethodParameter.getParameterAnnotation:method(Class<A>)",
+      "path": "src/test/java/org/springframework/core/MethodParameterTests.java",
+      "line": 143,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/MethodParameterTests.java::org.springframework.core.MethodParameterTests.annotatedConstructorParameterInInnerClass:method()",
+      "target": "src/main/java/org/springframework/core/MethodParameter.java::org.springframework.core.MethodParameter.getParameterAnnotation:method(Class<A>)",
+      "path": "src/test/java/org/springframework/core/MethodParameterTests.java",
+      "line": 147,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/MethodParameterTests.java::org.springframework.core.MethodParameterTests.annotatedConstructorParameterInInnerClass:method()",
+      "target": "src/main/java/org/springframework/core/MethodParameter.java::org.springframework.core.MethodParameter.getParameterAnnotation:method(Class<A>)",
+      "path": "src/test/java/org/springframework/core/MethodParameterTests.java",
+      "line": 151,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/MethodParameterTests.java::org.springframework.core.MethodParameterTests.annotatedConstructorParameterInStaticNestedClass:method()",
+      "target": "src/main/java/org/springframework/core/MethodParameter.java::org.springframework.core.MethodParameter.getParameterAnnotation:method(Class<A>)",
+      "path": "src/test/java/org/springframework/core/MethodParameterTests.java",
+      "line": 134,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.ConventionBasedAnnotationAttributeOverrideTests.findMergedAnnotationWithLocalAliasesThatConflictWithAttributesInMetaAnnotationByConvention:method()",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotation:method(AnnotatedElement,Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 147,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.assertGetMergedAnnotation:method(Class<?>,String...)",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.getMergedAnnotation:method(AnnotatedElement,Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 512,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.assertWebMapping:method(AnnotatedElement,String)",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotation:method(AnnotatedElement,Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 816,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.findMergedAnnotationForMultipleMetaAnnotationsWithClashingAttributeNames:method()",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotation:method(AnnotatedElement,Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 792,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.findMergedAnnotationForMultipleMetaAnnotationsWithClashingAttributeNames:method()",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotation:method(AnnotatedElement,Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 803,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.findMergedAnnotationOnClassWithComposedMetaTransactionalAnnotation:method()",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotation:method(AnnotatedElement,Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 751,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.findMergedAnnotationOnMethodWithComposedMetaTransactionalAnnotation:method()",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotation:method(AnnotatedElement,Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 723,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.findMergedAnnotationWithAttributeAliasesInTargetAnnotation:method()",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotation:method(AnnotatedElement,Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 779,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.findMethodAnnotationFromGenericInterface:method()",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotation:method(AnnotatedElement,Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 858,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.findMethodAnnotationFromGenericSuperclass:method()",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotation:method(AnnotatedElement,Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 865,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.getMergedAnnotationOnThreeDeepMetaWithValue:method()",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.getMergedAnnotation:method(AnnotatedElement,Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 881,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.getMergedAnnotationWithImplicitAliasesInMetaAnnotationOnComposedAnnotation:method()",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.getMergedAnnotation:method(AnnotatedElement,Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 528,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.getMergedAnnotationWithImplicitAliasesWithDefaultsInMetaAnnotationOnComposedAnnotation:method()",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.getMergedAnnotation:method(AnnotatedElement,Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 545,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.jakartaAnnotationTypeViaFindMergedAnnotation:method()",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotation:method(AnnotatedElement,Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 831,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.jakartaAnnotationTypeViaFindMergedAnnotation:method()",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotation:method(AnnotatedElement,Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 832,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.javaLangAnnotationTypeViaFindMergedAnnotation:method()",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotation:method(AnnotatedElement,Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 825,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.javaLangAnnotationTypeViaFindMergedAnnotation:method()",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotation:method(AnnotatedElement,Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 826,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.nullableAnnotationTypeViaFindMergedAnnotation:method()",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotation:method(AnnotatedElement,Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 838,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedMethodTests.java::org.springframework.core.annotation.AnnotatedMethodTests.shouldFindAnnotationOnMethodInGenericAbstractSuperclass:method()",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedMethod.java::org.springframework.core.annotation.AnnotatedMethod.hasMethodAnnotation:method(Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedMethodTests.java",
+      "line": 47,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedMethodTests.java::org.springframework.core.annotation.AnnotatedMethodTests.shouldFindAnnotationOnMethodInGenericInterface:method()",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedMethod.java::org.springframework.core.annotation.AnnotatedMethod.hasMethodAnnotation:method(Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedMethodTests.java",
+      "line": 56,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotationBackCompatibilityTests.java::org.springframework.core.annotation.AnnotationBackCompatibilityTests.multipleRoutesToMetaAnnotation:method()",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.getMergedAnnotation:method(AnnotatedElement,Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotationBackCompatibilityTests.java",
+      "line": 41,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotationsScannerTests.java::org.springframework.core.annotation.AnnotationsScannerTests.scan:method(C,AnnotatedElement,SearchStrategy,Predicate<Class<?>>,AnnotationsProcessor<C,R>)",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotationsScanner.java::org.springframework.core.annotation.AnnotationsScanner.scan:method(C,AnnotatedElement,SearchStrategy,Predicate<Class<?>>,AnnotationsProcessor<C,R>)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotationsScannerTests.java",
+      "line": 548,
+      "reason": "generic value type requires semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AttributeMethodsTests.java::org.springframework.core.annotation.AttributeMethodsTests.isValidWhenHasTypeNotPresentExceptionReturnsFalse:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AttributeMethodsTests.java::org.springframework.core.annotation.AttributeMethodsTests.mockAnnotation:method(Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/AttributeMethodsTests.java",
+      "line": 112,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AttributeMethodsTests.java::org.springframework.core.annotation.AttributeMethodsTests.validateWhenDoesNotHaveTypeNotPresentExceptionThrowsNothing:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AttributeMethodsTests.java::org.springframework.core.annotation.AttributeMethodsTests.mockAnnotation:method(Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/AttributeMethodsTests.java",
+      "line": 138,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AttributeMethodsTests.java::org.springframework.core.annotation.AttributeMethodsTests.validateWhenHasTypeNotPresentExceptionThrowsException:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AttributeMethodsTests.java::org.springframework.core.annotation.AttributeMethodsTests.mockAnnotation:method(Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/AttributeMethodsTests.java",
+      "line": 129,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/MergedAnnotationClassLoaderTests.java::org.springframework.core.annotation.MergedAnnotationClassLoaderTests.synthesizedUsesCorrectClassLoader:method()",
+      "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.getMergedAnnotation:method(AnnotatedElement,Class<A>)",
+      "path": "src/test/java/org/springframework/core/annotation/MergedAnnotationClassLoaderTests.java",
+      "line": 82,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/MergedAnnotationPredicatesTests.java::org.springframework.core.annotation.MergedAnnotationPredicatesTests.firstRunOfAcceptsOnlyFirstRun:method()",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationPredicates.java::org.springframework.core.annotation.MergedAnnotationPredicates.firstRunOf:method(Function<?superMergedAnnotation<A>,?>)",
+      "path": "src/test/java/org/springframework/core/annotation/MergedAnnotationPredicatesTests.java",
+      "line": 96,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/MergedAnnotationPredicatesTests.java::org.springframework.core.annotation.MergedAnnotationPredicatesTests.uniqueAcceptsUniquely:method()",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationPredicates.java::org.springframework.core.annotation.MergedAnnotationPredicates.unique:method(Function<?superMergedAnnotation<A>,K>)",
+      "path": "src/test/java/org/springframework/core/annotation/MergedAnnotationPredicatesTests.java",
+      "line": 112,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/MergedAnnotationsTests.java::org.springframework.core.annotation.MergedAnnotationsTests.testExplicitRepeatables:method(SearchStrategy,Class<?>,String[])",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationPredicates.java::org.springframework.core.annotation.MergedAnnotationPredicates.firstRunOf:method(Function<?superMergedAnnotation<A>,?>)",
+      "path": "src/test/java/org/springframework/core/annotation/MergedAnnotationsTests.java",
+      "line": 1455,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/MergedAnnotationsTests.java::org.springframework.core.annotation.MergedAnnotationsTests.testStandardRepeatables:method(SearchStrategy,Class<?>,String[])",
+      "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationPredicates.java::org.springframework.core.annotation.MergedAnnotationPredicates.firstRunOf:method(Function<?superMergedAnnotation<A>,?>)",
+      "path": "src/test/java/org/springframework/core/annotation/MergedAnnotationsTests.java",
+      "line": 1462,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java::org.springframework.core.io.buffer.DataBufferUtilsTests.genericInputStreamSubscriberTest:method(DataBufferFactory,int,int,int,List<String>,List<String>)",
+      "target": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java::org.springframework.core.io.buffer.DataBufferUtils.subscriberInputStream:method(Publisher<T>,int)",
+      "path": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java",
+      "line": 919,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java::org.springframework.core.io.buffer.DataBufferUtilsTests.inputStreamSubscriberError:method(DataBufferFactory)",
+      "target": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java::org.springframework.core.io.buffer.DataBufferUtils.subscriberInputStream:method(Publisher<T>,int)",
+      "path": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java",
+      "line": 956,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java::org.springframework.core.io.buffer.DataBufferUtilsTests.inputStreamSubscriberMixedReadMode:method(DataBufferFactory)",
+      "target": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java::org.springframework.core.io.buffer.DataBufferUtils.subscriberInputStream:method(Publisher<T>,int)",
+      "path": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java",
+      "line": 995,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java::org.springframework.core.io.buffer.DataBufferUtilsTests.readByteArrayResourcePositionAndTakeUntil:method(DataBufferFactory)",
+      "target": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java::org.springframework.core.io.buffer.DataBufferUtils.takeUntilByteCount:method(Publisher<T>,long)",
+      "path": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java",
+      "line": 358,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java::org.springframework.core.io.buffer.DataBufferUtilsTests.readResourcePositionAndTakeUntil:method(DataBufferFactory)",
+      "target": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java::org.springframework.core.io.buffer.DataBufferUtils.takeUntilByteCount:method(Publisher<T>,long)",
+      "path": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java",
+      "line": 341,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java::org.springframework.core.io.buffer.DataBufferUtilsTests.skipUntilByteCount:method(DataBufferFactory)",
+      "target": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java::org.springframework.core.io.buffer.DataBufferUtils.skipUntilByteCount:method(Publisher<T>,long)",
+      "path": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java",
+      "line": 1203,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java::org.springframework.core.io.buffer.DataBufferUtilsTests.skipUntilByteCountCancelled:method(DataBufferFactory)",
+      "target": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java::org.springframework.core.io.buffer.DataBufferUtils.skipUntilByteCount:method(Publisher<T>,long)",
+      "path": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java",
+      "line": 1220,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java::org.springframework.core.io.buffer.DataBufferUtilsTests.skipUntilByteCountErrorInFlux:method(DataBufferFactory)",
+      "target": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java::org.springframework.core.io.buffer.DataBufferUtils.skipUntilByteCount:method(Publisher<T>,long)",
+      "path": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java",
+      "line": 1235,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java::org.springframework.core.io.buffer.DataBufferUtilsTests.skipUntilByteCountShouldSkipAll:method(DataBufferFactory)",
+      "target": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java::org.springframework.core.io.buffer.DataBufferUtils.skipUntilByteCount:method(Publisher<T>,long)",
+      "path": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java",
+      "line": 1250,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java::org.springframework.core.io.buffer.DataBufferUtilsTests.takeUntilByteCount:method(DataBufferFactory)",
+      "target": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java::org.springframework.core.io.buffer.DataBufferUtils.takeUntilByteCount:method(Publisher<T>,long)",
+      "path": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java",
+      "line": 1131,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java::org.springframework.core.io.buffer.DataBufferUtilsTests.takeUntilByteCountCanceled:method(DataBufferFactory)",
+      "target": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java::org.springframework.core.io.buffer.DataBufferUtils.takeUntilByteCount:method(Publisher<T>,long)",
+      "path": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java",
+      "line": 1149,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java::org.springframework.core.io.buffer.DataBufferUtilsTests.takeUntilByteCountError:method(DataBufferFactory)",
+      "target": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java::org.springframework.core.io.buffer.DataBufferUtils.takeUntilByteCount:method(Publisher<T>,long)",
+      "path": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java",
+      "line": 1167,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java::org.springframework.core.io.buffer.DataBufferUtilsTests.takeUntilByteCountExact:method(DataBufferFactory)",
+      "target": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java::org.springframework.core.io.buffer.DataBufferUtils.takeUntilByteCount:method(Publisher<T>,long)",
+      "path": "src/test/java/org/springframework/core/io/buffer/DataBufferUtilsTests.java",
+      "line": 1185,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java::org.springframework.core.io.support.SpringFactoriesLoaderTests.ArgumentResolverTests.ofValueSupplierResolvesValue:method()",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.ofSupplied:method(Class<T>,Supplier<T>)",
+      "path": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java",
+      "line": 250,
+      "reason": "generic invariant argument requires semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/CollectionUtilsTests.java::org.springframework.util.CollectionUtilsTests.changesValueByReference:method()",
+      "target": "src/main/java/org/springframework/util/CollectionUtils.java::org.springframework.util.CollectionUtils.toMultiValueMap:method(Map<K,List<V>>)",
+      "path": "src/test/java/org/springframework/util/CollectionUtilsTests.java",
+      "line": 373,
+      "reason": "generic parameter shape requires semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/CollectionUtilsTests.java::org.springframework.util.CollectionUtilsTests.conversionOfEmptyMap:method()",
+      "target": "src/main/java/org/springframework/util/CollectionUtils.java::org.springframework.util.CollectionUtils.toMultiValueMap:method(Map<K,List<V>>)",
+      "path": "src/test/java/org/springframework/util/CollectionUtilsTests.java",
+      "line": 357,
+      "reason": "generic parameter shape requires semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/CollectionUtilsTests.java::org.springframework.util.CollectionUtilsTests.conversionOfNonEmptyMap:method()",
+      "target": "src/main/java/org/springframework/util/CollectionUtils.java::org.springframework.util.CollectionUtils.toMultiValueMap:method(Map<K,List<V>>)",
+      "path": "src/test/java/org/springframework/util/CollectionUtilsTests.java",
+      "line": 366,
+      "reason": "generic parameter shape requires semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/CollectionUtilsTests.java::org.springframework.util.CollectionUtilsTests.findFirstMatch:method()",
+      "target": "src/main/java/org/springframework/util/CollectionUtils.java::org.springframework.util.CollectionUtils.findFirstMatch:method(Collection<?>,Collection<E>)",
+      "path": "src/test/java/org/springframework/util/CollectionUtilsTests.java",
+      "line": 194,
+      "reason": "generic invariant argument requires semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/CollectionUtilsTests.java::org.springframework.util.CollectionUtilsTests.findFirstMatch:method()",
+      "target": "src/main/java/org/springframework/util/CollectionUtils.java::org.springframework.util.CollectionUtils.findFirstMatch:method(Collection<?>,Collection<E>)",
+      "path": "src/test/java/org/springframework/util/CollectionUtilsTests.java",
+      "line": 198,
+      "reason": "generic invariant argument requires semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/CollectionUtilsTests.java::org.springframework.util.CollectionUtilsTests.findFirstMatch:method()",
+      "target": "src/main/java/org/springframework/util/CollectionUtils.java::org.springframework.util.CollectionUtils.findFirstMatch:method(Collection<?>,Collection<E>)",
+      "path": "src/test/java/org/springframework/util/CollectionUtilsTests.java",
+      "line": 201,
+      "reason": "generic invariant argument requires semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/CollectionUtilsTests.java::org.springframework.util.CollectionUtilsTests.mergeArrayIntoCollection:method()",
+      "target": "src/main/java/org/springframework/util/CollectionUtils.java::org.springframework.util.CollectionUtils.mergeArrayIntoCollection:method(Object,Collection<E>)",
+      "path": "src/test/java/org/springframework/util/CollectionUtilsTests.java",
+      "line": 71,
+      "reason": "generic invariant argument requires semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/CollectionUtilsTests.java::org.springframework.util.CollectionUtilsTests.mergePrimitiveArrayIntoCollection:method()",
+      "target": "src/main/java/org/springframework/util/CollectionUtils.java::org.springframework.util.CollectionUtils.mergeArrayIntoCollection:method(Object,Collection<E>)",
+      "path": "src/test/java/org/springframework/util/CollectionUtilsTests.java",
+      "line": 81,
+      "reason": "generic invariant argument requires semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/CollectionUtilsTests.java::org.springframework.util.CollectionUtilsTests.mergePropertiesIntoMap:method()",
+      "target": "src/main/java/org/springframework/util/CollectionUtils.java::org.springframework.util.CollectionUtils.mergePropertiesIntoMap:method(Properties,Map<K,V>)",
+      "path": "src/test/java/org/springframework/util/CollectionUtilsTests.java",
+      "line": 96,
+      "reason": "generic parameter shape requires semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/CollectionUtilsTests.java::org.springframework.util.CollectionUtilsTests.toArray:method()",
+      "target": "src/main/java/org/springframework/util/CollectionUtils.java::org.springframework.util.CollectionUtils.toArray:method(Enumeration<E>,A[])",
+      "path": "src/test/java/org/springframework/util/CollectionUtilsTests.java",
+      "line": 352,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/MimeTypeTests.java::org.springframework.util.MimeTypeTests.SpecificityTests.sortBySpecificity:method()",
+      "target": "src/main/java/org/springframework/util/MimeTypeUtils.java::org.springframework.util.MimeTypeUtils.sortBySpecificity:method(List<T>)",
+      "path": "src/test/java/org/springframework/util/MimeTypeTests.java",
+      "line": 434,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/MultiValueMapTests.java::org.springframework.util.MultiValueMapTests.mapsUnderTest:method()",
+      "target": "src/main/java/org/springframework/util/CollectionUtils.java::org.springframework.util.CollectionUtils.toMultiValueMap:method(Map<K,List<V>>)",
+      "path": "src/test/java/org/springframework/util/MultiValueMapTests.java",
+      "line": 197,
+      "reason": "generic parameter shape requires semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertBigDecimalToBigInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 145,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertDoubleToBigInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 138,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertNonExactBigDecimalToBigInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 151,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 275,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 276,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 277,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 278,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 279,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 280,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 281,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 283,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 284,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 285,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 286,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 287,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 288,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 289,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 291,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 292,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 293,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 294,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 295,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 296,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 297,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 299,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 300,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 301,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 302,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 303,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 304,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 305,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 307,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 308,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 309,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 310,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 311,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 312,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToInteger:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 313,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 324,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 325,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 326,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 327,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 328,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 329,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 330,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 332,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 333,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 334,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 335,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 336,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 337,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 338,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 340,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 341,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 342,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 343,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 344,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 345,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 346,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 348,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 349,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 350,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 351,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 352,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 353,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 354,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 356,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 357,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 358,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 359,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 360,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 361,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/NumberUtilsTests.java::org.springframework.util.NumberUtilsTests.convertToLong:method()",
+      "target": "src/main/java/org/springframework/util/NumberUtils.java::org.springframework.util.NumberUtils.convertNumberToTargetClass:method(Number,Class<T>)",
+      "path": "src/test/java/org/springframework/util/NumberUtilsTests.java",
+      "line": 362,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/ObjectUtilsTests.java::org.springframework.util.ObjectUtilsTests.caseInsensitiveValueOf:method()",
+      "target": "src/main/java/org/springframework/util/ObjectUtils.java::org.springframework.util.ObjectUtils.caseInsensitiveValueOf:method(E[],String)",
+      "path": "src/test/java/org/springframework/util/ObjectUtilsTests.java",
+      "line": 826,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/ObjectUtilsTests.java::org.springframework.util.ObjectUtilsTests.caseInsensitiveValueOf:method()",
+      "target": "src/main/java/org/springframework/util/ObjectUtils.java::org.springframework.util.ObjectUtils.caseInsensitiveValueOf:method(E[],String)",
+      "path": "src/test/java/org/springframework/util/ObjectUtilsTests.java",
+      "line": 827,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/test/java/org/springframework/util/SerializationUtilsTests.java::org.springframework.util.SerializationUtilsTests.cloneException:method()",
+      "target": "src/main/java/org/springframework/util/SerializationUtils.java::org.springframework.util.SerializationUtils.clone:method(T)",
+      "path": "src/test/java/org/springframework/util/SerializationUtilsTests.java",
+      "line": 97,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/testFixtures/java/org/springframework/core/testfixture/io/buffer/LeakAwareDataBuffer.java::org.springframework.core.testfixture.io.buffer.LeakAwareDataBuffer.retain:method()",
+      "target": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java::org.springframework.core.io.buffer.DataBufferUtils.retain:method(T)",
+      "path": "src/testFixtures/java/org/springframework/core/testfixture/io/buffer/LeakAwareDataBuffer.java",
+      "line": 71,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    },
+    {
+      "source": "src/testFixtures/java/org/springframework/core/testfixture/io/buffer/LeakAwareDataBuffer.java::org.springframework.core.testfixture.io.buffer.LeakAwareDataBuffer.touch:method(Object)",
+      "target": "src/main/java/org/springframework/core/io/buffer/DataBufferUtils.java::org.springframework.core.io.buffer.DataBufferUtils.touch:method(T,Object)",
+      "path": "src/testFixtures/java/org/springframework/core/testfixture/io/buffer/LeakAwareDataBuffer.java",
+      "line": 77,
+      "reason": "generic bounds or explicit type arguments require semantic analysis"
+    }
+  ],
+  "added_edges": [
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.findMergedAnnotationForMultipleMetaAnnotationsWithClashingAttributeNames:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 787
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.findMergedAnnotationForMultipleMetaAnnotationsWithClashingAttributeNames:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 788
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.getMergedAnnotationAttributesWithAliasedComposedAnnotation:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 440
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.getMergedAnnotationAttributesWithAliasedComposedAnnotation:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 441
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.getMergedAnnotationAttributesWithAliasedValueComposedAnnotation:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 454
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.getMergedAnnotationAttributesWithAliasedValueComposedAnnotation:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 455
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.getMergedAnnotationAttributesWithImplicitAliasesInMetaAnnotationOnComposedAnnotation:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 466
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.getMergedAnnotationAttributesWithShadowedAliasComposedAnnotation:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 560
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java::org.springframework.core.annotation.AnnotatedElementUtilsTests.getMergedAnnotationWithImplicitAliasesInMetaAnnotationOnComposedAnnotation:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotatedElementUtilsTests.java",
+      "line": 529
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.getAnnotationAttributesWithAttributeAliases:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java",
+      "line": 466
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.getAnnotationAttributesWithAttributeAliases:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java",
+      "line": 467
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.getAnnotationAttributesWithAttributeAliases:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java",
+      "line": 475
+    },
+    {
+      "source": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.getAnnotationAttributesWithAttributeAliases:method()",
+      "target": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java::org.springframework.core.annotation.AnnotationUtilsTests.asArray:method(T...)",
+      "path": "src/test/java/org/springframework/core/annotation/AnnotationUtilsTests.java",
+      "line": 476
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java::org.springframework.core.io.support.SpringFactoriesLoaderTests.ArgumentResolverTests.andResolverReturnsComposite:method()",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.of:method(Class<T>,T)",
+      "path": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java",
+      "line": 295
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java::org.springframework.core.io.support.SpringFactoriesLoaderTests.ArgumentResolverTests.andResolverReturnsComposite:method()",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.of:method(Class<T>,T)",
+      "path": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java",
+      "line": 296
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java::org.springframework.core.io.support.SpringFactoriesLoaderTests.ArgumentResolverTests.andValueReturnsComposite:method()",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.of:method(Class<T>,T)",
+      "path": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java",
+      "line": 267
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java::org.springframework.core.io.support.SpringFactoriesLoaderTests.ArgumentResolverTests.andValueSupplierReturnsComposite:method()",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.of:method(Class<T>,T)",
+      "path": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java",
+      "line": 281
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java::org.springframework.core.io.support.SpringFactoriesLoaderTests.ArgumentResolverTests.andValueSupplierWhenSameTypeReturnsCompositeResolvingFirst:method()",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.of:method(Class<T>,T)",
+      "path": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java",
+      "line": 289
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java::org.springframework.core.io.support.SpringFactoriesLoaderTests.ArgumentResolverTests.andValueWhenSameTypeReturnsCompositeResolvingFirst:method()",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.of:method(Class<T>,T)",
+      "path": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java",
+      "line": 275
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java::org.springframework.core.io.support.SpringFactoriesLoaderTests.ArgumentResolverTests.ofValueResolvesValue:method()",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.of:method(Class<T>,T)",
+      "path": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java",
+      "line": 242
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java::org.springframework.core.io.support.SpringFactoriesLoaderTests.FactoryInstantiatorTests:class",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.of:method(Class<T>,T)",
+      "path": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java",
+      "line": 308
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java::org.springframework.core.io.support.SpringFactoriesLoaderTests.loadWhenMultipleConstructorsThrowsException:method()",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.of:method(Class<T>,T)",
+      "path": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java",
+      "line": 127
+    },
+    {
+      "source": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java::org.springframework.core.io.support.SpringFactoriesLoaderTests.loadWithArgumentResolverWhenNoDefaultConstructor:method()",
+      "target": "src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java::org.springframework.core.io.support.SpringFactoriesLoader.ArgumentResolver.of:method(Class<T>,T)",
+      "path": "src/test/java/org/springframework/core/io/support/SpringFactoriesLoaderTests.java",
+      "line": 117
+    },
+    {
+      "source": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.emptyFilterApplyMatchIfEmpty:method()",
+      "target": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.match:method(InstanceFilter<T>,T)",
+      "path": "src/test/java/org/springframework/util/InstanceFilterTests.java",
+      "line": 33
+    },
+    {
+      "source": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.emptyFilterApplyMatchIfEmpty:method()",
+      "target": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.match:method(InstanceFilter<T>,T)",
+      "path": "src/test/java/org/springframework/util/InstanceFilterTests.java",
+      "line": 34
+    },
+    {
+      "source": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.excludesFilter:method()",
+      "target": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.doNotMatch:method(InstanceFilter<T>,T)",
+      "path": "src/test/java/org/springframework/util/InstanceFilterTests.java",
+      "line": 47
+    },
+    {
+      "source": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.excludesFilter:method()",
+      "target": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.match:method(InstanceFilter<T>,T)",
+      "path": "src/test/java/org/springframework/util/InstanceFilterTests.java",
+      "line": 48
+    },
+    {
+      "source": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.includesAndExcludesFilters:method()",
+      "target": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.doNotMatch:method(InstanceFilter<T>,T)",
+      "path": "src/test/java/org/springframework/util/InstanceFilterTests.java",
+      "line": 54
+    },
+    {
+      "source": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.includesAndExcludesFilters:method()",
+      "target": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.match:method(InstanceFilter<T>,T)",
+      "path": "src/test/java/org/springframework/util/InstanceFilterTests.java",
+      "line": 55
+    },
+    {
+      "source": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.includesAndExcludesFiltersConflict:method()",
+      "target": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.doNotMatch:method(InstanceFilter<T>,T)",
+      "path": "src/test/java/org/springframework/util/InstanceFilterTests.java",
+      "line": 61
+    },
+    {
+      "source": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.includesFilter:method()",
+      "target": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.doNotMatch:method(InstanceFilter<T>,T)",
+      "path": "src/test/java/org/springframework/util/InstanceFilterTests.java",
+      "line": 41
+    },
+    {
+      "source": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.includesFilter:method()",
+      "target": "src/test/java/org/springframework/util/InstanceFilterTests.java::org.springframework.util.InstanceFilterTests.match:method(InstanceFilter<T>,T)",
+      "path": "src/test/java/org/springframework/util/InstanceFilterTests.java",
+      "line": 40
+    }
+  ],
+  "fingerprint": {
+    "languages": [
+      "java",
+      "json",
+      "kotlin",
+      "text",
+      "xml"
+    ],
+    "versions": {
+      "engine": "columbus-1.0.0",
+      "python_ast": "3.11.16",
+      "tree-sitter": "0.26.0",
+      "tree-sitter-java": "0.23.5+columbus.1",
+      "tree-sitter-kotlin": "1.1.0",
+      "analyzer_code": "6ea505de0df4c25b8ae8",
+      "language_config": "44136fa355b3678a1146"
+    },
+    "fidelity": {
+      "java": "ast",
+      "json": "text",
+      "kotlin": "ast",
+      "text": "text",
+      "xml": "text"
+    }
+  }
+}

@@ -1,0 +1,986 @@
+{
+  "conclusion": "success",
+  "headSha": "5b24630df7ef3a647ee2b27d7d08f3cd9a8b4bc1",
+  "jobs": [
+    {
+      "completedAt": "2026-09-07T17:36:53Z",
+      "conclusion": "success",
+      "databaseId": 101824799547,
+      "name": "distribution (ubuntu-latest, 3.11)",
+      "startedAt": "2026-09-07T17:35:35Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-07T17:35:37Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-07T17:35:36Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:35:38Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-09-07T17:35:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:35:38Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v5",
+          "number": 3,
+          "startedAt": "2026-09-07T17:35:38Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:35:48Z",
+          "conclusion": "success",
+          "name": "Install parser and optional MCP test dependencies",
+          "number": 4,
+          "startedAt": "2026-09-07T17:35:38Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:35:51Z",
+          "conclusion": "success",
+          "name": "Bootstrap and archive tests",
+          "number": 5,
+          "startedAt": "2026-09-07T17:35:48Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:08Z",
+          "conclusion": "success",
+          "name": "Engine tests",
+          "number": 6,
+          "startedAt": "2026-09-07T17:35:51Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:22Z",
+          "conclusion": "success",
+          "name": "Observation harness tests (no model calls)",
+          "number": 7,
+          "startedAt": "2026-09-07T17:36:08Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:22Z",
+          "conclusion": "success",
+          "name": "Continuous-session audit tests (no model calls)",
+          "number": 8,
+          "startedAt": "2026-09-07T17:36:22Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:23Z",
+          "conclusion": "success",
+          "name": "CLI delivery observations (no model calls)",
+          "number": 9,
+          "startedAt": "2026-09-07T17:36:22Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:23Z",
+          "conclusion": "success",
+          "name": "Compile Python sources",
+          "number": 10,
+          "startedAt": "2026-09-07T17:36:23Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:25Z",
+          "conclusion": "success",
+          "name": "Build wheel",
+          "number": 11,
+          "startedAt": "2026-09-07T17:36:23Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:25Z",
+          "conclusion": "success",
+          "name": "Build reproducible ZIP",
+          "number": 12,
+          "startedAt": "2026-09-07T17:36:25Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:25Z",
+          "conclusion": "success",
+          "name": "Assemble checksummed release assets",
+          "number": 13,
+          "startedAt": "2026-09-07T17:36:25Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:42Z",
+          "conclusion": "success",
+          "name": "Verify clean install and portable bundle",
+          "number": 14,
+          "startedAt": "2026-09-07T17:36:25Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:50Z",
+          "conclusion": "success",
+          "name": "Verify pre-commit partial staging and deletion-only updates",
+          "number": 15,
+          "startedAt": "2026-09-07T17:36:42Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:51Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 16,
+          "startedAt": "2026-09-07T17:36:50Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:51Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v5",
+          "number": 31,
+          "startedAt": "2026-09-07T17:36:51Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:52Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 32,
+          "startedAt": "2026-09-07T17:36:51Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:52Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 33,
+          "startedAt": "2026-09-07T17:36:52Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34148244701/job/101824799547"
+    },
+    {
+      "completedAt": "2026-09-07T17:36:39Z",
+      "conclusion": "success",
+      "databaseId": 101824799672,
+      "name": "distribution (ubuntu-latest, 3.14)",
+      "startedAt": "2026-09-07T17:35:35Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-07T17:35:36Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-07T17:35:36Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:35:37Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-09-07T17:35:36Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:35:37Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v5",
+          "number": 3,
+          "startedAt": "2026-09-07T17:35:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:35:43Z",
+          "conclusion": "success",
+          "name": "Install parser and optional MCP test dependencies",
+          "number": 4,
+          "startedAt": "2026-09-07T17:35:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:35:46Z",
+          "conclusion": "success",
+          "name": "Bootstrap and archive tests",
+          "number": 5,
+          "startedAt": "2026-09-07T17:35:43Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:35:58Z",
+          "conclusion": "success",
+          "name": "Engine tests",
+          "number": 6,
+          "startedAt": "2026-09-07T17:35:46Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:02Z",
+          "conclusion": "success",
+          "name": "Observation harness tests (no model calls)",
+          "number": 7,
+          "startedAt": "2026-09-07T17:35:58Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:02Z",
+          "conclusion": "success",
+          "name": "Continuous-session audit tests (no model calls)",
+          "number": 8,
+          "startedAt": "2026-09-07T17:36:02Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:04Z",
+          "conclusion": "success",
+          "name": "CLI delivery observations (no model calls)",
+          "number": 9,
+          "startedAt": "2026-09-07T17:36:02Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:04Z",
+          "conclusion": "success",
+          "name": "Compile Python sources",
+          "number": 10,
+          "startedAt": "2026-09-07T17:36:04Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:07Z",
+          "conclusion": "success",
+          "name": "Build wheel",
+          "number": 11,
+          "startedAt": "2026-09-07T17:36:04Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:07Z",
+          "conclusion": "success",
+          "name": "Build reproducible ZIP",
+          "number": 12,
+          "startedAt": "2026-09-07T17:36:07Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:07Z",
+          "conclusion": "success",
+          "name": "Assemble checksummed release assets",
+          "number": 13,
+          "startedAt": "2026-09-07T17:36:07Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:30Z",
+          "conclusion": "success",
+          "name": "Verify clean install and portable bundle",
+          "number": 14,
+          "startedAt": "2026-09-07T17:36:07Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:36Z",
+          "conclusion": "success",
+          "name": "Verify pre-commit partial staging and deletion-only updates",
+          "number": 15,
+          "startedAt": "2026-09-07T17:36:30Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:37Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 16,
+          "startedAt": "2026-09-07T17:36:36Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:37Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v5",
+          "number": 31,
+          "startedAt": "2026-09-07T17:36:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:38Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 32,
+          "startedAt": "2026-09-07T17:36:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:38Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 33,
+          "startedAt": "2026-09-07T17:36:38Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34148244701/job/101824799672"
+    },
+    {
+      "completedAt": "2026-09-07T17:37:36Z",
+      "conclusion": "success",
+      "databaseId": 101824799707,
+      "name": "distribution (macos-latest, 3.11)",
+      "startedAt": "2026-09-07T17:35:41Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-07T17:35:43Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-07T17:35:42Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:35:46Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-09-07T17:35:43Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:35:46Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v5",
+          "number": 3,
+          "startedAt": "2026-09-07T17:35:46Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:35:53Z",
+          "conclusion": "success",
+          "name": "Install parser and optional MCP test dependencies",
+          "number": 4,
+          "startedAt": "2026-09-07T17:35:46Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:35:56Z",
+          "conclusion": "success",
+          "name": "Bootstrap and archive tests",
+          "number": 5,
+          "startedAt": "2026-09-07T17:35:53Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:20Z",
+          "conclusion": "success",
+          "name": "Engine tests",
+          "number": 6,
+          "startedAt": "2026-09-07T17:35:56Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:47Z",
+          "conclusion": "success",
+          "name": "Observation harness tests (no model calls)",
+          "number": 7,
+          "startedAt": "2026-09-07T17:36:20Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:47Z",
+          "conclusion": "success",
+          "name": "Continuous-session audit tests (no model calls)",
+          "number": 8,
+          "startedAt": "2026-09-07T17:36:47Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:49Z",
+          "conclusion": "success",
+          "name": "CLI delivery observations (no model calls)",
+          "number": 9,
+          "startedAt": "2026-09-07T17:36:47Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:49Z",
+          "conclusion": "success",
+          "name": "Compile Python sources",
+          "number": 10,
+          "startedAt": "2026-09-07T17:36:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:52Z",
+          "conclusion": "success",
+          "name": "Build wheel",
+          "number": 11,
+          "startedAt": "2026-09-07T17:36:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:53Z",
+          "conclusion": "success",
+          "name": "Build reproducible ZIP",
+          "number": 12,
+          "startedAt": "2026-09-07T17:36:52Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:53Z",
+          "conclusion": "success",
+          "name": "Assemble checksummed release assets",
+          "number": 13,
+          "startedAt": "2026-09-07T17:36:53Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:37:20Z",
+          "conclusion": "success",
+          "name": "Verify clean install and portable bundle",
+          "number": 14,
+          "startedAt": "2026-09-07T17:36:53Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:37:28Z",
+          "conclusion": "success",
+          "name": "Verify pre-commit partial staging and deletion-only updates",
+          "number": 15,
+          "startedAt": "2026-09-07T17:37:20Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:37:31Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 16,
+          "startedAt": "2026-09-07T17:37:28Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:37:31Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v5",
+          "number": 31,
+          "startedAt": "2026-09-07T17:37:31Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:37:32Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 32,
+          "startedAt": "2026-09-07T17:37:31Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:37:33Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 33,
+          "startedAt": "2026-09-07T17:37:32Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34148244701/job/101824799707"
+    },
+    {
+      "completedAt": "2026-09-07T17:38:48Z",
+      "conclusion": "success",
+      "databaseId": 101824799708,
+      "name": "distribution (windows-latest, 3.14)",
+      "startedAt": "2026-09-07T17:35:35Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-07T17:35:37Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-07T17:35:36Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:35:45Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-09-07T17:35:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:35:45Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v5",
+          "number": 3,
+          "startedAt": "2026-09-07T17:35:45Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:10Z",
+          "conclusion": "success",
+          "name": "Install parser and optional MCP test dependencies",
+          "number": 4,
+          "startedAt": "2026-09-07T17:35:45Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:18Z",
+          "conclusion": "success",
+          "name": "Bootstrap and archive tests",
+          "number": 5,
+          "startedAt": "2026-09-07T17:36:10Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:37:22Z",
+          "conclusion": "success",
+          "name": "Engine tests",
+          "number": 6,
+          "startedAt": "2026-09-07T17:36:18Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:37:29Z",
+          "conclusion": "success",
+          "name": "Observation harness tests (no model calls)",
+          "number": 7,
+          "startedAt": "2026-09-07T17:37:22Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:37:30Z",
+          "conclusion": "success",
+          "name": "Continuous-session audit tests (no model calls)",
+          "number": 8,
+          "startedAt": "2026-09-07T17:37:29Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:37:34Z",
+          "conclusion": "success",
+          "name": "CLI delivery observations (no model calls)",
+          "number": 9,
+          "startedAt": "2026-09-07T17:37:30Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:37:34Z",
+          "conclusion": "success",
+          "name": "Compile Python sources",
+          "number": 10,
+          "startedAt": "2026-09-07T17:37:34Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:37:40Z",
+          "conclusion": "success",
+          "name": "Build wheel",
+          "number": 11,
+          "startedAt": "2026-09-07T17:37:34Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:37:40Z",
+          "conclusion": "success",
+          "name": "Build reproducible ZIP",
+          "number": 12,
+          "startedAt": "2026-09-07T17:37:40Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:37:41Z",
+          "conclusion": "success",
+          "name": "Assemble checksummed release assets",
+          "number": 13,
+          "startedAt": "2026-09-07T17:37:40Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:38:27Z",
+          "conclusion": "success",
+          "name": "Verify clean install and portable bundle",
+          "number": 14,
+          "startedAt": "2026-09-07T17:37:41Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:38:44Z",
+          "conclusion": "success",
+          "name": "Verify pre-commit partial staging and deletion-only updates",
+          "number": 15,
+          "startedAt": "2026-09-07T17:38:27Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:38:45Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 16,
+          "startedAt": "2026-09-07T17:38:44Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:38:45Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v5",
+          "number": 31,
+          "startedAt": "2026-09-07T17:38:45Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:38:47Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 32,
+          "startedAt": "2026-09-07T17:38:45Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:38:47Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 33,
+          "startedAt": "2026-09-07T17:38:47Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34148244701/job/101824799708"
+    },
+    {
+      "completedAt": "2026-09-07T17:37:02Z",
+      "conclusion": "success",
+      "databaseId": 101824799763,
+      "name": "distribution (macos-latest, 3.14)",
+      "startedAt": "2026-09-07T17:35:42Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-07T17:35:44Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-07T17:35:43Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:35:47Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-09-07T17:35:44Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:35:47Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v5",
+          "number": 3,
+          "startedAt": "2026-09-07T17:35:47Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:35:54Z",
+          "conclusion": "success",
+          "name": "Install parser and optional MCP test dependencies",
+          "number": 4,
+          "startedAt": "2026-09-07T17:35:47Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:35:58Z",
+          "conclusion": "success",
+          "name": "Bootstrap and archive tests",
+          "number": 5,
+          "startedAt": "2026-09-07T17:35:54Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:20Z",
+          "conclusion": "success",
+          "name": "Engine tests",
+          "number": 6,
+          "startedAt": "2026-09-07T17:35:58Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:25Z",
+          "conclusion": "success",
+          "name": "Observation harness tests (no model calls)",
+          "number": 7,
+          "startedAt": "2026-09-07T17:36:20Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:25Z",
+          "conclusion": "success",
+          "name": "Continuous-session audit tests (no model calls)",
+          "number": 8,
+          "startedAt": "2026-09-07T17:36:25Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:28Z",
+          "conclusion": "success",
+          "name": "CLI delivery observations (no model calls)",
+          "number": 9,
+          "startedAt": "2026-09-07T17:36:25Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:28Z",
+          "conclusion": "success",
+          "name": "Compile Python sources",
+          "number": 10,
+          "startedAt": "2026-09-07T17:36:28Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:30Z",
+          "conclusion": "success",
+          "name": "Build wheel",
+          "number": 11,
+          "startedAt": "2026-09-07T17:36:28Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:31Z",
+          "conclusion": "success",
+          "name": "Build reproducible ZIP",
+          "number": 12,
+          "startedAt": "2026-09-07T17:36:30Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:31Z",
+          "conclusion": "success",
+          "name": "Assemble checksummed release assets",
+          "number": 13,
+          "startedAt": "2026-09-07T17:36:31Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:53Z",
+          "conclusion": "success",
+          "name": "Verify clean install and portable bundle",
+          "number": 14,
+          "startedAt": "2026-09-07T17:36:31Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:59Z",
+          "conclusion": "success",
+          "name": "Verify pre-commit partial staging and deletion-only updates",
+          "number": 15,
+          "startedAt": "2026-09-07T17:36:53Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:37:00Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 16,
+          "startedAt": "2026-09-07T17:36:59Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:37:01Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v5",
+          "number": 31,
+          "startedAt": "2026-09-07T17:37:00Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:37:01Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 32,
+          "startedAt": "2026-09-07T17:37:01Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:37:01Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 33,
+          "startedAt": "2026-09-07T17:37:01Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34148244701/job/101824799763"
+    },
+    {
+      "completedAt": "2026-09-07T17:39:17Z",
+      "conclusion": "success",
+      "databaseId": 101824799772,
+      "name": "distribution (windows-latest, 3.11)",
+      "startedAt": "2026-09-07T17:35:36Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-07T17:35:39Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-07T17:35:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:35:47Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-09-07T17:35:39Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:35:48Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v5",
+          "number": 3,
+          "startedAt": "2026-09-07T17:35:47Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:09Z",
+          "conclusion": "success",
+          "name": "Install parser and optional MCP test dependencies",
+          "number": 4,
+          "startedAt": "2026-09-07T17:35:48Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:36:20Z",
+          "conclusion": "success",
+          "name": "Bootstrap and archive tests",
+          "number": 5,
+          "startedAt": "2026-09-07T17:36:09Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:37:23Z",
+          "conclusion": "success",
+          "name": "Engine tests",
+          "number": 6,
+          "startedAt": "2026-09-07T17:36:20Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:37:58Z",
+          "conclusion": "success",
+          "name": "Observation harness tests (no model calls)",
+          "number": 7,
+          "startedAt": "2026-09-07T17:37:23Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:37:58Z",
+          "conclusion": "success",
+          "name": "Continuous-session audit tests (no model calls)",
+          "number": 8,
+          "startedAt": "2026-09-07T17:37:58Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:38:01Z",
+          "conclusion": "success",
+          "name": "CLI delivery observations (no model calls)",
+          "number": 9,
+          "startedAt": "2026-09-07T17:37:58Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:38:02Z",
+          "conclusion": "success",
+          "name": "Compile Python sources",
+          "number": 10,
+          "startedAt": "2026-09-07T17:38:01Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:38:08Z",
+          "conclusion": "success",
+          "name": "Build wheel",
+          "number": 11,
+          "startedAt": "2026-09-07T17:38:02Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:38:09Z",
+          "conclusion": "success",
+          "name": "Build reproducible ZIP",
+          "number": 12,
+          "startedAt": "2026-09-07T17:38:08Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:38:09Z",
+          "conclusion": "success",
+          "name": "Assemble checksummed release assets",
+          "number": 13,
+          "startedAt": "2026-09-07T17:38:09Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:38:57Z",
+          "conclusion": "success",
+          "name": "Verify clean install and portable bundle",
+          "number": 14,
+          "startedAt": "2026-09-07T17:38:09Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:39:13Z",
+          "conclusion": "success",
+          "name": "Verify pre-commit partial staging and deletion-only updates",
+          "number": 15,
+          "startedAt": "2026-09-07T17:38:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:39:14Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 16,
+          "startedAt": "2026-09-07T17:39:13Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:39:14Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v5",
+          "number": 31,
+          "startedAt": "2026-09-07T17:39:14Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:39:16Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 32,
+          "startedAt": "2026-09-07T17:39:14Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:39:16Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 33,
+          "startedAt": "2026-09-07T17:39:16Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34148244701/job/101824799772"
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/ch4570/columbus/actions/runs/34148244701"
+}

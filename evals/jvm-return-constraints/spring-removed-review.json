@@ -1,0 +1,869 @@
+{
+  "scope": "Every removed edge matched to its post-change unresolved reference and unchanged source; no full-corpus compiler validity claim.",
+  "reasons": {
+    "generic bounds or explicit type arguments require semantic analysis": 40,
+    "generic declaring-type substitution requires semantic analysis": 3
+  },
+  "removed": [
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findAllMergedAnnotations:method(AnnotatedElement,Class<A>)",
+        "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.highAggregateIndexesFirst:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java",
+        "line": 664,
+        "confidence": "heuristic",
+        "evidence": "highAggregateIndexesFirst()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "Comparator<MergedAnnotation<A>>",
+      "source_sha256": "a7012928cfa9805dd8404fa2ffb38fe910c1b22c9650c15aa9021e9efc93ede7",
+      "source_line": "\t\t\t\t.sorted(highAggregateIndexesFirst())",
+      "target_sha256": "a7012928cfa9805dd8404fa2ffb38fe910c1b22c9650c15aa9021e9efc93ede7",
+      "target_signature": "private static <A extends Annotation> Comparator<MergedAnnotation<A>> highAggregateIndexesFirst()",
+      "target_start_line": 830,
+      "target_excerpt": "\tprivate static <A extends Annotation> Comparator<MergedAnnotation<A>> highAggregateIndexesFirst() {\n\t\treturn Comparator.<MergedAnnotation<A>> comparingInt(MergedAnnotation::getAggregateIndex).reversed();\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findAllMergedAnnotations:method(AnnotatedElement,Class<A>)",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java",
+        "line": 665,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotationCollectors.toAnnotationSet()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "Collector<MergedAnnotation<A>,?,Set<A>>",
+      "source_sha256": "a7012928cfa9805dd8404fa2ffb38fe910c1b22c9650c15aa9021e9efc93ede7",
+      "source_line": "\t\t\t\t.collect(MergedAnnotationCollectors.toAnnotationSet());",
+      "target_sha256": "410a20dfff6462a8687c4b9e5bf988bd8f7f1c85d1426806ce1d086258b6c31b",
+      "target_signature": "public static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet()",
+      "target_start_line": 65,
+      "target_excerpt": "\tpublic static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet() {\n\t\treturn Collector.of(LinkedHashSet::new, (set, annotation) -> set.add(annotation.synthesize()),\n\t\t\t\tMergedAnnotationCollectors::combiner);\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findAllMergedAnnotations:method(AnnotatedElement,Set<Class<?extendsAnnotation>>)",
+        "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.highAggregateIndexesFirst:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java",
+        "line": 689,
+        "confidence": "heuristic",
+        "evidence": "highAggregateIndexesFirst()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "Comparator<MergedAnnotation<A>>",
+      "source_sha256": "a7012928cfa9805dd8404fa2ffb38fe910c1b22c9650c15aa9021e9efc93ede7",
+      "source_line": "\t\t\t\t.sorted(highAggregateIndexesFirst())",
+      "target_sha256": "a7012928cfa9805dd8404fa2ffb38fe910c1b22c9650c15aa9021e9efc93ede7",
+      "target_signature": "private static <A extends Annotation> Comparator<MergedAnnotation<A>> highAggregateIndexesFirst()",
+      "target_start_line": 830,
+      "target_excerpt": "\tprivate static <A extends Annotation> Comparator<MergedAnnotation<A>> highAggregateIndexesFirst() {\n\t\treturn Comparator.<MergedAnnotation<A>> comparingInt(MergedAnnotation::getAggregateIndex).reversed();\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findAllMergedAnnotations:method(AnnotatedElement,Set<Class<?extendsAnnotation>>)",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java",
+        "line": 690,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotationCollectors.toAnnotationSet()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "Collector<MergedAnnotation<A>,?,Set<A>>",
+      "source_sha256": "a7012928cfa9805dd8404fa2ffb38fe910c1b22c9650c15aa9021e9efc93ede7",
+      "source_line": "\t\t\t\t.collect(MergedAnnotationCollectors.toAnnotationSet());",
+      "target_sha256": "410a20dfff6462a8687c4b9e5bf988bd8f7f1c85d1426806ce1d086258b6c31b",
+      "target_signature": "public static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet()",
+      "target_start_line": 65,
+      "target_excerpt": "\tpublic static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet() {\n\t\treturn Collector.of(LinkedHashSet::new, (set, annotation) -> set.add(annotation.synthesize()),\n\t\t\t\tMergedAnnotationCollectors::combiner);\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotation:method(AnnotatedElement,Class<A>)",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationSelectors.java::org.springframework.core.annotation.MergedAnnotationSelectors.firstDirectlyDeclared:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java",
+        "line": 639,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotationSelectors.firstDirectlyDeclared()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "MergedAnnotationSelector<A>",
+      "source_sha256": "a7012928cfa9805dd8404fa2ffb38fe910c1b22c9650c15aa9021e9efc93ede7",
+      "source_line": "\t\t\t\t.get(annotationType, null, MergedAnnotationSelectors.firstDirectlyDeclared())",
+      "target_sha256": "4126107ac07331664bd88e3fd03d57e94d18e4a819c83bd209e3229ba71977d3",
+      "target_signature": "@SuppressWarnings(\"unchecked\") public static <A extends Annotation> MergedAnnotationSelector<A> firstDirectlyDeclared()",
+      "target_start_line": 56,
+      "target_excerpt": "\t@SuppressWarnings(\"unchecked\")\n\tpublic static <A extends Annotation> MergedAnnotationSelector<A> firstDirectlyDeclared() {\n\t\treturn (MergedAnnotationSelector<A>) FIRST_DIRECTLY_DECLARED;\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotationAttributes:method(AnnotatedElement,Class<?extendsAnnotation>,boolean,boolean)",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationSelectors.java::org.springframework.core.annotation.MergedAnnotationSelectors.firstDirectlyDeclared:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java",
+        "line": 576,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotationSelectors.firstDirectlyDeclared()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "MergedAnnotationSelector<A>",
+      "source_sha256": "a7012928cfa9805dd8404fa2ffb38fe910c1b22c9650c15aa9021e9efc93ede7",
+      "source_line": "\t\t\t\t.get(annotationType, null, MergedAnnotationSelectors.firstDirectlyDeclared());",
+      "target_sha256": "4126107ac07331664bd88e3fd03d57e94d18e4a819c83bd209e3229ba71977d3",
+      "target_signature": "@SuppressWarnings(\"unchecked\") public static <A extends Annotation> MergedAnnotationSelector<A> firstDirectlyDeclared()",
+      "target_start_line": 56,
+      "target_excerpt": "\t@SuppressWarnings(\"unchecked\")\n\tpublic static <A extends Annotation> MergedAnnotationSelector<A> firstDirectlyDeclared() {\n\t\treturn (MergedAnnotationSelector<A>) FIRST_DIRECTLY_DECLARED;\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotationAttributes:method(AnnotatedElement,String,boolean,boolean)",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationSelectors.java::org.springframework.core.annotation.MergedAnnotationSelectors.firstDirectlyDeclared:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java",
+        "line": 609,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotationSelectors.firstDirectlyDeclared()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "MergedAnnotationSelector<A>",
+      "source_sha256": "a7012928cfa9805dd8404fa2ffb38fe910c1b22c9650c15aa9021e9efc93ede7",
+      "source_line": "\t\t\t\t.get(annotationName, null, MergedAnnotationSelectors.firstDirectlyDeclared());",
+      "target_sha256": "4126107ac07331664bd88e3fd03d57e94d18e4a819c83bd209e3229ba71977d3",
+      "target_signature": "@SuppressWarnings(\"unchecked\") public static <A extends Annotation> MergedAnnotationSelector<A> firstDirectlyDeclared()",
+      "target_start_line": 56,
+      "target_excerpt": "\t@SuppressWarnings(\"unchecked\")\n\tpublic static <A extends Annotation> MergedAnnotationSelector<A> firstDirectlyDeclared() {\n\t\treturn (MergedAnnotationSelector<A>) FIRST_DIRECTLY_DECLARED;\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findMergedRepeatableAnnotations:method(AnnotatedElement,Class<A>,Class<?extendsAnnotation>)",
+        "target": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.highAggregateIndexesFirst:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java",
+        "line": 768,
+        "confidence": "heuristic",
+        "evidence": "highAggregateIndexesFirst()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "Comparator<MergedAnnotation<A>>",
+      "source_sha256": "a7012928cfa9805dd8404fa2ffb38fe910c1b22c9650c15aa9021e9efc93ede7",
+      "source_line": "\t\t\t\t.sorted(highAggregateIndexesFirst())",
+      "target_sha256": "a7012928cfa9805dd8404fa2ffb38fe910c1b22c9650c15aa9021e9efc93ede7",
+      "target_signature": "private static <A extends Annotation> Comparator<MergedAnnotation<A>> highAggregateIndexesFirst()",
+      "target_start_line": 830,
+      "target_excerpt": "\tprivate static <A extends Annotation> Comparator<MergedAnnotation<A>> highAggregateIndexesFirst() {\n\t\treturn Comparator.<MergedAnnotation<A>> comparingInt(MergedAnnotation::getAggregateIndex).reversed();\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.findMergedRepeatableAnnotations:method(AnnotatedElement,Class<A>,Class<?extendsAnnotation>)",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java",
+        "line": 769,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotationCollectors.toAnnotationSet()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "Collector<MergedAnnotation<A>,?,Set<A>>",
+      "source_sha256": "a7012928cfa9805dd8404fa2ffb38fe910c1b22c9650c15aa9021e9efc93ede7",
+      "source_line": "\t\t\t\t.collect(MergedAnnotationCollectors.toAnnotationSet());",
+      "target_sha256": "410a20dfff6462a8687c4b9e5bf988bd8f7f1c85d1426806ce1d086258b6c31b",
+      "target_signature": "public static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet()",
+      "target_start_line": 65,
+      "target_excerpt": "\tpublic static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet() {\n\t\treturn Collector.of(LinkedHashSet::new, (set, annotation) -> set.add(annotation.synthesize()),\n\t\t\t\tMergedAnnotationCollectors::combiner);\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.getAllMergedAnnotations:method(AnnotatedElement,Class<A>)",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java",
+        "line": 367,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotationCollectors.toAnnotationSet()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "Collector<MergedAnnotation<A>,?,Set<A>>",
+      "source_sha256": "a7012928cfa9805dd8404fa2ffb38fe910c1b22c9650c15aa9021e9efc93ede7",
+      "source_line": "\t\t\t\t.collect(MergedAnnotationCollectors.toAnnotationSet());",
+      "target_sha256": "410a20dfff6462a8687c4b9e5bf988bd8f7f1c85d1426806ce1d086258b6c31b",
+      "target_signature": "public static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet()",
+      "target_start_line": 65,
+      "target_excerpt": "\tpublic static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet() {\n\t\treturn Collector.of(LinkedHashSet::new, (set, annotation) -> set.add(annotation.synthesize()),\n\t\t\t\tMergedAnnotationCollectors::combiner);\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.getAllMergedAnnotations:method(AnnotatedElement,Set<Class<?extendsAnnotation>>)",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java",
+        "line": 393,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotationCollectors.toAnnotationSet()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "Collector<MergedAnnotation<A>,?,Set<A>>",
+      "source_sha256": "a7012928cfa9805dd8404fa2ffb38fe910c1b22c9650c15aa9021e9efc93ede7",
+      "source_line": "\t\t\t\t.collect(MergedAnnotationCollectors.toAnnotationSet());",
+      "target_sha256": "410a20dfff6462a8687c4b9e5bf988bd8f7f1c85d1426806ce1d086258b6c31b",
+      "target_signature": "public static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet()",
+      "target_start_line": 65,
+      "target_excerpt": "\tpublic static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet() {\n\t\treturn Collector.of(LinkedHashSet::new, (set, annotation) -> set.add(annotation.synthesize()),\n\t\t\t\tMergedAnnotationCollectors::combiner);\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.getMergedAnnotation:method(AnnotatedElement,Class<A>)",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationSelectors.java::org.springframework.core.annotation.MergedAnnotationSelectors.firstDirectlyDeclared:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java",
+        "line": 339,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotationSelectors.firstDirectlyDeclared()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "MergedAnnotationSelector<A>",
+      "source_sha256": "a7012928cfa9805dd8404fa2ffb38fe910c1b22c9650c15aa9021e9efc93ede7",
+      "source_line": "\t\t\t\t.get(annotationType, null, MergedAnnotationSelectors.firstDirectlyDeclared())",
+      "target_sha256": "4126107ac07331664bd88e3fd03d57e94d18e4a819c83bd209e3229ba71977d3",
+      "target_signature": "@SuppressWarnings(\"unchecked\") public static <A extends Annotation> MergedAnnotationSelector<A> firstDirectlyDeclared()",
+      "target_start_line": 56,
+      "target_excerpt": "\t@SuppressWarnings(\"unchecked\")\n\tpublic static <A extends Annotation> MergedAnnotationSelector<A> firstDirectlyDeclared() {\n\t\treturn (MergedAnnotationSelector<A>) FIRST_DIRECTLY_DECLARED;\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.getMergedAnnotationAttributes:method(AnnotatedElement,Class<?extendsAnnotation>)",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationSelectors.java::org.springframework.core.annotation.MergedAnnotationSelectors.firstDirectlyDeclared:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java",
+        "line": 256,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotationSelectors.firstDirectlyDeclared()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "MergedAnnotationSelector<A>",
+      "source_sha256": "a7012928cfa9805dd8404fa2ffb38fe910c1b22c9650c15aa9021e9efc93ede7",
+      "source_line": "\t\t\t\t.get(annotationType, null, MergedAnnotationSelectors.firstDirectlyDeclared());",
+      "target_sha256": "4126107ac07331664bd88e3fd03d57e94d18e4a819c83bd209e3229ba71977d3",
+      "target_signature": "@SuppressWarnings(\"unchecked\") public static <A extends Annotation> MergedAnnotationSelector<A> firstDirectlyDeclared()",
+      "target_start_line": 56,
+      "target_excerpt": "\t@SuppressWarnings(\"unchecked\")\n\tpublic static <A extends Annotation> MergedAnnotationSelector<A> firstDirectlyDeclared() {\n\t\treturn (MergedAnnotationSelector<A>) FIRST_DIRECTLY_DECLARED;\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.getMergedAnnotationAttributes:method(AnnotatedElement,String,boolean,boolean)",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationSelectors.java::org.springframework.core.annotation.MergedAnnotationSelectors.firstDirectlyDeclared:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java",
+        "line": 313,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotationSelectors.firstDirectlyDeclared()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "MergedAnnotationSelector<A>",
+      "source_sha256": "a7012928cfa9805dd8404fa2ffb38fe910c1b22c9650c15aa9021e9efc93ede7",
+      "source_line": "\t\t\t\t.get(annotationName, null, MergedAnnotationSelectors.firstDirectlyDeclared());",
+      "target_sha256": "4126107ac07331664bd88e3fd03d57e94d18e4a819c83bd209e3229ba71977d3",
+      "target_signature": "@SuppressWarnings(\"unchecked\") public static <A extends Annotation> MergedAnnotationSelector<A> firstDirectlyDeclared()",
+      "target_start_line": 56,
+      "target_excerpt": "\t@SuppressWarnings(\"unchecked\")\n\tpublic static <A extends Annotation> MergedAnnotationSelector<A> firstDirectlyDeclared() {\n\t\treturn (MergedAnnotationSelector<A>) FIRST_DIRECTLY_DECLARED;\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java::org.springframework.core.annotation.AnnotatedElementUtils.getMergedRepeatableAnnotations:method(AnnotatedElement,Class<A>,Class<?extendsAnnotation>)",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/AnnotatedElementUtils.java",
+        "line": 472,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotationCollectors.toAnnotationSet()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "Collector<MergedAnnotation<A>,?,Set<A>>",
+      "source_sha256": "a7012928cfa9805dd8404fa2ffb38fe910c1b22c9650c15aa9021e9efc93ede7",
+      "source_line": "\t\t\t\t.collect(MergedAnnotationCollectors.toAnnotationSet());",
+      "target_sha256": "410a20dfff6462a8687c4b9e5bf988bd8f7f1c85d1426806ce1d086258b6c31b",
+      "target_signature": "public static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet()",
+      "target_start_line": 65,
+      "target_excerpt": "\tpublic static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet() {\n\t\treturn Collector.of(LinkedHashSet::new, (set, annotation) -> set.add(annotation.synthesize()),\n\t\t\t\tMergedAnnotationCollectors::combiner);\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/AnnotationUtils.java::org.springframework.core.annotation.AnnotationUtils.computeDefaultValues:method(Class<?extendsAnnotation>)",
+        "target": "src/main/java/org/springframework/util/CollectionUtils.java::org.springframework.util.CollectionUtils.newLinkedHashMap:method(int)",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/AnnotationUtils.java",
+        "line": 916,
+        "confidence": "heuristic",
+        "evidence": "CollectionUtils.newLinkedHashMap(methods.size())"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "Map<String,DefaultValueHolder>",
+      "target_return_type": "LinkedHashMap<K,V>",
+      "source_sha256": "a8231ba716d6f13b2e1ce223212bc7b37aea69bf8abe25582ce02081cf00819f",
+      "source_line": "\t\tMap<String, DefaultValueHolder> result = CollectionUtils.newLinkedHashMap(methods.size());",
+      "target_sha256": "1135f8af5daa0b8098289d09179cea9e2514e0426bb49b72069b1d8b2e95f2d3",
+      "target_signature": "public static <K, V extends @Nullable Object> LinkedHashMap<K, V> newLinkedHashMap(int expectedSize)",
+      "target_start_line": 113,
+      "target_excerpt": "\tpublic static <K, V extends @Nullable Object> LinkedHashMap<K, V> newLinkedHashMap(int expectedSize) {\n\t\treturn new LinkedHashMap<>(computeInitialCapacity(expectedSize), DEFAULT_LOAD_FACTOR);\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/AnnotationUtils.java::org.springframework.core.annotation.AnnotationUtils.getDeclaredRepeatableAnnotations:method(AnnotatedElement,Class<A>,Class<?extendsAnnotation>)",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/AnnotationUtils.java",
+        "line": 478,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotationCollectors.toAnnotationSet()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "Collector<MergedAnnotation<A>,?,Set<A>>",
+      "source_sha256": "a8231ba716d6f13b2e1ce223212bc7b37aea69bf8abe25582ce02081cf00819f",
+      "source_line": "\t\t\t\t.collect(MergedAnnotationCollectors.toAnnotationSet());",
+      "target_sha256": "410a20dfff6462a8687c4b9e5bf988bd8f7f1c85d1426806ce1d086258b6c31b",
+      "target_signature": "public static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet()",
+      "target_start_line": 65,
+      "target_excerpt": "\tpublic static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet() {\n\t\treturn Collector.of(LinkedHashSet::new, (set, annotation) -> set.add(annotation.synthesize()),\n\t\t\t\tMergedAnnotationCollectors::combiner);\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/AnnotationUtils.java::org.springframework.core.annotation.AnnotationUtils.getRepeatableAnnotations:method(AnnotatedElement,Class<A>,Class<?extendsAnnotation>)",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/AnnotationUtils.java",
+        "line": 398,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotationCollectors.toAnnotationSet()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "Collector<MergedAnnotation<A>,?,Set<A>>",
+      "source_sha256": "a8231ba716d6f13b2e1ce223212bc7b37aea69bf8abe25582ce02081cf00819f",
+      "source_line": "\t\t\t\t.collect(MergedAnnotationCollectors.toAnnotationSet());",
+      "target_sha256": "410a20dfff6462a8687c4b9e5bf988bd8f7f1c85d1426806ce1d086258b6c31b",
+      "target_signature": "public static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet()",
+      "target_start_line": 65,
+      "target_excerpt": "\tpublic static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet() {\n\t\treturn Collector.of(LinkedHashSet::new, (set, annotation) -> set.add(annotation.synthesize()),\n\t\t\t\tMergedAnnotationCollectors::combiner);\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/MergedAnnotationsCollection.java::org.springframework.core.annotation.MergedAnnotationsCollection.find:method(Object,Predicate<?superMergedAnnotation<A>>,MergedAnnotationSelector<A>)",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationSelectors.java::org.springframework.core.annotation.MergedAnnotationSelectors.nearest:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/MergedAnnotationsCollection.java",
+        "line": 167,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotationSelectors.nearest()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "MergedAnnotationSelector<A>",
+      "source_sha256": "dadd278cb48ed5ebd81a33ea9177b77ba91955e7ab55a142e1cf81d7cc8732e3",
+      "source_line": "\t\t\tselector = MergedAnnotationSelectors.nearest();",
+      "target_sha256": "4126107ac07331664bd88e3fd03d57e94d18e4a819c83bd209e3229ba71977d3",
+      "target_signature": "@SuppressWarnings(\"unchecked\") public static <A extends Annotation> MergedAnnotationSelector<A> nearest()",
+      "target_start_line": 46,
+      "target_excerpt": "\t@SuppressWarnings(\"unchecked\")\n\tpublic static <A extends Annotation> MergedAnnotationSelector<A> nearest() {\n\t\treturn (MergedAnnotationSelector<A>) NEAREST;\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/MergedAnnotationsCollection.java::org.springframework.core.annotation.MergedAnnotationsCollection.get:method(Class<A>,Predicate<?superMergedAnnotation<A>>,MergedAnnotationSelector<A>)",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotation.java::org.springframework.core.annotation.MergedAnnotation.missing:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/MergedAnnotationsCollection.java",
+        "line": 137,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotation.missing()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "MergedAnnotation<A>",
+      "source_sha256": "dadd278cb48ed5ebd81a33ea9177b77ba91955e7ab55a142e1cf81d7cc8732e3",
+      "source_line": "\t\treturn (result != null ? result : MergedAnnotation.missing());",
+      "target_sha256": "ae217fda490881eb6cec364de73bc87a5451371ba5a00125d048aa97bb950b88",
+      "target_signature": "static <A extends Annotation> MergedAnnotation<A> missing()",
+      "target_start_line": 549,
+      "target_excerpt": "\tstatic <A extends Annotation> MergedAnnotation<A> missing() {\n\t\treturn MissingMergedAnnotation.getInstance();\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/MergedAnnotationsCollection.java::org.springframework.core.annotation.MergedAnnotationsCollection.get:method(String,Predicate<?superMergedAnnotation<A>>,MergedAnnotationSelector<A>)",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotation.java::org.springframework.core.annotation.MergedAnnotation.missing:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/MergedAnnotationsCollection.java",
+        "line": 158,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotation.missing()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "MergedAnnotation<A>",
+      "source_sha256": "dadd278cb48ed5ebd81a33ea9177b77ba91955e7ab55a142e1cf81d7cc8732e3",
+      "source_line": "\t\treturn (result != null ? result : MergedAnnotation.missing());",
+      "target_sha256": "ae217fda490881eb6cec364de73bc87a5451371ba5a00125d048aa97bb950b88",
+      "target_signature": "static <A extends Annotation> MergedAnnotation<A> missing()",
+      "target_start_line": 549,
+      "target_excerpt": "\tstatic <A extends Annotation> MergedAnnotation<A> missing() {\n\t\treturn MissingMergedAnnotation.getInstance();\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java::org.springframework.core.annotation.TypeMappedAnnotations.AggregatesSpliterator.tryAdvance:method(Aggregate,Consumer<?superMergedAnnotation<A>>)",
+        "target": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java::org.springframework.core.annotation.TypeMappedAnnotations.Aggregate.createMergedAnnotationIfPossible:method(int,int,IntrospectionFailureLogger)",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java",
+        "line": 584,
+        "confidence": "heuristic",
+        "evidence": "aggregate.createMergedAnnotationIfPossible( annotationResult, this.mappingCursors[annotationResult], this.requiredType != null ? IntrospectionFailureLogger.INFO : IntrospectionFailureLogger.DEBUG)"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "MergedAnnotation<A>",
+      "target_return_type": "MergedAnnotation<A>",
+      "source_sha256": "580027538511bb6048edc3b6311891e73b2aebea0554c4a7545c4cd508d29c84",
+      "source_line": "\t\t\t\tMergedAnnotation<A> mergedAnnotation = aggregate.createMergedAnnotationIfPossible(",
+      "target_sha256": "580027538511bb6048edc3b6311891e73b2aebea0554c4a7545c4cd508d29c84",
+      "target_signature": "<A extends Annotation> @Nullable MergedAnnotation<A> createMergedAnnotationIfPossible( int annotationIndex, int mappingIndex, IntrospectionFailureLogger logger)",
+      "target_start_line": 524,
+      "target_excerpt": "\t\t<A extends Annotation> @Nullable MergedAnnotation<A> createMergedAnnotationIfPossible(\n\t\t\t\tint annotationIndex, int mappingIndex, IntrospectionFailureLogger logger) {\n\n\t\t\treturn TypeMappedAnnotation.createIfPossible("
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java::org.springframework.core.annotation.TypeMappedAnnotations.MergedAnnotationFinder.<init>:constructor(Object,Predicate<?superMergedAnnotation<A>>,MergedAnnotationSelector<A>)",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationSelectors.java::org.springframework.core.annotation.MergedAnnotationSelectors.nearest:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java",
+        "line": 381,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotationSelectors.nearest()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "MergedAnnotationSelector<A>",
+      "source_sha256": "580027538511bb6048edc3b6311891e73b2aebea0554c4a7545c4cd508d29c84",
+      "source_line": "\t\t\tthis.selector = (selector != null ? selector : MergedAnnotationSelectors.nearest());",
+      "target_sha256": "4126107ac07331664bd88e3fd03d57e94d18e4a819c83bd209e3229ba71977d3",
+      "target_signature": "@SuppressWarnings(\"unchecked\") public static <A extends Annotation> MergedAnnotationSelector<A> nearest()",
+      "target_start_line": 46,
+      "target_excerpt": "\t@SuppressWarnings(\"unchecked\")\n\tpublic static <A extends Annotation> MergedAnnotationSelector<A> nearest() {\n\t\treturn (MergedAnnotationSelector<A>) NEAREST;\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java::org.springframework.core.annotation.TypeMappedAnnotations.get:method(Class<A>,Predicate<?superMergedAnnotation<A>>,MergedAnnotationSelector<A>)",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotation.java::org.springframework.core.annotation.MergedAnnotation.missing:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java",
+        "line": 148,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotation.missing()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "MergedAnnotation<A>",
+      "target_return_type": "MergedAnnotation<A>",
+      "source_sha256": "580027538511bb6048edc3b6311891e73b2aebea0554c4a7545c4cd508d29c84",
+      "source_line": "\t\t\treturn MergedAnnotation.missing();",
+      "target_sha256": "ae217fda490881eb6cec364de73bc87a5451371ba5a00125d048aa97bb950b88",
+      "target_signature": "static <A extends Annotation> MergedAnnotation<A> missing()",
+      "target_start_line": 549,
+      "target_excerpt": "\tstatic <A extends Annotation> MergedAnnotation<A> missing() {\n\t\treturn MissingMergedAnnotation.getInstance();\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java::org.springframework.core.annotation.TypeMappedAnnotations.get:method(Class<A>,Predicate<?superMergedAnnotation<A>>,MergedAnnotationSelector<A>)",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotation.java::org.springframework.core.annotation.MergedAnnotation.missing:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java",
+        "line": 152,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotation.missing()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "MergedAnnotation<A>",
+      "source_sha256": "580027538511bb6048edc3b6311891e73b2aebea0554c4a7545c4cd508d29c84",
+      "source_line": "\t\treturn (result != null ? result : MergedAnnotation.missing());",
+      "target_sha256": "ae217fda490881eb6cec364de73bc87a5451371ba5a00125d048aa97bb950b88",
+      "target_signature": "static <A extends Annotation> MergedAnnotation<A> missing()",
+      "target_start_line": 549,
+      "target_excerpt": "\tstatic <A extends Annotation> MergedAnnotation<A> missing() {\n\t\treturn MissingMergedAnnotation.getInstance();\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java::org.springframework.core.annotation.TypeMappedAnnotations.get:method(String,Predicate<?superMergedAnnotation<A>>,MergedAnnotationSelector<A>)",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotation.java::org.springframework.core.annotation.MergedAnnotation.missing:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java",
+        "line": 173,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotation.missing()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "MergedAnnotation<A>",
+      "target_return_type": "MergedAnnotation<A>",
+      "source_sha256": "580027538511bb6048edc3b6311891e73b2aebea0554c4a7545c4cd508d29c84",
+      "source_line": "\t\t\treturn MergedAnnotation.missing();",
+      "target_sha256": "ae217fda490881eb6cec364de73bc87a5451371ba5a00125d048aa97bb950b88",
+      "target_signature": "static <A extends Annotation> MergedAnnotation<A> missing()",
+      "target_start_line": 549,
+      "target_excerpt": "\tstatic <A extends Annotation> MergedAnnotation<A> missing() {\n\t\treturn MissingMergedAnnotation.getInstance();\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java::org.springframework.core.annotation.TypeMappedAnnotations.get:method(String,Predicate<?superMergedAnnotation<A>>,MergedAnnotationSelector<A>)",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotation.java::org.springframework.core.annotation.MergedAnnotation.missing:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/annotation/TypeMappedAnnotations.java",
+        "line": 177,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotation.missing()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "MergedAnnotation<A>",
+      "source_sha256": "580027538511bb6048edc3b6311891e73b2aebea0554c4a7545c4cd508d29c84",
+      "source_line": "\t\treturn (result != null ? result : MergedAnnotation.missing());",
+      "target_sha256": "ae217fda490881eb6cec364de73bc87a5451371ba5a00125d048aa97bb950b88",
+      "target_signature": "static <A extends Annotation> MergedAnnotation<A> missing()",
+      "target_start_line": 549,
+      "target_excerpt": "\tstatic <A extends Annotation> MergedAnnotation<A> missing() {\n\t\treturn MissingMergedAnnotation.getInstance();\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/codec/Decoder.java::org.springframework.core.codec.Decoder.decode:method(DataBuffer,ResolvableType,MimeType,Map<String,Object>)",
+        "target": "src/main/java/org/springframework/core/codec/Decoder.java::org.springframework.core.codec.Decoder.decodeToMono:method(Publisher<DataBuffer>,ResolvableType,MimeType,Map<String,Object>)",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/codec/Decoder.java",
+        "line": 96,
+        "confidence": "heuristic",
+        "evidence": "decodeToMono(Mono.just(buffer), targetType, mimeType, hints)"
+      },
+      "unresolved_reason": "generic declaring-type substitution requires semantic analysis",
+      "expected_type": "",
+      "target_return_type": "Mono<T>",
+      "source_sha256": "c4387d7a53964b880688d233d31b5bb3c2a517a6244a05e95cfb1e929bc6e561",
+      "source_line": "\t\tCompletableFuture<@Nullable T> future = decodeToMono(Mono.just(buffer), targetType, mimeType, hints).toFuture();",
+      "target_sha256": "c4387d7a53964b880688d233d31b5bb3c2a517a6244a05e95cfb1e929bc6e561",
+      "target_signature": "Mono<T> decodeToMono(Publisher<DataBuffer> inputStream, ResolvableType elementType, @Nullable MimeType mimeType, @Nullable Map<String, Object> hints);",
+      "target_start_line": 79,
+      "target_excerpt": "\tMono<T> decodeToMono(Publisher<DataBuffer> inputStream, ResolvableType elementType,\n\t\t\t@Nullable MimeType mimeType, @Nullable Map<String, Object> hints);"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/env/PropertySource.java::org.springframework.core.env.PropertySource.toString:method()",
+        "target": "src/main/java/org/springframework/core/env/PropertySource.java::org.springframework.core.env.PropertySource.getSource:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/env/PropertySource.java",
+        "line": 167,
+        "confidence": "heuristic",
+        "evidence": "getSource()"
+      },
+      "unresolved_reason": "generic declaring-type substitution requires semantic analysis",
+      "expected_type": "",
+      "target_return_type": "T",
+      "source_sha256": "20632af38c2515aed11e351bad933b9d642bd251d5c1d4bc3780cb7ac4bf2918",
+      "source_line": "\t\t\t\t\t\" {name='\" + getName() + \"', properties=\" + getSource() + \"}\";",
+      "target_sha256": "20632af38c2515aed11e351bad933b9d642bd251d5c1d4bc3780cb7ac4bf2918",
+      "target_signature": "public T getSource()",
+      "target_start_line": 107,
+      "target_excerpt": "\tpublic T getSource() {\n\t\treturn this.source;\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/serializer/Deserializer.java::org.springframework.core.serializer.Deserializer.deserializeFromByteArray:method(byte[])",
+        "target": "src/main/java/org/springframework/core/serializer/Deserializer.java::org.springframework.core.serializer.Deserializer.deserialize:method(InputStream)",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/serializer/Deserializer.java",
+        "line": 55,
+        "confidence": "heuristic",
+        "evidence": "deserialize(new ByteArrayInputStream(serialized))"
+      },
+      "unresolved_reason": "generic declaring-type substitution requires semantic analysis",
+      "expected_type": "T",
+      "target_return_type": "T",
+      "source_sha256": "694e186a296945fd49f020d7534e136d4e6d6eb04b084091cdfe418c4eb33c97",
+      "source_line": "\t\treturn deserialize(new ByteArrayInputStream(serialized));",
+      "target_sha256": "694e186a296945fd49f020d7534e136d4e6d6eb04b084091cdfe418c4eb33c97",
+      "target_signature": "T deserialize(InputStream inputStream) throws IOException;",
+      "target_start_line": 45,
+      "target_excerpt": "\tT deserialize(InputStream inputStream) throws IOException;"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/core/type/AnnotatedTypeMetadata.java::org.springframework.core.type.AnnotatedTypeMetadata.getAnnotationAttributes:method(String,boolean)",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationSelectors.java::org.springframework.core.annotation.MergedAnnotationSelectors.firstDirectlyDeclared:method()",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/core/type/AnnotatedTypeMetadata.java",
+        "line": 121,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotationSelectors.firstDirectlyDeclared()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "MergedAnnotationSelector<A>",
+      "source_sha256": "5264523070128791fb5f2b59f7dea50b2ddbb6b66991f5f70b957014104f828c",
+      "source_line": "\t\t\t\tnull, MergedAnnotationSelectors.firstDirectlyDeclared());",
+      "target_sha256": "4126107ac07331664bd88e3fd03d57e94d18e4a819c83bd209e3229ba71977d3",
+      "target_signature": "@SuppressWarnings(\"unchecked\") public static <A extends Annotation> MergedAnnotationSelector<A> firstDirectlyDeclared()",
+      "target_start_line": 56,
+      "target_excerpt": "\t@SuppressWarnings(\"unchecked\")\n\tpublic static <A extends Annotation> MergedAnnotationSelector<A> firstDirectlyDeclared() {\n\t\treturn (MergedAnnotationSelector<A>) FIRST_DIRECTLY_DECLARED;\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/util/LinkedMultiValueMap.java::org.springframework.util.LinkedMultiValueMap.<init>:constructor(int)",
+        "target": "src/main/java/org/springframework/util/CollectionUtils.java::org.springframework.util.CollectionUtils.newLinkedHashMap:method(int)",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/util/LinkedMultiValueMap.java",
+        "line": 59,
+        "confidence": "heuristic",
+        "evidence": "CollectionUtils.newLinkedHashMap(expectedSize)"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "LinkedHashMap<K,V>",
+      "source_sha256": "601a17fd36937329ed22d9c975214f00aaeb764e8723d3f7175eb1d982521efa",
+      "source_line": "\t\tsuper(CollectionUtils.newLinkedHashMap(expectedSize));",
+      "target_sha256": "1135f8af5daa0b8098289d09179cea9e2514e0426bb49b72069b1d8b2e95f2d3",
+      "target_signature": "public static <K, V extends @Nullable Object> LinkedHashMap<K, V> newLinkedHashMap(int expectedSize)",
+      "target_start_line": 113,
+      "target_excerpt": "\tpublic static <K, V extends @Nullable Object> LinkedHashMap<K, V> newLinkedHashMap(int expectedSize) {\n\t\treturn new LinkedHashMap<>(computeInitialCapacity(expectedSize), DEFAULT_LOAD_FACTOR);\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java/org/springframework/util/MultiValueMapAdapter.java::org.springframework.util.MultiValueMapAdapter.toSingleValueMap:method()",
+        "target": "src/main/java/org/springframework/util/CollectionUtils.java::org.springframework.util.CollectionUtils.newLinkedHashMap:method(int)",
+        "kind": "calls",
+        "path": "src/main/java/org/springframework/util/MultiValueMapAdapter.java",
+        "line": 95,
+        "confidence": "heuristic",
+        "evidence": "CollectionUtils.newLinkedHashMap(this.targetMap.size())"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "Map<K,V>",
+      "target_return_type": "LinkedHashMap<K,V>",
+      "source_sha256": "44276e4065deaa4442a7364a9d953feed1035b28c1d805bb8ba63b304f164d64",
+      "source_line": "\t\tMap<K, V> singleValueMap = CollectionUtils.newLinkedHashMap(this.targetMap.size());",
+      "target_sha256": "1135f8af5daa0b8098289d09179cea9e2514e0426bb49b72069b1d8b2e95f2d3",
+      "target_signature": "public static <K, V extends @Nullable Object> LinkedHashMap<K, V> newLinkedHashMap(int expectedSize)",
+      "target_start_line": 113,
+      "target_excerpt": "\tpublic static <K, V extends @Nullable Object> LinkedHashMap<K, V> newLinkedHashMap(int expectedSize) {\n\t\treturn new LinkedHashMap<>(computeInitialCapacity(expectedSize), DEFAULT_LOAD_FACTOR);\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/main/java24/org/springframework/core/type/classreading/ClassFileAnnotationDelegate.java::org.springframework.core.type.classreading.ClassFileAnnotationDelegate.readAnnotationValue:method(String,AnnotationValue,ClassLoader)",
+        "target": "src/main/java24/org/springframework/core/type/classreading/ClassFileAnnotationDelegate.java::org.springframework.core.type.classreading.ClassFileAnnotationDelegate.createMergedAnnotation:method(String,Annotation,ClassLoader)",
+        "kind": "calls",
+        "path": "src/main/java24/org/springframework/core/type/classreading/ClassFileAnnotationDelegate.java",
+        "line": 95,
+        "confidence": "heuristic",
+        "evidence": "createMergedAnnotation(className, annotationValue.annotation(), classLoader)"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "Object",
+      "target_return_type": "MergedAnnotation<A>",
+      "source_sha256": "fa4c33f14b2434d112fe9eef71f4864d1ea8ad7b951a2978a68993f9989695f2",
+      "source_line": "\t\t\t\treturn createMergedAnnotation(className, annotationValue.annotation(), classLoader);",
+      "target_sha256": "fa4c33f14b2434d112fe9eef71f4864d1ea8ad7b951a2978a68993f9989695f2",
+      "target_signature": "@SuppressWarnings(\"unchecked\") private static <A extends java.lang.annotation.Annotation> @Nullable MergedAnnotation<A> createMergedAnnotation( String className, Annotation annotation, @Nullable ClassLoader classLoader)",
+      "target_start_line": 60,
+      "target_excerpt": "\t@SuppressWarnings(\"unchecked\")\n\tprivate static <A extends java.lang.annotation.Annotation> @Nullable MergedAnnotation<A> createMergedAnnotation(\n\t\t\tString className, Annotation annotation, @Nullable ClassLoader classLoader) {\n"
+    },
+    {
+      "edge": {
+        "source": "src/main/java24/org/springframework/core/type/classreading/ClassFileAnnotationDelegate.java::org.springframework.core.type.classreading.ClassFileAnnotationDelegate.readAnnotationValue:method(String,AnnotationValue,ClassLoader)",
+        "target": "src/main/java24/org/springframework/core/type/classreading/ClassFileAnnotationDelegate.java::org.springframework.core.type.classreading.ClassFileAnnotationDelegate.parseEnum:method(AnnotationValue.OfEnum,ClassLoader)",
+        "kind": "calls",
+        "path": "src/main/java24/org/springframework/core/type/classreading/ClassFileAnnotationDelegate.java",
+        "line": 101,
+        "confidence": "heuristic",
+        "evidence": "parseEnum(enumValue, classLoader)"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "Object",
+      "target_return_type": "Enum<E>",
+      "source_sha256": "fa4c33f14b2434d112fe9eef71f4864d1ea8ad7b951a2978a68993f9989695f2",
+      "source_line": "\t\t\t\treturn parseEnum(enumValue, classLoader);",
+      "target_sha256": "fa4c33f14b2434d112fe9eef71f4864d1ea8ad7b951a2978a68993f9989695f2",
+      "target_signature": "@SuppressWarnings(\"unchecked\") private static <E extends Enum<E>> Enum<E> parseEnum(AnnotationValue.OfEnum enumValue, @Nullable ClassLoader classLoader)",
+      "target_start_line": 119,
+      "target_excerpt": "\t@SuppressWarnings(\"unchecked\")\n\tprivate static <E extends Enum<E>> Enum<E> parseEnum(AnnotationValue.OfEnum enumValue, @Nullable ClassLoader classLoader) {\n\t\tClass<E> enumClass = (Class<E>) loadEnumClass(enumValue, classLoader);\n\t\treturn Enum.valueOf(enumClass, enumValue.constantName().stringValue());"
+    },
+    {
+      "edge": {
+        "source": "src/test/java/org/springframework/core/annotation/MergedAnnotationCollectorsTests.java::org.springframework.core.annotation.MergedAnnotationCollectorsTests.toAnnotationSetCollectsLinkedHashSetWithSynthesizedAnnotations:method()",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+        "kind": "calls",
+        "path": "src/test/java/org/springframework/core/annotation/MergedAnnotationCollectorsTests.java",
+        "line": 45,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotationCollectors.toAnnotationSet()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "Collector<MergedAnnotation<A>,?,Set<A>>",
+      "source_sha256": "91a8016fe8f83e5b9231e4a940391cb6a18b3c4eb63a11c6cb0bc0d4b135ddd3",
+      "source_line": "\t\t\t\tMergedAnnotationCollectors.toAnnotationSet());",
+      "target_sha256": "410a20dfff6462a8687c4b9e5bf988bd8f7f1c85d1426806ce1d086258b6c31b",
+      "target_signature": "public static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet()",
+      "target_start_line": 65,
+      "target_excerpt": "\tpublic static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet() {\n\t\treturn Collector.of(LinkedHashSet::new, (set, annotation) -> set.add(annotation.synthesize()),\n\t\t\t\tMergedAnnotationCollectors::combiner);\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/test/java/org/springframework/core/annotation/MergedAnnotationsCollectionTests.java::org.springframework.core.annotation.MergedAnnotationsCollectionTests.getWhenNotPresentReturnsMissing:method()",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotation.java::org.springframework.core.annotation.MergedAnnotation.missing:method()",
+        "kind": "calls",
+        "path": "src/test/java/org/springframework/core/annotation/MergedAnnotationsCollectionTests.java",
+        "line": 159,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotation.missing()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "MergedAnnotation<A>",
+      "source_sha256": "4139bd796ef1405c6a13a6cc4ec83af2e98503f0e9d69d36ad39923737035d50",
+      "source_line": "\t\tassertThat(annotations.get(Missing.class)).isEqualTo(MergedAnnotation.missing());",
+      "target_sha256": "ae217fda490881eb6cec364de73bc87a5451371ba5a00125d048aa97bb950b88",
+      "target_signature": "static <A extends Annotation> MergedAnnotation<A> missing()",
+      "target_start_line": 549,
+      "target_excerpt": "\tstatic <A extends Annotation> MergedAnnotation<A> missing() {\n\t\treturn MissingMergedAnnotation.getInstance();\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/test/java/org/springframework/core/annotation/MergedAnnotationsRepeatableAnnotationTests.java::org.springframework.core.annotation.MergedAnnotationsRepeatableAnnotationTests.getAnnotations:method(Class<?extendsAnnotation>,Class<A>,SearchStrategy,AnnotatedElement,AnnotationFilter)",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+        "kind": "calls",
+        "path": "src/test/java/org/springframework/core/annotation/MergedAnnotationsRepeatableAnnotationTests.java",
+        "line": 279,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotationCollectors.toAnnotationSet()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "Collector<MergedAnnotation<A>,?,Set<A>>",
+      "source_sha256": "8c54a0377e2b29e8dfa7dcf3cadcc189cdcd26042369c23f48fffbcdf67bcf0b",
+      "source_line": "\t\treturn annotations.stream(repeatable).collect(MergedAnnotationCollectors.toAnnotationSet());",
+      "target_sha256": "410a20dfff6462a8687c4b9e5bf988bd8f7f1c85d1426806ce1d086258b6c31b",
+      "target_signature": "public static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet()",
+      "target_start_line": 65,
+      "target_excerpt": "\tpublic static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet() {\n\t\treturn Collector.of(LinkedHashSet::new, (set, annotation) -> set.add(annotation.synthesize()),\n\t\t\t\tMergedAnnotationCollectors::combiner);\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/test/java/org/springframework/core/annotation/MergedAnnotationsRepeatableAnnotationTests.java::org.springframework.core.annotation.MergedAnnotationsRepeatableAnnotationTests.searchFindsRepeatableContainerAnnotationAndRepeatedAnnotations:method()",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+        "kind": "calls",
+        "path": "src/test/java/org/springframework/core/annotation/MergedAnnotationsRepeatableAnnotationTests.java",
+        "line": 246,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotationCollectors.toAnnotationSet()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "Collector<MergedAnnotation<A>,?,Set<A>>",
+      "source_sha256": "8c54a0377e2b29e8dfa7dcf3cadcc189cdcd26042369c23f48fffbcdf67bcf0b",
+      "source_line": "\t\t\t\t.collect(MergedAnnotationCollectors.toAnnotationSet());",
+      "target_sha256": "410a20dfff6462a8687c4b9e5bf988bd8f7f1c85d1426806ce1d086258b6c31b",
+      "target_signature": "public static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet()",
+      "target_start_line": 65,
+      "target_excerpt": "\tpublic static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet() {\n\t\treturn Collector.of(LinkedHashSet::new, (set, annotation) -> set.add(annotation.synthesize()),\n\t\t\t\tMergedAnnotationCollectors::combiner);\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/test/java/org/springframework/core/annotation/MergedAnnotationsRepeatableAnnotationTests.java::org.springframework.core.annotation.MergedAnnotationsRepeatableAnnotationTests.searchFindsRepeatableContainerAnnotationAndRepeatedAnnotations:method()",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+        "kind": "calls",
+        "path": "src/test/java/org/springframework/core/annotation/MergedAnnotationsRepeatableAnnotationTests.java",
+        "line": 262,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotationCollectors.toAnnotationSet()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "Collector<MergedAnnotation<A>,?,Set<A>>",
+      "source_sha256": "8c54a0377e2b29e8dfa7dcf3cadcc189cdcd26042369c23f48fffbcdf67bcf0b",
+      "source_line": "\t\t\t\t.collect(MergedAnnotationCollectors.toAnnotationSet());",
+      "target_sha256": "410a20dfff6462a8687c4b9e5bf988bd8f7f1c85d1426806ce1d086258b6c31b",
+      "target_signature": "public static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet()",
+      "target_start_line": 65,
+      "target_excerpt": "\tpublic static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet() {\n\t\treturn Collector.of(LinkedHashSet::new, (set, annotation) -> set.add(annotation.synthesize()),\n\t\t\t\tMergedAnnotationCollectors::combiner);\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/test/java/org/springframework/core/annotation/NestedRepeatableAnnotationsTests.java::org.springframework.core.annotation.NestedRepeatableAnnotationsTests.MultipleRepeatableAnnotationsTests.streamRepeatableAnnotationsWithExplicitRepeatables_MergedAnnotationsApi:method()",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+        "kind": "calls",
+        "path": "src/test/java/org/springframework/core/annotation/NestedRepeatableAnnotationsTests.java",
+        "line": 114,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotationCollectors.toAnnotationSet()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "Collector<MergedAnnotation<A>,?,Set<A>>",
+      "source_sha256": "10c06fbd56ba52011500b6d83249328320639b7ab88218b9c5733fbe4f09ab61",
+      "source_line": "\t\t\t\t\t.stream(A.class).collect(MergedAnnotationCollectors.toAnnotationSet());",
+      "target_sha256": "410a20dfff6462a8687c4b9e5bf988bd8f7f1c85d1426806ce1d086258b6c31b",
+      "target_signature": "public static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet()",
+      "target_start_line": 65,
+      "target_excerpt": "\tpublic static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet() {\n\t\treturn Collector.of(LinkedHashSet::new, (set, annotation) -> set.add(annotation.synthesize()),\n\t\t\t\tMergedAnnotationCollectors::combiner);\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/test/java/org/springframework/core/annotation/NestedRepeatableAnnotationsTests.java::org.springframework.core.annotation.NestedRepeatableAnnotationsTests.MultipleRepeatableAnnotationsTests.streamRepeatableAnnotationsWithStandardRepeatables_MergedAnnotationsApi:method()",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+        "kind": "calls",
+        "path": "src/test/java/org/springframework/core/annotation/NestedRepeatableAnnotationsTests.java",
+        "line": 104,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotationCollectors.toAnnotationSet()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "Collector<MergedAnnotation<A>,?,Set<A>>",
+      "source_sha256": "10c06fbd56ba52011500b6d83249328320639b7ab88218b9c5733fbe4f09ab61",
+      "source_line": "\t\t\t\t\t.stream(A.class).collect(MergedAnnotationCollectors.toAnnotationSet());",
+      "target_sha256": "410a20dfff6462a8687c4b9e5bf988bd8f7f1c85d1426806ce1d086258b6c31b",
+      "target_signature": "public static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet()",
+      "target_start_line": 65,
+      "target_excerpt": "\tpublic static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet() {\n\t\treturn Collector.of(LinkedHashSet::new, (set, annotation) -> set.add(annotation.synthesize()),\n\t\t\t\tMergedAnnotationCollectors::combiner);\n\t}"
+    },
+    {
+      "edge": {
+        "source": "src/test/java/org/springframework/core/annotation/NestedRepeatableAnnotationsTests.java::org.springframework.core.annotation.NestedRepeatableAnnotationsTests.SingleRepeatableAnnotationTests.streamRepeatableAnnotations_MergedAnnotationsApi:method()",
+        "target": "src/main/java/org/springframework/core/annotation/MergedAnnotationCollectors.java::org.springframework.core.annotation.MergedAnnotationCollectors.toAnnotationSet:method()",
+        "kind": "calls",
+        "path": "src/test/java/org/springframework/core/annotation/NestedRepeatableAnnotationsTests.java",
+        "line": 54,
+        "confidence": "heuristic",
+        "evidence": "MergedAnnotationCollectors.toAnnotationSet()"
+      },
+      "unresolved_reason": "generic bounds or explicit type arguments require semantic analysis",
+      "expected_type": "",
+      "target_return_type": "Collector<MergedAnnotation<A>,?,Set<A>>",
+      "source_sha256": "10c06fbd56ba52011500b6d83249328320639b7ab88218b9c5733fbe4f09ab61",
+      "source_line": "\t\t\t\t\t.stream(A.class).collect(MergedAnnotationCollectors.toAnnotationSet());",
+      "target_sha256": "410a20dfff6462a8687c4b9e5bf988bd8f7f1c85d1426806ce1d086258b6c31b",
+      "target_signature": "public static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet()",
+      "target_start_line": 65,
+      "target_excerpt": "\tpublic static <A extends Annotation> Collector<MergedAnnotation<A>, ?, Set<A>> toAnnotationSet() {\n\t\treturn Collector.of(LinkedHashSet::new, (set, annotation) -> set.add(annotation.synthesize()),\n\t\t\t\tMergedAnnotationCollectors::combiner);\n\t}"
+    }
+  ]
+}

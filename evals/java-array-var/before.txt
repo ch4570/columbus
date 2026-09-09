@@ -1,0 +1,35 @@
+.FF.....................................
+======================================================================
+FAIL: test_array_loop_bindings_preserve_scope_and_reject_conflicts (test_jvm.JVMTests.test_array_loop_bindings_preserve_scope_and_reject_conflicts) (body='void run(Item[] values) { for(var item : values) item.hit(); }')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/rex/Desktop/columbus/skills/columbus/scripts/tests/test_jvm.py", line 35, in test_array_loop_bindings_preserve_scope_and_reject_conflicts
+    self.assertEqual(calls, expected)
+AssertionError: Lists differ: [None] != ['C.java::Item.hit:method()']
+
+First differing element 0:
+None
+'C.java::Item.hit:method()'
+
+- [None]
++ ['C.java::Item.hit:method()']
+
+======================================================================
+FAIL: test_array_loop_bindings_preserve_scope_and_reject_conflicts (test_jvm.JVMTests.test_array_loop_bindings_preserve_scope_and_reject_conflicts) (body='void run(Item[][] values) { for(var row : values) for(var item : row) item.hit(); }')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/rex/Desktop/columbus/skills/columbus/scripts/tests/test_jvm.py", line 35, in test_array_loop_bindings_preserve_scope_and_reject_conflicts
+    self.assertEqual(calls, expected)
+AssertionError: Lists differ: [None] != ['C.java::Item.hit:method()']
+
+First differing element 0:
+None
+'C.java::Item.hit:method()'
+
+- [None]
++ ['C.java::Item.hit:method()']
+
+----------------------------------------------------------------------
+Ran 39 tests in 0.179s
+
+FAILED (failures=2)

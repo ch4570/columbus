@@ -1,0 +1,13 @@
+{
+  "schema": "columbus.source-call-sites-runner-handle-confirmation/v1",
+  "confirmed_by_utc": "2026-09-08T22:38:32+00:00",
+  "frozen_commit": "28bfa454044f88e2cc0096f509ae316a4676f209",
+  "input_hashes_sha256": "69f196d7db2fac0248805878f294966774346028dee725f439707702d60c2fa6",
+  "original_handles": [
+    {"language": "java", "handle": 29323, "exit_code": 0},
+    {"language": "kotlin", "handle": 98681, "exit_code": 0},
+    {"language": "javascript", "handle": 73207, "exit_code": 0}
+  ],
+  "all_original_handles_closed": true,
+  "note": "The parent directly received exit_code 0 from each original tool session. This is owner confirmation, not an inference from absent process metadata. Exact process start/finish times and the fixed schedule remain in original process, terminal and runner records. No runner restart, resume or model retry was performed."
+}

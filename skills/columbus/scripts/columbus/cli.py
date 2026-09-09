@@ -54,7 +54,10 @@ def doctor() -> dict:
             found = importlib.metadata.version(name)
         except importlib.metadata.PackageNotFoundError:
             found = None
-        dependencies[name] = {'required': version, 'installed': found, 'matches': found == version}
+        # Public == pins accept local builds in pip; retain the full version
+        # for provenance and the analyzer's cache fingerprint.
+        matches = found is not None and found.partition('+')[0] == version
+        dependencies[name] = {'required': version, 'installed': found, 'matches': matches}
     conn = sqlite3.connect(':memory:')
     try:
         conn.execute('CREATE VIRTUAL TABLE probe USING fts5(text)')
@@ -94,9 +97,58 @@ def main(argv=None) -> int:
     parser.add_argument('--version', action='version', version=__version__)
     _common(parser)
     sub = parser.add_subparsers(dest='command', required=True)
-    for name in ('doctor', 'init', 'tree', 'hook-install', 'hook-update', 'sync', 'index', 'status', 'search', 'map', 'symbol', 'neighbors', 'impact', 'context', 'explore', 'stats', 'graph', 'export', 'serve', 'telemetry'):
+    for name in ('doctor', 'init', 'archive-search', 'archive-source', 'archive-quotes', 'archive-neighbors', 'archive-callers', 'archive', 'tree', 'hook-install', 'hook-update', 'sync', 'index', 'status', 'search', 'map', 'symbol', 'callers', 'neighbors', 'impact', 'context', 'explore', 'stats', 'graph', 'export', 'serve', 'telemetry'):
         command = sub.add_parser(name)
         _common(command, subcommand=True)
+        if name == 'archive-quotes':
+            command.add_argument('--range', dest='ranges', action='append', nargs=3, required=True,
+                                 metavar=('PATH', 'START', 'END'),
+                                 help='Exact path and inclusive physical lines; repeat for 1–16 quotes, at most 400 total lines; use ./ before option-like paths')
+            command.add_argument('--input', required=True)
+            command.add_argument('--format', choices=['json'], default='json',
+                                 help='Copy-ready JSON quote/range objects; no semantic support check')
+            command.add_argument('--budget-bytes', type=int, default=6000,
+                                 help='512–64000 serialized UTF-8 bytes; complete batch or error, never clipped')
+        if name == 'archive-source':
+            command.add_argument('symbol_id', nargs='+', help='One declaration, or 2–16 unique declarations in one page')
+            command.add_argument('--call-sites', action='store_true',
+                                 help='Include every stored call on the returned source page; shares its line cursor and byte budget, not runtime completeness')
+            command.add_argument('--call-table', action='store_true',
+                                 help='Share call endpoint/file metadata in page-local tables; requires --call-sites (JSON or text)')
+            command.add_argument('--overloads', action='store_true',
+                                 help='Include Java/Kotlin overloads with the same owner and receiver; '
+                                      'batch exact IDs from archive-search for different receivers')
+            command.add_argument('--input', required=True)
+            command.add_argument('--format', choices=['json', 'text'], default='json')
+            command.add_argument('--offset', type=int, default=0)
+            command.add_argument('--limit', type=int, default=120)
+            command.add_argument('--budget-bytes', type=int, default=12000)
+        if name == 'archive-search':
+            command.add_argument('--format', choices=['json', 'text'], default='json')
+            command.add_argument('--path', help='Case-sensitive glob on declaration paths, before ranking/counting')
+            command.add_argument('--language', help='Exact detected language name, e.g. python or javascript')
+            command.add_argument('query', nargs='+',
+                                 help='One search, or 2–16 distinct literal queries in one archive scan')
+            command.add_argument('--input', required=True)
+            command.add_argument('--limit', type=int, default=5, help='Maximum declarations per query (1–50)')
+            command.add_argument('--budget-bytes', type=int, default=6000,
+                                 help='2048–64000 total bytes; a multi-query batch must fit completely or errors')
+        if name in {'archive-neighbors', 'archive-callers'}:
+            command.add_argument('--path', help='Case-sensitive glob on edge paths, before counting/pagination')
+            command.add_argument('--format', choices=['json', 'text'], default='json')
+            command.add_argument('--context-lines', type=int, help='Verified source radius 0–40 around calls; archive-neighbors requires --kinds calls')
+            command.add_argument('--offset', type=int, default=0)
+            command.add_argument('symbol_id')
+            command.add_argument('--input', required=True)
+            if name == 'archive-neighbors':
+                command.add_argument('--direction', choices=['in', 'out', 'both'], default='out')
+                command.add_argument('--kinds', nargs='+')
+            command.add_argument('--limit', type=int, default=50)
+            command.add_argument('--budget-bytes', type=int, default=6000)
+        if name == 'archive':
+            command.add_argument('--compression', choices=['gzip', 'xz'], default='gzip')
+            command.add_argument('--output', required=True, help='New complete .jsonl.gz graph artifact')
+            command.add_argument('--snapshot', action='store_true', help='Archive the saved index without syncing')
         if name == 'tree':
             command.add_argument('--label', help='Exact symbol ID, name or qualified label; include ancestors and descendants')
             command.add_argument('--path', help='Repository-relative path glob')
@@ -120,12 +172,13 @@ def main(argv=None) -> int:
         if name == 'index':
             command.add_argument('root', help='Legacy alias for sync --repo ROOT')
         if name in {'sync', 'index', 'status'}:
+            command.add_argument('--summary', action='store_true', help='Emit counts and freshness without file inventory or diagnostic text')
             command.add_argument('--verify-content', '--check-files', action='store_true', help='Hash source contents to verify freshness')
         if name in {'sync', 'index'}:
             command.add_argument('--source-root', default=None, help='Restrict source directory; also sets Python import root')
-        if name in {'search', 'map', 'symbol', 'neighbors', 'impact', 'context', 'explore', 'graph', 'export'}:
+        if name in {'search', 'map', 'symbol', 'callers', 'neighbors', 'impact', 'context', 'explore', 'graph', 'export'}:
             command.add_argument('--snapshot', action='store_true', help='Read saved index without automatic sync')
-        if name in {'search', 'map', 'symbol', 'neighbors', 'impact', 'context', 'explore'}:
+        if name in {'search', 'map', 'symbol', 'callers', 'neighbors', 'impact', 'context', 'explore'}:
             command.add_argument('--format', choices=['json', 'text'], default='text' if name == 'explore' else 'json',
                                  help='Compact text for agents or compatible structured JSON')
         if name in {'search', 'context'}:
@@ -137,10 +190,19 @@ def main(argv=None) -> int:
             command.add_argument('--language', help='Detected language name, e.g. python or typescript')
         if name == 'search':
             command.add_argument('--limit', type=int, default=10)
-        if name in {'symbol', 'neighbors', 'impact'}:
+            command.add_argument('--cursor', help='Continue this query/filter on the same indexed revision')
+        if name in {'symbol', 'callers', 'neighbors', 'impact'}:
             command.add_argument('symbol_id')
+        if name == 'callers':
+            command.add_argument('--path', help='Repository-relative caller glob, quoted to prevent shell expansion')
+            command.add_argument('--context-lines', type=int, help='Lines before and after the first call, 0–40; clipped to caller bounds')
+            command.add_argument('--budget-bytes', type=int, default=12000)
+            command.add_argument('--limit', type=int, default=50)
         if name == 'symbol':
             command.add_argument('--max-lines', type=int, default=80)
+        if name in {'neighbors', 'impact'}:
+            command.add_argument('--include-candidates', action='store_true',
+                                 help='Traverse uncertain receiver candidates; these are not resolved calls')
         if name in {'neighbors', 'impact', 'graph', 'export'}:
             command.add_argument('--hops', type=int, default=2)
             command.add_argument('--limit', type=int, default=1000 if name in {'graph', 'export'} else 50)
@@ -163,6 +225,18 @@ def main(argv=None) -> int:
     args = parser.parse_args(argv)
     started = time.perf_counter()
     try:
+        if args.command == 'archive-source' and args.call_table:
+            if not args.call_sites:
+                raise ValueError('--call-table requires --call-sites')
+            if args.pretty and args.format == 'json':
+                raise ValueError('archive-source --call-sites rejects --pretty to preserve its byte budget')
+        source_call_sites = args.command == 'archive-source' and args.call_sites
+        search_batch = args.command == 'archive-search' and len(args.query) > 1
+        read_only_archive = args.command == 'archive-quotes' or source_call_sites or search_batch
+        archive_label = ('archive-source --call-sites' if source_call_sites else
+                         'archive-search batch' if search_batch else args.command)
+        if read_only_archive and args.telemetry is not None:
+            raise ValueError(archive_label + ' does not support --telemetry')
         if args.command == 'explore':
             if not args.query and (args.mode != 'snippets' or args.receipt is not None or args.exclude_id or args.session is not None):
                 raise ValueError('Explore without QUERY returns a map; --mode/--receipt/--exclude-id/--session require QUERY')
@@ -196,6 +270,8 @@ def main(argv=None) -> int:
             return 0 if result['ready'] else 2
         if args.command == 'index':
             args.repo = args.root
+        if read_only_archive and args.db is not None:
+            raise ValueError(archive_label + ' does not use --db; select source with --repo')
         db = Path(args.db).expanduser().resolve() if args.db else None
         if args.repo is None and db and db.is_file():
             root = Path(RepositoryIndex(db).status()['root'])
@@ -227,6 +303,36 @@ def main(argv=None) -> int:
             result = install_bundle(root, apply=not args.plan, skills_dir=args.skills_dir)
             print(json.dumps(result, ensure_ascii=False, indent=2 if args.pretty else None))
             return 2 if result['status'] in {'error', 'conflict'} else 0
+        if args.command == 'archive-quotes':
+            if args.pretty:
+                raise ValueError('archive-quotes rejects pretty output to preserve its byte budget')
+            from .quotes import quotes_archive, render_quotes
+            # One explicit ./ escapes option-like filenames without permitting
+            # parent traversal, general normalization or noncanonical archive keys.
+            ranges = [(path.removeprefix('./'), int(start), int(end)) for path, start, end in args.ranges]
+            result = quotes_archive(args.input, ranges, root, args.budget_bytes)
+            sys.stdout.write(render_quotes(result))
+            return 0
+        if source_call_sites:
+            if args.pretty:
+                raise ValueError('archive-source --call-sites rejects --pretty to preserve its byte budget')
+            from .source_calls import source_calls_archive, source_calls_json, source_calls_text
+            call_options = {'call_table': True} if args.call_table else {}
+            result = source_calls_archive(args.input, args.symbol_id, root, args.limit, args.budget_bytes,
+                                          args.offset, output_format=args.format, overloads=args.overloads,
+                                          **call_options)
+            sys.stdout.write(source_calls_text(result, **call_options)
+                             if args.format == 'text' else source_calls_json(result, **call_options))
+            return 0
+        if search_batch:
+            if args.pretty:
+                raise ValueError('archive-search rejects pretty output to preserve its byte budget')
+            from .archive import search_archive_many
+            from .presentation import archive_search_many_output
+            result = search_archive_many(args.input, args.query, args.limit, args.budget_bytes,
+                                         output_format=args.format, path=args.path, language=args.language)
+            sys.stdout.write(archive_search_many_output(result, args.format))
+            return 0
         index = RepositoryIndex(db or root / '.columbus/index-v1.sqlite')
         if args.command == 'tree':
             from .tree import records
@@ -244,6 +350,41 @@ def main(argv=None) -> int:
             result = index.status(check_files=args.verify_content)
             if result['root'] != str(root):
                 raise ValueError('Selected index belongs to a different repository')
+        elif args.command == 'archive-source':
+            if args.pretty:
+                raise ValueError('archive-source rejects pretty output to preserve its byte budget')
+            from .archive import source_archive, source_archive_many
+            if len(args.symbol_id) == 1 and not args.overloads:
+                result = source_archive(args.input, args.symbol_id[0], root, args.limit, args.budget_bytes, args.offset,
+                                        output_format=args.format)
+            else:
+                result = source_archive_many(args.input, args.symbol_id, root, args.limit, args.budget_bytes, args.offset,
+                                             output_format=args.format, overloads=args.overloads)
+        elif args.command == 'archive-search':
+            if args.pretty:
+                raise ValueError('archive-search rejects pretty output to preserve its byte budget')
+            from .archive import search_archive
+            result = search_archive(args.input, args.query[0], args.limit, args.budget_bytes,
+                                    output_format=args.format, path=args.path, language=args.language)
+        elif args.command == 'archive-callers':
+            if args.pretty:
+                raise ValueError('archive-callers rejects pretty output to preserve its byte budget')
+            from .archive import callers_archive
+            result = callers_archive(args.input, args.symbol_id, args.limit, args.budget_bytes, args.offset,
+                                     output_format=args.format, repo=root, context_lines=args.context_lines, path=args.path)
+        elif args.command == 'archive-neighbors':
+            if args.pretty:
+                raise ValueError('archive-neighbors rejects pretty output to preserve its byte budget')
+            from .archive import neighbors_archive
+            result = neighbors_archive(args.input, args.symbol_id, args.direction, args.kinds, args.limit, args.budget_bytes, args.offset,
+                                       output_format=args.format, repo=root, context_lines=args.context_lines, path=args.path)
+        elif args.command == 'archive':
+            from .archive import archive
+            if not args.snapshot:
+                index.refresh(root, fast=True)
+            elif index.status()['root'] != str(root):
+                raise ValueError('Selected index belongs to a different repository')
+            result = archive(index, args.output, args.compression)
         elif args.command == 'serve':
             from .mcp_server import serve
             if index.status()['root'] != str(root):
@@ -256,13 +397,18 @@ def main(argv=None) -> int:
             elif index.status()['root'] != str(root):
                 raise ValueError('Selected index belongs to a different repository')
             if args.command == 'search':
-                result = index.search(args.query, args.limit, path=args.path, language=args.language)
+                result = index.search(args.query, args.limit, path=args.path, language=args.language, cursor=args.cursor)
+            elif args.command == 'callers':
+                if args.pretty:
+                    raise ValueError('callers does not support --pretty; its serialized output is byte-budgeted')
+                result = index.callers(args.symbol_id, args.budget_bytes, args.limit, output_format=args.format, path=args.path, context_lines=args.context_lines)
             elif args.command == 'symbol':
                 result = index.symbol(args.symbol_id, args.max_lines)
             elif args.command in {'neighbors', 'impact'}:
                 result = index.neighbors(args.symbol_id, direction='in' if args.command == 'impact' else args.direction,
                                          hops=args.hops, limit=args.limit,
-                                         kinds=['calls', 'inherits'] if args.command == 'impact' else args.kinds)
+                                         kinds=['calls', 'inherits'] if args.command == 'impact' else args.kinds,
+                                         include_candidates=args.include_candidates)
             elif args.command in {'context', 'map'}:
                 from .presentation import render
                 kwargs = dict(budget_bytes=args.budget_bytes, budget_tokens=args.budget_tokens, path=args.path,
@@ -296,6 +442,9 @@ def main(argv=None) -> int:
                 with output.open('x', encoding='utf-8') as stream:
                     stream.write(rendered)
                 result = {'output': str(output), 'nodes': len(graph['nodes']), 'edges': len(graph['edges']), 'truncated': graph['truncated']}
+        if getattr(args, 'summary', False):
+            from .presentation import sync_summary
+            result = sync_summary(result)
         if getattr(args, 'format', 'json') == 'text':
             from .presentation import render
             rendered = render(result, 'text', args.command)
@@ -306,5 +455,10 @@ def main(argv=None) -> int:
             telemetry.append(args.command, args.format, result, rendered, time.perf_counter() - started)
         return 0
     except (ValueError, OSError, RuntimeError, ImportError, SyntaxError, UnicodeError, sqlite3.Error) as exc:
-        print(f'columbus: {exc}', file=sys.stderr)
+        # Source readers can include an untrusted path in their diagnostics.
+        message = (json.dumps(str(exc), ensure_ascii=True)[1:-1]
+                   if args.command == 'archive-quotes' or (args.command == 'archive-source' and args.call_sites)
+                   or (args.command == 'archive-search' and len(args.query) > 1)
+                   else str(exc))
+        print(f'columbus: {message}', file=sys.stderr)
         return 2

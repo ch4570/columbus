@@ -1,0 +1,153 @@
+{
+  "answer_sha256": "aae3b16a04b48874b7d035a8759c7ae96d685991ce9917939bc8e5185300fc29",
+  "rubric_sha256": "a1e13a97cf68a69e236d7254e6e88b018f364b55973972fbec4c426775f386b3",
+  "findings": [
+    {
+      "id": "kotlin-bridges",
+      "passed": false,
+      "reason": "The mandatory kotlin-bridges finding ID is absent. The answer instead supplies two differently named extension findings. The checks below assess their globally shared content without silently renaming those findings or waiving the required ID.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The submitted kotlin-proxyhints-extension and kotlin-builder-extension prose and operative code correctly identify KClass-to-java mapping, array materialization and spreading into the corresponding Class-varargs Java members, with no recursive or direct-TypeReference handoff. These mechanisms match both Kotlin sources at lines 27-28. Their incorrect author-name text is a literal-citation issue, not a contradiction of the bridge mechanism."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "Shared extension explanations expressly preserve order, repetitions and empty arrays, and state that expression-body results are the same ProxyHints and Builder receivers returned by the respective Java methods."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "Both extension discussions identify mocked receivers, Class-varargs stubs and exact String/Int Class forwarding. They correctly say that the ignored result does not independently assert fluent identity and that these mocks bypass real validation/storage, so concrete String and primitive int examples prove the handoff rather than acceptable real proxy interfaces. This agrees with both Kotlin tests at lines 31-37."
+        }
+      ]
+    },
+    {
+      "id": "registration-lifecycle",
+      "passed": false,
+      "reason": "The required registration-lifecycle finding ID is absent; java-registration-entry-points is not silently substituted for it. Its shared explanation and code nevertheless establish the substantive lifecycle clauses below.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "Shared prose explicitly says the TypeReference and Class varargs overloads each wrap their unchanged array in a consumer calling the corresponding Builder.proxiedInterfaces overload, and both converge on the consumer entry point. The TypeReference wrapper is also quoted. This establishes the separate routes without an intermediate Class-to-TypeReference registration hop."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The quoted consumer implementation contains fresh builder creation, callback, builder.build inside Set.add and return this. The explanation gives that order, while the construction finding supplies List.copyOf before insertion, matching ProxyHints.java 48-53 and JdkProxyHint.java 43-47."
+        },
+          {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The lifecycle prose says callback, validation or build failures prevent insertion and leave existing entries intact under the stated consumer scope. The quote has no catch/recovery; its unconditional return this after Set.add, together with shared equal-hint suppression prose, supports fluent return even when a completed duplicate is suppressed."
+        }
+      ]
+    },
+    {
+      "id": "interface-validation",
+      "passed": false,
+      "reason": "The required interface-validation ID is absent. In addition, the shared content does not supply the named Class-validation failure type or the complete required ReflectionTypeReference.of factory hop.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": false,
+          "reason": "The addition/validation discussion correctly identifies the non-interface/sealed filter, full-array validation and no partial appending before failure. However, it says only that the helper throws, without naming IllegalArgumentException or explaining collection of invalid Class.getName values. The submitted addition-overload quote does not contain the separate validation helper at JdkProxyHint.java 168-177, and no other submitted explanation or quote provides the missing failure type."
+        },
+        {
+          "criterion_index": 1,
+          "passed": false,
+          "reason": "The answer follows the helper through TypeReference.listOf and TypeReference.of(Class), preserves encounter order/repetitions, and identifies the ReflectionTypeReference result. It does not identify the additional delegation to ReflectionTypeReference.of shown at TypeReference.java 73-75 before that factory constructs the result at ReflectionTypeReference.java 45-49. No submitted quote contains this missing hop of the mandatory helper chain."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The direct TypeReference addAll(Arrays.asList(...)) mechanism is quoted and contrasted with Class validation. Shared built-in-type-reference-identity prose explicitly identifies TypeReference.of(String) creating SimpleTypeReference and the name-based route avoiding Class loading/introspection; the addition discussion permits unresolved/name-only references without interface/sealed checks. Together these establish the required branch distinction under the built-in factory scope."
+        }
+      ]
+    },
+    {
+      "id": "interface-storage",
+      "passed": false,
+      "reason": "The mandatory interface-storage ID is absent. Shared addition, construction and registry explanations cover its substantive clauses, but those differently named findings are not remapped into the required answer schema.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The quoted addAll overloads and prose establish appending to a LinkedList rather than replacing, sorting or deduplicating, concatenation across repeated calls, preserved repetitions, and empty arrays as no-ops."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The construction explanation states that an empty builder builds successfully with an empty immutable list. Shared registry prose explicitly discusses repeated identical empty hints deduplicating and different-metadata empty hints remaining separate, establishing registration without a minimum interface count while staying within hint storage rather than real proxy creation."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The constructor quote uses List.copyOf, and shared prose explicitly calls the exposed list unmodifiable and states that later builder additions cannot alter the completed hint. This describes getter exposure and snapshot isolation even without spelling getProxiedInterfaces; it does not claim deep-copying custom TypeReference objects."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The answer explains that Arrays.asList/LinkedList permit the scoped null element, leaving latent builder state until List.copyOf throws NullPointerException during build. Through registration, that failure precedes Set insertion and leaves the registry unchanged. Its additional observation about JdkProxyHint.of returning a builder before build is accurate and does not alter the required behavior."
+        }
+      ]
+    },
+    {
+      "id": "hint-state-identity",
+      "passed": false,
+      "reason": "The required hint-state-identity ID is absent. The shared metadata discussion also omits the required meaning of null reachability as no condition, although defaults, setters, copied fields and equality/hash distinctions are otherwise described.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": false,
+          "reason": "The shared metadata explanation identifies null reachable type, false serialization and the completed getReachableType/hasJavaSerialization getters. It does not explain that null means no reachability condition/always applicable, as ConditionalHint.java 32-37 documents. Saying 'no reachable type (null)' supplies the absent value, not the required meaning of that absence; no submitted quote contains the condition contract."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "Shared prose explicitly identifies both setters as fluent field assignments with last-value-wins behavior, including resetting serialization to false, and construction as copying current fields so later builder metadata changes cannot affect the existing hint. The constructor quote supports that snapshot."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "The complete equals mechanism is quoted, including ordered proxiedInterfaces equality, nullable reachability through Objects.equals and the serialization flag. Shared registry prose explains interface order/multiplicity and metadata differences rather than unordered-set identity."
+        },
+        {
+          "criterion_index": 3,
+          "passed": true,
+          "reason": "The exact hashCode quote hashes only proxiedInterfaces. Shared prose correctly makes reachability/serialization variants unequal despite colliding hashes and explains that Set equality resolves the collision without deduplicating unequal hints."
+        }
+      ]
+    },
+    {
+      "id": "registry-deduplication",
+      "passed": false,
+      "reason": "The required registry-deduplication ID is absent. Its substantive behaviors are addressed by two replacement findings, including an exact TypeReference equality quote, but the required finding identity remains unsatisfied.",
+      "checks": [
+        {
+          "criterion_index": 0,
+          "passed": true,
+          "reason": "The LinkedHashSet field and direct stream are quoted; the shared registry explanation describes first-successful insertion order and later equal hints neither adding nor moving an entry. Its direct-set mechanism and explicit rejection of sorting in the addition discussion support first-unique order rather than TypeReference comparison order."
+        },
+        {
+          "criterion_index": 1,
+          "passed": true,
+          "reason": "The built-in identity explanation names the Class and String factories, ReflectionTypeReference/SimpleTypeReference, inherited canonical-name equality/hash behavior, and cross-representation deduplication when whole-hint content matches. The complete AbstractTypeReference.java 85-94 quote supplies String.equals on canonical names and canonical-name hashing, directly establishing the required case sensitivity even though prose does not repeat that adjective."
+        },
+        {
+          "criterion_index": 2,
+          "passed": true,
+          "reason": "Shared prose explicitly applies deduplication only to complete hints, preserves repeated interface entries, distinguishes changed order/multiplicity and metadata despite hash collisions, and rejects merging [A] and [A, B]. The discussion is about changed list sequences, not an unsupported claim that swapping indistinguishable equal entries changes equality."
+        }
+      ]
+    }
+  ],
+  "execution_review": {
+    "events_sha256": "ad7a867de6df52802c5c5d6b60aa2379035f7a97839b514595b5f583d7ba34a2",
+    "passed": false,
+    "reason": "Reviewed all 19 started/completed command pairs, item_0 through item_18, against the frozen prompt. Full prompt compliance fails because item_3, item_4, item_7, item_14 and item_15 invoke the offered absolute runtime wrapper using python3 without -B, rather than the explicitly required supplied absolute .venv Python -B wrapper prefix. This is a scoped interpreter/prefix instruction deviation, not evidence of an actual write or execution of Spring code. All inspected targets otherwise remain within the repository or offered runtime/archive: item_0 reads SKILL.md; item_1 searches source; item_2 inspects the offered wrapper; item_3 fails the archive-source line-limit check and item_4 succeeds with a bounded limit; item_5 and item_6 search relevant source; item_7 reads type-reference declarations; item_8 reads relevant Java/Kotlin tests and bridges; item_9 and item_13 read/search package nullness declarations; item_10 reads bridge/test ranges; item_11 has two mistyped repository paths alongside successful bounded reads, corrected by item_12; item_14 fails the quote budget check and item_15 succeeds with an increased bounded budget; item_16 and item_17 inspect relevant tests; item_18 rereads bounded citation ranges. Pipelines, batched source reads and stderr redirection to /dev/null do not modify source. No source/index write, upstream code/test/build execution, web/delegation event, or sibling/private-oracle access was observed. Full raw events were hashed while turn.completed usage and result.json/other-arm answers were excluded from inspection."
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "repository": "https://github.com/expressjs/express",
+  "commit": "023767fe9872e029271df1418f73401bff20ff40",
+  "commit_url": "https://github.com/expressjs/express/tree/023767fe9872e029271df1418f73401bff20ff40",
+  "source_root": "/tmp/columbus-express-token-eval",
+  "source_zip": "/tmp/columbus-express-token-source.zip",
+  "source_zip_sha256": "019254986d23c8ad14e1212c7be1d5f7d803a8d6e023563e566045c49036b278",
+  "source_zip_bytes": 210583,
+  "source_zip_prefix": "express/",
+  "source_file_count": 213,
+  "source_uncompressed_bytes": 713745,
+  "full_snapshot_validation": "Every ZIP file was compared byte-for-byte with the full local source snapshot; both inventories have exactly 213 files. Only .git/.columbus metadata directories are outside the source inventory. No source file was excluded or modified.",
+  "provenance_limit": "Existing local snapshot and historical evals/multilang-token-batch/javascript/source.json associate these source bytes with the stated commit. The original ZIP download transaction was not observed during this task; no new retrieval or redirect claim is made.",
+  "reuse_limit": "Previously used repository, newly specified download/sendFile transfer operation. This is not a held-out repository and historical rendering answers/rubrics are not this task's oracle.",
+  "primary_files": ["lib/response.js"],
+  "supporting_tests_read_not_run": ["test/res.download.js", "test/res.sendFile.js"],
+  "files": [
+    {"path": "lib/response.js", "sha256": "969ca139deb9d33c144ee08050c16f4af5d5cfde60988d8f767b0763e1206f9a", "bytes": 25037, "lines": 1047},
+    {"path": "test/res.download.js", "sha256": "274bbf9ce6cc03f2f6480ca05d7c80707081837b238d53d1a9ca2c0c96038a8a", "bytes": 13112, "lines": 487},
+    {"path": "test/res.sendFile.js", "sha256": "1ce86ede00a1e19a3c11a835ef9f87669d495ada5060922d96cc96e4120ec4f7", "bytes": 23888, "lines": 913},
+    {"path": "LICENSE", "sha256": "95a5762890e5c1c9808921cef095661fc482c5e1f0bba31446ac85595df6237c", "bytes": 1249, "lines": 24},
+    {"path": "package.json", "sha256": "306342b9027390e786311da3966db7324d6fc2aba523d68064ea6648af92f8d9", "bytes": 2731, "lines": 99}
+  ],
+  "finding_markers": [
+    {"id": "download_arguments", "path": "lib/response.js", "line": 451, "marker": "if (typeof filename === 'object' &&", "representative_range": [435, 455]},
+    {"id": "download_options", "path": "lib/response.js", "line": 474, "marker": "opts = Object.create(opts)", "representative_range": [457, 484]},
+    {"id": "sendfile_setup", "path": "lib/response.js", "line": 403, "marker": "var file = send(req, pathname, opts);", "representative_range": [373, 403]},
+    {"id": "callback_routing", "path": "lib/response.js", "line": 407, "marker": "if (done) return done(err);", "representative_range": [406, 414]},
+    {"id": "transfer_events", "path": "lib/response.js", "line": 1008, "marker": "file.pipe(res);", "representative_range": [987, 1009]},
+    {"id": "finish_race", "path": "lib/response.js", "line": 971, "marker": "if (streaming !== false && !done) {", "representative_range": [965, 980]}
+  ],
+  "historical_graph_observation": {
+    "path": "/tmp/columbus-token-javascript-batch/graph.jsonl.xz",
+    "sha256": "bd61bd0b82500cc41a0eec60e223390591fa0059774160e4039b6b96774e6115",
+    "bytes": 212640,
+    "revision": "c765fa8aa9f3c5eb878d",
+    "analyzer_version": "columbus-1.1.0",
+    "not_prospective_arm_archive": true,
+    "requires_revalidation_before_freeze": true,
+    "calls": [
+      {"source": "lib/response.js::sendFile:function", "target": "lib/response.js::sendfile:function", "path": "lib/response.js", "line": 406},
+      {"source": "lib/response.js::sendfile.onfinish:function", "target": "lib/response.js::sendfile.onaborted:function", "path": "lib/response.js", "line": 966},
+      {"source": "lib/response.js::sendfile.onfinish:function", "target": "lib/response.js::sendfile.onerror:function", "path": "lib/response.js", "line": 967},
+      {"source": "lib/response.js::sendfile.onfinish:function", "target": "lib/response.js::sendfile.onaborted:function", "path": "lib/response.js", "line": 972}
+    ],
+    "known_omission": "No recorded download-to-this.sendFile call at source line 483; source establishes the delegation without a resolved historical graph edge."
+  },
+  "source_unchanged": true,
+  "model_started": false
+}

@@ -1,0 +1,37 @@
+{
+  "download_arguments": [
+    "download initially takes done from the fourth callback argument, name from filename and opts from options or null. The ordinary explicit filename/options/callback form keeps those roles; omitted/falsy options default to null before deriving the final options object.",
+    "A function in the filename position becomes done and clears both name and opts. Otherwise a function in the options position becomes done and clears opts while retaining the filename. These are distinct normalization branches, not interchangeable argument shifts.",
+    "A second-position object is used as options only when the third argument is undefined or a function. This branch clears the alternate name and uses the original second-position object; a third-position callback already assigned by the preceding branch remains the callback. Do not claim every object filename overrides an explicitly supplied third-position options object.",
+    "After normalization and option/path preparation, download returns this.sendFile(fullPath, opts, done). It delegates the computed path, derived options and normalized callback to the public method, rather than constructing or piping its own stream or directly calling the lowercase private transfer helper."
+  ],
+  "download_options": [
+    "The generated Content-Disposition uses contentDisposition.create(basename(name || path)). A truthy alternate name changes attachment naming, not the source path; a missing/null/empty alternate name falls back to the original path's basename. No particular dependency-specific header escaping behavior is required or implied.",
+    "When supplied, header keys are enumerated with Object.keys. Every key whose lowercase spelling is content-disposition is excluded, protecting the generated attachment header regardless of casing; other own enumerable keys and their values are copied using their supplied key spellings.",
+    "Object.create(opts) derives the final options object through prototype inheritance, not a shallow own-property copy. With the default null opts this makes a null-prototype object. A fresh own headers property is assigned on the derived object, so this ordinary-object code does not overwrite the caller's options or headers; other options, including root, remain inherited.",
+    "A falsy root selects resolve(originalPath); a truthy root passes the original path through unchanged for sendFile. Presence alone is not the test. This source establishes delegation and resolution choice, not filesystem containment or enforcement inside the external send implementation."
+  ],
+  "sendfile_setup": [
+    "sendFile synchronously rejects a missing/falsy path first, a remaining non-string path next, and a non-absolute path without a truthy root with TypeError. These checks occur before stream creation and are not asynchronous transfer callback results; exact exception message spelling is not required.",
+    "Options start as options || {}. A function in the second position becomes the callback and opts is reset to a fresh empty object. An ordinary supplied options object otherwise remains the same object, rather than being cloned by sendFile itself.",
+    "The path is passed through encodeURI, and opts.etag is assigned from this.app.enabled('etag') before send is called, overriding a supplied etag value. This writes a directly supplied ordinary options object; download instead supplies its derived object, so that assignment does not mutate download's original caller options. No internal URI or ETag algorithm is required.",
+    "The imported send(req, pathname, opts) creates the file stream-like object, then the distinct local sendfile(res, file, opts, completionClosure) handles transfer wiring. Identify these separate handoffs rather than claiming public sendFile recursion or implementation of the external send package."
+  ],
+  "callback_routing": [
+    "If done is supplied, the completion closure immediately returns done(err), for successful completion as well as any transfer error. This precedes all automatic next routing. The closure does not itself send an error response or check headersSent; response/error handling is the supplied callback's responsibility.",
+    "Without done, EISDIR calls next() without an error. ECONNABORTED and errors with syscall equal to write do not call next(err); other truthy errors do. Successful/falsy-error completion does not call next. Do not infer a particular downstream HTTP status from next().",
+    "Synchronous validation or setup throws are not caught and converted into done(err) by sendFile. If setup throws before the private helper call, the transfer completion closure is not reached. No enumeration of exceptions inside unavailable dependencies is required."
+  ],
+  "transfer_events": [
+    "The helper registers directory, end, error, file and stream handlers on file, plus onFinished(res, onfinish); the optional headers handler is also registered before file.pipe(res). These are listener registrations and a transfer handoff, not proof that external events occur in a particular order.",
+    "A per-transfer done flag begins false. Terminal handlers check it and set it true before invoking the callback, preventing a second completion for repeated or reentrant terminal events under the task's non-throwing callback assumptions. This is a local callback guard, not a guarantee of successful network delivery.",
+    "The directory and abort handlers construct new errors with codes EISDIR and ECONNABORTED respectively. The generic error handler forwards the original error; the end handler calls back successfully with no argument. Each follows the terminal completion guard.",
+    "Custom headers are applied only through the optional file headers-event listener, not eagerly during helper setup. At that event the listener reads options.headers, enumerates its own keys with Object.keys and calls res.setHeader with each key/value. A failure before that event does not apply these headers through this helper; it has no removal/rollback branch guaranteeing absence after a later failure."
+  ],
+  "finish_race": [
+    "streaming initially has the undefined value; the file event sets it false and the stream event sets it true. These distinct states matter to the strict-false finish check.",
+    "onfinish maps an ECONNRESET error to onaborted, producing the helper's new ECONNABORTED error, while another truthy error goes to onerror and is forwarded unchanged. Terminal guards prevent an additional callback if completion already occurred.",
+    "An error-free, not-yet-done finish schedules a setImmediate callback instead of immediately reporting success. The deferred callback checks the latest streaming and done values: streaming !== false with !done, including either undefined or true, invokes onaborted.",
+    "If streaming is false and completion is still pending at the deferred check, it marks done and calls back successfully. An intervening terminal event that set done makes the deferred callback return without another completion. Finish is therefore not unconditional success, and the implementation does not promise a second callback after an intervening end/error/abort."
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "method": "Independent reviewers received condition/usage-hidden answer copies, the question, frozen rubric/criteria and complete source snapshot. They did not receive raw model traces or usage. Root inspected the stated failure reasons against answers before integration. Citation scoring remains separate.",
+  "reviews": [
+    {
+      "language": "java",
+      "trial": "java-property-resolution-baseline-1",
+      "review_input_alias": "8afe727de9",
+      "review_sha256": "602dbb7c8c213d86959440c18cd665f7235d934d040c35263ba3a3a66ba560a4",
+      "clauses_passed": 19
+    },
+    {
+      "language": "java",
+      "trial": "java-property-resolution-baseline-2",
+      "review_input_alias": "48260743c0",
+      "review_sha256": "f69762cbbb95eb82d7e6d8061c8e9d56bd10bdb080f6dd74af16968900aeb231",
+      "clauses_passed": 20
+    },
+    {
+      "language": "java",
+      "trial": "java-property-resolution-columbus-1",
+      "review_input_alias": "99e649b50a",
+      "review_sha256": "1c691b3a58459bd3f4476dbb52e0fcd3068added155f07ba6ca5baf93c92c1b1",
+      "clauses_passed": 19
+    },
+    {
+      "language": "java",
+      "trial": "java-property-resolution-columbus-2",
+      "review_input_alias": "3ba353911b",
+      "review_sha256": "c9b1fec4f3508963d361b5552a4bb814b389da712059166a03437a137e5efab2",
+      "clauses_passed": 18
+    },
+    {
+      "language": "kotlin",
+      "trial": "kotlin-reflection-hint-state-baseline-1",
+      "review_input_alias": "29ea15149d",
+      "review_sha256": "c01067e9b7055380a3f39a339557e4a2a99d0c64f7bb3f238efb2966d8f36ccc",
+      "clauses_passed": 17
+    },
+    {
+      "language": "kotlin",
+      "trial": "kotlin-reflection-hint-state-baseline-2",
+      "review_input_alias": "324241ce9d",
+      "review_sha256": "146e4cf532ef868a30c185d3c4955252d2d0de70da9a55cd407b735e17555ca9",
+      "clauses_passed": 19
+    },
+    {
+      "language": "kotlin",
+      "trial": "kotlin-reflection-hint-state-columbus-1",
+      "review_input_alias": "4ac774983c",
+      "review_sha256": "842b9293c2099a132511e6236b8f5fad3213f59b0ef4add7e651f272da4e6bd3",
+      "clauses_passed": 18
+    },
+    {
+      "language": "kotlin",
+      "trial": "kotlin-reflection-hint-state-columbus-2",
+      "review_input_alias": "bc30e96259",
+      "review_sha256": "d14262f470957f80d6c30cc41d26ba431841bec1f3449945abe9fb60e1f72cf1",
+      "clauses_passed": 19
+    },
+    {
+      "language": "javascript",
+      "trial": "express-render-pipeline-baseline-1",
+      "review_input_alias": "e54ddfb253",
+      "review_sha256": "36dec36293748e396b63dbf70e59ca422551c93baf50d97677b4d51c1bf820b3",
+      "clauses_passed": 22
+    },
+    {
+      "language": "javascript",
+      "trial": "express-render-pipeline-baseline-2",
+      "review_input_alias": "cd7b537e4a",
+      "review_sha256": "85061c6c2f9eda559e8970423c10677879759efca1fdf9292d7151bcbc4bd39b",
+      "clauses_passed": 21
+    },
+    {
+      "language": "javascript",
+      "trial": "express-render-pipeline-columbus-1",
+      "review_input_alias": "8e09ac8ca5",
+      "review_sha256": "2aee12bb9d04356713774b9373ae5fa6d68418438703464b268b952b7dbe1a4b",
+      "clauses_passed": 19
+    },
+    {
+      "language": "javascript",
+      "trial": "express-render-pipeline-columbus-2",
+      "review_input_alias": "766a192ef5",
+      "review_sha256": "6bd9d01e3a53d16620f8670a628a0bfd16b26a2ce4727a1f0e3e7f96cbca5e7e",
+      "clauses_passed": 18
+    }
+  ]
+}

@@ -4,6 +4,8 @@ This harness compares ordinary `rg` plus bounded source reads with the same tool
 
 The [Korean report](../../docs/token-efficiency.md) explains the findings. The 2026-09-07 cohort contains all six controlled trials, including regressions and citation failures. The one pair passing both citation checks used **34.0% more cumulative input tokens** with RepoAtlas. No general token or billing savings were established.
 
+The [current-skill cohort](results/current-skill/REPORT.md) adds six real runs with the current frozen skill and engine. Both quality-passing pairs increased cumulative input; the skill chose ordinary search in all three cases. It does not demonstrate graph-token savings.
+
 ## Recorded artifacts
 
 | File | Purpose |
@@ -34,13 +36,15 @@ python evals/exploration/observe.py --output .omx/observations/new-run run \
 python evals/exploration/observe.py --output .omx/observations/new-run summary
 ```
 
+For a new evaluation of the current skill’s actual routing, add `--with-skill` to `freeze-engine`. This freezes SKILL.md and its references, includes their hashes in preflight, and asks the enhanced condition to follow that skill rather than forcing graph-first retrieval. Archived engines cannot be combined with the current skill. The default retains the historical graph-first protocol for reproducibility.
+
 Also run `configuration-invalidation` in Columbus → baseline order and `managed-installation` in baseline → Columbus order. A fresh trial uses `--repeat 2`, then `3`, in **both** conditions; predeclare the number of repeats. Do not rerun only unfavorable answers or overwrite earlier evidence. The harness refuses an existing trial directory. The default freeze uses current Columbus production code against the fixed source fixture and creates a new cohort. To replay the recorded tool, freeze with `--engine-fixture evals/exploration/fixtures/repoatlas-engine-observed-0.4.0.zip` in a fresh directory and use the `repoatlas` condition. A condition must match its frozen engine. Current runs use `.columbus/index-v1.sqlite`; archived replays use the recorded `.repoatlas/jvm-v2.sqlite`. Never rename or overwrite published observation inputs to fit a new brand.
 
 The preserved RepoAtlas 0.4 engine cannot replay on **Windows with Python 3.14** because its original `stat`/`fstat` handling mistakes creation/change timestamps for a concurrent edit. The harness refuses that exact archived input before copying or executing it; use Windows/Python 3.11, Linux, or macOS for this replay. CI skips only the archived execution test on that known incompatible combination. Archive checksums and file inventory, the compatibility guard, and current Columbus engine tests still run there. The archive and historical observations remain unchanged; a skipped replay is not a successful historical execution.
 
 Preparation extracts the source snapshot, initializes its own Git root and verifies the case markers. Freezing copies one engine and creates a nonempty index. Trials verify the case catalog, source manifest and engine manifest before running. Snapshot source must remain unchanged. Model sessions use a read-only sandbox, with web and delegation disabled; repository code, tests and builds are forbidden in the task. The graph tool itself is permitted only in its enhanced condition.
 
-The model receives a useful ordinary-search baseline. The enhanced condition is instructed to start with the frozen tool’s search or context query and may fall back to shell reads. Thus the experiment evaluates that specific routing strategy, not every possible agent policy. The installed global skill catalog still appeared in both conditions despite ignoring user configuration; startup context and the longer enhanced prompt are included in measured usage. Caches are not reset. Identical settings cannot make independent model executions deterministic.
+The model receives a useful ordinary-search baseline. In the default protocol the enhanced condition is instructed to start with the frozen tool’s search or context query and may fall back to shell reads. Thus the experiment evaluates that specific routing strategy, not every possible agent policy. The installed global skill catalog still appeared in both conditions despite ignoring user configuration; startup context and the longer enhanced prompt are included in measured usage. Caches are not reset. Identical settings cannot make independent model executions deterministic.
 
 ## Measures and quality gate
 
@@ -64,3 +68,18 @@ python scripts/observe_delivery.py
 ```
 
 CI runs these deterministic checks and never launches the model trials. The separate `scripts/benchmark_context.py` remains a synthetic whole-source-versus-response illustration; it is not the baseline used here.
+
+## Archive evidence for future cohorts
+
+[archive_evidence.py](archive_evidence.py) provides the opt-in `archive-evidence-v1` recognizer for new collectors:
+
+```python
+from archive_evidence import graph_evidence
+receipts = graph_evidence(events, observation_directory, task_evidence_paths)
+```
+
+It recognizes successful commands against the frozen runtime/archive and validates JSON, legacy source text and current file/declaration-table text. Receipts report operation, encoding, output hash, task-path relevance and batch use without retaining source or conversation text. Empty, failed, malformed or merely offered commands do not establish useful graph evidence. Recognition is not an answer-quality grade or an independent source/hash verification gate.
+
+Before any new model run, freeze/hash this module, its tests and the new collector alongside the source, archive, runtime, skill, task catalog and full quality rubric. Record `recognizer_version` in results; keep actual input/output, citation and semantic checks separate. Historical collectors and frozen cohorts deliberately retain their original recognizers and acceptance criteria. These parser tests neither rerun nor upgrade prior failed results.
+
+Custom predeclared tasks can now be prepared with `prepare --fixture SOURCE.zip --cases CATALOG.json`. The catalog is copied into the observation directory and hash-checked at execution and summary time; later edits to the external catalog cannot rewrite prepared tasks. Historical observations without a frozen catalog retain their original hash validation. IDs and evidence paths are validated. The new [relational pilot plan](results/relational-pilot/PLAN.md) has a prepared current-source fixture but no model measurements yet.

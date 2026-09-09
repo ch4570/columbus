@@ -1,0 +1,16 @@
+{
+  "model_trial_complete": true,
+  "predeclared_quality_gate_passed": false,
+  "accepted_savings_pair": false,
+  "usage_percent_change_graph_vs_baseline": {
+    "input_tokens": 38.62,
+    "cached_input_tokens": 47.2505,
+    "uncached_input_tokens": -19.7199,
+    "output_tokens": 24.7753,
+    "reasoning_output_tokens": 25.4177
+  },
+  "baseline_semantic_passed_owners": 32,
+  "graph_semantic_passed_owners": 33,
+  "repeat_not_holdout": true,
+  "attribution": "Combined frozen runtime/skill configuration; no isolated causal attribution or population claim."
+}

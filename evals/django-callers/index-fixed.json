@@ -1,0 +1,23 @@
+{
+  "source_commit": "4ea267661b260ea0d0c87e9dcb99d70037c6f2fc",
+  "seconds": 19.02691824999056,
+  "files": 5466,
+  "indexed_bytes": 35218440,
+  "symbols": 46631,
+  "edges": 86592,
+  "diagnostics": [
+    {
+      "path": "tests/test_runner_apps/tagged/tests_syntax_error.py",
+      "message": "SyntaxError at line 11: invalid decimal literal (tests_syntax_error.py, line 11)"
+    }
+  ],
+  "inventory": {
+    "probe_files": 3907,
+    "probe_bytes": 24486875,
+    "binary_paths_count": 1385,
+    "regression_assets_excluded": {
+      "tests/mail/attachments/file_png.txt": true,
+      "tests/staticfiles_tests/project/nonutf8/nonutf8.css": true
+    }
+  }
+}

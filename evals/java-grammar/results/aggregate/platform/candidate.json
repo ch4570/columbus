@@ -1,0 +1,1663 @@
+{
+  "conclusion": "success",
+  "headSha": "6c4c968f73db47aa3a5ed4db7856ff7c0e86b4a1",
+  "jobs": [
+    {
+      "completedAt": "2026-09-07T17:11:43Z",
+      "conclusion": "success",
+      "databaseId": 101819524224,
+      "name": "candidate (ubuntu-latest, 3.11)",
+      "startedAt": "2026-09-07T17:10:28Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-07T17:10:30Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-07T17:10:28Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:31Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-09-07T17:10:30Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:32Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v5",
+          "number": 3,
+          "startedAt": "2026-09-07T17:10:31Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:33Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-node@v4",
+          "number": 4,
+          "startedAt": "2026-09-07T17:10:32Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:39Z",
+          "conclusion": "success",
+          "name": "Fetch pinned upstream grammar",
+          "number": 5,
+          "startedAt": "2026-09-07T17:10:33Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:44Z",
+          "conclusion": "success",
+          "name": "Generate parser and run upstream corpus",
+          "number": 6,
+          "startedAt": "2026-09-07T17:10:39Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:44Z",
+          "conclusion": "success",
+          "name": "Stamp candidate and record source provenance",
+          "number": 7,
+          "startedAt": "2026-09-07T17:10:44Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:47Z",
+          "conclusion": "success",
+          "name": "Build candidate wheel",
+          "number": 8,
+          "startedAt": "2026-09-07T17:10:44Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:57Z",
+          "conclusion": "success",
+          "name": "Install production dependencies then candidate wheel",
+          "number": 9,
+          "startedAt": "2026-09-07T17:10:47Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:03Z",
+          "conclusion": "success",
+          "name": "Verify existing bootstrap runtime adopts the candidate",
+          "number": 10,
+          "startedAt": "2026-09-07T17:10:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:03Z",
+          "conclusion": "success",
+          "name": "Verify installed candidate and annotation spans",
+          "number": 11,
+          "startedAt": "2026-09-07T17:11:03Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:16Z",
+          "conclusion": "success",
+          "name": "Engine regression tests with candidate",
+          "number": 12,
+          "startedAt": "2026-09-07T17:11:03Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:18Z",
+          "conclusion": "success",
+          "name": "Build Columbus wheel and portable ZIP",
+          "number": 13,
+          "startedAt": "2026-09-07T17:11:16Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:23Z",
+          "conclusion": "success",
+          "name": "Verify bundled default through existing-runtime upgrade and relocation",
+          "number": 14,
+          "startedAt": "2026-09-07T17:11:18Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:23Z",
+          "conclusion": "success",
+          "name": "Verify incompatible bundled parser cannot fall back to upstream",
+          "number": 15,
+          "startedAt": "2026-09-07T17:11:23Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:41Z",
+          "conclusion": "success",
+          "name": "Verify candidate through clean Columbus installations",
+          "number": 16,
+          "startedAt": "2026-09-07T17:11:23Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:41Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 17,
+          "startedAt": "2026-09-07T17:11:41Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:42Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@v4",
+          "number": 32,
+          "startedAt": "2026-09-07T17:11:41Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:42Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v5",
+          "number": 33,
+          "startedAt": "2026-09-07T17:11:42Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:42Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 34,
+          "startedAt": "2026-09-07T17:11:42Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:42Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 35,
+          "startedAt": "2026-09-07T17:11:42Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34146482329/job/101819524224"
+    },
+    {
+      "completedAt": "2026-09-07T17:12:04Z",
+      "conclusion": "success",
+      "databaseId": 101819524287,
+      "name": "candidate (macos-latest, 3.14)",
+      "startedAt": "2026-09-07T17:10:34Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-07T17:10:36Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-07T17:10:35Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:38Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-09-07T17:10:36Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:38Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v5",
+          "number": 3,
+          "startedAt": "2026-09-07T17:10:38Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:39Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-node@v4",
+          "number": 4,
+          "startedAt": "2026-09-07T17:10:38Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:45Z",
+          "conclusion": "success",
+          "name": "Fetch pinned upstream grammar",
+          "number": 5,
+          "startedAt": "2026-09-07T17:10:39Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:51Z",
+          "conclusion": "success",
+          "name": "Generate parser and run upstream corpus",
+          "number": 6,
+          "startedAt": "2026-09-07T17:10:45Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:52Z",
+          "conclusion": "success",
+          "name": "Stamp candidate and record source provenance",
+          "number": 7,
+          "startedAt": "2026-09-07T17:10:51Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:56Z",
+          "conclusion": "success",
+          "name": "Build candidate wheel",
+          "number": 8,
+          "startedAt": "2026-09-07T17:10:52Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:02Z",
+          "conclusion": "success",
+          "name": "Install production dependencies then candidate wheel",
+          "number": 9,
+          "startedAt": "2026-09-07T17:10:56Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:09Z",
+          "conclusion": "success",
+          "name": "Verify existing bootstrap runtime adopts the candidate",
+          "number": 10,
+          "startedAt": "2026-09-07T17:11:02Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:09Z",
+          "conclusion": "success",
+          "name": "Verify installed candidate and annotation spans",
+          "number": 11,
+          "startedAt": "2026-09-07T17:11:09Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:28Z",
+          "conclusion": "success",
+          "name": "Engine regression tests with candidate",
+          "number": 12,
+          "startedAt": "2026-09-07T17:11:09Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:31Z",
+          "conclusion": "success",
+          "name": "Build Columbus wheel and portable ZIP",
+          "number": 13,
+          "startedAt": "2026-09-07T17:11:28Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:36Z",
+          "conclusion": "success",
+          "name": "Verify bundled default through existing-runtime upgrade and relocation",
+          "number": 14,
+          "startedAt": "2026-09-07T17:11:31Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:37Z",
+          "conclusion": "success",
+          "name": "Verify incompatible bundled parser cannot fall back to upstream",
+          "number": 15,
+          "startedAt": "2026-09-07T17:11:36Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:58Z",
+          "conclusion": "success",
+          "name": "Verify candidate through clean Columbus installations",
+          "number": 16,
+          "startedAt": "2026-09-07T17:11:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:12:00Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 17,
+          "startedAt": "2026-09-07T17:11:58Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:12:00Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@v4",
+          "number": 32,
+          "startedAt": "2026-09-07T17:12:00Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:12:00Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v5",
+          "number": 33,
+          "startedAt": "2026-09-07T17:12:00Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:12:00Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 34,
+          "startedAt": "2026-09-07T17:12:00Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:12:01Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 35,
+          "startedAt": "2026-09-07T17:12:00Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34146482329/job/101819524287"
+    },
+    {
+      "completedAt": "2026-09-07T17:11:45Z",
+      "conclusion": "success",
+      "databaseId": 101819524358,
+      "name": "candidate (ubuntu-latest, 3.14)",
+      "startedAt": "2026-09-07T17:10:28Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-07T17:10:30Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-07T17:10:29Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:31Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-09-07T17:10:30Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:31Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v5",
+          "number": 3,
+          "startedAt": "2026-09-07T17:10:31Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:34Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-node@v4",
+          "number": 4,
+          "startedAt": "2026-09-07T17:10:31Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:40Z",
+          "conclusion": "success",
+          "name": "Fetch pinned upstream grammar",
+          "number": 5,
+          "startedAt": "2026-09-07T17:10:34Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:45Z",
+          "conclusion": "success",
+          "name": "Generate parser and run upstream corpus",
+          "number": 6,
+          "startedAt": "2026-09-07T17:10:40Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:46Z",
+          "conclusion": "success",
+          "name": "Stamp candidate and record source provenance",
+          "number": 7,
+          "startedAt": "2026-09-07T17:10:45Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:51Z",
+          "conclusion": "success",
+          "name": "Build candidate wheel",
+          "number": 8,
+          "startedAt": "2026-09-07T17:10:46Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:59Z",
+          "conclusion": "success",
+          "name": "Install production dependencies then candidate wheel",
+          "number": 9,
+          "startedAt": "2026-09-07T17:10:51Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:04Z",
+          "conclusion": "success",
+          "name": "Verify existing bootstrap runtime adopts the candidate",
+          "number": 10,
+          "startedAt": "2026-09-07T17:10:59Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:04Z",
+          "conclusion": "success",
+          "name": "Verify installed candidate and annotation spans",
+          "number": 11,
+          "startedAt": "2026-09-07T17:11:04Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:15Z",
+          "conclusion": "success",
+          "name": "Engine regression tests with candidate",
+          "number": 12,
+          "startedAt": "2026-09-07T17:11:04Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:17Z",
+          "conclusion": "success",
+          "name": "Build Columbus wheel and portable ZIP",
+          "number": 13,
+          "startedAt": "2026-09-07T17:11:15Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:22Z",
+          "conclusion": "success",
+          "name": "Verify bundled default through existing-runtime upgrade and relocation",
+          "number": 14,
+          "startedAt": "2026-09-07T17:11:17Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:23Z",
+          "conclusion": "success",
+          "name": "Verify incompatible bundled parser cannot fall back to upstream",
+          "number": 15,
+          "startedAt": "2026-09-07T17:11:22Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:40Z",
+          "conclusion": "success",
+          "name": "Verify candidate through clean Columbus installations",
+          "number": 16,
+          "startedAt": "2026-09-07T17:11:23Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:42Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 17,
+          "startedAt": "2026-09-07T17:11:40Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:42Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@v4",
+          "number": 32,
+          "startedAt": "2026-09-07T17:11:42Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:42Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v5",
+          "number": 33,
+          "startedAt": "2026-09-07T17:11:42Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:42Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 34,
+          "startedAt": "2026-09-07T17:11:42Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:42Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 35,
+          "startedAt": "2026-09-07T17:11:42Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34146482329/job/101819524358"
+    },
+    {
+      "completedAt": "2026-09-07T17:12:26Z",
+      "conclusion": "success",
+      "databaseId": 101819524361,
+      "name": "candidate (macos-latest, 3.11)",
+      "startedAt": "2026-09-07T17:10:33Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-07T17:10:34Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-07T17:10:33Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:36Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-09-07T17:10:34Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:36Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v5",
+          "number": 3,
+          "startedAt": "2026-09-07T17:10:36Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:37Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-node@v4",
+          "number": 4,
+          "startedAt": "2026-09-07T17:10:36Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:45Z",
+          "conclusion": "success",
+          "name": "Fetch pinned upstream grammar",
+          "number": 5,
+          "startedAt": "2026-09-07T17:10:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:53Z",
+          "conclusion": "success",
+          "name": "Generate parser and run upstream corpus",
+          "number": 6,
+          "startedAt": "2026-09-07T17:10:45Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:53Z",
+          "conclusion": "success",
+          "name": "Stamp candidate and record source provenance",
+          "number": 7,
+          "startedAt": "2026-09-07T17:10:53Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:58Z",
+          "conclusion": "success",
+          "name": "Build candidate wheel",
+          "number": 8,
+          "startedAt": "2026-09-07T17:10:53Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:05Z",
+          "conclusion": "success",
+          "name": "Install production dependencies then candidate wheel",
+          "number": 9,
+          "startedAt": "2026-09-07T17:10:58Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:11Z",
+          "conclusion": "success",
+          "name": "Verify existing bootstrap runtime adopts the candidate",
+          "number": 10,
+          "startedAt": "2026-09-07T17:11:05Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:11Z",
+          "conclusion": "success",
+          "name": "Verify installed candidate and annotation spans",
+          "number": 11,
+          "startedAt": "2026-09-07T17:11:11Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:36Z",
+          "conclusion": "success",
+          "name": "Engine regression tests with candidate",
+          "number": 12,
+          "startedAt": "2026-09-07T17:11:11Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:39Z",
+          "conclusion": "success",
+          "name": "Build Columbus wheel and portable ZIP",
+          "number": 13,
+          "startedAt": "2026-09-07T17:11:36Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:45Z",
+          "conclusion": "success",
+          "name": "Verify bundled default through existing-runtime upgrade and relocation",
+          "number": 14,
+          "startedAt": "2026-09-07T17:11:39Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:47Z",
+          "conclusion": "success",
+          "name": "Verify incompatible bundled parser cannot fall back to upstream",
+          "number": 15,
+          "startedAt": "2026-09-07T17:11:45Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:12:21Z",
+          "conclusion": "success",
+          "name": "Verify candidate through clean Columbus installations",
+          "number": 16,
+          "startedAt": "2026-09-07T17:11:47Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:12:22Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 17,
+          "startedAt": "2026-09-07T17:12:21Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:12:22Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@v4",
+          "number": 32,
+          "startedAt": "2026-09-07T17:12:22Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:12:23Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v5",
+          "number": 33,
+          "startedAt": "2026-09-07T17:12:22Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:12:23Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 34,
+          "startedAt": "2026-09-07T17:12:23Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:12:24Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 35,
+          "startedAt": "2026-09-07T17:12:23Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34146482329/job/101819524361"
+    },
+    {
+      "completedAt": "2026-09-07T17:15:15Z",
+      "conclusion": "success",
+      "databaseId": 101819524485,
+      "name": "candidate (windows-latest, 3.11)",
+      "startedAt": "2026-09-07T17:10:28Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-07T17:10:30Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-07T17:10:29Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:38Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-09-07T17:10:30Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:38Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v5",
+          "number": 3,
+          "startedAt": "2026-09-07T17:10:38Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:56Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-node@v4",
+          "number": 4,
+          "startedAt": "2026-09-07T17:10:38Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:03Z",
+          "conclusion": "success",
+          "name": "Fetch pinned upstream grammar",
+          "number": 5,
+          "startedAt": "2026-09-07T17:10:56Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:27Z",
+          "conclusion": "success",
+          "name": "Generate parser and run upstream corpus",
+          "number": 6,
+          "startedAt": "2026-09-07T17:11:03Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:30Z",
+          "conclusion": "success",
+          "name": "Stamp candidate and record source provenance",
+          "number": 7,
+          "startedAt": "2026-09-07T17:11:27Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:48Z",
+          "conclusion": "success",
+          "name": "Build candidate wheel",
+          "number": 8,
+          "startedAt": "2026-09-07T17:11:30Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:12:10Z",
+          "conclusion": "success",
+          "name": "Install production dependencies then candidate wheel",
+          "number": 9,
+          "startedAt": "2026-09-07T17:11:48Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:12:23Z",
+          "conclusion": "success",
+          "name": "Verify existing bootstrap runtime adopts the candidate",
+          "number": 10,
+          "startedAt": "2026-09-07T17:12:10Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:12:24Z",
+          "conclusion": "success",
+          "name": "Verify installed candidate and annotation spans",
+          "number": 11,
+          "startedAt": "2026-09-07T17:12:23Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:13:53Z",
+          "conclusion": "success",
+          "name": "Engine regression tests with candidate",
+          "number": 12,
+          "startedAt": "2026-09-07T17:12:24Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:13:58Z",
+          "conclusion": "success",
+          "name": "Build Columbus wheel and portable ZIP",
+          "number": 13,
+          "startedAt": "2026-09-07T17:13:53Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:14:14Z",
+          "conclusion": "success",
+          "name": "Verify bundled default through existing-runtime upgrade and relocation",
+          "number": 14,
+          "startedAt": "2026-09-07T17:13:58Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:14:16Z",
+          "conclusion": "success",
+          "name": "Verify incompatible bundled parser cannot fall back to upstream",
+          "number": 15,
+          "startedAt": "2026-09-07T17:14:14Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:11Z",
+          "conclusion": "success",
+          "name": "Verify candidate through clean Columbus installations",
+          "number": 16,
+          "startedAt": "2026-09-07T17:14:16Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:12Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 17,
+          "startedAt": "2026-09-07T17:15:11Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:12Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@v4",
+          "number": 32,
+          "startedAt": "2026-09-07T17:15:12Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:12Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v5",
+          "number": 33,
+          "startedAt": "2026-09-07T17:15:12Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:14Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 34,
+          "startedAt": "2026-09-07T17:15:12Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:14Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 35,
+          "startedAt": "2026-09-07T17:15:14Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34146482329/job/101819524485"
+    },
+    {
+      "completedAt": "2026-09-07T17:14:24Z",
+      "conclusion": "success",
+      "databaseId": 101819524519,
+      "name": "candidate (windows-latest, 3.14)",
+      "startedAt": "2026-09-07T17:10:28Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-07T17:10:30Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-07T17:10:29Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:35Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-09-07T17:10:30Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:35Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v5",
+          "number": 3,
+          "startedAt": "2026-09-07T17:10:35Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:40Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-node@v4",
+          "number": 4,
+          "startedAt": "2026-09-07T17:10:35Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:10:46Z",
+          "conclusion": "success",
+          "name": "Fetch pinned upstream grammar",
+          "number": 5,
+          "startedAt": "2026-09-07T17:10:40Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:02Z",
+          "conclusion": "success",
+          "name": "Generate parser and run upstream corpus",
+          "number": 6,
+          "startedAt": "2026-09-07T17:10:46Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:05Z",
+          "conclusion": "success",
+          "name": "Stamp candidate and record source provenance",
+          "number": 7,
+          "startedAt": "2026-09-07T17:11:02Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:21Z",
+          "conclusion": "success",
+          "name": "Build candidate wheel",
+          "number": 8,
+          "startedAt": "2026-09-07T17:11:05Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:39Z",
+          "conclusion": "success",
+          "name": "Install production dependencies then candidate wheel",
+          "number": 9,
+          "startedAt": "2026-09-07T17:11:21Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:48Z",
+          "conclusion": "success",
+          "name": "Verify existing bootstrap runtime adopts the candidate",
+          "number": 10,
+          "startedAt": "2026-09-07T17:11:39Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:11:49Z",
+          "conclusion": "success",
+          "name": "Verify installed candidate and annotation spans",
+          "number": 11,
+          "startedAt": "2026-09-07T17:11:48Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:13:07Z",
+          "conclusion": "success",
+          "name": "Engine regression tests with candidate",
+          "number": 12,
+          "startedAt": "2026-09-07T17:11:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:13:12Z",
+          "conclusion": "success",
+          "name": "Build Columbus wheel and portable ZIP",
+          "number": 13,
+          "startedAt": "2026-09-07T17:13:07Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:13:24Z",
+          "conclusion": "success",
+          "name": "Verify bundled default through existing-runtime upgrade and relocation",
+          "number": 14,
+          "startedAt": "2026-09-07T17:13:12Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:13:27Z",
+          "conclusion": "success",
+          "name": "Verify incompatible bundled parser cannot fall back to upstream",
+          "number": 15,
+          "startedAt": "2026-09-07T17:13:24Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:14:18Z",
+          "conclusion": "success",
+          "name": "Verify candidate through clean Columbus installations",
+          "number": 16,
+          "startedAt": "2026-09-07T17:13:27Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:14:19Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 17,
+          "startedAt": "2026-09-07T17:14:18Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:14:20Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@v4",
+          "number": 32,
+          "startedAt": "2026-09-07T17:14:19Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:14:20Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v5",
+          "number": 33,
+          "startedAt": "2026-09-07T17:14:20Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:14:22Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 34,
+          "startedAt": "2026-09-07T17:14:20Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:14:22Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 35,
+          "startedAt": "2026-09-07T17:14:22Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34146482329/job/101819524519"
+    },
+    {
+      "completedAt": "2026-09-07T17:15:26Z",
+      "conclusion": "success",
+      "databaseId": 101820558803,
+      "name": "aggregate",
+      "startedAt": "2026-09-07T17:15:17Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-07T17:15:19Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-07T17:15:18Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:20Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-09-07T17:15:19Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:20Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v5",
+          "number": 3,
+          "startedAt": "2026-09-07T17:15:20Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:20Z",
+          "conclusion": "success",
+          "name": "Run actions/download-artifact@v4",
+          "number": 4,
+          "startedAt": "2026-09-07T17:15:20Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:23Z",
+          "conclusion": "success",
+          "name": "Assemble one three-OS parser ZIP and Columbus wheel",
+          "number": 5,
+          "startedAt": "2026-09-07T17:15:20Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:24Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 6,
+          "startedAt": "2026-09-07T17:15:23Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:25Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v5",
+          "number": 11,
+          "startedAt": "2026-09-07T17:15:24Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:25Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 12,
+          "startedAt": "2026-09-07T17:15:25Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:25Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 13,
+          "startedAt": "2026-09-07T17:15:25Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34146482329/job/101820558803"
+    },
+    {
+      "completedAt": "2026-09-07T17:16:12Z",
+      "conclusion": "success",
+      "databaseId": 101820598049,
+      "name": "aggregate-verify (ubuntu-latest, 3.14)",
+      "startedAt": "2026-09-07T17:15:28Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-07T17:15:31Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-07T17:15:29Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:32Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-09-07T17:15:31Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:32Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v5",
+          "number": 3,
+          "startedAt": "2026-09-07T17:15:32Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:34Z",
+          "conclusion": "success",
+          "name": "Run actions/download-artifact@v4",
+          "number": 4,
+          "startedAt": "2026-09-07T17:15:32Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:08Z",
+          "conclusion": "success",
+          "name": "Verify the unchanged shared artifact through installation and upgrade",
+          "number": 5,
+          "startedAt": "2026-09-07T17:15:34Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:09Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 6,
+          "startedAt": "2026-09-07T17:16:08Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:09Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v5",
+          "number": 11,
+          "startedAt": "2026-09-07T17:16:09Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:09Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 12,
+          "startedAt": "2026-09-07T17:16:09Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:09Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 13,
+          "startedAt": "2026-09-07T17:16:09Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34146482329/job/101820598049"
+    },
+    {
+      "completedAt": "2026-09-07T17:16:50Z",
+      "conclusion": "success",
+      "databaseId": 101820598076,
+      "name": "aggregate-verify (windows-latest, 3.11)",
+      "startedAt": "2026-09-07T17:15:29Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-07T17:15:31Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-07T17:15:30Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:36Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-09-07T17:15:31Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:37Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v5",
+          "number": 3,
+          "startedAt": "2026-09-07T17:15:36Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:37Z",
+          "conclusion": "success",
+          "name": "Run actions/download-artifact@v4",
+          "number": 4,
+          "startedAt": "2026-09-07T17:15:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:46Z",
+          "conclusion": "success",
+          "name": "Verify the unchanged shared artifact through installation and upgrade",
+          "number": 5,
+          "startedAt": "2026-09-07T17:15:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:47Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 6,
+          "startedAt": "2026-09-07T17:16:46Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:47Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v5",
+          "number": 11,
+          "startedAt": "2026-09-07T17:16:47Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:49Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 12,
+          "startedAt": "2026-09-07T17:16:47Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:49Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 13,
+          "startedAt": "2026-09-07T17:16:49Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34146482329/job/101820598076"
+    },
+    {
+      "completedAt": "2026-09-07T17:16:17Z",
+      "conclusion": "success",
+      "databaseId": 101820598094,
+      "name": "aggregate-verify (macos-latest, 3.14)",
+      "startedAt": "2026-09-07T17:15:34Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-07T17:15:36Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-07T17:15:34Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:38Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-09-07T17:15:36Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:38Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v5",
+          "number": 3,
+          "startedAt": "2026-09-07T17:15:38Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:40Z",
+          "conclusion": "success",
+          "name": "Run actions/download-artifact@v4",
+          "number": 4,
+          "startedAt": "2026-09-07T17:15:38Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:11Z",
+          "conclusion": "success",
+          "name": "Verify the unchanged shared artifact through installation and upgrade",
+          "number": 5,
+          "startedAt": "2026-09-07T17:15:40Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:13Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 6,
+          "startedAt": "2026-09-07T17:16:11Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:13Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v5",
+          "number": 11,
+          "startedAt": "2026-09-07T17:16:13Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:14Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 12,
+          "startedAt": "2026-09-07T17:16:13Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:14Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 13,
+          "startedAt": "2026-09-07T17:16:14Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34146482329/job/101820598094"
+    },
+    {
+      "completedAt": "2026-09-07T17:16:10Z",
+      "conclusion": "success",
+      "databaseId": 101820598102,
+      "name": "aggregate-verify (macos-latest, 3.11)",
+      "startedAt": "2026-09-07T17:15:32Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-07T17:15:35Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-07T17:15:33Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:37Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-09-07T17:15:35Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:37Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v5",
+          "number": 3,
+          "startedAt": "2026-09-07T17:15:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:39Z",
+          "conclusion": "success",
+          "name": "Run actions/download-artifact@v4",
+          "number": 4,
+          "startedAt": "2026-09-07T17:15:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:04Z",
+          "conclusion": "success",
+          "name": "Verify the unchanged shared artifact through installation and upgrade",
+          "number": 5,
+          "startedAt": "2026-09-07T17:15:39Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:06Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 6,
+          "startedAt": "2026-09-07T17:16:04Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:06Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v5",
+          "number": 11,
+          "startedAt": "2026-09-07T17:16:06Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:06Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 12,
+          "startedAt": "2026-09-07T17:16:06Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:07Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 13,
+          "startedAt": "2026-09-07T17:16:07Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34146482329/job/101820598102"
+    },
+    {
+      "completedAt": "2026-09-07T17:17:22Z",
+      "conclusion": "success",
+      "databaseId": 101820598124,
+      "name": "aggregate-verify (windows-latest, 3.14)",
+      "startedAt": "2026-09-07T17:15:28Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-07T17:15:31Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-07T17:15:29Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:43Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-09-07T17:15:31Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:43Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v5",
+          "number": 3,
+          "startedAt": "2026-09-07T17:15:43Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:44Z",
+          "conclusion": "success",
+          "name": "Run actions/download-artifact@v4",
+          "number": 4,
+          "startedAt": "2026-09-07T17:15:43Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:17:18Z",
+          "conclusion": "success",
+          "name": "Verify the unchanged shared artifact through installation and upgrade",
+          "number": 5,
+          "startedAt": "2026-09-07T17:15:44Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:17:19Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 6,
+          "startedAt": "2026-09-07T17:17:18Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:17:19Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v5",
+          "number": 11,
+          "startedAt": "2026-09-07T17:17:19Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:17:21Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 12,
+          "startedAt": "2026-09-07T17:17:19Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:17:21Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 13,
+          "startedAt": "2026-09-07T17:17:21Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34146482329/job/101820598124"
+    },
+    {
+      "completedAt": "2026-09-07T17:16:03Z",
+      "conclusion": "success",
+      "databaseId": 101820598152,
+      "name": "aggregate-verify (ubuntu-latest, 3.11)",
+      "startedAt": "2026-09-07T17:15:28Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-07T17:15:30Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-07T17:15:29Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:30Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-09-07T17:15:30Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:31Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v5",
+          "number": 3,
+          "startedAt": "2026-09-07T17:15:30Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:15:31Z",
+          "conclusion": "success",
+          "name": "Run actions/download-artifact@v4",
+          "number": 4,
+          "startedAt": "2026-09-07T17:15:31Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:01Z",
+          "conclusion": "success",
+          "name": "Verify the unchanged shared artifact through installation and upgrade",
+          "number": 5,
+          "startedAt": "2026-09-07T17:15:31Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:01Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 6,
+          "startedAt": "2026-09-07T17:16:01Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:01Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v5",
+          "number": 11,
+          "startedAt": "2026-09-07T17:16:01Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:02Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 12,
+          "startedAt": "2026-09-07T17:16:01Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-07T17:16:02Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 13,
+          "startedAt": "2026-09-07T17:16:02Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/ch4570/columbus/actions/runs/34146482329/job/101820598152"
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/ch4570/columbus/actions/runs/34146482329"
+}

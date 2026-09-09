@@ -1,0 +1,23 @@
+{
+  "archive_sha256": "7d9f86e849f45df5c0dab9283f83ba7dd62ffe2b3b61c3571bf2003c7b73d06e",
+  "pages": [
+    {
+      "offset": 0,
+      "edges": 7,
+      "contexts": 7,
+      "bytes": 8000,
+      "next_offset": null
+    }
+  ],
+  "total_bytes": 8000,
+  "source_files_checked": 5,
+  "production_call_sites": 7,
+  "production_callers": 7,
+  "exact_excerpt_parity": true,
+  "oracle_parity": true,
+  "archive_unchanged": true,
+  "consumer_index_absent": true,
+  "path_filter": "django/*",
+  "model_trial": false,
+  "token_savings_claimed": false
+}

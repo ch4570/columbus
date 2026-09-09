@@ -1,0 +1,322 @@
+[
+  {
+    "id": "src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.getTypeHint:method(TypeReference)",
+    "path": "src/main/java/org/springframework/aot/hint/ReflectionHints.java",
+    "kind": "method",
+    "start_line": 76,
+    "end_line": 79,
+    "signature": "public @Nullable TypeHint getTypeHint(TypeReference type)"
+  },
+  {
+    "id": "src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.getTypeHint:method(Class<?>)",
+    "path": "src/main/java/org/springframework/aot/hint/ReflectionHints.java",
+    "kind": "method",
+    "start_line": 86,
+    "end_line": 88,
+    "signature": "public @Nullable TypeHint getTypeHint(Class<?> type)"
+  },
+  {
+    "id": "src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.registerType:method(TypeReference,Consumer<TypeHint.Builder>)",
+    "path": "src/main/java/org/springframework/aot/hint/ReflectionHints.java",
+    "kind": "method",
+    "start_line": 98,
+    "end_line": 102,
+    "signature": "public ReflectionHints registerType(TypeReference type, Consumer<TypeHint.Builder> typeHint)"
+  },
+  {
+    "id": "src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.registerType:method(TypeReference,MemberCategory...)",
+    "path": "src/main/java/org/springframework/aot/hint/ReflectionHints.java",
+    "kind": "method",
+    "start_line": 111,
+    "end_line": 113,
+    "signature": "public ReflectionHints registerType(TypeReference type, MemberCategory... memberCategories)"
+  },
+  {
+    "id": "src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.registerType:method(Class<?>,Consumer<TypeHint.Builder>)",
+    "path": "src/main/java/org/springframework/aot/hint/ReflectionHints.java",
+    "kind": "method",
+    "start_line": 122,
+    "end_line": 128,
+    "signature": "public ReflectionHints registerType(Class<?> type, Consumer<TypeHint.Builder> typeHint)"
+  },
+  {
+    "id": "src/main/java/org/springframework/aot/hint/ReflectionHints.java::org.springframework.aot.hint.ReflectionHints.registerType:method(Class<?>,MemberCategory...)",
+    "path": "src/main/java/org/springframework/aot/hint/ReflectionHints.java",
+    "kind": "method",
+    "start_line": 137,
+    "end_line": 143,
+    "signature": "public ReflectionHints registerType(Class<?> type, MemberCategory... memberCategories)"
+  },
+  {
+    "id": "src/main/java/org/springframework/aot/hint/ReflectionTypeReference.java::org.springframework.aot.hint.ReflectionTypeReference.of:method(Class<?>)",
+    "path": "src/main/java/org/springframework/aot/hint/ReflectionTypeReference.java",
+    "kind": "method",
+    "start_line": 45,
+    "end_line": 49,
+    "signature": "static ReflectionTypeReference of(Class<?> type)"
+  },
+  {
+    "id": "src/main/java/org/springframework/aot/hint/TypeHint.java::org.springframework.aot.hint.TypeHint.<init>:constructor(Builder)",
+    "path": "src/main/java/org/springframework/aot/hint/TypeHint.java",
+    "kind": "constructor",
+    "start_line": 59,
+    "end_line": 67,
+    "signature": "private TypeHint(Builder builder)"
+  },
+  {
+    "id": "src/main/java/org/springframework/aot/hint/TypeHint.java::org.springframework.aot.hint.TypeHint.getMemberCategories:method()",
+    "path": "src/main/java/org/springframework/aot/hint/TypeHint.java",
+    "kind": "method",
+    "start_line": 122,
+    "end_line": 124,
+    "signature": "public Set<MemberCategory> getMemberCategories()"
+  },
+  {
+    "id": "src/main/java/org/springframework/aot/hint/TypeHint.java::org.springframework.aot.hint.TypeHint.builtWith:method(MemberCategory...)",
+    "path": "src/main/java/org/springframework/aot/hint/TypeHint.java",
+    "kind": "method",
+    "start_line": 146,
+    "end_line": 148,
+    "signature": "public static Consumer<Builder> builtWith(MemberCategory... memberCategories)"
+  },
+  {
+    "id": "src/main/java/org/springframework/aot/hint/TypeHint.java::org.springframework.aot.hint.TypeHint.Builder.<init>:constructor(TypeReference)",
+    "path": "src/main/java/org/springframework/aot/hint/TypeHint.java",
+    "kind": "constructor",
+    "start_line": 170,
+    "end_line": 172,
+    "signature": "Builder(TypeReference type)"
+  },
+  {
+    "id": "src/main/java/org/springframework/aot/hint/TypeHint.java::org.springframework.aot.hint.TypeHint.Builder.withMembers:method(MemberCategory...)",
+    "path": "src/main/java/org/springframework/aot/hint/TypeHint.java",
+    "kind": "method",
+    "start_line": 272,
+    "end_line": 275,
+    "signature": "public Builder withMembers(MemberCategory... memberCategories)"
+  },
+  {
+    "id": "src/main/java/org/springframework/aot/hint/TypeHint.java::org.springframework.aot.hint.TypeHint.Builder.withJavaSerialization:method(boolean)",
+    "path": "src/main/java/org/springframework/aot/hint/TypeHint.java",
+    "kind": "method",
+    "start_line": 283,
+    "end_line": 286,
+    "signature": "public Builder withJavaSerialization(boolean javaSerialization)"
+  },
+  {
+    "id": "src/main/java/org/springframework/aot/hint/TypeHint.java::org.springframework.aot.hint.TypeHint.Builder.build:method()",
+    "path": "src/main/java/org/springframework/aot/hint/TypeHint.java",
+    "kind": "method",
+    "start_line": 292,
+    "end_line": 294,
+    "signature": "TypeHint build()"
+  },
+  {
+    "id": "src/main/java/org/springframework/aot/hint/TypeReference.java::org.springframework.aot.hint.TypeReference.of:method(Class<?>)",
+    "path": "src/main/java/org/springframework/aot/hint/TypeReference.java",
+    "kind": "method",
+    "start_line": 73,
+    "end_line": 75,
+    "signature": "static TypeReference of(Class<?> type)"
+  },
+  {
+    "id": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.getConversionService:method()",
+    "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+    "kind": "method",
+    "start_line": 107,
+    "end_line": 122,
+    "signature": "@Override public ConfigurableConversionService getConversionService()"
+  },
+  {
+    "id": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.setConversionService:method(ConfigurableConversionService)",
+    "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+    "kind": "method",
+    "start_line": 124,
+    "end_line": 128,
+    "signature": "@Override public void setConversionService(ConfigurableConversionService conversionService)"
+  },
+  {
+    "id": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.setIgnoreUnresolvableNestedPlaceholders:method(boolean)",
+    "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+    "kind": "method",
+    "start_line": 181,
+    "end_line": 184,
+    "signature": "@Override public void setIgnoreUnresolvableNestedPlaceholders(boolean ignoreUnresolvableNestedPlaceholders)"
+  },
+  {
+    "id": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.getProperty:method(String,String)",
+    "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+    "kind": "method",
+    "start_line": 214,
+    "end_line": 218,
+    "signature": "@Override public String getProperty(String key, String defaultValue)"
+  },
+  {
+    "id": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.getProperty:method(String,Class<T>,T)",
+    "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+    "kind": "method",
+    "start_line": 220,
+    "end_line": 224,
+    "signature": "@Override public <T> T getProperty(String key, Class<T> targetType, T defaultValue)"
+  },
+  {
+    "id": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.getRequiredProperty:method(String)",
+    "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+    "kind": "method",
+    "start_line": 226,
+    "end_line": 233,
+    "signature": "@Override public String getRequiredProperty(String key) throws IllegalStateException"
+  },
+  {
+    "id": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.getRequiredProperty:method(String,Class<T>)",
+    "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+    "kind": "method",
+    "start_line": 235,
+    "end_line": 242,
+    "signature": "@Override public <T> T getRequiredProperty(String key, Class<T> valueType) throws IllegalStateException"
+  },
+  {
+    "id": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.resolvePlaceholders:method(String)",
+    "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+    "kind": "method",
+    "start_line": 244,
+    "end_line": 250,
+    "signature": "@Override public String resolvePlaceholders(String text)"
+  },
+  {
+    "id": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders:method(String)",
+    "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+    "kind": "method",
+    "start_line": 252,
+    "end_line": 258,
+    "signature": "@Override public String resolveRequiredPlaceholders(String text) throws IllegalArgumentException"
+  },
+  {
+    "id": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.resolveNestedPlaceholders:method(String)",
+    "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+    "kind": "method",
+    "start_line": 272,
+    "end_line": 278,
+    "signature": "protected String resolveNestedPlaceholders(String value)"
+  },
+  {
+    "id": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.createPlaceholderHelper:method(boolean)",
+    "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+    "kind": "method",
+    "start_line": 280,
+    "end_line": 283,
+    "signature": "private PropertyPlaceholderHelper createPlaceholderHelper(boolean ignoreUnresolvablePlaceholders)"
+  },
+  {
+    "id": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders:method(String,PropertyPlaceholderHelper)",
+    "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+    "kind": "method",
+    "start_line": 285,
+    "end_line": 287,
+    "signature": "private String doResolvePlaceholders(String text, PropertyPlaceholderHelper helper)"
+  },
+  {
+    "id": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java::org.springframework.core.env.AbstractPropertyResolver.convertValueIfNecessary:method(Object,Class<T>)",
+    "path": "src/main/java/org/springframework/core/env/AbstractPropertyResolver.java",
+    "kind": "method",
+    "start_line": 297,
+    "end_line": 312,
+    "signature": "@SuppressWarnings(\"unchecked\") protected <T> @Nullable T convertValueIfNecessary(Object value, @Nullable Class<T> targetType)"
+  },
+  {
+    "id": "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java::org.springframework.core.env.PropertySourcesPropertyResolver.getProperty:method(String)",
+    "path": "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java",
+    "kind": "method",
+    "start_line": 58,
+    "end_line": 61,
+    "signature": "@Override public @Nullable String getProperty(String key)"
+  },
+  {
+    "id": "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java::org.springframework.core.env.PropertySourcesPropertyResolver.getProperty:method(String,Class<T>)",
+    "path": "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java",
+    "kind": "method",
+    "start_line": 63,
+    "end_line": 66,
+    "signature": "@Override public <T> @Nullable T getProperty(String key, Class<T> targetValueType)"
+  },
+  {
+    "id": "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java::org.springframework.core.env.PropertySourcesPropertyResolver.getPropertyAsRawString:method(String)",
+    "path": "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java",
+    "kind": "method",
+    "start_line": 68,
+    "end_line": 71,
+    "signature": "@Override protected @Nullable String getPropertyAsRawString(String key)"
+  },
+  {
+    "id": "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java::org.springframework.core.env.PropertySourcesPropertyResolver.getProperty:method(String,Class<T>,boolean)",
+    "path": "src/main/java/org/springframework/core/env/PropertySourcesPropertyResolver.java",
+    "kind": "method",
+    "start_line": 73,
+    "end_line": 100,
+    "signature": "protected <T> @Nullable T getProperty(String key, Class<T> targetValueType, boolean resolveNestedPlaceholders)"
+  },
+  {
+    "id": "src/main/java/org/springframework/util/Assert.java::org.springframework.util.Assert.notNull:method(Object,String)",
+    "path": "src/main/java/org/springframework/util/Assert.java",
+    "kind": "method",
+    "start_line": 179,
+    "end_line": 184,
+    "signature": "@Contract(\"null, _ -> fail\") public static void notNull(@Nullable Object object, String message)"
+  },
+  {
+    "id": "src/main/java/org/springframework/util/PlaceholderParser.java::org.springframework.util.PlaceholderParser.PartResolutionContext.handleUnresolvablePlaceholder:method(String,String)",
+    "path": "src/main/java/org/springframework/util/PlaceholderParser.java",
+    "kind": "method",
+    "start_line": 341,
+    "end_line": 348,
+    "signature": "public String handleUnresolvablePlaceholder(String key, String text)"
+  },
+  {
+    "id": "src/main/java/org/springframework/util/PlaceholderParser.java::org.springframework.util.PlaceholderParser.PartResolutionContext.toPlaceholderText:method(String)",
+    "path": "src/main/java/org/springframework/util/PlaceholderParser.java",
+    "kind": "method",
+    "start_line": 350,
+    "end_line": 352,
+    "signature": "private String toPlaceholderText(String text)"
+  },
+  {
+    "id": "src/main/java/org/springframework/util/PlaceholderParser.java::org.springframework.util.PlaceholderParser.PartResolutionContext.parse:method(String)",
+    "path": "src/main/java/org/springframework/util/PlaceholderParser.java",
+    "kind": "method",
+    "start_line": 354,
+    "end_line": 356,
+    "signature": "public @Nullable List<Part> parse(String text)"
+  },
+  {
+    "id": "src/main/java/org/springframework/util/PlaceholderParser.java::org.springframework.util.PlaceholderParser.PartResolutionContext.flagPlaceholderAsVisited:method(String)",
+    "path": "src/main/java/org/springframework/util/PlaceholderParser.java",
+    "kind": "method",
+    "start_line": 358,
+    "end_line": 366,
+    "signature": "public void flagPlaceholderAsVisited(String placeholder)"
+  },
+  {
+    "id": "src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt::org.springframework.aot.hint.getTypeHint:function()@ReflectionHints",
+    "path": "src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt",
+    "kind": "function",
+    "start_line": 26,
+    "end_line": 27,
+    "signature": "inline fun <reified T> ReflectionHints.getTypeHint()"
+  },
+  {
+    "id": "src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt::org.springframework.aot.hint.registerType:function((TypeHint.Builder)->Unit)@ReflectionHints",
+    "path": "src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt",
+    "kind": "function",
+    "start_line": 36,
+    "end_line": 37,
+    "signature": "inline fun <reified T> ReflectionHints.registerType(noinline typeHint: (TypeHint.Builder) -> Unit)"
+  },
+  {
+    "id": "src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt::org.springframework.aot.hint.registerType:function(MemberCategory)@ReflectionHints",
+    "path": "src/main/kotlin/org/springframework/aot/hint/ReflectionHintsExtensions.kt",
+    "kind": "function",
+    "start_line": 46,
+    "end_line": 47,
+    "signature": "inline fun <reified T> ReflectionHints.registerType(vararg memberCategories: MemberCategory)"
+  }
+]

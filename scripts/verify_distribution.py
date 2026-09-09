@@ -45,7 +45,8 @@ def verify_archive(artifact: Path, target: Path) -> Path:
 
 
 def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False,
-           bundle: Path | None = None) -> dict:
+           bundle: Path | None = None, expected_java_version: str | None = None,
+           bundled_java_default: bool = False) -> dict:
     environment = dict(os.environ)
     for name in ("PYTHONPATH", "PYTHONHOME", "VIRTUAL_ENV"):
         environment.pop(name, None)
@@ -61,6 +62,282 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
             if result.returncode != expected:
                 raise VerificationError(f"Command failed ({result.returncode}, expected {expected}): {command}\n{result.stdout}\n{result.stderr}")
             return result.stdout
+
+        grammar_checks, continuation_checks = [], []
+
+        def verify_java_runtime(interpreter, label):
+            if expected_java_version is None:
+                return
+            probe = """
+import importlib.metadata as metadata
+import json, sys
+from tree_sitter import Language, Parser
+import tree_sitter_java
+actual = metadata.version('tree-sitter-java')
+assert actual == sys.argv[1], (actual, sys.argv[1])
+parser = Parser(Language(tree_sitter_java.language()))
+for parameter, invalid in [('int @A ... values', False), ('int @A [] @B ... values', False),
+                           ('@A Class<?> @B ... values', False), ('int ... @A values', True)]:
+    source = ('class C { void run(' + parameter + ') {} }').encode()
+    assert parser.parse(source).root_node.has_error == invalid, parameter
+print(json.dumps({'version': actual, 'annotation_cases': 4}))
+"""
+            observed = json.loads(run([interpreter, '-I', '-c', probe, expected_java_version]))
+            grammar_checks.append({'installation': label, **observed})
+
+        def verify_graph_archive(prefix, target, label, name):
+            status = json.loads(run([*prefix, 'sync', '--repo', target, '--summary']))
+            if not status.get('summary') or not status.get('details_omitted'):
+                raise VerificationError('Installed summary omitted its evidence boundary')
+            if (status['schema_version'] != '4'
+                    or any(status['refresh'].get(key) != 0 for key in ('cached_parses_loaded', 'parsed_files', 'hashed_files'))):
+                raise VerificationError('Installed compressed cache did not support lazy unchanged sync')
+            artifact = root / (name + '.jsonl.gz')
+            receipt = json.loads(run([*prefix, 'archive', '--repo', target, '--snapshot', '--output', artifact]))
+            if receipt['nodes'] != status['symbols'] or receipt['edges'] != status['edges'] or receipt['truncated']:
+                raise VerificationError('Installed complete archive lost graph records')
+            consumer = root / (name + ' consumer')
+            consumer.mkdir()
+            result = run([*prefix, 'archive-search', label, '--input', artifact,
+                          '--repo', consumer, '--budget-bytes', '2048'])
+            packet = json.loads(result)
+            if not any(item['name'] == label for item in packet['items']) or len(result.encode('utf-8')) > 2048:
+                raise VerificationError('Installed archive lookup failed its result/budget check')
+            symbol_id = next(item['id'] for item in packet['items'] if item['name'] == label)
+            related = run([*prefix, 'archive-neighbors', symbol_id, '--input', artifact,
+                           '--repo', consumer, '--direction', 'in', '--kinds', 'contains', '--budget-bytes', '2048'])
+            relations = json.loads(related)
+            if (not relations['edges'] or relations['semantic_complete'] or len(related.encode('utf-8')) > 2048
+                    or not all(edge['target'] == symbol_id for edge in relations['edges'])):
+                raise VerificationError('Installed source-free archive relationships failed')
+            xz = root / (name + '.jsonl.xz')
+            run([*prefix, 'archive', '--repo', target, '--snapshot', '--output', xz, '--compression', 'xz'])
+            xz_packet = json.loads(run([*prefix, 'archive-search', label, '--input', xz,
+                                       '--repo', consumer, '--budget-bytes', '2048']))
+            xz_relations = json.loads(run([*prefix, 'archive-neighbors', symbol_id, '--input', xz,
+                                          '--repo', consumer, '--direction', 'in', '--kinds', 'contains', '--budget-bytes', '2048']))
+            if xz_packet != packet or xz_relations != relations:
+                raise VerificationError('Installed XZ archive differs from gzip queries')
+            searches = [run([*prefix, 'archive-search', label, '--input', source, '--repo', consumer,
+                             '--format', 'text', '--budget-bytes', '2048']) for source in (artifact, xz)]
+            if (searches[0] != searches[1] or len(searches[0].encode('utf-8')) > 2048
+                    or symbol_id not in searches[0] or 'source_hash' not in searches[0]):
+                raise VerificationError('Installed archive search text lost evidence or exceeded budget')
+            text_pages = [run([*prefix, 'archive-neighbors', symbol_id, '--input', source,
+                              '--repo', consumer, '--direction', 'in', '--kinds', 'contains',
+                              '--format', 'text', '--budget-bytes', '4096']) for source in (artifact, xz)]
+            if (text_pages[0] != text_pages[1] or len(text_pages[0].encode('utf-8')) > 4096
+                    or 'edges [source_node,target_node,file_number,relationship]' not in text_pages[0]
+                    or symbol_id not in text_pages[0] or 'source_hash' not in text_pages[0]):
+                raise VerificationError('Installed archive text relationships failed codec/budget/evidence checks')
+            if (consumer / '.columbus').exists():
+                raise VerificationError('Archive lookup unexpectedly created a repository index')
+
+        def verify_callers(prefix, target):
+            source = target / 'caller_probe.py'
+            overload_source = ('class OverloadProbe {\n'
+                               '  int choose() { return 1; }\n'
+                               '  int choose(int value) { return value; }\n}\n').encode()
+            (target / 'OverloadProbe.java').write_bytes(overload_source)
+            original = ("def evidence_target(): return 1\n"
+                        "def outer():\n    def inner():\n        evidence_target()\n    inner()\n"
+                        "def direct():\n    value = 'a\u2028b'\n    evidence_target()\n"
+                        "class ReceiverProbe:\n    def helper(self): pass\n    def run(self): self.helper()\n").encode()
+            source.write_bytes(original)
+            run([*prefix, 'sync', '--repo', target, '--summary'])
+            neighbors = [*prefix, 'neighbors', 'ReceiverProbe.run', '--repo', target,
+                         '--snapshot', '--direction', 'out', '--kinds', 'calls']
+            if json.loads(run(neighbors))['edges']:
+                raise VerificationError('Receiver candidate leaked into default calls')
+            candidate = json.loads(run([*neighbors, '--include-candidates']))
+            if (len(candidate['edges']) != 1 or candidate['edges'][0]['kind'] != 'candidate_calls'
+                    or candidate['edges'][0]['confidence'] != 'retrieval_only'):
+                raise VerificationError('Installed receiver candidate traversal lost uncertainty')
+            if 'not resolved calls' not in run([*neighbors, '--include-candidates', '--format', 'text']):
+                raise VerificationError('Installed candidate text lost uncertainty')
+            command = [*prefix, 'callers', 'evidence_target', '--repo', target, '--snapshot']
+            text = run(command)
+            packet = json.loads(text)
+            if ({item['qualname'] for item in packet['items']} != {'outer.inner', 'direct'}
+                    or packet['truncated'] or packet['semantic_complete']):
+                raise VerificationError('Installed callers lost lexical ownership or completeness markers')
+            for item in packet['items']:
+                if (item['source_hash'] != hashlib.sha256(original).hexdigest()
+                        or 'evidence_target()' not in item['source'] or not item['confidence']):
+                    raise VerificationError('Installed caller evidence lost source/hash/confidence')
+            numbered = run([*command, '--format', 'text'])
+            if ('semantic_complete=false' not in numbered
+                    or any(item['source_hash'] not in numbered or f"{item['call_line']}| " not in numbered for item in packet['items'])):
+                raise VerificationError('Installed caller text lost numbered evidence or completeness')
+            if len(run([*command, '--format', 'text', '--budget-bytes', '1024']).encode('utf-8')) > 1024:
+                raise VerificationError('Installed caller text exceeded byte budget')
+            if len(run([*command, '--budget-bytes', '1024']).encode('utf-8')) > 1024:
+                raise VerificationError('Installed caller packet exceeded byte budget')
+            expanded = json.loads(run([*command, '--path', 'caller_probe.py', '--context-lines', '40']))
+            if (expanded['matched_callers'] != 2 or expanded['truncated']
+                    or any(item['start_line'] >= item['call_line'] for item in expanded['items'])):
+                raise VerificationError('Installed caller context expansion lost lexical ranges')
+            excluded = json.loads(run([*command, '--path', 'absent/*', '--limit', '1']))
+            if excluded['matched_callers'] != 0 or excluded['items'] or excluded['truncated']:
+                raise VerificationError('Installed caller path filter did not apply before counting')
+            single = json.loads(run([*command, '--context-lines', '0']))
+            if any(item['start_line'] != item['end_line'] for item in single['items']):
+                raise VerificationError('Installed zero-context caller response expanded unexpectedly')
+            run([*command, '--context-lines', '41'], expected=2)
+            with tempfile.TemporaryDirectory(dir=root, prefix='archive source consumer ') as folder:
+                consumer = Path(folder)
+                (consumer / 'caller_probe.py').write_bytes(original)
+                (consumer / 'OverloadProbe.java').write_bytes(overload_source)
+                artifact = consumer / 'graph.xz'
+                run([*prefix, 'archive', '--repo', target, '--snapshot', '--output', artifact, '--compression', 'xz'])
+                search_command = [*prefix, 'archive-search', 'choose', '--input', artifact,
+                                  '--repo', consumer, '--path', 'OverloadProbe.java', '--language', 'java']
+                choices = json.loads(run(search_command))
+                if choices['matched_nodes'] != 2 or choices['truncated']:
+                    raise VerificationError('Installed filtered archive search lost overloads')
+                if json.loads(run([*search_command, '--language', 'python']))['matched_nodes']:
+                    raise VerificationError('Installed archive search ignored the language filter')
+                overload_command = [*prefix, 'archive-source', 'OverloadProbe.choose', '--input', artifact,
+                                    '--repo', consumer, '--budget-bytes', '2048']
+                run(overload_command, expected=2)
+                overloads = json.loads(run([*overload_command, '--overloads']))
+                if ({item['id'] for item in overloads['targets']} != {item['id'] for item in choices['items']}
+                        or overloads['total_lines'] != 2 or overloads['truncated']
+                        or overloads['sources'][0]['source'] != '\n'.join(overload_source.decode().splitlines()[1:3])):
+                    raise VerificationError('Installed grouped source lost exact declarations or source lines')
+                overload_text = run([*overload_command, '--overloads', '--format', 'text'])
+                if (len(overload_text.encode('utf-8')) > 2048
+                        or overload_text.count(hashlib.sha256(overload_source).hexdigest()) != 1):
+                    raise VerificationError('Installed grouped text lost its shared hash or byte bound')
+                (consumer / 'OverloadProbe.java').write_bytes(overload_source + b'// stale\n')
+                run([*overload_command, '--overloads'], expected=2)
+                archive_command = [*prefix, 'archive-neighbors', packet['target'], '--input', artifact,
+                                   '--repo', consumer, '--direction', 'in', '--kinds', 'calls', '--context-lines', '2']
+                context = json.loads(run(archive_command))
+                filtered = json.loads(run([*archive_command, '--path', 'caller_probe.py']))
+                if filtered['edges'] != context['edges'] or filtered['matched_edges'] != 2:
+                    raise VerificationError('Installed archive path filter lost matching calls')
+                excluded = json.loads(run([*archive_command, '--path', 'absent/*']))
+                if excluded['edges'] or excluded['call_context'] or excluded['matched_edges'] or excluded['truncated']:
+                    raise VerificationError('Installed archive path filter did not apply before counting')
+                if (len(context['edges']) != 2 or context['truncated'] or not context['call_context']
+                        or any(item['source_hash'] != hashlib.sha256(original).hexdigest()
+                               or 'evidence_target()' not in item['source'] for item in context['call_context'])):
+                    raise VerificationError('Installed archive call context lost verified evidence')
+                rendered = run([*archive_command, '--format', 'text'])
+                if len(rendered.encode('utf-8')) > 6000 or 'call_context:' not in rendered:
+                    raise VerificationError('Installed archive context text failed budget/rendering')
+                batch_command = [*prefix, 'archive-source', 'outer', 'outer.inner', 'evidence_target',
+                                 '--input', artifact, '--repo', consumer, '--budget-bytes', '6000']
+                batch = json.loads(run(batch_command))
+                expected_source = '\n'.join(original.decode('utf-8').splitlines()[:5])
+                if (len(batch['targets']) != 3 or batch['total_lines'] != 5 or batch['truncated']
+                        or len(batch['sources']) != 1 or batch['sources'][0]['source'] != expected_source):
+                    raise VerificationError('Installed batch declaration source lost or duplicated selected lines')
+                delivered, offset = [], 0
+                while offset is not None:
+                    page = json.loads(run([*batch_command, '--limit', '2', '--offset', str(offset)]))
+                    delivered.extend((block['path'], line) for block in page['sources']
+                                     for line in range(block['start_line'], block['end_line'] + 1))
+                    offset = page['next_offset']
+                if delivered != [('caller_probe.py', line) for line in range(1, 6)]:
+                    raise VerificationError('Installed batch declaration pagination skipped or repeated source')
+                batch_text = run([*batch_command, '--format', 'text'])
+                if len(batch_text.encode('utf-8')) > 6000 or '1| def evidence_target()' not in batch_text:
+                    raise VerificationError('Installed batch declaration text lost source or exceeded its budget')
+                quote_command = [*prefix, 'archive-quotes', '--input', artifact, '--repo', consumer,
+                                 '--range', './caller_probe.py', '1', '2',
+                                 '--range', 'caller_probe.py', '3', '5', '--budget-bytes', '2048']
+                quoted_text = run(quote_command)
+                quoted = json.loads(quoted_text)
+                expected_quotes = [dict(path='caller_probe.py', start_line=start, end_line=end,
+                                        source_hash=hashlib.sha256(original).hexdigest(), language='python',
+                                        quote='\n'.join(original.decode('utf-8').splitlines()[start - 1:end]))
+                                   for start, end in [(1, 2), (3, 5)]]
+                if (quoted.get('format') != 'columbus-quotes/v1' or quoted.get('quotes') != expected_quotes
+                        or quoted.get('semantic_complete') is not False
+                        or len(quoted_text.encode('utf-8')) > 2048):
+                    raise VerificationError('Installed exact quotes lost source/range identity or byte bounds')
+                run([*quote_command, '--range', 'caller_probe.py', '1', '9999'], expected=2)
+                run([*quote_command, '--pretty'], expected=2)
+                (consumer / 'caller_probe.py').write_bytes(original + b'# stale\n')
+                run(archive_command, expected=2)
+                run(batch_command, expected=2)
+                run(quote_command, expected=2)
+                if (consumer / '.columbus').exists():
+                    raise VerificationError('Archive call context created a consumer index')
+            try:
+                source.write_bytes(original + b'# changed after indexing\n')
+                run(command, expected=2)
+            finally:
+                source.write_bytes(original)
+                run([*prefix, 'sync', '--repo', target, '--summary'])
+
+        def verify_continuation(prefix: list, label: str) -> None:
+            # Keep this larger fixture separate from the fixed polyglot inventory.
+            target = root / (label + ' continuation repository')
+            target.mkdir()
+            bodies = {f'entry_{number:03}.py': f'def continuation_target():\n    return "{number} 한글"\n'
+                      for number in range(25)}
+            for name, body in bodies.items():
+                (target / name).write_text(body, encoding='utf-8', newline='\n')
+            run([*prefix, 'sync', '--repo', target, '--summary'])
+            search = [*prefix, 'search', 'continuation_target', '--repo', target, '--snapshot']
+            complete = json.loads(run([*search, '--limit', '50']))
+            first = json.loads(run([*search, '--limit', '20']))
+            if len(first['hits']) != 20 or not first['truncated'] or not first['next_cursor']:
+                raise VerificationError('Installed search did not expose its next lexical page')
+            second = json.loads(run([*search, '--limit', '50', '--cursor', first['next_cursor']]))
+            identifiers = [item['id'] for page in (first, second) for item in page['hits']]
+            expected = {name + '::continuation_target:function' for name in bodies}
+            if (len(identifiers) != len(set(identifiers)) or not expected <= set(identifiers)
+                    or identifiers != [item['id'] for item in complete['hits']] or complete['truncated']
+                    or second['truncated'] or second['next_cursor'] is not None):
+                raise VerificationError('Installed search continuation skipped or repeated declarations')
+            run([*prefix, 'search', 'different_query', '--repo', target, '--snapshot',
+                 '--cursor', first['next_cursor']], expected=2)
+            run([*search, '--path', 'entry_00*.py', '--cursor', first['next_cursor']], expected=2)
+            spans = {name: set() for name in bodies}
+            receipt_path = target / '.columbus/sessions/continuation-probe/receipt.json'
+            previous = None
+            for page_number in range(75):
+                output = run([*prefix, 'explore', 'continuation_target', '--repo', target,
+                              '--snapshot', '--session', 'continuation-probe', '--format', 'json',
+                              '--budget-bytes', '2048'])
+                packet = json.loads(output)
+                if packet['used_bytes'] != len(output.encode('utf-8')) or packet['used_bytes'] > 2048:
+                    raise VerificationError('Installed continued session exceeded its measured UTF-8 budget')
+                for item in packet['items']:
+                    name = item['path']
+                    start, end = item['source_start_offset'], item['source_end_offset']
+                    if (name not in bodies or not 0 <= start < end <= len(bodies[name])
+                            or bodies[name][start:end] != item['source']
+                            or item['source_hash'] != hashlib.sha256(bodies[name].encode('utf-8')).hexdigest()):
+                        raise VerificationError('Installed continued session lost source/hash/offset evidence')
+                    delivered = set(range(start, end))
+                    if spans[name] & delivered:
+                        raise VerificationError('Installed continued session repeated source spans')
+                    spans[name].update(delivered)
+                saved = json.loads(receipt_path.read_text(encoding='utf-8'))
+                if (saved['schema'] != 'columbus.context-receipt/v2'
+                        or bool(saved['continuations']) != packet['receipt']['has_more']):
+                    raise VerificationError('Installed session did not persist its continuation state')
+                if not packet['receipt']['has_more']:
+                    break
+                if not packet['items'] and saved['continuations'] == previous:
+                    raise VerificationError('Installed continued session returned an empty nonadvancing page')
+                previous = saved['continuations']
+            else:
+                raise VerificationError('Installed session did not exhaust its bounded fixture')
+            for name, body in bodies.items():
+                required = {offset for offset, character in enumerate(body) if character != '\n'}
+                if not required <= spans[name]:
+                    raise VerificationError('Installed session omitted source after the first lexical page')
+            continuation_checks.append({'installation': label, 'files': len(bodies), 'search_pages': 2,
+                                        'search_declarations': len(identifiers),
+                                        'session_pages': page_number + 1, 'query_and_filter_cursor_scope': True,
+                                        'source_spans_unique': True, 'source_coverage_complete': True,
+                                        'utf8_budget_bytes': 2048})
 
         def verify_hook(prefix: list, target: Path) -> None:
             run(['git', 'init', '-q', target])
@@ -98,6 +375,7 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
         if wheelhouse:
             installation.extend(["--find-links", wheelhouse])
         run([*installation, wheel])
+        verify_java_runtime(python, "wheel")
         if "columbus explore" not in run([cli]):
             raise VerificationError("Installed CLI did not show its getting-started guide")
         run([cli, "doctor"])
@@ -165,6 +443,9 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
         warm = json.loads(run([cli, "--repo", repo, "sync"]))
         if warm["refresh"]["parsed_files"] or warm["refresh"]["hashed_files"]:
             raise VerificationError("Unchanged installed index was reparsed or rehashed")
+        verify_graph_archive([cli], repo, "settle_payment", "wheel archive")
+        verify_callers([cli], repo)
+        verify_continuation([cli], 'wheel')
         planned = json.loads(run([cli, "--repo", repo, "init", "--plan"]))
         if (repo / ".agents").exists():
             raise VerificationError("init --plan changed the repository")
@@ -201,6 +482,7 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
             release_install.extend(["--wheelhouse", wheelhouse])
         run(release_install)
         run(release_install)
+        verify_java_runtime(root / "managed release environments/versions" / version / binary.name / python.name, "standalone release installer")
         global_cli = global_bin / ("columbus.cmd" if os.name == "nt" else "columbus")
         if run([global_cli, "--version"]).strip() != version:
             raise VerificationError("Standalone release installer did not activate the requested version")
@@ -218,7 +500,7 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
             command = [python, extracted / "install.py", "--repo", bootstrap_repo]
             if offline:
                 command.append("--offline")
-            if wheelhouse:
+            if wheelhouse and not bundled_java_default:
                 command.extend(["--wheelhouse", wheelhouse])
             run(command)
             run(command)
@@ -227,16 +509,24 @@ def verify(wheel: Path, *, wheelhouse: Path | None = None, offline: bool = False
                 raise VerificationError("ZIP bootstrap did not create its initial JVM index")
             extracted.rename(root / "relocated archive source")
             local_python = bootstrap_repo / ".columbus/runtime" / binary.name / python.name
+            verify_java_runtime(local_python, "relocated ZIP bootstrap")
             local_entrypoint = bootstrap_repo / ".agents/skills/columbus/scripts/columbus.py"
             run([local_python, "-E", "-s", local_entrypoint, "doctor"])
             verify_hook([local_python, '-E', '-s', local_entrypoint], bootstrap_repo)
+            verify_graph_archive([local_python, '-E', '-s', local_entrypoint], bootstrap_repo, 'visible_hook', 'bootstrap archive')
+            verify_callers([local_python, '-E', '-s', local_entrypoint], bootstrap_repo)
+            verify_continuation([local_python, '-E', '-s', local_entrypoint], 'relocated ZIP')
         return {"status": "passed", "version": version, "wheel": str(wheel),
+                "java_candidate_checks": grammar_checks, "bundled_java_default": bundled_java_default,
+                "continuation_checks": continuation_checks,
                 "clean_venv": True, "unrelated_cwd": True, "paths_with_spaces": True,
                 "global_search": True, "skill_reinstall": repeated["status"],
                 "polyglot_and_fallback": True, "budgeted_context": True, "graph_formats": 4,
                 "text_budget": True, "receipt_continuation": True, "telemetry_bytes_verified": True,
                 "named_sessions": True, "no_argument_guide": True, "standalone_release_install": True,
                 "ast_tree": True, "native_hook_partial_staging": True,
+                "bounded_caller_evidence": True, "stale_caller_source_rejected": True,
+                "complete_graph_archive": True, "source_free_archive_query": True, "source_free_archive_relationships": True, "summary_lazy_cache": True,
                 "bootstrap_hook_after_source_relocation": bool(bundle),
                 "local_edits_preserved": True, "managed_files": len(lock["files"]),
                 "archive_files": archive_files, "plan_status": planned.get("status")}
@@ -246,16 +536,20 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--wheel", type=Path, required=True)
     parser.add_argument("--bundle", type=Path)
+    parser.add_argument("--bundled-java-default", action="store_true", help="Verify ZIP parser adoption without an explicit wheelhouse")
     parser.add_argument("--wheelhouse", type=Path)
     parser.add_argument("--offline", action="store_true")
+    parser.add_argument("--expected-java-version", help="Require this installed candidate version and corrected annotation parsing")
     args = parser.parse_args(argv)
+    if args.bundled_java_default and (args.bundle is None or args.expected_java_version is None or args.offline):
+        parser.error("--bundled-java-default requires --bundle and --expected-java-version, without --offline")
     if args.offline and args.wheelhouse is None:
         parser.error("--offline requires --wheelhouse")
     try:
         result = verify(args.wheel.resolve(strict=True),
                         bundle=args.bundle.resolve(strict=True) if args.bundle else None,
                         wheelhouse=args.wheelhouse.resolve(strict=True) if args.wheelhouse else None,
-                        offline=args.offline)
+                        offline=args.offline, expected_java_version=args.expected_java_version, bundled_java_default=args.bundled_java_default)
     except (OSError, ValueError, KeyError, VerificationError, subprocess.CalledProcessError) as error:
         print(f"Distribution verification failed: {error}", file=sys.stderr)
         return 1

@@ -1,0 +1,92 @@
+{
+  "passed": true,
+  "queries": [
+    "create"
+  ],
+  "source_queries": [
+    "okhttp3.RequestBody.Companion.create"
+  ],
+  "overloads": true,
+  "recognizer_version": "archive-evidence-v1",
+  "results": [
+    {
+      "format": "json",
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "/tmp/columbus-overload-token-kotlin/runtime/columbus.py",
+        "archive-source",
+        "okhttp3.RequestBody.Companion.create",
+        "--overloads",
+        "--input",
+        "/tmp/columbus-overload-token-kotlin/graph.jsonl.xz",
+        "--repo",
+        ".",
+        "--limit",
+        "300",
+        "--budget-bytes",
+        "32000",
+        "--format",
+        "json"
+      ],
+      "output_bytes": 4693,
+      "output_sha256": "4ae689ea805c4a996e8669e2d9179bf0272db79935cd1968931255103d128f5f",
+      "receipts": [
+        {
+          "recognizer_version": "archive-evidence-v1",
+          "command_id": "control-json",
+          "operation": "archive-source",
+          "encoding": "json-v1",
+          "useful_task_evidence": true,
+          "batch_used": true,
+          "relevant_paths": [
+            "okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt"
+          ],
+          "source_rows": 59,
+          "declarations": 4,
+          "edges": 0,
+          "output_sha256": "4ae689ea805c4a996e8669e2d9179bf0272db79935cd1968931255103d128f5f"
+        }
+      ]
+    },
+    {
+      "format": "text",
+      "argv": [
+        "/Users/rex/Desktop/personal/columbus/.venv/bin/python",
+        "/tmp/columbus-overload-token-kotlin/runtime/columbus.py",
+        "archive-source",
+        "okhttp3.RequestBody.Companion.create",
+        "--overloads",
+        "--input",
+        "/tmp/columbus-overload-token-kotlin/graph.jsonl.xz",
+        "--repo",
+        ".",
+        "--limit",
+        "300",
+        "--budget-bytes",
+        "32000",
+        "--format",
+        "text"
+      ],
+      "output_bytes": 4162,
+      "output_sha256": "bccb9f0c6daa55f2ed393c148d910637540390eb4c3e33d0ef57dcf115aa8078",
+      "receipts": [
+        {
+          "recognizer_version": "archive-evidence-v1",
+          "command_id": "control-text",
+          "operation": "archive-source",
+          "encoding": "source-table-text-v1",
+          "useful_task_evidence": true,
+          "batch_used": true,
+          "relevant_paths": [
+            "okhttp/src/commonJvmAndroid/kotlin/okhttp3/RequestBody.kt"
+          ],
+          "source_rows": 59,
+          "declarations": 4,
+          "edges": 0,
+          "output_sha256": "bccb9f0c6daa55f2ed393c148d910637540390eb4c3e33d0ef57dcf115aa8078"
+        }
+      ]
+    }
+  ],
+  "no_consumer_sqlite": true
+}

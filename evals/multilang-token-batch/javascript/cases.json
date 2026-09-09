@@ -1,0 +1,47 @@
+{
+  "schema": "columbus.exploration-cases/v1",
+  "cases": [
+    {
+      "id": "express-render-pipeline",
+      "question": "Trace this Express snapshot's source-level path from res.render through app.render to the built-in View lookup/render implementation. Explain locals precedence, View versus engine caching, extension/default-engine selection and file lookup order, then distinguish missing-view errors, constructor/render throws, and synchronous versus asynchronous engine callbacks. Determine whether the shown implementation guarantees at-most-once callback delivery. Account for the relevant defaults, guards, ordering and negative cases; distinguish the configurable View/engine calls from proven runtime behavior. Do not execute the application, invoke a template engine, install dependencies, or make network requests.",
+      "findings": [
+        {
+          "id": "response_delegation",
+          "description": "res.render argument normalization, response locals, delegation, and automatic response versus explicit callback handling.",
+          "path": "lib/response.js",
+          "marker": "app.render(view, opts, done);"
+        },
+        {
+          "id": "locals_and_cache",
+          "description": "app.render locals precedence, null/default versus explicit cache control, cached View reuse and the order of cache insertion and rendering.",
+          "path": "lib/application.js",
+          "marker": "var renderOptions = { ...this.locals, ...opts._locals, ...opts };"
+        },
+        {
+          "id": "engine_selection",
+          "description": "Filename extension versus the default engine, registered/loaded engine reuse, __express validation, and constructor failure paths.",
+          "path": "lib/view.js",
+          "marker": "var fn = require(mod).__express"
+        },
+        {
+          "id": "view_lookup",
+          "description": "Ordered root lookup, direct-file versus index-file fallback, regular-file/stat failure handling and the unsuccessful lookup result.",
+          "path": "lib/view.js",
+          "marker": "path = this.resolve(dir, file);"
+        },
+        {
+          "id": "error_boundary",
+          "description": "Missing-view callback delivery versus constructor throws; the tryRender catch boundary and how default res.render handles errors.",
+          "path": "lib/application.js",
+          "marker": "view.render(options, callback);"
+        },
+        {
+          "id": "callback_timing",
+          "description": "Built-in View engine delegation, synchronous versus asynchronous callback timing, preserved arguments/context and whether at-most-once delivery is enforced.",
+          "path": "lib/view.js",
+          "marker": "return process.nextTick(function renderTick() {"
+        }
+      ]
+    }
+  ]
+}

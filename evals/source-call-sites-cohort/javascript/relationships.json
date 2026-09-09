@@ -1,0 +1,134 @@
+[
+  {
+    "source": "lib/core/Axios.js::Axios.getUri:method",
+    "target": "lib/core/mergeConfig.js::mergeConfig:function",
+    "path": "lib/core/Axios.js",
+    "line": 201
+  },
+  {
+    "source": "lib/core/Axios.js::Axios.getUri:method",
+    "target": "lib/core/buildFullPath.js::buildFullPath:function",
+    "path": "lib/core/Axios.js",
+    "line": 202
+  },
+  {
+    "source": "lib/core/Axios.js::Axios.getUri:method",
+    "target": "lib/helpers/buildURL.js::buildURL:function",
+    "path": "lib/core/Axios.js",
+    "line": 203
+  },
+  {
+    "source": "lib/core/buildFullPath.js::buildFullPath:function",
+    "target": "lib/helpers/isAbsoluteURL.js::isAbsoluteURL:function",
+    "path": "lib/core/buildFullPath.js",
+    "line": 17
+  },
+  {
+    "source": "lib/core/buildFullPath.js::buildFullPath:function",
+    "target": "lib/helpers/combineURLs.js::combineURLs:function",
+    "path": "lib/core/buildFullPath.js",
+    "line": 19
+  },
+  {
+    "source": "lib/core/mergeConfig.js::mergeConfig.mergeDeepProperties:function",
+    "target": "lib/core/mergeConfig.js::mergeConfig.getMergedValue:function",
+    "path": "lib/core/mergeConfig.js",
+    "line": 36
+  },
+  {
+    "source": "lib/core/mergeConfig.js::mergeConfig.mergeDeepProperties:function",
+    "target": "lib/core/mergeConfig.js::mergeConfig.getMergedValue:function",
+    "path": "lib/core/mergeConfig.js",
+    "line": 38
+  },
+  {
+    "source": "lib/core/mergeConfig.js::mergeConfig.valueFromConfig2:function",
+    "target": "lib/core/mergeConfig.js::mergeConfig.getMergedValue:function",
+    "path": "lib/core/mergeConfig.js",
+    "line": 45
+  },
+  {
+    "source": "lib/core/mergeConfig.js::mergeConfig.defaultToConfig2:function",
+    "target": "lib/core/mergeConfig.js::mergeConfig.getMergedValue:function",
+    "path": "lib/core/mergeConfig.js",
+    "line": 52
+  },
+  {
+    "source": "lib/core/mergeConfig.js::mergeConfig.defaultToConfig2:function",
+    "target": "lib/core/mergeConfig.js::mergeConfig.getMergedValue:function",
+    "path": "lib/core/mergeConfig.js",
+    "line": 54
+  },
+  {
+    "source": "lib/helpers/toFormData.js::toFormData.defaultVisitor:function",
+    "target": "lib/helpers/toFormData.js::isFlatArray:function",
+    "path": "lib/helpers/toFormData.js",
+    "line": 158
+  },
+  {
+    "source": "lib/helpers/toFormData.js::toFormData.defaultVisitor.each:function",
+    "target": "lib/helpers/toFormData.js::toFormData.convertValue:function",
+    "path": "lib/helpers/toFormData.js",
+    "line": 168
+  },
+  {
+    "source": "lib/helpers/toFormData.js::toFormData.defaultVisitor:function",
+    "target": "lib/helpers/toFormData.js::isVisitable:function",
+    "path": "lib/helpers/toFormData.js",
+    "line": 175
+  },
+  {
+    "source": "lib/helpers/toFormData.js::toFormData.defaultVisitor:function",
+    "target": "lib/helpers/toFormData.js::renderKey:function",
+    "path": "lib/helpers/toFormData.js",
+    "line": 179
+  },
+  {
+    "source": "lib/helpers/toFormData.js::toFormData.defaultVisitor:function",
+    "target": "lib/helpers/toFormData.js::toFormData.convertValue:function",
+    "path": "lib/helpers/toFormData.js",
+    "line": 179
+  },
+  {
+    "source": "lib/helpers/toFormData.js::toFormData.build.each:function",
+    "target": "lib/helpers/toFormData.js::toFormData.build:function",
+    "path": "lib/helpers/toFormData.js",
+    "line": 207
+  },
+  {
+    "source": "lib/helpers/toFormData.js::toFormData:function",
+    "target": "lib/helpers/toFormData.js::toFormData.build:function",
+    "path": "lib/helpers/toFormData.js",
+    "line": 218
+  },
+  {
+    "source": "lib/utils.js::merge.assignValue:function",
+    "target": "lib/utils.js::isPlainObject:function",
+    "path": "lib/utils.js",
+    "line": 348
+  },
+  {
+    "source": "lib/utils.js::merge.assignValue:function",
+    "target": "lib/utils.js::merge:function",
+    "path": "lib/utils.js",
+    "line": 349
+  },
+  {
+    "source": "lib/utils.js::merge.assignValue:function",
+    "target": "lib/utils.js::isPlainObject:function",
+    "path": "lib/utils.js",
+    "line": 350
+  },
+  {
+    "source": "lib/utils.js::merge.assignValue:function",
+    "target": "lib/utils.js::merge:function",
+    "path": "lib/utils.js",
+    "line": 351
+  },
+  {
+    "source": "lib/utils.js::merge:function",
+    "target": "lib/utils.js::forEach:function",
+    "path": "lib/utils.js",
+    "line": 360
+  }
+]

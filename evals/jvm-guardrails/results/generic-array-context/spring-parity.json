@@ -1,0 +1,10 @@
+{
+  "before_engine": "e8b494dbbe401c3c8a2cdec83b6328cc15e93424",
+  "spring_revision": "4c8c6409a27a62ab163d3b6196ad862b7c835440",
+  "edges": 31408,
+  "files": 1166,
+  "all_edge_rows_equal": true,
+  "source_hashes_equal": true,
+  "edge_sha256": "d7d63608ba01db6ae1cf41763cc34508e8a1c2e30a2121a4999bad5287d3a29e",
+  "source_hashes_sha256": "74c79ef6c287ef92c8fe0de596d07a4e0c70157d7d34250a5e847aaf2409c8db"
+}

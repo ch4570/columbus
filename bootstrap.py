@@ -143,6 +143,20 @@ def requirements_digest(mcp: bool) -> str:
     return hashlib.sha256(b"\0".join(path.read_bytes() for path in files)).hexdigest()
 
 
+def wheelhouse_digest(wheelhouse: Path | None) -> str | None:
+    """Track the explicit local candidates, including same-name replacements."""
+    if wheelhouse is None:
+        return None
+    digest = hashlib.sha256()
+    for wheel in sorted(wheelhouse.glob("*.whl")):
+        if wheel.is_symlink() or not wheel.is_file():
+            raise SetupError(f"Wheelhouse candidate must be a regular, non-symlink file: {wheel}")
+        with wheel.open("rb") as stream:
+            content = hashlib.file_digest(stream, "sha256").hexdigest()
+        digest.update(wheel.name.encode("utf-8") + b"\0" + content.encode("ascii") + b"\0")
+    return digest.hexdigest()
+
+
 def healthy(python: Path, *, mcp: bool, quiet: bool = True) -> bool:
     result = invoke(python_command(python, SOURCE / "scripts/columbus.py", "doctor"), quiet=quiet)
     if result.returncode:
@@ -152,7 +166,46 @@ def healthy(python: Path, *, mcp: bool, quiet: bool = True) -> bool:
     return result.returncode == 0
 
 
+def bundled_java() -> tuple[Path, dict] | None:
+    """Verify the optional release parser payload before changing a runtime."""
+    source_root = Path(__file__).resolve().parent
+    directory = internal(source_root, "vendor/java")
+    if not directory.exists():
+        return None
+    try:
+        manifest = json.loads(internal(source_root, "vendor/java/manifest.json").read_text(encoding="utf-8"))
+        files = manifest['files']
+        if (manifest['format'] != 1 or manifest['version'] != '0.23.5+columbus.1'
+                or not isinstance(files, dict) or 'constraints.txt' not in files
+                or not any(name.endswith('.whl') for name in files)
+                or set(path.name for path in directory.iterdir()) != set(files) | {'manifest.json'}):
+            raise ValueError("Unexpected bundled parser inventory")
+        for name, digest in files.items():
+            if Path(name).name != name or '/' in name or "\\" in name:
+                raise ValueError("Unsafe bundled parser filename")
+            path = internal(source_root, Path('vendor/java') / name)
+            if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != digest:
+                raise ValueError("Bundled parser checksum mismatch: " + name)
+        if (directory/'constraints.txt').read_text(encoding='ascii') != 'tree-sitter-java==0.23.5+columbus.1\n':
+            raise ValueError("Unexpected bundled parser constraint")
+        return directory, manifest
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        raise SetupError("Invalid bundled Java parser: " + str(exc)) from exc
+
+
+def bundled_java_ready(python: Path, payload: tuple[Path, dict] | None) -> bool:
+    if payload is None:
+        return True
+    return invoke(python_command(python, '-c',
+        "import importlib.metadata as m, sys; assert m.version('tree-sitter-java') == sys.argv[1]",
+        payload[1]['version']), quiet=True).returncode == 0
+
+
 def ensure_runtime(root: Path, *, mcp: bool, offline: bool, wheelhouse: Path | None) -> Path:
+    payload = bundled_java() if wheelhouse is None else None
+    if payload is not None:
+        wheelhouse = payload[0]
+    candidates = wheelhouse_digest(wheelhouse)
     _, runtime, _ = layout(root)
     state = runtime_state(root, runtime)
     if state is None:
@@ -167,18 +220,27 @@ def ensure_runtime(root: Path, *, mcp: bool, offline: bool, wheelhouse: Path | N
     if not usable:
         checked(python_command(Path(sys.executable), "-m", "venv", str(runtime)), "Create dedicated Python environment")
     fingerprint = requirements_digest(mcp)
-    ready = state.get("requirements_sha256") == fingerprint and healthy(python, mcp=mcp)
+    changed_candidates = state.get("wheelhouse_sha256") != candidates
+    ready = (state.get("requirements_sha256") == fingerprint and not changed_candidates
+             and healthy(python, mcp=mcp) and bundled_java_ready(python, payload))
     if not ready:
         requirement = SOURCE / "scripts" / ("requirements-mcp.txt" if mcp else "requirements.txt")
         command = python_command(python, "-m", "pip", "--disable-pip-version-check", "install", "--no-input")
         if offline:
             command.append("--no-index")
         if wheelhouse:
-            command.extend(["--find-links", str(wheelhouse)])
+            command.extend(["--find-links", str(wheelhouse), "--upgrade"])
+            if changed_candidates:
+                command.append("--force-reinstall")
+        if payload is not None:
+            command.extend(["--constraint", str(payload[0]/"constraints.txt")])
         command.extend(["-r", str(requirement)])
         checked(command, "Install pinned dependencies")
-    if not healthy(python, mcp=mcp, quiet=False):
+    if not healthy(python, mcp=mcp, quiet=False) or not bundled_java_ready(python, payload):
         raise SetupError("Runtime doctor failed. Review parser versions and SQLite FTS5 support, then rerun the same install command.")
-    state.update(requirements_sha256=fingerprint, mcp_requested=mcp)
+    if (wheelhouse_digest(wheelhouse) != candidates
+            or (payload is not None and bundled_java() != payload)):
+        raise SetupError("Wheelhouse changed during installation; rerun with stable candidate files.")
+    state.update(requirements_sha256=fingerprint, mcp_requested=mcp, wheelhouse_sha256=candidates)
     save_state(root, runtime, state)
     return python

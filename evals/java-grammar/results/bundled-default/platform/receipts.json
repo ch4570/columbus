@@ -1,0 +1,710 @@
+[
+  {
+    "platform": "java-candidate-macos-latest-py3.11",
+    "upgrade": {
+      "source_unchanged": true,
+      "bundled_default": true,
+      "bundle_sha256": "c3c5bc7466ba708b3764a7a7e54f82be6e2172f52918f1aa6adbcf387fa603b5",
+      "runs": [
+        {
+          "version": "0.23.5",
+          "partial": true,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": null
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "987d1375349dc7452b1798b768a76980b96ad0c3c1fd90b3aebbc2909e8beda0",
+          "install_stderr_sha256": "e83027fdad71dd5c64c8a1e0f5936d39c5fd7054cb00da95a3ad89cd911a8158"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "fc4ef3eabf3cd3c7cfc849d8cadb2c8d37763c29f33cf1accb214a8bf3142ffa"
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "67909c976a46e181583d0fb6ad86501ba706a3c25ffa7de5aaa3908debf11030",
+          "install_stderr_sha256": "64484c2452ea0d8ba80d18d30c95a21a92298734fb4e675a1db78362d375ef40"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "fc4ef3eabf3cd3c7cfc849d8cadb2c8d37763c29f33cf1accb214a8bf3142ffa"
+          },
+          "pip_ran": false,
+          "install_stdout_sha256": "ff551c905f67df442f28670dfc9aaeffd14b0340d98755ef735b2e8ca51af1a7",
+          "install_stderr_sha256": "8da630a5c3d3fd07867c947c0f94f2c1d0d4c2e4cfb1c66a8b4309b9fafaf6d3"
+        }
+      ]
+    },
+    "fallback": {
+      "unavailable_candidate_tag": "columbus_unavailable",
+      "runtime_mutated": false,
+      "upstream_wheels": {
+        "tree_sitter_java-0.23.5-cp39-abi3-macosx_11_0_arm64.whl": "24acd59c4720dedad80d548fe4237e43ef2b7a4e94c8549b0ca6e4c4d7bf6e69"
+      },
+      "without_constraint": {
+        "exit_code": 0,
+        "stdout": "Looking in links: /var/folders/d8/hvxvltxn0fl4rmnd52sncbth0000gn/T/columbus unavailable parser x8vyj6sn\nProcessing /var/folders/d8/hvxvltxn0fl4rmnd52sncbth0000gn/T/columbus unavailable parser x8vyj6sn/tree_sitter_java-0.23.5-cp39-abi3-macosx_11_0_arm64.whl\nWould install tree-sitter-java-0.23.5\n",
+        "stderr": ""
+      },
+      "with_constraint": {
+        "exit_code": 1,
+        "stdout": "Looking in links: /var/folders/d8/hvxvltxn0fl4rmnd52sncbth0000gn/T/columbus unavailable parser x8vyj6sn\n\nThe conflict is caused by:\n    The user requested tree-sitter-java==0.23.5\n    The user requested (constraint) tree-sitter-java==0.23.5+columbus.1\n\nAdditionally, some packages in these conflicts have no matching distributions available for your environment:\n    tree-sitter-java\n\nTo fix this you could try to:\n1. loosen the range of package versions you've specified\n2. remove package versions to allow pip to attempt to solve the dependency conflict\n\n",
+        "stderr": "ERROR: Cannot install tree-sitter-java==0.23.5 because these package versions have conflicting dependencies.\nERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts\n"
+      }
+    },
+    "distribution": {
+      "status": "passed",
+      "version": "1.0.0",
+      "wheel": "/Users/runner/work/columbus/columbus/dist/columbus-1.0.0-py3-none-any.whl",
+      "java_candidate_checks": [
+        {
+          "installation": "wheel",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        },
+        {
+          "installation": "standalone release installer",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        },
+        {
+          "installation": "relocated ZIP bootstrap",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        }
+      ],
+      "bundled_java_default": true,
+      "clean_venv": true,
+      "unrelated_cwd": true,
+      "paths_with_spaces": true,
+      "global_search": true,
+      "skill_reinstall": "noop",
+      "polyglot_and_fallback": true,
+      "budgeted_context": true,
+      "graph_formats": 4,
+      "text_budget": true,
+      "receipt_continuation": true,
+      "telemetry_bytes_verified": true,
+      "named_sessions": true,
+      "no_argument_guide": true,
+      "standalone_release_install": true,
+      "ast_tree": true,
+      "native_hook_partial_staging": true,
+      "bounded_caller_evidence": true,
+      "stale_caller_source_rejected": true,
+      "complete_graph_archive": true,
+      "source_free_archive_query": true,
+      "summary_lazy_cache": true,
+      "bootstrap_hook_after_source_relocation": true,
+      "local_edits_preserved": true,
+      "managed_files": 43,
+      "archive_files": 437,
+      "plan_status": "planned"
+    }
+  },
+  {
+    "platform": "java-candidate-macos-latest-py3.14",
+    "upgrade": {
+      "source_unchanged": true,
+      "bundled_default": true,
+      "bundle_sha256": "861f5abceec1c142054c1c4e0c557a7bce63fe17f89209d78d2d284ad39762cd",
+      "runs": [
+        {
+          "version": "0.23.5",
+          "partial": true,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": null
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "d0d9b21521bc9a68c7dcb63bd239a5fc62cdcb74aabca3f09dc9c46cd5e64c69",
+          "install_stderr_sha256": "e83027fdad71dd5c64c8a1e0f5936d39c5fd7054cb00da95a3ad89cd911a8158"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "28416ad2da70cc1c4bd59e8ad5605886c519004039e2aaa73209890405b09d2c"
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "87548a002b226b8e5c55cb22f0dc5c5a749b5d332f154138f982b988f62ffb18",
+          "install_stderr_sha256": "64484c2452ea0d8ba80d18d30c95a21a92298734fb4e675a1db78362d375ef40"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "28416ad2da70cc1c4bd59e8ad5605886c519004039e2aaa73209890405b09d2c"
+          },
+          "pip_ran": false,
+          "install_stdout_sha256": "7ad329bede4b177d181b26e40eefabb72d287d6cee3f72a029f9b27ae155f8c9",
+          "install_stderr_sha256": "8da630a5c3d3fd07867c947c0f94f2c1d0d4c2e4cfb1c66a8b4309b9fafaf6d3"
+        }
+      ]
+    },
+    "fallback": {
+      "unavailable_candidate_tag": "columbus_unavailable",
+      "runtime_mutated": false,
+      "upstream_wheels": {
+        "tree_sitter_java-0.23.5-cp39-abi3-macosx_11_0_arm64.whl": "24acd59c4720dedad80d548fe4237e43ef2b7a4e94c8549b0ca6e4c4d7bf6e69"
+      },
+      "without_constraint": {
+        "exit_code": 0,
+        "stdout": "Looking in links: /var/folders/d8/hvxvltxn0fl4rmnd52sncbth0000gn/T/columbus unavailable parser z6ty664m\nProcessing /var/folders/d8/hvxvltxn0fl4rmnd52sncbth0000gn/T/columbus unavailable parser z6ty664m/tree_sitter_java-0.23.5-cp39-abi3-macosx_11_0_arm64.whl\nWould install tree-sitter-java-0.23.5\n",
+        "stderr": ""
+      },
+      "with_constraint": {
+        "exit_code": 1,
+        "stdout": "Looking in links: /var/folders/d8/hvxvltxn0fl4rmnd52sncbth0000gn/T/columbus unavailable parser z6ty664m\n\nThe conflict is caused by:\n    The user requested tree-sitter-java==0.23.5\n    The user requested (constraint) tree-sitter-java==0.23.5+columbus.1\n\nAdditionally, some packages in these conflicts have no matching distributions available for your environment:\n    tree-sitter-java\n\nTo fix this you could try to:\n1. loosen the range of package versions you've specified\n2. remove package versions to allow pip to attempt to solve the dependency conflict\n\n",
+        "stderr": "ERROR: Cannot install tree-sitter-java==0.23.5 because these package versions have conflicting dependencies.\nERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts\n"
+      }
+    },
+    "distribution": {
+      "status": "passed",
+      "version": "1.0.0",
+      "wheel": "/Users/runner/work/columbus/columbus/dist/columbus-1.0.0-py3-none-any.whl",
+      "java_candidate_checks": [
+        {
+          "installation": "wheel",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        },
+        {
+          "installation": "standalone release installer",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        },
+        {
+          "installation": "relocated ZIP bootstrap",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        }
+      ],
+      "bundled_java_default": true,
+      "clean_venv": true,
+      "unrelated_cwd": true,
+      "paths_with_spaces": true,
+      "global_search": true,
+      "skill_reinstall": "noop",
+      "polyglot_and_fallback": true,
+      "budgeted_context": true,
+      "graph_formats": 4,
+      "text_budget": true,
+      "receipt_continuation": true,
+      "telemetry_bytes_verified": true,
+      "named_sessions": true,
+      "no_argument_guide": true,
+      "standalone_release_install": true,
+      "ast_tree": true,
+      "native_hook_partial_staging": true,
+      "bounded_caller_evidence": true,
+      "stale_caller_source_rejected": true,
+      "complete_graph_archive": true,
+      "source_free_archive_query": true,
+      "summary_lazy_cache": true,
+      "bootstrap_hook_after_source_relocation": true,
+      "local_edits_preserved": true,
+      "managed_files": 43,
+      "archive_files": 437,
+      "plan_status": "planned"
+    }
+  },
+  {
+    "platform": "java-candidate-ubuntu-latest-py3.11",
+    "upgrade": {
+      "source_unchanged": true,
+      "bundled_default": true,
+      "bundle_sha256": "9b18a13f637a34e76873e22c526b69c53904a2201ce445227f287a8750bb4830",
+      "runs": [
+        {
+          "version": "0.23.5",
+          "partial": true,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": null
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "48e3d25468259ee49fd7b1e46e4ea484e49dc1df2c3fdd11f51cd2e47ef300ea",
+          "install_stderr_sha256": "e83027fdad71dd5c64c8a1e0f5936d39c5fd7054cb00da95a3ad89cd911a8158"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "7ba642e666048b33b02fdac48c5613fc6085bebad4dbe9f58f1e6f67247a0739"
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "9f423d95d57111dec315e9091ddc0b036df0bce851271398cc8f3e9788c38b81",
+          "install_stderr_sha256": "64484c2452ea0d8ba80d18d30c95a21a92298734fb4e675a1db78362d375ef40"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "7ba642e666048b33b02fdac48c5613fc6085bebad4dbe9f58f1e6f67247a0739"
+          },
+          "pip_ran": false,
+          "install_stdout_sha256": "3a35e99a1b88fdbe83f9b9c0377951bd2838e0c9e4551633b9bd48ba1d480ab4",
+          "install_stderr_sha256": "8da630a5c3d3fd07867c947c0f94f2c1d0d4c2e4cfb1c66a8b4309b9fafaf6d3"
+        }
+      ]
+    },
+    "fallback": {
+      "unavailable_candidate_tag": "columbus_unavailable",
+      "runtime_mutated": false,
+      "upstream_wheels": {
+        "tree_sitter_java-0.23.5-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl": "370b204b9500b847f6d0c5ad584045831cee69e9a3e4d878535d39e4a7e4c4f1"
+      },
+      "without_constraint": {
+        "exit_code": 0,
+        "stdout": "Looking in links: /tmp/columbus unavailable parser amnhq44e\nProcessing /tmp/columbus unavailable parser amnhq44e/tree_sitter_java-0.23.5-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl\nWould install tree-sitter-java-0.23.5\n",
+        "stderr": ""
+      },
+      "with_constraint": {
+        "exit_code": 1,
+        "stdout": "Looking in links: /tmp/columbus unavailable parser amnhq44e\n\nThe conflict is caused by:\n    The user requested tree-sitter-java==0.23.5\n    The user requested (constraint) tree-sitter-java==0.23.5+columbus.1\n\nAdditionally, some packages in these conflicts have no matching distributions available for your environment:\n    tree-sitter-java\n\nTo fix this you could try to:\n1. loosen the range of package versions you've specified\n2. remove package versions to allow pip to attempt to solve the dependency conflict\n\n",
+        "stderr": "ERROR: Cannot install tree-sitter-java==0.23.5 because these package versions have conflicting dependencies.\nERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts\n"
+      }
+    },
+    "distribution": {
+      "status": "passed",
+      "version": "1.0.0",
+      "wheel": "/home/runner/work/columbus/columbus/dist/columbus-1.0.0-py3-none-any.whl",
+      "java_candidate_checks": [
+        {
+          "installation": "wheel",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        },
+        {
+          "installation": "standalone release installer",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        },
+        {
+          "installation": "relocated ZIP bootstrap",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        }
+      ],
+      "bundled_java_default": true,
+      "clean_venv": true,
+      "unrelated_cwd": true,
+      "paths_with_spaces": true,
+      "global_search": true,
+      "skill_reinstall": "noop",
+      "polyglot_and_fallback": true,
+      "budgeted_context": true,
+      "graph_formats": 4,
+      "text_budget": true,
+      "receipt_continuation": true,
+      "telemetry_bytes_verified": true,
+      "named_sessions": true,
+      "no_argument_guide": true,
+      "standalone_release_install": true,
+      "ast_tree": true,
+      "native_hook_partial_staging": true,
+      "bounded_caller_evidence": true,
+      "stale_caller_source_rejected": true,
+      "complete_graph_archive": true,
+      "source_free_archive_query": true,
+      "summary_lazy_cache": true,
+      "bootstrap_hook_after_source_relocation": true,
+      "local_edits_preserved": true,
+      "managed_files": 43,
+      "archive_files": 437,
+      "plan_status": "planned"
+    }
+  },
+  {
+    "platform": "java-candidate-ubuntu-latest-py3.14",
+    "upgrade": {
+      "source_unchanged": true,
+      "bundled_default": true,
+      "bundle_sha256": "085bd658f0e5c89e3ee919e7ae817a4e2f6b2cf4518701f4210c87236aa3afb6",
+      "runs": [
+        {
+          "version": "0.23.5",
+          "partial": true,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": null
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "42d8dfd3b6c80d6b57d4ce9603a7049cb891af92212d0c3118487daa6c8cfcbc",
+          "install_stderr_sha256": "e83027fdad71dd5c64c8a1e0f5936d39c5fd7054cb00da95a3ad89cd911a8158"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "d2ed4ce42b368e7ffdf621c8ec9b54965142d5bfa3041bfd4325b2daece4db6d"
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "595cfff7f75655cd99bfa5ba34ef2e3b56e8cdf82d8b3ce4f508e58e016ed812",
+          "install_stderr_sha256": "64484c2452ea0d8ba80d18d30c95a21a92298734fb4e675a1db78362d375ef40"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "d2ed4ce42b368e7ffdf621c8ec9b54965142d5bfa3041bfd4325b2daece4db6d"
+          },
+          "pip_ran": false,
+          "install_stdout_sha256": "574d261df97461e81b2addf80d647c4903fb2c3ce2fcbacf9ab8e2a733c76c31",
+          "install_stderr_sha256": "8da630a5c3d3fd07867c947c0f94f2c1d0d4c2e4cfb1c66a8b4309b9fafaf6d3"
+        }
+      ]
+    },
+    "fallback": {
+      "unavailable_candidate_tag": "columbus_unavailable",
+      "runtime_mutated": false,
+      "upstream_wheels": {
+        "tree_sitter_java-0.23.5-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl": "370b204b9500b847f6d0c5ad584045831cee69e9a3e4d878535d39e4a7e4c4f1"
+      },
+      "without_constraint": {
+        "exit_code": 0,
+        "stdout": "Looking in links: /tmp/columbus unavailable parser 241j2cxp\nProcessing /tmp/columbus unavailable parser 241j2cxp/tree_sitter_java-0.23.5-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl\nWould install tree-sitter-java-0.23.5\n",
+        "stderr": ""
+      },
+      "with_constraint": {
+        "exit_code": 1,
+        "stdout": "Looking in links: /tmp/columbus unavailable parser 241j2cxp\n\nThe conflict is caused by:\n    The user requested tree-sitter-java==0.23.5\n    The user requested (constraint) tree-sitter-java==0.23.5+columbus.1\n\nAdditionally, some packages in these conflicts have no matching distributions available for your environment:\n    tree-sitter-java\n\nTo fix this you could try to:\n1. loosen the range of package versions you've specified\n2. remove package versions to allow pip to attempt to solve the dependency conflict\n\n",
+        "stderr": "ERROR: Cannot install tree-sitter-java==0.23.5 because these package versions have conflicting dependencies.\nERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts\n"
+      }
+    },
+    "distribution": {
+      "status": "passed",
+      "version": "1.0.0",
+      "wheel": "/home/runner/work/columbus/columbus/dist/columbus-1.0.0-py3-none-any.whl",
+      "java_candidate_checks": [
+        {
+          "installation": "wheel",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        },
+        {
+          "installation": "standalone release installer",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        },
+        {
+          "installation": "relocated ZIP bootstrap",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        }
+      ],
+      "bundled_java_default": true,
+      "clean_venv": true,
+      "unrelated_cwd": true,
+      "paths_with_spaces": true,
+      "global_search": true,
+      "skill_reinstall": "noop",
+      "polyglot_and_fallback": true,
+      "budgeted_context": true,
+      "graph_formats": 4,
+      "text_budget": true,
+      "receipt_continuation": true,
+      "telemetry_bytes_verified": true,
+      "named_sessions": true,
+      "no_argument_guide": true,
+      "standalone_release_install": true,
+      "ast_tree": true,
+      "native_hook_partial_staging": true,
+      "bounded_caller_evidence": true,
+      "stale_caller_source_rejected": true,
+      "complete_graph_archive": true,
+      "source_free_archive_query": true,
+      "summary_lazy_cache": true,
+      "bootstrap_hook_after_source_relocation": true,
+      "local_edits_preserved": true,
+      "managed_files": 43,
+      "archive_files": 437,
+      "plan_status": "planned"
+    }
+  },
+  {
+    "platform": "java-candidate-windows-latest-py3.11",
+    "upgrade": {
+      "source_unchanged": true,
+      "bundled_default": true,
+      "bundle_sha256": "ae86e2da55ad60e3fa43663add80a3d90785c5a2f83b6e5e365fa6547b90f04a",
+      "runs": [
+        {
+          "version": "0.23.5",
+          "partial": true,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": null
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "bf4d5062f02d12e1698dba78df2bee55366ed470477cad501af3faba33d50957",
+          "install_stderr_sha256": "e83027fdad71dd5c64c8a1e0f5936d39c5fd7054cb00da95a3ad89cd911a8158"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "c43b2433561ee235d1d4390a5fe26776fe4046cc44da35440e419db2d58777b2"
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "fe110683ab3ace36b2a192e630f628712c279c91b4108b22f0cc4f666ddc2ec4",
+          "install_stderr_sha256": "64484c2452ea0d8ba80d18d30c95a21a92298734fb4e675a1db78362d375ef40"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "c43b2433561ee235d1d4390a5fe26776fe4046cc44da35440e419db2d58777b2"
+          },
+          "pip_ran": false,
+          "install_stdout_sha256": "78bf2ca9b7ba22deea1365ead0752ad05430a77b1879752ec6154ec6bfcf1742",
+          "install_stderr_sha256": "8da630a5c3d3fd07867c947c0f94f2c1d0d4c2e4cfb1c66a8b4309b9fafaf6d3"
+        }
+      ]
+    },
+    "fallback": {
+      "unavailable_candidate_tag": "columbus_unavailable",
+      "runtime_mutated": false,
+      "upstream_wheels": {
+        "tree_sitter_java-0.23.5-cp39-abi3-win_amd64.whl": "1ee45e790f8d31d416bc84a09dac2e2c6bc343e89b8a2e1d550513498eedfde7"
+      },
+      "without_constraint": {
+        "exit_code": 0,
+        "stdout": "Looking in links: c:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\columbus unavailable parser oxpnak2b\nProcessing C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\columbus unavailable parser oxpnak2b\\tree_sitter_java-0.23.5-cp39-abi3-win_amd64.whl\nWould install tree-sitter-java-0.23.5\n",
+        "stderr": ""
+      },
+      "with_constraint": {
+        "exit_code": 1,
+        "stdout": "Looking in links: c:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\columbus unavailable parser oxpnak2b\n\nThe conflict is caused by:\n    The user requested tree-sitter-java==0.23.5\n    The user requested (constraint) tree-sitter-java==0.23.5+columbus.1\n\nAdditionally, some packages in these conflicts have no matching distributions available for your environment:\n    tree-sitter-java\n\nTo fix this you could try to:\n1. loosen the range of package versions you've specified\n2. remove package versions to allow pip to attempt to solve the dependency conflict\n\n",
+        "stderr": "ERROR: Cannot install tree-sitter-java==0.23.5 because these package versions have conflicting dependencies.\nERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts\n"
+      }
+    },
+    "distribution": {
+      "status": "passed",
+      "version": "1.0.0",
+      "wheel": "D:\\a\\columbus\\columbus\\dist\\columbus-1.0.0-py3-none-any.whl",
+      "java_candidate_checks": [
+        {
+          "installation": "wheel",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        },
+        {
+          "installation": "standalone release installer",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        },
+        {
+          "installation": "relocated ZIP bootstrap",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        }
+      ],
+      "bundled_java_default": true,
+      "clean_venv": true,
+      "unrelated_cwd": true,
+      "paths_with_spaces": true,
+      "global_search": true,
+      "skill_reinstall": "noop",
+      "polyglot_and_fallback": true,
+      "budgeted_context": true,
+      "graph_formats": 4,
+      "text_budget": true,
+      "receipt_continuation": true,
+      "telemetry_bytes_verified": true,
+      "named_sessions": true,
+      "no_argument_guide": true,
+      "standalone_release_install": true,
+      "ast_tree": true,
+      "native_hook_partial_staging": true,
+      "bounded_caller_evidence": true,
+      "stale_caller_source_rejected": true,
+      "complete_graph_archive": true,
+      "source_free_archive_query": true,
+      "summary_lazy_cache": true,
+      "bootstrap_hook_after_source_relocation": true,
+      "local_edits_preserved": true,
+      "managed_files": 43,
+      "archive_files": 437,
+      "plan_status": "planned"
+    }
+  },
+  {
+    "platform": "java-candidate-windows-latest-py3.14",
+    "upgrade": {
+      "source_unchanged": true,
+      "bundled_default": true,
+      "bundle_sha256": "b3e887e67ea5b4e5ca860499730b7e4375f7312cb1694746e531d6bc4e09d027",
+      "runs": [
+        {
+          "version": "0.23.5",
+          "partial": true,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": null
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "432d766e87a08969485d9d24251a38e5bfe3eceb909c8c61b6e1895cab1e5c1f",
+          "install_stderr_sha256": "e83027fdad71dd5c64c8a1e0f5936d39c5fd7054cb00da95a3ad89cd911a8158"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "019a33fbdd71c430b49f138e1d7bb582ddd1d4da4d79a445a8334ce3517b7533"
+          },
+          "pip_ran": true,
+          "install_stdout_sha256": "e1528069140918e54e8f21bfa817b67f4cb1c7018ca78c11d102214406ab9e07",
+          "install_stderr_sha256": "64484c2452ea0d8ba80d18d30c95a21a92298734fb4e675a1db78362d375ef40"
+        },
+        {
+          "version": "0.23.5+columbus.1",
+          "partial": false,
+          "runtime_state": {
+            "owner": "columbus-bootstrap",
+            "format": 1,
+            "requirements_sha256": "09b05e980ba74da4e68ab737b1031e55bbe9573b46fc3f73f51bf023221d9d05",
+            "mcp_requested": false,
+            "wheelhouse_sha256": "019a33fbdd71c430b49f138e1d7bb582ddd1d4da4d79a445a8334ce3517b7533"
+          },
+          "pip_ran": false,
+          "install_stdout_sha256": "0e5bf624d7e17d0ff87ed463ecabe2dd2d1b5e1bc247b773e52bad72cc657252",
+          "install_stderr_sha256": "8da630a5c3d3fd07867c947c0f94f2c1d0d4c2e4cfb1c66a8b4309b9fafaf6d3"
+        }
+      ]
+    },
+    "fallback": {
+      "unavailable_candidate_tag": "columbus_unavailable",
+      "runtime_mutated": false,
+      "upstream_wheels": {
+        "tree_sitter_java-0.23.5-cp39-abi3-win_amd64.whl": "1ee45e790f8d31d416bc84a09dac2e2c6bc343e89b8a2e1d550513498eedfde7"
+      },
+      "without_constraint": {
+        "exit_code": 0,
+        "stdout": "Looking in links: c:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\columbus unavailable parser w2cipt_f\nProcessing C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\columbus unavailable parser w2cipt_f\\tree_sitter_java-0.23.5-cp39-abi3-win_amd64.whl\nWould install tree-sitter-java-0.23.5\n",
+        "stderr": ""
+      },
+      "with_constraint": {
+        "exit_code": 1,
+        "stdout": "Looking in links: c:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\columbus unavailable parser w2cipt_f\n\nThe conflict is caused by:\n    The user requested tree-sitter-java==0.23.5\n    The user requested (constraint) tree-sitter-java==0.23.5+columbus.1\n\nAdditionally, some packages in these conflicts have no matching distributions available for your environment:\n    tree-sitter-java\n\nTo fix this you could try to:\n1. loosen the range of package versions you've specified\n2. remove package versions to allow pip to attempt to solve the dependency conflict\n\n",
+        "stderr": "ERROR: Cannot install tree-sitter-java==0.23.5 because these package versions have conflicting dependencies.\nERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts\n"
+      }
+    },
+    "distribution": {
+      "status": "passed",
+      "version": "1.0.0",
+      "wheel": "D:\\a\\columbus\\columbus\\dist\\columbus-1.0.0-py3-none-any.whl",
+      "java_candidate_checks": [
+        {
+          "installation": "wheel",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        },
+        {
+          "installation": "standalone release installer",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        },
+        {
+          "installation": "relocated ZIP bootstrap",
+          "version": "0.23.5+columbus.1",
+          "annotation_cases": 4
+        }
+      ],
+      "bundled_java_default": true,
+      "clean_venv": true,
+      "unrelated_cwd": true,
+      "paths_with_spaces": true,
+      "global_search": true,
+      "skill_reinstall": "noop",
+      "polyglot_and_fallback": true,
+      "budgeted_context": true,
+      "graph_formats": 4,
+      "text_budget": true,
+      "receipt_continuation": true,
+      "telemetry_bytes_verified": true,
+      "named_sessions": true,
+      "no_argument_guide": true,
+      "standalone_release_install": true,
+      "ast_tree": true,
+      "native_hook_partial_staging": true,
+      "bounded_caller_evidence": true,
+      "stale_caller_source_rejected": true,
+      "complete_graph_archive": true,
+      "source_free_archive_query": true,
+      "summary_lazy_cache": true,
+      "bootstrap_hook_after_source_relocation": true,
+      "local_edits_preserved": true,
+      "managed_files": 43,
+      "archive_files": 437,
+      "plan_status": "planned"
+    }
+  }
+]
