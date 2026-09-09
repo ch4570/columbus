@@ -28,6 +28,8 @@ Coverage is included in a bounded map (`map --format text --budget-tokens 700`);
 
 For repeated snippet queries, add `--session TASK_NAME` to `explore`/`context`; `stats TASK_NAME` reads its local totals. Reuse a receipt only while this agent retains the delivered source. After compaction, a new task or an agent change, use a new name or retrieve without a receipt. `receipt.has_more` means retrieval can continue; exhausted retrieval is not proof of semantic completeness.
 
+For opt-in cumulative query/byte/no-progress limits, see [session budgets](references/session-budgets.md). They persist across calls, not across new names, and are not model-billing caps.
+
 Verify current source before editing. Inspect fidelity, partial/unresolved evidence, hashes and omission indicators; missing edges never prove independence. Run relevant repository checks after changes. CLI queries auto-sync unless `--snapshot` is selected; failed sync stops the query. Use `sync --verify-content` for full content verification. Each worktree needs its own index.
 
 ## Output and budgets

@@ -110,6 +110,12 @@ columbus stats checkout-task --format json
 
 세션은 실제 소스를 반환하는 snippets 조회에만 적용합니다. 검색어 없는 `explore`나 `--mode signatures`에 `--session`을 붙이면 receipt를 만들지 않고 오류를 반환합니다. 선언만 탐색할 때는 세션을 생략하세요.
 
+새 세션의 첫 조회에 `--max-queries 8 --max-session-bytes 24000 --max-no-progress 2`를 붙이면 누적 한도를 저장합니다. 이후 옵션을 생략해도 같은 정책을 적용하며, 기존 한도를 바꾸거나 이미 사용한 무제한 세션에 소급 적용하지 않습니다. 조회 횟수에는 허용 후 실패한 시도도 포함합니다. 새 소스나 실제로 전진한 continuation은 진행으로 계산하고, 반복된 빈 결과는 진행 없는 횟수를 늘립니다. revision이 바뀌어도 누적 사용량은 유지합니다.
+
+소진 시 동기화·소스 조회 전에 종료 코드 3으로 중단하며 stdout은 비워 둡니다. stderr에는 이유·사용량·남은 바이트를 짧게 표시합니다. 전송 도중 실패하면 사용량을 0으로 돌리지 않고 `pending` 예약량을 남겨 재호출을 막습니다. `stats --format json`의 `session_budget`은 이 사용량과 예약량을 조회 로그와 구분해 보여 줍니다. 동시 호출은 거부합니다.
+
+이 한도는 이름 있는 CLI snippets 세션의 허용된 조회와 UTF-8 stdout 응답만 통제합니다. stderr·stats·map/search·직접 receipt·MCP·다른 도구/에이전트·모델 청구 비용은 제외합니다. 소진은 작업 완료가 아니며, 새 이름으로 반복 우회하지 마세요. 컨텍스트 손실로 새 receipt가 필요해도 이전 비용은 호스트의 작업 합계에 남겨야 합니다. 상태 손상, 부분 전달, 정책 변경과 수동 복구의 자세한 규칙은 [세션 예산](../skills/columbus/references/session-budgets.md)을 참고하세요.
+
 파일 위치를 직접 정하려면 작업별 receipt를 대신 사용합니다. `--mode signatures`에는 receipt를 지정하지 않습니다.
 
 ```sh
