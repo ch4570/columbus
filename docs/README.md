@@ -8,6 +8,7 @@
 | Explore a repository and export a graph | [CLI usage](usage.md) · [한국어 사용법](usage.ko.md) |
 | Use a coding agent or configure MCP | [Agent integration](agents.md) |
 | Design an explicit workflow and measure completion cost | [워크플로우와 비용](../skills/columbus/references/workflow-economics.md) |
+| Separate tool availability from workflow policy | [네 조건 완료 비용 관측](workflow-cost.md) · [Reproduce](../evals/exploration/factorial-README.md) |
 | Understand language support and custom rules | [Language coverage](languages.md) |
 | Find the implementation and data boundaries | [Architecture](architecture.md) |
 | Inspect benchmark graphs and reproduce the measurements | [Columbus benchmarks](benchmarks/README.md) |
