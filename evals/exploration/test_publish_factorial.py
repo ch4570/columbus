@@ -113,6 +113,43 @@ class FactorialPublicationTests(unittest.TestCase):
             publisher.publish(self.output, self.destination)
         self.assertEqual(json.loads(self.destination.read_text())['manifest']['python'], '$PYTHON')
 
+    def test_windows_path_suffixes_are_portable_without_rewriting_command_source(self):
+        run = r'C:\Users\private-account\study'
+        pilot = run + '-pilot'
+        command = run + r'\runtime\columbus.py search "\d+\s" --repo ' + run + r'\repository'
+        source = 'print("\\n")'
+        payload = {
+            'repository': run + r'\repository',
+            'nested': [{'source': run + r'\source directory\file.py', 'pilot': pilot + r'\repository'}],
+            'commands': [command, {'command': command + ' -c ' + source}],
+            'prompt': 'Inspect ' + run + r'\repository with regex \w+',
+            'answer': {'quote': run + r'\literal\n', 'explanation': source},
+        }
+        original = copy.deepcopy(payload)
+        rendered = publisher._display_paths(payload, [(run, '$RUN'), (pilot, '$PILOT')])
+        self.assertEqual(rendered['repository'], '$RUN/repository')
+        self.assertEqual(rendered['nested'], [{'source': '$RUN/source directory/file.py',
+                                              'pilot': '$PILOT/repository'}])
+        expected_command = command.replace(run, '$RUN')
+        self.assertEqual(rendered['commands'], [expected_command, {'command': expected_command + ' -c ' + source}])
+        self.assertEqual(rendered['prompt'], r'Inspect $RUN\repository with regex \w+')
+        self.assertEqual(rendered['answer'], {'quote': r'$RUN\literal\n', 'explanation': source})
+        self.assertEqual(payload, original)
+
+    def test_publisher_reads_utf8_explicitly_independent_of_platform_locale(self):
+        pilot = self.pilot()
+        write_json(self.output / 'observer-notes.json', {'note': '관찰된 호출만 합산 — 실패 포함'})
+        read_text = Path.read_text
+
+        def require_utf8(path, *args, **kwargs):
+            self.assertEqual(kwargs.get('encoding'), 'utf-8', str(path))
+            return read_text(path, *args, **kwargs)
+
+        with patch.object(Path, 'read_text', require_utf8):
+            publisher.publish(self.output, self.destination, pilot=pilot)
+        published = json.loads(self.destination.read_text(encoding='utf-8'))
+        self.assertEqual(published['observer_notes']['note'], '관찰된 호출만 합산 — 실패 포함')
+
     def test_existing_destination_is_preserved_without_append_or_overwrite(self):
         self.destination.parent.mkdir()
         before = b'previous reviewed artifact\n'

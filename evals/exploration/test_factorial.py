@@ -125,6 +125,27 @@ class FactorialProtocolTests(unittest.TestCase):
             second = factorial.run_slot(self.root, 0, attempt=2)
         self.assertNotEqual(result['attempt_id'], second['attempt_id'])
 
+    def test_prompt_file_and_stdin_keep_identical_utf8_lf_bytes_on_windows(self):
+        self.frozen()
+        write_text = Path.write_text
+
+        def windows_write(path, data, *arguments, **options):
+            if options.get('newline') != '\n':
+                data = data.replace('\n', '\r\n')
+            options['newline'] = '\n'
+            return write_text(path, data, *arguments, **options)
+
+        with patch.object(Path, 'write_text', windows_write), patch.object(subprocess, 'Popen') as launch:
+            launch.return_value.returncode = 0
+            result = factorial.run_slot(self.root, 0)
+        delivered = launch.return_value.communicate.call_args.args[0]
+        self.assertIsInstance(delivered, bytes)
+        self.assertNotIn(b'\r\n', delivered)
+        saved = (self.root / 'trials' / result['attempt_id'] / 'prompt.txt').read_bytes()
+        self.assertEqual(saved, delivered)
+        self.assertEqual(sha(saved), result['prompt_sha256'])
+        self.assertFalse(launch.call_args.kwargs.get('text', False))
+
     def test_incomplete_attempt_stays_in_all_attempt_cost_aggregation(self):
         expected = self.frozen()
         scheduled = expected['schedule'][0]

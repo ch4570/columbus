@@ -95,7 +95,7 @@ def prepare(output: Path, *, model: str, effort: str, repeats: int, timeout: int
             raise ValueError('Cannot freeze the index for read-only sandbox access')
     connection.close()
     (snapshot / '.columbus/sessions').mkdir(exist_ok=True)
-    frozen = json.loads((output / 'engine.json').read_text())
+    frozen = json.loads((output / 'engine.json').read_text(encoding='utf-8'))
     frozen['index_seconds'] = round(time.monotonic() - index_started, 3)
     frozen['journal_mode'] = 'delete (checkpointed; source/index read-only during model attempts)'
     dump(output / 'engine.json', frozen)
@@ -126,7 +126,7 @@ def prepare(output: Path, *, model: str, effort: str, repeats: int, timeout: int
 
 
 def preflight(output: Path, *, check_runtime=False) -> dict:
-    expected = json.loads((output / 'manifest.json').read_text())
+    expected = json.loads((output / 'manifest.json').read_text(encoding='utf-8'))
     if expected['protocol'] != protocol_files():
         raise ValueError('Observation protocol changed; retain this study and prepare a new one')
     if expected['protocol'] != {name: sha((output / 'protocol' / name).read_bytes()) for name in expected['protocol']}:
@@ -219,13 +219,13 @@ def run_slot(output: Path, slot: int, *, attempt: int = 1) -> dict:
     directory = output / 'trials' / trial_id
     if directory.exists():
         raise ValueError('Attempt already exists; preserve it and use an explicit new attempt number')
-    case = next(item for item in json.loads((output / 'cases.json').read_text()) if item['id'] == scheduled['case'])
+    case = next(item for item in json.loads((output / 'cases.json').read_text(encoding='utf-8')) if item['id'] == scheduled['case'])
     preflight_result = live_index_preflight(output, expected['engine']) if ARMS[scheduled['arm']]['tool'] else None
     directory.mkdir(parents=True)
     scratch = directory / 'scratch'
     scratch.mkdir()
     prompt = prompt_for(output, case, scheduled['arm'], trial_id)
-    (directory / 'prompt.txt').write_text(prompt, encoding='utf-8')
+    (directory / 'prompt.txt').write_text(prompt, encoding='utf-8', newline='\n')
     command = ['codex', 'exec', '--ignore-user-config', '--ephemeral', '--json', '--sandbox', 'workspace-write',
                '--skip-git-repo-check', '--disable', 'multi_agent', '--disable', 'multi_agent_v2',
                '--enable', 'skip_host_skill_discovery', '-c', 'project_doc_max_bytes=0',
@@ -249,9 +249,10 @@ def run_slot(output: Path, slot: int, *, attempt: int = 1) -> dict:
     with (directory / 'events.jsonl').open('w', encoding='utf-8') as stdout, (directory / 'stderr.log').open('w', encoding='utf-8') as stderr:
         try:
             process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=stdout, stderr=stderr,
-                                       text=True, encoding='utf-8', start_new_session=os.name != 'nt')
+                                       start_new_session=os.name != 'nt')
             try:
-                process.communicate(prompt, timeout=expected['timeout_seconds'])
+                # A text-mode Windows pipe would translate LF to CRLF after hashing.
+                process.communicate(prompt.encode('utf-8'), timeout=expected['timeout_seconds'])
             except subprocess.TimeoutExpired:
                 timed_out = True
                 _stop(process)
@@ -305,10 +306,10 @@ def run_slot(output: Path, slot: int, *, attempt: int = 1) -> dict:
 def summarize(output: Path, prices: dict | None = None) -> dict:
     expected = preflight(output)
     review_path = output / 'prose-review.json'
-    reviews = json.loads(review_path.read_text()) if review_path.exists() else {}
+    reviews = json.loads(review_path.read_text(encoding='utf-8')) if review_path.exists() else {}
     records = []
     for path in sorted((output / 'trials').glob('*/attempt.json')):
-        record = json.loads(path.read_text())
+        record = json.loads(path.read_text(encoding='utf-8'))
         slot = record.get('slot')
         if type(slot) is not int or not 0 <= slot < len(expected['schedule']):
             raise ValueError('Attempt is not a registered schedule slot')
@@ -320,14 +321,14 @@ def summarize(output: Path, prices: dict | None = None) -> dict:
         result = path.parent / 'result.json'
         capture = path.parent / 'capture.json'
         if result.exists() and capture.exists():
-            sealed = json.loads(capture.read_text())
+            sealed = json.loads(capture.read_text(encoding='utf-8'))
             required = {'attempt.json', 'result.json', 'events.jsonl', 'prompt.txt', 'stderr.log'}
             if not isinstance(sealed, dict) or set(sealed) not in (required, required | {'answer.json'}):
                 raise ValueError('Invalid attempt evidence inventory')
             if any(not (path.parent / name).is_file() or sha((path.parent / name).read_bytes()) != digest
                    for name, digest in sealed.items()):
                 raise ValueError('Captured attempt evidence changed')
-            captured = json.loads(result.read_text())
+            captured = json.loads(result.read_text(encoding='utf-8'))
             if any(captured.get(key) != value for key, value in record.items()):
                 raise ValueError('Result identity or invocation differs from the started attempt')
             record = captured
@@ -395,7 +396,7 @@ def summarize(output: Path, prices: dict | None = None) -> dict:
 
 def pack_evidence(output: Path, destination: Path) -> dict:
     """Publish a small, deterministic archive instead of hundreds of generated files."""
-    saved = json.loads((output / 'summary.json').read_text())
+    saved = json.loads((output / 'summary.json').read_text(encoding='utf-8'))
     if saved != summarize(output, saved['totals']['pricing']):
         raise ValueError('Summary is stale; regenerate it from the retained raw captures before publishing')
     if destination.exists() or output == destination or output in destination.parents:
@@ -450,7 +451,7 @@ def main():
     elif args.command == 'pack':
         print(json.dumps(pack_evidence(output, args.destination.expanduser().resolve())))
     else:
-        prices = json.loads(args.prices.read_text()) if args.prices else None
+        prices = json.loads(args.prices.read_text(encoding='utf-8')) if args.prices else None
         result = summarize(output, prices)
         dump(output / 'summary.json', result)
         print(json.dumps({'totals': result['totals'], 'comparable_blocks': sum(b['same_quality_comparable'] for b in result['blocks'])}, indent=2))

@@ -13,6 +13,31 @@ from factorial_metrics import parse_events, summarize_attempts
 from observe import manifest
 
 
+def _display_paths(value, replacements):
+    """Redact string values; normalize path separators only outside free text."""
+    replacements = sorted(replacements, key=lambda pair: len(pair[0]), reverse=True)
+
+    def replace(item, *, free_text=False):
+        if isinstance(item, dict):
+            return {key: replace(child, free_text=free_text or key in {'command', 'commands', 'prompt', 'answer',
+                                                                       'quote', 'explanation', 'note', 'notes'})
+                    for key, child in item.items()}
+        if isinstance(item, list):
+            return [replace(child, free_text=free_text) for child in item]
+        if not isinstance(item, str):
+            return item
+        for original, label in replacements:
+            if item == original:
+                return label
+            if not free_text and item.startswith(original + '\\'):
+                return label + item[len(original):].replace('\\', '/')
+        for original, label in replacements:
+            item = item.replace(original, label)
+        return item
+
+    return replace(value)
+
+
 def publish(output: Path, destination: Path, *, pilot: Path | None = None) -> dict:
     """Keep failures and hashes, but leave raw event/stderr transcripts local."""
     report = summarize(output)
@@ -25,13 +50,13 @@ def publish(output: Path, destination: Path, *, pilot: Path | None = None) -> di
             raise ValueError('Pilot source snapshot changed')
         for record in pilot_summary['attempts']:
             directory = pilot / 'trials' / record['attempt_id']
-            sealed = json.loads((directory / 'capture.json').read_text())
+            sealed = json.loads((directory / 'capture.json').read_text(encoding='utf-8'))
             required = {'attempt.json', 'result.json', 'events.jsonl', 'prompt.txt', 'stderr.log'}
             if set(sealed) not in (required, required | {'answer.json'}):
                 raise ValueError('Invalid pilot capture inventory')
             if any(sha256((directory / name).read_bytes()).hexdigest() != digest for name, digest in sealed.items()):
                 raise ValueError('Pilot captured evidence changed')
-            captured = json.loads((directory / 'result.json').read_text())
+            captured = json.loads((directory / 'result.json').read_text(encoding='utf-8'))
             if any(record.get(key) != value for key, value in captured.items() if key not in {'quality', 'success'}):
                 raise ValueError('Pilot derived measurements differ from its capture')
             review = record.get('prose_review', {})
@@ -41,7 +66,7 @@ def publish(output: Path, destination: Path, *, pilot: Path | None = None) -> di
             events = directory / 'events.jsonl'
             if sha256(events.read_bytes()).hexdigest() != record['events_sha256']:
                 raise ValueError('Pilot raw event evidence changed')
-            observed = parse_events([json.loads(line) for line in events.read_text().split('\n') if line.strip()])
+            observed = parse_events([json.loads(line) for line in events.read_text(encoding='utf-8').split('\n') if line.strip()])
             for key in ('input_tokens', 'cached_input_tokens', 'output_tokens'):
                 if (record.get('usage') or {}).get(key) != (observed.get('usage') or {}).get(key):
                     raise ValueError('Pilot token counts disagree with raw events')
@@ -57,7 +82,7 @@ def publish(output: Path, destination: Path, *, pilot: Path | None = None) -> di
         'overhead': 'Engineering and independent prose-review agent usage is not exposed by this CLI cohort and is excluded; '
                     'the full research bill is unknown, not the sum of reported cohort tokens alone.'}
     notes = output / 'observer-notes.json'
-    report['observer_notes'] = json.loads(notes.read_text()) if notes.exists() else {}
+    report['observer_notes'] = json.loads(notes.read_text(encoding='utf-8')) if notes.exists() else {}
     for contrast, amortization in report.get('elapsed_amortization', {}).items():
         tool_arm = contrast.split('-')[1]
         used = any(record.get('arm') == tool_arm and record.get('columbus_commands', 0) > 0
@@ -75,13 +100,11 @@ def publish(output: Path, destination: Path, *, pilot: Path | None = None) -> di
                                  for key in ('input_tokens', 'cached_input_tokens', 'output_tokens')},
         'note': 'Reported counters include the instrumentation pilot and failures with reported usage. '
                 'If any usage is missing these are partial sums, not complete totals or a billing estimate.'}
-    # Serialized metadata includes prompts/commands and answers, but never raw
-    # event text. Replacement cannot weaken the original answer/source hashes.
-    encoded = json.dumps(report, ensure_ascii=False, indent=2)
+    # Metadata includes prompts/commands and answers, but never raw event text.
+    # Redact before JSON escaping, preserving source and regex backslashes.
     replacements = [(sys.executable, '$PYTHON'), (str(Path(sys.executable).resolve()), '$PYTHON'),
                     *roots, (str(Path(__file__).resolve().parents[2]), '$CHECKOUT')]
-    for original, label in sorted(replacements, key=lambda pair: len(pair[0]), reverse=True):
-        encoded = encoded.replace(json.dumps(original, ensure_ascii=False)[1:-1], label)
+    encoded = json.dumps(_display_paths(report, replacements), ensure_ascii=False, indent=2)
     destination.parent.mkdir(parents=True, exist_ok=True)
     with destination.open('x', encoding='utf-8', newline='\n') as stream:
         stream.write(encoded + '\n')
