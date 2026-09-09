@@ -91,6 +91,8 @@ def summarize(path: str) -> dict:
 
 
 def summary_text(summary: dict) -> str:
+    if summary.get('telemetry_status') == 'unavailable':
+        return 'Columbus local telemetry unavailable\n' + summary['note'] + '\n'
     return (f"Columbus local telemetry: {summary['queries']} queries\n"
             f"commands={json.dumps(summary['commands'], separators=(',', ':'))} "
             f"formats={json.dumps(summary['formats'], separators=(',', ':'))}\n"

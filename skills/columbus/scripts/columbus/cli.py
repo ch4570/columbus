@@ -40,7 +40,8 @@ def _session_paths(root: Path, name: str) -> tuple[Path, Path]:
         if directory.is_symlink() or directory.resolve() != directory or (directory.exists() and not directory.is_dir()):
             raise ValueError('Session parent must be a regular directory, never a symlink')
     paths = directory / 'receipt.json', directory / 'queries.jsonl'
-    for path in paths:
+    from .session_budget import FILES
+    for path in (*paths, *(directory / name for name in FILES)):
         if path.is_symlink() or (path.exists() and not path.is_file()):
             raise ValueError('Session files must be regular files, never symlinks')
     return paths
@@ -156,6 +157,9 @@ def main(argv=None) -> int:
             command.add_argument('--exclude-id', action='append', default=[], help='Already-seen symbol ID; repeat to avoid resending')
             command.add_argument('--receipt', help='Caller-owned JSON receipt of emitted source spans; use .columbus/session.json')
             command.add_argument('--session', help='Use .columbus/sessions/NAME/{receipt.json,queries.jsonl}; snippets only')
+            command.add_argument('--max-queries', type=int, help='Persist maximum admitted queries for this named snippet session')
+            command.add_argument('--max-session-bytes', type=int, help='Persist cumulative UTF-8 stdout payload limit, not model billing')
+            command.add_argument('--max-no-progress', type=int, help='Persist maximum consecutive queries without new source or cursor progress')
         if name in {'graph', 'export'}:
             command.add_argument('--format', choices=['html', 'graphml', 'mermaid', 'json'], default='html')
             command.add_argument('--output', required=True)
@@ -163,6 +167,8 @@ def main(argv=None) -> int:
             command.add_argument('--level', choices=['symbol', 'file'], default='symbol')
     args = parser.parse_args(argv)
     started = time.perf_counter()
+    lease = None
+    from .session_budget import BudgetExceeded, LIMITS, SessionBudget
     try:
         if args.command == 'explore':
             if not args.query and (args.mode != 'snippets' or args.receipt is not None or args.exclude_id or args.session is not None):
@@ -173,6 +179,12 @@ def main(argv=None) -> int:
                 args.budget_bytes = 64000
             args.command = 'context' if args.query else 'map'
         session_name = getattr(args, 'session', None)
+        requested = {key: getattr(args, key, None) for key in LIMITS}
+        if any(value is not None for value in requested.values()):
+            if session_name is None:
+                raise ValueError('Cumulative budget options require --session and a source QUERY')
+            if any(value is not None and not 1 <= value <= 2**63 - 1 for value in requested.values()):
+                raise ValueError('Session limits must be positive integers no larger than 2^63-1')
         if session_name is not None:
             if args.mode != 'snippets':
                 raise ValueError('--session requires source snippets; use signatures without a session')
@@ -212,17 +224,42 @@ def main(argv=None) -> int:
             return 0
         if args.command == 'stats':
             from .telemetry import summarize, summary_text
-            _, log = _session_paths(root, args.name)
-            summary = summarize(str(log))
+            from .session_budget import summary as budget_summary
+            receipt_path, log = _session_paths(root, args.name)
+            budget = budget_summary(receipt_path.parent, root)
+            try:
+                summary = summarize(str(log)) if log.exists() or budget is None else {
+                    'queries': 0, 'commands': {}, 'formats': {}, 'duration_ms': 0,
+                    'note': 'No successful query telemetry rows; authoritative admitted usage is in session_budget.'}
+                if budget is not None and log.exists() and summary['queries'] == 0:
+                    raise ValueError('Empty telemetry file has no complete ownership record; preserved')
+            except (OSError, ValueError) as exc:
+                if budget is None:
+                    raise
+                summary = dict.fromkeys(('queries', 'commands', 'formats', 'duration_ms', 'output_bytes',
+                                         'estimated_tokens', 'source_bytes', 'returned_items', 'returned_edges',
+                                         'omitted_candidates', 'seen_candidates'))
+                summary.update(telemetry_status='unavailable', telemetry_error=str(exc),
+                               note='Telemetry unavailable: ' + str(exc) +
+                               '. Observational totals are unknown; session_budget is authoritative.')
+            if budget is not None:
+                summary['session_budget'] = budget
+                if args.format == 'text':
+                    summary['note'] += '\nsession_budget=' + compact(budget)
             sys.stdout.write(summary_text(summary) if args.format == 'text' else compact(summary) + '\n')
             return 0
         if session_name is not None:
             from .telemetry import TelemetryLog
+            from .retrieval import limits
+            from .session_budget import FILES
             receipt_path, log = _session_paths(root, session_name)
-            if db is not None and db in {receipt_path, log}:
+            if db is not None and db in {receipt_path, log, *(receipt_path.parent / name for name in FILES)}:
                 raise ValueError('The index database and session files must use different paths')
             args.receipt, args.telemetry = str(receipt_path), str(log)
             telemetry = TelemetryLog(args.telemetry)
+            response_bytes = limits(args.budget_bytes, args.budget_tokens)
+            lease = SessionBudget(receipt_path.parent, root)
+            args.budget_bytes = lease.admit(requested, response_bytes)
         if args.command == 'init':
             from .bundle import install_bundle
             result = install_bundle(root, apply=not args.plan, skills_dir=args.skills_dir)
@@ -277,12 +314,18 @@ def main(argv=None) -> int:
                     kwargs['receipt'] = receipt_file.data
                 result = index.context(args.query, mode=args.mode, exclude_ids=args.exclude_id, **kwargs) if args.command == 'context' else index.repo_map(args.query, **kwargs)
                 rendered = render(result, args.format)
-                sys.stdout.write(rendered)
+                if lease is not None:
+                    lease.before_output(rendered)
+                written = sys.stdout.write(rendered)
+                if lease is not None and lease.admitted and written != len(rendered):
+                    raise OSError('Short stdout write; session delivery remains pending')
                 sys.stdout.flush()
                 if session_name is not None:
                     _session_paths(root, session_name)
                 if receipt_file is not None:
                     receipt_file.save(result)
+                if lease is not None:
+                    lease.complete(result, receipt_file)
                 if telemetry is not None:
                     telemetry.append(args.command, args.format, result, rendered, time.perf_counter() - started)
                 return 0
@@ -311,6 +354,17 @@ def main(argv=None) -> int:
         if telemetry is not None:
             telemetry.append(args.command, args.format, result, rendered, time.perf_counter() - started)
         return 0
+    except BudgetExceeded as exc:
+        print(f'columbus: {exc}', file=sys.stderr)
+        return 3
     except (ValueError, OSError, RuntimeError, ImportError, SyntaxError, UnicodeError, sqlite3.Error) as exc:
+        if lease is not None:
+            try:
+                lease.fail_before_output()
+            except (ValueError, OSError) as accounting_error:
+                print(f'columbus: session accounting remains uncertain: {accounting_error}', file=sys.stderr)
         print(f'columbus: {exc}', file=sys.stderr)
         return 2
+    finally:
+        if lease is not None:
+            lease.close()

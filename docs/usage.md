@@ -112,6 +112,8 @@ columbus stats checkout-task --format json
 
 Sessions require source snippets. `explore` without a query and `--mode signatures` reject `--session` and create no receipt. Run declaration-only queries without a session.
 
+For a new session, optionally persist cumulative limits with `--max-queries 8 --max-session-bytes 24000 --max-no-progress 2`. Omitted flags on later queries still use that immutable policy. Exhaustion returns exit 3 before sync/source reads, with no stdout payload; stderr explains the reason. These limits cover named CLI snippets only, not model billing or other tools. See [session budgets](../skills/columbus/references/session-budgets.md) for exact counting, failure/pending delivery, concurrency and recovery semantics.
+
 For explicit file locations, use one receipt per task instead. `--mode signatures` does not accept receipts:
 
 ```sh
