@@ -1,0 +1,23 @@
+# Prospective JSON call-table evidence
+
+`json_call_table_evidence.evidence(events, *, binding, relationships)` is a standalone, read-only verifier for `archive-source --call-sites --call-table` with default JSON or explicit `--format json`. It recognizes `columbus-call-table-json/v1` with recognizer version `json-call-table-evidence-v1`. It is not a cohort adapter, a model result or a replacement for any historical evaluation.
+
+The API returns `json_call_table_used`, `source_call_receipts`, `relationship_receipts` and `relationship_used`, plus its version. Delivery means the complete canonical source packet and stored calls matched independently reconstructed expectations. Only an independently supplied reviewed relationship actually present in those calls receives relationship credit. Empty-call delivery or adoption alone does not prove graph utility. Exact decoded source delivery does not prove that the answer quoted it correctly, used it, understood it or cost less.
+
+## Independent contract
+
+Freeze this module and its unchanged `source_call_evidence.py` dependency, as well as the complete runtime, interpreter/environment, source and graph inventories. The seven-key binding and supported shell syntax follow the [compact-output evidence contract](COMPACT-EVIDENCE.md#independent-binding-and-comparison). Inputs must be frozen independently, never derived from the trial files being assessed. Complete source/runtime inventories and archive bytes are checked before recognition and rehashed afterward, with captured-binding equality checked after the final I/O. Invalid frozen inputs raise even for an empty stream; unsupported or inconsistent events receive no receipt.
+
+The legacy helper supplies frozen-input validation, source decoding, selection, endpoint projection and full-packet construction. This new module owns its invocation parser, JSON-table rendering and format-specific fitting; it never imports or executes the production selector/renderer, offered runtime or repository code. Its complete frozen-source/graph checks are intentionally stronger than the production reader's selected-source freshness checks. It retains a complete snapshot and performs extra I/O, not production streaming-memory service or candidate model-token work.
+
+The expected wire keeps source strings, targets and other packet metadata intact. Inside `call_sites`, it shares exact file path/hash pairs and full endpoint IDs through implicit zero-based `files`, `nodes` and `edges` arrays. All metadata, actual nested owners, ordered duplicate calls, uncertainty, reference counts, source ranges and cursors remain represented. Whole canonical UTF-8 equality checks the schema and integer index types, bounds, order, complete multiplicity and decoded source; a partial or merely equivalent-looking table is insufficient. Terminal event/command/output/binding hashes remain separate receipts, not binary-execution attestation.
+
+The independent per-line lower bound sums every zero-index JSON edge row, each unique endpoint row and each unique file pair, without text row numbers, per-row newlines or enclosing punctuation. It does not reuse legacy full-ID or raw hydrated-node limits. Complete source prefixes are then rendered in descending length with all escaping, metadata and final LF included. It neither assumes monotone serialized sizes nor drops individual calls or skips an unreturnable next line.
+
+## Compatibility and evaluation boundary
+
+The previous full-ID, text-table and batch-search verifiers are unchanged. Each recognizes only its own command/output contract; search still proves discovery only. Existing cohort adapters do not import this new verifier. New test names deliberately avoid historical `test_source_call*.py` dependency globs.
+
+Before any new actual comparison, create a separate adapter, freeze its full dependency closure and schedules, and capture fresh runtime-capability and corruption controls. Keep every original observation and review unchanged. All six primary pairs must strictly reduce both actual total input and output; all 18 runs must pass full semantic, citation, execution and terminal review; all 12 graph-arm runs must contain a reviewed useful relationship. Secondary comparisons, bytes, adoption, discovery, averages or cached tokens cannot compensate. No replacement runs, omissions or retrospective regrading.
+
+This feature and verifier alone establish no accepted pair or savings. The existing preparation and remaining-disk reserves still apply to a future cohort. Native unit/CLI tests use tiny temporary fixtures and do not launch models or create real corpus indexes.
