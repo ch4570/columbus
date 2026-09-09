@@ -327,6 +327,54 @@ class SessionBudgetTests(unittest.TestCase):
             self.assert_rejected(self.query(), status=2)
         self.assertEqual(self.state(), before)
 
+    def test_stats_preserve_valid_budget_when_telemetry_append_leaves_a_damaged_log(self):
+        for number, damage in enumerate((b'', b'{"schema":', b'\xff\n', b'{}\n')):
+            name = f'torn-telemetry-{number}'
+            with self.subTest(damage=damage):
+                def fail_append(log, *arguments):
+                    log.path.write_bytes(damage)
+                    raise OSError('fixture interrupted append')
+
+                with patch('columbus.telemetry.TelemetryLog.append', fail_append):
+                    status, rendered, error = self.query('--max-queries', '4', name=name)
+                self.assertEqual(status, 2, error)
+                self.assertTrue(rendered)
+                before = {path.name: path.read_bytes() for path in self.directory(name).iterdir()}
+                with self.no_retrieval():
+                    summary = self.stats(name)
+                    status, output, error = self.call('stats', name, '--format', 'text')
+                self.assertEqual(status, 0, error)
+                self.assertEqual(summary['session_budget']['queries'], 1)
+                self.assertEqual(summary['session_budget']['output_bytes'], len(rendered.encode('utf-8')))
+                self.assertEqual(summary['session_budget']['phase'], 'idle')
+                self.assertEqual(summary['telemetry_status'], 'unavailable')
+                self.assertIsNone(summary['queries'])
+                self.assertIsNone(summary['output_bytes'])
+                self.assertTrue(summary['telemetry_error'])
+                self.assertIn('telemetry unavailable', output.lower())
+                self.assertIn('session_budget=', output)
+                self.assertNotIn('0 queries', output)
+                self.assertEqual({path.name: path.read_bytes() for path in self.directory(name).iterdir()}, before)
+
+    def test_stats_do_not_report_partial_telemetry_totals_after_a_corrupt_later_row(self):
+        self.assert_success(self.query('--max-queries', '4'))
+        log = self.directory() / 'queries.jsonl'
+        log.write_bytes(log.read_bytes() + b'{')
+        before = {path.name: path.read_bytes() for path in self.directory().iterdir()}
+        summary = self.stats()
+        self.assertIsNone(summary['queries'])
+        self.assertEqual(summary['session_budget']['queries'], 1)
+        self.assertEqual(summary['telemetry_status'], 'unavailable')
+        self.assertEqual({path.name: path.read_bytes() for path in self.directory().iterdir()}, before)
+
+    def test_invalid_budget_is_not_hidden_by_telemetry_damage(self):
+        self.assert_success(self.query('--max-queries', '4'))
+        (self.directory() / 'queries.jsonl').write_bytes(b'{')
+        (self.directory() / 'budget.json').write_bytes(b'{')
+        before = {path.name: path.read_bytes() for path in self.directory().iterdir()}
+        self.assert_rejected(self.call('stats', 'task', '--format', 'json'), status=2)
+        self.assertEqual({path.name: path.read_bytes() for path in self.directory().iterdir()}, before)
+
     def test_corrupt_or_missing_budget_files_are_preserved_and_never_reset(self):
         for number, (filename, replacement) in enumerate((
                 ('budget.json', b'{'), ('budget-policy.json', b'{}'),

@@ -227,9 +227,21 @@ def main(argv=None) -> int:
             from .session_budget import summary as budget_summary
             receipt_path, log = _session_paths(root, args.name)
             budget = budget_summary(receipt_path.parent, root)
-            summary = summarize(str(log)) if log.exists() or budget is None else {
-                'queries': 0, 'commands': {}, 'formats': {}, 'duration_ms': 0,
-                'note': 'No successful query telemetry rows; authoritative admitted usage is in session_budget.'}
+            try:
+                summary = summarize(str(log)) if log.exists() or budget is None else {
+                    'queries': 0, 'commands': {}, 'formats': {}, 'duration_ms': 0,
+                    'note': 'No successful query telemetry rows; authoritative admitted usage is in session_budget.'}
+                if budget is not None and log.exists() and summary['queries'] == 0:
+                    raise ValueError('Empty telemetry file has no complete ownership record; preserved')
+            except (OSError, ValueError) as exc:
+                if budget is None:
+                    raise
+                summary = dict.fromkeys(('queries', 'commands', 'formats', 'duration_ms', 'output_bytes',
+                                         'estimated_tokens', 'source_bytes', 'returned_items', 'returned_edges',
+                                         'omitted_candidates', 'seen_candidates'))
+                summary.update(telemetry_status='unavailable', telemetry_error=str(exc),
+                               note='Telemetry unavailable: ' + str(exc) +
+                               '. Observational totals are unknown; session_budget is authoritative.')
             if budget is not None:
                 summary['session_budget'] = budget
                 if args.format == 'text':
