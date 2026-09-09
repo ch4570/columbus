@@ -12,7 +12,7 @@ import sqlite3
 import time
 
 from .discovery import digest, discover, module_name
-from .languages import ANALYZER_VERSION, analyzer_fingerprint, decode_source, parse_source, resolve_files
+from .languages import ANALYZER_VERSION, analyzer_fingerprint, code_lines, decode_source, parse_source, resolve_files
 from .sync_state import SnapshotChanged, file_stat, git_state, read_stable
 
 SCHEMA_VERSION = "2"
@@ -188,7 +188,7 @@ class RepositoryIndex:
                     conn.execute("DELETE FROM symbol_fts")
                 for record in records:
                     parsed = record["parsed"]
-                    source_lines = sources.get(record["path"], "").splitlines()
+                    source_lines = code_lines(sources.get(record["path"], ""), parsed.get("language"))
                     for symbol in parsed["symbols"]:
                         symbol.setdefault("language", parsed.get("language", "python"))
                         conn.execute("INSERT INTO symbols VALUES(?,?,?,?,?,?)", (
@@ -416,8 +416,8 @@ class RepositoryIndex:
             raise ValueError("Source unavailable; refresh the index") from exc
         if digest(data) != record[0]:
             raise ValueError(f"Stale source: {symbol['path']}; refresh the index before coding")
-        lines = decode_source(symbol["path"], data, config=meta.get("inventory", {}).get("language_config"),
-                              language=symbol.get("language")).splitlines()
+        lines = code_lines(decode_source(symbol["path"], data, config=meta.get("inventory", {}).get("language_config"),
+                              language=symbol.get("language")), symbol.get("language"))
         start = symbol["start_line"]
         exact_name = query and query.strip().lower() in {symbol.get('id', '').lower(), symbol.get('name', '').lower(), symbol.get('qualname', '').lower()}
         if query and not exact_name and (symbol["kind"] == "module" or symbol['end_line'] - start + 1 > max_lines):
@@ -475,7 +475,7 @@ class RepositoryIndex:
         if byte_truncated:
             excerpt = excerpt.encode("utf-8")[:16000].decode("utf-8", errors="ignore")
         source_end = source_start + len(excerpt)
-        end = start + max(0, len(excerpt.splitlines()) - 1)
+        end = start + excerpt.count('\n')
         partial = source_end < len(text) and text[source_end:source_end + 1] != '\n'
         result = dict(symbol)
         result["doc"] = result.get("doc", "")[:1200]

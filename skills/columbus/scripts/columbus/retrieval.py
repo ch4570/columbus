@@ -125,7 +125,7 @@ def build_context(index, query: str, budget_bytes: int, *, budget_tokens: int | 
             packet['truncated'] = True
             if mode == 'snippets':
                 while not fits(packet) and '\n' in item['source']:
-                    lines = item['source'].splitlines()
+                    lines = item['source'].split('\n')
                     lines = lines[:max(1, len(lines) // 2)]
                     item.update(source='\n'.join(lines), excerpt_end_line=item['start_line'] + len(lines) - 1,
                                 truncated=True, last_line_may_be_partial=False)
