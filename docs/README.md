@@ -7,6 +7,7 @@
 | Install on a machine or in one project | [Installation](../INSTALL.md) |
 | Explore a repository and export a graph | [CLI usage](usage.md) · [한국어 사용법](usage.ko.md) |
 | Use a coding agent or configure MCP | [Agent integration](agents.md) |
+| Design an explicit workflow and measure completion cost | [워크플로우와 비용](../skills/columbus/references/workflow-economics.md) |
 | Understand language support and custom rules | [Language coverage](languages.md) |
 | Find the implementation and data boundaries | [Architecture](architecture.md) |
 | Inspect benchmark graphs and reproduce the measurements | [Columbus benchmarks](benchmarks/README.md) |

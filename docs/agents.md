@@ -16,30 +16,17 @@ The host runtime decides how skills are discovered. An explicit instruction to r
 
 ```text
 Read .agents/skills/columbus/SKILL.md. Investigate the checkout flow.
-For a known name or file, use a short search or read the relevant source
-range directly. Use a map capped at 2,000 estimated tokens only when the
-structure is unclear. Inspect declarations or relationships as needed,
-and stop retrieving once the evidence answers the question. Reuse one
-receipt for snippet queries and keep a local telemetry log for this task.
-Explain the result with source paths and lines, then run the relevant
-tests if you change code.
+Scope: checkout entry points and validation rules.
+Completion evidence: source locations explaining validation and order creation.
+Follow the skill's task contract; explain any remaining gaps.
+Run the relevant repository tests if you change code.
 ```
 
 ## Choose the next read
 
-Choose the row that matches what you already know; these are alternatives, not a required sequence.
+The installed [task contract and retrieval choices](../skills/columbus/SKILL.md#task-contract) are the canonical policy. Its routes are alternatives: known files can go directly to source, maps are conditional on missing orientation, and retrieval ends when the requested evidence is sufficient. Optional operations do not add a mandatory preliminary map.
 
-| Situation | Useful question | Tool |
-| --- | --- | --- |
-| Known name or file | Where is the relevant implementation? | Short `search QUERY`, path-scoped `rg`, or a direct bounded source read |
-| Unfamiliar structure | Which files and declarations matter here? | Small `map [QUERY]` |
-| Unclear declaration or dependency | Which candidate or relationship matters? | `context QUERY --mode signatures`, `neighbors ID` |
-| Source needed | What does the current source actually do? | `context QUERY`, `symbol ID`, or a direct bounded source read |
-| Change verification | Is the evidence current and does the change work? | `sync --verify-content`, repository tests |
-
-Stop retrieving when the evidence answers the question. For a one-line fix with an already known location, a direct file read may be cheaper than indexing and several discovery queries. Broad maps, repeated searches, and unnecessary hops can add tokens even when each response is small.
-
-If a search is empty or unhelpful, check coverage once, then switch to a shorter keyword, a path, or a direct read. Rephrasing the same broad search can add rounds without replacing later source reads. The [observed agent traces](token-efficiency.md) did not establish general model-token savings, so choose the next query by the missing evidence.
+For workflow design, failure transitions, compaction and cost evaluation, read [명시적인 워크플로우와 완료 비용](../skills/columbus/references/workflow-economics.md). The [historical observations](token-efficiency.md) did not establish general model-token savings.
 
 ## Explore with fewer options
 
