@@ -74,7 +74,7 @@ def _common(parser, *, subcommand=False):
     parser.add_argument('--repo', default=default, help='Repository/worktree directory (default current directory)')
     parser.add_argument('--db', default=default, help='Index path; default REPO/.columbus/index-v1.sqlite')
     parser.add_argument('--pretty', action='store_true', default=argparse.SUPPRESS if subcommand else False,
-                        help='Indent JSON (bounded map/context always stay compact)')
+                        help='Indent JSON (byte-budgeted responses always stay compact)')
     parser.add_argument('--telemetry', default=default, metavar='PATH',
                         help='Opt-in local metadata-only query JSONL log (no query or source text)')
 
@@ -148,7 +148,7 @@ def main(argv=None) -> int:
         if name in {'neighbors', 'graph', 'export'}:
             command.add_argument('--direction', choices=['in', 'out', 'both'], default='both')
             command.add_argument('--kinds', nargs='+', choices=['contains', 'calls', 'imports', 'inherits'])
-        if name in {'map', 'context', 'explore'}:
+        if name in {'map', 'context', 'explore', 'neighbors', 'impact'}:
             command.add_argument('--budget-bytes', type=int, default=None if name == 'explore' else 6000 if name == 'map' else 12000)
             command.add_argument('--budget-tokens', type=int, help='Estimated tokens = ceil(output UTF-8 bytes / 3), not tokenizer-exact')
         if name in {'context', 'explore'}:
@@ -263,7 +263,9 @@ def main(argv=None) -> int:
             elif args.command in {'neighbors', 'impact'}:
                 result = index.neighbors(args.symbol_id, direction='in' if args.command == 'impact' else args.direction,
                                          hops=args.hops, limit=args.limit,
-                                         kinds=['calls', 'inherits'] if args.command == 'impact' else args.kinds)
+                                         kinds=['calls', 'inherits'] if args.command == 'impact' else args.kinds,
+                                         budget_bytes=args.budget_bytes, budget_tokens=args.budget_tokens,
+                                         output_format=args.format)
             elif args.command in {'context', 'map'}:
                 from .presentation import render
                 kwargs = dict(budget_bytes=args.budget_bytes, budget_tokens=args.budget_tokens, path=args.path,
@@ -297,7 +299,10 @@ def main(argv=None) -> int:
                 with output.open('x', encoding='utf-8') as stream:
                     stream.write(rendered)
                 result = {'output': str(output), 'nodes': len(graph['nodes']), 'edges': len(graph['edges']), 'truncated': graph['truncated']}
-        if getattr(args, 'format', 'json') == 'text':
+        if args.command in {'neighbors', 'impact'}:
+            from .presentation import render
+            rendered = render(result, args.format)
+        elif getattr(args, 'format', 'json') == 'text':
             from .presentation import render
             rendered = render(result, 'text', args.command)
         else:

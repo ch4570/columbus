@@ -74,7 +74,7 @@ Quote glob patterns so your shell does not expand them. Language values use dete
 
 | Option | Allowed values | Meaning |
 | --- | --- | --- |
-| `--budget-bytes` | 2,048–64,000 | UTF-8 response budget for explore/map/context |
+| `--budget-bytes` | 2,048–64,000 | UTF-8 response budget for explore/map/context/neighbors/impact |
 | `--budget-tokens` | 700–21,000 | A byte budget derived from `tokens × 3` |
 | `--limit` on search | Query result limit | Limits candidate output |
 | `--max-lines` on symbol | Source excerpt limit | Limits the selected source read |
@@ -87,6 +87,8 @@ columbus explore checkout --budget-bytes 2048
 ```
 
 The existing `map` and `context` defaults remain 6,000 and 12,000 bytes. For these commands, increasing `--budget-tokens` alone does not raise the default byte limit; set both when a larger response is intended.
+
+`neighbors` and `impact` also default to 12,000 bytes. Their nodes are navigation summaries without full docstrings; signatures and edge evidence are capped at 240 UTF-8 bytes. `omitted_text_bytes` records text removed from the count-selected graph before fitting; `omitted_nodes` and `omitted_edges` count payload removals. `traversal_truncated` preserves the original node/edge count-cap signal; `hops` separately selects traversal depth. `payload_truncated` identifies projection or byte-budget omissions, and `truncated` combines both signals. Retained edges always include both endpoint IDs. Byte-budgeted JSON stays compact even with `--pretty`.
 
 ```sh
 columbus context checkout --budget-bytes 18000 --budget-tokens 6000 --format text

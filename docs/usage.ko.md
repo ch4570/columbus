@@ -94,6 +94,8 @@ columbus context checkout --budget-bytes 18000 --budget-tokens 6000 --format tex
 
 `truncated`, `omitted_candidates`, `stale_candidates`, 개별 소스의 잘림 여부를 확인하세요. 작은 예산 때문에 관련 후보가 빠질 수 있으므로 잘린 응답을 저장소 전체 설명으로 해석하지 않습니다.
 
+`neighbors`와 `impact`도 `--budget-bytes`/`--budget-tokens`를 지원하며 기본 상한은 12,000바이트입니다. 전체 docstring은 제외하고 signature와 edge evidence는 각각 UTF-8 240바이트까지 반환합니다. `omitted_text_bytes`는 선택한 그래프에서 먼저 제거한 텍스트, `omitted_nodes`/`omitted_edges`는 직렬화 예산으로 생략한 항목 수입니다. `traversal_truncated`와 `payload_truncated`로 탐색 제한과 응답 생략을 구분하며, `truncated`는 둘을 합친 상태입니다. 남은 edge에는 양쪽 endpoint ID가 모두 포함됩니다. 예산이 있는 JSON은 `--pretty`를 주어도 compact 형식을 유지합니다.
+
 ## 같은 코드를 반복해서 받지 않기
 
 같은 에이전트가 한 작업에서 소스를 계속 조회한다면 세션 하나를 사용합니다.

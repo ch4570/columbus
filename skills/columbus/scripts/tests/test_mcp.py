@@ -26,6 +26,7 @@ class MCPIntegrationTests(unittest.TestCase):
                 encoding="utf-8",
             )
             database = Path(temporary) / "index.sqlite"
+            (root / 'documented.py').write_text('def documented():\n    """' + 'x' * 900000 + '"""\n    return 1\n')
             RepositoryIndex(str(database)).refresh(str(root))
             asyncio.run(self._exercise_stdio(database))
 
@@ -114,6 +115,20 @@ class MCPIntegrationTests(unittest.TestCase):
                 )
                 self.assertFalse(impact.is_error)
                 self.assertIn("checkout", json.dumps(impact.structured_content))
+
+                for tool in ('graph_neighbors', 'impact_analysis'):
+                    bounded = await session.call_tool(tool, {
+                        'symbol_id': 'documented.py::documented:function', 'limit': 1, 'budget_bytes': 2048})
+                    self.assertFalse(bounded.is_error)
+                    graph = bounded.structured_content
+                    core_size = len(json.dumps(graph, ensure_ascii=False, separators=(',', ':')).encode('utf-8'))
+                    self.assertEqual(core_size, graph['used_bytes'])
+                    self.assertLessEqual(core_size, 2048)
+                    self.assertEqual(900000, graph['omitted_text_bytes'])
+                    envelope = json.dumps(bounded.model_dump(mode='json', by_alias=True), ensure_ascii=False)
+                    self.assertLess(len(envelope.encode('utf-8')), 12000)
+                    invalid_graph = await session.call_tool(tool, {'symbol_id': symbol_id, 'budget_bytes': 1})
+                    self.assertTrue(invalid_graph.is_error)
 
                 context = await session.call_tool(
                     "build_context",

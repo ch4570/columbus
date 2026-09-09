@@ -41,7 +41,7 @@ def envelope(meta: dict, query: str, mode: str, budget: int, tokens: int | None,
 
 def fits(packet: dict) -> bool:
     from .presentation import render
-    packet['economy']['source_bytes_returned'] = sum(len(i.get('source', '').encode('utf-8')) for i in packet['items'])
+    packet['economy']['source_bytes_returned'] = sum(len(i.get('source', '').encode('utf-8')) for i in packet.get('items', []))
     # Counters contribute to their own serialized size.
     for _ in range(12):
         size = len(render(packet, packet.get('output_format', 'json')).encode('utf-8'))
@@ -129,7 +129,7 @@ def build_context(index, query: str, budget_bytes: int, *, budget_tokens: int | 
             page_cursor = found['cursor']
             candidates = {s['id']: 'lexical match' for s in found['hits']}
             for seed in found['hits'][:3]:
-                related = index.neighbors(seed['id'], limit=12, kinds=['calls', 'inherits', 'imports'])
+                related = index._neighbors(seed['id'], limit=12, kinds=['calls', 'inherits', 'imports'])
                 if related['revision'] != meta['revision']:
                     raise ValueError('Index changed during retrieval; retry context')
                 for symbol in related['nodes']:
