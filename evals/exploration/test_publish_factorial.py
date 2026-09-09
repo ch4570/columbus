@@ -3,6 +3,7 @@ import copy
 from hashlib import sha256
 import json
 from pathlib import Path
+import shlex
 import sys
 import tempfile
 import unittest
@@ -150,6 +151,109 @@ class FactorialPublicationTests(unittest.TestCase):
         published = json.loads(self.destination.read_text(encoding='utf-8'))
         self.assertEqual(published['observer_notes']['note'], '관찰된 호출만 합산 — 실패 포함')
 
+    def test_restored_invocations_and_old_interpreters_use_captured_path_labels(self):
+        for windows in (False, True):
+            with self.subTest(windows=windows):
+                separator = '\\' if windows else '/'
+                account = r'C:\Users\private-account' if windows else '/Users/private-account'
+                original = account + separator + 'original-study'
+                interpreter = account + separator + ('old-env\\python.exe' if windows else 'old-env/bin/python3')
+                record = self.report['attempts'][0]
+                record['invocation'] = ['codex', 'exec', '--output-schema', original + separator + 'answer.schema.json',
+                                        '-C', original + separator + 'trials' + separator + record['attempt_id'] + separator + 'scratch']
+                command = f'"{interpreter}" -c \'print("\\\\n", "\\\\d+")\' {original}{separator}repository'
+                record['commands'] = [command, {'command': command}]
+                destination = self.destination.with_name(f'restored-{windows}.json')
+                publisher.publish(self.output, destination)
+                published = json.loads(destination.read_text(encoding='utf-8'))
+                invocation = published['attempts'][0]['invocation']
+                self.assertEqual(invocation[3], '$RUN/answer.schema.json')
+                self.assertEqual(invocation[-1], '$RUN/trials/controlled-A/scratch')
+                expected = command.replace(interpreter, '$PYTHON').replace(original, '$RUN')
+                self.assertEqual(published['attempts'][0]['commands'], [expected, {'command': expected}])
+                self.assertNotIn('private-account', destination.read_text(encoding='utf-8'))
+                self.assertEqual(published['attempts'][0]['events_sha256'], record['events_sha256'])
+
+    def test_restored_manifest_paths_and_pilot_origin_are_separately_redacted(self):
+        pilot = self.pilot()
+        original = '/Users/private-account/original-pilot'
+        summary_path = pilot / 'summary.json'
+        summary = json.loads(summary_path.read_text(encoding='utf-8'))
+        summary['manifest'].update(repository=original + '/repository', python='/Users/private-account/old-env/bin/python',
+                                   checkout='/Users/private-account/old-checkout', engine={'python': '3.14.7'})
+        summary['attempts'][0]['prompt'] = f'Inspect {original}/repository; preserve regex \\d+'
+        directory = pilot / 'trials/pilot-0'
+        write_json(directory / 'result.json', summary['attempts'][0])
+        self.seal(directory)
+        write_json(summary_path, summary)
+        publisher.publish(self.output, self.destination, pilot=pilot)
+        published = json.loads(self.destination.read_text(encoding='utf-8'))
+        metadata = published['instrumentation_pilot']['manifest']
+        self.assertEqual(metadata['repository'], '$PILOT/repository')
+        self.assertEqual(metadata['python'], '$PYTHON')
+        self.assertEqual(metadata['checkout'], '$CHECKOUT')
+        self.assertEqual(metadata['engine']['python'], '3.14.7')
+        self.assertEqual(published['instrumentation_pilot']['attempts'][0]['prompt'],
+                         r'Inspect $PILOT/repository; preserve regex \d+')
+        self.assertNotIn('private-account', self.destination.read_text(encoding='utf-8'))
+
+    def test_each_recorded_invocation_location_recovers_the_original_run(self):
+        original = '/Users/private-account/original-study'
+        for number, (option, suffix) in enumerate([
+                ('--output-schema', '/answer.schema.json'),
+                ('--output-last-message', '/trials/controlled-A/answer.json'),
+                ('-C', '/trials/controlled-A/scratch'),
+                ('--add-dir', '/repository/.columbus/sessions')]):
+            with self.subTest(option=option):
+                self.report['attempts'][0]['invocation'] = ['codex', 'exec', option, original + suffix]
+                destination = self.destination.with_name(f'option-{number}.json')
+                publisher.publish(self.output, destination)
+                published = json.loads(destination.read_text(encoding='utf-8'))
+                self.assertEqual(published['attempts'][0]['invocation'][-1], '$RUN' + suffix)
+
+    def test_old_interpreter_inside_shell_wrapper_preserves_command_quoting(self):
+        interpreter = '/Users/private-account/old environment/bin/python3.14'
+        script = shlex.quote(interpreter) + ' -c ' + shlex.quote('print("\\n", "\\d+")')
+        command = '/bin/zsh -lc ' + shlex.quote(script)
+        self.report['attempts'][0]['commands'] = [command]
+        publisher.publish(self.output, self.destination)
+        published = json.loads(self.destination.read_text(encoding='utf-8'))
+        self.assertEqual(published['attempts'][0]['commands'], [command.replace(interpreter, '$PYTHON')])
+        self.assertNotIn('private-account', self.destination.read_text(encoding='utf-8'))
+
+    def test_old_interpreters_after_shell_operators_and_env_are_redacted(self):
+        original = '/Users/private-account/original-study'
+        interpreter = '/Users/private-account/old-env/bin/python3'
+        execution = interpreter + ' -c ' + shlex.quote('print("\\n", "\\d+")')
+        scripts = [f'cd {original}/repository && {execution}',
+                   f'cd {original}/repository;{execution}',
+                   f'printf text | {execution}',
+                   f'false || {execution}',
+                   f'LANG=C {execution}',
+                   f'/usr/bin/env LANG=C {execution}',
+                   f'env -i -u PYTHONPATH LANG=C {execution}']
+        self.report['attempts'][0]['invocation'] = ['codex', 'exec', '--output-schema', original + '/answer.schema.json']
+        commands = [command for script in scripts for command in (script, '/bin/zsh -lc ' + shlex.quote(script))]
+        for number, command in enumerate(commands):
+            with self.subTest(command=command):
+                self.report['attempts'][0]['commands'] = [command]
+                destination = self.destination.with_name(f'compound-{number}.json')
+                publisher.publish(self.output, destination)
+                published = json.loads(destination.read_text(encoding='utf-8'))
+                self.assertEqual(published['attempts'][0]['commands'],
+                                 [command.replace(interpreter, '$PYTHON').replace(original, '$RUN')])
+                self.assertNotIn('private-account', destination.read_text(encoding='utf-8'))
+
+    def test_python_source_and_quoted_shell_operators_are_not_executable_positions(self):
+        source = 'print("; /example/not-an-executable/bin/python3 -c \\\"\\\\n\\\"")'
+        commands = ['python3 -c ' + shlex.quote(source),
+                    'printf %s ' + shlex.quote('&&') + ' /example/not-an-executable/bin/python3',
+                    'printf %s ' + shlex.quote('env /example/not-an-executable/bin/python3')]
+        self.report['attempts'][0]['commands'] = commands
+        publisher.publish(self.output, self.destination)
+        published = json.loads(self.destination.read_text(encoding='utf-8'))
+        self.assertEqual(published['attempts'][0]['commands'], commands)
+
     def test_existing_destination_is_preserved_without_append_or_overwrite(self):
         self.destination.parent.mkdir()
         before = b'previous reviewed artifact\n'
@@ -192,6 +296,53 @@ class FactorialPublicationTests(unittest.TestCase):
         self.assertEqual((all_calls['attempts'], all_calls['unknown_usage_attempts']), (6, 0))
         self.assertEqual(all_calls['known_reported_usage'],
                          {'input_tokens': 600, 'cached_input_tokens': 120, 'output_tokens': 60})
+
+    def test_pilot_summary_inventory_cannot_omit_add_or_duplicate_attempts(self):
+        pilot = self.pilot(count=2)
+        path = pilot / 'summary.json'
+        summary = json.loads(path.read_text(encoding='utf-8'))
+        records = summary['attempts']
+        for name, attempts in [('omitted', records[:1]), ('empty', []),
+                               ('extra', records + [{**records[0], 'attempt_id': 'pilot-extra'}]),
+                               ('duplicate', records + [records[0]])]:
+            with self.subTest(name=name):
+                write_json(path, {**summary, 'attempts': attempts})
+                destination = self.destination.with_name(name + '.json')
+                with self.assertRaisesRegex(ValueError, 'Pilot attempt inventory'):
+                    publisher.publish(self.output, destination, pilot=pilot)
+                self.assertFalse(destination.exists())
+
+    def test_one_cohort_cannot_be_counted_again_as_its_own_pilot(self):
+        cohort = self.pilot(count=2)
+        self.report = json.loads((cohort / 'summary.json').read_text(encoding='utf-8'))
+        for number, pilot in enumerate((cohort, cohort / '..' / cohort.name)):
+            destination = self.destination.with_name(f'own-pilot-{number}.json')
+            with self.subTest(pilot=pilot):
+                with self.assertRaisesRegex(ValueError, 'distinct cohort'):
+                    publisher.publish(cohort, destination, pilot=pilot)
+                self.assertFalse(destination.exists())
+        self.summarize.assert_not_called()
+
+    def test_unfinished_pilot_start_cannot_disappear_from_stale_summary(self):
+        pilot = self.pilot()
+        directory = pilot / 'trials/pilot-unfinished'
+        directory.mkdir()
+        write_json(directory / 'attempt.json', {'attempt_id': 'pilot-unfinished', 'arm': 'D'})
+        with self.assertRaisesRegex(ValueError, 'Pilot attempt inventory'):
+            publisher.publish(self.output, self.destination, pilot=pilot)
+        self.assertFalse(self.destination.exists())
+
+    def test_sealed_pilot_started_identity_must_match_directory_and_result(self):
+        pilot = self.pilot()
+        directory = pilot / 'trials/pilot-0'
+        for changes in ({'attempt_id': 'different-id'}, {'arm': 'D'}, {'invocation': ['different-command']}):
+            with self.subTest(changes=changes):
+                write_json(directory / 'attempt.json', {'attempt_id': 'pilot-0', 'arm': 'A', **changes})
+                self.seal(directory)
+                destination = self.destination.with_name(next(iter(changes)) + '.json')
+                with self.assertRaisesRegex(ValueError, 'Pilot started attempt'):
+                    publisher.publish(self.output, destination, pilot=pilot)
+                self.assertFalse(destination.exists())
 
     def test_unknown_usage_remains_counted_and_partial_totals_are_labelled(self):
         self.report['attempts'][0].update(usage=None, usage_complete=False)

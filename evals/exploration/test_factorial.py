@@ -71,6 +71,14 @@ class FactorialProtocolTests(unittest.TestCase):
         first = cases()[0]['id']
         self.assertNotEqual(grouped[first + '-1'], grouped[first + '-2'])
 
+    def test_prepared_manifest_distinguishes_index_availability_from_actual_adoption(self):
+        output = self.root / 'fresh-cohort'
+        prepared = factorial.prepare(output, model='fixture-model', effort='high', repeats=2, timeout=10)
+        self.assertIn('C/D', prepared['index_policy'])
+        self.assertIn('optional', prepared['index_policy'])
+        self.assertIn('A/B', prepared['index_policy'])
+        self.assertIn('observed, not assumed', prepared['index_policy'])
+
     def test_preflight_detects_source_engine_catalog_schema_and_protocol_changes(self):
         self.frozen()
         self.assertTrue(factorial.preflight(self.root))

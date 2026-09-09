@@ -89,6 +89,8 @@ For private evidence retention, `pack --destination /ABS/NEW_ARCHIVE.zip` create
 
 `publish_factorial.py --output /ABS/STUDY --destination /ABS/NEW_REPORT.json [--pilot /ABS/PILOT]` publishes that restricted report with display-only path labels and no raw reasoning/stderr transcripts. It keeps all attempts and separates calibration overhead. If no Columbus command was observed, it suppresses any index-payback conclusion from the raw wall-time formula; unused indexes do not establish reuse savings.
 
+Pilot summaries must match every started trial exactly, including failures and unfinished starts; a stale or duplicate inventory blocks publication. The controlled directory cannot also be passed as its own pilot, including aliases of the same directory. Runtime path labels are derived from captured origins as well as the current publication location. This is not a general private-data scrubber: inspect free-text answers and commands before sharing. These publication checks and the clarified index-availability metadata were added after the 2026-09-09 observations; the recorded cohorts and public measurements remain unchanged.
+
 ## Model-free checks
 
 ```sh

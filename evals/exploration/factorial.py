@@ -111,7 +111,8 @@ def prepare(output: Path, *, model: str, effort: str, repeats: int, timeout: int
                   ['git', '-C', str(HERE.parents[1]), 'rev-parse', 'HEAD'], text=True,
                   capture_output=True, check=True).stdout.strip(),
               'cache_policy': 'Provider prompt cache is observed, not flushed or guaranteed cold. Fresh ephemeral agent per attempt.',
-              'index_policy': 'One cold index measured before trials; all query trials use the same warm frozen index.',
+              'index_policy': 'One cold index measured before trials; C/D receive the same warm frozen index as an '
+                              'optional tool, A/B may not use it. Actual adoption is observed, not assumed.',
               'session_policy': 'Unique session per attempt. No receipt crosses agent, task or repeat boundaries.',
               'scope': 'Synthetic read-only navigation, not editing/testing product changes or a population estimate.',
               'quality_policy': 'Machine evidence/fact gates plus explicit answer-hash-bound prose review before success/comparison.',
