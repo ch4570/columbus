@@ -254,6 +254,7 @@ def mask_source(source: str, language: str, *, jsx: bool = True) -> tuple[str, l
     them without a language grammar would manufacture misleading call facts.
     """
     chars, literals, size, i = list(source), [], len(source), 0
+    expression_end = 0
     jsx_regions = {}
 
     def blank(start, end):
@@ -265,6 +266,7 @@ def mask_source(source: str, language: str, *, jsx: bool = True) -> tuple[str, l
         if i in jsx_regions:
             end = jsx_regions[i]
             blank(i, end)
+            expression_end = end
             i = end
             continue
         if jsx and source[i] == '<' and language in {'javascript', 'typescript'} and _jsx_start(source, i):
@@ -349,7 +351,15 @@ def mask_source(source: str, language: str, *, jsx: bool = True) -> tuple[str, l
             # A regex literal can contain apparent declarations/calls. Recognize
             # expression-start positions; division remains ordinary source.
             prefix = source[:i].rstrip()
-            if not prefix or prefix[-1] in "=(:,![{;?&|" or re.search(r"\b(?:return|yield|case)\s*$", prefix):
+            previous = i - 1
+            while previous >= 0 and chars[previous].isspace():
+                previous -= 1
+            # Comments may intervene after =>, but an already masked literal
+            # or JSX expression must not turn later division into a regex.
+            after_arrow = (previous >= 1 and chars[previous - 1:previous + 1] == ["=", ">"]
+                           and previous - 1 >= expression_end)
+            if (not prefix or prefix[-1] in "=(:,![{;?&|" or after_arrow
+                    or re.search(r"\b(?:return|yield|case)\s*$", prefix)):
                 cursor, in_class = i + 1, False
                 while cursor < size and source[cursor] != "\n":
                     if source[cursor] == "\\":
@@ -367,6 +377,7 @@ def mask_source(source: str, language: str, *, jsx: bool = True) -> tuple[str, l
             end = size if end < 0 else end
             if literal:
                 literals.append({"start": start, "end": end, "text": source[start:end]})
+                expression_end = end
             blank(start, end)
             i = end
         else:
@@ -465,6 +476,13 @@ def _js_export_bindings(masked, literals, symbols, spans, scopes, imports, dynam
     prefixes, empty_prefixes, stack, start, only_space, pattern_writes = {}, set(), [], 0, True, set()
     assignment = re.compile(r"\s*(?:=(?!=|>)|(?:\*\*|&&|\|\||\?\?|>>>|>>|<<|[+*/%&|^~-])=|\+\+|--)")
     loop_binding = re.compile(r"\s*(?:in|of)\b")
+    # A deliberately small ASI boundary: a complete top-level variable
+    # initializer consisting of a direct call, optionally an identifier-only
+    # arrow returning that call. No controls, chains or conditional expressions.
+    parameters = rf"(?:{IDENT}(?:\s*,\s*{IDENT})*)?"
+    asi_call = re.compile(rf"\s*(?:export\s+)?(?:const|let|var)\s+{IDENT}\s*=\s*"
+                          rf"(?:(?:async[ \t]+)?(?:{IDENT}|\(\s*{parameters}\s*\))\s*=>\s*)?"
+                          rf"(?:new\s+)?{IDENT}\s*\(")
     for offset, char in enumerate(code):
         if offset in positions and not stack:
             # Retain offsets, not repeated source-prefix copies (which can be
@@ -489,6 +507,15 @@ def _js_export_bindings(masked, literals, symbols, spans, scopes, imports, dynam
                 pattern_writes.update(re.findall(IDENT, code[begin:offset]))
             if not stack and char == "}":
                 start, only_space = offset + 1, True
+            elif not stack and char == ")":
+                following = offset + 1
+                while following < len(code) and code[following].isspace():
+                    following += 1
+                if (any(c in "\r\n" for c in code[offset + 1:following])
+                        and re.match(r"export\b", code[following:following + 7])):
+                    initializer = asi_call.match(code, start, begin + 1)
+                    if initializer and initializer.end() == begin + 1:
+                        start, only_space = offset + 1, True
         elif char == ";" and not stack:
             start, only_space = offset + 1, True
     # Even parenthesized/aliased eval can hide exporter writes. Reject the
@@ -500,7 +527,10 @@ def _js_export_bindings(masked, literals, symbols, spans, scopes, imports, dynam
                  if literal["text"].startswith("`") and "${" in literal["text"]]
     # The shared masker intentionally omits executable template expressions.
     # Do not let hidden writes or computed eval bypass the export guard.
-    if any(re.search(r"\b(?:eval|with)\b|\\", text) for text in templates):
+    # Ordinary template escapes (e.g. RegExp's \\s) cannot spell identifiers.
+    # Unicode escapes can hide binding names, so they remain unsupported even
+    # when they might instead belong to harmless literal text.
+    if any(re.search(r"\b(?:eval|with)\b|\\u(?:[0-9a-fA-F]{4}|\{)", text) for text in templates):
         return
     blocked = pattern_writes | {name for scope in scopes.values() for name in scope["blocked"]}
     for imported in imports:

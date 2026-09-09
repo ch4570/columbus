@@ -3,7 +3,7 @@ import unittest
 import tracemalloc
 
 from columbus.languages import parse_source, resolve_files
-from columbus.polyglot import _js_export_bindings
+from columbus.polyglot import _js_export_bindings, mask_source
 
 
 class JsExportBindingsTests(unittest.TestCase):
@@ -206,6 +206,70 @@ class JsExportBindingsTests(unittest.TestCase):
         # The 28 KB malformed input previously implied ~56 MB of repeated
         # prefix strings. This permits ample platform overhead for offsets.
         self.assertLess(peak, 8_000_000)
+
+    def test_arrow_regex_and_unrelated_regexp_template_keep_named_export(self):
+        # Exact relevant shapes from pinned Axios bin/helpers/parser.js: the
+        # unrelated template has ordinary regex escapes, not identifier escapes.
+        helper = r"""export const parseSection = (body, name, cb) => {
+  matchAll(body, new RegExp(`^(#+)\\s+${name}?(.*?)^\\1\\s+\\w+`, 'gims'), cb);
+}
+export const parseVersion = (rawVersion) => /^v?(\d+).(\d+).(\d+)/.exec(rawVersion);
+"""
+        _, calls = self.calls(helper, clause="{ parseVersion }", call="parseVersion(value)")
+        self.assertEqual([edge["target"] for edge in calls], ["helper.js::parseVersion:function"])
+        masked, literals = mask_source(helper, "javascript")
+        self.assertNotIn(r"\d", masked)
+        self.assertIn(r"/^v?(\d+).(\d+).(\d+)/", [literal["text"] for literal in literals])
+
+    def test_arrow_regex_comments_are_masked_but_literals_do_not_hide_later_division(self):
+        for gap in (" ", " /* comment */ ", " // comment\n "):
+            source = f"const regex = () =>{gap}/export default function phantom()|target = other|eval(code)/g;\n"
+            source += "function target() {} export default target;"
+            self.assert_resolves(source)
+            files, _ = self.calls(source)
+            self.assertNotIn("phantom", {symbol["name"] for symbol in files[1]["symbols"]})
+        for expression in ("value", "'text'", "'=> '", "`text`", "/text/", "<x/>"):
+            with self.subTest(expression=expression):
+                self.assert_unresolved(f"function target() {{}} const value = () => {expression} / (target = other) / 2; export default target;")
+
+    def test_template_unicode_identifier_escapes_stay_unsupported(self):
+        for expression in (r"\u0074arget = other", r"\u{74}arget = other", r"\u0065val(code)"):
+            self.assert_unresolved("function target() {} const text = `${" + expression + "}`; export default target;")
+        self.assert_unresolved(r"function target() {} t\u0061rget = other; export default target;")
+
+    def test_completed_constructor_arrow_initializer_allows_newline_export(self):
+        # Exact boundary shape from pinned Axios test/helpers/server.js: the
+        # expression-bodied arrow ends in }) without a semicolon.
+        helper = """export const makeEchoStream = (echo) => new WritableStream({
+  write(chunk) {
+    echo && console.log(`Echo chunk`, chunk);
+  }
+})
+
+export const startTestServer = async (port) => {
+  return await startHTTPServer(port);
+}
+"""
+        _, calls = self.calls(helper, clause="{ startTestServer }", call="startTestServer(port)")
+        self.assertEqual([edge["target"] for edge in calls], ["helper.js::startTestServer:function"])
+        for previous in ("const prior = Factory()", "const prior = new Factory()",
+                         "const prior = value => Factory(value)", "export const prior = () => Factory()"):
+            for gap in ("\n", "\r\n", " /* comment\n */ ", " // comment\n"):
+                self.assert_resolves(previous + gap + "export default function target() {}")
+
+    def test_asi_boundary_does_not_reset_controls_properties_or_unfinished_expressions(self):
+        for previous in ("if (condition)", "while (condition)", "for (;;)",
+                         "const prior = condition ? Factory()", "const prior = condition && Factory()",
+                         "const prior = object.Factory()", "const prior = Factory() + other()",
+                         "const prior = Factory().", "const prior = Factory() +",
+                         "const prior = (() => Factory())()", "const prior = Factory(",
+                         "const prior = object.", "const prior = ()"):
+            with self.subTest(previous=previous):
+                self.assert_unresolved(previous + "\nexport default function target() {}")
+                self.assert_unresolved(previous + "\nexport const target = () => {};", clause="{ target as renamed }")
+        self.assert_unresolved("const prior = Factory() export default function target() {}")
+        self.assert_unresolved("const prior = Factory() /* no newline */ export default function target() {}")
+        self.assert_unresolved("function outer() { const prior = Factory()\nexport default function target() {} }")
 
 
 if __name__ == "__main__":
