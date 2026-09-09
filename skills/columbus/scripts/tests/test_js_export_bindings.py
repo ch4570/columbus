@@ -237,6 +237,17 @@ export const parseVersion = (rawVersion) => /^v?(\d+).(\d+).(\d+)/.exec(rawVersi
             self.assert_unresolved("function target() {} const text = `${" + expression + "}`; export default target;")
         self.assert_unresolved(r"function target() {} t\u0061rget = other; export default target;")
 
+    def test_arrow_regex_quotes_do_not_mask_following_declarations(self):
+        # AxiosHeaders' character class includes both a backtick and apostrophe.
+        # Neither starts a template/string or hides the remaining module.
+        pattern = r"/^[-_a-zA-Z0-9^`|~,!#$%&'*+.]+$/"
+        helper = f"const isValidHeaderName = (str) => {pattern}.test(str.trim());\n"
+        helper += "function target() {}\nexport default target;\n"
+        masked, literals = mask_source(helper, "javascript")
+        self.assertEqual([literal["text"] for literal in literals], [pattern])
+        self.assertIn("function target() {}", masked)
+        self.assert_resolves(helper)
+
     def test_completed_constructor_arrow_initializer_allows_newline_export(self):
         # Exact boundary shape from pinned Axios test/helpers/server.js: the
         # expression-bodied arrow ends in }) without a semicolon.
