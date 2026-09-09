@@ -248,6 +248,89 @@ export const parseVersion = (rawVersion) => /^v?(\d+).(\d+).(\d+)/.exec(rawVersi
         self.assertIn("function target() {}", masked)
         self.assert_resolves(helper)
 
+    def test_delete_class_method_owns_nested_function_and_direct_calls(self):
+        for suffix in ("js", "ts"):
+            modifiers = ("", "static ", "async ") + (("public ",) if suffix == "ts" else ())
+            for modifier in modifiers:
+                with self.subTest(suffix=suffix, modifier=modifier):
+                    path = f"headers.{suffix}"
+                    source = """function normalizeHeader(value) { return value; }
+class Headers {
+  MODIFIERdelete(header) {
+    function deleteHeader(value) {
+      delete value.cache;
+      return normalizeHeader(value);
+    }
+    this.delete(header);
+    return deleteHeader(header);
+  }
+}
+""".replace("MODIFIER", modifier)
+                    file = parse_source(path, source, "headers")
+                    symbols = {symbol["name"]: symbol for symbol in file["symbols"]}
+                    owner = f"{path}::Headers.delete:method"
+                    nested = f"{path}::Headers.delete.deleteHeader:function"
+                    self.assertEqual(symbols["delete"]["id"], owner)
+                    self.assertEqual(symbols["delete"]["parent_id"], f"{path}::Headers:class")
+                    self.assertEqual(symbols["deleteHeader"]["id"], nested)
+                    self.assertEqual(symbols["deleteHeader"]["parent_id"], owner)
+                    calls = [edge for edge in resolve_files([file]) if edge["kind"] == "calls"]
+                    self.assertEqual({(edge["source"], edge["target"], edge["line"]) for edge in calls}, {
+                        (nested, f"{path}::normalizeHeader:function", 6),
+                        (owner, nested, 9),
+                    })
+                    self.assertTrue(all(edge["confidence"] == "heuristic" for edge in calls))
+                    receiver = next(ref for ref in file["references"] if ref["name"] == "this.delete")
+                    self.assertFalse(receiver["resolved"])
+                    self.assertNotIn("delete", {ref["name"] for ref in file["references"]})
+
+    def test_delete_method_uses_nearest_nested_class_owner(self):
+        for suffix in ("js", "ts"):
+            with self.subTest(suffix=suffix):
+                path = f"headers.{suffix}"
+                source = """class Outer {
+  make() {
+    class Inner {
+      delete(value) {
+        function nested() {}
+        nested();
+      }
+    }
+  }
+}
+"""
+                file = parse_source(path, source, "headers")
+                owner = f"{path}::Outer.make.Inner.delete:method"
+                nested = f"{path}::Outer.make.Inner.delete.nested:function"
+                symbols = {symbol["id"]: symbol for symbol in file["symbols"]}
+                self.assertEqual(symbols[owner]["parent_id"], f"{path}::Outer.make.Inner:class")
+                self.assertEqual(symbols[nested]["parent_id"], owner)
+                calls = [edge for edge in resolve_files([file]) if edge["kind"] == "calls"]
+                self.assertEqual([(edge["source"], edge["target"], edge["line"]) for edge in calls],
+                                 [(owner, nested, 6)])
+
+    def test_delete_operator_and_object_members_are_not_class_methods(self):
+        for suffix in ("js", "ts"):
+            for source in (
+                "class Headers { static { delete (object.key)\n{} } }",
+                "class Headers { static { if (flag) { delete (object.key)\n{} } } }",
+                "class Headers { run(object) { delete (object.key)\n{} } }",
+                "class Headers { field = { delete(value) { return value; } }; }",
+                "class Headers { field = () => { delete (object.key)\n{} }; }",
+                "const object = { delete(value) { return value; } };",
+                "function run(object) { delete (object.key); }",
+            ):
+                with self.subTest(suffix=suffix, source=source):
+                    file = parse_source(f"headers.{suffix}", source, "headers")
+                    self.assertNotIn("delete", {symbol["name"] for symbol in file["symbols"]})
+                    self.assertNotIn("delete", {ref["name"] for ref in file["references"]})
+
+    def test_delete_exception_does_not_enable_other_control_word_methods(self):
+        for name in ("if", "while", "for", "switch", "catch"):
+            with self.subTest(name=name):
+                file = parse_source("headers.js", f"class Headers {{ {name}(value) {{}} }}", "headers")
+                self.assertNotIn(name, {symbol["name"] for symbol in file["symbols"]})
+
     def test_completed_constructor_arrow_initializer_allows_newline_export(self):
         # Exact boundary shape from pinned Axios test/helpers/server.js: the
         # expression-bodied arrow ends in }) without a semicolon.

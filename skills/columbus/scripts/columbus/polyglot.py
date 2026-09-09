@@ -676,9 +676,18 @@ def parse_polyglot(path: str, source: str, module: str, language: str, config: d
             name_start, name = match.start("name"), match.group("name")
             containers = [c for c in candidates if c["body"] is not None and c["body"] < name_start < c["end"]]
             parent = min(containers, key=lambda c: c["end"] - c["start"]) if containers else None
-            if (name_start in seen or name in CONTROL_WORDS or not parent
+            delete_method = name == "delete" and parent and parent["kind"] == "class"
+            if (name_start in seen or (name in CONTROL_WORDS and not delete_method) or not parent
                     or parent["kind"] not in {"class", "interface"}):
                 continue
+            if delete_method:
+                # A class member may be named delete, but the unary operator
+                # in a static block (or an object-literal method in a field)
+                # must not acquire the surrounding class as its method owner.
+                lexical_body = max((opening for opening, closing in braces.items()
+                                    if opening < name_start < closing), default=None)
+                if lexical_body != parent["body"]:
+                    continue
             body = masked.find("{", match.end())
             if body not in braces:
                 continue
