@@ -1,6 +1,6 @@
 """Implementation candidates must retain declaration evidence and ambiguity."""
 import json
-from contextlib import redirect_stdout, redirect_stderr
+from contextlib import closing, redirect_stdout, redirect_stderr
 import io
 from pathlib import Path
 import sqlite3
@@ -87,7 +87,7 @@ class Bad : Port { fun handle(value: Value) {} }
         self.assertEqual([], self.query()['items'])
 
     def test_cycle_is_bounded_and_invalid_cursor_or_limits_rejected(self):
-        with sqlite3.connect(self.index.db) as c:
+        with closing(sqlite3.connect(self.index.db)) as c, c:
             base = self.index.search('demo.UseCase')['hits'][0]['id']
             child = self.index.search('demo.Alpha')['hits'][0]['id']
             c.execute('insert into edges values(?,?,?,?,?,?,?)', (base, child, 'inherits', 'heuristic', 'cycle fixture', 'Flow.kt', 1))
@@ -133,7 +133,7 @@ class Impl implements Port {
         self.assertEqual('declared_parameter_types', items[0]['signature_match'])
 
     def test_legacy_method_metadata_requires_refresh(self):
-        with sqlite3.connect(self.index.db) as conn:
+        with closing(sqlite3.connect(self.index.db)) as conn, conn:
             value = json.loads(conn.execute('select data from symbols where id=?', [self.target]).fetchone()[0])
             value.pop('declaration_modifiers', None)
             conn.execute('update symbols set data=? where id=?', [json.dumps(value), self.target])

@@ -1,4 +1,5 @@
 """Declared resource discovery preserves provenance and uncertain framework evidence."""
+from contextlib import closing
 import json
 from pathlib import Path
 import sqlite3
@@ -132,7 +133,7 @@ class ResourceNavigationTests(unittest.TestCase):
         item = resources(self.index)["items"][0]
         self.assertEqual("incomplete", item["resolution"])
         self.assertIn("truncated", " ".join(item["limitations"]))
-        with sqlite3.connect(self.index.db) as conn:
+        with closing(sqlite3.connect(self.index.db)) as conn, conn:
             for symbol_id, data in conn.execute("SELECT id,data FROM symbols").fetchall():
                 symbol = json.loads(data)
                 symbol.pop("annotation_details", None)
@@ -238,7 +239,7 @@ class ResourceNavigationTests(unittest.TestCase):
         '''})
         # Kotlin may detach leading annotations into a separate AST expression
         # without a syntax diagnostic. Freeze that observed old-cache shape.
-        with sqlite3.connect(self.index.db) as conn:
+        with closing(sqlite3.connect(self.index.db)) as conn, conn:
             row = conn.execute("SELECT id,data FROM symbols WHERE name='QueryController'").fetchone()
             owner = json.loads(row[1])
             owner["annotations"] = ['@Tag(name = "Items")']
@@ -256,7 +257,7 @@ class ResourceNavigationTests(unittest.TestCase):
             import org.springframework.web.bind.annotation.GetMapping;
             class Controller { @GetMapping("/items") void list() {} }
         '''})
-        with sqlite3.connect(self.index.db) as conn:
+        with closing(sqlite3.connect(self.index.db)) as conn, conn:
             row = conn.execute("SELECT id,data FROM symbols WHERE name='list'").fetchone()
             method = json.loads(row[1])
             method["parent_id"] = "missing-owner"
@@ -273,7 +274,7 @@ class ResourceNavigationTests(unittest.TestCase):
             @RequestMapping("/api")
             class Controller { @GetMapping("/items") void list() {} }
         '''})
-        with sqlite3.connect(self.index.db) as conn:
+        with closing(sqlite3.connect(self.index.db)) as conn, conn:
             row = conn.execute("SELECT id,data FROM symbols WHERE name='Controller'").fetchone()
             original = json.loads(row[1])
             for metadata in ({}, {"annotation_metadata_version": 2, "annotation_metadata_complete": False},
