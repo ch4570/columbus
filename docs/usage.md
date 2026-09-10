@@ -38,6 +38,8 @@ Search returns `next_cursor` when another page exists. Pass that value with `sea
 | `map [QUERY]` | Ranked declarations, locations, coverage | None |
 | `search QUERY` | Matches and exact symbol IDs | None |
 | `context QUERY --mode signatures` | Declarations and nearby graph candidates | None |
+| `implementations SYMBOL_ID` | Subtype or method implementation candidates | None |
+| `resources [QUERY]` | HTTP, Kafka, table, or cache declarations and evidence | None |
 | `context QUERY --mode snippets` | Selected, hash-verified source spans | Selected files |
 | `symbol EXACT_SYMBOL_ID` | The selected declaration's current code | Its file |
 
@@ -58,6 +60,51 @@ columbus context checkout --mode snippets --format text --budget-tokens 2000
 
 Source snippets are verified against indexed content hashes. A failed source check is not returned as verified code. Inspect stale and truncation indicators; narrow the query or synchronize again when necessary.
 
+## Find implementation candidates
+
+Pass the exact ID of a type or overridable method:
+
+```sh
+columbus implementations 'EXACT_SYMBOL_ID' --format text
+columbus implementations 'EXACT_SYMBOL_ID' --hops 4 --limit 10 --budget-tokens 2000
+columbus implementations 'EXACT_SYMBOL_ID' --hops 4 --cursor 'NEXT_CURSOR' --snapshot --format json
+```
+
+`implementations SYMBOL_ID` follows indexed inheritance and compares declared method parameter types. Each result has `relation: implementation_candidate`, an inheritance evidence chain, and `signature_match`. `generic_or_type_unresolved` means the type comparison remains uncertain. These candidates do not select a runtime DI bean or prove proxy behavior or dispatch; `runtime_verified` and `semantic_complete` remain false. Generics, external types, and missing inheritance can leave candidates undiscovered.
+
+`--limit` defaults to 30 and accepts 1–200. `--hops` defaults to 6 and accepts 1–8; traversal is also capped at 200 visited types and 200 candidates. Follow `next_cursor` using the same repository, index revision, symbol ID, and hop count. Page size and response budget may change. `scan_truncated` means the traversal itself reached a bound, so exhausting the cursor does not establish completeness. If the next candidate cannot fit, increase the byte/token budget.
+
+## Find resource declarations
+
+```sh
+columbus resources --kind http --path 'src/*' --limit 10 --format text
+columbus resources checkout --kind kafka --format json
+columbus resources checkout --kind table --budget-bytes 6000 --budget-tokens 2000
+columbus resources checkout --kind cache --format text
+columbus resources --kind http --path 'src/*' --cursor 'NEXT_CURSOR' --snapshot --format json
+```
+
+`resources [QUERY]` reads indexed JVM annotation evidence. An optional query matches text in the declaration and its evidence, ignoring case. `--kind http|kafka|table|cache` restricts the resource type; `--path GLOB` restricts repository-relative paths. `--limit` defaults to 30 and accepts 1–100. Both resource and implementation queries default to JSON, accept `--format json|text`, and synchronize unless `--snapshot` is set.
+
+| Kind | Declared evidence |
+| --- | --- |
+| `http` | Spring request mappings, HTTP methods, and class/method paths when they can be combined |
+| `kafka` | Spring Kafka listener topics or patterns, group ID, and declared startup state |
+| `table` | JPA `@Table` name, schema, and catalog |
+| `cache` | Spring cache operation, names, keys, conditions, and eviction flags |
+
+Each item includes `owner_id`, source path and annotation lines, `evidence`, and `limitations`. Use `symbol OWNER_ID` to read the owning declaration. Interpret `resolution` as follows:
+
+| Resolution | Meaning |
+| --- | --- |
+| `literal` | Recognized annotation evidence has literal values within the extractor's supported scope |
+| `dynamic` | Expressions, placeholders, or SpEL are preserved without evaluation |
+| `incomplete` | Missing, ambiguous, truncated, or unsupported evidence prevents complete extraction; inspect `limitations` |
+
+Even `literal` evidence does not verify live HTTP registration, DI selection, broker subscriptions, SQL access, or cache execution. `runtime_verified` and `semantic_complete` remain false. Meta-annotations, annotation containers, inherited declarations, external configuration, and framework defaults are not expanded. A table declaration does not establish a query path, and a listener marked `declared_disabled` does not establish an active subscription.
+
+Follow `next_cursor` with the same repository, revision, query, `--kind`, and `--path`; `--limit` and the response budget may change. A call scans at most 200 annotation candidates, so a filtered page can be empty and still have a continuation. While truncated, `omitted_candidates` is a continuation indicator rather than an exact remaining result count (`omitted_candidates_exact: false`). No continuation means this indexed scan is exhausted, not that all runtime resources were found.
+
 ## Scope a query
 
 `explore`, `search`, `map`, `context`, `graph`, and the legacy `export` alias accept path and language filters:
@@ -70,13 +117,16 @@ columbus context checkout --path 'web/*' --mode signatures --format text
 
 Quote glob patterns so your shell does not expand them. Language values use detected lowercase names, such as `typescript`, `cpp`, and `csharp`. Configuration and unknown-language behavior are covered in [language coverage](languages.md).
 
+`resources` also accepts `--path`, but has no language filter. `implementations` is scoped by its target symbol and hop count.
+
 ## Bound the response
 
 | Option | Allowed values | Meaning |
 | --- | --- | --- |
-| `--budget-bytes` | 2,048–64,000 | UTF-8 response budget for explore/map/context/neighbors/impact |
+| `--budget-bytes` | 2,048–64,000 | UTF-8 response budget for explore/map/context/neighbors/impact/implementations/resources |
 | `--budget-tokens` | 700–21,000 | A byte budget derived from `tokens × 3` |
 | `--limit` on search | Query result limit | Limits candidate output |
+| `--limit` on implementations/resources | 1–200 / 1–100 | Maximum items on one page; default 30 |
 | `--max-lines` on symbol | Source excerpt limit | Limits the selected source read |
 
 Explore defaults to 2,000 estimated tokens, equivalent to 6,000 bytes. An explicit `--budget-tokens` or `--budget-bytes` replaces that default. If both are supplied, the smaller byte limit applies.
@@ -87,6 +137,8 @@ columbus explore checkout --budget-bytes 2048
 ```
 
 The existing `map` and `context` defaults remain 6,000 and 12,000 bytes. For these commands, increasing `--budget-tokens` alone does not raise the default byte limit; set both when a larger response is intended.
+
+`implementations` and `resources` default to 12,000 bytes. Their budgets include evidence, continuation, and accounting fields. The smaller byte/token limit applies; set both flags to raise the default ceiling. Items that do not fit remain available through continuation. A budget too small for one item and metadata returns an error.
 
 `neighbors` and `impact` also default to 12,000 bytes. Their nodes are navigation summaries without full docstrings; signatures and edge evidence are capped at 240 UTF-8 bytes. `omitted_text_bytes` records text removed from the count-selected graph before fitting; `omitted_nodes` and `omitted_edges` count payload removals. `traversal_truncated` preserves the original node/edge count-cap signal; `hops` separately selects traversal depth. `payload_truncated` identifies projection or byte-budget omissions, and `truncated` combines both signals. Retained edges always include both endpoint IDs. Byte-budgeted JSON stays compact even with `--pretty`.
 
@@ -158,13 +210,20 @@ The output file is created exclusively, so an existing file is not overwritten. 
 
 ```sh
 columbus sync
+columbus sync --summary
+columbus index /absolute/path/to/project --summary
+columbus status --summary
 columbus status --verify-content
 columbus sync --verify-content
 ```
 
+`--summary` on `sync`, the legacy `index ROOT` alias, or `status` returns JSON counters and freshness without the full inventory or diagnostic details. It includes `summary: true`, `inventory_omitted: true`, and counts for diagnostics and available stale-path lists. Use it for routine checks; omit it to inspect the details. It changes output only, so combine it with `--verify-content` when hash verification is needed. These three commands do not accept `--format` or byte/token budget options.
+
 Code queries automatically synchronize unless `--snapshot` is set. The startup guide, `stats`, and `telemetry` do not synchronize. Fast synchronization uses file metadata to avoid rehashing unchanged known files. `--verify-content` checks source hashes; use it when timestamps are not trustworthy or stronger freshness evidence is needed. Unknown extensions may still require a text-discovery probe, reported as `inventory.probe_files` and `inventory.probe_bytes`.
 
 The index accounts for source, configuration, analyzer identity, and repository/worktree state. `--db PATH` selects another index file. A snapshot is tied to its recorded repository; it cannot silently stand in for a different root. MCP uses the saved snapshot and requires separate CLI synchronization after edits or branch changes.
+
+Internal parse facts may be compressed; CLI responses remain ordinary JSON or text. Run `sync` once on an older compatible index to refresh navigation metadata before using `--snapshot`. Older binaries may not read compressed caches; for a downgrade, create a separate index with that binary at a fresh `--db` path. An unsupported schema also requires rebuilding at a new `--db` path, as the error instructs.
 
 ## Observe a session
 

@@ -8,6 +8,8 @@ from __future__ import annotations
 
 import json
 import math
+import re
+from collections import Counter
 from typing import Any
 from xml.etree import ElementTree as ET
 
@@ -122,10 +124,43 @@ def _mermaid(nodes: list[dict], edges: list[dict]) -> str:
     return "\n".join(lines) + "\n"
 
 
+def _html_labels(nodes: list[dict]) -> list[str]:
+    """Use distinguishing namespace/path suffixes without changing identities."""
+    candidates = []
+    for node in nodes:
+        full = str(node.get("qualname") or node.get("name") or node.get("path") or node["id"])
+        is_path = node.get("kind") == "file" or "/" in full or "\\" in full
+        # A file extension belongs to the basename, not to its namespace.
+        parts = re.split(r"[/\\]+" if is_path else r"[.:]+", full)
+        separator = "/" if is_path else "."
+        candidates.append([separator.join(parts[-size:]) for size in range(1, len(parts) + 1)])
+    depths = [0] * len(nodes)
+    while True:
+        labels = [options[depth] for options, depth in zip(candidates, depths)]
+        counts = Counter(labels)
+        expand = [index for index, label in enumerate(labels)
+                  if counts[label] > 1 and depths[index] + 1 < len(candidates[index])]
+        if not expand:
+            break
+        for index in expand:
+            depths[index] += 1
+    for index, node in enumerate(nodes):
+        if counts[labels[index]] > 1:
+            source = str(node.get("path") or "").replace("\\", "/").rsplit("/", 1)[-1]
+            if source and node.get("start_line"):
+                source += f":{node['start_line']}"
+            labels[index] += f" · {source or node['id']}"
+    counts = Counter(labels)
+    return [f"{label} · {node['id']}" if counts[label] > 1 else label
+            for node, label in zip(nodes, labels)]
+
+
 def _html(graph: dict, nodes: list[dict], edges: list[dict]) -> str:
     node_fields = ("id", "path", "name", "qualname", "kind", "start_line", "end_line")
     edge_fields = ("source", "target", "kind", "confidence", "evidence", "path", "line")
     shown_nodes = [{key: node[key] for key in node_fields if key in node} for node in nodes[:HTML_NODE_LIMIT]]
+    for node, display_label in zip(shown_nodes, _html_labels(shown_nodes)):
+        node["display_label"] = display_label
     ids = {node["id"] for node in shown_nodes}
     shown_edges = [
         {key: edge[key] for key in edge_fields if key in edge}
@@ -211,7 +246,6 @@ _HTML = r'''<!doctype html>
   const uncertain = edge => typeof edge.confidence === "number" ? edge.confidence < 1 : !["syntactic", "resolved_static", "resolved", "1", "1.0"].includes(String(edge.confidence));
   const confidenceLabels = new Map([["syntactic","syntactic fact"],["resolved_static","static candidate"],["heuristic","heuristic candidate"]]);
   const confidence = edge => confidenceLabels.get(edge.confidence) || pretty(edge.confidence ?? "unknown");
-  const shorten = (text, limit) => text.length > limit ? text.slice(0, limit - 1) + "…" : text;
   const element = (tag, text, className) => { const el = document.createElement(tag); if (text !== undefined) el.textContent = text; if(className) el.className = className; return el; };
   const svgElement = (tag, attributes, text) => { const el = document.createElementNS("http://www.w3.org/2000/svg", tag); Object.entries(attributes || {}).forEach(([key,value]) => el.setAttribute(key,String(value))); if(text !== undefined) el.textContent = text; return el; };
   let selected = nodes.has(graph.center) ? graph.center : graph.nodes.find(node => !["file","external","unresolved"].includes(node.kind))?.id || graph.nodes[0]?.id;
@@ -277,9 +311,7 @@ _HTML = r'''<!doctype html>
     const svg = $("graph"); svg.replaceChildren();
     const width = 900, height = Math.max(390,Math.max(incoming.length,outgoing.length) * 82 + 100);
     svg.setAttribute("viewBox",`0 0 ${width} ${height}`); svg.style.height = `${height}px`;
-    // Keep the selected node visible in large neighborhoods; the bounded
-    // graph viewport can still scroll to every displayed neighbor.
-    requestAnimationFrame(() => { svg.parentElement.scrollTop = Math.max(0,(height - svg.parentElement.clientHeight)/2); });
+    requestAnimationFrame(centerSelection);
     svg.appendChild(svgElement("title",{},"One-hop code relationships"));
     const defs = svgElement("defs");
     [["known","#8cb9ff"],["uncertain","#efbb67"]].forEach(([id,color]) => {const marker = svgElement("marker",{id:'arrow-' + id,viewBox:"0 0 10 10",refX:9,refY:5,markerWidth:7,markerHeight:7,orient:"auto-start-reverse"});marker.appendChild(svgElement("path",{d:"M 0 0 L 10 5 L 0 10 z",fill:color}));defs.appendChild(marker);}); svg.appendChild(defs);
@@ -299,15 +331,28 @@ _HTML = r'''<!doctype html>
     });
     positions.forEach(({x,y,node}) => {
       const active = node.id === selected, external = ["external","unresolved"].includes(node.kind);
-      const group = svgElement("g",{transform:`translate(${x},${y})`,cursor:"pointer",role:"button",tabindex:0,'aria-label':`Explore ${label(node)}`});
+      const identity = `${label(node)}\n${location(node)}\nSymbol ID: ${node.id}`;
+      const group = svgElement("g",{transform:`translate(${x},${y})`,cursor:"pointer",role:"button",tabindex:0,'aria-pressed':active,'aria-label':`Explore ${identity}`});
       const rect = svgElement("rect",{x:-104,y:-29,width:208,height:58,rx:9,fill:active ? '#1b3838' : '#192435',stroke:active ? '#69dec0' : external ? '#efbb67' : '#34465e','stroke-width':active ? 1.6 : 1});if(external) rect.setAttribute("stroke-dasharray","4 3"); group.appendChild(rect);
-      group.appendChild(svgElement("text",{x:0,y:-3,'text-anchor':'middle',fill:'#e7edf7','font-family':'system-ui,sans-serif','font-size':12},shorten(label(node),27)));
+      const name = svgElement("text",{x:0,y:-3,'text-anchor':'middle',fill:'#e7edf7','font-family':'system-ui,sans-serif','font-size':12},node.display_label);
+      group.appendChild(name);
       group.appendChild(svgElement("text",{x:0,y:16,'text-anchor':'middle',fill:'#a3b2c8','font-family':'system-ui,sans-serif','font-size':11},node.kind || 'symbol'));
-      group.appendChild(svgElement("title",{},`${label(node)}\n${location(node)}`));
+      group.appendChild(svgElement("title",{},identity));
       group.addEventListener("click",() => select(node.id));group.addEventListener("keydown",event => {if(event.key === 'Enter' || event.key === ' '){event.preventDefault();select(node.id);}});svg.appendChild(group);
+      // Preserve the distinguishing text when a long suffix exceeds the card.
+      if(name.getComputedTextLength() > 184) { name.setAttribute("textLength",184); name.setAttribute("lengthAdjust","spacingAndGlyphs"); }
     });
   }
+  function centerSelection() {
+    const svg = $("graph"), viewport = svg.parentElement;
+    const active = svg.querySelector('g[aria-pressed="true"] rect');
+    if(!active) return;
+    const node = active.getBoundingClientRect(), bounds = viewport.getBoundingClientRect();
+    viewport.scrollLeft += (node.left + node.right)/2 - bounds.left - viewport.clientWidth/2;
+    viewport.scrollTop += (node.top + node.bottom)/2 - bounds.top - viewport.clientHeight/2;
+  }
   $("search").addEventListener("input",renderList); $("direction").addEventListener("change",renderNeighborhood); $("edge-kind").addEventListener("change",renderNeighborhood);
+  window.addEventListener("resize",() => requestAnimationFrame(centerSelection));
   renderList(); renderNeighborhood();
 })();
 </script>

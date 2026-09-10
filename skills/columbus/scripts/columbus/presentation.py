@@ -31,6 +31,12 @@ def text_output(packet: dict, command: str = '') -> str:
     if packet.get('semantic_complete') is False:
         lines.append(f"semantic_complete=false partial_nodes={packet.get('partial_nodes', 0)} "
                      f"repository_unresolved_references={packet.get('repository_unresolved_references', 'unknown')}")
+    if 'runtime_verified' in packet:
+        lines.append(f"runtime_verified={str(packet['runtime_verified']).lower()} "
+                     f"relation={_line(packet.get('relation', 'declared_resource'))} "
+                     f"scan_truncated={str(bool(packet.get('scan_truncated'))).lower()}")
+        for limitation in packet.get('limitations', []):
+            lines.append('limit: ' + _line(limitation))
     if 'payload_truncated' in packet:
         lines.append(f"traversal_truncated={str(packet['traversal_truncated']).lower()} "
                      f"payload_truncated={str(packet['payload_truncated']).lower()} "
@@ -44,6 +50,8 @@ def text_output(packet: dict, command: str = '') -> str:
                          if packet.get('stale_candidates') else 'more; repeat with the same receipt and query options'
                          if packet['receipt']['has_more'] else 'exhausted'))
     if 'hits' in packet and 'next_cursor' in packet:
+        lines.append('next_cursor=' + (packet['next_cursor'] or 'null'))
+    elif 'runtime_verified' in packet and 'next_cursor' in packet:
         lines.append('next_cursor=' + (packet['next_cursor'] or 'null'))
     items = packet.get('items', packet.get('hits', packet.get('nodes', [packet] if 'id' in packet else [])))
     lines.append(f"items={len(items)}")
@@ -63,6 +71,18 @@ def text_output(packet: dict, command: str = '') -> str:
                          enumerate(item['source'].split('\n') if item['source'] else [], item.get('start_line', 1)))
         elif item.get('signature'):
             lines.append('  ' + _line(item['signature']))
+        if item.get('relation') == 'implementation_candidate':
+            lines.append('  implementation_candidate match=' + _line(item['signature_match']))
+            lines.append('  inheritance=' + _line(json.dumps(item['inheritance'], ensure_ascii=False, separators=(',', ':'))))
+        if 'resolution' in item:
+            lines.append('  resolution=' + _line(item['resolution']) +
+                         ' runtime_verified=' + str(bool(item.get('runtime_verified'))).lower())
+        if item.get('kind') == 'resource':
+            lines.append('  hash=' + _line(item['source_hash']))
+            kind = item['resource_kind']
+            lines.append('  ' + kind + '=' + _line(json.dumps(item[kind], ensure_ascii=False, separators=(',', ':'))))
+            lines.append('  evidence=' + _line(json.dumps(item['evidence'], ensure_ascii=False, separators=(',', ':'))))
+            lines.extend('  limit: ' + _line(value) for value in item.get('limitations', []))
     if 'edges' in packet:
         lines.append(f"edges={len(packet['edges'])}")
         for edge in packet['edges']:

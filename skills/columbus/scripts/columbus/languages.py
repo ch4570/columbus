@@ -41,7 +41,8 @@ def analyzer_fingerprint(paths: list[str], config: dict | None = None,
     languages = sorted({detected_languages.get(path) or language_for(path, config=config) for path in paths})
     versions = {"engine": ANALYZER_VERSION, "python_ast": platform.python_version()}
     analyzer_files = [Path(module.__file__) for module in (parser, discovery, language_profiles, polyglot)]
-    analyzer_files.extend([Path(__file__), Path(__file__).with_name("index.py")])
+    analyzer_files.extend([Path(__file__), Path(__file__).with_name("index.py"),
+                           Path(__file__).with_name("parse_cache.py")])
     if any(language in {"kotlin", "java"} for language in languages):
         for package, expected in JVM_DEPENDENCIES.items():
             try:

@@ -84,30 +84,46 @@ def graph_view(index, limit: int = 1000, *, path: str | None = None, language: s
             condition = where + (" AND s.id=s.path || '::module'" if level == 'file' else '')
             rows = conn.execute('SELECT s.data FROM symbols s WHERE ' + condition + ' ORDER BY s.path,s.id LIMIT ?', [*values, limit + 1]).fetchall()
             nodes = [json.loads(row[0]) for row in rows[:limit]]
-            conn.execute('CREATE TEMP TABLE selected(id TEXT PRIMARY KEY)')
+            edge_filter = '' if not kinds else ' AND e.kind IN (' + ','.join('?' for _ in kinds) + ')'
             if level == 'file':
                 conn.execute('CREATE TEMP TABLE selected_paths(path TEXT PRIMARY KEY)')
                 conn.executemany('INSERT INTO selected_paths VALUES(?)', [(n['path'],) for n in nodes])
-                conn.execute('INSERT INTO selected SELECT id FROM symbols JOIN selected_paths USING(path)')
+                # Count complete cross-file groups in SQLite before limiting the
+                # result. Raw containment or repeated calls must not consume the
+                # projected edge budget or enter Python as an unbounded row set.
+                edge_rows = conn.execute('''WITH projected AS (
+                    SELECT e.*, a.path AS source_path, b.path AS target_path,
+                        COUNT(*) OVER (PARTITION BY a.path,b.path,e.kind) AS count,
+                        ROW_NUMBER() OVER (PARTITION BY a.path,b.path,e.kind
+                            ORDER BY e.source,e.target,e.line,e.path,e.evidence,e.confidence) AS representative
+                    FROM edges e
+                    JOIN symbols a ON a.id=e.source JOIN symbols b ON b.id=e.target
+                    JOIN selected_paths x ON a.path=x.path JOIN selected_paths y ON b.path=y.path
+                    WHERE a.path<>b.path''' + edge_filter + ''')
+                    SELECT source_path || '::module' AS source, target_path || '::module' AS target,
+                        kind,confidence,evidence,path,line,count
+                    FROM projected WHERE representative=1
+                    ORDER BY source_path,target_path,kind LIMIT 20001''', kinds or []).fetchall()
             else:
+                conn.execute('CREATE TEMP TABLE selected(id TEXT PRIMARY KEY)')
                 conn.executemany('INSERT INTO selected VALUES(?)', [(n['id'],) for n in nodes])
-            edge_filter = '' if not kinds else ' WHERE e.kind IN (' + ','.join('?' for _ in kinds) + ')'
-            edge_rows = conn.execute('''SELECT e.*, a.path AS source_path,b.path AS target_path FROM edges e
-                JOIN selected x ON e.source=x.id JOIN selected y ON e.target=y.id
-                JOIN symbols a ON a.id=e.source JOIN symbols b ON b.id=e.target''' + edge_filter +
-                ' ORDER BY e.source,e.target,e.kind,e.line LIMIT 20001', kinds or []).fetchall()
+                edge_rows = conn.execute('''SELECT e.* FROM edges e
+                    JOIN selected x ON e.source=x.id JOIN selected y ON e.target=y.id
+                    WHERE 1=1''' + edge_filter +
+                    ' ORDER BY e.source,e.target,e.kind,e.line LIMIT 20001', kinds or []).fetchall()
             edges = [dict(row) for row in edge_rows[:20000]]
             truncated = len(rows) > limit or len(edge_rows) > 20000
-        if level == 'file':
+        if level == 'file' and focused:
             paths = {n['path'] for n in nodes}
             file_nodes = []
             for file in sorted(paths):
                 file_nodes.append(index._find(conn, file + '::module'))
             projected = {}
             symbol_paths = {n['id']: n['path'] for n in nodes}
-            for edge in edges:
-                source = edge.get('source_path') or symbol_paths[edge['source']]
-                target = edge.get('target_path') or symbol_paths[edge['target']]
+            for edge in sorted(edges, key=lambda e: (e['source'], e['target'], e['kind'], e['line'],
+                                                     e['path'], e['evidence'], e['confidence'])):
+                source = symbol_paths[edge['source']]
+                target = symbol_paths[edge['target']]
                 if source == target:
                     continue
                 key = source, target, edge['kind']
@@ -115,10 +131,7 @@ def graph_view(index, limit: int = 1000, *, path: str | None = None, language: s
                     projected[key]['count'] += 1
                 else:
                     projected[key] = {**edge, 'source': source + '::module', 'target': target + '::module', 'count': 1}
-            nodes, edges = file_nodes, list(projected.values())
-        for edge in edges:
-            edge.pop('source_path', None)
-            edge.pop('target_path', None)
+            nodes, edges = file_nodes, [projected[key] for key in sorted(projected)]
         result = {'nodes': nodes, 'edges': edges, 'revision': meta['revision'],
                   'freshness': 'index_snapshot', 'truncated': truncated}
         if focused:
