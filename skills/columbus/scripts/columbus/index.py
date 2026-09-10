@@ -16,6 +16,7 @@ import time
 
 from .discovery import digest, discover, module_name
 from .languages import ANALYZER_VERSION, analyzer_fingerprint, code_lines, decode_source, parse_source, resolve_files
+from .parse_cache import decode_parse_cache, encode_parse_cache
 from .sync_state import SnapshotChanged, file_stat, git_state, read_stable
 
 SCHEMA_VERSION = "2"
@@ -157,7 +158,9 @@ class RepositoryIndex:
             language_config = inventory.get("language_config", {})
             detected_languages = inventory.get("detected_languages", {})
             actual_analyzer = analyzer_fingerprint(paths, language_config, detected_languages)
-            old = {r["path"]: dict(r) for r in conn.execute("SELECT * FROM files")}
+            # Parse bodies can dwarf file metadata. Defer fetching them until
+            # a content/configuration change requires relinking the graph.
+            old = {r["path"]: dict(r) for r in conn.execute("SELECT path,hash,size,stat FROM files")}
             old_configs = {r["path"]: dict(r) for r in conn.execute("SELECT * FROM configs")}
             previous_state = old_meta.get("git_state")
             git_changed = previous_state != state_before
@@ -191,9 +194,9 @@ class RepositoryIndex:
             for rel in paths:
                 previous = old.get(rel)
                 current_stat = source_stats[rel]
+                parsed = None
                 if previous and not rebuild and not force_hash and json.loads(previous["stat"]) == current_stat:
                     content_hash = previous["hash"]
-                    parsed = json.loads(previous["parsed"])
                     reused += 1
                     metadata_reused += 1
                     size = previous["size"]
@@ -209,7 +212,6 @@ class RepositoryIndex:
                     bytes_read += len(data)
                     size = len(data)
                     if previous and previous["hash"] == content_hash and not rebuild:
-                        parsed = json.loads(previous["parsed"])
                         reused += 1
                     else:
                         source = decode_source(rel, data, config=language_config, language=detected_languages.get(rel))
@@ -219,14 +221,26 @@ class RepositoryIndex:
                         changed += 1
                 records.append({"path": rel, "hash": content_hash, "size": size,
                                 "parsed": parsed, "stat": current_stat})
-                for message in parsed.get("diagnostics", []):
-                    diagnostics.append({"path": rel, "message": str(message)})
-            if require_complete and diagnostics:
-                raise ValueError(f'Incomplete parse: {len(diagnostics)} diagnostics; previous index preserved')
             current_paths = {r["path"] for r in records}
             removed = sorted(set(old) - current_paths)
             added = sorted(current_paths - set(old))
             has_changes = bool(changed or removed or rebuild)
+            reference_keys = ("references", "resolved_references", "unresolved_references")
+            reuse_summary = not has_changes and all(key in old_meta for key in ("diagnostics", *reference_keys))
+            if reuse_summary:
+                # Unchanged parse facts retain their diagnostics. Exclusions
+                # come from today's discovery, since excluded files can change
+                # without changing the indexed graph or its revision.
+                diagnostics.extend(d for d in old_meta["diagnostics"] if d["path"] in current_paths)
+            else:
+                for record in records:
+                    if record["parsed"] is None:
+                        row = conn.execute("SELECT parsed FROM files WHERE path=?", (record["path"],)).fetchone()
+                        record["parsed"] = decode_parse_cache(row[0])
+                    for message in record["parsed"].get("diagnostics", []):
+                        diagnostics.append({"path": record["path"], "message": str(message)})
+            if require_complete and diagnostics:
+                raise ValueError(f'Incomplete parse: {len(diagnostics)} diagnostics; previous index preserved')
             if has_changes:
                 edges = resolve_files([r["parsed"] for r in records])
                 conn.execute("DELETE FROM edges")
@@ -262,7 +276,7 @@ class RepositoryIndex:
             if has_changes:
                 conn.execute("DELETE FROM files")
                 conn.executemany("INSERT INTO files VALUES(?,?,?,?,?)", [
-                    (r["path"], r["hash"], r["size"], compact(r["parsed"]), compact(r["stat"])) for r in records])
+                    (r["path"], r["hash"], r["size"], encode_parse_cache(r["parsed"]), compact(r["stat"])) for r in records])
             else:
                 conn.executemany("UPDATE files SET stat=? WHERE path=?", [
                     (compact(r["stat"]), r["path"]) for r in records
@@ -285,16 +299,20 @@ class RepositoryIndex:
                 raise SnapshotChanged("Git HEAD/branch/worktree changed during sync; retry sync")
             revision = digest(compact([SCHEMA_VERSION, actual_analyzer, source_root, state_before,
                                       config_fingerprint, [(r["path"], r["hash"]) for r in records]]).encode())[:20]
-            references = [ref for record in records for ref in record["parsed"].get("references", [])]
+            if reuse_summary:
+                reference_counts = {key: old_meta[key] for key in reference_keys}
+            else:
+                references = [ref for record in records for ref in record["parsed"].get("references", [])]
+                reference_counts = {"references": len(references),
+                                    "resolved_references": sum(bool(r.get("resolved")) for r in references),
+                                    "unresolved_references": sum(not r.get("resolved") for r in references)}
             check_mode = "content_hash_verified" if force_hash or rebuild else "metadata_checked"
             report = {"root": str(root), "source_root": source_root, "schema_version": SCHEMA_VERSION,
                       "analyzer_version": ANALYZER_VERSION, "analyzer_fingerprint": actual_analyzer,
                       "revision": revision, "git_head_at_index": state_before["head"], "git_state": state_before,
                       "config_fingerprint": config_fingerprint, "config_files": len(config_records),
                       "indexed_at": datetime.now(timezone.utc).isoformat(), "inventory": inventory,
-                      "diagnostics": diagnostics, "references": len(references),
-                      "resolved_references": sum(bool(r.get("resolved")) for r in references),
-                      "unresolved_references": sum(not r.get("resolved") for r in references),
+                      "diagnostics": diagnostics, **reference_counts,
                       "indexed_bytes": sum(r["size"] for r in records),
                       "last_sync_check": check_mode,
                       "refresh": {"mode": "fast" if fast else "full", "check": check_mode,
@@ -589,7 +607,7 @@ class RepositoryIndex:
         with self._read() as conn:
             result = self._source(conn, self._find(conn, symbol_id), max_lines)
             row = conn.execute("SELECT parsed FROM files WHERE path=?", (result["path"],)).fetchone()
-            unresolved = [r for r in json.loads(row[0]).get("references", [])
+            unresolved = [r for r in decode_parse_cache(row[0]).get("references", [])
                           if r["source"] == result["id"] and not r.get("resolved")]
             result["unresolved_references"] = unresolved[:30]
             result["unresolved_reference_count"] = len(unresolved)

@@ -13,6 +13,8 @@ import sys
 import tempfile
 import time
 
+from columbus.parse_cache import decode_parse_cache
+
 PIN = '4c8c6409a27a62ab163d3b6196ad862b7c835440'
 RESOURCE = 'src/main/java/org/springframework/core/io/'
 ANNOTATION = 'src/main/java/org/springframework/core/annotation/'
@@ -115,7 +117,7 @@ def main():
                 delivered.append(span)
         for fmt in ['json','html','mermaid','graphml']:
             cli('graph-'+fmt,'graph','--snapshot','--focus',resource['id'],'--level','symbol','--hops','2','--limit','100','--format',fmt,'--output',str(args.output / ('resource-graph.'+fmt)))
-        parsed = [json.loads(r[0]) for r in connection.execute('select parsed from files')]
+        parsed = [decode_parse_cache(r[0]) for r in connection.execute('select parsed from files')]
         refs = [r for p in parsed for r in p.get('references',[])]
         from collections import Counter
         graph = dict(files=len(parsed), symbols=len(symbols), source_bytes=sum(r[0] for r in connection.execute('select size from files')),

@@ -47,6 +47,8 @@ def main():
         parser.error('Choose a new output directory to preserve previous observations')
     if output.is_relative_to(root) or db.is_relative_to(root):
         parser.error('Keep the observation and index outside the source repository')
+    sys.path.insert(0, str(entry.parent))
+    from columbus.parse_cache import decode_parse_cache
     output.mkdir(parents=True)
     records, checks = [], []
 
@@ -135,7 +137,7 @@ def main():
         metadata = {k: json.loads(v) for k, v in connection.execute('select key,value from metadata')}
         languages, diagnostic_files = Counter(), Counter()
         for (parsed,) in connection.execute('select parsed from files'):
-            parsed = json.loads(parsed)
+            parsed = decode_parse_cache(parsed)
             languages[parsed['language']] += 1
             if parsed.get('diagnostics'):
                 diagnostic_files[parsed['language']] += 1
