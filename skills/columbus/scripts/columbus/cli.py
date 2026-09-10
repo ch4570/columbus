@@ -95,7 +95,7 @@ def main(argv=None) -> int:
     parser.add_argument('--version', action='version', version=__version__)
     _common(parser)
     sub = parser.add_subparsers(dest='command', required=True)
-    for name in ('doctor', 'init', 'tree', 'hook-install', 'hook-update', 'sync', 'index', 'status', 'search', 'map', 'symbol', 'neighbors', 'impact', 'context', 'explore', 'stats', 'graph', 'export', 'serve', 'telemetry'):
+    for name in ('doctor', 'init', 'tree', 'hook-install', 'hook-update', 'sync', 'index', 'status', 'search', 'map', 'symbol', 'neighbors', 'impact', 'implementations', 'resources', 'context', 'explore', 'stats', 'graph', 'export', 'serve', 'telemetry'):
         command = sub.add_parser(name)
         _common(command, subcommand=True)
         if name == 'tree':
@@ -122,16 +122,17 @@ def main(argv=None) -> int:
             command.add_argument('root', help='Legacy alias for sync --repo ROOT')
         if name in {'sync', 'index', 'status'}:
             command.add_argument('--verify-content', '--check-files', action='store_true', help='Hash source contents to verify freshness')
+            command.add_argument('--summary', action='store_true', help='Emit counters and freshness without the full path inventory')
         if name in {'sync', 'index'}:
             command.add_argument('--source-root', default=None, help='Restrict source directory; also sets Python import root')
-        if name in {'search', 'map', 'symbol', 'neighbors', 'impact', 'context', 'explore', 'graph', 'export'}:
+        if name in {'search', 'map', 'symbol', 'neighbors', 'impact', 'implementations', 'resources', 'context', 'explore', 'graph', 'export'}:
             command.add_argument('--snapshot', action='store_true', help='Read saved index without automatic sync')
-        if name in {'search', 'map', 'symbol', 'neighbors', 'impact', 'context', 'explore'}:
+        if name in {'search', 'map', 'symbol', 'neighbors', 'impact', 'implementations', 'resources', 'context', 'explore'}:
             command.add_argument('--format', choices=['json', 'text'], default='text' if name == 'explore' else 'json',
                                  help='Compact text for agents or compatible structured JSON')
         if name in {'search', 'context'}:
             command.add_argument('query')
-        if name in {'map', 'explore'}:
+        if name in {'map', 'explore', 'resources'}:
             command.add_argument('query', nargs='?', default='')
         if name in {'search', 'map', 'context', 'explore', 'graph', 'export'}:
             command.add_argument('--path', help='Repository-relative glob, quoted to prevent shell expansion')
@@ -139,7 +140,15 @@ def main(argv=None) -> int:
         if name == 'search':
             command.add_argument('--limit', type=int, default=10)
             command.add_argument('--cursor', help='Continue this query/filter on the same indexed revision')
-        if name in {'symbol', 'neighbors', 'impact'}:
+        if name in {'implementations', 'resources'}:
+            command.add_argument('--limit', type=int, default=30)
+            command.add_argument('--cursor', help='Continue this query on the same indexed revision')
+        if name == 'implementations':
+            command.add_argument('--hops', type=int, default=6)
+        if name == 'resources':
+            command.add_argument('--kind', choices=['http', 'kafka', 'table', 'cache'])
+            command.add_argument('--path', help='Repository-relative glob')
+        if name in {'symbol', 'neighbors', 'impact', 'implementations'}:
             command.add_argument('symbol_id')
         if name == 'symbol':
             command.add_argument('--max-lines', type=int, default=80)
@@ -149,7 +158,7 @@ def main(argv=None) -> int:
         if name in {'neighbors', 'graph', 'export'}:
             command.add_argument('--direction', choices=['in', 'out', 'both'], default='both')
             command.add_argument('--kinds', nargs='+', choices=['contains', 'calls', 'imports', 'inherits'])
-        if name in {'map', 'context', 'explore', 'neighbors', 'impact'}:
+        if name in {'map', 'context', 'explore', 'neighbors', 'impact', 'implementations', 'resources'}:
             command.add_argument('--budget-bytes', type=int, default=None if name == 'explore' else 6000 if name == 'map' else 12000)
             command.add_argument('--budget-tokens', type=int, help='Estimated tokens = ceil(output UTF-8 bytes / 3), not tokenizer-exact')
         if name in {'context', 'explore'}:
@@ -303,6 +312,16 @@ def main(argv=None) -> int:
                                          kinds=['calls', 'inherits'] if args.command == 'impact' else args.kinds,
                                          budget_bytes=args.budget_bytes, budget_tokens=args.budget_tokens,
                                          output_format=args.format)
+            elif args.command == 'implementations':
+                from .navigation import implementations
+                result = implementations(index, args.symbol_id, limit=args.limit, hops=args.hops, cursor=args.cursor,
+                                         budget_bytes=args.budget_bytes, budget_tokens=args.budget_tokens,
+                                         output_format=args.format)
+            elif args.command == 'resources':
+                from .resource_navigation import resources
+                result = resources(index, args.query, kind=args.kind, path=args.path, limit=args.limit, cursor=args.cursor,
+                                   budget_bytes=args.budget_bytes, budget_tokens=args.budget_tokens,
+                                   output_format=args.format)
             elif args.command in {'context', 'map'}:
                 from .presentation import render
                 kwargs = dict(budget_bytes=args.budget_bytes, budget_tokens=args.budget_tokens, path=args.path,
@@ -342,7 +361,16 @@ def main(argv=None) -> int:
                 with output.open('x', encoding='utf-8') as stream:
                     stream.write(rendered)
                 result = {'output': str(output), 'nodes': len(graph['nodes']), 'edges': len(graph['edges']), 'truncated': graph['truncated']}
-        if args.command in {'neighbors', 'impact'}:
+        if args.command in {'sync', 'index', 'status'} and args.summary:
+            keys = ('root', 'revision', 'analyzer_version', 'schema_version', 'freshness', 'check', 'last_sync_check',
+                    'files', 'symbols', 'edges', 'references', 'resolved_references', 'unresolved_references',
+                    'indexed_bytes', 'refresh', 'stale_reasons')
+            result = {**{key: result[key] for key in keys if key in result},
+                      **{key + '_count': len(result[key]) for key in ('stale_paths', 'stale_config_paths')
+                         if key in result},
+                      'diagnostics_count': len(result.get('diagnostics', [])),
+                      'summary': True, 'inventory_omitted': True}
+        if args.command in {'neighbors', 'impact', 'implementations', 'resources'}:
             from .presentation import render
             rendered = render(result, args.format)
         elif getattr(args, 'format', 'json') == 'text':

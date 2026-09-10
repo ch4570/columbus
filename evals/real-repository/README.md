@@ -1,5 +1,7 @@
 # 실제 Kotlin/Spring 저장소 탐색 평가
 
+이 문서는 **수정 전 엔진의 관측 기록**이다. 후속 수정과 동일 입력의 Graphify 비교는 [수정·비교 보고서](repairs-and-comparison.md)에 따로 기록한다. 아래 수치를 현재 엔진의 결과로 해석하지 않는다.
+
 **코드 위치와 원문을 찾는 보조 도구로는 사용할 수 있다. 호출 경로 전체나 변경 영향의 완전성을 판단하는 근거로는 부족하다.** 2026-09-10에 비공개 다중 모듈 저장소를 Columbus로 색인하고, 세 진입점의 검색·원문·관계·반복 조회와 HTML 탐색을 실행했다.
 
 엔진은 `06fe8079d9b5ea95deaa134b72b5434e8cc8938f`다. 버전 문자열은 1.0.0이지만, 이 관측은 해당 소스 커밋의 결과이며 v1.0.0 배포 파일의 검증이 아니다. macOS arm64, Python 3.14.7, Tree-sitter 0.26.0 / Kotlin 1.1.0 / Java 0.23.5를 사용했다.
@@ -68,7 +70,7 @@
 
 출력 디렉터리가 이미 있으면 중단한다. [observe.py](observe.py)는 CLI stdout/stderr, 명령·시간·출력 hash, 색인 통계, 소스/receipt/예산/무결성 검증과 파일 투영의 DB 대비 누락 수를 기록한다. 스크립트 성공은 실행·소스·예산 검증의 성공이다. `file_projections.missing`이나 의미 분석의 한계가 해결됐다는 뜻은 아니다.
 
-[probe_projection.py](probe_projection.py)는 같은 파일의 20,000개 containment 관계가 앞에 있는 입력을 만든다. 현재 엔진에서 기본 파일 export는 3 nodes / 0 edges, 필터 적용 시 3 nodes / 2 edges다. 이 스크립트도 결함을 관측하므로 종료 코드 0만 보고 결함이 고쳐졌다고 판단하면 안 된다.
+[probe_projection.py](probe_projection.py)는 같은 파일의 20,000개 containment 관계가 앞에 있는 입력을 만든다. 위 수정 전 커밋에서 기본 파일 export는 3 nodes / 0 edges, 필터 적용 시 3 nodes / 2 edges다. 이 스크립트도 결함을 관측하므로 종료 코드 0만 보고 결함이 고쳐졌다고 판단하면 안 된다.
 
 [Flow.kt](fixtures/Flow.kt)는 #45의 합성 parser fixture다. Spring 의존성을 내려받거나 애플리케이션으로 컴파일하지 않았다. 18 symbols / 22 edges / 0 unresolved로 색인되지만 Controller → Executor → UseCase에서 호출 탐색이 끝나며 `semantic_complete=false`를 반환한다. 이를 비공개 원본의 대체 정확도 검증으로 사용하지 않는다.
 
