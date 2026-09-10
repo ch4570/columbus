@@ -12,6 +12,7 @@
 | Understand language support and custom rules | [Language coverage](languages.md) |
 | Find the implementation and data boundaries | [Architecture](architecture.md) |
 | Inspect benchmark graphs and reproduce the measurements | [Columbus benchmarks](benchmarks/README.md) |
+| Assess real Kotlin/Spring navigation and its limits | [실제 저장소 탐색 평가](../evals/real-repository/README.md) |
 | Inspect historical RepoAtlas 0.4.0 token observations | [Observations](token-efficiency.md) · [Offline HTML report](report.html) |
 | Reproduce tests and distribution checks | [Validation](../VALIDATION.md), [contributing](../CONTRIBUTING.md) |
 | Report a problem | [Support](../SUPPORT.md), [security policy](../SECURITY.md) |

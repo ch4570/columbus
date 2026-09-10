@@ -1,0 +1,69 @@
+name: Evaluation gap
+description: Report a source-backed gap found while evaluating Columbus on a repository task.
+title: "[Evaluation] "
+body:
+  - type: markdown
+    attributes:
+      value: Use a minimal synthetic fixture or public source for reproduction. Review all evidence before posting; do not attach private source, repository graphs or indexes, raw private traces, or secrets. Public artifacts must be redacted. Follow SECURITY.md for sensitive reports.
+  - type: input
+    id: version
+    attributes:
+      label: Version and revision
+      description: Columbus version, installation method, and Columbus commit SHA; include the evaluated fixture or public repository revision.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system, CPU architecture, Python version, and relevant source languages or frameworks.
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: Evaluation question
+      description: The exact question or repository task and the scope of the answer being evaluated.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction and fixture
+      description: Exact commands, options, budgets, and a minimal synthetic fixture or public source with revision. State index configuration and freshness. If the original source is private, reproduce its relevant structure with synthetic names and data.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: Source-backed answer, symbols, or relationships that should be found, with fixture paths and line references.
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed behavior
+      description: Actual answer or output, missing or incorrect results, and impact on completing the task.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and limitations
+      description: Attach only reviewed, redacted outputs or public artifact links. Report graph coverage against an explicit scope and relationship precision against checked source, including sample counts and false positives. Record result limits, budgets, and truncation separately from extraction coverage and answer completeness. A non-truncated response does not prove complete coverage; mark unmeasured claims as unknown.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Observable pass/fail checks on the reproducible fixture, including relevant negative cases and the validation command.
+    validations:
+      required: true
+  - type: textarea
+    id: related
+    attributes:
+      label: Existing issues and workarounds
+      description: Link related or duplicate issues and describe any verified workaround. State none if no related issue was found.
