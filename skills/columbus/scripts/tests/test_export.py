@@ -90,6 +90,48 @@ class ExportTests(unittest.TestCase):
         self.assertIn("The index reports stale source files", html)
         self.assertIn('id="snapshot"', html)
 
+    def test_html_labels_distinguish_symbols_with_long_shared_namespaces(self):
+        prefix = "example.application.src.main.kotlin.example.application.feature."
+        names = ["RequestController", "RequestExecutor", "SessionResolver"]
+        graph = {"nodes": [
+            {"id": name, "name": prefix + name, "qualname": prefix + name,
+             "kind": "module", "path": f"src/{name}.kt"}
+            for name in names
+        ], "edges": []}
+        html = render_graph(graph, "html")
+        data = json.loads(re.search(r'type="application/json">(.*?)</script>', html, re.S).group(1))
+        self.assertEqual([node["display_label"] for node in data["nodes"]], names)
+        self.assertEqual([node["qualname"] for node in data["nodes"]], [prefix + name for name in names])
+        self.assertEqual([node["id"] for node in data["nodes"]], names)
+        self.assertNotIn("display_label", graph["nodes"][0])
+
+    def test_html_labels_use_context_for_duplicate_basenames(self):
+        graph = {"nodes": [
+            {"id": "api", "qualname": "example.api.Handler"},
+            {"id": "jobs", "qualname": "example.jobs.Handler"},
+            {"id": "api-file", "kind": "file", "path": "src/api/main.py"},
+            {"id": "jobs-file", "kind": "file", "path": "src/jobs/main.py"},
+        ], "edges": []}
+        data = json.loads(re.search(r'type="application/json">(.*?)</script>', render_graph(graph, "html"), re.S).group(1))
+        self.assertEqual([node["display_label"] for node in data["nodes"]],
+                         ["api.Handler", "jobs.Handler", "api/main.py", "jobs/main.py"])
+
+    def test_html_labels_disambiguate_equal_names_using_source_and_id(self):
+        graph = {"nodes": [
+            {"id": "one", "name": "Handler", "path": "src/api.kt", "start_line": 5},
+            {"id": "two", "name": "Handler", "path": "src/api.kt", "start_line": 15},
+            {"id": "three", "name": "Handler"},
+            {"id": "four", "name": "Handler"},
+        ], "edges": []}
+        data = json.loads(re.search(r'type="application/json">(.*?)</script>', render_graph(graph, "html"), re.S).group(1))
+        labels = [node["display_label"] for node in data["nodes"]]
+        self.assertEqual(len(set(labels)), 4)
+        self.assertTrue(all("Handler" in label for label in labels))
+        self.assertIn("api.kt:5", labels[0])
+        self.assertIn("api.kt:15", labels[1])
+        self.assertIn("three", labels[2])
+        self.assertIn("four", labels[3])
+
     def test_empty_graph_and_format_validation(self):
         for format in ["html", "graphml", "mermaid"]:
             self.assertTrue(render_graph({"nodes": [], "edges": []}, format))
